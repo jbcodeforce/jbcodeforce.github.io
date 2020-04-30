@@ -1,0 +1,9 @@
+<div class="col-md-4 roundRect" [ngStyle]="{ 'box-shadow': style, 'border-color': color }">
+      <h3>{{title}}</h3>
+      <p>{{description}}</p>
+
+
+      <a *ngIf="externalUrl && !urlMdPath" href={{urlPath}}>{{buttonName}}</a>
+      <button mat-raised-button *ngIf="urlMdPath" (click)="openDialog()">{{buttonName}}</button>
+      <button id="button" *ngIf="!externalUrl && !urlMdPath" mat-button (click)="submit()" style="color: white;background-color: {{color}};" class="btn btn-primary">{{buttonName}}</button>
+</div>

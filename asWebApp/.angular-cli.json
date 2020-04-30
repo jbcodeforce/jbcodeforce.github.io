@@ -1,0 +1,16 @@
+"styles": [
+            "../node_modules/mdbootstrap/css/mdb.min.css",
+            "../node_modules/mdbootstrap/css/bootstrap.min.css",
+            "styles.css",
+            "../node_modules/prismjs/themes/prism-okaidia.css"
+        ],
+        "scripts": [
+            "../node_modules/mdbootstrap/js/jquery-3.2.1.min.js",
+            "../node_modules/mdbootstrap/js/popper.min.js",
+            "../node_modules/mdbootstrap/js/mdb.min.js",
+            "../node_modules/mdbootstrap/js/bootstrap.min.js",
+            "../node_modules/marked/lib/marked.js",
+            "../node_modules/prismjs/prism.js",
+            "../node_modules/prismjs/components/prism-csharp.min.js",
+            "../node_modules/prismjs/components/prism-css.min.js" 
+        ],

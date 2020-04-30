@@ -1,0 +1,48 @@
+<!--
+<mat-list>
+  <mat-list-item><a (click)="openDialog('summary')">Summary</a></mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item><a (click)="openDialog('faq')">FAQ</a></mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
+-->
+<h3>{{study.title}}</h3>
+<button mat-raised-button (click)="back()" style="margin-bottom: 15px;">Back</button>
+
+<div class="container">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header style="background-color:#b0cdf2;">
+      <mat-panel-title>
+        <b><u>Summary</u></b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-reader *ngIf="stepByStep" [fileName]="study.summary" [maxIndex]="study.maxFile"></app-reader>
+    <markdown *ngIf="!stepByStep" [src]="study.summary" ngPreserveWhitespaces></markdown>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header style="background-color:#8dbaf4;">
+      <mat-panel-title>
+          <b><u>FAQ</u></b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <markdown [src]="study.faq" ngPreserveWhitespaces></markdown>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header style="background-color:#579af2;">
+      <mat-panel-title>
+
+        <b><u>Compendium</u></b>
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+
+    <markdown [src]="study.compendium" ngPreserveWhitespaces></markdown>
+
+  </mat-expansion-panel>
+</div>
