@@ -5,10 +5,7 @@ asWebApp/dist/
 asWebApp/node_modules/
 site/
 /tmp
-/out-tsc
-
-# dependencies
-/node_modules
+asWebApp/out-tsc
 
 # IDEs and editors
 /.idea
@@ -31,7 +28,7 @@ site/
 /connect.lock
 /coverage
 /libpeerconnection.log
-npm-debug.log
+asWebApp/npm-debug.log
 yarn-error.log
 testem.log
 /typings
