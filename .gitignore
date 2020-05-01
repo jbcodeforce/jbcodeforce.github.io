@@ -2,6 +2,7 @@
 
 # compiled output
 asWebApp/dist/
+asWebApp/node_modules/
 site/
 /tmp
 /out-tsc
