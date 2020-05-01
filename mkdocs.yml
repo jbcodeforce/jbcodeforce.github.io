@@ -13,6 +13,20 @@ nav:
 
 theme: 
   name: material
+  logo: 'images/cloud.png'
+  favicon: 'images/cloud.png'
+  feature:
+    tabs: true
+  palette:
+      primary: 'blue grey'
+      primary: 'deep purple'
+  social:
+    - type: 'github'
+      link: 'https://github.com/jbcodeforce'
+    - type: 'twitter'
+      link: 'https://twitter.com/agileitarch'
+    - type: 'linkedin'
+      link: 'https://linkedin.com/in/jeromeboyer'
 extra_css: ["extra.css"]
 markdown_extensions:
   - admonition

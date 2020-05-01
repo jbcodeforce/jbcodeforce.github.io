@@ -12,9 +12,12 @@ All views expressed on this site are mine only, and do not represent the views o
 
 ## Java
 
-### Good web sites I like to go back to
+Good web sites I like to go back to
 
-* []
+* [Baeldung](https://www.baeldung.com/)
+* [Open liberty](https://openliberty.io/docs/)
+* [Quarkus](https://quarkus.io/)
+* [Microprofile guides](https://microprofile.io/)
 
 ## Python
 
@@ -31,20 +34,23 @@ All views expressed on this site are mine only, and do not represent the views o
 
 ## Kafka
 
+* [Kafka Studies](https://jbcodeforce.github.com/kafka-studies)
+
 ## Machine learning
 
+* [Basic Machine Learning studies in Python](https:///jbcodeforce.github.io/ml-basics): Classifier on IRIS data set: Adaline, Perceptron, matplotlib
 
 ## Methodology
 
 * **Agile Business Rule Development Methodology**, an open source project for sharing best practices developing business rule solution based on my book: [Browse](http://abrd.github.io) [source](https://github.com/abrd/abrd.github.io)
-
-
+* [IBM Garage methodology](https://www.ibm.com/garage/method), agile development for cloud native solution - contributor
 
 ## About me
 
 As part of the IBM Cloud Garage solution engineering team, I am responsible to drive the emerging artificial intelligence capabilities into hybrid cloud solutions and build delivery capability across IBM services and sales, initially focusing on introducing artificial intelligence capabilities into cloud private deployment.
 
 My main roles are:
+
 * Educate strategic customers on the value proposition of IBM Cloud, and participate in deep architectural discussions to ensure solutions are designed for successful deployment in the cloud
 * Build deep relationships with senior technical individuals within customers to enable them to be cloud advocates
 * Conduct one-to-few and one-to-many training sessions to transfer knowledge to customers considering or already using IBM Cloud
@@ -59,11 +65,15 @@ Recently I started to address how to enable Data Scientists to work more closely
 
 For the last 10 years, I am presenter to every IBM conferences like Think, Interconnect,...
 
-I lead the following major open source contributions with all related sub-repositorties:
-* [Analytics Reference Architecture](https://github.com/ibm-cloud-architecture/refarch-analytics) reference implementation for building and running analytics application deployed on hybrid cloud environment with IBM Cloud private for Data.
+I lead the following major open source contributions with all related sub-repositorties (Current means still working on it on a daily basis):
+
+* [Event Driven Architecture reference architecture](https://ibm-cloud-architecture.github.io/refarch-eda): Started Oct 2018 - Current
+* [Event Driven Architecture reference implementation](https://ibm-cloud-architecture.github.io/refarch-kc): Started Oct 2018 - Current
+* [Anomaly detection machine learning solution with real time analytics and event driven solution](https://ibm-cloud-architecture.github.io/refarch-reefer-ml) Started Dec 2019 - Current
+* [Analytics Reference Architecture](https://github.com/ibm-cloud-architecture/refarch-analytics) reference implementation for building and running analytics application deployed on hybrid cloud environment with IBM Cloud private for Data. June 2019 - Current 
 * [Hybrid Cloud Integration Reference Architecture](https://github.com/ibm-cloud-architecture/refarch-integration) describes an approach to connect components which are split across cloud and on-premises environments, or across public and private clouds -- even across different cloud providers.
 * [Cognitive Reference Architecture solution implementation](https://github.com/ibm-cloud-architecture/refarch-cognitive) build and run cloud based cognitive application using micro service architecture, Watson Cloud development APIs.
-* [Event Driven Architecture reference architecture solution implementation](https://github.com/ibm-cloud-architecture/refarch-eda) Started Oct 2018
+
 
 ### Publications
 
@@ -71,14 +81,12 @@ Books:
 * Co Author: **Sustainable IT Architecture** Wisley
 * Co Author: **[Agile Business Rule Development](http://www.springer.com/business+%26+management/business+information+systems/book/978-3-642-19040-7)** Springer.
 
-Web site:
-* 
 
 Multiple articles on IBM developerWorks site, and BPM journal.
-*	[http://www.ibm.com/developerworks/bpm/bpmjournal/1302_boyer/1302_boyer.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1302_boyer/1302_boyer.html)
-*	http://www.ibm.com/developerworks/bpm/bpmjournal/1404_boyer/1404_boyer.html
-*	http://www.ibm.com/developerworks/bpm/bpmjournal/1206_boyer/1206_boyer.html
-*	http://www.ibm.com/developerworks/bpm/bpmjournal/1212_boyer2/1212_boyer2.html
-*	http://www.ibm.com/developerworks/bpm/bpmjournal/1404_fu/1404_fu.html
-*	http://www.ibm.com/developerworks/library/ws-policyandrulespart2/
-*	http://www.ibm.com/developerworks/webservices/library/ws-policyandrules/index.html
+* [http://www.ibm.com/developerworks/bpm/bpmjournal/1302_boyer/1302_boyer.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1302_boyer/1302_boyer.html)
+* [http://www.ibm.com/developerworks/bpm/bpmjournal/1404_boyer/1404_boyer.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1404_boyer/1404_boyer.html)
+* [http://www.ibm.com/developerworks/bpm/bpmjournal/1206_boyer/1206_boyer.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1206_boyer/1206_boyer.html)
+* [http://www.ibm.com/developerworks/bpm/bpmjournal/1212_boyer2/1212_boyer2.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1212_boyer2/1212_boyer2.html)
+* [http://www.ibm.com/developerworks/bpm/bpmjournal/1404_fu/1404_fu.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1404_fu/1404_fu.html)
+* [http://www.ibm.com/developerworks/library/ws-policyandrulespart2](http://www.ibm.com/developerworks/library/ws-policyandrulespart2)
+* [http://www.ibm.com/developerworks/webservices/library/ws-policyandrules/index.html](http://www.ibm.com/developerworks/webservices/library/ws-policyandrules/index.html)
