@@ -18,26 +18,37 @@ Good web sites I like to go back to
 * [Open liberty](https://openliberty.io/docs/)
 * [Quarkus](https://quarkus.io/)
 * [Microprofile guides](https://microprofile.io/)
+* [My java notes](https://jbcodeforce.github.io/java-studies)
 
 ## Python
 
+My [python notes](https://jbcodeforce.github.io/python-code/)
+
 ## Kubernetes
+
+* [Kubernetes site](https://kubernetes.io/)
+* [Cloud native bootcamp](https://cloudnative101.dev/)
 
 ## EDA
 
+* [Main EDA website](https://ibm-cloud-architecture.github.io/refarch-eda)
+* [Main EDA solution implementation](https://ibm-cloud-architecture.github.io/refarch-kc)
+* [Integration / brown compute](https://ibm-cloud-architecture.github.io/refarch-integration) to update!
 * [Angular app with nodejs BFF](https://github.com/ibm-cloud-architecture/refarch-kc-ui) to present the container shipment demonstration
 * [A fleet simulator microservice](https://github.com/ibm-cloud-architecture/refarch-kc-ms)
 * [Real time analytics](https://github.com/ibm-cloud-architecture/refarch-kc-streams) as streaming application demonstrates real time event processing applied to inputs from the ships and containers used in the K Container Shipment Use Case
 * [Event sourcing and CQRS pattern illustrated](https://github.com/ibm-cloud-architecture/refarch-kc-order-ms)
-* [Event Streams Samples](https://github.com/ibm-messaging/event-streams-samples)
-
+* [Event Streams Samples for IBM messaging github](https://github.com/ibm-messaging/event-streams-samples)
 
 ## Kafka
 
 * [Kafka Studies](https://jbcodeforce.github.com/kafka-studies)
+* [Kafka streams sample](https://github.com/jbcodeforce/kafka-streams-samples)
+* [Data replication with kafka](https://jbcodeforce.github.io/kp-data-replication/)
 
-## Machine learning
+## Data AI and Machine learning
 
+* [Data and AI architecture](https://ibm-cloud-architecture.github.io/refarch-data-ai-analytics/)
 * [Basic Machine Learning studies in Python](https:///jbcodeforce.github.io/ml-basics): Classifier on IRIS data set: Adaline, Perceptron, matplotlib
 
 ## Methodology
