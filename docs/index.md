@@ -28,6 +28,8 @@ My [python notes](https://jbcodeforce.github.io/python-code/)
 
 * [Kubernetes site](https://kubernetes.io/)
 * [Cloud native bootcamp](https://cloudnative101.dev/)
+* [My Openshift and Kubernetes notes](https://jbcodeforce.github.com/openshift-studies)
+
 
 ## EDA
 
