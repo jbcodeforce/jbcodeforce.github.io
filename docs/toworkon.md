@@ -8,5 +8,4 @@
 
 ## Openshift
 
-* [Code ready]()
 * [Architecture certification]()

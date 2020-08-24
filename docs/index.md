@@ -36,6 +36,15 @@ My [python notes](https://jbcodeforce.github.io/python-code/)
 
 * [Main EDA website](https://ibm-cloud-architecture.github.io/refarch-eda)
 * [Main EDA solution implementation](https://ibm-cloud-architecture.github.io/refarch-kc)
+* [Kafka notes](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-overview/)
+* [Kafka producer and consumer best practices](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-producers-consumers/)
+* [Kafka Streams](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-streams/)
+* [Kafka Connect](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-connect/) with hand-on lab
+* [Mirror maker 2](https://ibm-cloud-architecture.github.io/refarch-eda/use-cases/kafka-mm2/)
+* [Consumer group](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/consumergrp/)
+* [Event Streams on Cloud lab](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/es-cloud/)
+* [Security and access control with IBM Cloud lab](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/security/)
+* [Real time inventory management with kafka streams and kafka connect](https://ibm-cloud-architecture.github.io/refarch-eda/scenarios/realtime-inventory/)
 * [Integration / brown compute](https://ibm-cloud-architecture.github.io/refarch-integration) to update!
 * [Angular app with nodejs BFF](https://github.com/ibm-cloud-architecture/refarch-kc-ui) to present the container shipment demonstration
 * [A fleet simulator microservice](https://github.com/ibm-cloud-architecture/refarch-kc-ms)
@@ -77,7 +86,7 @@ As a technical expert, I sell, create, and lead First of a Kind hybrid cloud art
 
 For the last 10 years, I am presenter to every IBM conferences like Think, Interconnects, WebSphere conferences ...
 
-I lead the following major open source contributions with all related sub-repositorties (Current means still working on it on a daily basis):
+I lead the following major open source contributions with all related sub-repositories (Current means still working on it on a daily basis):
 
 * [Event Driven Architecture reference architecture](https://ibm-cloud-architecture.github.io/refarch-eda): Started Oct 2018 - Current
 * [Event Driven Architecture reference implementation](https://ibm-cloud-architecture.github.io/refarch-kc): Started Oct 2018 - Current
@@ -103,3 +112,5 @@ Multiple articles on IBM developerWorks site, and BPM journal.
 * [http://www.ibm.com/developerworks/bpm/bpmjournal/1404_fu/1404_fu.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1404_fu/1404_fu.html)
 * [http://www.ibm.com/developerworks/library/ws-policyandrulespart2](http://www.ibm.com/developerworks/library/ws-policyandrulespart2)
 * [http://www.ibm.com/developerworks/webservices/library/ws-policyandrules/index.html](http://www.ibm.com/developerworks/webservices/library/ws-policyandrules/index.html)
+
+EDA
