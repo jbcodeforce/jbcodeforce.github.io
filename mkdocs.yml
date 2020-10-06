@@ -2,12 +2,14 @@ site_name: Jerome's studies
 repo_url: https://github.com/jbcodeforce/jbcodeforce.github.io/
 nav:
   - Introduction: index.md
+  - List of assets: assets.md
   - Java Studies: https://jbcodeforce.github.com/java-studies
   - Kafka Studies: https://jbcodeforce.github.com/kafka-studies
   - Openshift Studies: https://jbcodeforce.github.com/openshift-studies
   - Python Studies: https://jbcodeforce.github.com/python-code
   - Spark Studies: https://jbcodeforce.github.io/spark-studies/
   - Flink Studies: https://jbcodeforce.github.io/flink-studies/
+  - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
   - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
   - Machine learning: https://jbcodeforce.github.io/ml-basics/
   - Cloud native content IBM: https://cloudnative101.dev/
