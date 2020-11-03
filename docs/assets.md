@@ -1,22 +1,22 @@
 # Assets developed
 
+This is the list of assets I developed or co-developed
 
 ## Methodology
 
 * [Event storming workshop](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/)
-* [Domain Driven Design](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/)
-* [Agile Business Rules Development]()
+* [Domain Driven Design](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/) Updated 10/2020
 
 ## EDA
 
 ### Architecture
 
-* [Global EDA page](https://ibm-cloud-architecture.github.io/refarch-eda/) - started 10/2018
+* [Global EDA site](https://ibm-cloud-architecture.github.io/refarch-eda/) - started 10/2018
 * [Reefer Container shipment EDA solution implementation](https://ibm-cloud-architecture.github.io/refarch-kc/) - started 10/2018
 * [Reference Architecture and integration with analytics and machine learning](https://ibm-cloud-architecture.github.io/refarch-eda/introduction/reference-architecture/#integration-with-analytics-and-machine-learning)
 * [Advantages of Event-Driven Reference Architectures - Microservice decoupling](https://ibm-cloud-architecture.github.io/refarch-eda/advantages/microservice)
-* [Advantages of Event-Driven Reference Architectures - Reactive systems](https://ibm-cloud-architecture.github.io/refarch-eda/advantages/reactive)
-* [Advantages of Event-Driven Reference Architectures- Resiliency](https://ibm-cloud-architecture.github.io/refarch-eda/advantages/resiliency/)
+* [Advantages of Event-Driven Reference Architectures - Reactive systems](https://ibm-cloud-architecture.github.io/refarch-eda/advantages/reactive) 10/2020
+* [Advantages of Event-Driven Reference Architectures- Resiliency](https://ibm-cloud-architecture.github.io/refarch-eda/advantages/resiliency/) 07/2020
 * [Strangler design pattern in the context of EDA](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/intro/#strangler-pattern)
 * [CQRS pattern discussion](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/cqrs/) - documented 01/2019 - updated 04/2020
 * [Event sourcing design pattern](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/event-sourcing/) 01/2019
@@ -29,10 +29,10 @@
 
 * [CQRS pattern implementation](https://github.com/ibm-cloud-architecture/refarch-kc-order-ms) query and command are part of two separate folders. - started in dec 2018 - updated Q1 2020 with new integration tests.
 * [Topic replication with mirror maker 2](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/topic-replication/) Q2 2020 - updated 09/2020
-* [Mirror Maker 2  Studies](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-mirrormaker/)
+* [Mirror Maker 2  Studies](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-mirrormaker/)  04/2020
 * [Mirror maker 2 labs](https://ibm-cloud-architecture.github.io/refarch-eda/use-cases/kafka-mm2/) - Q2 2020 - updated 09/2020
 * [Event Streams on Cloud hands on lab](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/es-cloud/) introductory hands-on lab on IBM Event Streams on Cloud with topic creation. It was done in the context of customer's Kafka bootcamp. 
-* [Store item sale simulator for Rabbit MQ, MQ or Kafka backends](https://github.com/ibm-cloud-architecture/refarch-eda-store-simulator)
+* [Store item sale simulator for Rabbit MQ, MQ or Kafka backends](https://github.com/ibm-cloud-architecture/refarch-eda-store-simulator) 10/2020
 * [Realtime Analytics pattern](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/realtime-analytics/). Created for EDA
 * [Reefer simulator in python](https://github.com/ibm-cloud-architecture/vaccine-reefer-simulator) - updated 07/2020
 * [Reefer Container Shipment Container Management](https://github.com/ibm-cloud-architecture/refarch-kc-container-ms) springboot
@@ -81,3 +81,5 @@
 * [Customer analysis with cognitive and analytics in hybrid cloud](https://github.com/ibm-cloud-architecture/refarch-cognitive-analytics)
 
 ## Business process automation
+
+* [Digital Business Automation site](https://ibm-cloud-architecture.github.io/refarch-dba)
