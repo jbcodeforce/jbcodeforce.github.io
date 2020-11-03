@@ -1,11 +1,10 @@
 name: Build & Push docs
 on: 
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - code
 jobs:
     build:
-         
         name: Deploy docs
         runs-on: ubuntu-latest
         steps:
