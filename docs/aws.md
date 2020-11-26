@@ -226,3 +226,105 @@ Automatically Register new instances to a load balancer.
 * ASG tries the balance the number of instances across AZ by default, and then delete based on the age of the launch configuration
 * The capacity of your ASG cannot go over the maximum capacity you have allocated during scale out events
 * when an ALB validate an health check issue it terminate the EC2 instance.
+
+## EBS Volume
+
+Elastic Block Store Volume is a network drive attached to the instance. It is locked to an AZ, and uses provisioned capacity in GBs and IOPS.
+
+* Create a EBS while creating the EC2 instance and keep it not deleted on shutdown
+* Once logged, add a filesystem, mount to a folder and modify boot so the volume is mounted at start time. Which looks like:
+
+```shell
+# List existing block storage, verify your created storage is present
+lsblk
+# Verify file system type
+sudo file -s /dev/xdvf
+# Create a ext4 file system on the device 
+sudo mkfs -t ext4 /dev/xvdb
+# make a mount point
+sudo mkdir /data
+sudo mount  /dev/xvdb /data
+# Add entry in /etc/fstab with line like:
+/dev/xvdb /data ext4 default,nofail 0 2
+```
+
+* EBS is already a redundant storage, replicated within an AZ.
+* EC2 instance has a logical volume that can be attached to two or more EBS RAID 0 volumes, where write operations are distributed among them. It is used to increate IOPS without any fault tolerance. If one fails, we lost data. It could be used for database with built-in replication or Kafka.
+* RAID 1 is for better fault tolerance: a write operation is going to all attached volumes.
+
+### Volume types
+
+* GP2: used for most workload up to 16 TB at 16000 IOPS max  (3 IOPS per GB brustable to 3000)
+* io 1: critical app with large database workloads. max ratio 50:1 IOPS/GB. Min 100 iops and 4G to 16T
+* st 1: Streaming workloads requiring consistent, fast throughput at a low price. For Big data, Data warehouses, Log processing, Apache Kafka
+* sc 1: throughput oriented storage.  500G- 16T, 500MiB/s. Max IOPs at 250. Used for cold HDD, and infrequently accessed data.
+
+Encryption has a minimum impact on latency. It encrypts data at rest and during snapshots.
+
+Instance store is a volume attached to the instance, used for root folder. It is a ephemeral storage but has millions read per s and 700k write IOPS. It provides the best disk performance and can be used to have high performance cache for your application.
+
+![5](./images/ephemeral.png)
+
+If we need to run a high-performance database that requires an IOPS of 210,000 for its underlying filesystem, we need instance store and DB replication in place.
+
+### Snapshots
+
+Used to backup disk and stored on S3.
+Snapshot Lifecycle policies helps to create snapshot with scheduling it by defining policies.
+To move a volume to another AZ or data center we can create a volume from a snapshot.
+
+### Elastic File System
+
+Managed Network FS for multi AZs. (3x gp2 cost), controlled by using security group. This security group needs to add in bound rule of type NFS connected / linked to the SG of the EC2.
+Only Linux based AMI. Encryption is supported using KMS.
+1000 concurrent clients
+10GB+/s throughput, bursting or provisioned.
+Support different performance mode, like max I/O or general purpose
+Support storage tiers to move files after n days, infrequent EFS-IA for files rarely accessed.
+Use amazon EFS util tool in each EC2 instance to mount the EFS to a target mount point.
+
+## Relational Database Service
+
+Managed service for SQL based database. Support multi AZs for DR with automatic failover to standby, app uses one unique DNS name. Continuous backup and restore to specific point of time restore. It uses gp2 or io1 EBS. Transaction logs are backed-up every 5 minutes.
+Support user triggered snapshot.
+
+* Read replicas: helps to scale the read operations. Can create up to 5 replicas within AZ, cross AZ and cross region. Replication is asynch. Use cases include, reporting, analytics, ML model
+* AWS charge for network when for example data goes from one AZ to another.
+* Support at rest Encryption. Master needs to be encrypted to get encrypted replicas. 
+* We can create a snapshot from unencrypted DB and then copy it by enabling the encryption for this snapshot. From there you can create an Encrypted DB
+
+Your responsibility:
+* Check the ports / IP / security group inbound rules in DB’s SG
+* In-database user creation and permissions or manage through IAM
+* Creating a database with or without public access
+* Ensure parameter groups or DB is configured to only allow SSL connections
+
+### Aurora
+
+Proprietary SQL database, work on postgresql and mysql driver. It is cloud optimized and claims 5x performance improvement over mySQL on RDS, and 3x for postgresql.
+
+Can grow up to 64 TB. Sub 10ms replica lag, up to 15 replicas.
+
+Failover in Aurora is instantaneous. It’s HA (High Availability) native. Use 1 master - 5 readers to create 6 copies over 3 AZs. 3 copies of 6 need for reads. Peer to peer replication. Use 100s volumes. Autoscaling on the read operation. 
+
+ ![6](./images/aws-aurora.png)
+
+It is CQRS at DB level. Use writer end point and reader endpoint.
+
+It also supports one write with multiple reader and parallel query, multiple writes and serverless to automate scaling down to zero (No capacity planning needed and pay per second).
+
+With Aurora global database one primary region is used for write and then up to 5 read only regions with replica lag up to 1 s. Promoting another region (for disaster recovery) has an RTO of < 1 minute
+
+## ElastiCache
+
+Get a managed Redis or Memcached cluster. Applications queries ElastiCache, if not available, get from RDS and store in ElastiCache. 
+It can be used for user session store so user interaction can got to different application instances.
+
+**Redis** is a multi AZ with Auto-Failover, supports read replicas to scale and for high availability. It can persist data using AOF persistence, and has backup and restore features.
+
+**Memcached** is a multi-node for partitioning of data (sharding), and no persistence, no backup and restore. It is based on a multi-threaded architecture.
+
+Some patterns for ElastiCache:
+* Lazy Loading: all the read data is cached, data can become stale in cache
+* Write Through: Adds or update data in the cache when written to a DB (no stale data)
+* Session Store: store temporary session data in a cache (using TTL features)
