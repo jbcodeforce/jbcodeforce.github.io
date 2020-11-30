@@ -2,7 +2,8 @@
 
 ## Organization
 
-24 regions -> 2 to 6 availability zones per region: us-west-1-2a  [Global infrastructure](https://aws.amazon.com/about-aws/global-infrastructure/)
+24 regions -> 2 to 6 availability zones per region. Ex: us-west-1-2a.  See [Global infrastructure map](https://aws.amazon.com/about-aws/global-infrastructure/).
+
 AZ is one or more DC with redundant power, networking and connectivity. Isolated from disasters. Interconnected with low latency. 
 
 * EC2 is a regional service.
@@ -18,49 +19,49 @@ AZ is one or more DC with redundant power, networking and connectivity. Isolated
 * Assign users to groups and assign policies to groups and not to individual user.
 * For identity federation SAML standard is used
 
-## EC2
+## EC2 components
 
 * Renting machine EC2
 * Storing data on virtual drives EBS
 * Distribute load across machines ELB
 * Auto scale the service ASG
 
-Amazon Machine Image: AMI, image for OS and preinstalled soft. Amazon Linux 2
+Amazon Machine Image: AMI, image for OS and preinstalled softwares. Amazon Linux 2 for linux base image.
 
  ![0](./images/EC2-instance.png)
 
-When creating an instance, we can select the VPC and the AZ subnet, and the storage (EBS) for root folder to get OS. The security group helps to isolate the instance for example authorizing ssh on port 22.
-Get the public ssh key, and once instance started: `ssh -i EC2key.pem  ec2-user@ec2-52-8-75-8.us-west-1.compute.amazonaws.com `
-Can use **EC2 Instance Connect** to open a terminal in the web browser. Need to get SSH port open.
+When creating an instance, we can select the VPC and the AZ subnet, and the storage (EBS) for root folder to get the OS. The security group helps to isolate the instance, for example, authorizing ssh on port 22 or HTTP port 80.
+Get the public ssh key, and when the instance is started, use: `ssh -i EC2key.pem  ec2-user@ec2-52-8-75-8.us-west-1.compute.amazonaws.com `
+
+Can also use **EC2 Instance Connect** to open a terminal in the web browser. Need to get SSH port open.
 
 EC2 has a section to add `User data`, which could be used to define a bash script to install dependent software and start some services.
 
-EC2 instance types see [ec2instances.info](https://www.ec2instances.info)
+EC2 **instance types**: (see [ec2instances.info](https://www.ec2instances.info))
 
 * R: applications that needs a lot of RAM – in-memory caches
 * C: applications that needs good CPU – compute / databases
 * M: applications that are balanced (think “medium”) – general / web app
 * I: applications that need good local I/O (instance storage) – databases
-* G: applications that need a GPU –
+* G: applications that need a GPU
 * T2/T3 for burstable instance: When the machine needs to process something unexpected (a spike in
 load for example), it can burst. Use burst credits to control CPU usage.
 
 ### Launch types
 
-* **On demand**: short workload, predictable pricing, pay per second after first minute
+* **On demand**: short workload, predictable pricing, pay per second after first minute.
 * **Reserved** for at least for one year, used for long workloads like database. Get discounted rate from on-demand.
-* **Convertible reserved** instance for changing resource capacity
-* **Scheduled reserved** instance for job based workload for example
-* **Spot instance** for very short - 90% discount on on-demand - used for work resilient to failure like batch job, data analysis, image processing,..
-    * Define a max spot price and get the instance while the current spot price < max. The hourly spot price varies base on offer and capacity. 
+* **Convertible reserved** instance for changing resource capacity over time.
+* **Scheduled reserved** instance for job based workload.
+* **Spot instance** for very short - 90% discount on on-demand - used for work resilient to failure like batch job, data analysis, image processing,...
+    * Define a **max spot price** and get the instance while the current spot price < max. The hourly spot price varies based on offer and capacity. 
     * if the current spot price > max, then instance will be stopped
     * with spot block we can a time frame without interruptions.
-    * The expected state is defined in a 'spot request' which can be cancelled. one time or persistent request types are supported. Cancel a spot request does not terminate instances, but need to be the first thing to do and then terminate the instances.
-    * Spot fleets allow to automatically request spot instance with the lowest price.    
-* Dedicated instance not shared with other
+    * The expected state is defined in a 'spot request' which can be cancelled. One time or persistent request types are supported. Cancel a spot request does not terminate instances, but need to be the first thing to do and then terminate the instances.
+    * Spot fleets allow to automatically request spot instance with the lowest price.
 * **Dedicated hosts** to book entire physical server and control instance placement. # years. BYOL. 
 
-Use **EC2 launch templates** to automate instance launches, simplify permission policies, and enforce best practices across your organization. (Look very similar than docker image)
+Use **EC2 launch templates** to automate instance launches, simplify permission policies, and enforce best practices across your organization. (Look very similar as docker image)
 
 ### AMI
 
@@ -70,19 +71,19 @@ AMI are built for a specific AWS region. But they can be copied and shared [See 
 
 ### EC2 Hibernate
 
-The in memory state is preserved, persisted to a file in the root EBS volume. It helps to make the start quicker. The root EBS volume is encrypted.
-Constrained by 150GB RAM. No more than 60 days. 
+The in memory state is preserved, persisted to a file in the root EBS volume. It helps to make the instance startup time quicker. The root EBS volume is encrypted.
+Constrained by 150GB RAM. No more than 60 days.
 
 ## Security group
 
 Define inbound and outbound security rules.  They regulate access to ports, authorized IP ranges, control inbound and outbound network. By default all inbound traffic is denied and outbound authorized.
 
-* can be attached to multiple EC2 instances and to load balancers
-* locked down to a region / VPC combination
+* Can be attached to multiple EC2 instances and to load balancers
+* Locked down to a region / VPC combination
 * Live outside of the EC2
 * Define one security group for SSH access
-* application not accessible is a security group
-* connect refused in an application error or is not launched
+* Application not accessible is a security group
+* Connect refused in an application error or is not launched
 * Instances with the same security group can access each other
 * Security group can reference other security groups, IP address, CIDR but no DNS server
 
@@ -108,8 +109,10 @@ systemctl start httpd.service
 # Enable it cross restart
 systemctl enable httpd.service
 > Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service
+# Get the availability zone
+EC2-AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
 # Change the home page by changing /var/www/html/index.html
-echo "Hello World from $(hostname -f)" > /var/www/html/index.html
+echo "<h3>Hello World from $(hostname -f) in AZ= $EC2_AZ </h3>" > /var/www/html/index.html
 ```
 
 This script can be added as User Data (Under Advanced Details while configuring new instance) so when the instance starts it executes this code.
@@ -133,7 +136,6 @@ ENI is a logical component in a VPC that represents a virtual network card. It h
 Define strategy to place EC2 instances:
 
 * **Cluster**: groups instances into a low-latency group in a single Availability Zone
-
     * highest performance while talking to each other as you're performing big data analysis
 * **Spread**: groups across underlying hardware (max 7 instances per group per AZ)
     * Reduced risk is simultaneous failure
@@ -294,6 +296,7 @@ Support user triggered snapshot.
 * We can create a snapshot from unencrypted DB and then copy it by enabling the encryption for this snapshot. From there you can create an Encrypted DB
 
 Your responsibility:
+
 * Check the ports / IP / security group inbound rules in DB’s SG
 * In-database user creation and permissions or manage through IAM
 * Creating a database with or without public access
@@ -328,3 +331,108 @@ Some patterns for ElastiCache:
 * Lazy Loading: all the read data is cached, data can become stale in cache
 * Write Through: Adds or update data in the cache when written to a DB (no stale data)
 * Session Store: store temporary session data in a cache (using TTL features)
+
+## Route 53
+
+It is a managed Domain Name System. DNS is a collection of rules and records which helps clients understand
+how to reach a server through URLs. Here is a quick figure to summary the process
+
+ ![7](./images/dns.png)
+
+DNS records Time to Live (TTL), is set to get the web browser to keep the DNS resolution in cache. High TTL is around 24 hours, low TTL at 60s will make more DNS calls. TTL should be set to strike a balance between how long the value should be cached vs how much pressure should go on the DNS. Need to define the TTL for the app depending on the expected deployment model.
+
+A hosted zone is a container that holds information about how you want to route traffic for a domain. Two types are supported: public or private within a VPC.
+
+Route 53 is a registrar. We can buy domain name.
+
+Use `dig <hostname>` to get the DNS resolution record.
+
+### CNAME vs Alias
+
+[CNAME](https://en.wikipedia.org/wiki/CNAME_record) is a DNS record to maps one domain name to another. CNAME should point to a ALB. **Alias** is used to point a hostname of an AWS resource and can work on root domain (domainname.com).
+
+### Routing
+
+A simple routing policy to get an IP @ from a hostname could not have health check defined. 
+
+The **weighted** routing policy controls the % of the requests that go to specific endpoint. Can do blue-green traffic management. It can also help to split traffic between two regions. It can be associated with Health Checks
+
+The **latency** routing Policy redirects to the server that has the least latency close to the client. Latency is evaluated in terms of user to designated AWS Region.
+
+**Health check** monitors he health and performance of the app servers or endpoints and assess DNS failure. We can have HTTP, TCP or HTTPS health checks. We can define from which region to run the health check. They are charged per HC / month. It is recommended to have one HC per app deployment. It can also monitor latency,
+
+The **failover** routing policy helps us to specify a record set to point to a primary and then a secondary instance for DR. 
+
+The **Geo Location** routing policy is based on user's location, and we may specify how the traffic from a given country should go to this specific IP. Need to define a “default” policy in case there’s no match on location.
+
+The **Multi Value** routing policy is used to access multiple resources. The record set, associates a Route 53 health checks with records. The client on DNS request gets up to 8 healthy records returned for each Multi Value query. If one fails then the client can try one other IIP @ from the list.
+
+## Some application patterns
+
+For solution architecture we need to assess cost, performance, reliability, security and operational excellence.
+
+### Stateless App
+
+The step to grow a stateless app: add vertical scaling by changing the EC2 profile, but while changing user has out of service. Second step is to scale horizontal, each EC2 instance has static IP address and DNS is configured with 'A record' to get each EC2 end point. But is one instance is gone, the client App will see it down until TTL expires.
+
+The reference architecture includes DNS record set with alias record (to point to ALB. Using alias as ALB address may change over time) with TTL of 1 hour. Use load balancers in 3 AZs (to survive disaster) to hide the horizontal scaling of EC2 instances (managed with auto scaling group) where the app runs. Health checks are added to keep system auto adaptable and hide system down, and restricted security group rules to control EC2 instance accesses. ALB and EC instances are in multi different AZs. The EC instances can be set up with reserved capacity to control cost.
+
+ ![8](./images/stateless-app.png)
+
+### Stateful app
+
+In this case we will add the pattern of shopping cart. If we apply the same architecture as before, at each interaction of the user, it is possible the traffic will be sent to another EC2 instance that started to process the shopping cart. Using ELB with stickiness will help to keep the traffic to the same EC2, but in case of EC2 failure we still loose the cart. An alternate is to use user cookies to keep the cart at each interaction. It is back to a stateless app as state is managed by client and cookie. For security reason the app needs to validate the cookie content. cookie as a limit of 4K data.
+
+Another solution is to keep session data into an elastic cache, like Redis, and use the sessionId as key and persisted in a user cookie. So EC2 managing the interaction can get the cart data from the cache using the sessionID. It can be enhanced with a RDS to keep user data. Which can also support the CQRS pattern with read replicas. Cache can be update with data from RDS so if the user is requesting data in session, it hits the cache.
+
+ ![9](./images/stateful-app.png)
+
+Cache and database are set on multi AZ, as well as EC2 instance and load balancer, all to support disaster. Security groups need to be defined to get all traffic to the ELB and limited traffic between ELB and EC2 and between EC2 and cache and EC2 and DB.
+
+Another example of stateful app is the ones using image stored on disk. In this case EC2 EBS volume will work only for one app instance, but for multi app scaling out, we need to have a Elastic FS which can be Multi AZ too.
+
+### Deploying app
+
+The easiest solution is to create AMI containing OS, dependencies and app binary. This is completed with User Data to get dynamic configuration. Database data can be restored from Snapshot, and the same for EFS data.
+
+[Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/) is a developer centric view of the app, hiding the complexity of the IaaS. From one git repository it can automatically handle the deployment details of capacity provisioning, load balancing, auto-scaling, and application health monitoring. 
+
+## S3
+
+Amazon S3 allows people to store objects (files) in **buckets** (directories), which must have a globally unique name (cross users!). They are defined at the region level. **Object** in a bucket, is referenced as a **key** which can be seen to a file path in a file system. The max size for an object is 5 TB but need to be uploaded in multi part using 5GB max size.
+
+S3 supports versioning at the bucket level. So file can be restored from previous version, and even deleted file can be retrieved from a previous version.
+
+Objects can also be encrypted, and different mechanisms are available:
+
+* **SSE-S3**: server-side encrypted S3 objects using keys handled & managed by AWS using AES-256 protocol must set `x-amz-server-side-encryption: "AES256"` header in the POST request.
+* **SSE-KMS**: leverage AWS Key Management Service to manage encryption keys. `x-amz-server-side-encryption: "aws:kms"` header. Server side encrypted. It gives user control of the key rotation policy and audit trail.
+* **SSE-C**: when you want to manage your own encryption keys. Server-side encrypted. Encryption key must provided in HTTP headers, for every HTTP request made. HTTPS is mandatory
+* **Client Side Encryption**: encrypt before sending object.
+
+### Security control
+
+Explicit DENY in an IAM policy will take precedence over a bucket policy permission
+
+### S3 Website
+
+We can have static web site on S3. Once html pages are uploaded, setting the properties as static web site from the bucket. The bucket needs to be public, and have a security policy to allow any user to `GetObject` action. The URL may look like: `<bucket-name>.s3-website.<AWS-region>.amazonaws.com`
+
+* **Cross Origin resource sharing CORS**: The web browser requests won’t be fulfilled unless the other origin allows for the requests, using CORS Headers `Access-Control-Allow-Origin`. If a client does a cross-origin request on our S3 bucket, we need to enable the correct CORS headers: this is done by adding a security policy with CORS configuration like:
+
+```xml
+<CORSConfiguration>
+    <CORSRule>
+        <AllowedOrigin>enter-bucket-url-here</AllowedOrigin>
+        <AllowedMethod>GET</AllowedMethod>
+        <MaxAgeSeconds>3000</MaxAgeSeconds>
+        <AllowedHeader>Authorization</AllowedHeader>
+    </CORSRule>
+</CORSConfiguration>
+```
+
+Finally S3 is eventual consistent.
+
+## ECS
+
+Amazon ECS is a fully managed container orchestration service, Amazon EKS is a fully managed Kubernetes service, both services support Fargate to provide serverless compute for containers. Fargate removes the need to provision and manage servers, lets you specify and pay for resources per application, and improves security through application isolation by design
