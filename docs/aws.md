@@ -61,11 +61,11 @@ load for example), it can burst. Use burst credits to control CPU usage.
     * Spot fleets allow to automatically request spot instance with the lowest price.
 * **Dedicated hosts** to book entire physical server and control instance placement. # years. BYOL. 
 
-Use **EC2 launch templates** to automate instance launches, simplify permission policies, and enforce best practices across your organization. (Look very similar as docker image)
+Use **EC2 launch templates** to automate instance launches, simplify permission policies, and enforce best practices across the organization. (Look very similar as docker image)
 
 ### AMI
 
-Bring your own image. Shareable on amazon marketplace. Can be saved on S3 storage. By default, your AMIs are private, and locked for your account / region.
+Bring our own image. Shareable on amazon marketplace. Can be saved on S3 storage. By default, our AMIs are private, and locked for our account / region.
 
 AMI are built for a specific AWS region. But they can be copied and shared [See AWS doc - copying an AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html).
 
@@ -126,7 +126,7 @@ ENI is a logical component in a VPC that represents a virtual network card. It h
 * One Public IPv4
 * One or more security groups
 * A MAC address
-* You can create ENI independently and attach them on the fly (move them) on EC2 instances for failover 
+* We can create ENI independently and attach them on the fly (move them) on EC2 instances for failover 
 * Bound to a specific availability zone (AZ)
 
 [New ENI doc.](https://aws.amazon.com/blogs/aws/new-elastic-network-interfaces-in-the-virtual-private-cloud/)
@@ -136,7 +136,7 @@ ENI is a logical component in a VPC that represents a virtual network card. It h
 Define strategy to place EC2 instances:
 
 * **Cluster**: groups instances into a low-latency group in a single Availability Zone
-    * highest performance while talking to each other as you're performing big data analysis
+    * highest performance while talking to each other as We're performing big data analysis
 * **Spread**: groups across underlying hardware (max 7 instances per group per AZ)
     * Reduced risk is simultaneous failure
     * EC2 Instances are on different physical hardware
@@ -192,7 +192,7 @@ Each load balancer instance distributes traffic evenly across all registered ins
 
 ### TLS - Transport Layer Security,
 
-An SSL/TLS Certificate allows traffic between your clients and your load balancer to be encrypted in transit (in-flight encryption).
+An SSL/TLS Certificate allows traffic between our clients and our load balancer to be encrypted in transit (in-flight encryption).
 
 * Load balancer uses an X.509 certificate (SSL/TLS server certificate). 
 * Manage certificates using ACM (AWS Certificate Manager)
@@ -226,7 +226,7 @@ Automatically Register new instances to a load balancer.
 
 * when creating scaling policies, **CloudWatch** alarms are created. Ex: "Create an alarm if: CPUUtilization < 36 for 15 datapoints within 15 minutes".
 * ASG tries the balance the number of instances across AZ by default, and then delete based on the age of the launch configuration
-* The capacity of your ASG cannot go over the maximum capacity you have allocated during scale out events
+* The capacity of our ASG cannot go over the maximum capacity ee have allocated during scale out events
 * when an ALB validate an health check issue it terminate the EC2 instance.
 
 ## EBS Volume
@@ -237,7 +237,7 @@ Elastic Block Store Volume is a network drive attached to the instance. It is lo
 * Once logged, add a filesystem, mount to a folder and modify boot so the volume is mounted at start time. Which looks like:
 
 ```shell
-# List existing block storage, verify your created storage is present
+# List existing block storage, verify our created storage is present
 lsblk
 # Verify file system type
 sudo file -s /dev/xdvf
@@ -263,7 +263,7 @@ sudo mount  /dev/xvdb /data
 
 Encryption has a minimum impact on latency. It encrypts data at rest and during snapshots.
 
-Instance store is a volume attached to the instance, used for root folder. It is a ephemeral storage but has millions read per s and 700k write IOPS. It provides the best disk performance and can be used to have high performance cache for your application.
+Instance store is a volume attached to the instance, used for root folder. It is a ephemeral storage but has millions read per s and 700k write IOPS. It provides the best disk performance and can be used to have high performance cache for our application.
 
 ![5](./images/ephemeral.png)
 
@@ -293,9 +293,9 @@ Support user triggered snapshot.
 * Read replicas: helps to scale the read operations. Can create up to 5 replicas within AZ, cross AZ and cross region. Replication is asynch. Use cases include, reporting, analytics, ML model
 * AWS charge for network when for example data goes from one AZ to another.
 * Support at rest Encryption. Master needs to be encrypted to get encrypted replicas. 
-* We can create a snapshot from unencrypted DB and then copy it by enabling the encryption for this snapshot. From there you can create an Encrypted DB
+* We can create a snapshot from unencrypted DB and then copy it by enabling the encryption for this snapshot. From there we can create an Encrypted DB
 
-Your responsibility:
+wer responsibility:
 
 * Check the ports / IP / security group inbound rules in DB’s SG
 * In-database user creation and permissions or manage through IAM
@@ -341,7 +341,7 @@ how to reach a server through URLs. Here is a quick figure to summary the proces
 
 DNS records Time to Live (TTL), is set to get the web browser to keep the DNS resolution in cache. High TTL is around 24 hours, low TTL at 60s will make more DNS calls. TTL should be set to strike a balance between how long the value should be cached vs how much pressure should go on the DNS. Need to define the TTL for the app depending on the expected deployment model.
 
-A hosted zone is a container that holds information about how you want to route traffic for a domain. Two types are supported: public or private within a VPC.
+A hosted zone is a container that holds information about how we want to route traffic for a domain. Two types are supported: public or private within a VPC.
 
 Route 53 is a registrar. We can buy domain name.
 
@@ -407,7 +407,7 @@ Objects can also be encrypted, and different mechanisms are available:
 
 * **SSE-S3**: server-side encrypted S3 objects using keys handled & managed by AWS using AES-256 protocol must set `x-amz-server-side-encryption: "AES256"` header in the POST request.
 * **SSE-KMS**: leverage AWS Key Management Service to manage encryption keys. `x-amz-server-side-encryption: "aws:kms"` header. Server side encrypted. It gives user control of the key rotation policy and audit trail.
-* **SSE-C**: when you want to manage your own encryption keys. Server-side encrypted. Encryption key must provided in HTTP headers, for every HTTP request made. HTTPS is mandatory
+* **SSE-C**: when We want to manage our own encryption keys. Server-side encrypted. Encryption key must provided in HTTP headers, for every HTTP request made. HTTPS is mandatory
 * **Client Side Encryption**: encrypt before sending object.
 
 ### Security control
@@ -433,6 +433,51 @@ We can have static web site on S3. Once html pages are uploaded, setting the pro
 
 Finally S3 is eventual consistent.
 
+#### S3 replication
+
+Once versioning enabled, a bucket can be replicated in the same region or cross regions. The replication is done asynchronously. SRR is for log aggregation for example while CRR is used for compliance and DR or replication across accounts. Delete operations are not replicated.
+
+### S3 Storage classes
+
+When uploading a document into an existing bucket we can specify the storage class for keep data over time. Different levels are offered with different cost and SLA.
+
+ ![A](./images/storage-class.png)
+
+To prevent accidental file deletes, we can setup MFA Delete to use MFA tokens before deleting objects.
+
+Amazon Glacier is for archiving, like writing to tapes. 
+
+We can transition objects between storage classes. For infrequently accessed object, move them to STANDARD_IA. For archive objects We don’t need in real-time, GLACIER or DEEP_ARCHIVE. Moving objects can be automated using a lifecycle configuration
+
+At the bucket level, a user can define lifecycle rules for when to transition an object to another storage class.
+
+ ![B](./images/storage-rule.png)
+
+To improve performance, a big file can be split and then uploaded with local connection to the closed edge access and then use AWS private network to copy between buckets in different region.
+
+[S3 to Kafka lab](https://ibm-cloud-architecture.github.io/refarch-eda/use-cases/connect-s3/)
+
+## AWS Athena
+
+It is to run analytics directly on S3 files, using SQL language to query the files (CSV, JSON, Avro, Parquet...). S3 Access Logs log all the requests made to buckets, and Athena can then be used to run serverless analytics on top of the logs files
+
+## AWS CLI
+
+The cli needs to be configured: `aws configure` with the credential, key and region to be able to access the aws account. Use IAM user to get a new credentials key.
+
+When using CLI in a EC2 instance always use an IAM role to control security credentials. This role can come with a policy authorizing exactly what the EC2 instance should be able to do. Also within a EC2 instance, it is possible to use the URL http://169.254.169.254/latest/meta-data to get information about the EC2. We can retrieve the IAM Role name from that metadata.
+
+## CloudFront
+
+CDN service with DDoS protection. It caches data to the edge to improve web browsing and app performance. 216 Edge location.
+
+The origins of those files are S3 bucker, Custom resource accessible via HTTP. Cloudfront keeps cache for the data read. For the edge to access the S3 bucket, it uses an origin access identity (OAI), managed as IAM role. 
+
+For EC2 instance, the security group needs to accept traffic from edge location IP addresses. 
+
+It is possible to control with geo restriction. 
+
 ## ECS
 
-Amazon ECS is a fully managed container orchestration service, Amazon EKS is a fully managed Kubernetes service, both services support Fargate to provide serverless compute for containers. Fargate removes the need to provision and manage servers, lets you specify and pay for resources per application, and improves security through application isolation by design
+
+Amazon ECS is a fully managed container orchestration service, Amazon EKS is a fully managed Kubernetes service, both services support Fargate to provide serverless compute for containers. Fargate removes the need to provision and manage servers, lets us specify and pay for resources per application, and improves security through application isolation by design
