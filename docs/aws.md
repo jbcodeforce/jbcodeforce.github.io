@@ -28,7 +28,7 @@ AZ is one or more DC with redundant power, networking and connectivity. Isolated
 
 Amazon Machine Image: AMI, image for OS and preinstalled softwares. Amazon Linux 2 for linux base image.
 
- ![0](./images/EC2-instance.png)
+ ![0](./images/aws/EC2-instance.png)
 
 When creating an instance, we can select the VPC and the AZ subnet, and the storage (EBS) for root folder to get the OS. The security group helps to isolate the instance, for example, authorizing ssh on port 22 or HTTP port 80.
 Get the public ssh key, and when the instance is started, use: `ssh -i EC2key.pem  ec2-user@ec2-52-8-75-8.us-west-1.compute.amazonaws.com `
@@ -87,7 +87,7 @@ Define inbound and outbound security rules.  They regulate access to ports, auth
 * Instances with the same security group can access each other
 * Security group can reference other security groups, IP address, CIDR but no DNS server
 
- ![2](./images/security-group.png)
+ ![2](./images/aws/security-group.png)
 
 ## Networking
 
@@ -156,7 +156,7 @@ Access from network and policies menu, define the group with expected strategy, 
 
 Route traffic into the different EC2 instances. It also exposes a single point of access (DNS) to the deployed application. In case of failure, it can route to a new instance, transparently and cross multiple AZ. It uses health check (/health on the app called the `ping path`) to asses instance availability. It provides SSL termination. It supports to separate private (internal) to public (external) traffic.
 
- ![1](./images/EC2-AZ.png)
+ ![1](./images/aws/EC2-AZ.png)
 
 ELB: EC2 load balancer is the managed service by Amazon. Three types supported:
 
@@ -179,7 +179,7 @@ Target group defines protocol to use, health check checking and what application
 
 Example of listener rule for an ALB:
 
- ![3](./images/ALB-listener-rules.png)
+ ![3](./images/aws/ALB-listener-rules.png)
 
 ### Load balancer stickiness
 
@@ -222,9 +222,9 @@ Automatically Register new instances to a load balancer.
 * Load Balancer Information, with target groups to be used as a grouping of the newly created instances
 * Scaling Policies help to define rules to manage instance life cycle, based for example on CPU usage or network bandwidth used. 
 
- ![4](images/ASG-1.png)
+ ![4](images/aws/ASG-1.png)
 
-* when creating scaling policies, **CloudWatch** alarms are created. Ex: "Create an alarm if: CPUUtilization < 36 for 15 datapoints within 15 minutes".
+* when creating scaling policies, **CloudWatch** alarms are created. Ex: "Create an alarm if: CPUUtilization < 36 for 15 data points within 15 minutes".
 * ASG tries the balance the number of instances across AZ by default, and then delete based on the age of the launch configuration
 * The capacity of our ASG cannot go over the maximum capacity ee have allocated during scale out events
 * when an ALB validate an health check issue it terminate the EC2 instance.
@@ -265,7 +265,7 @@ Encryption has a minimum impact on latency. It encrypts data at rest and during 
 
 Instance store is a volume attached to the instance, used for root folder. It is a ephemeral storage but has millions read per s and 700k write IOPS. It provides the best disk performance and can be used to have high performance cache for our application.
 
-![5](./images/ephemeral.png)
+![5](./images/aws/ephemeral.png)
 
 If we need to run a high-performance database that requires an IOPS of 210,000 for its underlying filesystem, we need instance store and DB replication in place.
 
@@ -310,7 +310,7 @@ Can grow up to 64 TB. Sub 10ms replica lag, up to 15 replicas.
 
 Failover in Aurora is instantaneous. It’s HA (High Availability) native. Use 1 master - 5 readers to create 6 copies over 3 AZs. 3 copies of 6 need for reads. Peer to peer replication. Use 100s volumes. Autoscaling on the read operation. 
 
- ![6](./images/aws-aurora.png)
+ ![6](./images/aws/aws-aurora.png)
 
 It is CQRS at DB level. Use writer end point and reader endpoint.
 
@@ -337,7 +337,7 @@ Some patterns for ElastiCache:
 It is a managed Domain Name System. DNS is a collection of rules and records which helps clients understand
 how to reach a server through URLs. Here is a quick figure to summary the process
 
- ![7](./images/dns.png)
+ ![7](./images/aws/dns.png)
 
 DNS records Time to Live (TTL), is set to get the web browser to keep the DNS resolution in cache. High TTL is around 24 hours, low TTL at 60s will make more DNS calls. TTL should be set to strike a balance between how long the value should be cached vs how much pressure should go on the DNS. Need to define the TTL for the app depending on the expected deployment model.
 
@@ -377,7 +377,7 @@ The step to grow a stateless app: add vertical scaling by changing the EC2 profi
 
 The reference architecture includes DNS record set with alias record (to point to ALB. Using alias as ALB address may change over time) with TTL of 1 hour. Use load balancers in 3 AZs (to survive disaster) to hide the horizontal scaling of EC2 instances (managed with auto scaling group) where the app runs. Health checks are added to keep system auto adaptable and hide system down, and restricted security group rules to control EC2 instance accesses. ALB and EC instances are in multi different AZs. The EC instances can be set up with reserved capacity to control cost.
 
- ![8](./images/stateless-app.png)
+ ![8](./images/aws/stateless-app.png)
 
 ### Stateful app
 
@@ -385,7 +385,7 @@ In this case we will add the pattern of shopping cart. If we apply the same arch
 
 Another solution is to keep session data into an elastic cache, like Redis, and use the sessionId as key and persisted in a user cookie. So EC2 managing the interaction can get the cart data from the cache using the sessionID. It can be enhanced with a RDS to keep user data. Which can also support the CQRS pattern with read replicas. Cache can be update with data from RDS so if the user is requesting data in session, it hits the cache.
 
- ![9](./images/stateful-app.png)
+ ![9](./images/aws/stateful-app.png)
 
 Cache and database are set on multi AZ, as well as EC2 instance and load balancer, all to support disaster. Security groups need to be defined to get all traffic to the ELB and limited traffic between ELB and EC2 and between EC2 and cache and EC2 and DB.
 
@@ -441,7 +441,7 @@ Once versioning enabled, a bucket can be replicated in the same region or cross 
 
 When uploading a document into an existing bucket we can specify the storage class for keep data over time. Different levels are offered with different cost and SLA.
 
- ![A](./images/storage-class.png)
+ ![A](./images/aws/storage-class.png)
 
 To prevent accidental file deletes, we can setup MFA Delete to use MFA tokens before deleting objects.
 
@@ -451,7 +451,7 @@ We can transition objects between storage classes. For infrequently accessed obj
 
 At the bucket level, a user can define lifecycle rules for when to transition an object to another storage class.
 
- ![B](./images/storage-rule.png)
+ ![B](./images/aws/storage-rule.png)
 
 To improve performance, a big file can be split and then uploaded with local connection to the closed edge access and then use AWS private network to copy between buckets in different region.
 
@@ -471,11 +471,100 @@ When using CLI in a EC2 instance always use an IAM role to control security cred
 
 CDN service with DDoS protection. It caches data to the edge to improve web browsing and app performance. 216 Edge location.
 
-The origins of those files are S3 bucker, Custom resource accessible via HTTP. Cloudfront keeps cache for the data read. For the edge to access the S3 bucket, it uses an origin access identity (OAI), managed as IAM role. 
+The origins of those files are S3 buckets, Custom resource accessible via HTTP. CloudFront keeps cache for the data read. For the edge to access the S3 bucket, it uses an origin access identity (OAI), managed as IAM role. 
 
 For EC2 instance, the security group needs to accept traffic from edge location IP addresses. 
 
 It is possible to control with geo restriction. 
+
+It also support the concept of signed URL. When you want to distribute content to different user groups over the world: We attach a policy with:
+
+* Includes URL expiration
+* Includes IP ranges to access the data from
+* Trusted signers (which AWS accounts can create signed URLs)
+* How long should the URL be valid for?
+* Shared content (movie, music): make it short (a few minutes)
+* Private content (private to the user): you can make it last for years
+* Signed URL = access to individual files (one signed URL per file)
+* Signed Cookies = access to multiple files (one signed cookie for many files)
+
+## Storage
+
+### Snowball
+
+Move TB of data in and out AWS using physical device to ship data. The edge has 100TB and compute power to do some local processing on data. Snow mobile is a truck with 100 PB capacity. Once on site, it is transferred to S3.
+
+Snowball Edge brings computing capabilities to allow data pre-processing while it's being moved in Snowball, so we save time on the pre-processing side as well.
+
+## Hybrid cloud storage
+
+Storage gateway expose an API in front of S3. Three gateway types:
+
+* file: S3 bucket accessible using NFS or SMB protocols. Controlled access via IAM roles. File gateway is installed on-premise and communicate with AWS.
+* volume: this is a block storage using iSCSI protocol. On-premise and visible as a local volume backed by S3.
+* tape: same approach but with virtual tape library. Can go to S3 and Glacier.
+
+### Storage comparison
+
+* S3: Object Storage
+* Glacier: Object Archival
+* EFS: Network File System for Linux instances, POSIX filesystem
+* FSx for Windows: Network File System for Windows servers
+* FSx for Lustre: High Performance Computing Linux file system
+* EBS volumes: Network storage for one EC2 instance at a time
+* Instance Storage: Physical storage for your EC2 instance (high IOPS)
+* Storage Gateway: File Gateway, Volume Gateway (cache & stored), Tape Gateway
+* Snowball / Snowmobile: to move large amount of data to the cloud, physically
+* Database: for specific workloads, usually with indexing and querying
+
+## Integration and middleware: SQS, Kinesis Active MQ
+
+### SQS: Standard queue
+
+Oldest queueing service on AWS. The default retention is 4 days up to 14 days. low latency < 10ms. Duplicate messages is possible and out of order too. Consumer deletes the message. It is auto scaling.
+
+Specific SDK to integrate to SendMessage...
+
+Consumer receive, process and then delete. Parallel is possible on the different messages. The consumers can be in an auto scaling group so with CloudWatch, it is possible to monitor the queue size / # of instances and on the CloudWatch alarm action, trigger scaling. Max size is 256KB. 
+
+Message has metadata out of the box. After a message is polled by a consumer, it becomes invisible to other consumers. By default, the “message visibility timeout” is 30 seconds, which means the message has 30 seconds to be processed (Amazon SQS prevents other consumers from receiving and processing the message.). After the message visibility timeout is over, the message is “visible” in SQS, so it will be processed twice. But a consumer could call the ChangeMessageVisibility API to get more time. When the visibility timeout is high (hours), and the consumer crashes then the re-processing of all the message will take time. If it is set too low (seconds), we may get duplicates
+
+ ![SQS](./images/aws/sqs-msg.png)
+
+Encryption in fight via HTTPS, at rest encryption with KMS keys. Comes with monitoring.
+
+If a consumer fails to process a message within the Visibility Timeout, the message goes back to the queue. But if we can set a threshold of how many times a message can go back to the queue. After the MaximumReceives threshold is exceeded, the message goes into a dead letter queue (DLQ) (which has a limit of 14 days to process).
+
+ ![DLQ](./images/aws/sqs-dlq.png)
+
+Delay queues let you postpone the delivery of new messages to a queue for a number of seconds. If you create a delay queue, any messages that you send to the queue remain invisible to consumers for the duration of the delay period. The default (minimum) delay for a queue is 0 seconds. The maximum is 15 minutes
+
+Queue can be set as FIFO to guaranty the order: limited to throughput at 300 msg/s without batching or 3000 msg/s with batching. I can also support exactly once. It can be set to remove duplicate by looking at the content.
+
+### Simple Notification Service is for topic pub/sub
+
+SNS supports up to 10,000,000 subscriptions per topic, 100,000 topics limit. The subscribers can publish to topic via SDK and can use different protocols like: HTTP / HTTPS (with delivery retries – how many times), SMTP,  SMS, ... The subscribers can be a SQS, a Lambda, emails, Emails...
+Many AWS services can send data directly to SNS for notifications: CloudWatch (for alarms), Auto Scaling Groups notifications, Amazon S3 (on bucket events), CloudFormation.
+
+SNS can be combined with SQS: Producers oush once in SNS, receive in all SQS queues that are subscribers. It is fully decoupled without any data loss. SQS allows for data persistence, delayed processing and retries. SNS cannot send messages to SQS FIFO queues.
+
+### Kinesis
+
+It is like a managed alternative to kafka. It uses the same principle and features set.
+
+ ![kin](./images/aws/kinesis.png)
+
+Data can be kept to for 7 days. Ability to replay data, multiple apps consume the same stream. Only one consumer per shard
+
+* **Kinesis Streams**: low latency streaming ingest at scale. They offer patterns for data stream processing.
+* **Kinesis Analytics**: perform real-time analytics on streams using SQL
+* **Kinesis Firehose**: load streams into S3, Redshift, ElasticSearch. Mo administration, auto scaling, serverless. 
+
+One stream is made of many different shards (like kafka partition). Capacity of 1MB/s or 1000 messages/s at write PER SHARD, and 2MB/s at read PER SHARD. Billing is per shard provisioned, can have as many shards as we want. Batching available or per message calls.
+
+captured Metrics are: # of incoming/outgoing bytes, # incoming/outgoing records, Write / read provisioned throughput exceeded, and iterator age ms.
+
+It offer a CLI to get stream, list streams, list shard...
 
 ## ECS
 
