@@ -558,7 +558,7 @@ Data can be kept to for 7 days. Ability to replay data, multiple apps consume th
 
 * **Kinesis Streams**: low latency streaming ingest at scale. They offer patterns for data stream processing.
 * **Kinesis Analytics**: perform real-time analytics on streams using SQL
-* **Kinesis Firehose**: load streams into S3, Redshift, ElasticSearch. Mo administration, auto scaling, serverless. 
+* **Kinesis Firehose**: load streams into S3, Redshift, ElasticSearch. Mo administration, auto scaling, serverless.
 
 One stream is made of many different shards (like kafka partition). Capacity of 1MB/s or 1000 messages/s at write PER SHARD, and 2MB/s at read PER SHARD. Billing is per shard provisioned, can have as many shards as we want. Batching available or per message calls.
 
@@ -566,7 +566,46 @@ captured Metrics are: # of incoming/outgoing bytes, # incoming/outgoing records,
 
 It offer a CLI to get stream, list streams, list shard...
 
-## ECS
+## Serverless 
 
+Serveless on AWS is supported by a lot of services:
+
+* AWS Lambda: Limited by time - short executions, runs on-demand, and automated scaling. Pay per call, duration and memory used. 
+* DynamoDB: no sql db, with HA supported by replication across three AZ. millions req/s, trillions rows, 100s TB storage. low latency on read. Support event driven programming with streams: lambda function can read the stream (24h retention). Table oriented, with dynamic attribute but primary key. 400KB max size for one document. It uses the concept of Read Capacity Unit and Write CU. It supports auto-scaling and on-demand throughput. A burst credit is authorized, when empty we get ProvisionedThroughputException. Finally it use the DynamoDB Accelerator to cache data to authorize micro second latency for cached reads. Supports transactions and bulk tx with up to 10 items. 
+* AWS Cognito: gives users an identity to interact with the app.
+* AWS API Gateway: API versioning, websocket supported, different environment, support authentication and authorization. Handle request throttling. Cache API response. SDK. Support different security approaches:
+    * IAM:
+        * Great for users / roles already within your AWS account
+        * Handle authentication + authorization
+        * Leverages Sig v4
+    * Custom Authorizer:
+        * Great for 3rd party tokens
+        * Very flexible in terms of what IAM policy is returned
+        * Handle Authentication + Authorization
+        * Pay per Lambda invocation
+    * Cognito User Pool:
+        * You manage your own user pool (can be backed by Facebook, Google login etc…)
+        * No need to write any custom code
+        * Must implement authorization in the backend
+* Amazon S3
+* AWS SNS & SQS
+* AWS Kinesis Data Firehose
+* Aurora Serverless
+* Step Functions
+* Fargate
+
+Lambda@Edge is used to deploy Lambda functions alongside your CloudFront CDN, it is for building more responsive applications. Lambda is deployed globally. Here are some use cases: Website security and privacy, dynamic webapp at the edge, search engine optimization (SEO), intelligently route across origins and data centers, bot mitigation at the edge, real-time image transformation, A/B testing, user authentication and authorization, user prioritization, user tracking and analytics.
+
+### Serverless architecture patterns
+
+#### Few write / Lot of reads app
+
+The mobile application access application via REST HTTP through API gateway. They first get JWT token to authenticate and the API gateway validate such token. The Gateway delegates to a Lambda function which go to Dynamo DB.
+
+ ![](./images/aws-app-L.png)
+
+Each of the component supports auto scaling. To improve read throughput cache is used with DAX. Also some of the REST request could be cached in the API gateway. If the application needs to access S3 directly. Cognito can also generate temporary credentials with STS. Restricted policy is set to control access to S3 too. 
+
+## ECS
 
 Amazon ECS is a fully managed container orchestration service, Amazon EKS is a fully managed Kubernetes service, both services support Fargate to provide serverless compute for containers. Fargate removes the need to provision and manage servers, lets us specify and pay for resources per application, and improves security through application isolation by design
