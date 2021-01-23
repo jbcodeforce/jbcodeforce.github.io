@@ -32,7 +32,7 @@ This is the list of assets I developed or co-developed
 * [Mirror Maker 2  Studies](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-mirrormaker/)  04/2020
 * [Mirror maker 2 labs](https://ibm-cloud-architecture.github.io/refarch-eda/use-cases/kafka-mm2/) - Q2 2020 - updated 09/2020
 * [Event Streams on Cloud hands on lab](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/es-cloud/) introductory hands-on lab on IBM Event Streams on Cloud with topic creation. It was done in the context of customer's Kafka bootcamp. 
-* [Store item sale simulator for Rabbit MQ, MQ or Kafka backends](https://github.com/ibm-cloud-architecture/refarch-eda-store-simulator) 10/2020
+* [Store item sale simulator to produce messages to Rabbit MQ, IBM MQ or Kafka backends](https://github.com/ibm-cloud-architecture/refarch-eda-store-simulator) 10/2020
 * [Realtime Analytics pattern](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/realtime-analytics/). Created for EDA
 * [Reefer simulator in python](https://github.com/ibm-cloud-architecture/vaccine-reefer-simulator) - updated 07/2020
 * [Reefer Container Shipment Container Management](https://github.com/ibm-cloud-architecture/refarch-kc-container-ms) springboot

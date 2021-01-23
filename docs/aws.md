@@ -602,10 +602,15 @@ Lambda@Edge is used to deploy Lambda functions alongside your CloudFront CDN, it
 
 The mobile application access application via REST HTTP through API gateway. They first get JWT token to authenticate and the API gateway validate such token. The Gateway delegates to a Lambda function which go to Dynamo DB.
 
- ![](./images/aws-app-L.png)
+ ![](./images/aws/aws-app-L.png)
 
 Each of the component supports auto scaling. To improve read throughput cache is used with DAX. Also some of the REST request could be cached in the API gateway. If the application needs to access S3 directly. Cognito can also generate temporary credentials with STS. Restricted policy is set to control access to S3 too. 
 
 ## ECS
 
 Amazon ECS is a fully managed container orchestration service, Amazon EKS is a fully managed Kubernetes service, both services support Fargate to provide serverless compute for containers. Fargate removes the need to provision and manage servers, lets us specify and pay for resources per application, and improves security through application isolation by design
+
+
+## Other interesting stuff
+
+[IBM Cloud pak for integration on AWS](https://aws.amazon.com/quickstart/architecture/ibm-cloud-pak-for-integration/)

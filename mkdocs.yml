@@ -18,6 +18,7 @@ nav:
   - AWS: aws.md
   - IBM Cloud: ibmcloud.md
   - My code templates: code-template.md
+  - Git summary: git.md
   - To work on: toworkon.md
 
 theme: 
