@@ -1,24 +1,48 @@
-site_name: Jerome's studies
+site_name: Jerome Boyer Personal Site
 repo_url: https://github.com/jbcodeforce/jbcodeforce.github.io/
 nav:
-  - Introduction: index.md
-  - List of assets: assets.md
-  - Java Studies: https://jbcodeforce.github.com/java-studies
-  - Kafka Studies: https://jbcodeforce.github.com/kafka-studies
-  - Openshift Studies: https://jbcodeforce.github.com/openshift-studies
-  - Python Studies: https://jbcodeforce.github.com/python-code
-  - Spark Studies: https://jbcodeforce.github.io/spark-studies/
-  - Flink Studies: https://jbcodeforce.github.io/flink-studies/
-  - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
-  - Database play:  https://jbcodeforce.github.io/db-play/
-  - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
-  - Machine learning: https://jbcodeforce.github.io/ml-basics/
-  - Code Engine: code-engine.md
-  - Cloud native content IBM: https://cloudnative101.dev/
-  - AWS: aws.md
-  - IBM Cloud: ibmcloud.md
-  - My code templates: code-template.md
-  - Git summary: git.md
+  - Home: index.md
+  - skill: skill.md
+  - List of contributions: assets.md
+  - Knowledge base: 
+    - Event Driven Architecture:
+      - Reference architecture: https://jbcodeforce.github.io/refarch-eda/
+    - Architecture:
+      - Architecture decision: architecture/architectural-decisions.md
+      - AWS: architecture/aws.md
+      - GCP: architecture/gcp.md
+      - IBM Cloud: architecture/ibmcloud.md
+      - Data integration: architecture/data-integration.md
+      - Data partitioning: architecture/data-partitioning.md 
+      - Data replication: architecture/data-replication.md 
+    - Programming:
+      - Java Studies: 
+        - Introduction: java/index.md
+        - Microprofile 3.x: java/microprofile.md
+        - Concurrency: java/concurrent.md
+        - Open Liberty: java/openliberty.md
+        - Quarkus: java/quarkus.md
+        - Vert.x: java/vertx.md
+        - Funqy: java/funqy.md
+        - Concurrency : java/concurrent.md
+        - MQ challenge: java/mqChallenge.md
+        - Java FAQ: java/FAQ.md
+        - VScode: java/java-vscode.md
+      - Python Studies: https://jbcodeforce.github.com/python-code
+      - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
+      - Machine learning: https://jbcodeforce.github.io/ml-basics/
+      - Cloud native content IBM: https://cloudnative101.dev/
+      - Git summary: git.md
+      - My code templates: code-template.md
+    - Techno:
+      - Kafka Studies: https://jbcodeforce.github.com/kafka-studies
+      - Openshift Studies: https://jbcodeforce.github.com/openshift-studies
+      - Spark Studies: https://jbcodeforce.github.io/spark-studies/
+      - Flink Studies: https://jbcodeforce.github.io/flink-studies/
+      - Database play:  https://jbcodeforce.github.io/db-play/  
+      - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
+      - Code Engine: code-engine.md
+      - VScode: java-vscode.md
   - To work on: toworkon.md
 
 theme: 
