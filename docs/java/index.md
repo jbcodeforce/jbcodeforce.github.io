@@ -296,7 +296,7 @@ See the extensive doc from [SmallRye](https://smallrye.io/smallrye-reactive-mess
 This is the implementation of [the MQ developer tutorial](https://developer.ibm.com/messaging/learn-mq/mq-tutorials/mq-dev-challenge/) and supports the Reseller class outlined in the red rectangle below:
 ![](https://developer.ibm.com/messaging/wp-content/uploads/sites/18/2018/08/LearnMQbadgeDiag1.png)
 
-Code to subscribe to topic, and put, get from Queue. It includes a Docker image with MQ embbedded [more explanation here.](mqChallenge/README.md)
+Code to subscribe to topic, and put, get from Queue. It includes a Docker image with MQ embedded [more explanation here.](mqChallenge.md)
 
 ## TestContainer for integration test
 

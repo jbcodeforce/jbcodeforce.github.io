@@ -5,9 +5,8 @@ nav:
   - skill: skill.md
   - List of contributions: assets.md
   - Knowledge base: 
-    - Event Driven Architecture:
-      - Reference architecture: https://jbcodeforce.github.io/refarch-eda/
     - Architecture:
+      - Event Driven Architecture: architecture/eda.md
       - Architecture decision: architecture/architectural-decisions.md
       - AWS: architecture/aws.md
       - GCP: architecture/gcp.md
@@ -51,8 +50,7 @@ theme:
   feature:
     tabs: true
   palette:
-      primary: 'blue grey'
-      primary: 'deep purple'
+      primary: 'magenta dark'
   social:
     - type: 'github'
       link: 'https://github.com/jbcodeforce'

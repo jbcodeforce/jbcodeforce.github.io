@@ -3,7 +3,7 @@
 !!! abstract
     In this article, we are dealing with data replication from traditional Database, like DB2, to a microservice environment with document oriented or relational data. Database replications can be used to move data between environments or to separate read and write models, which may be a viable solution with microservices, but we need to assess how to support coexistence where older systems run in parallel to microservices and use eventual data consistency pattern. 
 
-We recommend reading the ['Ensure data resilience' article from Neal Fishman](https://www.ibm.com/cloud/garage/practices/manage/ensure-data-resilience/) to understand the problems related to data resilience and how they fit into [data topology](../topology/README.md) and governance broader discussions.
+We recommend reading the ['Ensure data resilience' article from Neal Fishman](https://www.ibm.com/cloud/garage/practices/manage/ensure-data-resilience/) to understand the problems related to data resilience and how they fit into [data topology](./data-topology.md) and governance broader discussions.
 
 ## Concepts
 
