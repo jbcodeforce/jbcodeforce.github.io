@@ -2,21 +2,23 @@
 
 ## About me
 
-I am currently IBM Distinguished Engineer, responsible to advocate Event driven solution and architecture with cloud native microservice and real time analytics or complex event processing. I do also play with AI to add intelligent to business applications and processes. I try to be as much hands-on as possible, to be able to provide good and tested recommendations to our customers. 
+I am currently IBM Distinguished Engineer, responsible to evangelize event-driven cloud native solution and architecture with microservice, real time analytics and complex event processing. I do also help customers integrating AI to business applications and processes. I try to be as much hands-on as possible, to be able to provide good and tested recommendations to our customers.
 
 My main roles are:
 
-* I help strategic customers to adopt hybrid cloud deployment, and specially event driven architecture to modernize their IT architecture so they can improve their business agility and scale their applications. The deployment of such approaches improve cost efficiency and increase the top line, as new opportunities are added easily. 
-* The potential business impact is at the hundred of millions.
-* I try to commit myself to be a trusted advisor, so I focus to continuously deeply learning new technology, programming habits, and agile practices. I try to code and play with new things on a daily basis. Days are long. The goal is to help customer to innovate and bring business values with new technologies. 
-* My architecture skillset is around application modernization with event driven microservices, modern data pipeline, eventual data consistency and real time analytics.
-* I lead incremental architecture workshops and prototype solution based on business requirements to proof the business value.
-* I try to engage on long term, deep, business relationships with senior technical individuals within customers team and within my company. Problems are difficult, network of people who can help is important.
-* I do a lot of mentoring too, so I like to capture and share best-practice, tribal knowledge, so team member can learn quickly to be more operational
-* I author or contribute to customer-facing publications
-* Act as a technical liaison between customers and product teams and help evolve the different company products.
+* Helping strategic customers to adopt hybrid cloud deployment, and specially event driven architecture on Kubernetes to modernize their IT architecture so they can improve their business agility and scale their applications. The deployment of such approaches improve cost efficiency and increase the top line, as new business opportunities are added easily. The potential business impact is at the hundred of millions.
+* Leading incremental architecture workshops and prototype solution based on business requirements to proof the business value in the form of minimum viable products. 
+* Supporting customers in long term, deep, technical relationships with senior technical individuals.
+* Mentoring developers, consultants and technical sellers.
+* Capturing and sharing best-practices, tribal knowledge, so team members can learn quickly to be more operational
+* Authoring, presenting or contributing to customer-facing publications for conferences
+* Acting as a technical liaison between customers and product teams and help evolve the different company products.
 
-As a technical expert, I sell, create, and lead First of a Kind hybrid cloud projects and resolves customers’ critical issues. I harvest architecture, best practices, and lessons learned from customer experiences through leading a team of solution engineers who are publishing reference architecture, industry solution and reference implementation template solutions. 
+As a technical expert, I sell, create, and lead First of a Kind hybrid cloud projects and resolves customers’ critical issues. I harvest architecture, best practices, and lessons learned from customer experiences through leading a team of solution engineers who are publishing reference architecture, industry solution and reference implementation template solutions.
+
+I try to commit myself to be a trusted advisor, so I focus to continuously deeply learning new technology, programming habits, and agile practices. I try to code and play with new things on a daily basis. Days are long. The goal is to help customers to innovate and bring business values with new technologies.
+
+My architecture skillset is around application modernization with event driven microservices, modern data pipeline, eventual data consistency, cep, and real time analytics.
 
 ### Some open source projects
 
@@ -38,7 +40,7 @@ Books:
 * Co Author: **[Agile Business Rule Development](http://www.springer.com/business+%26+management/business+information+systems/book/978-3-642-19040-7)** Springer.
 
 
-Multiple articles on IBM developerWorks site, and BPM journal.
+Multiple articles on IBM developers site, and BPM journal.
 
 * [http://www.ibm.com/developerworks/bpm/bpmjournal/1302_boyer/1302_boyer.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1302_boyer/1302_boyer.html)
 * [http://www.ibm.com/developerworks/bpm/bpmjournal/1404_boyer/1404_boyer.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1404_boyer/1404_boyer.html)
@@ -50,14 +52,10 @@ Multiple articles on IBM developerWorks site, and BPM journal.
 
 ## What is in this site
 
-The goal of this site is to keep references and notes from my studies and may be define some best practices I have used to implement customer's solutions. It addresses some of the common problems I encountered while trying new technologies.
-
-The left navigation is to go over the last technologies studied to address business application solution implementation based on event driven microservice, real time analytics leveraging artificial intelligence and hybrid cloud. This is always a work in progress, some subjects are at the beginning of the study, some are dropped as of now, but I could come later on it depending of customer's engagement.
-
+The goal of this site is to keep references and notes from my different studies and may be define some best practices I have used to implement customer's solutions. It addresses some of the common problems I encountered while trying new technologies.
 
 All views expressed on this site are mine only, and do not represent the views of my current and past employers and customers.
 
 ## Study Repositories
 
 [Repository list](https://github.com/jbcodeforce?tab=repositories)
-
