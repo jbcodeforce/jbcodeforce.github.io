@@ -10,18 +10,27 @@ ibmcloud login --sso
 
 ## Cloud Object Storage
 
-Very similar service as S3. [Product doc](https://cloud.ibm.com/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage). 
+Very similar service as S3. [Product doc](https://cloud.ibm.com/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
 
-* Create a COS service to keep n buckets
-* Bucket concept as a unique folder to content files
+* Create a COS service to keep n buckets. 
+* IBM Cloud Object Storage is a multi-tenant system, and all instances of Object Storage share physical infrastructure
+* Bucket is like a unique folder to content files
 * Stores encrypted and dispersed data across multiple geographic locations
+* Different level of resiliency. Resiliency refers to the scope and scale of the geographic area across which your data is distributed.
 
     * **Cross Region** resiliency spreads your data across several metropolitan areas
-    * **Regional** resiliency spreads data across a single metropolitan area. 
+    * **Regional** resiliency spreads data across a single metropolitan area.
     * A **Single** Data Center distributes data across devices within a single site only.
-* Different level of resiliency
-* Billing based on storage class, which reflect how to read and write data
 
+* Billing based on storage class, which reflect how to read and write data. We can transition from any of the storage tiers (Standard, Vault, Cold Vault and Flex) to long-term offline archive.
+* Different roles can be used to access the object.
+* SQL Query can be used on top of COS objects
+
+### Use cases
+
+* as part of a data lake
+* serving static websites
+* 
 ## Function As A Service
 
 [Function as Service](https://cloud.ibm.com/functions/learn/concepts) is the current service for 'serverless'.

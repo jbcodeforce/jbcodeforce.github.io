@@ -2,7 +2,7 @@ site_name: Jerome Boyer Personal Site
 repo_url: https://github.com/jbcodeforce/jbcodeforce.github.io/
 nav:
   - Home: index.md
-  - skill: skill.md
+  - Skill: skill.md
   - List of contributions: assets.md
   - Knowledge base: 
     - Architecture:
@@ -11,9 +11,13 @@ nav:
       - AWS: architecture/aws.md
       - GCP: architecture/gcp.md
       - IBM Cloud: architecture/ibmcloud.md
-      - Data integration: architecture/data-integration.md
-      - Data partitioning: architecture/data-partitioning.md 
-      - Data replication: architecture/data-replication.md 
+      - Openshift Studies: https://jbcodeforce.github.com/openshift-studies
+      - Data:
+        - Data integration: architecture/data-integration.md
+        - Data partitioning: architecture/data-partitioning.md 
+        - Data replication: architecture/data-replication.md 
+        - Data catalog - spectrum discover: https://www.ibm.com/cloud/architecture/architectures/spectrum-discover
+        - OpenDataHub.io: https://opendatahub.io
     - Programming:
       - Java Studies: 
         - Introduction: java/index.md
@@ -35,9 +39,9 @@ nav:
       - My code templates: code-template.md
     - Techno:
       - Kafka Studies: https://jbcodeforce.github.com/kafka-studies
-      - Openshift Studies: https://jbcodeforce.github.com/openshift-studies
       - Spark Studies: https://jbcodeforce.github.io/spark-studies/
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/
+      - RedPanda Studies: https://jbcodeforce.github.io/redpanda-studies/
       - Database play:  https://jbcodeforce.github.io/db-play/  
       - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
       - Code Engine: code-engine.md
