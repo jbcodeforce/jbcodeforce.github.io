@@ -15,6 +15,7 @@ nav:
       - Data:
         - Data integration: architecture/data-integration.md
         - Data partitioning: architecture/data-partitioning.md 
+        - Data topology: architecture/data-topology.md 
         - Data replication: architecture/data-replication.md 
         - Data catalog - spectrum discover: https://www.ibm.com/cloud/architecture/architectures/spectrum-discover
         - OpenDataHub.io: https://opendatahub.io

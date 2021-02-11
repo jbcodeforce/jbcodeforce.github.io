@@ -54,11 +54,13 @@ load for example), it can burst. Use burst credits to control CPU usage.
 * **Convertible reserved** instance for changing resource capacity over time.
 * **Scheduled reserved** instance for job based workload.
 * **Spot instance** for very short - 90% discount on on-demand - used for work resilient to failure like batch job, data analysis, image processing,...
+
     * Define a **max spot price** and get the instance while the current spot price < max. The hourly spot price varies based on offer and capacity. 
     * if the current spot price > max, then instance will be stopped
     * with spot block we can a time frame without interruptions.
     * The expected state is defined in a 'spot request' which can be cancelled. One time or persistent request types are supported. Cancel a spot request does not terminate instances, but need to be the first thing to do and then terminate the instances.
     * Spot fleets allow to automatically request spot instance with the lowest price.
+    
 * **Dedicated hosts** to book entire physical server and control instance placement. # years. BYOL. 
 
 Use **EC2 launch templates** to automate instance launches, simplify permission policies, and enforce best practices across the organization. (Look very similar as docker image)
@@ -285,9 +287,9 @@ Support different performance mode, like max I/O or general purpose
 Support storage tiers to move files after n days, infrequent EFS-IA for files rarely accessed.
 Use amazon EFS util tool in each EC2 instance to mount the EFS to a target mount point.
 
-## Relational Database Service
+## Relational Database Service - RDS
 
-Managed service for SQL based database. Support multi AZs for DR with automatic failover to standby, app uses one unique DNS name. Continuous backup and restore to specific point of time restore. It uses gp2 or io1 EBS. Transaction logs are backed-up every 5 minutes.
+Managed service for SQL based database (mySQL, Postgresql, SQL server, Oracle). Must provision EC2 instance and EBS volume.  Support multi AZs for DR with automatic failover to standby, app uses one unique DNS name. Continuous backup and restore to specific point of time restore. It uses gp2 or io1 EBS. Transaction logs are backed-up every 5 minutes.
 Support user triggered snapshot.
 
 * Read replicas: helps to scale the read operations. Can create up to 5 replicas within AZ, cross AZ and cross region. Replication is asynch. Use cases include, reporting, analytics, ML model
@@ -295,16 +297,23 @@ Support user triggered snapshot.
 * Support at rest Encryption. Master needs to be encrypted to get encrypted replicas. 
 * We can create a snapshot from unencrypted DB and then copy it by enabling the encryption for this snapshot. From there we can create an Encrypted DB
 
-wer responsibility:
+Our responsibility:
 
 * Check the ports / IP / security group inbound rules in DB’s SG
 * In-database user creation and permissions or manage through IAM
 * Creating a database with or without public access
 * Ensure parameter groups or DB is configured to only allow SSL connections
 
-### Aurora
+From a solution architecture point of view:
 
-Proprietary SQL database, work on postgresql and mysql driver. It is cloud optimized and claims 5x performance improvement over mySQL on RDS, and 3x for postgresql.
+* **Operations**:  small downtime when failover happens. For maintenance, scaling in read replicas, updating underlying ec2 instance, or restore EBS, there will be manual intervention.
+* **Security**: AWS responsible for OS security, we are responsible for setting up KMS, security groups, IAM policies, authorizing users in DB, enforcing SSL.
+* **Reliability**: Multi AZ feature helps to address it, with failover mechanism in case of failures
+* **Performance**: depends on EC2 instance type, EBS volume type, ability to add Read Replicas. Doesn’t auto-scale, adapt to workload manually. 
+
+## Aurora
+
+Proprietary SQL database, work using postgresql and mysql driver. It is cloud optimized and claims 5x performance improvement over mySQL on RDS, and 3x for postgresql. 
 
 Can grow up to 64 TB. Sub 10ms replica lag, up to 15 replicas.
 
@@ -312,15 +321,20 @@ Failover in Aurora is instantaneous. It’s HA (High Availability) native. Use 1
 
  ![6](./images/aws/aws-aurora.png)
 
-It is CQRS at DB level. Use writer end point and reader endpoint.
+It is CQRS at DB level, and read can be global. Use writer end point and reader endpoint.
 
 It also supports one write with multiple reader and parallel query, multiple writes and serverless to automate scaling down to zero (No capacity planning needed and pay per second).
 
 With Aurora global database one primary region is used for write and then up to 5 read only regions with replica lag up to 1 s. Promoting another region (for disaster recovery) has an RTO of < 1 minute
 
+* **Operations**:  less operation, auto scaling storage.
+* **Security**: AWS responsible for OS security, we are responsible for setting up KMS, security groups, IAM policies, authorizing users in DB, enforcing SSL.
+* **Reliability**: Multi AZ, HA
+* **Performance**: 5x performance, up to 15 read replicas.
+
 ## ElastiCache
 
-Get a managed Redis or Memcached cluster. Applications queries ElastiCache, if not available, get from RDS and store in ElastiCache. 
+Get a managed Redis or Memcached cluster. Applications queries ElastiCache, if not available, get from RDS and store in ElastiCache. Key-Value store.
 It can be used for user session store so user interaction can got to different application instances.
 
 **Redis** is a multi AZ with Auto-Failover, supports read replicas to scale and for high availability. It can persist data using AOF persistence, and has backup and restore features.
@@ -328,9 +342,20 @@ It can be used for user session store so user interaction can got to different a
 **Memcached** is a multi-node for partitioning of data (sharding), and no persistence, no backup and restore. It is based on a multi-threaded architecture.
 
 Some patterns for ElastiCache:
+
 * Lazy Loading: all the read data is cached, data can become stale in cache
 * Write Through: Adds or update data in the cache when written to a DB (no stale data)
 * Session Store: store temporary session data in a cache (using TTL features)
+
+Sub millisecond performance, in memory read replicas for sharding. 
+
+## DynamoDB
+
+AWS proprietary NoSQL database, Serverless, provisioned capacity, auto scaling, on demand capacity. Highly Available, Multi AZ by default, Read and Writes are decoupled, and DAX can be used for read cache. 
+
+The read operations can be eventually consistent or strongly consistent.
+
+DynamoDB Streams to integrate with AWS Lambda.
 
 ## Route 53
 
@@ -459,25 +484,29 @@ To improve performance, a big file can be split and then uploaded with local con
 
 ## AWS Athena
 
-It is to run analytics directly on S3 files, using SQL language to query the files (CSV, JSON, Avro, Parquet...). S3 Access Logs log all the requests made to buckets, and Athena can then be used to run serverless analytics on top of the logs files
+[AWS Athena](https://aws.amazon.com/athena) runs analytics directly on S3 files, using SQL language to query the files (CSV, JSON, Avro, Parquet...). S3 Access Logs log all the requests made to buckets, and Athena can then be used to run serverless analytics on top of the logs files.
+
+No need for complex ETL jobs to prepare your data for analysis.
+
+Integrated with AWS Glue Data Catalog, allowing you to create a unified metadata repository across various services, crawl data sources to discover schemas and populate your Catalog with new and modified table and partition definitions, and maintain schema versioning.
 
 ## AWS CLI
 
-The cli needs to be configured: `aws configure` with the credential, key and region to be able to access the aws account. Use IAM user to get a new credentials key.
+The cli needs to be configured: `aws configure` with the credential, key and region to access. Use IAM user to get a new credentials key.
 
-When using CLI in a EC2 instance always use an IAM role to control security credentials. This role can come with a policy authorizing exactly what the EC2 instance should be able to do. Also within a EC2 instance, it is possible to use the URL http://169.254.169.254/latest/meta-data to get information about the EC2. We can retrieve the IAM Role name from that metadata.
+When using CLI in a EC2 instance always use an IAM role to control security credentials. This role can come with a policy authorizing exactly what the EC2 instances should be able to do. Also within a EC2 instance, it is possible to use the URL http://169.254.169.254/latest/meta-data to get information about the EC2. We can retrieve the IAM Role name from that metadata.
 
 ## CloudFront
 
-CDN service with DDoS protection. It caches data to the edge to improve web browsing and app performance. 216 Edge location.
+CDN service with DDoS protection. It caches data to the edge to improve web browsing and app performance. 216 Edge locations.
 
-The origins of those files are S3 buckets, Custom resource accessible via HTTP. CloudFront keeps cache for the data read. For the edge to access the S3 bucket, it uses an origin access identity (OAI), managed as IAM role. 
+The origins of those files are S3 buckets, Custom resource accessible via HTTP. CloudFront keeps cache for the data read. For the edge to access the S3 bucket, it uses an origin access identity (OAI), managed as IAM role.
 
-For EC2 instance, the security group needs to accept traffic from edge location IP addresses. 
+For EC2 instance, the security group needs to accept traffic from edge location IP addresses.
 
-It is possible to control with geo restriction. 
+It is possible to control with geo restriction.
 
-It also support the concept of signed URL. When you want to distribute content to different user groups over the world: We attach a policy with:
+It also supports the concept of signed URL. When you want to distribute content to different user groups over the world: We attach a policy with:
 
 * Includes URL expiration
 * Includes IP ranges to access the data from
@@ -546,21 +575,21 @@ Queue can be set as FIFO to guaranty the order: limited to throughput at 300 msg
 SNS supports up to 10,000,000 subscriptions per topic, 100,000 topics limit. The subscribers can publish to topic via SDK and can use different protocols like: HTTP / HTTPS (with delivery retries – how many times), SMTP,  SMS, ... The subscribers can be a SQS, a Lambda, emails, Emails...
 Many AWS services can send data directly to SNS for notifications: CloudWatch (for alarms), Auto Scaling Groups notifications, Amazon S3 (on bucket events), CloudFormation.
 
-SNS can be combined with SQS: Producers oush once in SNS, receive in all SQS queues that are subscribers. It is fully decoupled without any data loss. SQS allows for data persistence, delayed processing and retries. SNS cannot send messages to SQS FIFO queues.
+SNS can be combined with SQS: Producers push once in SNS, receive in all SQS queues that they subscribed to. It is fully decoupled without any data loss. SQS allows for data persistence, delayed processing and retries. SNS cannot send messages to SQS FIFO queues.
 
 ### Kinesis
 
-It is like a managed alternative to kafka. It uses the same principle and features set.
+It is like a managed alternative to Kafka. It uses the same principle and feature set.
 
  ![kin](./images/aws/kinesis.png)
 
-Data can be kept to for 7 days. Ability to replay data, multiple apps consume the same stream. Only one consumer per shard
+Data can be kept up to 7 days. Ability to replay data, multiple apps consume the same stream. Only one consumer per shard
 
 * **Kinesis Streams**: low latency streaming ingest at scale. They offer patterns for data stream processing.
 * **Kinesis Analytics**: perform real-time analytics on streams using SQL
 * **Kinesis Firehose**: load streams into S3, Redshift, ElasticSearch. Mo administration, auto scaling, serverless.
 
-One stream is made of many different shards (like kafka partition). Capacity of 1MB/s or 1000 messages/s at write PER SHARD, and 2MB/s at read PER SHARD. Billing is per shard provisioned, can have as many shards as we want. Batching available or per message calls.
+One stream is made of many different shards (like Kafka partition). Capacity of 1MB/s or 1000 messages/s at write PER SHARD, and 2MB/s at read PER SHARD. Billing is per shard provisioned, can have as many shards as we want. Batching available or per message calls.
 
 captured Metrics are: # of incoming/outgoing bytes, # incoming/outgoing records, Write / read provisioned throughput exceeded, and iterator age ms.
 
@@ -570,8 +599,8 @@ It offer a CLI to get stream, list streams, list shard...
 
 Serveless on AWS is supported by a lot of services:
 
-* AWS Lambda: Limited by time - short executions, runs on-demand, and automated scaling. Pay per call, duration and memory used. 
-* DynamoDB: no sql db, with HA supported by replication across three AZ. millions req/s, trillions rows, 100s TB storage. low latency on read. Support event driven programming with streams: lambda function can read the stream (24h retention). Table oriented, with dynamic attribute but primary key. 400KB max size for one document. It uses the concept of Read Capacity Unit and Write CU. It supports auto-scaling and on-demand throughput. A burst credit is authorized, when empty we get ProvisionedThroughputException. Finally it use the DynamoDB Accelerator to cache data to authorize micro second latency for cached reads. Supports transactions and bulk tx with up to 10 items. 
+* **AWS Lambda**: Limited by time - short executions, runs on-demand, and automated scaling. Pay per call, duration and memory used.
+* **DynamoDB**: no sql db, with HA supported by replication across three AZs. millions req/s, trillions rows, 100s TB storage. low latency on read. Support event driven programming with streams: lambda function can read the stream (24h retention). Table oriented, with dynamic attribute but primary key. 400KB max size for one document. It uses the concept of Read Capacity Unit and Write CU. It supports auto-scaling and on-demand throughput. A burst credit is authorized, when empty we get ProvisionedThroughputException. Finally it use the DynamoDB Accelerator to cache data to authorize micro second latency for cached reads. Supports transactions and bulk tx with up to 10 items. 
 * AWS Cognito: gives users an identity to interact with the app.
 * AWS API Gateway: API versioning, websocket supported, different environment, support authentication and authorization. Handle request throttling. Cache API response. SDK. Support different security approaches:
     * IAM:
@@ -594,17 +623,58 @@ Serveless on AWS is supported by a lot of services:
 * Step Functions
 * Fargate
 
-Lambda@Edge is used to deploy Lambda functions alongside your CloudFront CDN, it is for building more responsive applications. Lambda is deployed globally. Here are some use cases: Website security and privacy, dynamic webapp at the edge, search engine optimization (SEO), intelligently route across origins and data centers, bot mitigation at the edge, real-time image transformation, A/B testing, user authentication and authorization, user prioritization, user tracking and analytics.
+Lambda@Edge is used to deploy Lambda functions alongside your CloudFront CDN, it is for building more responsive applications. Lambda is deployed globally. Here are some use cases: Website security and privacy, dynamic webapp at the edge, search engine optimization (SEO), intelligent route across origins and data centers, bot mitigation at the edge, real-time image transformation, A/B testing, user authentication and authorization, user prioritization, user tracking and analytics.
 
 ### Serverless architecture patterns
 
-#### Few write / Lot of reads app
+#### Few write / Lot of reads app (ToDo)
 
-The mobile application access application via REST HTTP through API gateway. They first get JWT token to authenticate and the API gateway validate such token. The Gateway delegates to a Lambda function which go to Dynamo DB.
+The mobile application access application via REST HTTPS through API gateway. This use serverless and users should be able to directly interact with s3 buckets.  They first get JWT token to authenticate and the API gateway validates such token. The Gateway delegates to a Lambda function which goes to Dynamo DB.
 
- ![](./images/aws/aws-app-L.png)
+ ![ToDo web app architecture](./images/aws/aws-app-L.png)
 
-Each of the component supports auto scaling. To improve read throughput cache is used with DAX. Also some of the REST request could be cached in the API gateway. If the application needs to access S3 directly. Cognito can also generate temporary credentials with STS. Restricted policy is set to control access to S3 too. 
+Each of the component supports auto scaling. To improve read throughput cache is used with DAX. Also some of the REST request could be cached in the API gateway. As the application needs to access S3 directly, Cognito generates temporary credentials with STS so the application can authenticate to S3. User's credentials are not saved on the client app. Restricted policy is set to control access to S3 too.
+
+To improve throughput we can add DAX as a caching layer in front of DynamoDB: this will also reduce the sizing for DynamoDB. Some of the response can also be cached at the API gateway level.
+
+#### Serverless hosted web site (Blog)
+
+The public web site should scale globally, focus to scale on read, pure static files with some write. To secure access to S3 content, we use Origin Access Identity and Bucket policy to authorize read only from OAI.
+
+![](./images/aws/aws-app-blog.png)
+
+To get a welcome message sent when a user register to the app, we can add dynamoDB streams to get changes to the dynamoDB and then calls a lambda that will send an email with the Simple Email Service.
+
+DynamoDB Global Table can be used to expose data in different regions by using DynamoDB streams.
+
+#### Microservice
+
+Services use REST api to communicate. The service can be dockerized and run with ECS. Integration via REST is done via API gateway and load balancer.
+
+![](./images/aws/aws-app-ms.png)
+
+#### Paid content
+
+User has to pay to get content (video). We have a DB for users. This is a Serverless solution. Videos are saved in S3. To serve the video, we use Signed URL. So a lambda will build those URLs.
+
+![](./images/aws/aws-app-video.png)
+
+CloudFront is used to access videos globally. OAI for security so users cannot bypass it. We can't use S3 signed URL as they are not efficient for global access.
+
+#### Software update distribution
+
+The EC2 will be deployed in multi-zones and all is exposed with CloudFront to cache.
+
+#### Big Data pipeline
+
+The solution applies the traditional collect, inject, transform and query pattern.
+
+![](./images/aws/aws-big-data.png)
+
+IoT Core allows to collect data from IoT devices. Kinesis is used to get data as streams, and then FireHose upload every minute to S3. A Lambda can already do transformation from FireHose. As new files are added to S3 bucket, it trigger a Lambda to call queries defined in Athena. Athena pull the data and build a report published to another S3 bucket that will be used by QuickSight to visualize the data.
+
+## Database considerations
+
 
 ## ECS
 
