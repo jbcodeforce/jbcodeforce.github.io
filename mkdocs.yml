@@ -18,7 +18,7 @@ nav:
         - Data topology: architecture/data-topology.md 
         - Data replication: architecture/data-replication.md 
         - Data catalog - spectrum discover: https://www.ibm.com/cloud/architecture/architectures/spectrum-discover
-        - OpenDataHub.io: https://opendatahub.io
+        - OpenData Hub: opendatahub.md
     - Programming:
       - Java Studies: 
         - Introduction: java/index.md

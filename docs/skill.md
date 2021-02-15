@@ -4,21 +4,21 @@
 
 * Distributed system
 * Cloud architecture: IBM Cloud, AWS
-* Container and Kubernetes / OpenShift
+* Container (docker) and Kubernetes / OpenShift
 * Kafka, Flink
 * JEE, Java Microprofile
 * Quarkus, Open liberty, spring boot
-* Decision engine and services
-* BPM process
+* Decision engine and decision services
+* BPM
 
 ## Development
 
-* Java, nodejs and python
+* Java, python, nodejs, scala, bash
 * Web Development Vuejs, Angular
 * Business rules based system
 * AI: Classification, clustering, chatbot, Machine learning
 * SQL Database with JPA and JTA: Postgresql, DB2
-* Document oriented DB: Cloudant, Mondodb, Cassandra
+* Document oriented DB: Cloudant, Mongodb, Cassandra
 * Kafka Streams API, Kafka API, reactive messaging
 
 ## Methodology
