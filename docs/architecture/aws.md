@@ -484,9 +484,9 @@ To improve performance, a big file can be split and then uploaded with local con
 
 ## AWS Athena
 
-[AWS Athena](https://aws.amazon.com/athena) runs analytics directly on S3 files, using SQL language to query the files (CSV, JSON, Avro, Parquet...). S3 Access Logs log all the requests made to buckets, and Athena can then be used to run serverless analytics on top of the logs files.
+[AWS Athena](https://aws.amazon.com/athena) runs analytics directly on S3 files, using SQL language to query the files (CSV, JSON, Avro, Parquet...). S3 Access Logs log all the requests made to buckets, and Athena can then be used to run serverless analytics on top of the logs files. Queries are done on high availability capability so will succeed, and scale based on the data size.
 
-No need for complex ETL jobs to prepare your data for analysis.
+No need for complex ETL jobs to prepare your data for analytics.
 
 Integrated with AWS Glue Data Catalog, allowing you to create a unified metadata repository across various services, crawl data sources to discover schemas and populate your Catalog with new and modified table and partition definitions, and maintain schema versioning.
 
@@ -673,8 +673,17 @@ The solution applies the traditional collect, inject, transform and query patter
 
 IoT Core allows to collect data from IoT devices. Kinesis is used to get data as streams, and then FireHose upload every minute to S3. A Lambda can already do transformation from FireHose. As new files are added to S3 bucket, it trigger a Lambda to call queries defined in Athena. Athena pull the data and build a report published to another S3 bucket that will be used by QuickSight to visualize the data.
 
-## Database considerations
+## Other Database considerations
 
+### Redshift
+
+It is based on Postgresql. but not used for OLTP, it is used for analytical processing and data warehousing, scale to PBs. It is Columnar storage of data. It uses massively parallel query execution.
+
+Data can be loaded from S3, DynamoDB, DMS and other DBs. It can scale from 1 to 128 nodes, and each node has 160GB per node.
+
+The architecture is based on a leader node to support query planning and aggregate results, and compute nodes to perform the queries and send results back.
+
+Redshift spectrum performs queries directly on top of S3.
 
 ## ECS
 

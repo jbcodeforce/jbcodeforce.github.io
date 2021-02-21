@@ -1,7 +1,8 @@
-site_name: Jerome Boyer Personal Site
+site_name: Jerome Boyer's Personal Site
 repo_url: https://github.com/jbcodeforce/jbcodeforce.github.io/
 nav:
-  - Home: index.md
+  - Blogs: index.md
+  - About: about.md
   - Skill: skill.md
   - List of contributions: assets.md
   - Knowledge base: 
@@ -47,7 +48,6 @@ nav:
       - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
       - Code Engine: code-engine.md
       - VScode: java-vscode.md
-  - To work on: toworkon.md
 
 theme: 
   name: material
