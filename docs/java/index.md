@@ -287,6 +287,8 @@ See [Project Reactor](http://projectreactor.io/docs/core/release/reference/#intr
 
 See [this dedicated studies](https://jbcodeforce.github.io/kafka-studies/) for how to do end to end event driven microservice with kafka.
 
+See also the eda-quickstart project for tool and project template.
+
 ## Reactive messaging
 
 See the extensive doc from [SmallRye](https://smallrye.io/smallrye-reactive-messaging/) and my note [quarkus](/java/quarkus.md)

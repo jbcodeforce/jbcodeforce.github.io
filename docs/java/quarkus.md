@@ -10,7 +10,7 @@ Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and
 * [Testing with Quarkus](#testing-with-quarkus)
 * [Development practices](#development-practices)
 
-Updated 11/3/2020
+Updated 03/9/2021
 
 ## Value Propositions
 
@@ -368,7 +368,7 @@ Develop [command mode applications](https://quarkus.io/guides/command-mode-refer
 For that implement QuarkusApplication and have Quarkus run this method automatically
 
 ```java
-@QuarkusMain(name="JbMain")
+@QuarkusMain
 public class CommandModeApp implements QuarkusApplication {
 
     @Override
@@ -378,13 +378,32 @@ public class CommandModeApp implements QuarkusApplication {
     }
 ```
 
+A @QuarkusMain instance is an application scoped bean by default.
+
+For a Java main app
+
+```java
+@QuarkusMain(name: "kbMain")
+public class JavaMain {
+
+    public static void main(String... args) {
+        Quarkus.run(HelloWorldMain.class, args);
+    }
+}
+```
+
+Dev mode works the same.
+
 Then `mvn package` and run it with `java -jar target/....-runner.jar`
 
-
 When running a command mode application the basic lifecycle is as follows:
+
 * Start Quarkus
 * Run the QuarkusApplication main method
 * Shut down Quarkus and exit the JVM after the main method returns
+
+It is possible to have multiple main methods in an application, and select between them at build time. The @QuarkusMain annotation takes an optional 'name' parameter and the name is used with `-Dquarkus.package.main-class="kbMain"`.
+If the app needs arguments, pass them with `-Dquarkus.args=`.
 
 ## Development practices
 

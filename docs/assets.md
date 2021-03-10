@@ -1,11 +1,13 @@
 # Assets developed
 
-This is the list of assets I developed or co-developed
+This is the list of assets, I developed or co-developed over the years.
 
 ## Methodology
 
 * [Event storming workshop](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/)
 * [Domain Driven Design](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/) Updated 10/2020
+* [Develop data intensive app](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/data-intensive)
+* [Agile business rules development](https://ibm-cloud-architecture.github.io/refarch-dba/methodology/abrd/)
 
 ## EDA
 
@@ -27,6 +29,7 @@ This is the list of assets I developed or co-developed
 
 ### Development practices
 
+* [Different Data Models](https://ibm-cloud-architecture.github.io/refarch-dba/methodology/model/)
 * [CQRS pattern implementation](https://github.com/ibm-cloud-architecture/refarch-kc-order-ms) query and command are part of two separate folders. - started in dec 2018 - updated Q1 2020 with new integration tests.
 * [Topic replication with mirror maker 2](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/topic-replication/) Q2 2020 - updated 09/2020
 * [Mirror Maker 2  Studies](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-mirrormaker/)  04/2020
@@ -34,9 +37,10 @@ This is the list of assets I developed or co-developed
 * [Event Streams on Cloud hands on lab](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/es-cloud/) introductory hands-on lab on IBM Event Streams on Cloud with topic creation. It was done in the context of customer's Kafka bootcamp. 
 * [Store item sale simulator to produce messages to Rabbit MQ, IBM MQ or Kafka backends](https://github.com/ibm-cloud-architecture/refarch-eda-store-simulator) 10/2020
 * [Realtime Analytics pattern](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/realtime-analytics/). Created for EDA
-* [Reefer simulator in python](https://github.com/ibm-cloud-architecture/vaccine-reefer-simulator) - updated 07/2020
+* [Reefer simulator in python](https://github.com/ibm-cloud-architecture/vaccine-reefer-simulator) - updated 02/2021
 * [Reefer Container Shipment Container Management](https://github.com/ibm-cloud-architecture/refarch-kc-container-ms) springboot
 * [Container inventory management - legacy mockup](https://github.com/ibm-cloud-architecture/refarch-container-inventory)
+* [Gitops with kustomize for Vaccine solution](https://github.com/ibm-cloud-architecture/vaccine-gitops) - 03/2021
 
 ### Technology
 
@@ -50,8 +54,6 @@ This is the list of assets I developed or co-developed
 * [Event Streams on Cloud - security with IAM - labs](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/security/) Q1 2020
 * [Event Streams on Cloud - Consumer group lab](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/consumergrp/) Q1 -2020
 * [Event Streams on Cloud - monitoring](https://ibm-cloud-architecture.github.io/refarch-eda/use-cases/monitoring-on-cloud/)  Q1 -2020
-
-
 
 ## Integration
 
