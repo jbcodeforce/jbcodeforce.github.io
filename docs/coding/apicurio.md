@@ -70,11 +70,11 @@ To Generate java beans from Avro schema definition use a maven plugin. The order
 
 See the [notes here](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/getting-started/assembly-installing-registry-storage-openshift.htm)
 
-* Install Strimzi operator - create a Strimzi cluster
-* Install Apicurio operator (search from registry in Operator Hub)
+* Install Strimzi operator - create a Strimzi cluster (See [vaccine-gitops strimzi env](https://github.com/ibm-cloud-architecture/vaccine-gitops/tree/main/environments/strimzi))
+* Install Apicurio operator (search from registry in Operator Hub) - define one registry instance. 
 * Get Kafka bootstrap internal listener address
 * Create the `storage-topic` and `global-id-topic` topic
-* Create the Apicurio instance using the bootstrap URL, see this example of yaml
+* Create the Apicurio instance using the bootstrap URL, see this example of yaml (See [vaccine-gitops Apicurio env](https://github.com/ibm-cloud-architecture/vaccine-gitops/tree/main/environments/apicurio))
 
 ```yaml
 apiVersion: apicur.io/v1alpha1
