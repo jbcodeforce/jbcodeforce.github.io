@@ -40,14 +40,14 @@ nav:
       - Git summary: git.md
       - My code templates: code-template.md
     - Techno:
-      - Kafka Studies: https://jbcodeforce.github.com/kafka-studies
-      - Spark Studies: https://jbcodeforce.github.io/spark-studies/
-      - Flink Studies: https://jbcodeforce.github.io/flink-studies/
-      - RedPanda Studies: https://jbcodeforce.github.io/redpanda-studies/
-      - Database play:  https://jbcodeforce.github.io/db-play/  
       - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
       - Apicurio: coding/apicurio.md
       - Code Engine: code-engine.md
+      - Database play:  https://jbcodeforce.github.io/db-play/  
+      - Flink Studies: https://jbcodeforce.github.io/flink-studies/
+      - Kafka Studies: https://jbcodeforce.github.com/kafka-studies
+      - RedPanda Studies: https://jbcodeforce.github.io/redpanda-studies/
+      - Spark Studies: https://jbcodeforce.github.io/spark-studies/
       - VScode: java-vscode.md
 
 theme: 

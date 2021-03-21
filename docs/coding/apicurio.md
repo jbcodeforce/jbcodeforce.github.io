@@ -2,28 +2,28 @@
 
 [Apicurio](https://www.apicur.io) includes a registry to manage Avro, json, protobuf schemas, and an API registry to manage OpenApi and AsynchAPI.
 
-It is a Cloud-native Quarkus Java runtime for low memory footprint and fast deployment times. It supports [different persistences](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/getting-started/assembly-intro-to-the-registry.html#registry-distros) and deployments.
+It is a Cloud-native Quarkus Java runtime for low memory footprint and fast deployment times. It supports [different persistences](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/getting-started/assembly-intro-to-the-registry.html#registry-distros) like Kafka and Postgresql and different deployment models.
 
 ## Registry
 
-Apicurio Registry is a datastore for sharing standard event schemas and API designs across API and event-driven architectures. 
+Apicurio Registry is a datastore for sharing standard event schemas and API designs across API and event-driven architectures.
 In the messaging and event streaming world, data that are published to topics and queues often must be serialized or validated using a Schema.
 
 The registry supports adding, removing, and updating the following types of artifacts: OpenAPI, AsyncAPI, GraphQL, Apache Avro, Google protocol buffers, JSON Schema, Kafka Connect schema, WSDL, XML Schema (XSD).
 
 It includes configurable rules to control the validity and compatibility.
 
-The registry can be configured to store data in various back-end storage systems depending on use-case, including Kafka, PostgreSQL, and Infinispan.
+The registry can be configured to store data in various back-end storage systems, depending on use-case, including Kafka, PostgreSQL, and Infinispan.
 
 Client applications can dynamically push or pull the latest schema updates to or from Apicurio Registry at runtime without needing to redeploy.
 
-Full Apache Kafka schema registry support, including integration with Kafka Connect for external systems. Compatibility with existing Confluent schema registry client applications.
+Full Apache Kafka schema registry API support, including integration with Kafka Connect for external systems. Compatibility with existing Confluent schema registry client applications.
 
-Client serializers/deserializers (Serdes) to validate Kafka and other message types at runtime.
+It includes client serializers/deserializers (Serdes) to validate Kafka and other message types at runtime.
 
 ## Avro
 
-Quick [getting started on Avro with Java](https://avro.apache.org/docs/current/gettingstartedjava.html). So we need:
+Quick [getting started on Avro with Java](https://avro.apache.org/docs/current/gettingstartedjava.html). We need:
 
 * Define .avsc file (JSON doc) for each type. Schemas are composed of primitive types (null, boolean, int, long, float, double, bytes, and string) and complex types (record, enum, array, map, union, and fixed).
 * Use Avro Maven plugin to generate Java beans from the schema definition
@@ -38,7 +38,9 @@ To access avro classes:
 </dependency>
 ```
 
-To Generate java beans from Avro schema definition use a maven plugin. The order of schema processing is important to build the dependencies before the records using them (see imports statement):
+### From schema to beans
+
+Define one to many `.avcs` file in the `src/main/avro` folder. Then to generate java beans from those schema definitions use the avro maven plugin. The order of schema processing is important to build the dependencies before the records using them (see imports statement below):
 
 ```xml
 <plugin>
@@ -65,6 +67,22 @@ To Generate java beans from Avro schema definition use a maven plugin. The order
         </executions>
       </plugin>
 ```
+
+The beans created will be in the Java package as defined in the namespace attribute:
+
+```json
+
+    "namespace": "ibm.eda.demo.app.infrastructure.events",
+    "type": "record",
+    "name": "OrderEvent",
+    "fields": []
+```
+
+See the project template [quarkus-kafka-producer](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-kafka-producer) for example of order events Avro Schema with bean generation.
+
+### From beans to schema
+
+The [Jackson parser](https://github.com/FasterXML/jackson-dataformats-binary/tree/master/avro#generating-avro-schema-from-pojo-definition) offers such capability, so you can add a small program to create a schema from your beans. 
 
 ## Install on OpenShift with Kafka as persistence storage
 
@@ -155,7 +173,7 @@ props.putIfAbsent(AbstractKafkaSerializer.REGISTRY_GLOBAL_ID_STRATEGY_CONFIG_PAR
             FindBySchemaIdStrategy.class.getName());
 ```
 
-* Define the schema
+* Define the schema via code
 
 ```java
 private static void createSchemaInServiceRegistry(String artifactId, String schema) throws Exception {

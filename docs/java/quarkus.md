@@ -10,7 +10,7 @@ Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and
 * [Testing with Quarkus](#testing-with-quarkus)
 * [Development practices](#development-practices)
 
-Updated 03/9/2021
+Updated 03/16/2021
 
 ## Value Propositions
 
@@ -30,7 +30,7 @@ Quarkus HTTP support is based on a non-blocking and reactive engine (Eclipse Ver
 ### Create a project
 
 ```shell
-mvn io.quarkus:quarkus-maven-plugin:1.10.3.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:1.12.2.Final:create \
     -DprojectGroupId=ibm.gse.eda \
     -DprojectArtifactId=app-name \
     -DclassName="ibm.gse.eda.GreetingResource" \
@@ -39,6 +39,12 @@ cd app-name
 ```
 
 Modify resource, service,... 
+
+Example for a Reactive messaging:
+
+```
+mvn io.quarkus:quarkus-maven-plugin:1.12.2.Final:create -DprojectGroupId=ibm.gse.eda  -DprojectArtifactId=app-name -Dextensions="kubernetes-config,openshift,smallrye-health,resteasy-jackson,quarkus-smallrye-openapi,quarkus-smallrye-reactive-messaging"
+```
 
 ### Package & run
 
