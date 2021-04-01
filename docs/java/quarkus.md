@@ -10,7 +10,7 @@ Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and
 * [Testing with Quarkus](#testing-with-quarkus)
 * [Development practices](#development-practices)
 
-Updated 03/16/2021
+Updated 03/30/2021
 
 ## Value Propositions
 
@@ -30,7 +30,7 @@ Quarkus HTTP support is based on a non-blocking and reactive engine (Eclipse Ver
 ### Create a project
 
 ```shell
-mvn io.quarkus:quarkus-maven-plugin:1.12.2.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:1.13.0.Final:create \
     -DprojectGroupId=ibm.gse.eda \
     -DprojectArtifactId=app-name \
     -DclassName="ibm.gse.eda.GreetingResource" \
@@ -43,7 +43,7 @@ Modify resource, service,...
 Example for a Reactive messaging:
 
 ```
-mvn io.quarkus:quarkus-maven-plugin:1.12.2.Final:create -DprojectGroupId=ibm.gse.eda  -DprojectArtifactId=app-name -Dextensions="kubernetes-config,openshift,smallrye-health,resteasy-jackson,quarkus-smallrye-openapi,quarkus-smallrye-reactive-messaging"
+mvn io.quarkus:quarkus-maven-plugin:1.13.0.Final:create -DprojectGroupId=ibm.gse.eda  -DprojectArtifactId=app-name -Dextensions="kubernetes-config,openshift,smallrye-health,resteasy-jackson,quarkus-smallrye-openapi,quarkus-smallrye-reactive-messaging"
 ```
 
 ### Package & run
@@ -120,6 +120,8 @@ Useful capabilities:
 
 * Deploy to **OpenShift** using source to image `./mvnw quarkus:add-extension -Dextensions="openshift"`.  See guide [QUARKUS - DEPLOYING ON OPENSHIFT](https://quarkus.io/guides/deploying-to-openshift)
 * `./mvnw quarkus:add-extension -Dextensions="container-image-docker"`
+* **Postgres hibernate reactive**: `./mvnw quarkus:add-extension -Dextensions=reactive-pg-client,resteasy-mutiny` Then see the [REACTIVE SQL CLIENTS guide](https://quarkus.io/guides/reactive-sql-clients#reactive-postgresql-client-extension) and the [maas_backend project]()
+
 * **vert.x**: `./mvnw quarkus:add-extension -Dextensions="vertx"`
 * **jib**: to do container image build. See [note here](https://quarkus.io/guides/container-image) `./mvnw quarkus:add-extension -Dextensions="container-image-jib"`
 * **[Kogito](https://kogito.kie.org)**:  `./mvnw quarkus:add-extension -Dextensions="kogito"`
@@ -365,6 +367,39 @@ For testing body content, use the [Hamcrest APIs](http://hamcrest.org/JavaHamcre
 public void shouldNotHaveStore_7_fromGetStoreNames(){
         given().when().get("/names").then().statusCode(200).body(not(containsString("Store_7")));
     }
+```
+
+## Reactive CRUD app with Postgres
+
+* Add following to pom.xml
+
+```xml
+<dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-mutiny</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-reactive-pg-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-reactive</artifactId>
+  </dependency>
+```
+
+* Annotate the entity with table and query
+
+```java
+@Entity
+@Table(name = "kafka_clusters")
+@NamedQuery(name = "ClusterDetail.findAll", query = "SELECT k FROM kafka_clusters k ORDER BY k.name")
+public class ClusterDetail {
+
+    @Id
+    @SequenceGenerator(name = "fruitsSequence", sequenceName = "known_fruits_id_seq", allocationSize = 1, initialValue = 10)
+    @GeneratedValue(generator = "fruitsSequence")
+    private Integer id;
 ```
 
 ## Command mode application
