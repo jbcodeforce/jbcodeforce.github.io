@@ -82,7 +82,7 @@ See the project template [quarkus-kafka-producer](https://github.com/ibm-cloud-a
 
 ### From beans to schema
 
-The [Jackson parser](https://github.com/FasterXML/jackson-dataformats-binary/tree/master/avro#generating-avro-schema-from-pojo-definition) offers such capability, so you can add a small program to create a schema from your beans. 
+The [Jackson parser](https://github.com/FasterXML/jackson-dataformats-binary/tree/master/avro#generating-avro-schema-from-pojo-definition) offers such capability, so you can add a small program to create a schema from your beans.
 
 ## Install on OpenShift with Kafka as persistence storage
 
@@ -194,7 +194,7 @@ Example of output:
 Successfully created Avro Schema artifact in Service Registry: ArtifactMetaData{name='BasicMessage', description='null', labels='[]', createdBy='null', createdOn=1615340019637, modifiedBy='null', modifiedOn=1615340019637, id='test', version=1, type=AVRO, globalId=18, state=ENABLED, properties={}}
 ```
 
-See simplest code in `apicurio` folder of [kafka Studies](https://github.com/jbcodeforce/kafka-studies/)
+See simplest code in the `apicurio` folder of [Kafka Studies](https://github.com/jbcodeforce/kafka-studies/)
 
 ## Useful links
 

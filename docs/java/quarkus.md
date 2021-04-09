@@ -10,7 +10,7 @@ Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and
 * [Testing with Quarkus](#testing-with-quarkus)
 * [Development practices](#development-practices)
 
-Updated 03/30/2021
+Updated 04/07/2021
 
 ## Value Propositions
 
@@ -91,7 +91,7 @@ Start debugger:  shift -> cmd -> P: `Quarkus:  Debug current Quarkus Project` to
 
 ```shell
 # create a project
-mvn io.quarkus:quarkus-maven-plugin:1.9.1.Final:create
+mvn io.quarkus:quarkus-maven-plugin:1.13.0.Final:create
 # getting extension
 ./mvnw quarkus:list-extensions
 # Build native executable
@@ -111,7 +111,6 @@ Useful capabilities:
 * Use API over HTTP in the JSON format: `./mvnw quarkus:add-extension -Dextensions="resteasy-jsonb"`.
 * **Openapi** and swagger-ui `./mvnw quarkus:add-extension -Dextensions="quarkus-smallrye-openapi"`. Also to get the swagger-ui visible in "production" set `quarkus.swagger-ui.always-include=true` in the application.properties.
 * **Kafka** client: `./mvnw quarkus:add-extension -Dextensions="kafka"`
-
 * **Kubernetes** to get the deployment yaml file generated
 
 ```shell
@@ -249,7 +248,7 @@ This will add the following declaration to the deploymentConfig:
                 name: message-cm
 ```
 
-* To add config map, secrets, we need the kubernetes-config. [See this guide](https://quarkus.io/guides/kubernetes-config), then declare properties in certain formats:
+* To add config map, secrets, we need the `kubernetes-config` extension. [See this guide](https://quarkus.io/guides/kubernetes-config), then declare properties in the following formats:
 
 ```properties
 quarkus.openshift.env.configmaps=vaccine-order-ms-cm
@@ -260,7 +259,7 @@ quarkus.openshift.mounts.es-cert.path=/deployments/certs/server
 quarkus.openshift.secret-volumes.es-cert.secret-name=light-es-cluster-ca-cert
 ```
 
- That will generate the expected spec:
+ That will generate the following spec:
  ```yaml
     envFrom:
       - configMapRef:
@@ -368,6 +367,16 @@ public void shouldNotHaveStore_7_fromGetStoreNames(){
         given().when().get("/names").then().statusCode(200).body(not(containsString("Store_7")));
     }
 ```
+
+## Maven profile and quarkus test
+
+The properties can be prefixed with `%staging` or `%prod` or `%dev` to set those properties according to the deployment. If we use a custom prefix like `staging` then we need to run quarkus with a specific profile. For that set `export QUARKUS_PROFILE=staging` in your `.env` file. 
+
+```
+./mvnw quarkus:dev 
+```
+
+By default, Quarkus tests in JVM mode are run using the test configuration profile
 
 ## Reactive CRUD app with Postgres
 
@@ -562,16 +571,23 @@ For a quick review of the reactive messaging with Quarkus tutorial is [here](htt
 
 Quick summary:
 
-* define an application scoped bean
-* using @Incoming and @Outcoming annotation with channel name
+* define an application scoped bean for your service
+* using @Incoming and @Outcoming annotation with channel name on top of function to process the message
 * define channel properties in `application.properties`.
-* To use kafka connector specify: `mp.messaging.incoming.[channel-name].connector=smallrye-kafka`
+* Use Kafka connector: `mp.messaging.incoming.[channel-name].connector=smallrye-kafka`
+* Implement Deserializer using Jsonb or Jackson. See [this section](https://quarkus.io/guides/kafka#serializing-via-json-b). If using Avro and Apicurio schema registry then the deserializer needs to be `io.apicurio.registry.utils.serde.AvroKafkaDeserializer`
 
-* Implement Deserializer using Jsonb. See [this section](https://quarkus.io/guides/kafka#serializing-via-json-b).
+```yaml
+mp.messaging.incoming.shipments.value.deserializer=io.apicurio.registry.utils.serde.AvroKafkaDeserializer
+mp.messaging.incoming.shipments.apicurio.registry.url=${SCHEMA_REGISTRY_URL}
+mp.messaging.incoming.shipments.specific.avro.reader=true
+mp.messaging.incoming.shipments.apicurio.registry.avro-datum-provider=io.apicurio.registry.utils.serde.avro.ReflectAvroDatumProvider
+mp.messaging.incoming.shipments.apicurio.registry.as-confluent=true
+```
 
-Nice [cheat sheet](https://lordofthejars.github.io/quarkus-cheat-sheet/#_reactive_messaging) to combine Munity, reative messaging.
+Nice [cheat sheet](https://lordofthejars.github.io/quarkus-cheat-sheet/#_reactive_messaging) to combine Mutiny, Reactive messaging.
 
-* It is possible to combine imperative and reactive: so on a POST api emits event to kafka. We just need to inject an emitter as below:
+* It is possible to combine imperative and reactive: so on a POST api emits event to Kafka. We just need to inject an emitter as below:
 
 ```java
   @Inject @Channel("items") Emitter<KafkaRecord<String, Item>> emitter;
@@ -586,11 +602,44 @@ Emitting Kafka Records will duplicate the payload.
 "payload":{"id":296,"price":72.9,"quantity":7,"sku":"Item_4","storeName":"Store_2"}}
 ```
 
-To send directly the payload with a key use a Message.
+To send directly the payload with a key, use a Message instance.
 
-[Apache kafka specific for reactive messaging](https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/2/kafka/kafka.html)
+[Apache Kafka specific for reactive messaging](https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/2/kafka/kafka.html)
 
 The Kafka Connector is based on the Vert.x Kafka Client.
+
+### A case for Kafka to SSE
+
+A nice capability is to open a Server Side Event end point (see code in [freezer mgr project](https://github.com/ibm-cloud-architecture/vaccine-freezer-mgr)):
+
+In the API resource class:
+
+```java
+    @Inject
+    @Channel("internal-alert-stream")
+    Publisher<ReeferAlert> alerts;
+
+    @GET
+    @Path("/alerts")
+    @Produces(MediaType.SERVER_SENT_EVENTS)
+    @SseElementType(MediaType.APPLICATION_JSON)
+    public Publisher<ReeferAlert> streamAlerts(){
+        return alerts;
+    }
+```
+
+In the service class, the incoming channel is connected to Kafka and the outgoing is an internal to broadcast to.
+
+```java
+    @Incoming("reefer-alerts")                                     
+    @Outgoing("internal-alert-stream")                             
+    @Broadcast                                              
+    @Acknowledgment(Acknowledgment.Strategy.PRE_PROCESSING)
+    public ReeferAlert process(ReeferAlert inAlert){
+        // process the alert and generate the message to broadcast to SSE
+        return inAlert;
+    }
+```
 
 ## Adopting Vertx
 
