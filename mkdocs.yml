@@ -52,7 +52,7 @@ nav:
 
 theme: 
   name: material
-  logo: 'images/cloud.png'
+  logo: 'images/gear-sp-01.png'
   feature:
     tabs: true
   palette:

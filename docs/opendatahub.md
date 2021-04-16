@@ -4,7 +4,7 @@
 
 ## Summary
 
-The goal of Open Data Hub is to provide open source AI tools for running large and distributed AI workloads on Openshift Container platform. While AI Library is to provide ML models as a service on Openshift.
+The goal of Open Data Hub is to provide open source AI tools for running large and distributed AI workloads on OpenShift Container platform. While AI Library is to provide ML models as a service on OpenShift.
 
 In general, an AI workflow includes most of the steps shown in figure below:
 

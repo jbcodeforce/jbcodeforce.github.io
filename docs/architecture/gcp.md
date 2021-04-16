@@ -2,7 +2,7 @@
 
  [https://cloud.google.com/](https://cloud.google.com/) - 24 regions, 73 zones - 200 countries.
  
-Each data center is connected with fiber optical network and a private network on the same subnet. G. connects its network to the rest of the internet via PoP. 
+Each data center is connected with fiber optical network and a private network on the same subnet. G. connects its network to the rest of the internet via PoP.
 
 [Cloud console](https://console.cloud.google.com/home/dashboard)
 
