@@ -1,5 +1,7 @@
 # IBM Public Cloud
 
+Really same approach as AWS and GCP. 
+
 ## ibmcloud CLI summary
 
 ```shell

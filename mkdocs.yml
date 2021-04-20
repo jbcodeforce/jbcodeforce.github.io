@@ -27,6 +27,7 @@ nav:
         - Concurrency: java/concurrent.md
         - Open Liberty: java/openliberty.md
         - Quarkus: java/quarkus.md
+        - SpringCloud: java/springcloud.md 
         - Vert.x: java/vertx.md
         - Funqy: java/funqy.md
         - Concurrency : java/concurrent.md
@@ -52,7 +53,7 @@ nav:
 
 theme: 
   name: material
-  logo: 'images/cloud.png'
+  logo: 'images/gear-sp-01.png'
   feature:
     tabs: true
   palette:
