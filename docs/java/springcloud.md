@@ -1,97 +1,83 @@
-# Spring Cloud 
+# Spring Cloud and Spring Boot
 
 This note is to summarize the techno, from an older springframework (2003) dev. 
 
-[Spring Cloud](https://spring.io/projects/spring-cloud) is based on Spring boot programming model but focusing on cloud native deployment and distributed computing. As other spring boot app it includes jetty or tomcat, health checks, metrics... It supports the following patterns:
+## Spring Boot
 
-* Distributed/versioned [configuration](https://spring.io/projects/spring-cloud-config): externalize config in distributed system with config server.
-* Service registration and discovery: uses Netflix Eureka, Apache Zookeeper or Consul to keep service information. 
-* Routing: supports HTTP (Open Feign or  Netflix Ribbon for load balancing) and messaging (RabbitMQ and Kafka)
-* Service-to-service calls: Sptring Cloud Gateway and Netflix Zuul is used
-* Load balancing
-* Circuit Breakers: based on Netflix Hystrix: if the request fails for n time, the circuit open.   
-* Global locks
-* Leadership election and cluster state
-* Distributed messaging
+To get started with Spring Boot see [this REST service app guide](https://spring.io/guides/gs/rest-service/).  Use [Spring initialzr](https://start.spring.io/) tool to get the maven project starting code. The starter guide use Spring Web.
 
-Also add pipelines for ci/cd and contract testing. 
+When creating app to be deployed as container think to add Actuator to get health, metrics, sessions, ...
 
-## Getting started:
+To build: `./mvnw clean package`.
+To run the main executable: `java -jar target/demo-0.0.1-SNAPSHOT.jar`
 
-Use [start.spring.io](https://start.spring.io/) to create the application starting code or add the Spring Cloud BOM to your maven `pom.xml` file. See [the Adding Spring Cloud To An Existing Spring Boot Application section.](https://spring.io/projects/spring-cloud)
+`@SpringBootApplication` is a convenience annotation that adds: `@Configuration`, `@EnableAutoConfiguration`  (Tells Spring Boot to start adding beans based on classpath settings, other beans, and various property settings), `@ComponentScan`. (look for other components, configurations, and services in package, letting it find the controllers.
 
-As most of the microservices expose REST resource, we may need to add the starter web:
+REST resources are `@RESTController` and the methods are annoted with `@GetMapping`, `@PostMapping`...
+To use test driven development add the dependency
 
 ```xml
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-web</artifactId>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-test</artifactId>
+	<scope>test</scope>
 </dependency>
 ```
 
-We also need to install the [Spring Cloud CLI](https://cloud.spring.io/spring-cloud-cli/).
-
-Then add the Spring cloud starter as dependencies. When using config server, we need to add the config client. 
-
-```xml
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-conflig-client</artifactId>
-</dependency>
-```
-
-For centralized tracing uses, starter-sleuth, and zipkin.
-
-```xml
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-sleuth</artifactId>
-</dependency>
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-zipkin</artifactId>
-</dependency>
-```
-
-For service discovery add netflix-eureka-client.
-
-```xml
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-eureka</artifactId>
-</dependency>
-```
-
-
-Using the [Cloud CLI]() we can get the service registry, config server, central tracing started in one command:
-
-```shell
-spring cloud eureka configserver zipkin
-```
-
-## Spring Cloud config
-
-Use the concept of Config Server you have a central place to manage external properties for applications across all environments.  As an application moves through the deployment pipeline from dev to test and into production you can manage the configuration between those environments and be certain that applications have everything they need to run when they migrate. 
+And then test classes like:
 
 ```java
-  @Value("${config.in.topic}")
-  String topicName = "orders";
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+public class GreetingControllerTests {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Test
+	public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
+
+		this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
+				.andExpect(jsonPath("$.content").value("Hello, World!"));
+	}
+}
 ```
 
-The value of the `config.in.topic` comes from local configuration or remote config server. The config server will serve content from a git. See [this sample](https://github.com/spring-cloud-samples/configserver) for such server.
+One of the most complete app is [KC container service](https://github.com/ibm-cloud-architecture/refarch-kc-container-ms/)
 
-## Spring Cloud Stream
+### To Remember
 
-[Spring Cloud Stream](https://spring.io/projects/spring-cloud-stream) is a framework for building highly scalable event-driven microservices connected with shared messaging systems. It unifies lots of popular messaging platforms behind one easy to use API including RabbitMQ, Apache Kafka, Amazon Kinesis, Google PubSub, Solace PubSub+, Azure Event Hubs, and Apache RocketMQ. 
-It uses destination binders (integration with messaging systems), destination bindings (bridge code to external systems) and message (canonical data model to communicate between producer and consumer)
+* Spring boot app is a main with `@SpringBootApplication` annotation to let the injection and bean management working
+* [Bean](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/beans.html) is the IoC component of your application managed by Spring. A function can become a bean using `@Bean`.
+* [@Configuration](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Configuration.html) indicates that a class declares one or more @Bean methods and may be processed by the Spring container to generate bean definitions.
 
-The approach is to develop the following:
+### Some how to
 
-* A spring boot application, with REST spring web starter
-* Define a resource and a controller.
-* Define inbound and/or outbound channels to communicate to Kafka using properties
-* Add method to process incoming message, taking into account the underlying middleware. For example with Kafka, most of the consumers may not auto commit the read offset but control the commit by using manual commit. 
-* Add logic to produce message using middleware 
+* Define the app-root for url: add properties: `server.servlet.context-path: orderms`
+* Get the VScode to recognize `org.springframework` package: use `Update Project` on the pom.xml
+* Copy a java bean properties into another one: use BeanUtils from spring: The bean needs to have getters and setters
 
-[Spring Cloud Stream Applications](https://spring.io/projects/spring-cloud-stream-applications) are standalone executable applications that communicate over messaging middleware such as Apache Kafka and RabbitMQ. The app is using uber-jars to get the minimal required library and code.
+    ```java 
+    public static Order from(OrderDTO dto){
+       
+        Order mappedOrder = new Order();
+        BeanUtils.copyProperties(dto, mappedOrder);
+        return mappedOrder;
+    }
+    ```
 
+#### Add swagger UI 
+
+* Add springfox dependency
+   ```
+   ```
+* Add swagger configuration via Docket bean
+
+## Spring Cloud
+
+< re integrate tvp work>

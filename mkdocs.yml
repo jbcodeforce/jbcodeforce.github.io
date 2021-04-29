@@ -34,7 +34,7 @@ nav:
         - MQ challenge: java/mqChallenge.md
         - Java FAQ: java/FAQ.md
         - VScode: java/java-vscode.md
-      - Python Studies: https://jbcodeforce.github.com/python-code
+      - Python Studies: https://jbcodeforce.github.io/python-code
       - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
       - Machine learning: https://jbcodeforce.github.io/ml-basics/
       - Cloud native content IBM: https://cloudnative101.dev/
@@ -46,7 +46,7 @@ nav:
       - Code Engine: code-engine.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/
-      - Kafka Studies: https://jbcodeforce.github.com/kafka-studies
+      - Kafka Studies: https://jbcodeforce.github.io/kafka-studies
       - RedPanda Studies: https://github.com/jbcodeforce/redpanda-studies/
       - Spark Studies: https://jbcodeforce.github.io/spark-studies/
       - VScode: java-vscode.md
