@@ -41,6 +41,7 @@ Create a configuration with the name of the class and arguments. See [example he
 * Java Dependencies view helps to get the code of the used dependencies
 * Run maven goals from the maven projects view in the Explorer
 * Avoid file closed when not edited: double clicks on the file header so it changes from italic to regular.
+* Control the number of columns in editor: `Settings > Editor: Word Wrap > wordWrapColumn, Settings > Editor: Word Wrap Column = 100`
 
 ## Debugging
 

@@ -9,6 +9,7 @@ nav:
     - Architecture:
       - Event Driven Architecture: architecture/eda.md
       - Architecture decision: architecture/architectural-decisions.md
+      - Disaster recovery: architecture/DR.md
       - AWS: architecture/aws.md
       - GCP: architecture/gcp.md
       - IBM Cloud: architecture/ibmcloud.md
@@ -39,17 +40,18 @@ nav:
       - Machine learning: https://jbcodeforce.github.io/ml-basics/
       - Cloud native content IBM: https://cloudnative101.dev/
       - Git summary: git.md
+      - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
       - My code templates: code-template.md
     - Techno:
-      - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
       - Apicurio: coding/apicurio.md
+      - Automation Decision Service: techno/ads.md
       - Code Engine: code-engine.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/
       - Kafka Studies: https://jbcodeforce.github.io/kafka-studies
       - RedPanda Studies: https://github.com/jbcodeforce/redpanda-studies/
       - Spark Studies: https://jbcodeforce.github.io/spark-studies/
-      - VScode: java-vscode.md
+      - VScode: java/java-vscode.md
 
 theme: 
   name: material

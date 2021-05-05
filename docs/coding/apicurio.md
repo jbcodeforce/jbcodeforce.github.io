@@ -2,7 +2,20 @@
 
 [Apicurio](https://www.apicur.io) includes a registry to manage Avro, json, protobuf schemas, and an API registry to manage OpenApi and AsynchAPI.
 
-It is a Cloud-native Quarkus Java runtime for low memory footprint and fast deployment times. It supports [different persistences](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/getting-started/assembly-intro-to-the-registry.html#registry-distros) like Kafka, Postgresql, Infinispan and supports different deployment models.
+It is a Cloud-native Quarkus Java runtime for low memory footprint and fast deployment times. It supports [different persistences](https://www.apicur.io/registry/docs/apicurio-registry/2.0.0.Final/getting-started/assembly-intro-to-the-registry.html#registry-distros) like Kafka, Postgresql, Infinispan and supports different deployment models.
+
+## Registry Characteristics
+
+* Apicurio Registry is a datastore for sharing standard event schemas and API designs across API and event-driven architectures.
+In the messaging and event streaming world, data that are published to topics and queues often must be serialized or validated using a Schema.
+* The registry supports adding, removing, and updating the following types of artifacts: OpenAPI, AsyncAPI, GraphQL, Apache Avro, Google protocol buffers, JSON Schema, Kafka Connect schema, WSDL, XML Schema (XSD).
+* Schema can be created via Web Console, core REST API or Maven plugin
+* It includes configurable rules to control the validity and compatibility.
+* Client applications can dynamically push or pull the latest schema updates to or from Apicurio Registry at runtime. Apicurio is compatible with existing Confluent schema registry client applications.
+* It includes client serializers/deserializers (Serdes) to validate Kafka and other message types at runtime.
+* Operator-based installation of Apicurio Registry on OpenShift
+* Use the concept of artifact group to collect schema and APIs logically related.
+* Support search for artifacts by label, name, group, and description
 
 ## Apicurio Studio
 
@@ -14,20 +27,16 @@ There are three runtime components in Apicurio and one Keycloak authentication s
 * **apicurio-studio-ws** - a WebSocket based API used only by the Apicurio Editor to provide real-time collaboration with other users.
 * **apicurio-studio-ui** - the Angular 5+ based user interface.
 
-## Registry
+## Developer experience
 
-Apicurio Registry is a datastore for sharing standard event schemas and API designs across API and event-driven architectures.
-In the messaging and event streaming world, data that are published to topics and queues often must be serialized or validated using a Schema.
+* Define your microservice with JAXRS and Swagger annotation. Get the OpenAPI definition from the build process via maven plugin
+* Define an artifact group to group elements inside Apicurio Registry - can be by environment or can be line of business or any thing to group elements.
+* Decide if Avro is used or just JSON Schema - Apicurio has both serdes.
 
-The registry supports adding, removing, and updating the following types of artifacts: OpenAPI, AsyncAPI, GraphQL, Apache Avro, Google protocol buffers, JSON Schema, Kafka Connect schema, WSDL, XML Schema (XSD).
+### Read more
 
-It includes configurable rules to control the validity and compatibility.
-
-Client applications can dynamically push or pull the latest schema updates to or from Apicurio Registry at runtime.
-
-Apicurio is compatible with existing Confluent schema registry client applications.
-
-It includes client serializers/deserializers (Serdes) to validate Kafka and other message types at runtime.
+* [Official demo](https://github.com/Apicurio/apicurio-registry-demo)
+* [Using Debezium With the Apicurio API and Schema Registry](https://debezium.io/blog/2020/04/09/using-debezium-with-apicurio-api-schema-registry/)
 
 ## Avro
 
@@ -91,6 +100,12 @@ See the project template [quarkus-kafka-producer](https://github.com/ibm-cloud-a
 ### From beans to schema
 
 The [Jackson parser](https://github.com/FasterXML/jackson-dataformats-binary/tree/master/avro#generating-avro-schema-from-pojo-definition) offers such capability, so you can add a small program to create a schema from your beans, using the AvroFactory, SchemaGenerator...
+
+```xml
+
+```
+
+And for the code:
 
 ```java
 ObjectMapper mapper = new ObjectMapper(new AvroFactory());
