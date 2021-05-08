@@ -1,0 +1,68 @@
+{
+    "entities": [
+        {
+            "typeName": "DataFile",
+            "createdBy": "ingestors_news",
+            "attributes": {
+                "qualifiedName": "news_from_reuters",
+                "uri": "news_from_reuters",
+                "name": "news_from_reuters",
+                "file_name_pattern": "news_from_reuters_DDMMYYY",
+                "directory": "/landingzone/reuters/news",
+                "frequency": "daily",
+                "user": "reuters_webscrapper",
+                "group": "newssource",
+                "format": "csv",
+                "server": {
+                    "guid": -100,
+                    "typeName": "server"
+                },
+                "schema": [
+                    {
+                        "col": "id",
+                        "data_type": "string",
+                        "required": true
+                    },
+                    {
+                        "col": "scrap_time",
+                        "data_type": "timestamp",
+                        "required": true
+                    },
+                    {
+                        "col": "url",
+                        "data_type": "string",
+                        "required": true
+                    },
+                    {
+                        "col": "headline",
+                        "data_type": "string",
+                        "required": true
+                    },
+                    {
+                        "col": "content",
+                        "data_type": "string",
+                        "required": false
+                    }
+                ]
+            },
+            "classifications": [
+                {
+                    "typeName": "news"
+                }
+            ]
+        }
+    ],
+    "referredEntities": {
+        "-100": {
+            "guid": "-100",
+            "typeName": "server",
+            "attributes": {
+                "qualifiedName": "landing_zone_server_1@dev",
+                "uri": "landing_zone_server_1@dev",
+                "name": "landing_zone_server_1",
+                "dns_name": "pluto",
+                "ip_address": "10.71.68.93"
+            }
+        }
+    }
+}

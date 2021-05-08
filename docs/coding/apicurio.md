@@ -29,9 +29,40 @@ There are three runtime components in Apicurio and one Keycloak authentication s
 
 ## Developer experience
 
-* Define your microservice with JAXRS and Swagger annotation. Get the OpenAPI definition from the build process via maven plugin
+* Define your microservice with JAXRS and Swagger annotation. Here is a [guide for quarkus openapi and swagger-ui](https://quarkus.io/guides/openapi-swaggerui) for detail.
+Here is an example of properties to add to quarkus application.properties:
+
+  ```
+  mp.openapi.extensions.smallrye.info.title=Example API
+  mp.openapi.extensions.smallrye.info.version=1.0.0
+  mp.openapi.extensions.smallrye.info.description=Just an example service
+  mp.openapi.extensions.smallrye.info.termsOfService=Your terms here
+  mp.openapi.extensions.smallrye.info.contact.email=techsupport@example.com
+  mp.openapi.extensions.smallrye.info.contact.name=API Support
+  mp.openapi.extensions.smallrye.info.contact.url=http://exampleurl.com/contact
+  mp.openapi.extensions.smallrye.info.license.name=Apache 2.0
+  mp.openapi.extensions.smallrye.info.license.url=https://www.apache.org/licenses/LICENSE-2.0.html
+  ```
+  
+* For top down approach push the api as file `META-INF/openapi.yaml` or `.json`
+* Get the OpenAPI definition using curl http://localhost:8080/q/openapi
 * Define an artifact group to group elements inside Apicurio Registry - can be by environment or can be line of business or any thing to group elements.
-* Decide if Avro is used or just JSON Schema - Apicurio has both serdes.
+
+* Decide if Avro is used or just JSON Schema - Apicurio has both serdes to integrate into you code:
+
+```xml
+ <dependency>
+      <groupId>io.apicurio</groupId>
+      <artifactId>apicurio-registry-serdes-avro-serde</artifactId>
+      <version>2.0.0.Final</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.jboss.spec.javax.interceptor</groupId>
+          <artifactId>jboss-interceptors-api_1.2_spec</artifactId>
+        </exclusion>
+      </exclusions>
+  </dependency>
+```
 
 ### Read more
 
@@ -101,6 +132,7 @@ See the project template [quarkus-kafka-producer](https://github.com/ibm-cloud-a
 
 The [Jackson parser](https://github.com/FasterXML/jackson-dataformats-binary/tree/master/avro#generating-avro-schema-from-pojo-definition) offers such capability, so you can add a small program to create a schema from your beans, using the AvroFactory, SchemaGenerator...
 
+Add this to your pom:
 ```xml
 
 ```

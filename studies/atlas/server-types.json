@@ -1,0 +1,69 @@
+{
+    "classificationDefs": [
+      {
+        "category": "CLASSIFICATION",
+        "name": "landing_zone_incoming",
+        "description": "Used for classifying a server. Indicates that this server is a place where files from external source system will land into",
+        "typeVersion": "1.0",
+        "attributeDefs": [],
+        "superTypes": []
+      },
+      {
+        "category": "CLASSIFICATION",
+        "name": "edge_node",
+        "description": "Used for classifying a server. Indicates that this server is a edge node in the datalake cluster",
+        "typeVersion": "1.0",
+        "attributeDefs": [],
+        "superTypes": []
+      },
+      {
+        "category": "CLASSIFICATION",
+        "name": "worker_node",
+        "description": "Used for classifying a server. Indicates that this server is a worker node in the datalake cluster",
+        "typeVersion": "1.0",
+        "attributeDefs": [],
+        "superTypes": []
+      },
+      {
+        "category": "CLASSIFICATION",
+        "name": "management_node",
+        "description": "Used for classifying a server. Indicates that this server is a management node in the datalake cluster",
+        "typeVersion": "1.0",
+        "attributeDefs": [],
+        "superTypes": []
+      }
+    ],
+    "entityDefs": [
+      {
+        "superTypes": [
+          "Infrastructure"
+        ],
+        "category": "ENTITY",
+        "name": "server",
+        "description": "a type definition for server machine",
+        "typeVersion": "1.0",
+        "attributeDefs": [
+          {
+            "name": "dns_name",
+            "typeName": "string",
+            "isOptional": false,
+            "cardinality": "SINGLE",
+            "valuesMinCount": 1,
+            "valuesMaxCount": 1,
+            "isUnique": true,
+            "isIndexable": true
+          },
+          {
+            "name": "ip_address",
+            "typeName": "string",
+            "isOptional": false,
+            "cardinality": "SINGLE",
+            "valuesMinCount": 1,
+            "valuesMaxCount": 1,
+            "isUnique": true,
+            "isIndexable": true
+          }
+        ]
+      }
+    ]
+   }

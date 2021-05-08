@@ -44,6 +44,7 @@ nav:
       - My code templates: code-template.md
     - Techno:
       - Apicurio: coding/apicurio.md
+      - Atlas: techno/atlas.md
       - Automation Decision Service: techno/ads.md
       - Code Engine: code-engine.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
