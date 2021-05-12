@@ -10,7 +10,7 @@ Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and
 * [Testing with Quarkus](#testing-with-quarkus)
 * [Development practices](#development-practices)
 
-Updated 04/07/2021
+Updated 05/11/2021
 
 ## Value Propositions
 
@@ -30,7 +30,7 @@ Quarkus HTTP support is based on a non-blocking and reactive engine (Eclipse Ver
 ### Create a project
 
 ```shell
-mvn io.quarkus:quarkus-maven-plugin:1.13.0.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:1.13.3.Final:create \
     -DprojectGroupId=ibm.gse.eda \
     -DprojectArtifactId=app-name \
     -DclassName="ibm.gse.eda.GreetingResource" \
@@ -43,7 +43,7 @@ Modify resource, service,...
 Example for a Reactive messaging:
 
 ```
-mvn io.quarkus:quarkus-maven-plugin:1.13.0.Final:create -DprojectGroupId=ibm.gse.eda  -DprojectArtifactId=app-name -Dextensions="kubernetes-config,openshift,smallrye-health,resteasy-jackson,quarkus-smallrye-openapi,quarkus-smallrye-reactive-messaging"
+mvn io.quarkus:quarkus-maven-plugin:1.13.3.Final:create -DprojectGroupId=ibm.gse.eda  -DprojectArtifactId=app-name -Dextensions="kubernetes-config,openshift,smallrye-health,resteasy-jackson,quarkus-smallrye-openapi,quarkus-smallrye-reactive-messaging"
 ```
 
 ### Package & run
@@ -151,7 +151,7 @@ And then start it, by mounting the .m2 maven repository.
 
 ```shell
 docker build -f Dockerfile-dev -t tmp-builder .
-docker run --rm -p 8080:8080 -ti --network kafkanet -v ~/.m2:/root/.m2 tmp-builder
+docker run --rm -p 8080:8080 -ti  -v ~/.m2:/root/.m2 tmp-builder
 ```
 
 We can also combine this into a docker-compose [file like in the eda item inventory](https://github.com/ibm-cloud-architecture/refarch-eda-item-inventory/blob/master/dev-docker-compose.yaml) project.
@@ -167,7 +167,7 @@ We can also combine this into a docker-compose [file like in the eda item invent
     hostname: aggregator
     environment:
       - BOOTSTRAP_SERVERS=kafka:9092
-      - QUARKUS_KAFKA_STREAMS_BOOTSTRAP_SERVERS=kafka:9092
+      - QUARKUS_KAFKA_STREAMS_BOOTSTRAP_SERVERS=kafka:29092
       - QUARKUS_PROFILE=dev
     ports:
       - "8080:8080"
@@ -178,7 +178,7 @@ We can also combine this into a docker-compose [file like in the eda item invent
 
 ## OpenAPI
 
-Add the declaration of the Application api in properties. [See this open API guide](https://quarkus.io/guides/openapi-swaggerui)
+Add the declaration of the Application api in properties. [See this open API guide](https://quarkus.io/guides/openapi-swaggerui#configuration-reference) for configuration details.
 
 ```properties
 %dev.mp.openapi.extensions.smallrye.info.title=Product Microservice API (development)
@@ -215,7 +215,7 @@ The guide is [here](https://quarkus.io/guides/deploying-to-openshift) and the ma
 * To expose a route add:
 
 ```properties
-quarkus.openshift.expose=true
+quarkus.openshift.expose.route=true
 ```
 
 * To define environment variables, use config map:
@@ -309,7 +309,7 @@ Quarkus uses junit 5, and QuarkusTest to access to CDI and other quarkus goodies
 Here is an example for post testing:
 
 ```java
- TrainSearchRequest req = new TrainSearchRequest(); //...
+TrainSearchRequest req = new TrainSearchRequest(); //...
 Response resp = with().headers("Content-Type", ContentType.JSON, "Accept", ContentType.JSON)
           .body(req)
           .when().post("/consolidatorA")
@@ -321,10 +321,24 @@ Response resp = with().headers("Content-Type", ContentType.JSON, "Accept", Conte
         TrainSearchResponse searchResp= resp.body().as(TrainSearchResponse.class);
 ```
 
+Other example on a Get
+
+```java
+Response rep = given()
+          .when().get(basicURL + "/names")
+          .then()
+             .statusCode(200)
+             .contentType(ContentType.JSON)
+        .extract()
+        .response();
+        String[] names = rep.body().as(String[].class);
+        Assertions.assertNotNull(names);
+        Assertions.assertEquals(3,names.length);
+```
 Application configuration will be used in any active profile. The built-in profiles in Quarkus are: `dev, prod and test`. The `test` profile will be used every time you run the @QuarkusTest
 
 @QuarkusTest helps to get the CDI working. But there is still an issue on inject properties that may not be loaded due to proxy instance creation. So in test class the properties need to be accessed via getter:
-
+For example to be sure the hostname is loaded from the application.properties do:
 ```Java 
 @ApplicationScoped
 public class RabbitMQItemGenerator {
@@ -557,12 +571,6 @@ Here are some basic examples:
                     acked.toCompletableFuture().join();
                     },
                     failure -> System.out.println("Failed with " + failure.getMessage()));
-```
-
-* Having a resource end point to do server-side events:
-
-```java
-
 ```
 
 ### Reactive messaging

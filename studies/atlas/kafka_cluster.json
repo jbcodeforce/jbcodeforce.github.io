@@ -1,0 +1,35 @@
+{
+    "entityDefs": [
+      {
+        "superTypes": [
+          "Infrastructure"
+        ],
+        "category": "ENTITY",
+        "name": "kafka_cluster",
+        "description": "a Kafka Cluster groups multiple Kafka Brokers",
+        "typeVersion": "1.0",
+        "attributeDefs": [
+          {
+            "name": "clusterName",
+            "typeName": "string",
+            "isOptional": false,
+            "cardinality": "SINGLE",
+            "valuesMinCount": 1,
+            "valuesMaxCount": 1,
+            "isUnique": true,
+            "isIndexable": true
+          },
+          { 
+            "name": "clusterId",
+            "typeName": "string",
+            "isOptional": false,
+            "cardinality": "SINGLE",
+            "valuesMinCount": 1,
+            "valuesMaxCount": 1,
+            "isUnique": true,
+            "isIndexable": false
+          }
+        ]
+      }
+    ]
+   }

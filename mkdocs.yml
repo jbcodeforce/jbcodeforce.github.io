@@ -25,6 +25,7 @@ nav:
       - Java Studies: 
         - Introduction: java/index.md
         - Microprofile 3.x: java/microprofile.md
+        - Rest assured: java/restassured.md
         - Concurrency: java/concurrent.md
         - Open Liberty: java/openliberty.md
         - Quarkus: java/quarkus.md

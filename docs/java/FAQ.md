@@ -6,12 +6,28 @@
 /usr/libexec/java_home -V
 ```
 
-
 ## Get UUID
 
 ```java
     UUID uuid = UUID.randomUUID();
     order.setOrderID(uuid.toString());
+```
+
+## Java Reflection 
+
+The [baeldung tutorial](https://www.baeldung.com/java-reflection), with an example of getting attributes of a class. 
+
+```java
+Object person = new Person();
+Field[] fields = person.getClass().getDeclaredFields();
+```
+
+* Create a class instance: ClusterRepository is an interface and we can have different implementation as specified by an application properties
+
+```java
+ @ConfigParameter("cluster.repository.class")
+ String repositoryClassToUse;
+ Class<?> clazz = Class.forName(repositoryClassToUse);
 ```
 
 ## Java SE

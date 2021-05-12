@@ -31,7 +31,7 @@ Some important concepts to know:
     * **DataSet** extends Referenceable, represents an type that stores data. Expected to have a Schema to define attributes
     * **Process** extends Asset represents any data transformation operation.
 
-* We can define Classification for defining new type: 
+* We can define Classification by defining new type: 
 
 ```json
  {
@@ -43,7 +43,8 @@ Some important concepts to know:
     "superTypes": []
 }
 ```
-* A type can extend another type:
+
+* A type can extend another type: A `kafka_topic_schema` is an array of `kafka_message_schema`:
 
 ```json
 {
@@ -79,7 +80,31 @@ docker run -d -p 21000:21000 -p 21443:21443 --name atlas sburn/apache-atlas /opt
 
 Login in as `admin/admin`.
 
-* Define new types
+* Start with a docker compose:
+
+```yaml
+services:
+  atlas:
+    container_name: atlas
+    hostname: atlas
+    image: sburn/apache-atlas
+    ports:
+      - 21000:21000 
+      - 21443:21443
+    env:
+      - MANAGE_LOCAL_HBASE: false
+      - MANAGE_LOCAL_SOLR: false
+    command:
+      /opt/apache-atlas-2.1.0/bin/atlas_start.py
+    volumes:
+      - ./data:/tmp/data/
+```
+
+* Define new types: example define a Kafka_Cluster type to be an Infrastructure
+
+```json
+```
+
 * Define dataset entities
 * Define process entities
 
