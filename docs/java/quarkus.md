@@ -679,7 +679,7 @@ By default, when building a native executable, GraalVM will not include any of t
 
 ### Run quarkus test with external components started with docker compose
 
-The best approach is to avoid using docker-compose for development and use TestContainer. See [this note](/coding/testcontainer).
+The best approach is to avoid using docker-compose for development and use [TestContainer](/coding/testcontainer).
 
 ### Cheat-Sheet
 

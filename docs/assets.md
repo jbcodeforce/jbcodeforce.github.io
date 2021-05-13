@@ -41,6 +41,7 @@ This is the list of assets, I developed or co-developed over the years.
 * [Reefer Container Shipment Container Management](https://github.com/ibm-cloud-architecture/refarch-kc-container-ms) springboot
 * [Container inventory management - legacy mockup](https://github.com/ibm-cloud-architecture/refarch-container-inventory)
 * [Gitops with kustomize for Vaccine solution](https://github.com/ibm-cloud-architecture/vaccine-gitops) - 03/2021
+* [Spring cloud stream project template with apicurio](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/spring-cloud-stream). 05/2021
 
 ### Technology
 
