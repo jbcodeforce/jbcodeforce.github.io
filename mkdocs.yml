@@ -14,13 +14,17 @@ nav:
       - GCP: architecture/gcp.md
       - IBM Cloud: architecture/ibmcloud.md
       - Openshift Studies: https://jbcodeforce.github.com/openshift-studies
-      - Data:
-        - Data integration: architecture/data-integration.md
-        - Data partitioning: architecture/data-partitioning.md 
-        - Data topology: architecture/data-topology.md 
-        - Data replication: architecture/data-replication.md 
-        - Data catalog - spectrum discover: https://www.ibm.com/cloud/architecture/architectures/spectrum-discover
-        - OpenData Hub: opendatahub.md
+    - Data:
+      - Introduction: data/index.md
+      - Data topology: data/data-topology.md 
+      - Data integration: data/data-integration.md
+      - Data replication: data/data-replication.md 
+      - Data partitioning: data/data-partitioning.md 
+      - Data catalog - spectrum discover: https://www.ibm.com/cloud/architecture/architectures/spectrum-discover
+      - OpenData Hub: architecture/opendatahub.md
+    - AI:
+      - Machine learning: https://jbcodeforce.github.io/ml-basics/
+      - Automation Decision Service: techno/ads.md
     - Programming:
       - Java Studies: 
         - Introduction: java/index.md
@@ -39,7 +43,6 @@ nav:
         - VScode: java/java-vscode.md
       - Python Studies: https://jbcodeforce.github.io/python-code
       - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
-      - Machine learning: https://jbcodeforce.github.io/ml-basics/
       - Cloud native content IBM: https://cloudnative101.dev/
       - Git summary: git.md
       - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
@@ -47,8 +50,8 @@ nav:
     - Techno:
       - Apicurio: coding/apicurio.md
       - Atlas: techno/atlas.md
-      - Automation Decision Service: techno/ads.md
-      - Code Engine: code-engine.md
+      - Cloud object storage: techno/cos.md
+      - Code Engine: techno/code-engine.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/
       - Kafka Studies: https://jbcodeforce.github.io/kafka-studies

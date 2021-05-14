@@ -16,7 +16,7 @@ Replication implementations are most of the time, black box for the business app
 
 * **single-leader**: one of the replica is the leader, and receive write operations from client services. Other replicas are followers, listening to data updates from a replication log and modify their own data store. Read operations can happen on any node, and followers are specifically read-only. This is a pattern used by Kafka, Postgresql, RabbitMQ...
 
-    ![Leader-Followers](images/leader-followers.png)
+    ![Leader-Followers](./images/leader-followers.png)
 
 * **multi-leader**: multiple nodes accept write operations (they are leaders), and act as follower for other leaders. 
 * **leaderless**: each node accept write operations. Client sends write to multiple replicas, accept p acknowledge (p <= number of nodes), but also performs n reads to assess eventual stale data. (This type is used in Cassandra or DynamoDB)
@@ -26,7 +26,7 @@ Replication implementations are most of the time, black box for the business app
 All write requests are done on the leader, but reads can happen on followers as well. It helps to scale out the solution and also to support long distance replications.
 Replication can be done synchronously or asynchronously. With synchronous the leader waits until at least one follower has confirmed replication before reporting to the client that the write operation is successful. From the client point of view, it is a synchronous call.
 
-![Synch-Asynch](images/synch-asynch.png)
+![Synch-Asynch](./images/synch-asynch.png)
 
 With asynchronous the leader does not wait for followers to replicate. With synchronous, we are sure the data are not lost as at least one follower responded, but if the follower node has failure then the write operation is not consider completed, even if leader has the data. The client can do a retry. But the leader may need to block other write requests until it sees a follower alive. With synch, the data is also consistent with the leader. The figure above illustrates a synchronous mechanism for client - leader and first follower to respond, and asynchronous for the other followers.
 
@@ -34,18 +34,18 @@ It is important to note that asynch replica may be the only possible solution wh
 
 With asynch, two reads at the same time on the leader and one of the follower will not get the same results. This inconsistency is temporal: when there is no more write then the followers will become eventually consistent. This elapse time is called replication lag.
 
-![](images/asynch.png)
+![](./images/asynch.png)
 
 This lag can have some interesting derived issues, like seeing data in one query (done on a follower with small lag) and then not seeing the data from the same query done on a bigger lagged follower. To avoid that, the pratice is to use a monolitic read: user makes several reads in sequence, they will not see time go backward. Which can be achieved by ensuring the reads for a given user are done on the same follower. This is what kafka does by assigning a consumer to partition.
 
 With asynch replica, if the leader fails, data not yet replicated to the followers, is lost until a new leader starts to accept new writes. 
 
-![](images/data-lost.png)
+![](./images/data-lost.png)
 
 
 Also **adding a new follower** brings other challenges: as the data are continuously being written to the leader database, copying the database files to the new follower will not be consistent. One adopted solution is to snapshot the database, without locking write operations, and copy the data to the follower, then from this snapshot, consumes the update log. To work the snapshot position needs to be known in the replication log. 
 
-![](images/add-follower.png)
+![](./images/add-follower.png)
 
 To support follower failure, the log needs to keep position of the last commited read, so when the follower restarts, it can load data from this position in the log. 
 
@@ -62,7 +62,7 @@ Now the adoption of database replication features is linked to the data movement
 
 With multi-leader configuration each leader gets write operations, and propagates data update notifications to all nodes. This is an active-active replication. And it is the practice when dealing with multiple datacenters. 
 
-![](images/multi-lead.png)
+![](./images/multi-lead.png)
 
 The write operations are propagated asynchronously which is more permissive to network failure. It is important to note that the following problems need to be addressed with this topology:
 
@@ -75,7 +75,7 @@ For the write conflict resolution, there are different strategies, one uses time
 
 When there is more than two leaders, the replicas topology can be use a ring, star or all-to-all model, as illustrated in the figure below:
 
-![](images/multi-lead-topo.png)
+![](./images/multi-lead-topo.png)
 
 With **Ring**, a leader forwards and propagates its own writes to one neighbor. With **Star** one designated root node forwards writes to all of the other nodes. Finally with **All-to-all**, every leader sends its writes to every other leader.
 
@@ -147,13 +147,13 @@ Other use cases are related to auditing and historical query on what happened on
 
 Another important part of the architecture is the change data capture component. The following diagram presents a generic architecture for real time data replication, using transaction logs as source for data update, a change data capture agent to load data and send then as event over the network to an "Apply / Transform" agent responsible to persist to the target destination. 
 
-![](images/data-replication-HL.png)
+![](./images/data-replication-HL.png)
 
 The data replication between databases by continuously propagate changes in real time instead of doing it by batch with traditional ETL products, brings data availability and consistency cross systems. It can be used to feed analytics system and data warehouses, for business intelligence activities.
 
 For example, IBM's [InfoSphere Data Replication (IIDR)](https://www.ibm.com/us-en/marketplace/infosphere-data-replication) captures and replicates data in one run or only replicate changes made to the data, and delivers those changes to other environments and applications that need them in a trusted and guaranteed fashion, ensuring referential integrity and synchronization between sources and targets. The architecture diagram below presents the  components involved in CDC replication:
 
-![](images/CDC_architecture.jpg)
+![](./images/CDC_architecture.jpg)
  
  Product explanations can be obtained  [here.](https://www.ibm.com/support/knowledgecenter/en/SSTRGZ_11.4.0/com.ibm.cdcdoc.sysreq.doc/concepts/aboutcdc.html)
 
@@ -161,7 +161,7 @@ We can combine Kafka and IIDR to support a flexible pub sub architecture for dat
 
 The combined architecture of a deployed solution looks like in the diagram below:
 
-![](images/iidr-archi.png)
+![](./images/iidr-archi.png)
 
 With the management console, the developer can define a data replication project that can include one to many subscriptions. Subscriptions define the source database and tables and target kafka cluster and topics.  
 
@@ -180,7 +180,7 @@ It uses the approach of replicating one table to one Kafka topic.
 
 It can be used for data synchronization between microservices using CDC at a service level and propagate changes via Kafka. The implementation of the [CQRS pattern](https://ibm-cloud-architecture.github.io/refarch-eda/evt-microservices/ED-patterns/#command-query-responsibility-segregation-cqrs-pattern) may be simplified with this capability. 
 
-![zoomify](images/cqrs-cdc.png)
+![zoomify](./images/cqrs-cdc.png)
 
 ### Why adopting Kafka for data replication
 
@@ -208,7 +208,7 @@ To get started please read [this introduction](https://kafka.apache.org/document
 
 The Kafka connect workers are stateless and can run easily on Kubernetes or as standalone docker process. `Kafka Connect Source` is to get data to Kafka, and `Kafka Connect Sink` to get data out of Kafka.
 
-![](images/kconnect-arch.png)
+![](./images/kconnect-arch.png)
 
 A worker is a process. A connector is a re-usable piece of java code packaged as jars, and configuration. Both elements define a task. A connector can have multiple tasks. 
 
