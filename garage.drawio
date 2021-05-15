@@ -1,0 +1,42 @@
+<mxfile host="app.diagrams.net" modified="2021-05-14T20:55:00.865Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36" etag="YmCt2UfPN-8hlMq7xHWq" version="14.6.13" type="github">
+  <diagram name="Page-1" id="099fd60b-425b-db50-ffb0-6b813814b670">
+    <mxGraphModel dx="1694" dy="970" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="1dd3ca9b2b35b949-1" value="" style="whiteSpace=wrap;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="80" y="420" width="400" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="10ed09ecd0ef054a-31" value="Garage Door" style="shape=rect;dashed=0;shadow=0;html=1;whiteSpace=wrap;rounded=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" parent="1" vertex="1">
+          <mxGeometry x="106" y="1050" width="334" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="k8ZJ19A_-cXAIgxXDkZ_-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="10ed09ecd0ef054a-34" target="k8ZJ19A_-cXAIgxXDkZ_-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="475" y="1020" />
+              <mxPoint x="458" y="1020" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="10ed09ecd0ef054a-34" value="Panel 100 Amps" style="shape=rect;dashed=0;shadow=0;html=1;whiteSpace=wrap;rounded=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="470" y="530" width="10" height="49.75" as="geometry" />
+        </mxCell>
+        <mxCell id="10ed09ecd0ef054a-57" value="Door" style="shape=rect;dashed=0;shadow=0;html=1;whiteSpace=wrap;rounded=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;direction=south;" parent="1" vertex="1">
+          <mxGeometry x="465" y="440" width="20" height="74.5" as="geometry" />
+        </mxCell>
+        <mxCell id="k8ZJ19A_-cXAIgxXDkZ_-3" value="Nema 14-50 plug" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="445" y="1030" width="25" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="k8ZJ19A_-cXAIgxXDkZ_-7" value="" style="whiteSpace=wrap;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="20" width="740" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="k8ZJ19A_-cXAIgxXDkZ_-9" value="Panel 200 Amps" style="shape=rect;dashed=0;shadow=0;html=1;whiteSpace=wrap;rounded=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="70" y="30" width="10" height="49.75" as="geometry" />
+        </mxCell>
+        <mxCell id="k8ZJ19A_-cXAIgxXDkZ_-10" value="Door" style="shape=rect;dashed=0;shadow=0;html=1;whiteSpace=wrap;rounded=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;direction=west;" vertex="1" parent="1">
+          <mxGeometry x="520" y="410" width="110" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
