@@ -48,3 +48,24 @@ given()
              .statusCode(200)
              .body(is("started"));
 ```
+
+Another POST with taking the response body to a bean
+
+```java
+ClusterBasicInfo clusterInfo = new ClusterBasicInfo();
+        clusterInfo.name = "localKafka";
+        clusterInfo.adminURL = kafkaContainerForTest.getBootstrapServers();
+        clusterInfo.bootstrapURL = clusterInfo.adminURL;
+        Response resp = with().headers("Content-Type", ContentType.JSON, "Accept", ContentType.JSON)
+          .body(clusterInfo)
+          .when().post(basicURL)
+          .then()
+             .statusCode(200)
+             .contentType(ContentType.JSON)
+        .extract()
+        .response();
+
+        ClusterDetail updateDetails = resp.body().as(ClusterDetail.class);
+```
+
+And array of beans
