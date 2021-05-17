@@ -83,17 +83,20 @@ This implies that we may duplicate data in different domains as we transform the
 which are considered as `truths of the business domains`. 
 * Domain event are stored and served in append logs with time-stamped immutable records.
 * Source data domains should also provides business aggregates, easy to consume: "account opened per month" for example is in the account domain.
+* New data domains can ve created by joining and correlating data from other domains.
 * Physical system datasets are differents and separated from the domain datasets. Domain datasets are larger in volume, records are timed, and change less frequently than source system.
 * Some domains align closely with the consumption. They have different nature than the source ones: they transform the source domain events to aggregate views and structures that fit a particular access model.
 * Data pipeline, cleansing, preparing, aggregating and serving data remains needed, but they stay within the domain. 
-* To address accesibility, usability and harmonization of the ditributed dataset, a `product thinking` approach is important, as already adopted for APIs. The data assets is a productm and the data scientists and data engineers are the customers.
+* To address accesibility, usability and harmonization of the ditributed dataset, a `product thinking` approach is important, (same approach as API product). The data assets is a product and the data scientists and data engineers are the customers.
 
 ![](./images/data-product.png)
 
 * To be discoverable we need a data catalog with metadata such as ownership, source of origin, structure, samples,... so each data product needs to register to the catalog.
 * Addressable with a unique address per storage formats. 
 * Provides a service level objective around data truthfulness. Providing data provenance and data lineage as the metadata associated with each data product helps consumers gain further confidence in the data product.
-* Inter-operable: The key for an effective correlation of data across domains is following certain standards and harmonization rules
+* Inter-operable: The key for an effective correlation of data across domains is following certain standards and harmonization rules.
+* Secure access to datasets is applied at the time of access to each data product
+* Common data infrastructure as a self serving platform is needed combined with global governance to ensure interoperability.
 
  #### Sources
 
