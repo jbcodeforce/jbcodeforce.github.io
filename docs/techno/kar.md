@@ -11,7 +11,7 @@ Together the KAR processes form a mesh, which uses kafka for decoupling and reli
 
 ## Some concepts
 
-* KAR make it easy to structure the state of microservices as a collection of actor instances
+* KAR makes it easy to structure the state of microservices as a collection of actor instances
 * Each actor instance is responsible for its own state. 
 * The state of an actor instance can be saved or restored safely (into Redis)
 * Actors are relocatable
@@ -27,11 +27,20 @@ Together the KAR processes form a mesh, which uses kafka for decoupling and reli
 
 ### DDD and Actors
 
-The actor model fits well on supporting reactive system implementation as they are message driven, resilient, and elastic. The architecture is simplified to two layers: the communication (web controller) and the domain model.
+The actor model fits well on supporting reactive system implementation as they are message driven, resilient, and elastic. 
+The architecture is simplified to two layers: the communication (web controller) and the domain model.
 Actors can be seen as Object (of OOD) done right.
 
 Bounded contexts are also reactives, reacting to asynch web request or messages and producing events and messages. Actors are within the bounded context. 
 Persistence is separated from command to query.
+
+Stateful logic in the domain layer maps nicely into Actors. Actors run in different processing and can be remote to the existing
+controller. 
+Router actors can handle the logistics of sending messages to other actors that may be distributed across 
+the cluster. A router actor receives messages, but it does not handle the message itself. 
+It forwards the message to a worker actor.
+
+
 Schema registry is used to define structure for inter bounded context communication. 
 
 
