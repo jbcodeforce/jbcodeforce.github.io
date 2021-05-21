@@ -52,6 +52,7 @@ nav:
       - Atlas: techno/atlas.md
       - Cloud object storage: techno/cos.md
       - Code Engine: techno/code-engine.md
+      - Redis: techno/redis.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/
       - Kafka Studies: https://jbcodeforce.github.io/kafka-studies
@@ -62,7 +63,7 @@ nav:
 
 theme: 
   name: material
-  logo: 'images/gear-sp-01.png'
+  logo: 'images/gear-sp-01.jpg'
   feature:
     tabs: true
   palette:
