@@ -4,7 +4,7 @@
 
 Redis provides 
 
-* Support different data structures for the value, such as Strings, hashes, lists, sets, sorted sets, range queries, bitmaps, hyperloglogs, geospatial indexes, and **streams**. 
+* Support to different data structures such as Strings, hashes, lists, sets, sorted sets, range queries, bitmaps, hyperloglogs, geospatial indexes, and **streams**. 
 * built-in replication
 * transactions
 * different levels of on-disk persistence

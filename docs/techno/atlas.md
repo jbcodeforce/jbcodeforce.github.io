@@ -15,9 +15,11 @@ The Core framework includes a graph database based on [JanusGraph](https://janus
 * Data lineage: shows the origin, movement, transformation and destination of data.
 
 ## Concepts
+
 Some important concepts to know:
 
-* a `Type` in Atlas is a definition of how particular types of metadata objects are stored and accessed. A type represents one or a collection of attributes that define the properties for the metadata object.
+* a `Type` in Atlas is a definition of how particular types of metadata objects are stored and accessed. 
+A type represents one or a collection of attributes that define the properties for the metadata object.
 * An `Entity` is an instance of a Type
 * A type has a metatype. Atlas has the following metatypes:
 
@@ -31,7 +33,7 @@ Some important concepts to know:
     * **DataSet** extends Referenceable, represents an type that stores data. Expected to have a Schema to define attributes
     * **Process** extends Asset represents any data transformation operation.
 
-* We can define Classification by defining new type: 
+* We can define `Classification` by defining new type: 
 
 ```json
  {
@@ -91,23 +93,68 @@ services:
     ports:
       - 21000:21000 
       - 21443:21443
-    env:
-      - MANAGE_LOCAL_HBASE: false
-      - MANAGE_LOCAL_SOLR: false
+    environment:
+      MANAGE_LOCAL_HBASE: "true"
+      MANAGE_LOCAL_SOLR: "false"
     command:
       /opt/apache-atlas-2.1.0/bin/atlas_start.py
     volumes:
-      - ./data:/tmp/data/
+      - $PWD/environment/atlas/data:/tmp/data/
 ```
 
-* Define new types: example define a Kafka_Cluster type to be an Infrastructure
+
+* Define new types See project [eda-governance](): 
+
+example define a Kafka_Cluster type to be an Infrastructure
 
 ```json
+"entityDefs": [
+    {
+      "superTypes": [
+        "Infrastructure"
+      ],
+      "category": "ENTITY",
+      "name": "eda_kafka_cluster",
+      "description": "a Kafka Cluster groups multiple Kafka Brokers and manage topics",
+      "typeVersion": "1.0",
+      "attributeDefs": [
+        {
+          "name": "cluster.name",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": true,
+          "isIndexable": true
+        }, 
+        ....
 ```
 
 * Define dataset entities
+
+```json
+"entities": [
+    {
+      "typeName": "eda_kafka_cluster",
+      "createdBy": "maas_service",
+      "attributes": {
+        "qualifiedName": "assets-arch-eda.eda-dev",
+        "cluster.name": "eda-dev",
+        "description": "EDA team's event streams 2020 cluster",
+        ...
+```
+
 * Define process entities
 
 
 ## Continuous visibility of flows
 
+
+## Source of readings
+
+* [Model governance with Atlas - part 1](https://community.cloudera.com/t5/Community-Articles/Customizing-Atlas-Part1-Model-governance-traceability-and/ta-p/249250)
+* [Model governance with Atlas - part 2](https://community.cloudera.com/t5/Community-Articles/Customizing-Atlas-Part2-Deep-source-metadata-embedded/ta-p/249377)
+* [Model governance with Atlas - part 3](https://community.cloudera.com/t5/Community-Articles/Customizing-Atlas-Part3-Lineage-beyond-Hadoop-including/ta-p/249318)
+
+* [Atlas Helm Chart with Solr and cassandra](https://github.com/manjitsin/atlas-helm-chart)

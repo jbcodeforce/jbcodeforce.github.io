@@ -13,7 +13,7 @@ nav:
       - AWS: architecture/aws.md
       - GCP: architecture/gcp.md
       - IBM Cloud: architecture/ibmcloud.md
-      - Openshift Studies: https://jbcodeforce.github.com/openshift-studies
+      - Openshift Studies: https://jbcodeforce.github.io/openshift-studies
     - Data:
       - Introduction: data/index.md
       - Data topology: data/data-topology.md 

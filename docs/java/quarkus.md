@@ -339,6 +339,7 @@ Application configuration will be used in any active profile. The built-in profi
 
 @QuarkusTest helps to get the CDI working. But there is still an issue on inject properties that may not be loaded due to proxy instance creation. So in test class the properties need to be accessed via getter:
 For example to be sure the hostname is loaded from the application.properties do:
+
 ```Java 
 @ApplicationScoped
 public class RabbitMQItemGenerator {
@@ -504,6 +505,8 @@ See also [Using Property Expressions](https://quarkus.io/guides/config#using-pro
 
 
 ### Get access to start and stop application events
+
+This is an important practice when we want to start a listener on Kafka topic for example or a kafka stream topology.
 
 ```java
 import javax.enterprise.event.Observes;
