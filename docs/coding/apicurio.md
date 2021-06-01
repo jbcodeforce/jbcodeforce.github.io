@@ -11,7 +11,8 @@ In the messaging and event streaming world, data that are published to topics an
 * The registry supports adding, removing, and updating the following types of artifacts: OpenAPI, AsyncAPI, GraphQL, Apache Avro, Google protocol buffers, JSON Schema, Kafka Connect schema, WSDL, XML Schema (XSD).
 * Schema can be created via Web Console, core REST API or Maven plugin
 * It includes configurable rules to control the validity and compatibility.
-* Client applications can dynamically push or pull the latest schema updates to or from Apicurio Registry at runtime. Apicurio is compatible with existing Confluent schema registry client applications.
+* Client applications can dynamically push or pull the latest schema updates to or from Apicurio Registry at runtime.
+Apicurio is compatible with existing Confluent schema registry client applications.
 * It includes client serializers/deserializers (Serdes) to validate Kafka and other message types at runtime.
 * Operator-based installation of Apicurio Registry on OpenShift
 * Use the concept of artifact group to collect schema and APIs logically related.
@@ -29,8 +30,8 @@ There are three runtime components in Apicurio and one Keycloak authentication s
 
 ## Developer experience
 
-* Define your microservice with JAXRS and Swagger annotation. Here is a [guide for quarkus openapi and swagger-ui](https://quarkus.io/guides/openapi-swaggerui) for detail.
-Here is an example of properties to add to quarkus application.properties:
+* Define your microservice with JAXRS and Swagger annotation. Here is a [guide for quarkus openapi and swagger-ui](https://quarkus.io/guides/openapi-swaggerui) for details.
+Below is an example of properties to add to a quarkus `application.properties` file:
 
   ```
   mp.openapi.extensions.smallrye.info.title=Example API
@@ -44,10 +45,11 @@ Here is an example of properties to add to quarkus application.properties:
   mp.openapi.extensions.smallrye.info.license.url=https://www.apache.org/licenses/LICENSE-2.0.html
   ```
   
-* For top down approach push the api as file `META-INF/openapi.yaml` or `.json`
-* Get the OpenAPI definition using curl http://localhost:8080/q/openapi
-* Define an artifact group to group elements inside Apicurio Registry - can be by environment or can be line of business or any thing to group elements.
-
+* For top down approach, starting from the API openAPI document, we can push the api as file to 
+the `META-INF/openapi.yaml` or as a `.json`
+* Get the OpenAPI definition using curl [http://localhost:8080/q/openapi](http://localhost:8080/q/openapi)
+* Define an artifact group to group elements inside Apicurio Registry - can be by environment or can be line of business 
+or any thing to group elements.
 * Decide if Avro is used or just JSON Schema - Apicurio has both serdes to integrate into you code:
 
 ```xml
@@ -71,12 +73,13 @@ Here is an example of properties to add to quarkus application.properties:
 
 ## Avro
 
-Quick [getting started on Avro with Java](https://avro.apache.org/docs/current/gettingstartedjava.html). We need:
+Quick [getting started on Avro with Java](https://avro.apache.org/docs/current/gettingstartedjava.html). We need to:
 
-* Define .avsc file (JSON doc) for each type. Schemas are composed of primitive types (null, boolean, int, long, float, double, bytes, and string) and complex types (record, enum, array, map, union, and fixed).
+* Define .avsc file (JSON doc) for each type. Schemas are composed of primitive types (null, boolean, int, long, float, double, bytes, and string) 
+and complex types (record, enum, array, map, union, and fixed).
 * Use Avro Maven plugin to generate Java beans from the schema definition
 
-To access avro classes:
+To access avro classes directly add this dependencies:
 
 ```
 <dependency>
@@ -88,7 +91,9 @@ To access avro classes:
 
 ### From schema to beans
 
-Define one to many `.avcs` file in the `src/main/avro` folder. Then to generate java beans from those schema definitions use the avro maven plugin. The order of schema processing is important to build the dependencies before the records using them (see imports statement below):
+Define one to many `.avcs` file in the `src/main/avro` folder. To generate java beans from those schema 
+definitions, use the avro maven plugin. The order of schema processing is important to build the dependencies
+ before the records using them (see imports statement below):
 
 ```xml
 <plugin>
@@ -116,7 +121,7 @@ Define one to many `.avcs` file in the `src/main/avro` folder. Then to generate 
       </plugin>
 ```
 
-The beans created will be in the Java package as defined in the namespace attribute:
+The beans created will be in the Java package as defined by the `namespace attribute`:
 
 ```json
 
@@ -133,11 +138,21 @@ See the project template [quarkus-kafka-producer](https://github.com/ibm-cloud-a
 The [Jackson parser](https://github.com/FasterXML/jackson-dataformats-binary/tree/master/avro#generating-avro-schema-from-pojo-definition) offers such capability, so you can add a small program to create a schema from your beans, using the AvroFactory, SchemaGenerator...
 
 Add this to your pom:
-```xml
 
+```xml
+ <dependency>
+            <groupId>io.apicurio</groupId>
+            <artifactId>apicurio-registry-utils-converter</artifactId>
+            <version>${apicurio.registry.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-avro</artifactId>
+            <version>${jackson2-version}</version>
+        </dependency>
 ```
 
-And for the code:
+Here how to get the `RootType.class` schema definition:
 
 ```java
 ObjectMapper mapper = new ObjectMapper(new AvroFactory());
@@ -156,8 +171,9 @@ See the [notes here](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3
 * Install Strimzi operator - create a Strimzi cluster (See [vaccine-gitops strimzi env](https://github.com/ibm-cloud-architecture/vaccine-gitops/tree/main/environments/strimzi))
 * Install Apicurio operator (search from registry in Operator Hub) - define one registry instance.
 * Get Kafka bootstrap internal listener address
-* Create the `storage-topic` and `global-id-topic` topic
-* Create the Apicurio instance using the bootstrap URL, see this example of yaml (See [vaccine-gitops Apicurio env](https://github.com/ibm-cloud-architecture/vaccine-gitops/tree/main/environments/apicurio))
+* Create the `storage-topic` and `global-id-topic` topics
+* Create the Apicurio instance using the bootstrap URL. Below is an example of registry definition using Kafka as persistence. 
+(See the [vaccine-gitops Apicurio env](https://github.com/ibm-cloud-architecture/vaccine-gitops/tree/main/environments/apicurio))
 
 ```yaml
 apiVersion: apicur.io/v1alpha1
@@ -169,6 +185,10 @@ spec:
     persistence: "streams"
     streams:
       bootstrapServers: "vaccine-kafka-kafka-bootstrap.vaccine-order.svc:9092"
+      security:
+        tls:
+          keystoreSecretName: tls-user
+          truststoreSecretName: kafka-cluster-ca-cert
 ```
 
 ## Manage artifacts with Maven
@@ -211,7 +231,6 @@ Use the [Registry REST API](https://www.apicur.io/registry/docs/apicurio-registr
 curl -X POST -H "Content-type: application/json; artifactType=AVRO" -H "X-Registry-ArtifactId: share-price" --data '{"type":"record","name":"price","namespace":"com.example","fields":[{"name":"symbol","type":"string"},{"name":"price","type":"string"}]}' http://MY-REGISTRY-HOST/api/artifacts
 ```
 
-
 ## Kafka de/serializer
 
 To configure the producer we need:
@@ -239,7 +258,7 @@ props.putIfAbsent(AbstractKafkaSerializer.REGISTRY_GLOBAL_ID_STRATEGY_CONFIG_PAR
             FindBySchemaIdStrategy.class.getName());
 ```
 
-* Define the schema via code
+* Create the schema within the registry using REST API client:
 
 ```java
 private static void createSchemaInServiceRegistry(String artifactId, String schema) throws Exception {
@@ -256,14 +275,38 @@ private static void createSchemaInServiceRegistry(String artifactId, String sche
 
 Example of output:
 
-```shell
-Successfully created Avro Schema artifact in Service Registry: ArtifactMetaData{name='BasicMessage', description='null', labels='[]', createdBy='null', createdOn=1615340019637, modifiedBy='null', modifiedOn=1615340019637, id='test', version=1, type=AVRO, globalId=18, state=ENABLED, properties={}}
+```s
+Successfully created Avro Schema artifact in Service Registry: 
+ArtifactMetaData{name='BasicMessage', description='null', labels='[]', createdBy='null', createdOn=1615340019637, modifiedBy='null', modifiedOn=1615340019637, id='test', version=1, type=AVRO, globalId=18, state=ENABLED, properties={}}
 ```
 
 See simplest code in the `apicurio` folder of [Kafka Studies](https://github.com/jbcodeforce/kafka-studies/)
 
 ## Consumer
 
+The consumer uses the GenericRecord class
+
+```java
+    @Incoming("shipments")
+    @Outgoing("internal-plan-stream")                             
+    @Broadcast                                              
+    @Acknowledgment(Acknowledgment.Strategy.POST_PROCESSING)
+    public Uni<ShipmentPlans> process(GenericRecord spse){  
+        //GenericRecord spse = evt.getPayload();
+        int idx = 0;
+        logger.info(spse);
+        CloudEvent ce = jsonb.fromJson(spse.toString(), CloudEvent.class);
+        for (ShipmentPlanEvent spe : ce.data.Shipments) {
+            ShipmentPlan plan = ShipmentPlan.from(spe);
+            logger.info(plan.toString());
+            plans.put("SHIP_" + idx,plan);
+            idx++;
+        }
+        ShipmentPlans shipmentPlans = new ShipmentPlans();
+        shipmentPlans.plans = new ArrayList<ShipmentPlan>(this.plans.values());
+        return Uni.createFrom().item(shipmentPlans);
+    }
+```
 
 ## Useful links
 

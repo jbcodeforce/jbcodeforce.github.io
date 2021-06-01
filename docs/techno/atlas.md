@@ -8,6 +8,8 @@ The architecture illustrates that Atlas expose APIs to add and query elements of
 
 The Core framework includes a graph database based on [JanusGraph](https://janusgraph.org/).
 
+The Kafka integration can also being used to consume metadata change events from Atlas.
+
 ## Key features
 
 * Centralized metadata management platform
@@ -32,8 +34,8 @@ A type represents one or a collection of attributes that define the properties f
     * **Infrastructure** extends Asset and may be used for cluster, host,...
     * **DataSet** extends Referenceable, represents an type that stores data. Expected to have a Schema to define attributes
     * **Process** extends Asset represents any data transformation operation.
-
-* We can define `Classification` by defining new type: 
+* **Relationships** to describe connections between entities.
+* We can define `Classification` can be associated to entities but are not attributes: 
 
 ```json
  {
@@ -68,9 +70,11 @@ A type represents one or a collection of attributes that define the properties f
 }
 ```
 
-## Useful documentation
+### Remarks
 
-* [REST API v2](https://atlas.apache.org/api/v2/index.html)
+Each of the predefined sources have matching type definitions. For Kafka, it may be needed to adapt 
+the definition or develop new definition to support and end-to-end governance of Kafka components.
+
 
 ## Getting started
 
@@ -103,7 +107,7 @@ services:
 ```
 
 
-* Define new types See project [eda-governance](): 
+* Define new types See project [eda-governance](https://github.com/jbcodeforce/eda-governance): 
 
 example define a Kafka_Cluster type to be an Infrastructure
 
@@ -145,16 +149,107 @@ example define a Kafka_Cluster type to be an Infrastructure
         ...
 ```
 
+The qualifiedName is important to define some naming convention like `<kafka_component>@<clustername>` for example. 
+Also important that entities represent instances. So if the same topic is defined into two clusters we need to
+have two entities in Atlas using the different qualifiedNames.
+
 * Define process entities
+
+For example an application is a process:
+
+```json
+```
+
+* Define relationship between any defined types. Example a topic is linked to a cluster:
+
+```json
+{
+ "category": "ENTITY",
+  "name": "eda_kafka_topic",
+  "superTypes": [
+                "DataSet"
+            ],
+  "attributeDefs": [
+    {
+      "name": "cluster",
+      "typeName": "eda_kafka_cluster",
+      "isOptional": false,
+      "cardinality": "SINGLE",
+      "isUnique": false,
+      "isIndexable": true
+    },
+    {
+      "name": "clusterQualifiedName",
+      "typeName": "string",
+      "isOptional": false,
+      "cardinality": "SINGLE",
+      "isUnique": false,
+      "isIndexable": true
+    }]
+}
+```
+
+Then the entity will use the following setting in the cluster name:
+
+```json
+{
+        "typeName": "eda_kafka_topic",
+        "attributes": {
+          "qualifiedName": "items@eda-dev",
+          "name": "items",
+          "cluster": {"uniqueAttributes": {"qualifiedName": "eda-dev"}, "typeName": "eda_kafka_cluster"},
+          "clusterQualifiedName": "eda-dev"
+        }
+}
+```
+
+We can also define the composition, like a broker is includes in the cluster and will not live outside of a cluster:
+
+```json
+ {
+      "superTypes": [
+        "Infrastructure"
+      ],
+      "category": "ENTITY",
+      "name": "eda_kafka_cluster",
+    ...
+    "attributeDefs": [
+    {
+    "name": "brokers",
+    "typeName": "array<eda_kafka_broker>",
+    "isOptional": true,
+    "cardinality": "SET",
+    "valuesMinCount": 1,
+    "valuesMaxCount": 1000,
+    "isUnique": false,
+    "isComposite": true,
+    "isIndexable": false,
+    "includeInNotification": false,
+    "searchWeight": -1,
+    "relationshipTypeName": "eda_kafka_topic"
+}
+```
+
+## Data lineage
+
+Atlas will address part of the data lineage as we can declare the physical dependencies between components:
+
+![](./images/app_lineage.png)
+
 
 
 ## Continuous visibility of flows
 
+Atlas can listen to Kafka topic to get updates to propagate to the entities. But there is no real time view of the data inside of the topic, for example, to see where 
+a data land. 
+
+## Deploy to Kubernetes
+
 
 ## Source of readings
 
+* [REST API v2](https://atlas.apache.org/api/v2/index.html)
 * [Model governance with Atlas - part 1](https://community.cloudera.com/t5/Community-Articles/Customizing-Atlas-Part1-Model-governance-traceability-and/ta-p/249250)
 * [Model governance with Atlas - part 2](https://community.cloudera.com/t5/Community-Articles/Customizing-Atlas-Part2-Deep-source-metadata-embedded/ta-p/249377)
 * [Model governance with Atlas - part 3](https://community.cloudera.com/t5/Community-Articles/Customizing-Atlas-Part3-Lineage-beyond-Hadoop-including/ta-p/249318)
-
 * [Atlas Helm Chart with Solr and cassandra](https://github.com/manjitsin/atlas-helm-chart)

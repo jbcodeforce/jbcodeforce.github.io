@@ -1,4 +1,22 @@
 # Blogs
+ 
+## TO DO
+
+* Blog on IBM EDA ref arch
+* Blog on kc container solution
+* Blog on vaccine demo
+* Blog on real time inventory
+* Blog on EDA governance
+* Blog on fit for purpose
+
+## 05/29/2021
+
+The Covid-19 vaccine shipment is a real challenge and last year we had to develop a proof od technology to address how
+and event based solution with linear programming could help address the vaccine order and optimize the vaccine lots shipment.
+In this blog I'm presenting different components of the order optimization and reference all the material to 
+run it your self on OpenShift.
+
+[>> Read more](/blogs/05-29-21)
 
 ## 01/10/2021 - Outbox Pattern with Debezium , Quarkus
 
