@@ -48,8 +48,9 @@ nav:
       - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
       - My code templates: code-template.md
     - Techno:
-      - Apicurio: coding/apicurio.md
+      - Apicurio: techno/apicurio.md
       - Atlas: techno/atlas.md
+      - Business Automation Insight: techno/bai.md
       - Cloud object storage: techno/cos.md
       - Code Engine: techno/code-engine.md
       - Redis: techno/redis.md
