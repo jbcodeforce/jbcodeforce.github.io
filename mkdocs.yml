@@ -45,6 +45,7 @@ nav:
       - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
       - Cloud native content IBM: https://cloudnative101.dev/
       - Git summary: git.md
+      - IBM Open lab - ArgoCD: coding/open-labs.md
       - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
       - My code templates: code-template.md
     - Techno:
@@ -53,11 +54,12 @@ nav:
       - Business Automation Insight: techno/bai.md
       - Cloud object storage: techno/cos.md
       - Code Engine: techno/code-engine.md
-      - Redis: techno/redis.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
+      - Egeria: techno/egeria.md
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/
       - Kafka Studies: https://jbcodeforce.github.io/kafka-studies
       - KAR: techno/kar.md
+      - Redis: techno/redis.md 
       - RedPanda Studies: https://github.com/jbcodeforce/redpanda-studies/
       - Spark Studies: https://jbcodeforce.github.io/spark-studies/
       - VScode: java/java-vscode.md

@@ -122,7 +122,8 @@ Get the available parameters: `mvn exec:help -Ddetail=true -Dgoal=java  `
 
 ### Maven profiles
 
-[Profile](http://maven.apache.org/guides/introduction/introduction-to-profiles.html) helps to use different configuration for different environment. They modify the POM at build time, and are meant to be used in complementary sets to give equivalent-but-different parameters for a set of target environments.
+[Profile](http://maven.apache.org/guides/introduction/introduction-to-profiles.html) helps to use different configuration for different environment. 
+They modify the POM at build time, and are meant to be used in complementary sets to give equivalent-but-different parameters for a set of target environments.
 Profiles can be explicitly specified using the `-P profilename`, or in the activeProfiles in the settings.xml file.
 
 ### Using maven with docker

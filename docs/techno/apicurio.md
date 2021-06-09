@@ -176,14 +176,14 @@ See the [notes here](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3
 (See the [vaccine-gitops Apicurio env](https://github.com/ibm-cloud-architecture/vaccine-gitops/tree/main/environments/apicurio))
 
 ```yaml
-apiVersion: apicur.io/v1alpha1
+apiVersion: registry.apicur.io/v1
 kind: ApicurioRegistry
 metadata:
   name: eda-apicurioregistry
 spec:
   configuration:
-    persistence: "streams"
-    streams:
+    persistence: kafkasql
+    kafkasql:
       bootstrapServers: "vaccine-kafka-kafka-bootstrap.vaccine-order.svc:9092"
       security:
         tls:
@@ -222,6 +222,8 @@ You can use the Apicurio Registry Maven plug-in to upload or download registry a
   </executions>
 </plugin>
 ```
+
+but it is recommended to put this plugin in a special maven profile if you do not have connection to an apicurio server while building apps.
 
 ## Manage artifacts with REST api
 
@@ -300,13 +302,19 @@ The consumer uses the GenericRecord class
             ShipmentPlan plan = ShipmentPlan.from(spe);
             logger.info(plan.toString());
             plans.put("SHIP_" + idx,plan);
-            idx++;
+            idx++;s
         }
         ShipmentPlans shipmentPlans = new ShipmentPlans();
         shipmentPlans.plans = new ArrayList<ShipmentPlan>(this.plans.values());
         return Uni.createFrom().item(shipmentPlans);
     }
 ```
+
+## Code using Apicurio
+
+* [Quarkus kafka producer template](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-kafka-producer)
+* [Postgresql, Debezium Outbox Quarkus plugin and Debezium change data capture with Kafka Conncet](https://github.com/ibm-cloud-architecture/vaccine-order-mgr-pg)
+* [Freezer service](https://github.com/ibm-cloud-architecture/vaccine-freezer-mgr)
 
 ## Useful links
 
