@@ -1,15 +1,24 @@
-# Business Automation Insights
+# Self driving enterprise
 
-Goal: BAI processes event data so that you can derive insights into the performance of your business
+Goal: BAI processes event data (from IBM Business automation products) so that you can derive insights into the performance of your business.
+
+This is evolving to self driving enterprise.
 
 ## Value propositions
 
-* Deliver visibility apply analytics or machine learning algorithms that add intelligence to the platform and 
+* AI continuously listen to events to correlate and derive business context to actionable insight in real time
+* Deliver visibility, apply analytics or machine learning algorithms that add intelligence to the platform and 
 provide guidance to knowledge workers and business owners.
+* **Detect** The insights engine builds a 360° view of the business to correlate events in-context, derives insights by applying analytics and detect business-relevant situations by applying rules, CEP and ML. 
+* Business owners keep contorl when automation fails
+* Able to fully explain and account for its observations, correlations and actions
+* Self-driving automations leapfrog traditional automation of tasks and workflow, by triggering actions 
+based on insights and their impact on objectives and KPIs and automates across Business and IT silos
 
 ## Features
 
 * Ingest and process records from Kafka, store to Elastic Search
+* Unify on single event framework for Automation and AI.
 * Aggregate these events into business-relevant KPIs
 * Monitoring with Kibana dashboards: Kibana uses index patterns to search indexes defined within Elasticsearch. An index pattern can match the name of a single index, or include a wildcard (*) to match multiple indexes
 * Store events to data lake like HDFS for off line queries

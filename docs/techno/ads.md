@@ -1,4 +1,4 @@
-# Automated Decision Service
+# Automation Decision Service
 
 Automation Decision Services provides decision modeling capabilities that help business experts capture and automate repeatable decisions. 
 Automation Decision Services comes with two main components: a designer and a runtime that can be installed separately.
