@@ -6,46 +6,49 @@ It uses the open metadata and governance standards and ensures compliance to it.
 
 ## Getting started
 
-Under `open-metadata-resources/open-metadata-deployment/compose/tutorials` starts
+Once the main repo cloned, under `open-metadata-resources/open-metadata-deployment/compose/tutorials` starts
 
 ```sh
 $ docker-compose -f ./egeria-tutorial.yaml up -d
 ```
 
-Go to [http://localhost:18888](http://localhost:18888) to open the Jupyter interface
+Go to [http://localhost:18888](http://localhost:18888) to open the Jupyter interface and load a tutorial notebook.
 
 
-Update the product docker images: `$ docker-compose -f ./egeria-tutorial.yaml pull`
+To update the product docker images: `$ docker-compose -f ./egeria-tutorial.yaml pull`
 
 
 ## Features
 
-It includes:
+Egeria includes the following features:
+
 * libraries that can be embedded into technologies that need to share metadata
 * an integration platform called the *Open Metadata and Governance* (OMAG) Platform for hosting connectors, metadata servers and governance servers
 
-Servers are part of a [cohort](https://egeria.odpi.org/open-metadata-implementation/admin-services/docs/concepts/cohort-member.html) that exchange metadata using peer to peer replication protocol and federated queries.
+Servers are part of a [cohort](https://egeria.odpi.org/open-metadata-implementation/admin-services/docs/concepts/cohort-member.html) which exchanges metadata using peer to peer replication protocol and federated queries.
 
 There are three types of cohort member to consider:
 
-* A Metadata Server that uses a native Egeria repository to store open metadata. There should be at least one of these servers in a cohort. It used to support either a community of users that are using the Egeria functions directly or to fill in any gaps in the metadata support provided by the third party tools that are connected to the cohort.
-* A Metadata Access Point that has no metadata repository of its own and uses federated queries to retrieve and store metadata in the other repositories connected to the cohort.
-* A Repository Proxy that connects in a thrid party metadata server.
+* A **Metadata Server** that uses a native Egeria repository to store open metadata. There should be at least one of these servers in a cohort. It used to support either a community of users that are using the Egeria functions directly or to fill in any gaps in the metadata support provided by the third party tools that are connected to the cohort.
+* A **Metadata Access Point** that has no metadata repository of its own and uses federated queries to retrieve and store metadata in the other repositories connected to the cohort.
+* A **Repository Proxy** that connects in a thrid party metadata server.
 
 Once a server has joined a cohort it can exchange metadata with the other members of that cohort.At the heart of each cohort is an event Kafka topic.
 
-Governance server is a servie to perform:
+Governance server is a service to perform:
 
 * discover and analyze content from metadata resources. The result of a discovery service's analysis is stored in a metadata server as a discovery analysis report that is chained off of the asset's definition.
-* overnance action services monitor the asset metadata and verify that it is set up correctly, determin how to fix anomolies, errors and ommisions, make the necessary changes and provision real-world artifacts and resources beased on the resulting metadata.
+* governance action services monitor the asset metadata and verify that it is set up correctly, determin how to fix anomolies, errors and ommisions, make the necessary changes and provision real-world artifacts and resources beased on the resulting metadata.
 
 Users can add assets for governance and can contribute and comments. They can connect to any sever within the cohort to see the metadata.
 Egeria has multiple levels of security so that access to individual metadata instances can be controlled
 
+### Install on kubernetes
+
 
 ## Define Assets
 
-An **Asset** represents a real resource of value that needs to be governed to ensure it is properly managed and used.
+An [**Asset**](https://github.com/odpi/egeria/tree/master/open-metadata-implementation/access-services/docs/concepts/assets) represents a real resource of value that needs to be governed to ensure it is properly managed and used.
 
 Assets are stored in **Catalog**. Governance zones are groups of related assets, and assets within a zone can be access controlled.
 
@@ -76,7 +79,7 @@ The CIM provides a common language to describe the different types of data. This
 Standard models are released in many different formats, some following open standards and others using a proprietary standard, 
 often defined by a particular modeling tool. Egeria typically provides a parser to read the specific model format and then a builder to convert the content into an open metadata archive and then a writer to write out the contents to a file for distribution
 
-### Asset lineage
+## Asset lineage
 
 Track the origin of the data that is held by the asset. There are different perspectives on what is meant the "origin". 
 
