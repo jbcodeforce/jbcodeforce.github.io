@@ -1,0 +1,67 @@
+version: '3.7'
+services:
+    zookeeper:
+        image: quay.io/strimzi/kafka:latest-kafka-2.7.0
+        container_name: zookeeper
+        command: [
+        "sh", "-c",
+        "bin/zookeeper-server-start.sh config/zookeeper.properties"
+        ]
+        ports:
+        - "2181:2181"
+        environment:
+            LOG_DIR: /tmp/logs
+
+    kafka:
+        image: quay.io/strimzi/kafka:latest-kafka-2.7.0
+        container_name: kafka
+        command: [
+        "sh", "-c",
+        "bin/kafka-server-start.sh config/server.properties --override listeners=$${KAFKA_LISTENERS} \
+        --override advertised.listeners=$${KAFKA_ADVERTISED_LISTENERS} \
+        --override listener.security.protocol.map=$${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP} \
+        --override inter.broker.listener.name=$${KAFKA_INTER_BROKER_LISTENER_NAME} \
+        --override zookeeper.connect=$${KAFKA_ZOOKEEPER_CONNECT}"
+        ]
+        depends_on:
+        - zookeeper
+        ports:
+        - "9092:9092"
+        - "29092:9092"
+        environment:
+            LOG_DIR: "/tmp/logs"
+            KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:29092,EXTERNAL://localhost:9092
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+            KAFKA_LISTENERS: EXTERNAL://0.0.0.0:9092,INTERNAL://kafka:29092
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+            KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+            KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    core:
+        depends_on:
+            - kafka
+        image: '${egeria_repo}/egeria:${egeria_version}'
+        ports:
+            - '19443:9443'
+        env_file:
+            - '.env'
+    ui:
+        depends_on:
+            - core
+        image: '${egeria_repo}/egeria:${egeria_version}'
+        environment:
+            - OMAS_SERVER_URL=https://core:9443
+            - OMAS_SERVER_NAME=coreDC1
+            - OPEN_LINEAGE_SERVER_URL=https://core:9443
+            - OPEN_LINEAGE_SERVER_NAME=coreDC1
+            - OPEN_LINEAGE_GRAPH_SOURCE=MAIN
+            - JAVA_APP_JAR=user-interface/ui-chassis-spring-${egeria_version}.jar
+        ports:
+            - '18443:8443'
+        env_file:
+            - '.env'
+    uistatic:
+        image: '${egeria_repo}/egeria-ui:${egeria_ui_version}'
+        ports:
+            - '10080:80'
+        env_file:
+            - '.env'

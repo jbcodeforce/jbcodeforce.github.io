@@ -4,18 +4,50 @@
 
 It uses the open metadata and governance standards and ensures compliance to it.
 
+The OMAG Server Platform provides a runtime process and platform for Open Metadata and Governance (OMAG) Services.
+The OMAG services are configured and activated in OMAG Servers using the Administration Services. 
+The configuration operations of the admin services create configuration documents, one for each OMAG Server. 
+Inside a configuration document is the definition of which OMAG services to activate in the server. 
+These include the repository services (any type of server), the access services (for metadata access points and metadata servers), 
+governance services (for governance servers) and view services (for view servers). 
+
+ ![](./images/egeria-distributed-operation.png#pagewidth)
+
+
+Once a configuration document is defined, the OMAG Server can be started and stopped multiple times by the admin services server instance operations.
+
+The OMAG Server Platform can host multiple OMAG servers at any one time. Each OMAG server is isolated within the server platform and so the OMAG server platform can be used to support multi-tenant operation for a cloud service, or host a variety of different OMAG Servers needed at a particular location.
+
+
+
 ## Getting started
+
+
+### OMAG only with docker
+
+Start a single OMAG server platform. 
+```sh
+docker run --publish 19443:9443 odpi/egeria
+```
+
+Access to [https://localhost:19443/swagger-ui/index.htm](https://localhost:19443/swagger-ui/index.html)
+
+### Example with docker compose
 
 Once the main repo cloned, under `open-metadata-resources/open-metadata-deployment/compose/tutorials` starts
 
 ```sh
-$ docker-compose -f ./egeria-tutorial.yaml up -d
+docker-compose -f ./egeria-tutorial.yaml up -d
 ```
 
 Go to [http://localhost:18888](http://localhost:18888) to open the Jupyter interface and load a tutorial notebook.
 
+or the simplest topology from this project under `studies/egeria`
 
-To update the product docker images: `$ docker-compose -f ./egeria-tutorial.yaml pull`
+```sh
+docker-compose up -d
+
+```
 
 
 ## Features
@@ -33,18 +65,29 @@ There are three types of cohort member to consider:
 * A **Metadata Access Point** that has no metadata repository of its own and uses federated queries to retrieve and store metadata in the other repositories connected to the cohort.
 * A **Repository Proxy** that connects in a thrid party metadata server.
 
+ ![](./images/types-of-omag-servers.png)
+
 Once a server has joined a cohort it can exchange metadata with the other members of that cohort.At the heart of each cohort is an event Kafka topic.
 
 Governance server is a service to perform:
 
 * discover and analyze content from metadata resources. The result of a discovery service's analysis is stored in a metadata server as a discovery analysis report that is chained off of the asset's definition.
-* governance action services monitor the asset metadata and verify that it is set up correctly, determin how to fix anomolies, errors and ommisions, make the necessary changes and provision real-world artifacts and resources beased on the resulting metadata.
+* governance action services monitor the asset metadata and verify that it is set up correctly, they also determine how to fix anomalies, errors and ommisions, make the necessary changes and provision real-world artifacts and resources beased on the resulting metadata.
 
 Users can add assets for governance and can contribute and comments. They can connect to any sever within the cohort to see the metadata.
 Egeria has multiple levels of security so that access to individual metadata instances can be controlled
 
 ### Install on kubernetes
 
+The minimum configuration is:
+
+* Kafka 
+* A metadata server with a persistent graph store
+* a server for the UI
+
+There is an [operator under construction](https://github.com/odpi/egeria-k8s-operator). 
+
+Otherwise use the Helm install and use the charts from open-metadata-resources/open-metadata-deployment/charts/
 
 ## Define Assets
 

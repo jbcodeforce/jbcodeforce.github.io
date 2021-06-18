@@ -48,8 +48,10 @@ tasks, gateways, timers, messages, and tracking groups. Aggregation of process t
 
 ## Getting started
 
+See [the product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=installing-business-automation-insights-without-kubernetes) 
+and [for MacOS](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=kubernetes-installing-macos).
 Need to get the images from Passport Advantage searching 'business automation insight', to get a zip named 
-`CP4Auto_20.0.3-bai4s.tgz`. Unzip and start the `bai-start --acceptLicense ` with `--init` for thee first time to get certificates and users set up.
+`CP4Auto_20.0.3-bai4s.tgz`. Unzip and start the `bai-start --acceptLicense ` with `--init` for the first time to get certificates and users set up.
 The error message about port numbers not set for any of the services started by docker compose is due to not executing 
 the `.env`. The questions asked help to populate this .env file.
 
