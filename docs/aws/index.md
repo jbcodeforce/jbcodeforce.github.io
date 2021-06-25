@@ -1,23 +1,48 @@
 # Amazon Web Service studies
 
+Created in 2002, and launch it as AWS in 2004 with SQS as first offering. 
+
+## Use cases
+
+* Enables to build scalablee apps
+* Enterprise IT
+* Big data analytics...
+
 ## Organization
 
-24 regions -> 2 to 6 availability zones per region. Ex: us-west-1-2a.  See [Global infrastructure map](https://aws.amazon.com/about-aws/global-infrastructure/).
+It is a [global infrastructure](https://infrastructure.aws)
+
+24 regions -> 2 to 6 availability zones per region. Ex: us-west-1-2a. 
 
 AZ is one or more DC with redundant power, networking and connectivity. Isolated from disasters. Interconnected with low latency. 
 
 * EC2 is a regional service.
 * IAM is a global service
 
+**AWS Local Zone** location is an extension of an AWS Region where you can run your latency sensitive application n geographic proximity to end-users.
+
+**AWS Wavelength** enables developers to build applications that deliver single-digit millisecond latencies to mobile devices and end-users. AWS infrastructure deployments that embed AWS compute and storage services within the telecommunications providers’ datacenters at the edge of the 5G networks, and seamlessly access the breadth of AWS services in the region
+
+Choose an AWS region, depending of the requirements 
+
+* compliance with dats govenance and legal requirements
+* close to users to reduce latency
+* [availability of service within a region](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) 
+* pricing
+
 ## IAM Identity and Access Management
 
 * Definer user (physical person), group and roles, and permissions
 * One role per application
 * Users are defined as global service encompasses all regions
-* Policies are written in JSON, to define permissions for user and group and role
+* Policies are written in JSON, to define permissions for user to access AWS services and group and role
 * Least privilege permission: Give user the minimal amount of permissions they need to do their job
 * Assign users to groups and assign policies to groups and not to individual user.
+* Groups can only contain users, not other groups
+* Users can belong to multiple groups
 * For identity federation SAML standard is used
+
+Policy is a json doc which sets the
 
 ## EC2 components
 
@@ -28,7 +53,7 @@ AZ is one or more DC with redundant power, networking and connectivity. Isolated
 
 Amazon Machine Image: AMI, image for OS and preinstalled softwares. Amazon Linux 2 for linux base image.
 
- ![0](./images/aws/EC2-instance.png)
+ ![0](./images/EC2-instance.png)
 
 When creating an instance, we can select the VPC and the AZ subnet, and the storage (EBS) for root folder to get the OS. The security group helps to isolate the instance, for example, authorizing ssh on port 22 or HTTP port 80.
 Get the public ssh key, and when the instance is started, use: `ssh -i EC2key.pem  ec2-user@ec2-52-8-75-8.us-west-1.compute.amazonaws.com `
@@ -89,7 +114,7 @@ Define inbound and outbound security rules.  They regulate access to ports, auth
 * Instances with the same security group can access each other
 * Security group can reference other security groups, IP address, CIDR but no DNS server
 
- ![2](./images/aws/security-group.png)
+ ![2](./images/security-group.png)
 
 ## Networking
 
@@ -158,7 +183,7 @@ Access from network and policies menu, define the group with expected strategy, 
 
 Route traffic into the different EC2 instances. It also exposes a single point of access (DNS) to the deployed application. In case of failure, it can route to a new instance, transparently and cross multiple AZ. It uses health check (/health on the app called the `ping path`) to asses instance availability. It provides SSL termination. It supports to separate private (internal) to public (external) traffic.
 
- ![1](./images/aws/EC2-AZ.png)
+ ![1](./images/EC2-AZ.png)
 
 ELB: EC2 load balancer is the managed service by Amazon. Three types supported:
 
@@ -181,7 +206,7 @@ Target group defines protocol to use, health check checking and what application
 
 Example of listener rule for an ALB:
 
- ![3](./images/aws/ALB-listener-rules.png)
+ ![3](./images/ALB-listener-rules.png)
 
 ### Load balancer stickiness
 
@@ -224,7 +249,7 @@ Automatically Register new instances to a load balancer.
 * Load Balancer Information, with target groups to be used as a grouping of the newly created instances
 * Scaling Policies help to define rules to manage instance life cycle, based for example on CPU usage or network bandwidth used. 
 
- ![4](images/aws/ASG-1.png)
+ ![4](images/ASG-1.png)
 
 * when creating scaling policies, **CloudWatch** alarms are created. Ex: "Create an alarm if: CPUUtilization < 36 for 15 data points within 15 minutes".
 * ASG tries the balance the number of instances across AZ by default, and then delete based on the age of the launch configuration
@@ -267,7 +292,7 @@ Encryption has a minimum impact on latency. It encrypts data at rest and during 
 
 Instance store is a volume attached to the instance, used for root folder. It is a ephemeral storage but has millions read per s and 700k write IOPS. It provides the best disk performance and can be used to have high performance cache for our application.
 
-![5](./images/aws/ephemeral.png)
+![5](./images/ephemeral.png)
 
 If we need to run a high-performance database that requires an IOPS of 210,000 for its underlying filesystem, we need instance store and DB replication in place.
 
@@ -319,7 +344,7 @@ Can grow up to 64 TB. Sub 10ms replica lag, up to 15 replicas.
 
 Failover in Aurora is instantaneous. It’s HA (High Availability) native. Use 1 master - 5 readers to create 6 copies over 3 AZs. 3 copies of 6 need for reads. Peer to peer replication. Use 100s volumes. Autoscaling on the read operation. 
 
- ![6](./images/aws/aws-aurora.png)
+ ![6](./images/aws-aurora.png)
 
 It is CQRS at DB level, and read can be global. Use writer end point and reader endpoint.
 
@@ -362,7 +387,7 @@ DynamoDB Streams to integrate with AWS Lambda.
 It is a managed Domain Name System. DNS is a collection of rules and records which helps clients understand
 how to reach a server through URLs. Here is a quick figure to summary the process
 
- ![7](./images/aws/dns.png)
+ ![7](./images/dns.png)
 
 DNS records Time to Live (TTL), is set to get the web browser to keep the DNS resolution in cache. High TTL is around 24 hours, low TTL at 60s will make more DNS calls. TTL should be set to strike a balance between how long the value should be cached vs how much pressure should go on the DNS. Need to define the TTL for the app depending on the expected deployment model.
 
@@ -402,7 +427,7 @@ The step to grow a stateless app: add vertical scaling by changing the EC2 profi
 
 The reference architecture includes DNS record set with alias record (to point to ALB. Using alias as ALB address may change over time) with TTL of 1 hour. Use load balancers in 3 AZs (to survive disaster) to hide the horizontal scaling of EC2 instances (managed with auto scaling group) where the app runs. Health checks are added to keep system auto adaptable and hide system down, and restricted security group rules to control EC2 instance accesses. ALB and EC instances are in multi different AZs. The EC instances can be set up with reserved capacity to control cost.
 
- ![8](./images/aws/stateless-app.png)
+ ![8](./images/stateless-app.png)
 
 ### Stateful app
 
@@ -410,7 +435,7 @@ In this case we will add the pattern of shopping cart. If we apply the same arch
 
 Another solution is to keep session data into an elastic cache, like Redis, and use the sessionId as key and persisted in a user cookie. So EC2 managing the interaction can get the cart data from the cache using the sessionID. It can be enhanced with a RDS to keep user data. Which can also support the CQRS pattern with read replicas. Cache can be update with data from RDS so if the user is requesting data in session, it hits the cache.
 
- ![9](./images/aws/stateful-app.png)
+ ![9](./images/stateful-app.png)
 
 Cache and database are set on multi AZ, as well as EC2 instance and load balancer, all to support disaster. Security groups need to be defined to get all traffic to the ELB and limited traffic between ELB and EC2 and between EC2 and cache and EC2 and DB.
 
@@ -466,7 +491,7 @@ Once versioning enabled, a bucket can be replicated in the same region or cross 
 
 When uploading a document into an existing bucket we can specify the storage class for keep data over time. Different levels are offered with different cost and SLA.
 
- ![A](./images/aws/storage-class.png)
+ ![A](./images/storage-class.png)
 
 To prevent accidental file deletes, we can setup MFA Delete to use MFA tokens before deleting objects.
 
@@ -476,7 +501,7 @@ We can transition objects between storage classes. For infrequently accessed obj
 
 At the bucket level, a user can define lifecycle rules for when to transition an object to another storage class.
 
- ![B](./images/aws/storage-rule.png)
+ ![B](./images/storage-rule.png)
 
 To improve performance, a big file can be split and then uploaded with local connection to the closed edge access and then use AWS private network to copy between buckets in different region.
 
@@ -558,13 +583,13 @@ Consumer receive, process and then delete. Parallel is possible on the different
 
 Message has metadata out of the box. After a message is polled by a consumer, it becomes invisible to other consumers. By default, the “message visibility timeout” is 30 seconds, which means the message has 30 seconds to be processed (Amazon SQS prevents other consumers from receiving and processing the message.). After the message visibility timeout is over, the message is “visible” in SQS, so it will be processed twice. But a consumer could call the ChangeMessageVisibility API to get more time. When the visibility timeout is high (hours), and the consumer crashes then the re-processing of all the message will take time. If it is set too low (seconds), we may get duplicates
 
- ![SQS](./images/aws/sqs-msg.png)
+ ![SQS](./images/sqs-msg.png)
 
 Encryption in fight via HTTPS, at rest encryption with KMS keys. Comes with monitoring.
 
 If a consumer fails to process a message within the Visibility Timeout, the message goes back to the queue. But if we can set a threshold of how many times a message can go back to the queue. After the MaximumReceives threshold is exceeded, the message goes into a dead letter queue (DLQ) (which has a limit of 14 days to process).
 
- ![DLQ](./images/aws/sqs-dlq.png)
+ ![DLQ](./images/sqs-dlq.png)
 
 Delay queues let you postpone the delivery of new messages to a queue for a number of seconds. If you create a delay queue, any messages that you send to the queue remain invisible to consumers for the duration of the delay period. The default (minimum) delay for a queue is 0 seconds. The maximum is 15 minutes
 
@@ -581,7 +606,7 @@ SNS can be combined with SQS: Producers push once in SNS, receive in all SQS que
 
 It is like a managed alternative to Kafka. It uses the same principle and feature set.
 
- ![kin](./images/aws/kinesis.png)
+ ![kin](./images/kinesis.png)
 
 Data can be kept up to 7 days. Ability to replay data, multiple apps consume the same stream. Only one consumer per shard
 
@@ -631,7 +656,7 @@ Lambda@Edge is used to deploy Lambda functions alongside your CloudFront CDN, it
 
 The mobile application access application via REST HTTPS through API gateway. This use serverless and users should be able to directly interact with s3 buckets.  They first get JWT token to authenticate and the API gateway validates such token. The Gateway delegates to a Lambda function which goes to Dynamo DB.
 
- ![ToDo web app architecture](./images/aws/aws-app-L.png)
+ ![ToDo web app architecture](./images/aws-app-L.png)
 
 Each of the component supports auto scaling. To improve read throughput cache is used with DAX. Also some of the REST request could be cached in the API gateway. As the application needs to access S3 directly, Cognito generates temporary credentials with STS so the application can authenticate to S3. User's credentials are not saved on the client app. Restricted policy is set to control access to S3 too.
 
@@ -641,7 +666,7 @@ To improve throughput we can add DAX as a caching layer in front of DynamoDB: th
 
 The public web site should scale globally, focus to scale on read, pure static files with some write. To secure access to S3 content, we use Origin Access Identity and Bucket policy to authorize read only from OAI.
 
-![](./images/aws/aws-app-blog.png)
+![](./images/aws-app-blog.png)
 
 To get a welcome message sent when a user register to the app, we can add dynamoDB streams to get changes to the dynamoDB and then calls a lambda that will send an email with the Simple Email Service.
 
@@ -651,13 +676,13 @@ DynamoDB Global Table can be used to expose data in different regions by using D
 
 Services use REST api to communicate. The service can be dockerized and run with ECS. Integration via REST is done via API gateway and load balancer.
 
-![](./images/aws/aws-app-ms.png)
+![](./images/aws-app-ms.png)
 
 #### Paid content
 
 User has to pay to get content (video). We have a DB for users. This is a Serverless solution. Videos are saved in S3. To serve the video, we use Signed URL. So a lambda will build those URLs.
 
-![](./images/aws/aws-app-video.png)
+![](./images/aws-app-video.png)
 
 CloudFront is used to access videos globally. OAI for security so users cannot bypass it. We can't use S3 signed URL as they are not efficient for global access.
 
@@ -669,7 +694,7 @@ The EC2 will be deployed in multi-zones and all is exposed with CloudFront to ca
 
 The solution applies the traditional collect, inject, transform and query pattern.
 
-![](./images/aws/aws-big-data.png)
+![](./images/aws-big-data.png)
 
 IoT Core allows to collect data from IoT devices. Kinesis is used to get data as streams, and then FireHose upload every minute to S3. A Lambda can already do transformation from FireHose. As new files are added to S3 bucket, it trigger a Lambda to call queries defined in Athena. Athena pull the data and build a report published to another S3 bucket that will be used by QuickSight to visualize the data.
 
@@ -685,17 +710,3 @@ The architecture is based on a leader node to support query planning and aggrega
 
 Redshift spectrum performs queries directly on top of S3.
 
-## ECS - Elastic Container Service
-
-Amazon ECS is a fully managed container orchestration service, Amazon EKS is a fully managed Kubernetes service, 
-both services support Fargate to provide serverless compute for containers. 
-Fargate removes the need to provision and manage servers, lets us specify and pay for resources per application, 
-and improves security through application isolation by design.
-
-Apply docker compose to Amazon ECS and Fargate
-
-[](https://press.aboutamazon.com/news-releases/news-release-details/aws-announces-general-availability-amazon-ecs-anywhere)
-
-## Other interesting stuff
-
-[IBM Cloud pak for integration on AWS](https://aws.amazon.com/quickstart/architecture/ibm-cloud-pak-for-integration/)

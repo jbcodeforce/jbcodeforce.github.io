@@ -10,10 +10,14 @@ nav:
       - Event Driven Architecture: architecture/eda.md
       - Architecture decision: architecture/architectural-decisions.md
       - Disaster recovery: architecture/DR.md
-      - AWS: architecture/aws.md
       - GCP: architecture/gcp.md
       - IBM Cloud: architecture/ibmcloud.md
+      - Istio: istio/index.md
       - Openshift Studies: https://jbcodeforce.github.io/openshift-studies
+    - AWS: 
+      - Introduction: aws/index.md
+      - Playground: aws/gettingstarted.md
+      - Kubernetes services: aws/k8s.md
     - Data:
       - Introduction: data/index.md
       - Data topology: data/data-topology.md 

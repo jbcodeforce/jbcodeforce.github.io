@@ -1,5 +1,9 @@
 # GitOps
 
+[Gitops](https://www.gitops.tech/)  is a way of implementing Continuous Deployment for cloud native applications.
+
+The core idea of GitOps is having a Git repository that always contains declarative descriptions of the infrastructure currently desired in the production environment and an automated process to make the production environment match the described state in the repository.
+
 ## GitOps
 
 Developers and operations want to:
@@ -54,6 +58,19 @@ oc get svc,deploy,po --all-namespaces
 ### Openshift try
 
 [Red Hat OpenShift trial](https://www.openshift.com/try). With this environment we cannot create new project, only use two predefined projects.
+
+### Having a schema registry
+
+We can use docker hub, quay.io or define a private registry:
+
+* [ibm cloud container registry](https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started#getting-started)  provides a multi-tenant private image registry that you can use to store and share your container images with users in your IBM Cloud account
+* [Amazon Elastic Container Registry (ECR)](https://aws.amazon.com/ecr/) we can share container software privately within your organization or publicly worldwide for anyone to discover and download. geo-replicated for high availability and faster downloads
+
+To move one image from one registry to another use docker tag to change the image name:
+
+```sh
+docker tag <source_image>:<tag> <region>.icr.io/<my_namespace>/<new_image_repo>:<new_tag>
+```
 
 ## OpenShift Pipelines
 
@@ -414,26 +431,50 @@ oc expose svc nexus
 * [IBM Tekton tasks](https://github.com/IBM/ibm-garage-tekton-tasks)
 
 ## ArgoCD tutorial
-To implement our GitOps workflow, we used Argo CD, the GitOps continuous delivery tool for Kubernetes. Argo CD is found in the OpenShift GitOps project. If you go to the Developer's Perspective, you can see a topology:
+
+To implement our GitOps workflow, we used Argo CD, the GitOps continuous delivery tool for Kubernetes. 
+Argo CD models a collection of applications as a project and uses a Git repository to store the application's desired state (a gitops repo). 
+Argo CD compares the actual state of the application in the cluster with the desired state defined in Git and
+determines if they are out of sync. When it detects the environment is out of sync, Argo CD can be configured
+to either send out a notification to kick off a separate reconciliation process or Argo CD can automatically synchronize the environments to ensure they match.
+
+ArgoCD is deployed with OpenShift GitOps operator. 
+
+If you go to the Developer's Perspective, you can see a topology:
 
 ![ArgoCD](./images/argocd.jpg)
 
 
 ><b>OpenShift GitOps</b> is an OpenShift add-on which provides Argo CD and other tooling to enable teams to implement GitOps workflows for cluster configuration and application delivery. 
-OpenShift GitOps is available as an operator in the OperatorHub and can be installed with a simple one-click experience.
+
 
 Clicking the Argo Server node that contains the URL takes you to the Argo login page.
 
 See [this getting started tutorial](https://argoproj.github.io/argo-cd/getting_started/) and the [core concept](https://argoproj.github.io/argo-cd/core_concepts/)
 
-* Install argocd: this will includes CRD, service account, RBAC policies, config maps, secret and deploy: Redis and argocd server.
+* Install argocd: this will includes CRD, service account, RBAC policies, config maps, secret and deploy: Redis and argocd server. It makes sense to have
+one ArgoCD instance deploy per cluster. It can manage projects and within project, applications.
+
 ```sh
 oc new-project argocd
 oc apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
+
 * It can be also installed via the Red Hat OpenShift GitOps operator. After installing the OpenShift GitOps 
 operator, an instance of Argo CD is installed in the `openshift-gitops` namespace which has sufficent privileges 
 for managing cluster configurations.
+
+* Finally, you can declare the operator yaml and service account and role binding as part of your gitops. See [sample in this folder](https://github.com/ibm-cloud-architecture/eda-lab-inventory/tree/master/environments/openshift-gitops).
+
+Once installed the following pods run:
+
+ ```sh
+ argocd-application-controller-0                                   1/1     Running     0          20h
+ argocd-dex-server-9dc558f5-4dw4q                                  1/1     Running     2          20h
+ argocd-redis-759b6bc7f4-g2jbj                                     1/1     Running     0          20h
+ argocd-repo-server-5fbf484547-6x4rj                               1/1     Running     0          20h
+ argocd-server-6d4678f7f6-vqs64  
+ ```
 
 * Install argocd CLI
 
@@ -451,22 +492,124 @@ The initial password for the admin account is auto-generated and stored as clear
 oc get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo ""
 ```
 
-Get the IP address of the argocd server: `oc get svc` then look at the LoadBalancer service.
+Get the IP address of the argocd server: `oc get svc` then look at the LoadBalancer service (argocd-server) external-IP.
 
-`argocd login SERVERIP`  then use admin user and the password retrieved previously.
+`argocd login SERVERIP`  then use admin user and password. 
+You can also access the ArgoCD UI using the load balancer IP address, admin user and password. 
 
-* Define application
+* Define application: this is the deployable unit, which is map to a k8s deployment that references the image built during the CI pipeline.
+The approach is to use one git repository to represent the solution to deploy. Each component, microservice or app is defined in
+its own folder and can use Helm or Kustomize to define the deployment, service, configmap... 
 
-Example of app definition in ArgoCD
+You use one application per target environment.
 
-```sh
-argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc  --dest-namespace mysandbox
+Here is an example of argoCD app:
+
+```yaml
+```
+
+On the application tile, we can use the 'SYNC' to deploy the application or use `argocd app get <appname>`.
+
+
+### Connect pipeline to deployment
+
+Once the manifests for a given app are defined in the gitops repository, we need to have the pipeline being able to update the deployment
+descriptor with the image reference and tag defined as part of the build pipeline.
+
+The pipeline needs to have the git credentials to be able to write to the gitops repository. Credentials are saved in a secret and a configmap
+define github host, user.
+
+### More reading
+
+* [ArgoCD documentation](https://argo-cd.readthedocs.io/en/stable/)
+
+
+## Kustomize and gitops
+
+There are at least two repositories: the **application** repository and the **environment configuration** repository.
+
+There are two ways to implement the deployment strategy for GitOps: 
+
+* **Push-based:** use CI/CD tools like jenkins, travis... to define a pipeline, triggered when application code source is updated, to build the container image and deploy the modified yaml files to the environment repo. Changes to the environment configuration repository trigger the deployment pipeline. It has to be used for running an automated provisioning of cloud infrastructure. See also [this tutorial](https://cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build).
+* **Pull-based:** An operator takes over the role of the pipeline by continuously comparing the desired state in the environment repository with the actual state in the deployed infrastructure.
+
+A CICD based on git action will build the image and edit Kustomize patch to bump the expected container tag using the new docker image tag, then commit this changes to the gitops repo.
+
+[Kustomize](https://kustomize.io/) is used to simplify the configuration of application and environment. Kustomize traverses a Kubernetes manifest to add, remove or update configuration options without forking. It is available both as a standalone binary and as a native feature of Kubectl. A [lot of examples here.](https://github.com/kubernetes-sigs/kustomize/tree/master/examples).
+
+The simple way to organize the configuration is to use one `kustomize` folder, then one folder per component, then one overlay folder in which environment folder include `kustomization.yaml` file with patches.
+
+```
+└── postgres
+    ├── base
+    │   ├── configmap.yaml
+    │   ├── kustomization.yaml
+    │   ├── pvc.yaml
+    │   ├── secret.yaml
+    │   ├── service-account.yaml
+    │   ├── statefulset.yaml
+    │   ├── svc-headless.yaml
+    │   └── svc.yaml
+    ├── kustomization.yaml
+    └── overlays
+        └── dev
+            ├── kustomization.yaml
+            └── secret.yaml
+```
+
+Here is an example of `kustomization.yaml`:
+
+```
+bases:
+  - ../../base
+patchesStrategicMerge:
+  - ./secret.yaml
+```
+
+The `patchesStrategicMerge` lists the resource configuration YAML files that you want to merge to the base kustomization. You must also add these files to the same repo as the kustomization file, such as `overlay/dev`. These resource configuration files can contain small changes that are merged to the base configuration files of the same name as a patch.
+
+
+In GitOps, the pipeline does not finish with something like `oc apply..`. but it’s an external tool (Argo CD or Flux) that detects the drift in the Git repository and will run these commands.
+
+Here is a command to install ArgoCD on k8s, see [details here](https://argoproj.github.io/argo-cd/getting_started/).
+
+```
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+For OpenShift:
+
+* create an `argocd` project
+* use operator hub, and install the operator in this project. Nothing to change in the default configuration
+* deploy one instance of ArgoCD with the following customization:
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  server:
+    ingress:
+      enabled: true
+    route: 
+      enabled: true
+  dex:
+    openShiftOAuth: true
+    image: quay.io/ablock/dex
+    version: openshift-connector
+  rbac:
+    policy: |
+      g, system:cluster-admins, role:admin
 ```
 
 
-Access ArgoCD UI with the same IP address, admin user and password. 
+An example of gitops with kustomize is in this [vaccine-gitops repo](https://github.com/ibm-cloud-architecture/vaccine-gitops)
 
-On the application tile, we can use the 'SYNC' to deploy the application or use `argocd app get guestbook`.
+### Future readings
+
+* [GitOps - Operations by Pull Request](https://www.weave.works/blog/gitops-operations-by-pull-request)
 
 ## Kam
 
