@@ -102,6 +102,11 @@ given()
     .body(jsonb.toJson(order)).post(url).then();
 ```
 
+### Data server with socket
+
+The code read data from a csv file, listen socket connection, and once connected sends record line by line. 
+See [the class as example](https://github.com/jbcodeforce/flink-studies/) in flink project.
+
 ### Kafka stream and json-b serdes
 
 How to use a pojo as value in the stream? use the io.quarkus.kafka.client.serialization.JsonbSerde class.

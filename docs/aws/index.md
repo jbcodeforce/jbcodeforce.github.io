@@ -1,62 +1,64 @@
 # Amazon Web Service studies
 
-Created in 2002, and launch it as AWS in 2004 with SQS as first offering. 
+Created in 2002, and launched as AWS in 2004 with SQS as first service offering. 
 
 ## Use cases
 
-* Enables to build scalablee apps
-* Enterprise IT
-* Big data analytics...
+* Enable to build scalable apps, adaptable to business demand
+* Extend Enterprise IT
+* Support flexible big data analytics
 
 ## Organization
 
-It is a [global infrastructure](https://infrastructure.aws)
+AWS is a [global infrastructure](https://infrastructure.aws) with 24 regions and 2 to 6 availability zones per region. Ex: us-west-1-2a. 
 
-24 regions -> 2 to 6 availability zones per region. Ex: us-west-1-2a. 
-
-AZ is one or more DC with redundant power, networking and connectivity. Isolated from disasters. Interconnected with low latency. 
+AZ is one or more DC with redundant power, networking and connectivity. Isolated from disasters. Interconnected with low latency network. 
+Some services are local or global:
 
 * EC2 is a regional service.
-* IAM is a global service
+* IAM is a global service.
 
-**AWS Local Zone** location is an extension of an AWS Region where you can run your latency sensitive application n geographic proximity to end-users.
+**AWS Local Zone** location is an extension of an AWS Region where you can run your latency sensitive application in geography close to end-users.
 
-**AWS Wavelength** enables developers to build applications that deliver single-digit millisecond latencies to mobile devices and end-users. AWS infrastructure deployments that embed AWS compute and storage services within the telecommunications providers’ datacenters at the edge of the 5G networks, and seamlessly access the breadth of AWS services in the region
+**AWS Wavelength** enables developers to build applications that deliver single-digit millisecond latencies to mobile devices and end-users. 
+AWS infrastructure deployments that embed AWS compute and storage services within the telecommunications providers’ datacenters at the edge of the 5G networks,
+and seamlessly access the breadth of AWS services in the region.
 
-Choose an AWS region, depending of the requirements 
+Choose an AWS region, depending of your requirements like:
 
-* compliance with dats govenance and legal requirements
+* compliance with data govenance and legal requirements
 * close to users to reduce latency
 * [availability of service within a region](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) 
 * pricing
 
 ## IAM Identity and Access Management
 
-* Definer user (physical person), group and roles, and permissions
+* Define user (physical person), group and roles, and permissions
 * One role per application
 * Users are defined as global service encompasses all regions
-* Policies are written in JSON, to define permissions for user to access AWS services and group and role
-* Least privilege permission: Give user the minimal amount of permissions they need to do their job
+* Policies are written in JSON, to define permissions for users to access AWS services, groups and roles
+* Least privilege permission: Give users the minimal amount of permissions they need to do their job
 * Assign users to groups and assign policies to groups and not to individual user.
 * Groups can only contain users, not other groups
 * Users can belong to multiple groups
-* For identity federation SAML standard is used
+* For identity federation, SAML standard is used
 
-Policy is a json doc which sets the
+Policy is a json doc which consists of a effect, a principals (to apply the policy to), an action (what is allowed or denied) and resources sections.
 
 ## EC2 components
 
-* Renting machine EC2
-* Storing data on virtual drives EBS
-* Distribute load across machines ELB
+* EC2 is a renting machine
+* Storing data on virtual drives: [EBS](#EBS)
+* Distribute load across machines: ELB
 * Auto scale the service ASG
 
 Amazon Machine Image: AMI, image for OS and preinstalled softwares. Amazon Linux 2 for linux base image.
 
  ![0](./images/EC2-instance.png)
 
-When creating an instance, we can select the VPC and the AZ subnet, and the storage (EBS) for root folder to get the OS. The security group helps to isolate the instance, for example, authorizing ssh on port 22 or HTTP port 80.
-Get the public ssh key, and when the instance is started, use: `ssh -i EC2key.pem  ec2-user@ec2-52-8-75-8.us-west-1.compute.amazonaws.com `
+When creating an instance, we can select the VPC, the AZ subnet, and the storage (EBS) for root folder to get the OS. The security group helps to isolate 
+the instance, for example, authorizing ssh on port 22 or HTTP port 80.
+Get the public ssh key, and when the instance is started, use: `ssh -i EC2key.pem  ec2-user@ec2-52-8-75-8.us-west-1.compute.amazonaws.com ` to connect to the EC2
 
 Can also use **EC2 Instance Connect** to open a terminal in the web browser. Need to get SSH port open.
 
@@ -100,6 +102,35 @@ AMI are built for a specific AWS region. But they can be copied and shared [See 
 
 The in memory state is preserved, persisted to a file in the root EBS volume. It helps to make the instance startup time quicker. The root EBS volume is encrypted.
 Constrained by 150GB RAM. No more than 60 days.
+
+## VPC
+
+A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. 
+It is logically isolated from other virtual networks in the AWS Cloud. You can launch your AWS resources, such as Amazon EC2 instances,
+ into your VPC. You can specify an IP address range for the VPC, add subnets, associate security groups, and configure route tables.
+
+VPC HelpS to:
+
+* assign static IP addresses, potentially multiple addresses for the same instance
+* Change security group membership for your instances while they're running
+* Control the outbound traffic from your instances (egress filtering) in addition to controlling the inbound traffic to them (ingress filtering)
+* Default VPC includes an internet gateway 
+
+![](./images/vpc.png)
+
+* non-default subnet has a private IPv4 address, but no public IPv4 
+
+You can enable internet access for an instance launched into a non-default subnet by attaching an internet gateway to its VPC. 
+Alternatively, to allow an instance in your VPC to initiate outbound connections to the internet but prevent unsolicited inbound connections from the internet, 
+you can use a network address translation (NAT) device for IPv4 traffic. NAT maps multiple private IPv4 addresses to a single public IPv4 address. 
+A NAT device has an Elastic IP address and is connected to the internet through an internet gateway.
+You can optionally connect your VPC to your own corporate data center using an IPsec AWS managed VPN connection, 
+making the AWS Cloud an extension of your data center. A VPN connection consists of a virtual private gateway attached 
+to your VPC and a customer gateway located in your data center. 
+A virtual private gateway is the VPN concentrator on the Amazon side of the VPN connection. 
+A customer gateway is a physical device or software appliance on your side of the VPN connection.
+
+![](./images/vpc-vpn.png)
 
 ## Security group
 
