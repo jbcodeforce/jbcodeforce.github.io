@@ -62,6 +62,7 @@ nav:
       - Database play:  https://jbcodeforce.github.io/db-play/  
       - Egeria: techno/egeria.md
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/
+      - Elastic Search: techno/elasticsrch.md
       - Kafka Studies: https://jbcodeforce.github.io/kafka-studies
       - KAR: techno/kar.md
       - Redis: techno/redis.md 
