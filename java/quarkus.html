@@ -1,0 +1,2318 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>Quarkus - Jerome Boyer's Personal Site</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="magenta-dark" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#quarkus-summary-and-trick" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Jerome Boyer&#39;s Personal Site" class="md-header__button md-logo" aria-label="Jerome Boyer's Personal Site" data-md-component="logo">
+      
+  <img src="../images/gear-sp-01.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jerome Boyer's Personal Site
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Quarkus
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/jbcodeforce/jbcodeforce.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Jerome Boyer&#39;s Personal Site" class="md-nav__button md-logo" aria-label="Jerome Boyer's Personal Site" data-md-component="logo">
+      
+  <img src="../images/gear-sp-01.jpg" alt="logo">
+
+    </a>
+    Jerome Boyer's Personal Site
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jbcodeforce/jbcodeforce.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Blogs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skill.html" class="md-nav__link">
+        Skill
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assets.html" class="md-nav__link">
+        List of contributions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5">
+        Knowledge base
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Knowledge base" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Knowledge base
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      <label class="md-nav__link" for="__nav_5_1">
+        Architecture
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecture" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/eda.html" class="md-nav__link">
+        Event Driven Architecture
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/architectural-decisions.html" class="md-nav__link">
+        Architecture decision
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/DR.html" class="md-nav__link">
+        Disaster recovery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/gcp.html" class="md-nav__link">
+        GCP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/ibmcloud.html" class="md-nav__link">
+        IBM Cloud
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../istio/index.html" class="md-nav__link">
+        Istio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/openshift-studies" class="md-nav__link">
+        Openshift Studies
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/gettingstarted.html" class="md-nav__link">
+        Playground
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/k8s.html" class="md-nav__link">
+        Kubernetes services
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_3">
+        Data
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-topology.html" class="md-nav__link">
+        Data topology
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-integration.html" class="md-nav__link">
+        Data integration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-replication.html" class="md-nav__link">
+        Data replication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-partitioning.html" class="md-nav__link">
+        Data partitioning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ibm.com/cloud/architecture/architectures/spectrum-discover" class="md-nav__link">
+        Data catalog - spectrum discover
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/opendatahub.html" class="md-nav__link">
+        OpenData Hub
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      <label class="md-nav__link" for="__nav_5_4">
+        AI
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AI" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          AI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/ml-basics/" class="md-nav__link">
+        Machine learning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/ads.html" class="md-nav__link">
+        Automation Decision Service
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5_5">
+        Programming
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_5">
+          <span class="md-nav__icon md-icon"></span>
+          Programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5_1" type="checkbox" id="__nav_5_5_1" checked>
+      
+      <label class="md-nav__link" for="__nav_5_5_1">
+        Java Studies
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Java Studies" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Java Studies
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="microprofile.html" class="md-nav__link">
+        Microprofile 3.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="restassured.html" class="md-nav__link">
+        Rest assured
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concurrent.html" class="md-nav__link">
+        Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding/testcontainer.html" class="md-nav__link">
+        TestContainer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="openliberty.html" class="md-nav__link">
+        Open Liberty
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Quarkus
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="quarkus.html" class="md-nav__link md-nav__link--active">
+        Quarkus
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#value-propositions" class="md-nav__link">
+    Value Propositions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting Started
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-project" class="md-nav__link">
+    Create a project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package-run" class="md-nav__link">
+    Package &amp; run
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-within-vscode" class="md-nav__link">
+    Debug within VSCode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-maven-quarkus-cli" class="md-nav__link">
+    Other Maven Quarkus CLI
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Maven Quarkus CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-capabilities" class="md-nav__link">
+    Add capabilities
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-build" class="md-nav__link">
+    Docker build
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openapi" class="md-nav__link">
+    OpenAPI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-on-openshift" class="md-nav__link">
+    Running on OpenShift
+  </a>
+  
+    <nav class="md-nav" aria-label="Running on OpenShift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#some-customization-needed" class="md-nav__link">
+    Some customization needed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-dev-mode" class="md-nav__link">
+    Remote dev mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-with-quarkus" class="md-nav__link">
+    Testing with Quarkus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maven-profile-and-quarkus-test" class="md-nav__link">
+    Maven profile and quarkus test
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reactive-crud-app-with-postgres" class="md-nav__link">
+    Reactive CRUD app with Postgres
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-mode-application" class="md-nav__link">
+    Command mode application
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-practices" class="md-nav__link">
+    Development practices
+  </a>
+  
+    <nav class="md-nav" aria-label="Development practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-access-to-start-and-stop-application-events" class="md-nav__link">
+    Get access to start and stop application events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reactive-with-mutiny" class="md-nav__link">
+    Reactive with Mutiny
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reactive-messaging" class="md-nav__link">
+    Reactive messaging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-case-for-kafka-to-sse" class="md-nav__link">
+    A case for Kafka to SSE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adopting-vertx" class="md-nav__link">
+    Adopting Vertx
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typical-problems" class="md-nav__link">
+    Typical problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Typical problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-cloud-native" class="md-nav__link">
+    Running cloud native
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-quarkus-test-with-external-components-started-with-docker-compose" class="md-nav__link">
+    Run quarkus test with external components started with docker compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cheat-sheet" class="md-nav__link">
+    Cheat-Sheet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-read" class="md-nav__link">
+    To read
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="springcloud.html" class="md-nav__link">
+        SpringCloud
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vertx.html" class="md-nav__link">
+        Vert.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="funqy.html" class="md-nav__link">
+        Funqy
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concurrent.html" class="md-nav__link">
+        Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mqChallenge.html" class="md-nav__link">
+        MQ challenge
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FAQ.html" class="md-nav__link">
+        Java FAQ
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="java-vscode.html" class="md-nav__link">
+        VScode
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/python-code" class="md-nav__link">
+        Python Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/vuejs-studies/" class="md-nav__link">
+        Vue.js Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://cloudnative101.dev/" class="md-nav__link">
+        Cloud native content IBM
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git.html" class="md-nav__link">
+        Git summary
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding/gitops.html" class="md-nav__link">
+        GitOps
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/angular-sandbox/" class="md-nav__link">
+        Angular Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code-template.html" class="md-nav__link">
+        My code templates
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_6" type="checkbox" id="__nav_5_6" >
+      
+      <label class="md-nav__link" for="__nav_5_6">
+        Techno
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Techno" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_6">
+          <span class="md-nav__icon md-icon"></span>
+          Techno
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/apicurio.html" class="md-nav__link">
+        Apicurio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/atlas.html" class="md-nav__link">
+        Atlas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/ads.html" class="md-nav__link">
+        Automation Decision Service
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/bai.html" class="md-nav__link">
+        Self driving enterprise
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/cos.html" class="md-nav__link">
+        Cloud object storage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/code-engine.html" class="md-nav__link">
+        Code Engine
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/db-play/" class="md-nav__link">
+        Database play
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/egeria.html" class="md-nav__link">
+        Egeria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/flink-studies/" class="md-nav__link">
+        Flink Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/elasticsrch.html" class="md-nav__link">
+        Elastic Search
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/kafka-studies" class="md-nav__link">
+        Kafka Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/kar.html" class="md-nav__link">
+        KAR
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/redis.html" class="md-nav__link">
+        Redis
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/jbcodeforce/redpanda-studies/" class="md-nav__link">
+        RedPanda Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/spark-studies/" class="md-nav__link">
+        Spark Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="java-vscode.html" class="md-nav__link">
+        VScode
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#value-propositions" class="md-nav__link">
+    Value Propositions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting Started
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-project" class="md-nav__link">
+    Create a project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package-run" class="md-nav__link">
+    Package &amp; run
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-within-vscode" class="md-nav__link">
+    Debug within VSCode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-maven-quarkus-cli" class="md-nav__link">
+    Other Maven Quarkus CLI
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Maven Quarkus CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-capabilities" class="md-nav__link">
+    Add capabilities
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-build" class="md-nav__link">
+    Docker build
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openapi" class="md-nav__link">
+    OpenAPI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-on-openshift" class="md-nav__link">
+    Running on OpenShift
+  </a>
+  
+    <nav class="md-nav" aria-label="Running on OpenShift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#some-customization-needed" class="md-nav__link">
+    Some customization needed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-dev-mode" class="md-nav__link">
+    Remote dev mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-with-quarkus" class="md-nav__link">
+    Testing with Quarkus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maven-profile-and-quarkus-test" class="md-nav__link">
+    Maven profile and quarkus test
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reactive-crud-app-with-postgres" class="md-nav__link">
+    Reactive CRUD app with Postgres
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-mode-application" class="md-nav__link">
+    Command mode application
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-practices" class="md-nav__link">
+    Development practices
+  </a>
+  
+    <nav class="md-nav" aria-label="Development practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-access-to-start-and-stop-application-events" class="md-nav__link">
+    Get access to start and stop application events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reactive-with-mutiny" class="md-nav__link">
+    Reactive with Mutiny
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reactive-messaging" class="md-nav__link">
+    Reactive messaging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-case-for-kafka-to-sse" class="md-nav__link">
+    A case for Kafka to SSE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adopting-vertx" class="md-nav__link">
+    Adopting Vertx
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typical-problems" class="md-nav__link">
+    Typical problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Typical problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-cloud-native" class="md-nav__link">
+    Running cloud native
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-quarkus-test-with-external-components-started-with-docker-compose" class="md-nav__link">
+    Run quarkus test with external components started with docker compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cheat-sheet" class="md-nav__link">
+    Cheat-Sheet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-read" class="md-nav__link">
+    To read
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jbcodeforce/jbcodeforce.github.io/edit/master/docs/java/quarkus.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="quarkus-summary-and-trick">Quarkus Summary and trick</h1>
+<p>Best source of knowledge is <a href="https://quarkus.io/guides/">reading the guides</a> and the <a href="https://quarkus.io/quarkus-workshops/">workshop</a></p>
+<ul>
+<li><a href="#value-propositions">Value Propositions</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#other-maven-quarkus-cli">Quarkus maven CLI</a></li>
+<li><a href="#docker-build">Docker build</a></li>
+<li><a href="#running-on-openshift">Running on OpenShift</a></li>
+<li><a href="#testing-with-quarkus">Testing with Quarkus</a></li>
+<li><a href="#development-practices">Development practices</a></li>
+</ul>
+<p>Updated 05/11/2021</p>
+<h2 id="value-propositions">Value Propositions</h2>
+<ul>
+<li>Designed to run java for microservice in container and OpenShift: reduce start time to microseconds, and reduce memory footprint.</li>
+<li>Run native in linux based image, so most of the java processing is done at build time.</li>
+<li>Extensible components, very easy to add dependencies and hide plumbing code</li>
+<li>Easy to develop integration tests at API level</li>
+<li>Quarkus implements reactive programming with Vert.x</li>
+<li>
+<blockquote>
+<p>50% reduction in resources demand</p>
+</blockquote>
+</li>
+<li>No need to retrain Java developer to nodejs</li>
+<li>Hot reload made developer flow faster: 20 microservices built per week.</li>
+</ul>
+<p>Quarkus HTTP support is based on a non-blocking and reactive engine (Eclipse Vert.x and Netty). All the HTTP requests your application receives, are handled by event loops (IO Thread) and then are routed towards the code that manages the request.</p>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="create-a-project">Create a project</h3>
+<div class="highlight"><pre><span></span><code>mvn io.quarkus:quarkus-maven-plugin:1.13.3.Final:create <span class="se">\</span>
+    -DprojectGroupId<span class="o">=</span>ibm.gse.eda <span class="se">\</span>
+    -DprojectArtifactId<span class="o">=</span>app-name <span class="se">\</span>
+    -DclassName<span class="o">=</span><span class="s2">&quot;ibm.gse.eda.GreetingResource&quot;</span> <span class="se">\</span>
+    -Dpath<span class="o">=</span><span class="s2">&quot;/greeting&quot;</span>
+<span class="nb">cd</span> app-name
+</code></pre></div>
+<p>Modify resource, service,... </p>
+<p>Example for a Reactive messaging:</p>
+<div class="highlight"><pre><span></span><code>mvn io.quarkus:quarkus-maven-plugin:1.13.3.Final:create -DprojectGroupId=ibm.gse.eda  -DprojectArtifactId=app-name -Dextensions=&quot;kubernetes-config,openshift,smallrye-health,resteasy-jackson,quarkus-smallrye-openapi,quarkus-smallrye-reactive-messaging&quot;
+</code></pre></div>
+<h3 id="package-run">Package &amp; run</h3>
+<p>Run with automatic compilation <code>./mvnw compile quarkus:dev</code>.</p>
+<p>Can be packaged using <code>./mvnw clean package</code> or <code>./mvnw clean package -Pnative</code> for native execution, you need a Graalvm installed locally, or use the command: <code>./mvnw package -Pnative -Dquarkus.native.container-build=true</code> to build with a docker build image. </p>
+<p>For native build see <a href="https://quarkus.io/guides/writing-native-applications-tips">QUARKUS - TIPS FOR WRITING NATIVE APPLICATIONS</a></p>
+<p>Start and override properties at runtime:</p>
+<p><code>java -Dquarkus.datasource.password=youshallnotpass -jar target/myapp-runner.jar</code></p>
+<p>for a native executable: <code>./target/myapp-runner -Dquarkus.datasource.password=youshallnotpass</code></p>
+<p>See the <a href="https://quarkus.io/guides/building-native-image">Building a native executable</a> guide to develop with graalvm:</p>
+<ul>
+<li>Use <a href="https://developers.redhat.com/blog/2020/06/05/mandrel-a-community-distribution-of-graalvm-for-the-red-hat-build-of-quarkus/">Mandrel</a> for java 11+ app, for linux OS</li>
+<li>Use Graalvm community edition for development JDK 1.8 Apps.</li>
+<li>Install native image with: <code>${GRAALVM_HOME}/bin/gu install native-image</code></li>
+<li><code>./mvnw clean package -Pnative</code> for native execution</li>
+<li>To generate debug symbols, add <code>-Dquarkus.native.debug.enabled=true</code> flag when generating the native executable.</li>
+<li>run the tests against a native executable that has already been built: <code>./mvnw test-compile failsafe:integration-test</code> </li>
+<li>The following command will create a linux executable container without graalvm installed: <code>./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true</code></li>
+<li>Build native executable</li>
+</ul>
+<div class="highlight"><pre><span></span><code>./mvnw package -Pnative
+./mvnw package -Pnative -DskipTests
+</code></pre></div>
+<ul>
+<li>Build and deploy on OpenShift: add OpenShift plugin and do <a href="#running-on-openshift">these steps</a>.</li>
+</ul>
+<p>Can also use environment variables: Environment variables names are following the <a href="https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configsources.asciidoc#default-configsources">conversion rules of Eclipse MicroProfile</a>.</p>
+<h3 id="debug-within-vscode">Debug within VSCode</h3>
+<p>Start debugger:  shift -&gt; cmd -&gt; P: <code>Quarkus:  Debug current Quarkus Project</code> to create a configuration.</p>
+<h2 id="other-maven-quarkus-cli">Other Maven Quarkus CLI</h2>
+<p><a href="https://quarkus.io/guides/maven-tooling">See Maven tooling guide</a></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># create a project</span>
+mvn io.quarkus:quarkus-maven-plugin:1.13.0.Final:create
+<span class="c1"># getting extension</span>
+./mvnw quarkus:list-extensions
+<span class="c1"># Build native executable</span>
+./mvnw package -Pnative
+<span class="c1"># Run integration tests on native app</span>
+./mvnw verify -Pnative
+<span class="c1"># Generate configuration for the application</span>
+./mvnw quarkus:generate-config
+</code></pre></div>
+<h3 id="add-capabilities">Add capabilities</h3>
+<p>Useful capabilities:</p>
+<ul>
+<li><strong>Heath</strong> for liveness and readiness: <code>./mvnw quarkus:add-extension -Dextensions="smallrye-health"</code></li>
+<li><strong>Metrics</strong> for application monitoring: <code>./mvnw quarkus:add-extension -Dextensions="smallrye-metrics"</code></li>
+<li>Use API over HTTP in the JSON format: <code>./mvnw quarkus:add-extension -Dextensions="resteasy-jsonb"</code>.</li>
+<li><strong>Openapi</strong> and swagger-ui <code>./mvnw quarkus:add-extension -Dextensions="quarkus-smallrye-openapi"</code>. Also to get the swagger-ui visible in "production" set <code>quarkus.swagger-ui.always-include=true</code> in the application.properties.</li>
+<li><strong>Kafka</strong> client: <code>./mvnw quarkus:add-extension -Dextensions="kafka"</code></li>
+<li><strong>Kubernetes</strong> to get the deployment yaml file generated</li>
+</ul>
+<div class="highlight"><pre><span></span><code>./mvnw quarkus:add-extension -Dextensions<span class="o">=</span><span class="s2">&quot;kubernetes,kubernetes-config&quot;</span>
+</code></pre></div>
+<ul>
+<li>Deploy to <strong>OpenShift</strong> using source to image <code>./mvnw quarkus:add-extension -Dextensions="openshift"</code>.  See guide <a href="https://quarkus.io/guides/deploying-to-openshift">QUARKUS - DEPLOYING ON OPENSHIFT</a></li>
+<li><code>./mvnw quarkus:add-extension -Dextensions="container-image-docker"</code></li>
+<li>
+<p><strong>Postgres hibernate reactive</strong>: <code>./mvnw quarkus:add-extension -Dextensions=reactive-pg-client,resteasy-mutiny</code> Then see the <a href="https://quarkus.io/guides/reactive-sql-clients#reactive-postgresql-client-extension">REACTIVE SQL CLIENTS guide</a> and the <a href="">maas_backend project</a></p>
+</li>
+<li>
+<p><strong>vert.x</strong>: <code>./mvnw quarkus:add-extension -Dextensions="vertx"</code></p>
+</li>
+<li><strong>jib</strong>: to do container image build. See <a href="https://quarkus.io/guides/container-image">note here</a> <code>./mvnw quarkus:add-extension -Dextensions="container-image-jib"</code></li>
+<li><strong><a href="https://kogito.kie.org">Kogito</a></strong>:  <code>./mvnw quarkus:add-extension -Dextensions="kogito"</code></li>
+</ul>
+<h2 id="docker-build">Docker build</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># image name will be the name of the project in pom. build only</span>
+./mvnw clean package -Dnative -Dquarkus.container-image.build<span class="o">=</span><span class="nb">true</span> -Dquarkus.container-image.group<span class="o">=</span>ibmcase -Dquarkus.container-image.tag<span class="o">=</span><span class="m">1</span>.0.0
+<span class="c1"># and push it to repository: </span>
+./mvnw clean package -Dquarkus.container-image.build<span class="o">=</span><span class="nb">true</span> -Dquarkus.container-image.push<span class="o">=</span><span class="nb">true</span>
+</code></pre></div>
+<p>To avoid downloading all the maven jars while using a multistage Dockerfile and to keep the current executable started with <code>quarkus:dev</code> running on the same docker network as other dependent components, use a simple docker file for development that has java and maven:</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="s">maven:3.6.3-jdk-11</span>
+
+<span class="k">COPY</span> pom.xml /home/
+<span class="k">COPY</span> src /home/src/
+
+<span class="k">WORKDIR</span><span class="s"> /home</span>
+
+<span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;mvn&quot;</span><span class="p">,</span> <span class="s2">&quot;compile&quot;</span><span class="p">,</span> <span class="s2">&quot;quarkus:dev&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>And then start it, by mounting the .m2 maven repository.</p>
+<div class="highlight"><pre><span></span><code>docker build -f Dockerfile-dev -t tmp-builder .
+docker run --rm -p <span class="m">8080</span>:8080 -ti  -v ~/.m2:/root/.m2 tmp-builder
+</code></pre></div>
+<p>We can also combine this into a docker-compose <a href="https://github.com/ibm-cloud-architecture/refarch-eda-item-inventory/blob/master/dev-docker-compose.yaml">file like in the eda item inventory</a> project.</p>
+<div class="highlight"><pre><span></span><code>  <span class="nt">maven</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">maven</span>
+    <span class="nt">volumes</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;./:/app&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;~/.m2:/root/.m2&quot;</span>
+    <span class="nt">depends_on</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">kafka</span>
+    <span class="nt">hostname</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">aggregator</span>
+    <span class="nt">environment</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">BOOTSTRAP_SERVERS=kafka:9092</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">QUARKUS_KAFKA_STREAMS_BOOTSTRAP_SERVERS=kafka:29092</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">QUARKUS_PROFILE=dev</span>
+    <span class="nt">ports</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;8080:8080&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;5005:5005&quot;</span>
+    <span class="nt">working_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/app</span>
+    <span class="nt">command</span><span class="p">:</span> <span class="s">&quot;mvn</span><span class="nv"> </span><span class="s">quarkus:dev&quot;</span>
+</code></pre></div>
+<h2 id="openapi">OpenAPI</h2>
+<p>Add the declaration of the Application api in properties. <a href="https://quarkus.io/guides/openapi-swaggerui#configuration-reference">See this open API guide</a> for configuration details.</p>
+<div class="highlight"><pre><span></span><code><span class="na">%dev.mp.openapi.extensions.smallrye.info.title</span><span class="o">=</span><span class="s">Product Microservice API (development)</span>
+<span class="na">mp.openapi.extensions.smallrye.info.title</span><span class="o">=</span><span class="s">Product Microservice API</span>
+<span class="na">mp.openapi.extensions.smallrye.info.version</span><span class="o">=</span><span class="s">1.0.0</span>
+<span class="na">mp.openapi.extensions.smallrye.info.description</span><span class="o">=</span><span class="s">Just an example of kafka consumer and service</span>
+<span class="na">mp.openapi.extensions.smallrye.info.termsOfService</span><span class="o">=</span><span class="s">Demonstration purpose</span>
+<span class="na">mp.openapi.extensions.smallrye.info.contact.name</span><span class="o">=</span><span class="s">IBM Technical Asset and Architecture team </span>
+<span class="na">mp.openapi.extensions.smallrye.info.contact.url</span><span class="o">=</span><span class="s">https://ibm-cloud-architecture/refarch-eda</span>
+<span class="na">mp.openapi.extensions.smallrye.info.license.name</span><span class="o">=</span><span class="s">Apache 2.0</span>
+<span class="na">mp.openapi.extensions.smallrye.info.license.url</span><span class="o">=</span><span class="s">http://www.apache.org/licenses/LICENSE-2.0.html</span>
+</code></pre></div>
+<h2 id="running-on-openshift">Running on OpenShift</h2>
+<p>The guide is <a href="https://quarkus.io/guides/deploying-to-openshift">here</a> and the main points are:</p>
+<ul>
+<li>The OpenShift extension is actually a wrapper extension that brings together the kubernetes and container-image-s2i extensions with defaults so that it’s easier for the user to get started with Quarkus on OpenShift</li>
+<li>Build is done by source 2 image binary build: <code>./mvnw clean package -Dquarkus.container-image.build=true</code>. The output of the build is an ImageStream that is configured to automatically trigger a deployment</li>
+<li>
+<p>The first time, build and deployment are done with the command: <code>./mvnw clean package -Dquarkus.kubernetes.deploy=true</code>, after that, any build will trigger redeployment. Here are the steps done:</p>
+<ul>
+<li>Build thin jar</li>
+<li>Contact kubernetes API server</li>
+<li>Perform s2i binary build with jar on the server. This adds a BuildConfig on the connected project.</li>
+<li>Send source code from local folder to OpenShift build container.</li>
+<li>Write manifest and signatures </li>
+<li>Generate Dockerfile and build the image on server</li>
+<li>Push image to private registry</li>
+<li>Apply the manifests: service account, service, image stream, build config, and deployment config as defined by the generated <code>openshift.yaml</code></li>
+<li>Three pods are visible: build, deploy and running app.</li>
+</ul>
+</li>
+</ul>
+<h3 id="some-customization-needed">Some customization needed</h3>
+<ul>
+<li>To expose a route add:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="na">quarkus.openshift.expose.route</span><span class="o">=</span><span class="s">true</span>
+</code></pre></div>
+<ul>
+<li>
+<p>To define environment variables, use config map:</p>
+<ul>
+<li>Add a config map with the variable name in the data filed as key. It follows the environment variable naming convention to overwrite quarkus' property. The config map can have multiple variables.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">message-cm</span>
+<span class="nt">data</span><span class="p">:</span>
+  <span class="nt">GREETING_MESSAGE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">salut</span>
+</code></pre></div>
+<ul>
+<li>To inject environment variables from config map add a property with the name of the config map.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="na">greeting.message</span><span class="o">=</span><span class="s">bonjour</span>
+<span class="na">quarkus.openshift.env.configmaps</span><span class="o">=</span><span class="s">message-cm</span>
+</code></pre></div>
+</li>
+<li>
+<p>Redeploy: <code>./mvnw clean package -Dquarkus.kubernetes.deploy=true</code></p>
+</li>
+</ul>
+<p>This will add the following declaration to the deploymentConfig:</p>
+<div class="highlight"><pre><span></span><code>      <span class="nt">envFrom</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">configMapRef</span><span class="p">:</span>
+                <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">message-cm</span>
+</code></pre></div>
+<ul>
+<li>To add config map, secrets, we need the <code>kubernetes-config</code> extension. <a href="https://quarkus.io/guides/kubernetes-config">See this guide</a>, then declare properties in the following formats:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="na">quarkus.openshift.env.configmaps</span><span class="o">=</span><span class="s">vaccine-order-ms-cm</span>
+<span class="na">quarkus.openshift.env.secrets</span><span class="o">=</span><span class="s">vaccine-order-secrets</span>
+<span class="na">quarkus.openshift.env.mapping.KAFKA_SSL_TRUSTSTORE_PASSWORD.from-secret</span><span class="o">=</span><span class="s">light-es-cluster-ca-cert</span>
+<span class="na">quarkus.openshift.env.mapping.KAFKA_SSL_TRUSTSTORE_PASSWORD.with-key</span><span class="o">=</span><span class="s">ca.password</span>
+<span class="na">quarkus.openshift.mounts.es-cert.path</span><span class="o">=</span><span class="s">/deployments/certs/server</span>
+<span class="na">quarkus.openshift.secret-volumes.es-cert.secret-name</span><span class="o">=</span><span class="s">light-es-cluster-ca-cert</span>
+</code></pre></div>
+<p>That will generate the following spec:
+ <div class="highlight"><pre><span></span><code>   <span class="nt">envFrom</span><span class="p">:</span>
+     <span class="p p-Indicator">-</span> <span class="nt">configMapRef</span><span class="p">:</span>
+       <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vaccine-order-ms-cm</span>
+     <span class="p p-Indicator">-</span> <span class="nt">secretRef</span><span class="p">:</span>
+       <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vaccine-order-secrets</span>
+   <span class="nt">volumeMounts</span><span class="p">:</span>
+   <span class="p p-Indicator">-</span> <span class="nt">mountPath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/deployments/certs/server</span>
+     <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">es-cert</span>
+     <span class="nt">readOnly</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+     <span class="nt">subPath</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+<span class=" -Error"> </span><span class="nt">volumes</span><span class="p">:</span>
+     <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">es-cert</span>
+       <span class="nt">secret</span><span class="p">:</span>
+         <span class="nt">defaultMode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">384</span>
+         <span class="nt">optional</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+         <span class="nt">secretName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sandbox-rp-cluster-ca-cert</span>
+</code></pre></div></p>
+<p>See <a href="https://quarkus.io/guides/deploying-to-kubernetes#openshift">OpenShift options</a></p>
+<p>To change the value of a specific property in the application properties, we can use environment variables: The convention is to convert the name of the property to uppercase and replace every dot (.) with an underscore (_). So define a config map to define those environment variables in <code>src/main/kubernetes</code> folder.</p>
+<p>To delete a deployed app, remove the deployment config.</p>
+<h3 id="remote-dev-mode">Remote dev mode</h3>
+<p>For running Quarkus app on OpenShift while developing locally so change done on code, pom, properties are sent to the remote quarkus use the following settings:</p>
+<ul>
+<li>Add in application.properties:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="na">quarkus.package.type</span><span class="o">=</span><span class="s">mutable-jar</span>
+<span class="na">quarkus.live-reload.password</span><span class="o">=</span><span class="s">changeit</span>
+</code></pre></div>
+<ul>
+<li>set the environment variable QUARKUS_LAUNCH_DEVMODE=true</li>
+<li>start with <code>./mvnw quarkus:remote-dev -Dquarkus.live-reload.url=http://my-remote-host:8080</code></li>
+</ul>
+<p>This is done via a HTTP based long polling transport, that will synchronize your local workspace and the remote application via HTTP calls.</p>
+<h2 id="testing-with-quarkus">Testing with Quarkus</h2>
+<p>Quarkus uses junit 5, and QuarkusTest to access to CDI and other quarkus goodies. See <a href="https://quarkus.io/guides/getting-started-testing">the test guide here</a>. To test via HTTP, and rest-assured. </p>
+<p>Here is an example for post testing:</p>
+<div class="highlight"><pre><span></span><code><span class="n">TrainSearchRequest</span> <span class="n">req</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TrainSearchRequest</span><span class="p">();</span> <span class="c1">//...</span>
+<span class="n">Response</span> <span class="n">resp</span> <span class="o">=</span> <span class="n">with</span><span class="p">().</span><span class="na">headers</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="n">ContentType</span><span class="p">.</span><span class="na">JSON</span><span class="p">,</span> <span class="s">&quot;Accept&quot;</span><span class="p">,</span> <span class="n">ContentType</span><span class="p">.</span><span class="na">JSON</span><span class="p">)</span>
+          <span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+          <span class="p">.</span><span class="na">when</span><span class="p">().</span><span class="na">post</span><span class="p">(</span><span class="s">&quot;/consolidatorA&quot;</span><span class="p">)</span>
+          <span class="p">.</span><span class="na">then</span><span class="p">()</span>
+             <span class="p">.</span><span class="na">statusCode</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+             <span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">ContentType</span><span class="p">.</span><span class="na">JSON</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">extract</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">response</span><span class="p">();</span>
+        <span class="n">TrainSearchResponse</span> <span class="n">searchResp</span><span class="o">=</span> <span class="n">resp</span><span class="p">.</span><span class="na">body</span><span class="p">().</span><span class="na">as</span><span class="p">(</span><span class="n">TrainSearchResponse</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<p>Other example on a Get</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">Response</span> <span class="n">rep</span> <span class="o">=</span> <span class="n">given</span><span class="p">()</span>
+          <span class="p">.</span><span class="na">when</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">basicURL</span> <span class="o">+</span> <span class="s">&quot;/names&quot;</span><span class="p">)</span>
+          <span class="p">.</span><span class="na">then</span><span class="p">()</span>
+             <span class="p">.</span><span class="na">statusCode</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+             <span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">ContentType</span><span class="p">.</span><span class="na">JSON</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">extract</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">response</span><span class="p">();</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">names</span> <span class="o">=</span> <span class="n">rep</span><span class="p">.</span><span class="na">body</span><span class="p">().</span><span class="na">as</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+        <span class="n">Assertions</span><span class="p">.</span><span class="na">assertNotNull</span><span class="p">(</span><span class="n">names</span><span class="p">);</span>
+        <span class="n">Assertions</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">names</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+</code></pre></div>
+Application configuration will be used in any active profile. The built-in profiles in Quarkus are: <code>dev, prod and test</code>. The <code>test</code> profile will be used every time you run the @QuarkusTest</p>
+<p>@QuarkusTest helps to get the CDI working. But there is still an issue on inject properties that may not be loaded due to proxy instance creation. So in test class the properties need to be accessed via getter:
+For example to be sure the hostname is loaded from the application.properties do:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@ApplicationScoped</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RabbitMQItemGenerator</span> <span class="p">{</span>
+
+  <span class="nd">@ConfigProperty</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;amqp.host&quot;</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">hostname</span><span class="p">;</span>
+<span class="p">...</span>
+
+<span class="nd">@QuarkusTest</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestRabbitGenerator</span> <span class="p">{</span>
+
+    <span class="nd">@Inject</span>
+    <span class="n">RabbitMQItemGenerator</span> <span class="n">generator</span><span class="p">;</span>
+
+    <span class="p">...</span>
+    <span class="n">Assertions</span><span class="p">.</span><span class="na">assertNotNull</span><span class="p">(</span><span class="n">generator</span><span class="p">.</span><span class="na">getHost</span><span class="p">());</span>
+</code></pre></div>
+<p>Things to do:</p>
+<ul>
+<li>in the test class add @QuarkusTest</li>
+<li>inject the bean under test</li>
+<li>be sure to use the good version of maven-surefire</li>
+<li>set the java.util.logging system property to make sure tests will use the correct log manager:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;systemPropertyVariables&gt;</span>
+    <span class="nt">&lt;java.util.logging.manager&gt;</span>org.jboss.logmanager.LogManager<span class="nt">&lt;/java.util.logging.manager&gt;</span>
+<span class="nt">&lt;/systemPropertyVariables&gt;</span>
+</code></pre></div>
+<ul>
+<li>Exposed port for tests are on port 8081 (can be changed via <code>quarkus.http.test-port=8083</code>)</li>
+</ul>
+<p>Integration test uses <a href="http://rest-assured.io/">Rest-assured</a> with <a href="https://github.com/rest-assured/rest-assured/wiki/Usage">API doc</a>.</p>
+<p>For testing body content, use the <a href="http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/CoreMatchers.html">Hamcrest APIs</a>. Example of not and containsString operators.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldNotHaveStore_7_fromGetStoreNames</span><span class="p">(){</span>
+        <span class="n">given</span><span class="p">().</span><span class="na">when</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;/names&quot;</span><span class="p">).</span><span class="na">then</span><span class="p">().</span><span class="na">statusCode</span><span class="p">(</span><span class="mi">200</span><span class="p">).</span><span class="na">body</span><span class="p">(</span><span class="n">not</span><span class="p">(</span><span class="n">containsString</span><span class="p">(</span><span class="s">&quot;Store_7&quot;</span><span class="p">)));</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="maven-profile-and-quarkus-test">Maven profile and quarkus test</h2>
+<p>The properties can be prefixed with <code>%staging</code> or <code>%prod</code> or <code>%dev</code> to set those properties according to the deployment. If we use a custom prefix like <code>staging</code> then we need to run quarkus with a specific profile. For that set <code>export QUARKUS_PROFILE=staging</code> in your <code>.env</code> file. </p>
+<div class="highlight"><pre><span></span><code>./mvnw quarkus:dev 
+</code></pre></div>
+<p>By default, Quarkus tests in JVM mode are run using the test configuration profile</p>
+<h2 id="reactive-crud-app-with-postgres">Reactive CRUD app with Postgres</h2>
+<ul>
+<li>Add following to pom.xml</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>io.quarkus<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>quarkus-resteasy-mutiny<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>io.quarkus<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>quarkus-reactive-pg-client<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>io.quarkus<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>quarkus-hibernate-reactive<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<ul>
+<li>Annotate the entity with table and query</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;kafka_clusters&quot;</span><span class="p">)</span>
+<span class="nd">@NamedQuery</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ClusterDetail.findAll&quot;</span><span class="p">,</span> <span class="n">query</span> <span class="o">=</span> <span class="s">&quot;SELECT k FROM kafka_clusters k ORDER BY k.name&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClusterDetail</span> <span class="p">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@SequenceGenerator</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;fruitsSequence&quot;</span><span class="p">,</span> <span class="n">sequenceName</span> <span class="o">=</span> <span class="s">&quot;known_fruits_id_seq&quot;</span><span class="p">,</span> <span class="n">allocationSize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">initialValue</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="nd">@GeneratedValue</span><span class="p">(</span><span class="n">generator</span> <span class="o">=</span> <span class="s">&quot;fruitsSequence&quot;</span><span class="p">)</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">id</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="command-mode-application">Command mode application</h2>
+<p>Develop <a href="https://quarkus.io/guides/command-mode-reference">command mode applications</a> that run and then exit, like a java main method.</p>
+<p>For that implement QuarkusApplication and have Quarkus run this method automatically</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@QuarkusMain</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CommandModeApp</span> <span class="kd">implements</span> <span class="n">QuarkusApplication</span> <span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="n">String</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello from mars&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>A @QuarkusMain instance is an application scoped bean by default.</p>
+<p>For a Java main app</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@QuarkusMain</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;kbMain&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaMain</span> <span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Quarkus</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">HelloWorldMain</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Dev mode works the same.</p>
+<p>Then <code>mvn package</code> and run it with <code>java -jar target/....-runner.jar</code></p>
+<p>When running a command mode application the basic lifecycle is as follows:</p>
+<ul>
+<li>Start Quarkus</li>
+<li>Run the QuarkusApplication main method</li>
+<li>Shut down Quarkus and exit the JVM after the main method returns</li>
+</ul>
+<p>It is possible to have multiple main methods in an application, and select between them at build time. The @QuarkusMain annotation takes an optional 'name' parameter and the name is used with <code>-Dquarkus.package.main-class="kbMain"</code>.
+If the app needs arguments, pass them with <code>-Dquarkus.args=</code>.</p>
+<h2 id="development-practices">Development practices</h2>
+<h3 id="configuration">Configuration</h3>
+<p><code>application.properties</code> content is injected with code like:</p>
+<div class="highlight"><pre><span></span><code>    <span class="nd">@ConfigProperty</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;temperature.threshold&quot;</span><span class="p">,</span> <span class="n">defaultValue</span><span class="o">=</span><span class="s">&quot;2.5&quot;</span><span class="p">)</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="n">temperatureThreshold</span><span class="p">;</span>
+</code></pre></div>
+<p>Quarkus does much of its configuration and bootstrap at build time. But some properties are defined at run time from system properties, environment variables (in uppercase, . transformed as _ : QUARKUS_DATASOURCE_PASSWORD), using <code>.env</code> file, and then <code>application.property</code> in a <code>$(pwd)/target/config</code> folder for development test.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// does fail as it return -</span>
+ <span class="n">Assertions</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">assessor</span><span class="p">.</span><span class="na">temperatureThreshold</span><span class="p">);</span>
+<span class="c1">// while this works!</span>
+  <span class="n">Assertions</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">assessor</span><span class="p">.</span><span class="na">getTemperatureThreshold</span><span class="p">());</span>
+</code></pre></div>
+<p>The content can be combined with environment variables See <a href="https://quarkus.io/guides/config#combining-property-expressions-and-environment-variables">this section in quarkus guide</a></p>
+<p>Also you can access the configuration programmatically. It can be handy to achieve dynamic lookup, or retrieve configured values from classes that are neither CDI beans or JAX-RS resources. See <a href="https://quarkus.io/guides/config#programmatically-access-the-configuration">this paragraph</a></p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">databaseName</span> <span class="o">=</span> <span class="n">ConfigProvider</span><span class="p">.</span><span class="na">getConfig</span><span class="p">().</span><span class="na">getValue</span><span class="p">(</span><span class="s">&quot;database.name&quot;</span><span class="p">,</span> <span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">maybeDatabaseName</span> <span class="o">=</span> <span class="n">ConfigProvider</span><span class="p">.</span><span class="na">getConfig</span><span class="p">().</span><span class="na">getOptionalValue</span><span class="p">(</span><span class="s">&quot;database.name&quot;</span><span class="p">,</span> <span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<p>Quarkus supports the notion of configuration profiles. These allow you to have multiple configuration in the same file and select between them via a profile name.</p>
+<p>See also <a href="https://quarkus.io/guides/config#using-property-expressions">Using Property Expressions</a></p>
+<h3 id="get-access-to-start-and-stop-application-events">Get access to start and stop application events</h3>
+<p>This is an important practice when we want to start a listener on Kafka topic for example or a kafka stream topology.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">javax.enterprise.event.Observes</span><span class="p">;</span>
+<span class="p">...</span>
+ <span class="kt">void</span> <span class="nf">onStart</span><span class="p">(</span><span class="nd">@Observes</span> <span class="n">StartupEvent</span> <span class="n">ev</span><span class="p">){}</span>
+
+ <span class="kt">void</span> <span class="nf">onStop</span><span class="p">(</span><span class="nd">@Observes</span> <span class="n">ShutdownEvent</span> <span class="n">ev</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+<h3 id="reactive-with-mutiny">Reactive with Mutiny</h3>
+<p><a href="https://smallrye.io/smallrye-mutiny/">Mutiny</a> is a reactive programming library to offer a more guided API than traditional reactive framework and API. It supports asynchrony, non-blocking programming and streams, events, back-pressure and data flows.</p>
+<p>Add the <code>resteasy-mutiny</code> package.</p>
+<div class="highlight"><pre><span></span><code>  <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>io.quarkus<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>quarkus-resteasy-mutiny<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<ul>
+<li>To asynchronously handle HTTP requests, the endpoint method must return a java.util.concurrent.CompletionStage or an <code>io.smallrye.mutiny.Uni</code>  or <code>io.smallrye.mutiny.Multi</code>(requires the quarkus-resteasy-mutiny extension).</li>
+</ul>
+<p>With Mutiny both <code>Uni</code> and <code>Multi</code> expose event-driven APIs: you express what you want to do upon a given event (success, failure, etc.). These APIs are divided into groups (types of operations) to make it more expressive and avoid having 100s of methods attached to a single class.</p>
+<p><a href="https://smallrye.io/smallrye-mutiny/#_uni_and_multi">This section of the product documentation</a> goes over some examples on how to use Uni/ Multi.</p>
+<p>Here are some basic examples:</p>
+<div class="highlight"><pre><span></span><code>    <span class="nd">@GET</span>
+    <span class="nd">@Produces</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">)</span>
+    <span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;/json/{id}&quot;</span><span class="p">)</span>
+  <span class="c1">// producing generic json object</span>
+  <span class="kd">public</span> <span class="n">Uni</span><span class="o">&lt;</span><span class="n">JsonObject</span><span class="o">&gt;</span> <span class="nf">getJsonObject</span><span class="p">(</span><span class="nd">@PathParam</span> <span class="n">String</span> <span class="n">id</span><span class="p">){</span>
+        <span class="n">JsonObject</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonObject</span><span class="p">(</span><span class="s">&quot;{\&quot;name\&quot;: \&quot;hello you\&quot;, \&quot;id\&quot;: \&quot;&quot;</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="s">&quot;\&quot;}&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">Uni</span><span class="p">.</span><span class="na">createFrom</span><span class="p">().</span><span class="na">item</span><span class="p">(</span> <span class="n">order</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Producing a bean</span>
+    <span class="nd">@GET</span>
+    <span class="nd">@Produces</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">)</span>
+    <span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;/order/{id}&quot;</span><span class="p">)</span>
+    <span class="kd">public</span> <span class="n">Uni</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span> <span class="nf">getOrderById</span><span class="p">(</span><span class="nd">@PathParam</span> <span class="n">String</span> <span class="n">id</span><span class="p">){</span>
+        <span class="n">Order</span> <span class="n">o</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Order</span><span class="p">();</span>
+        <span class="n">o</span><span class="p">.</span><span class="na">deliveryLocation</span><span class="o">=</span><span class="s">&quot;Paris/France&quot;</span><span class="p">;</span>
+        <span class="n">o</span><span class="p">.</span><span class="na">id</span><span class="o">=</span><span class="n">id</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">Uni</span><span class="p">.</span><span class="na">createFrom</span><span class="p">().</span><span class="na">item</span><span class="p">(</span><span class="n">o</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>Create a multi from a list and send to kafka</li>
+</ul>
+<div class="highlight"><pre><span></span><code>  <span class="nd">@Inject</span>
+  <span class="nd">@Channel</span><span class="p">(</span><span class="s">&quot;items&quot;</span><span class="p">)</span>
+  <span class="n">Emitter</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">emitter</span><span class="p">;</span>
+
+ <span class="n">Multi</span><span class="p">.</span><span class="na">createFrom</span><span class="p">().</span><span class="na">items</span><span class="p">(</span><span class="n">buildItems</span><span class="p">(</span><span class="n">numberOfRecords</span><span class="p">).</span><span class="na">stream</span><span class="p">())</span>
+                <span class="p">.</span><span class="na">subscribe</span><span class="p">().</span><span class="na">with</span><span class="p">(</span> <span class="n">item</span> <span class="o">-&gt;</span> <span class="p">{</span>
+                    <span class="n">logger</span><span class="p">.</span><span class="na">warning</span><span class="p">(</span><span class="s">&quot;send &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+                    <span class="c1">//KafkaRecord&lt;String, Item&gt; record = KafkaRecord.of(item.sku,item);</span>
+                    <span class="n">CompletionStage</span><span class="o">&lt;</span><span class="n">Void</span><span class="o">&gt;</span> <span class="n">acked</span> <span class="o">=</span> <span class="n">emitter</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+                    <span class="n">acked</span><span class="p">.</span><span class="na">toCompletableFuture</span><span class="p">().</span><span class="na">join</span><span class="p">();</span>
+                    <span class="p">},</span>
+                    <span class="n">failure</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Failed with &quot;</span> <span class="o">+</span> <span class="n">failure</span><span class="p">.</span><span class="na">getMessage</span><span class="p">()));</span>
+</code></pre></div>
+<h3 id="reactive-messaging">Reactive messaging</h3>
+<p>For a quick review of the reactive messaging with Quarkus tutorial is <a href="https://quarkus.io/guides/kafka">here</a></p>
+<p>Quick summary:</p>
+<ul>
+<li>define an application scoped bean for your service</li>
+<li>using @Incoming and @Outcoming annotation with channel name on top of function to process the message</li>
+<li>define channel properties in <code>application.properties</code>.</li>
+<li>Use Kafka connector: <code>mp.messaging.incoming.[channel-name].connector=smallrye-kafka</code></li>
+<li>Implement Deserializer using Jsonb or Jackson. See <a href="https://quarkus.io/guides/kafka#serializing-via-json-b">this section</a>. If using Avro and Apicurio schema registry then the deserializer needs to be <code>io.apicurio.registry.utils.serde.AvroKafkaDeserializer</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">mp.messaging.incoming.shipments.value.deserializer=io.apicurio.registry.utils.serde.AvroKafkaDeserializer</span>
+<span class="l l-Scalar l-Scalar-Plain">mp.messaging.incoming.shipments.apicurio.registry.url=${SCHEMA_REGISTRY_URL}</span>
+<span class="l l-Scalar l-Scalar-Plain">mp.messaging.incoming.shipments.specific.avro.reader=true</span>
+<span class="l l-Scalar l-Scalar-Plain">mp.messaging.incoming.shipments.apicurio.registry.avro-datum-provider=io.apicurio.registry.utils.serde.avro.ReflectAvroDatumProvider</span>
+<span class="l l-Scalar l-Scalar-Plain">mp.messaging.incoming.shipments.apicurio.registry.as-confluent=true</span>
+</code></pre></div>
+<p>Nice <a href="https://lordofthejars.github.io/quarkus-cheat-sheet/#_reactive_messaging">cheat sheet</a> to combine Mutiny, Reactive messaging.</p>
+<ul>
+<li>It is possible to combine imperative and reactive: so on a POST api emits event to Kafka. We just need to inject an emitter as below:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>  <span class="nd">@Inject</span> <span class="nd">@Channel</span><span class="p">(</span><span class="s">&quot;items&quot;</span><span class="p">)</span> <span class="n">Emitter</span><span class="o">&lt;</span><span class="n">KafkaRecord</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Item</span><span class="o">&gt;&gt;</span> <span class="n">emitter</span><span class="p">;</span>
+</code></pre></div>
+<p>Emitting Kafka Records will duplicate the payload.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;headers&quot;</span><span class="p">:{},</span>
+<span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="s2">&quot;Item_4&quot;</span><span class="p">,</span>
+<span class="nt">&quot;metadata&quot;</span><span class="p">:{},</span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="mi">-1</span><span class="p">,</span>
+<span class="nt">&quot;payload&quot;</span><span class="p">:{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">296</span><span class="p">,</span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="mf">72.9</span><span class="p">,</span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="s2">&quot;Item_4&quot;</span><span class="p">,</span><span class="nt">&quot;storeName&quot;</span><span class="p">:</span><span class="s2">&quot;Store_2&quot;</span><span class="p">}}</span>
+</code></pre></div>
+<p>To send directly the payload with a key, use a Message instance.</p>
+<p><a href="https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/2/kafka/kafka.html">Apache Kafka specific for reactive messaging</a></p>
+<p>The Kafka Connector is based on the Vert.x Kafka Client.</p>
+<h3 id="a-case-for-kafka-to-sse">A case for Kafka to SSE</h3>
+<p>A nice capability is to open a Server Side Event end point (see code in <a href="https://github.com/ibm-cloud-architecture/vaccine-freezer-mgr">freezer mgr project</a>):</p>
+<p>In the API resource class:</p>
+<div class="highlight"><pre><span></span><code>    <span class="nd">@Inject</span>
+    <span class="nd">@Channel</span><span class="p">(</span><span class="s">&quot;internal-alert-stream&quot;</span><span class="p">)</span>
+    <span class="n">Publisher</span><span class="o">&lt;</span><span class="n">ReeferAlert</span><span class="o">&gt;</span> <span class="n">alerts</span><span class="p">;</span>
+
+    <span class="nd">@GET</span>
+    <span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;/alerts&quot;</span><span class="p">)</span>
+    <span class="nd">@Produces</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">SERVER_SENT_EVENTS</span><span class="p">)</span>
+    <span class="nd">@SseElementType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">)</span>
+    <span class="kd">public</span> <span class="n">Publisher</span><span class="o">&lt;</span><span class="n">ReeferAlert</span><span class="o">&gt;</span> <span class="nf">streamAlerts</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="n">alerts</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>In the service class, the incoming channel is connected to Kafka and the outgoing is an internal to broadcast to.</p>
+<div class="highlight"><pre><span></span><code>    <span class="nd">@Incoming</span><span class="p">(</span><span class="s">&quot;reefer-alerts&quot;</span><span class="p">)</span>                                     
+    <span class="nd">@Outgoing</span><span class="p">(</span><span class="s">&quot;internal-alert-stream&quot;</span><span class="p">)</span>                             
+    <span class="nd">@Broadcast</span>                                              
+    <span class="nd">@Acknowledgment</span><span class="p">(</span><span class="n">Acknowledgment</span><span class="p">.</span><span class="na">Strategy</span><span class="p">.</span><span class="na">PRE_PROCESSING</span><span class="p">)</span>
+    <span class="kd">public</span> <span class="n">ReeferAlert</span> <span class="nf">process</span><span class="p">(</span><span class="n">ReeferAlert</span> <span class="n">inAlert</span><span class="p">){</span>
+        <span class="c1">// process the alert and generate the message to broadcast to SSE</span>
+        <span class="k">return</span> <span class="n">inAlert</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="adopting-vertx">Adopting Vertx</h2>
+<p>Quarkus is based on Vert.x, and almost all network-related features rely on Vert.x / Netty. Every IO interaction passes through the non-blocking and reactive Vert.x engine. The (Vert.x) HTTP server receives the request and then routes it to the application. If the request targets a JAX-RS resource, the routing layer invokes the resource method in a worker thread and writes the response when the data is available. But if the HTTP request targets a reactive (non-blocking) route, the routing layer invokes the route on the IO thread giving lots of benefits such as higher concurrency and performance.</p>
+<p><img alt="1" src="https://quarkus.io/guides/images/http-reactive-sequence.png" /></p>
+<p>To fully benefit from this model, the application code should be written in a non-blocking manner.</p>
+<p>Add the extension: <code>./mvnw quarkus:add-extension -Dextensions="vertx"</code>. Get access to Vert.x via injection: </p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Inject</span> <span class="n">Vertx</span> <span class="n">vertx</span><span class="p">;</span>
+</code></pre></div>
+<p>When using the Mutiny API to program in reactive approach, then the Vert.x package is <code>io.vertx.mutiny.core.Vertx</code>.</p>
+<h2 id="typical-problems">Typical problems</h2>
+<h3 id="examples">Examples</h3>
+<ul>
+<li>Quarkus with kafka and kubernetes deployment: <a href=""></a></li>
+</ul>
+<h3 id="running-cloud-native">Running cloud native</h3>
+<p>By default, when building a native executable, GraalVM will not include any of the resources that are on the classpath into the native executable it creates. Resources that are meant to be part of the native executable need to be configured explicitly.</p>
+<p><a href="https://quarkus.io/guides/writing-native-applications-tips">See writing native app tips</a></p>
+<h3 id="run-quarkus-test-with-external-components-started-with-docker-compose">Run quarkus test with external components started with docker compose</h3>
+<p>The best approach is to avoid using docker-compose for development and use <a href="/coding/testcontainer">TestContainer</a>.</p>
+<h3 id="cheat-sheet">Cheat-Sheet</h3>
+<ul>
+<li><a href="https://lordofthejars.github.io/quarkus-cheat-sheet/">Official</a></li>
+</ul>
+<h3 id="to-read">To read</h3>
+<ul>
+<li><a href="https://developers.redhat.com/blog/2020/01/23/using-kubernetes-configmaps-to-define-your-quarkus-applications-properties/">Using Kubernetes ConfigMaps to define your Quarkus application’s properties</a></li>
+<li><a href="https://medium.com/@hantsy/building-reactive-apis-with-quarkus-86bb12523da1">Reactive Programming with Quarkus - postgresql reactive with mutiny</a></li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="openliberty.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Open Liberty" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Open Liberty
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="springcloud.html" class="md-footer__link md-footer__link--next" aria-label="Next: SpringCloud" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              SpringCloud
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>

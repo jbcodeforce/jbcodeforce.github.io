@@ -1,0 +1,1634 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>Vert.x - Jerome Boyer's Personal Site</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="magenta-dark" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vertx" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Jerome Boyer&#39;s Personal Site" class="md-header__button md-logo" aria-label="Jerome Boyer's Personal Site" data-md-component="logo">
+      
+  <img src="../images/gear-sp-01.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jerome Boyer's Personal Site
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Vert.x
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/jbcodeforce/jbcodeforce.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Jerome Boyer&#39;s Personal Site" class="md-nav__button md-logo" aria-label="Jerome Boyer's Personal Site" data-md-component="logo">
+      
+  <img src="../images/gear-sp-01.jpg" alt="logo">
+
+    </a>
+    Jerome Boyer's Personal Site
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jbcodeforce/jbcodeforce.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Blogs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skill.html" class="md-nav__link">
+        Skill
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assets.html" class="md-nav__link">
+        List of contributions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5">
+        Knowledge base
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Knowledge base" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Knowledge base
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      <label class="md-nav__link" for="__nav_5_1">
+        Architecture
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecture" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/eda.html" class="md-nav__link">
+        Event Driven Architecture
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/architectural-decisions.html" class="md-nav__link">
+        Architecture decision
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/DR.html" class="md-nav__link">
+        Disaster recovery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/gcp.html" class="md-nav__link">
+        GCP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/ibmcloud.html" class="md-nav__link">
+        IBM Cloud
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../istio/index.html" class="md-nav__link">
+        Istio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/openshift-studies" class="md-nav__link">
+        Openshift Studies
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/gettingstarted.html" class="md-nav__link">
+        Playground
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/k8s.html" class="md-nav__link">
+        Kubernetes services
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_3">
+        Data
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-topology.html" class="md-nav__link">
+        Data topology
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-integration.html" class="md-nav__link">
+        Data integration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-replication.html" class="md-nav__link">
+        Data replication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-partitioning.html" class="md-nav__link">
+        Data partitioning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ibm.com/cloud/architecture/architectures/spectrum-discover" class="md-nav__link">
+        Data catalog - spectrum discover
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/opendatahub.html" class="md-nav__link">
+        OpenData Hub
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      <label class="md-nav__link" for="__nav_5_4">
+        AI
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AI" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          AI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/ml-basics/" class="md-nav__link">
+        Machine learning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/ads.html" class="md-nav__link">
+        Automation Decision Service
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5_5">
+        Programming
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_5">
+          <span class="md-nav__icon md-icon"></span>
+          Programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5_1" type="checkbox" id="__nav_5_5_1" checked>
+      
+      <label class="md-nav__link" for="__nav_5_5_1">
+        Java Studies
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Java Studies" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Java Studies
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="microprofile.html" class="md-nav__link">
+        Microprofile 3.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="restassured.html" class="md-nav__link">
+        Rest assured
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concurrent.html" class="md-nav__link">
+        Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding/testcontainer.html" class="md-nav__link">
+        TestContainer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="openliberty.html" class="md-nav__link">
+        Open Liberty
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quarkus.html" class="md-nav__link">
+        Quarkus
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="springcloud.html" class="md-nav__link">
+        SpringCloud
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Vert.x
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="vertx.html" class="md-nav__link md-nav__link--active">
+        Vert.x
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    Get started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-bus" class="md-nav__link">
+    Event bus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-with-docker" class="md-nav__link">
+    Run with docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-existing-application-with-a-dockerfile" class="md-nav__link">
+    Deploy existing application with a dockerfile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#circuit-breaker" class="md-nav__link">
+    Circuit breaker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kafka-and-vertx" class="md-nav__link">
+    Kafka and vert.x
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quarkus-vertx-reactive-app" class="md-nav__link">
+    Quarkus Vert.x reactive app
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vertx-reactive-with-database" class="md-nav__link">
+    Vertx reactive with database
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vertx-body-of-knowledge" class="md-nav__link">
+    Vert.x body of knowledge
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="funqy.html" class="md-nav__link">
+        Funqy
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concurrent.html" class="md-nav__link">
+        Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mqChallenge.html" class="md-nav__link">
+        MQ challenge
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FAQ.html" class="md-nav__link">
+        Java FAQ
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="java-vscode.html" class="md-nav__link">
+        VScode
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/python-code" class="md-nav__link">
+        Python Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/vuejs-studies/" class="md-nav__link">
+        Vue.js Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://cloudnative101.dev/" class="md-nav__link">
+        Cloud native content IBM
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git.html" class="md-nav__link">
+        Git summary
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding/gitops.html" class="md-nav__link">
+        GitOps
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/angular-sandbox/" class="md-nav__link">
+        Angular Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code-template.html" class="md-nav__link">
+        My code templates
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_6" type="checkbox" id="__nav_5_6" >
+      
+      <label class="md-nav__link" for="__nav_5_6">
+        Techno
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Techno" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_6">
+          <span class="md-nav__icon md-icon"></span>
+          Techno
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/apicurio.html" class="md-nav__link">
+        Apicurio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/atlas.html" class="md-nav__link">
+        Atlas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/ads.html" class="md-nav__link">
+        Automation Decision Service
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/bai.html" class="md-nav__link">
+        Self driving enterprise
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/cos.html" class="md-nav__link">
+        Cloud object storage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/code-engine.html" class="md-nav__link">
+        Code Engine
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/db-play/" class="md-nav__link">
+        Database play
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/egeria.html" class="md-nav__link">
+        Egeria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/flink-studies/" class="md-nav__link">
+        Flink Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/elasticsrch.html" class="md-nav__link">
+        Elastic Search
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/kafka-studies" class="md-nav__link">
+        Kafka Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/kar.html" class="md-nav__link">
+        KAR
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/redis.html" class="md-nav__link">
+        Redis
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/jbcodeforce/redpanda-studies/" class="md-nav__link">
+        RedPanda Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/spark-studies/" class="md-nav__link">
+        Spark Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="java-vscode.html" class="md-nav__link">
+        VScode
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    Get started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-bus" class="md-nav__link">
+    Event bus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-with-docker" class="md-nav__link">
+    Run with docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-existing-application-with-a-dockerfile" class="md-nav__link">
+    Deploy existing application with a dockerfile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#circuit-breaker" class="md-nav__link">
+    Circuit breaker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kafka-and-vertx" class="md-nav__link">
+    Kafka and vert.x
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quarkus-vertx-reactive-app" class="md-nav__link">
+    Quarkus Vert.x reactive app
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vertx-reactive-with-database" class="md-nav__link">
+    Vertx reactive with database
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vertx-body-of-knowledge" class="md-nav__link">
+    Vert.x body of knowledge
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jbcodeforce/jbcodeforce.github.io/edit/master/docs/java/vertx.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="vertx">Vert.x</h1>
+<p>A polyglot library to develop event driven non blocking apps. The main website <a href="https://vertx.io/">vertx.io/</a> has a lot of examples to get started.</p>
+<h2 id="concepts">Concepts</h2>
+<ul>
+<li>Vert.x is not a restrictive framework, and don't force the correct way to write an application.</li>
+<li>It uses an event loop thread to process requests with non blocking IO, and dispatch to event handlers. </li>
+<li>Verticles are pieces of code that Vert.x engine executes</li>
+<li>An application would typically be composed of multiple verticles running in the same Vert.x instance and communicate with each other using events via the event bus</li>
+<li>In Quarkus every IO interaction passes through the non-blocking and reactive Vert.x engine</li>
+<li>Verticles remain dormant until they receive a message or event.</li>
+<li>Message handling is ideally asynchronous, messages are queued to the event bus, and control is returned to the sender</li>
+<li>Vert.x offers an  event bus  allowing the different components of an application to interact using  messages. Messages are sent to  addresses and have a set of  headers  and a  body.</li>
+<li>By starting a Vert.x application in cluster  mode, nodes are connected to enable shared data structure, hard-stop failure detection, and load-balancing group communication. Vert.x uses <a href="https://vertx.io/docs/vertx-hazelcast/java/">Hazelcast</a> by default to support the cluster management.</li>
+</ul>
+<h2 id="get-started">Get started</h2>
+<p>Use the <a href="https://start.vertx.io/">app generator</a> to get starting code and pom.xml or Quarkus app generator as it has a Vert.x engine embedded inside it.</p>
+<p>See all the <a href="https://github.com/vert-x3/vertx-examples/tree/4.x">vert.x samples here</a>.</p>
+<ul>
+<li><a href="https://github.com/vert-x3/vertx-examples/blob/3.x/openshift3-examples/vertx-openshift-applications/vertx-greeting-application/src/main/java/io/vertx/example/openshift/greeting/MyGreetingApp.java">Simple http server with vertx router</a>. To run it: <code>mvn  exec:java -Dexec.mainClass=io.vertx.example.openshift.grting.MyGreetingApp</code></li>
+<li><a href="https://github.com/vert-x3/vertx-examples/blob/4.x/core-examples/src/main/java/io/vertx/example/core/http/simple/Client.java">A verticle to call a service via http</a></li>
+<li><a href="https://github.com/vert-x3/vertx-examples/blob/3.x/openshift3-examples/vertx-openshift-applications/vertx-clustered-application/clustered-application-http/src/main/java/io/vertx/examples/openshift/MyHttpVerticle.java">Clustered http server to deploy on openshift</a></li>
+<li><a href="https://github.com/vert-x3/vertx-examples/tree/4.x/core-examples#point-to-point">Event bus point to point</a></li>
+<li><a href="https://github.com/vert-x3/vertx-examples/tree/4.x/core-examples#publish--subscribe">Event bus pub/sub</a></li>
+<li><a href="#circuit-breaker">Circuit breaker</a></li>
+<li><a href="#kafka-and-vertx">Kafka consumer and producer</a></li>
+</ul>
+<p>vertx has a CLI to run verticle, to bypass maven or graddle.</p>
+<ul>
+<li>Start a http server with vertx: <code>vertx run io.vertx.examples.openshift.MyHttpVerticle -cp target/clustered-application-http-3.9.0.jar</code></li>
+</ul>
+<h2 id="event-bus">Event bus</h2>
+<p>Event bus is used by different verticles to communicate through asynchronous message passing  (JSON). </p>
+<p>A receiver on a point to point</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">start</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="p">{</span>
+
+    <span class="n">EventBus</span> <span class="n">eb</span> <span class="o">=</span> <span class="n">vertx</span><span class="p">.</span><span class="na">eventBus</span><span class="p">();</span>
+
+    <span class="n">eb</span><span class="p">.</span><span class="na">consumer</span><span class="p">(</span><span class="s">&quot;ping-address&quot;</span><span class="p">,</span> <span class="n">message</span> <span class="o">-&gt;</span> <span class="p">{</span>
+
+      <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Received message: &quot;</span> <span class="o">+</span> <span class="n">message</span><span class="p">.</span><span class="na">body</span><span class="p">());</span>
+      <span class="c1">// Now send back reply</span>
+      <span class="n">message</span><span class="p">.</span><span class="na">reply</span><span class="p">(</span><span class="s">&quot;pong!&quot;</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Receiver ready!&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+</code></pre></div>
+<p>Start with cluster option so Hazelcast will manage the verticles and netty will support the TCP connection
+A sender </p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">start</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="p">{</span>
+    <span class="n">EventBus</span> <span class="n">eb</span> <span class="o">=</span> <span class="n">vertx</span><span class="p">.</span><span class="na">eventBus</span><span class="p">();</span>
+
+    <span class="c1">// Send a message every second</span>
+
+    <span class="n">vertx</span><span class="p">.</span><span class="na">setPeriodic</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">v</span> <span class="o">-&gt;</span> <span class="p">{</span>
+
+      <span class="n">eb</span><span class="p">.</span><span class="na">request</span><span class="p">(</span><span class="s">&quot;ping-address&quot;</span><span class="p">,</span> <span class="s">&quot;ping!&quot;</span><span class="p">,</span> <span class="n">reply</span> <span class="o">-&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="p">.</span><span class="na">succeeded</span><span class="p">())</span> <span class="p">{</span>
+          <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Received reply &quot;</span> <span class="o">+</span> <span class="n">reply</span><span class="p">.</span><span class="na">result</span><span class="p">().</span><span class="na">body</span><span class="p">());</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;No reply&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+
+    <span class="p">});</span>
+  <span class="p">}</span>
+</code></pre></div>
+<h2 id="run-with-docker">Run with docker</h2>
+<p>Using <a href="https://vertx.io/docs/vertx-docker/">vert.x with docker</a> to get a Java environment with Vert.x jars ready to go. </p>
+<p>To run a Verticle:</p>
+<div class="highlight"><pre><span></span><code>docker run -i -t -p <span class="m">8080</span>:8080 <span class="se">\</span>
+    -v <span class="nv">$PWD</span>:/verticles vertx/vertx3-exec <span class="se">\</span>
+    run io.vertx.sample.RandomGeneratorVerticle <span class="se">\</span>
+    -cp /verticles/MY_VERTICLE.jar
+</code></pre></div>
+<h2 id="deploy-existing-application-with-a-dockerfile">Deploy existing application with a dockerfile</h2>
+<div class="highlight"><pre><span></span><code>oc new-build --binary --name=vertx-greeting-application -l app=vertx-greeting-application
+mvn dependency:copy-dependencies compile
+oc start-build vertx-greeting-application --from-dir=. --follow
+oc new-app vertx-greeting-application -l app=vertx-greeting-application
+oc expose service vertx-greeting-application
+</code></pre></div>
+<p>Access to external url and call one endpoint</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">URL</span><span class="o">=</span>http://<span class="k">$(</span>oc get routes vertx-greeting-application -o  yaml<span class="p">|</span> yq .spec.host <span class="p">|</span>sed <span class="s1">&#39;s/&quot;//g&#39;</span><span class="k">)</span>
+curl <span class="nv">$URL</span>
+</code></pre></div>
+<h2 id="circuit-breaker">Circuit breaker</h2>
+<p><img alt="Example of circuit breaker" src="https://github.com/vert-x3/vertx-examples/tree/4.x/circuit-breaker-examples" /></p>
+<p>To use the circuit breaker you need to:
+* Create a circuit breaker, with the configuration you want (timeout, number of failure before opening the circuit)
+* Execute some code using the breaker</p>
+<p><code>vertx run io.vertx.example.circuit.breaker.Client -cp target/circuit-breaker-exales-3.9.0.jar</code></p>
+<p>Operations guarded by a circuit breaker are intended to by non-blocking and asynchronous in order to benefits from the Vert.x execution mode</p>
+<h2 id="kafka-and-vertx">Kafka and vert.x</h2>
+<p>The <a href="https://github.com/vert-x3/vertx-examples/tree/4.x/kafka-examples">Kafka consumer and producer sample</a> is an interesting example where a kafka broker (from debezium) is started within a main verticle. Start the broker, producers and consumer to see the real time updated dashboard: <code>vertx run io.vertx.example.kafka.dashboard.MainVerticle -cp target/kafka-examples-3.9.0-fat.jar</code></p>
+<p>For Producer the code is a simple AbstractVerticle</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">io.vertx.core.json.JsonObject</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.kafka.client.producer.KafkaWriteStream</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.kafka.clients.producer.ProducerRecord</span><span class="p">;</span>
+
+  <span class="kd">private</span> <span class="n">KafkaWriteStream</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">JsonObject</span><span class="o">&gt;</span> <span class="n">producer</span><span class="p">;</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">start</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="p">{</span>
+    <span class="c1">// Get the kafka producer config</span>
+    <span class="n">JsonObject</span> <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="p">();</span>
+    <span class="c1">// Create the producer, ith key as string and value as jsonObject</span>
+    <span class="n">producer</span> <span class="o">=</span> <span class="n">KafkaWriteStream</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">vertx</span><span class="p">,</span> <span class="n">config</span><span class="p">.</span><span class="na">getMap</span><span class="p">(),</span> <span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="n">JsonObject</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+    <span class="c1">// get messages and write:</span>
+    <span class="n">producer</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="k">new</span> <span class="n">ProducerRecord</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="s">&quot;the_topic&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">JsonObject</span><span class="p">().</span><span class="na">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">payload</span><span class="p">)));</span>
+  <span class="p">}</span>
+
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">stop</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">producer</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">producer</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>
+<p>On the consumer side the same approach is used, get the kafka config and then create consumer:</p>
+<div class="highlight"><pre><span></span><code><span class="n">JsonObject</span> <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="p">();</span>
+
+<span class="n">KafkaReadStream</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">JsonObject</span><span class="o">&gt;</span> <span class="n">consumer</span> <span class="o">=</span> <span class="n">KafkaReadStream</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">vertx</span><span class="p">,</span> <span class="n">config</span><span class="p">.</span><span class="na">getMap</span><span class="p">(),</span> <span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="n">JsonObject</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+    <span class="n">consumer</span><span class="p">.</span><span class="na">handler</span><span class="p">(</span><span class="n">record</span> <span class="o">-&gt;</span> <span class="p">{</span>
+      <span class="n">JsonObject</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">record</span><span class="p">.</span><span class="na">value</span><span class="p">();</span>
+      <span class="c1">// process the received record </span>
+      <span class="p">});</span>
+
+    <span class="c1">// Subscribe to Kafka</span>
+    <span class="n">consumer</span><span class="p">.</span><span class="na">subscribe</span><span class="p">(</span><span class="n">Collections</span><span class="p">.</span><span class="na">singleton</span><span class="p">(</span><span class="s">&quot;the_topic&quot;</span><span class="p">));</span>
+</code></pre></div>
+<h2 id="quarkus-vertx-reactive-app">Quarkus Vert.x reactive app</h2>
+<p>Quarkus HTTP support is based on a non-blocking and reactive engine (Eclipse Vert.x and Netty). All the HTTP requests, your application receives, are handled by event loops (IO Thread) and then are routed towards the code that manages the request. 
+Depending on the destination, it can invoke the code managing the request on a worker thread (Servlet, Jax-RS) or use the IO Thread (reactive route). Quarkus also integrates smoothly with the Vert.x event bus (to enable asynchronous messaging passing between application components) and some reactive clients.</p>
+<p>See <a href="https://quarkus.io/guides/vertx">this guide to get started with quarkus and vert.x</a>.</p>
+<p>Use the following extensions: </p>
+<div class="highlight"><pre><span></span><code>mvn io.quarkus:quarkus-maven-plugin:1.9.1.Final:create <span class="se">\</span>
+    -DprojectGroupId<span class="o">=</span>jbcodeforce <span class="se">\</span>
+    -DprojectArtifactId<span class="o">=</span>getting-started-reactive <span class="se">\</span>
+    -DclassName<span class="o">=</span><span class="s2">&quot;jbcodeforce.gs.ReactiveGreetingResource&quot;</span> <span class="se">\</span>
+    -Dpath<span class="o">=</span><span class="s2">&quot;/hello&quot;</span> <span class="se">\</span>
+    -Dextensions<span class="o">=</span><span class="s2">&quot;resteasy-mutiny, vertx, resteasy-jsonb&quot;</span>
+<span class="c1"># Or using the add extension</span>
+mvn quarkus:add-extension -Dextension<span class="o">=</span>resteasy-mutiny 
+</code></pre></div>
+<p><img alt="" src="https://quarkus.io/guides/images/http-architecture.png" /></p>
+<p>Get access to Vert.x via injection in any beans (different Vertx classes are available depending of the api to use for reactive programming): </p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Inject</span> <span class="n">io</span><span class="p">.</span><span class="na">vertx</span><span class="p">.</span><span class="na">mutiny</span><span class="p">.</span><span class="na">core</span><span class="p">.</span><span class="na">Vertx</span> <span class="n">vertx</span><span class="p">;</span>
+</code></pre></div>
+<p>To asynchronously handle the HTTP request, the endpoint method must return a <code>java.util.concurrent.CompletionStage</code> or an <code>io.smallrye.mutiny.Uni</code> or <code>Multi</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GET</span>
+<span class="nd">@Produces</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">TEXT_PLAIN</span><span class="p">)</span>
+<span class="kd">public</span> <span class="n">Uni</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">doSomethingAsync</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Mimic an asynchronous computation.</span>
+    <span class="k">return</span> <span class="n">Uni</span><span class="p">.</span><span class="na">createFrom</span><span class="p">()</span>
+            <span class="p">.</span><span class="na">item</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="s">&quot;Hello!&quot;</span><span class="p">)</span>
+            <span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">delayIt</span><span class="p">().</span><span class="na">by</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMillis</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>You can deploy verticles in Quarkus. It supports:</p>
+<ul>
+<li>bare verticle - Java classes extending <code>io.vertx.core.AbstractVerticle</code></li>
+<li>Mutiny verticle - Java classes extending <code>io.smallrye.mutiny.vertx.core.AbstractVerticle</code></li>
+</ul>
+<p>Verticles are not beans, but adding @ApplicationScoped, can be used to access injection.</p>
+<p>Here is an example on how to deploy a verticle from another application scoped bean, when the application starts. </p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="p">(</span><span class="nd">@Observes</span> <span class="n">StartupEvent</span> <span class="n">e</span><span class="p">,</span> <span class="n">Vertx</span> <span class="n">vertx</span><span class="p">,</span> <span class="n">MyBeanVerticle</span> <span class="n">verticle</span><span class="p">)</span> <span class="p">{</span>
+         <span class="n">vertx</span><span class="p">.</span><span class="na">deployVerticle</span><span class="p">(</span><span class="n">verticle</span><span class="p">).</span><span class="na">await</span><span class="p">().</span><span class="na">indefinitely</span><span class="p">();</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>For reactive routes, we need to add vertx-web. And then add  @Route annotation on method to indicate it is a reactive route. The method gets a <code>RoutingContext</code> as a parameter from which we can get the HTTP request and response objects. You can also register your route directly on the HTTP routing layer by registering routes directly on the Vert.x Router object. A reactive route must be non-blocking.</p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>Reactive route and JaxRS resource can be combined. Every operations which may take long processing time can be asynchronous with callback.</p>
+<h2 id="vertx-reactive-with-database">Vertx reactive with database</h2>
+<p>Get a service loading entity from postgresql using reactive client.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">Uni</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span> <span class="nf">findById</span><span class="p">(</span><span class="n">PgPool</span> <span class="n">client</span><span class="p">,</span> <span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">preparedQuery</span><span class="p">(</span><span class="s">&quot;SELECT id, name FROM fruits WHERE id = $1&quot;</span><span class="p">).</span><span class="na">execute</span><span class="p">(</span><span class="n">Tuple</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
+                <span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">apply</span><span class="p">(</span><span class="n">RowSet</span><span class="p">::</span><span class="n">iterator</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">apply</span><span class="p">(</span><span class="n">iterator</span> <span class="o">-&gt;</span> <span class="n">iterator</span><span class="p">.</span><span class="na">hasNext</span><span class="p">()</span> <span class="o">?</span> <span class="n">from</span><span class="p">(</span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">())</span> <span class="p">:</span> <span class="kc">null</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="vertx-body-of-knowledge">Vert.x body of knowledge</h2>
+<ul>
+<li><a href="https://developer.ibm.com/technologies/java/articles/reactive-systems-getting-started/">Grace Jansen's Getting started with Reactive Systems</a></li>
+<li>[Building reactive microservice in java - Clement Escoffier]</li>
+<li><a href="https://www.baeldung.com/vertx">baeldung Vertx</a></li>
+<li><a href="https://quarkus.io/guides/vertx">Quarkus using Eclipse Vert.x</a></li>
+<li><a href="https://vertx.io/docs/vertx-hazelcast/java/">Hazelcast and Vert.x</a></li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="springcloud.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: SpringCloud" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              SpringCloud
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="funqy.html" class="md-footer__link md-footer__link--next" aria-label="Next: Funqy" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Funqy
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>

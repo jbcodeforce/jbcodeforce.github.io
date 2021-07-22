@@ -1,0 +1,2337 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>GitOps - Jerome Boyer's Personal Site</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="magenta-dark" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gitops" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Jerome Boyer&#39;s Personal Site" class="md-header__button md-logo" aria-label="Jerome Boyer's Personal Site" data-md-component="logo">
+      
+  <img src="../images/gear-sp-01.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jerome Boyer's Personal Site
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GitOps
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/jbcodeforce/jbcodeforce.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Jerome Boyer&#39;s Personal Site" class="md-nav__button md-logo" aria-label="Jerome Boyer's Personal Site" data-md-component="logo">
+      
+  <img src="../images/gear-sp-01.jpg" alt="logo">
+
+    </a>
+    Jerome Boyer's Personal Site
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jbcodeforce/jbcodeforce.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Blogs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skill.html" class="md-nav__link">
+        Skill
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assets.html" class="md-nav__link">
+        List of contributions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5">
+        Knowledge base
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Knowledge base" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Knowledge base
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      <label class="md-nav__link" for="__nav_5_1">
+        Architecture
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecture" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/eda.html" class="md-nav__link">
+        Event Driven Architecture
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/architectural-decisions.html" class="md-nav__link">
+        Architecture decision
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/DR.html" class="md-nav__link">
+        Disaster recovery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/gcp.html" class="md-nav__link">
+        GCP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/ibmcloud.html" class="md-nav__link">
+        IBM Cloud
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../istio/index.html" class="md-nav__link">
+        Istio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/openshift-studies" class="md-nav__link">
+        Openshift Studies
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/gettingstarted.html" class="md-nav__link">
+        Playground
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/k8s.html" class="md-nav__link">
+        Kubernetes services
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_3">
+        Data
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-topology.html" class="md-nav__link">
+        Data topology
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-integration.html" class="md-nav__link">
+        Data integration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-replication.html" class="md-nav__link">
+        Data replication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-partitioning.html" class="md-nav__link">
+        Data partitioning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ibm.com/cloud/architecture/architectures/spectrum-discover" class="md-nav__link">
+        Data catalog - spectrum discover
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/opendatahub.html" class="md-nav__link">
+        OpenData Hub
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      <label class="md-nav__link" for="__nav_5_4">
+        AI
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AI" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          AI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/ml-basics/" class="md-nav__link">
+        Machine learning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/ads.html" class="md-nav__link">
+        Automation Decision Service
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5_5">
+        Programming
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_5">
+          <span class="md-nav__icon md-icon"></span>
+          Programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5_1" type="checkbox" id="__nav_5_5_1" >
+      
+      <label class="md-nav__link" for="__nav_5_5_1">
+        Java Studies
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Java Studies" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Java Studies
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/microprofile.html" class="md-nav__link">
+        Microprofile 3.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/restassured.html" class="md-nav__link">
+        Rest assured
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/concurrent.html" class="md-nav__link">
+        Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="testcontainer.html" class="md-nav__link">
+        TestContainer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/openliberty.html" class="md-nav__link">
+        Open Liberty
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/quarkus.html" class="md-nav__link">
+        Quarkus
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/springcloud.html" class="md-nav__link">
+        SpringCloud
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/vertx.html" class="md-nav__link">
+        Vert.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/funqy.html" class="md-nav__link">
+        Funqy
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/concurrent.html" class="md-nav__link">
+        Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/mqChallenge.html" class="md-nav__link">
+        MQ challenge
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/FAQ.html" class="md-nav__link">
+        Java FAQ
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/java-vscode.html" class="md-nav__link">
+        VScode
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/python-code" class="md-nav__link">
+        Python Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/vuejs-studies/" class="md-nav__link">
+        Vue.js Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://cloudnative101.dev/" class="md-nav__link">
+        Cloud native content IBM
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git.html" class="md-nav__link">
+        Git summary
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          GitOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="gitops.html" class="md-nav__link md-nav__link--active">
+        GitOps
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gitops_1" class="md-nav__link">
+    GitOps
+  </a>
+  
+    <nav class="md-nav" aria-label="GitOps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-principles" class="md-nav__link">
+    Core principles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supporting-tools" class="md-nav__link">
+    Supporting tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playground" class="md-nav__link">
+    Playground
+  </a>
+  
+    <nav class="md-nav" aria-label="Playground">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-ibm-open-labs" class="md-nav__link">
+    Use IBM open labs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openshift-try" class="md-nav__link">
+    Openshift try
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#having-a-schema-registry" class="md-nav__link">
+    Having a schema registry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openshift-pipelines" class="md-nav__link">
+    OpenShift Pipelines
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tekton-tutorial" class="md-nav__link">
+    Tekton tutorial
+  </a>
+  
+    <nav class="md-nav" aria-label="Tekton tutorial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#administration-steps" class="md-nav__link">
+    Administration steps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#developers-steps" class="md-nav__link">
+    Developer's steps:
+  </a>
+  
+    <nav class="md-nav" aria-label="Developer's steps:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-tasks" class="md-nav__link">
+    Define tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-resources" class="md-nav__link">
+    Define resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-pipeline" class="md-nav__link">
+    Create pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#some-potential-errors" class="md-nav__link">
+    Some potential errors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggers" class="md-nav__link">
+    Triggers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enhancing" class="md-nav__link">
+    Enhancing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-readings" class="md-nav__link">
+    Other readings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#argocd-tutorial" class="md-nav__link">
+    ArgoCD tutorial
+  </a>
+  
+    <nav class="md-nav" aria-label="ArgoCD tutorial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connect-pipeline-to-deployment" class="md-nav__link">
+    Connect pipeline to deployment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more-reading" class="md-nav__link">
+    More reading
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kustomize-and-gitops" class="md-nav__link">
+    Kustomize and gitops
+  </a>
+  
+    <nav class="md-nav" aria-label="Kustomize and gitops">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#future-readings" class="md-nav__link">
+    Future readings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kam" class="md-nav__link">
+    Kam
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/angular-sandbox/" class="md-nav__link">
+        Angular Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code-template.html" class="md-nav__link">
+        My code templates
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_6" type="checkbox" id="__nav_5_6" >
+      
+      <label class="md-nav__link" for="__nav_5_6">
+        Techno
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Techno" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_6">
+          <span class="md-nav__icon md-icon"></span>
+          Techno
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/apicurio.html" class="md-nav__link">
+        Apicurio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/atlas.html" class="md-nav__link">
+        Atlas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/ads.html" class="md-nav__link">
+        Automation Decision Service
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/bai.html" class="md-nav__link">
+        Self driving enterprise
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/cos.html" class="md-nav__link">
+        Cloud object storage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/code-engine.html" class="md-nav__link">
+        Code Engine
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/db-play/" class="md-nav__link">
+        Database play
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/egeria.html" class="md-nav__link">
+        Egeria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/flink-studies/" class="md-nav__link">
+        Flink Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/elasticsrch.html" class="md-nav__link">
+        Elastic Search
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/kafka-studies" class="md-nav__link">
+        Kafka Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/kar.html" class="md-nav__link">
+        KAR
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/redis.html" class="md-nav__link">
+        Redis
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/jbcodeforce/redpanda-studies/" class="md-nav__link">
+        RedPanda Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/spark-studies/" class="md-nav__link">
+        Spark Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/java-vscode.html" class="md-nav__link">
+        VScode
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gitops_1" class="md-nav__link">
+    GitOps
+  </a>
+  
+    <nav class="md-nav" aria-label="GitOps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-principles" class="md-nav__link">
+    Core principles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supporting-tools" class="md-nav__link">
+    Supporting tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playground" class="md-nav__link">
+    Playground
+  </a>
+  
+    <nav class="md-nav" aria-label="Playground">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-ibm-open-labs" class="md-nav__link">
+    Use IBM open labs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openshift-try" class="md-nav__link">
+    Openshift try
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#having-a-schema-registry" class="md-nav__link">
+    Having a schema registry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openshift-pipelines" class="md-nav__link">
+    OpenShift Pipelines
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tekton-tutorial" class="md-nav__link">
+    Tekton tutorial
+  </a>
+  
+    <nav class="md-nav" aria-label="Tekton tutorial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#administration-steps" class="md-nav__link">
+    Administration steps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#developers-steps" class="md-nav__link">
+    Developer's steps:
+  </a>
+  
+    <nav class="md-nav" aria-label="Developer's steps:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-tasks" class="md-nav__link">
+    Define tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-resources" class="md-nav__link">
+    Define resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-pipeline" class="md-nav__link">
+    Create pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#some-potential-errors" class="md-nav__link">
+    Some potential errors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggers" class="md-nav__link">
+    Triggers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enhancing" class="md-nav__link">
+    Enhancing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-readings" class="md-nav__link">
+    Other readings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#argocd-tutorial" class="md-nav__link">
+    ArgoCD tutorial
+  </a>
+  
+    <nav class="md-nav" aria-label="ArgoCD tutorial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connect-pipeline-to-deployment" class="md-nav__link">
+    Connect pipeline to deployment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more-reading" class="md-nav__link">
+    More reading
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kustomize-and-gitops" class="md-nav__link">
+    Kustomize and gitops
+  </a>
+  
+    <nav class="md-nav" aria-label="Kustomize and gitops">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#future-readings" class="md-nav__link">
+    Future readings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kam" class="md-nav__link">
+    Kam
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jbcodeforce/jbcodeforce.github.io/edit/master/docs/coding/gitops.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="gitops">GitOps</h1>
+<p><a href="https://www.gitops.tech/">Gitops</a>  is a way of implementing Continuous Deployment for cloud native applications.</p>
+<p>The core idea of GitOps is having a Git repository that always contains declarative descriptions of the infrastructure currently desired in the production environment and an automated process to make the production environment match the described state in the repository.</p>
+<h2 id="gitops_1">GitOps</h2>
+<p>Developers and operations want to:</p>
+<ul>
+<li>Audit all changes made to pipelines, infrastructure, and application configuration.</li>
+<li>Roll forward/back to desired state in case of issues.</li>
+<li>Consistently configure all environments.</li>
+<li>Reduce manual effort by automating application and environment setup and remediation.</li>
+<li>Have an easy way to manage application and infrastructure state across clusters/environments</li>
+</ul>
+<p>GitOps is a natural evolution of DevOps and Infrastructure-as-Code.</p>
+<h3 id="core-principles">Core principles</h3>
+<ul>
+<li>Git is the source of truth.</li>
+<li>Separate application source code (Java/Go) from deployment manifests i.e the application source code and the GitOps configuration reside in separate git repositories.</li>
+<li>Deployment manifests are standard Kubernetes (k8s) manifests i.e Kubernetes manifests in the GitOps repository can be simply applied with nothing more than a oc apply.</li>
+<li>Kustomize for defining the differences between environments i.e reusable parameters with extra resources described using kustomization.yaml.</li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li>Day 1 Operations are actions that users take to bootstrap a GitOps configuration. See <a href="https://github.com/redhat-developer/kam/tree/master/docs/journey/day1">this note</a> on how to set up GitOps and Sealed Secret.</li>
+<li><a href="https://github.com/redhat-developer/kam/tree/master/docs/journey/day2">Day 2 Operations</a> are actions that users take to change a GitOps system.</li>
+</ul>
+<h3 id="supporting-tools">Supporting tools</h3>
+<ul>
+<li><a href="https://github.com/redhat-developer/kam">kam CLI from the Red Hat team gitops</a></li>
+<li><a href="#tekton-tutorial">Tekton</a> for continuous integration and even deployment</li>
+<li><a href="#argocd-tutorial">ArgoCD</a> for continuous deployment</li>
+</ul>
+<h2 id="playground">Playground</h2>
+<h3 id="use-ibm-open-labs">Use IBM open labs</h3>
+<p>Connect to the IBM <a href="https://developer.ibm.com/openlabs/openshift">open lab home page</a>, Select <code>bring your own app</code> to start a cluster with 2 nodes.</p>
+<p>Login to the cloud: <code>ibmcloud login --sso</code></p>
+<p>Get access to a temporary access code:</p>
+<p>Do not select a region, and do not ipdate the cli. </p>
+<p>Access the Openshift cluster: oc login --server  https://.....</p>
+<p>Verify nodes and services</p>
+<div class="highlight"><pre><span></span><code>oc get nodes 
+oc get svc,deploy,po --all-namespaces
+</code></pre></div>
+<h3 id="openshift-try">Openshift try</h3>
+<p><a href="https://www.openshift.com/try">Red Hat OpenShift trial</a>. With this environment we cannot create new project, only use two predefined projects.</p>
+<h3 id="having-a-schema-registry">Having a schema registry</h3>
+<p>We can use docker hub, quay.io or define a private registry:</p>
+<ul>
+<li><a href="https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started#getting-started">ibm cloud container registry</a>  provides a multi-tenant private image registry that you can use to store and share your container images with users in your IBM Cloud account</li>
+<li><a href="https://aws.amazon.com/ecr/">Amazon Elastic Container Registry (ECR)</a> we can share container software privately within your organization or publicly worldwide for anyone to discover and download. geo-replicated for high availability and faster downloads</li>
+</ul>
+<p>To move one image from one registry to another use docker tag to change the image name:</p>
+<div class="highlight"><pre><span></span><code>docker tag &lt;source_image&gt;:&lt;tag&gt; &lt;region&gt;.icr.io/&lt;my_namespace&gt;/&lt;new_image_repo&gt;:&lt;new_tag&gt;
+</code></pre></div>
+<h2 id="openshift-pipelines">OpenShift Pipelines</h2>
+<p>OpenShift Pipelines is a Continuous Integration / Continuous Delivery (CI/CD) solution based on the open source Tekton project. 
+The key objective of Tekton is to enable development teams to quickly create pipelines of activity from simple, repeatable steps.
+A unique characteristic of Tekton that differentiates it from previous CI/CD solutions is that Tekton steps execute within
+ a container that is specifically created just for that task.</p>
+<p>Users can interact with OpenShift Pipelines using the web user interface, command line interface, and via a Visual Studio Code editor plugin. 
+The command line access is a mixture of the OpenShift <code>oc</code> command line utility 
+and the <code>tkn</code> command line for specific Tekton commands. 
+The <code>tkn</code> and <code>oc</code> command line utilities can be downloaded from the OpenShift console web user interface. 
+To do this, simply press the white circle containing a black question mark near your name on the top right 
+corner and then select Command Line Tools:</p>
+<p><img alt="CLI tools" src="images/clitools.jpg" /></p>
+<h2 id="tekton-tutorial">Tekton tutorial</h2>
+<p>This section is a summary based on <a href="https://github.com/openshift/pipelines-tutorial">OpenShift pipeline tutorial</a>, <a href="https://redhat-scholars.github.io/tekton-tutorial">Red Hat scholar - tekton tutorial</a> and <a href="https://www.openshift.com/blog/cloud-native-ci-cd-with-openshift-pipelines">this blog</a>:</p>
+<ul>
+<li>Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc)</li>
+<li>Build images with Kubernetes tools such as S2I, Buildah, Buildpacks, Kaniko,...</li>
+<li>
+<p>With openshift pipelines operator, CRD, service account and cluster binding are created automatically:</p>
+</li>
+<li>
+<p>install the operator via Operator Hub or using yaml:</p>
+</li>
+<li>Service accounts are named <code>builder</code> and <code>pipeline</code></li>
+<li>
+<p>Concepts</p>
+<ul>
+<li><strong>Task</strong>: a reusable, loosely coupled number of steps that perform a specific task. Tasks are executed/run by creating TaskRuns. A TaskRun will schedule a Pod. Task definitions are reusable.</li>
+<li><strong>Pipeline</strong>: the definition of the pipeline and the Tasks that it should perform</li>
+<li><strong>Resources</strong>: build uses resources called <a href="https://github.com/tektoncd/pipeline/blob/main/docs/resources.md">PipelineResource</a> that helps to configure the git repo url, the final container image name etc</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Tekton elements" src="images/tekton-res.png" /></p>
+<p>The task requires an input resource of type git that defines where the source is located. 
+The git source is cloned to a local volume at path <code>/workspace/source</code> where <code>source</code> comes from the name we gave to the resource</p>
+<h3 id="administration-steps">Administration steps</h3>
+<p>Tested on RedHat OpenShit Pipelines Operator version 1.2.3  6/10/21</p>
+<ul>
+<li>Install Openshift pipelines operator from the operator hub or using oc cli with an operator subscription like in <a href="https://github.com/ibm-cloud-architecture/eda-lab-inventory/tree/master/environments/openshift-pipelines">EDA lab inventory openshift pipelines</a></li>
+</ul>
+<div class="highlight"><pre><span></span><code>oc apply -f https://raw.githubusercontent.com/ibm-cloud-architecture/eda-lab-inventory/master/environments/openshift-pipelines/operator.yaml
+</code></pre></div>
+<ul>
+<li>Define a service account <code>pipeline</code> (created automatically by the OpenShift Pipeline Operator  operator)</li>
+<li>Ensure Tekton pipelines is deployed and the API is availabe for use</li>
+</ul>
+<div class="highlight"><pre><span></span><code>kubectl api-resources --api-group<span class="o">=</span><span class="s1">&#39;tekton.dev&#39;</span>
+</code></pre></div>
+<p>Results</p>
+<div class="highlight"><pre><span></span><code>NAME                SHORTNAMES   APIGROUP     NAMESPACED   KIND
+clustertasks                     tekton.dev   false        ClusterTask
+conditions                       tekton.dev   true         Condition
+pipelineresources                tekton.dev   true         PipelineResource
+pipelineruns        pr,prs       tekton.dev   true         PipelineRun
+pipelines                        tekton.dev   true         Pipeline
+runs                             tekton.dev   true         Run
+taskruns            tr,trs       tekton.dev   true         TaskRun
+tasks                            tekton.dev   true         Task
+</code></pre></div>
+<h3 id="developers-steps">Developer's steps:</h3>
+<p>At the high level the generic steps for a given application look like:</p>
+<ul>
+<li><a href="#define-tasks">Create custom task</a> or install existing reusable Tasks</li>
+<li>Create <a href="#define-resources">PipelineResources</a> to specify the github source repository and the docker image name.</li>
+<li>Create a <a href="#create-pipeline">Pipeline</a> to define your application's delivery pipeline</li>
+<li>Create a PersistentVolumeClaim to provide the volume/filesystem for the pipeline execution or provide a VolumeClaimTemplate which creates a PersistentVolumeClaim</li>
+<li>Create a PipelineRun to instantiate and invoke the pipeline</li>
+</ul>
+<h4 id="define-tasks">Define tasks</h4>
+<p>The fundamental resource of the Tekton process is the <em>task</em>, which contains at least one step to be executed and performs a useful function. 
+Tasks execute steps in the order in which they are written, with each step completing before the next step starts. While <code>Pipelines</code> execute tasks
+ in parallel unless a task is directed to run after the completion of another task. This facilitates parallel execution of build / test / deploy 
+ activities and is a useful characteristic that guides the user in the grouping of steps within tasks.</p>
+<p>We need to have tasks to build the application executable, to build the docker image, push to the image registry and
+potentially deploy to the target runtime project. This last task is in fact done with ArgoCD.</p>
+<ul>
+<li>first task is to clone a repo. In the <a href="https://hub.tekton.dev/">Tekton hub</a> we can find the yaml for this task. But with the OpenShift pipeline operator, it is part of the clustertask:</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code>tkn  clustertask describe git-clone
+</code></pre></div>
+  So we do not need to redefine this task. If we really need to get the last release of a task we can use a command like:</p>
+<div class="highlight"><pre><span></span><code>oc apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.3/git-clone.yaml
+</code></pre></div>
+<p>Here is an example of using this task in a pipeline</p>
+<div class="highlight"><pre><span></span><code><span class="nt">tasks</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetch-source</span>
+    <span class="nt">taskRef</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">git-clone</span>
+      <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterTask</span>
+    <span class="nt">workspaces</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">output</span>
+      <span class="nt">workspace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build-ws</span>
+    <span class="nt">params</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">url</span>
+      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$(params.repo-url)</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">revision</span>
+      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$(params.revision)</span>
+</code></pre></div>
+<p>The <strong>workspace</strong> directory is where your Task/Pipeline sources/build artifacts will be cloned and generated. </p>
+<p>See <a href="#create-pipeline">next pipeline section</a> to see how to configure this git-clone.</p>
+<p><strong>Remarks:</strong> when using resource of type git then a clone will be done implicitly.</p>
+<ul>
+<li>Define a Task to build a quarkus app: this is done by using the maven task: <code>tkn task describe maven</code> or by using
+custom task using the maven docker image. </li>
+</ul>
+<p>To use the Tekton predefined maven task, use:</p>
+<div class="highlight"><pre><span></span><code>oc  apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/maven/0.2/maven.yaml
+</code></pre></div>
+<p>There is an alternative is to define the image to use for a step of the task. <a href="">A pipeline with maven image</a>.</p>
+<p>The <strong>source</strong> is a sub-path, under which Tekton cloned the application sources.</p>
+<ul>
+<li>Other task example to apply kubernetes manifests (<a href="https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.4/01_pipeline/01_apply_manifest_task.yaml">apply-manifests</a>) to deploy an image.
+or <a href="https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.4/01_pipeline/02_update_deployment_task.yaml">update-deployment</a> task to path the application deployment with a new <code>image name:tag</code>.</li>
+</ul>
+<p>The tasks are by default tied to namespace. <strong>ClusterTask</strong> makes the task available in all namespaces</p>
+<ul>
+<li>list the tasks defined in current project (Tasks are local to a namespace): </li>
+</ul>
+<div class="highlight"><pre><span></span><code>tkn task list
+</code></pre></div>
+<p>and use next command to list the Operator-installed additional cluster tasks such as buildah</p>
+<div class="highlight"><pre><span></span><code>tkn clustertasks list
+</code></pre></div>
+<ul>
+<li>
+<p>In <a href="https://hub.tekton.dev/">Tekton Hub we may find reusable tasks and pipelines</a> like:</p>
+</li>
+<li>
+<p><a href="https://hub.tekton.dev/tekton/task/git-clone">git-clone</a> has url as input and a workspace to clone code to.</p>
+</li>
+<li><a href="https://hub.tekton.dev/tekton/task/maven">maven</a></li>
+<li><a href="https://hub.tekton.dev/tekton/task/buildah">buildah</a> builds source into a container image and then pushes it to a container registry</li>
+</ul>
+<div class="highlight"><pre><span></span><code>tkn clustertask describe buildah
+</code></pre></div>
+<h4 id="define-resources">Define resources</h4>
+<p>A reference to the resource is declared within the task and then the steps use the resources in commands. 
+A resource can be used as an output in a step within the task.</p>
+<p>In Tekton, there is no explicit Git pull command. Simply including a Git resource in a task definition will result 
+in a Git pull action taking place, before any steps execute, which will pull the content of the Git repository 
+to a location of <code>/workspace/&lt;git-resource-name&gt;</code>. In the example below the Git repository content is pulled to <code>/workspace/source</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Task</span>
+ <span class="l l-Scalar l-Scalar-Plain">resources</span><span class="p p-Indicator">:</span>
+   <span class="nt">inputs</span><span class="p">:</span>
+     <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">source</span>
+       <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">git</span>
+   <span class="nt">outputs</span><span class="p">:</span>
+     <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">intermediate-image</span>
+       <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">image</span>
+<span class=" -Error"> </span><span class="nt">steps </span><span class="p">:</span>
+   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
+</code></pre></div>
+<p>PipelineResource defines resources to be used as input or output to task and pipeline, they are reusable. </p>
+<p><em>It looks it is still in alpha release so may not be kept.</em></p>
+<p>Example of resource for git repo:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tekton.dev/v1alpha1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PipelineResource</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">item-inventory-source</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">git</span>
+  <span class="nt">params</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">url</span>
+      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/jbcodeforce/refarch-eda-item-inventory</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">revision</span>
+      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+</code></pre></div>
+<p>See <a href="https://github.com/ibm-cloud-architecture/refarch-eda-item-inventory/tree/master/build/resources.yaml">other resource definitions</a> like docker image names.</p>
+<ul>
+<li>get list of resources defined in the project:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>tkn res ls
+</code></pre></div>
+<h4 id="create-pipeline">Create pipeline</h4>
+<p>A Pipeline is a collection of Tasks that you define and arrange in a specific order of execution as part of your continuous integration flow:</p>
+<p><img alt="TektonRR" src="images/tektonresourcerelationship-13.jpg" /></p>
+<p>The <em>pipelineRun</em> invokes the pipeline, which contains tasks. Each task consists of a number of steps, each of which can contain elements such as command, script, volumeMounts, workingDir, parameters, resources, workspace, or image. </p>
+<p>Generic pipeline takes the source code of the application from GitHub and then builds jar and docker image and deploys it on OpenShift. The deployment can also being done with ArgoCD.</p>
+<ul>
+<li><code>volumeMounts</code> allow you to add storage to a step. Since each step runs in an isolated container, any data that is created by a step for use by another step must be stored appropriately. 
+If the data is accessed by a subsequent step within the same task then it is possible to use the <code>/workspace</code> directory to hold any created files and directories. 
+A further option for steps within the same task is to use an emptyDir storage mechanism which can be useful for separating out different data content for ease of use. If file stored data is to be accessed by a subsequent step that is in a different task then a Kubernetes persistent volume claim is required to be used. As explained below, this is what we do for the Travelport demo.</li>
+</ul>
+<blockquote>
+<p>Note that volumes are defined in a section of the task outside the scope of any steps, and then each step that needs the volume will mount it. </p>
+</blockquote>
+<ul>
+<li>The <code>workingDir</code> element refers to the path within the container that should be the current working directory when the command is executed.</li>
+<li><code>parameters</code>: As with volumeMounts, parameters are defined outside the scope of any step within a task and then they are referenced from within the step. 
+Parameters in this case refers to any information in text form required by a step such as a path, a name of an object, a username etc.<br />
+Workspace</li>
+<li>
+<p>A <code>workspace</code> is similar to a volume in that it provides storage that can be shared across multiple tasks. A persistent volume claim 
+is required to be created first and then the intent to use the volume is declared within the pipeline and task before mapping the 
+workspace into an individual step such that it is mounted. Workspaces and volumes are similar in behavior but are defined in
+ slightly different places.</p>
+</li>
+<li>
+<p><code>Image</code>: Since each Tekton step runs within its own image, the image must be referenced as shown in the example below:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">steps </span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
+    <span class="nt">command</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">buildah</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bud</span>
+      <span class="p p-Indicator">-</span> <span class="s">&#39;-t&#39;</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$(resources.outputs.intermediate-image.url)</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">registry.redhat.io/rhel8/buildah</span>
+</code></pre></div>
+<p>A Pipeline requires PipelineResources to provide inputs and store outputs for the Tasks that comprise it.</p>
+<ul>
+<li>Declare the pipeline in a yaml file like <a href="https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.4/01_pipeline/04_pipeline.yaml">tutorial build and deploy</a> 
+or the <a href="">item inventory aggregator</a></li>
+<li>In previous section there is an example of git clone task declared in a pipeline. It uses the pipeline parameters to get URL and revision and output to the workspace.</li>
+</ul>
+<p>The workspace is declared in the pipeline, and the names must match</p>
+<div class="highlight"><pre><span></span><code><span class="nt">spec</span><span class="p">:</span>
+<span class="nt">params</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">repo-url</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The git repository URL to clone from.</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">revision</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The git tag to clone.</span>
+<span class="nt">workspaces</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build-ws</span>
+</code></pre></div>
+<p>This workspace will be specified in the pipelinerun (as well as url and revision):</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tekton.dev/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PipelineRun</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">generateName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build-quarkus-app-result-</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">pipelineRef</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build-quarkus-app</span>
+  <span class="nt">workspaces</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build-ws</span>
+    <span class="nt">emptyDir</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+</code></pre></div>
+<ul>
+<li>Use of Persistent Storage: adding persistent storage for the pipeline to allow us to cache and manage 
+state between tasks in the pipeline. For example, for its build, Maven needs all the repositories from the project dependencies. 
+Once persisted future builds do not have to download dependent jars. </li>
+</ul>
+<p>Since each step runs in an isolated container any data that is created by a step for use by another step must be stored appropriately. 
+If the data is accessed by a subsequent step within the same task then it is possible to use the <code>/workspace</code> directory to hold any 
+created files and directories. A further option for steps within the same task is to use an emptyDir storage mechanism which can be useful
+ for separating different data content for ease of use. If file stored data is to be accessed by a subsequent step that is in a different
+task, then a Kubernetes persistent volume claim is required to be used.
+The mechanism for adding storage to a step is called a <em>volumeMount</em>, as described further below. </p>
+<p>In our case, a persistent volume claim called <em>pipeline-storage-claim</em> is mounted into the step at a specifc path. 
+Other steps within the task and within other tasks of the pipeline can also mount this volume and reuse any data placed there by this step. 
+Note that the path used is where the Buildah command expects to find a local image repository. 
+As a result any steps that invoke a Buildah command will mount this volume at this location.</p>
+<p><code>Buildah</code> is a tool that facilitates building Open Container Initiative (OCI) container images. 
+It provides a command line tool that can be used to create a container from scratch or using an image as a starting point.</p>
+<blockquote>
+<p>You need to use persistence storage when your data must still be available, even if the container, the worker node, or the cluster is removed. 
+You should use persistent storage in the following scenarios:</p>
+<ul>
+<li>Stateful apps</li>
+<li>Core business data</li>
+<li>Data that must be available due to legal requirements, such as a defined retention period</li>
+<li>Auditing</li>
+<li>
+<p>Data that must be accessed and shared across app instances. For example: </p>
+<ul>
+<li><b>Access across pods</b>: When you use Kubernetes persistent volumes to access your storage, you can determine the number of pods that can mount the volume at the same time. Some storage solutions, such as block storage, can be accessed by one pod at a time only. With other storage solutions, you can share volume across multiple pods.</li>
+<li><b>Access across zones and regions</b>: You might require your data to be accessible across zones or regions. Some storage solutions, such as file and block storage, are data center-specific and cannot be shared across zones in a multizone cluster setup.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>Execute it using a pipeline run</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code>oc create -f build/pipelinerun.yaml
+</code></pre></div>
+* Or using <code>tkn</code> pipeline start:</p>
+<div class="highlight"><pre><span></span><code>tkn pipeline start 
+</code></pre></div>
+<ul>
+<li>List pipeline runs</li>
+</ul>
+<div class="highlight"><pre><span></span><code>tkn pipelinerun list
+</code></pre></div>
+<h4 id="some-potential-errors">Some potential errors</h4>
+<ul>
+<li>Build faild to access internal registry with <code>x509: certificate signed by unknown authority</code>. 
+We may need to do not verify TLS while pushing image to the internal docker registry or use a public registry</li>
+</ul>
+<h4 id="triggers">Triggers</h4>
+<h4 id="enhancing">Enhancing</h4>
+<p>We can use nexus to keep maven downloaded jars. </p>
+<div class="highlight"><pre><span></span><code>oc apply -f https://raw.githubusercontent.com/redhat-scholars/tekton-tutorial/master/install/utils/nexus.yaml
+oc expose svc nexus
+</code></pre></div>
+<h3 id="other-readings">Other readings</h3>
+<ul>
+<li><a href="https://tekton.dev/docs/">Tekton dev documentation</a></li>
+<li><a href="https://developer.ibm.com/tutorials/knative-build-app-development-with-tekton/">Deploy a Knative application using Tekton Pipelines</a></li>
+<li><a href="https://github.com/IBM/ibm-garage-tekton-tasks">IBM Tekton tasks</a></li>
+</ul>
+<h2 id="argocd-tutorial">ArgoCD tutorial</h2>
+<p>To implement our GitOps workflow, we used Argo CD, the GitOps continuous delivery tool for Kubernetes. 
+Argo CD models a collection of applications as a project and uses a Git repository to store the application's desired state (a gitops repo). 
+Argo CD compares the actual state of the application in the cluster with the desired state defined in Git and
+determines if they are out of sync. When it detects the environment is out of sync, Argo CD can be configured
+to either send out a notification to kick off a separate reconciliation process or Argo CD can automatically synchronize the environments to ensure they match.</p>
+<p>ArgoCD is deployed with OpenShift GitOps operator. </p>
+<p>If you go to the Developer's Perspective, you can see a topology:</p>
+<p><img alt="ArgoCD" src="images/argocd.jpg" /></p>
+<blockquote>
+<p><b>OpenShift GitOps</b> is an OpenShift add-on which provides Argo CD and other tooling to enable teams to implement GitOps workflows for cluster configuration and application delivery. </p>
+</blockquote>
+<p>Clicking the Argo Server node that contains the URL takes you to the Argo login page.</p>
+<p>See <a href="https://argoproj.github.io/argo-cd/getting_started/">this getting started tutorial</a> and the <a href="https://argoproj.github.io/argo-cd/core_concepts/">core concept</a></p>
+<ul>
+<li>Install argocd: this will includes CRD, service account, RBAC policies, config maps, secret and deploy: Redis and argocd server. It makes sense to have
+one ArgoCD instance deploy per cluster. It can manage projects and within project, applications.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>oc new-project argocd
+oc apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+</code></pre></div>
+<ul>
+<li>
+<p>It can be also installed via the Red Hat OpenShift GitOps operator. After installing the OpenShift GitOps 
+operator, an instance of Argo CD is installed in the <code>openshift-gitops</code> namespace which has sufficent privileges 
+for managing cluster configurations.</p>
+</li>
+<li>
+<p>Finally, you can declare the operator yaml and service account and role binding as part of your gitops. See <a href="https://github.com/ibm-cloud-architecture/eda-lab-inventory/tree/master/environments/openshift-gitops">sample in this folder</a>.</p>
+</li>
+</ul>
+<p>Once installed the following pods run:</p>
+<div class="highlight"><pre><span></span><code>argocd-application-controller-0                                   <span class="m">1</span>/1     Running     <span class="m">0</span>          20h
+argocd-dex-server-9dc558f5-4dw4q                                  <span class="m">1</span>/1     Running     <span class="m">2</span>          20h
+argocd-redis-759b6bc7f4-g2jbj                                     <span class="m">1</span>/1     Running     <span class="m">0</span>          20h
+argocd-repo-server-5fbf484547-6x4rj                               <span class="m">1</span>/1     Running     <span class="m">0</span>          20h
+argocd-server-6d4678f7f6-vqs64  
+</code></pre></div>
+<ul>
+<li>Install argocd CLI</li>
+</ul>
+<p>On MAC: <code>brew install argocd</code></p>
+<ul>
+<li>Expose the API server: By default, the Argo CD API server is not exposed with an external IP. Update the service to use load balancer: </li>
+</ul>
+<div class="highlight"><pre><span></span><code>kubectl patch svc argocd-server -n argocd -p <span class="s1">&#39;{&quot;spec&quot;: {&quot;type&quot;: &quot;LoadBalancer&quot;}}&#39;</span>
+</code></pre></div>
+<p>The initial password for the admin account is auto-generated and stored as clear text in the field password in a secret named <code>argocd-initial-admin-secret</code> </p>
+<div class="highlight"><pre><span></span><code>oc get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.password}&quot;</span> <span class="p">|</span> base64 -d <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+</code></pre></div>
+<p>Get the IP address of the argocd server: <code>oc get svc</code> then look at the LoadBalancer service (argocd-server) external-IP.</p>
+<p><code>argocd login SERVERIP</code>  then use admin user and password. 
+You can also access the ArgoCD UI using the load balancer IP address, admin user and password. </p>
+<ul>
+<li>Define application: this is the deployable unit, which is map to a k8s deployment that references the image built during the CI pipeline.
+The approach is to use one git repository to represent the solution to deploy. Each component, microservice or app is defined in
+its own folder and can use Helm or Kustomize to define the deployment, service, configmap... </li>
+</ul>
+<p>You use one application per target environment.</p>
+<p>Here is an example of argoCD app:</p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>On the application tile, we can use the 'SYNC' to deploy the application or use <code>argocd app get &lt;appname&gt;</code>.</p>
+<h3 id="connect-pipeline-to-deployment">Connect pipeline to deployment</h3>
+<p>Once the manifests for a given app are defined in the gitops repository, we need to have the pipeline being able to update the deployment
+descriptor with the image reference and tag defined as part of the build pipeline.</p>
+<p>The pipeline needs to have the git credentials to be able to write to the gitops repository. Credentials are saved in a secret and a configmap
+define github host, user.</p>
+<h3 id="more-reading">More reading</h3>
+<ul>
+<li><a href="https://argo-cd.readthedocs.io/en/stable/">ArgoCD documentation</a></li>
+</ul>
+<h2 id="kustomize-and-gitops">Kustomize and gitops</h2>
+<p>There are at least two repositories: the <strong>application</strong> repository and the <strong>environment configuration</strong> repository.</p>
+<p>There are two ways to implement the deployment strategy for GitOps: </p>
+<ul>
+<li><strong>Push-based:</strong> use CI/CD tools like jenkins, travis... to define a pipeline, triggered when application code source is updated, to build the container image and deploy the modified yaml files to the environment repo. Changes to the environment configuration repository trigger the deployment pipeline. It has to be used for running an automated provisioning of cloud infrastructure. See also <a href="https://cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build">this tutorial</a>.</li>
+<li><strong>Pull-based:</strong> An operator takes over the role of the pipeline by continuously comparing the desired state in the environment repository with the actual state in the deployed infrastructure.</li>
+</ul>
+<p>A CICD based on git action will build the image and edit Kustomize patch to bump the expected container tag using the new docker image tag, then commit this changes to the gitops repo.</p>
+<p><a href="https://kustomize.io/">Kustomize</a> is used to simplify the configuration of application and environment. Kustomize traverses a Kubernetes manifest to add, remove or update configuration options without forking. It is available both as a standalone binary and as a native feature of Kubectl. A <a href="https://github.com/kubernetes-sigs/kustomize/tree/master/examples">lot of examples here.</a>.</p>
+<p>The simple way to organize the configuration is to use one <code>kustomize</code> folder, then one folder per component, then one overlay folder in which environment folder include <code>kustomization.yaml</code> file with patches.</p>
+<div class="highlight"><pre><span></span><code>└── postgres
+    ├── base
+    │   ├── configmap.yaml
+    │   ├── kustomization.yaml
+    │   ├── pvc.yaml
+    │   ├── secret.yaml
+    │   ├── service-account.yaml
+    │   ├── statefulset.yaml
+    │   ├── svc-headless.yaml
+    │   └── svc.yaml
+    ├── kustomization.yaml
+    └── overlays
+        └── dev
+            ├── kustomization.yaml
+            └── secret.yaml
+</code></pre></div>
+<p>Here is an example of <code>kustomization.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code>bases:
+  - ../../base
+patchesStrategicMerge:
+  - ./secret.yaml
+</code></pre></div>
+<p>The <code>patchesStrategicMerge</code> lists the resource configuration YAML files that you want to merge to the base kustomization. You must also add these files to the same repo as the kustomization file, such as <code>overlay/dev</code>. These resource configuration files can contain small changes that are merged to the base configuration files of the same name as a patch.</p>
+<p>In GitOps, the pipeline does not finish with something like <code>oc apply..</code>. but it’s an external tool (Argo CD or Flux) that detects the drift in the Git repository and will run these commands.</p>
+<p>Here is a command to install ArgoCD on k8s, see <a href="https://argoproj.github.io/argo-cd/getting_started/">details here</a>.</p>
+<div class="highlight"><pre><span></span><code>kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+</code></pre></div>
+<p>For OpenShift:</p>
+<ul>
+<li>create an <code>argocd</code> project</li>
+<li>use operator hub, and install the operator in this project. Nothing to change in the default configuration</li>
+<li>deploy one instance of ArgoCD with the following customization:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">argoproj.io/v1alpha1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ArgoCD</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">argocd</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">argocd</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">server</span><span class="p">:</span>
+    <span class="nt">ingress</span><span class="p">:</span>
+      <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">route</span><span class="p">:</span> 
+      <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">dex</span><span class="p">:</span>
+    <span class="nt">openShiftOAuth</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">quay.io/ablock/dex</span>
+    <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">openshift-connector</span>
+  <span class="nt">rbac</span><span class="p">:</span>
+    <span class="nt">policy</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">g, system:cluster-admins, role:admin</span>
+</code></pre></div>
+<p>An example of gitops with kustomize is in this <a href="https://github.com/ibm-cloud-architecture/vaccine-gitops">vaccine-gitops repo</a></p>
+<h3 id="future-readings">Future readings</h3>
+<ul>
+<li><a href="https://www.weave.works/blog/gitops-operations-by-pull-request">GitOps - Operations by Pull Request</a></li>
+</ul>
+<h2 id="kam">Kam</h2>
+<p>Goal: create a gitops project for an existing application service as day 1 operation and then add more service.</p>
+<ul>
+<li>Use the following kam command:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>kam bootstrap <span class="se">\ </span>               
+--service-repo-url https://github.com/jbcodeforce/refarch-eda-store-inventory <span class="se">\</span>
+--gitops-repo-url  https://github.com/jbcodeforce/refarch-eda-inventory-gitops <span class="se">\</span>
+--image-repo image-registry.openshift-image-registry.svc:5000/ibmcase/store-aggregator <span class="se">\</span>
+--output refarch-eda-inventory-gitops <span class="se">\</span>
+--git-host-access-token &lt;agithubtoken&gt; <span class="se">\</span>
+--prefix my-inventory --push-to-git<span class="o">=</span><span class="nb">true</span>
+</code></pre></div>
+<p><strong>Kam bug:</strong>: the application name is marching the git repo name, and there will be an issue while creating binding with a limit of 
+the number of characters. kam boostrap need a --service-name argument.</p>
+<p>This will create a gitops project, pushed to github.com as private repo. The repo includes two main folders:</p>
+<ul>
+<li><code>environment</code> includes two environment definitions for dev and stage. </li>
+</ul>
+<div class="highlight"><pre><span></span><code>    environments
+  │   ├── my-inventory-dev
+  │   │   ├── apps
+  │   │   │   └── app-refarch-eda-store-inventory
+  │   │   │       ├── base
+  │   │   │       │   └── kustomization.yaml
+  │   │   │       ├── kustomization.yaml
+  │   │   │       ├── overlays
+  │   │   │       │   └── kustomization.yaml
+  │   │   │       └── services
+  │   │   │           └── refarch-eda-store-inventory
+  │   │   │               ├── base
+  │   │   │               │   ├── config
+  │   │   │               │   │   ├── <span class="m">100</span>-deployment.yaml
+  │   │   │               │   │   ├── <span class="m">200</span>-service.yaml
+  │   │   │               │   │   ├── <span class="m">300</span>-route.yaml
+  │   │   │               │   │   └── kustomization.yaml
+  │   │   │               │   └── kustomization.yaml
+  │   │   │               ├── kustomization.yaml
+  │   │   │               └── overlays
+  │   │   │                   └── kustomization.yaml
+  │   │   └── env
+  │   │       ├── base
+  │   │       │   ├── argocd-admin.yaml
+  │   │       │   ├── kustomization.yaml
+  │   │       │   ├── my-inventory-dev-environment.yaml
+  │   │       │   └── my-inventory-dev-rolebinding.yaml
+  │   │       └── overlays
+  │   │           └── kustomization.yaml
+  │   └── my-inventory-stage
+  │       └── env
+  │           ├── base
+  │           │   ├── argocd-admin.yaml
+  │           │   ├── kustomization.yaml
+  │           │   └── my-inventory-stage-environment.yaml
+  │           └── overlays
+  │               └── kustomization.yaml
+</code></pre></div>
+<ul>
+<li><code>config</code> define argocd and cicd project to support deployment and build pipeline</li>
+</ul>
+<div class="highlight"><pre><span></span><code>  ├── config
+  │   ├── argocd
+  │   │   ├── argo-app.yaml
+  │   │   ├── cicd-app.yaml
+  │   │   ├── kustomization.yaml
+  │   │   ├── my-inventory-dev-app-refarch-eda-store-inventory-app.yaml
+  │   │   ├── my-inventory-dev-env-app.yaml
+  │   │   └── my-inventory-stage-env-app.yaml
+  │   └── my-inventory-cicd
+  │       ├── base
+  │       │   ├── <span class="m">01</span>-namespaces
+  │       │   │   ├── cicd-environment.yaml
+  │       │   │   └── ibmcase-environment.yaml
+  │       │   ├── <span class="m">02</span>-rolebindings
+  │       │   │   ├── argocd-admin.yaml
+  │       │   │   ├── internal-registry-ibmcase-binding.yaml
+  │       │   │   ├── pipeline-service-account.yaml
+  │       │   │   ├── pipeline-service-role.yaml
+  │       │   │   ├── pipeline-service-rolebinding.yaml
+  │       │   │   └── sealed-secrets-aggregate-to-admin.yaml
+  │       │   ├── <span class="m">03</span>-secrets
+  │       │   │   ├── docker-config.yaml
+  │       │   │   ├── git-host-access-token.yaml
+  │       │   │   ├── gitops-webhook-secret.yaml
+  │       │   │   └── webhook-secret-my-inventory-dev-refarch-eda-store-inventory.yaml
+  │       │   ├── <span class="m">04</span>-tasks
+  │       │   │   ├── deploy-from-source-task.yaml
+  │       │   │   └── set-commit-status-task.yaml
+  │       │   ├── <span class="m">05</span>-pipelines
+  │       │   │   ├── app-ci-pipeline.yaml
+  │       │   │   └── ci-dryrun-from-push-pipeline.yaml
+  │       │   ├── <span class="m">06</span>-bindings
+  │       │   │   ├── github-push-binding.yaml
+  │       │   │   └── my-inventory-dev-app-refarch-eda-store-inventory-refarch-eda-store-inventory-binding.yaml
+  │       │   ├── <span class="m">07</span>-templates
+  │       │   │   ├── app-ci-build-from-push-template.yaml
+  │       │   │   └── ci-dryrun-from-push-template.yaml
+  │       │   ├── <span class="m">08</span>-eventlisteners
+  │       │   │   └── cicd-event-listener.yaml
+  │       │   ├── <span class="m">09</span>-routes
+  │       │   │   └── gitops-webhook-event-listener.yaml
+  │       │   └── kustomization.yaml
+  │       └── overlays
+  │           └── kustomization.yaml
+</code></pre></div>
+<p>The <code>environment</code> includes folders for each app of the solution.  In an app folder the <code>services</code> defines the manifests
+to configure the application. When created the image reference <code>nginx</code> we need to build the image with a pipeline with <a href="#tekton_tutorial">tekton</a>. 
+To bring up the argocd do <code>oc apply -k config/argocd/</code> which will create:</p>
+<ul>
+<li>three projects: my-inventory-cicd, my-inventory-dev, my-inventory-stage</li>
+<li>a set of role bindings, secrets...</li>
+</ul>
+<p>To access the argocd application use the Grid icon in OpenShift console and admin user. The secret is define in <code>openshift-gitops</code> and secret name <code>argocd-cluster-cluster</code>. </p>
+<div class="highlight"><pre><span></span><code>oc get secret argocd-cluster-cluster -n openshift-gitops -ojsonpath<span class="o">=</span><span class="s1">&#39;{.data.admin\.password}&#39;</span> <span class="p">|</span> base64 -d
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../git.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Git summary" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Git summary
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../code-template.html" class="md-footer__link md-footer__link--next" aria-label="Next: My code templates" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              My code templates
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>

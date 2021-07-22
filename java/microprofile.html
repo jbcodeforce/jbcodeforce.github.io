@@ -1,0 +1,1760 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>Microprofile 3.x - Jerome Boyer's Personal Site</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="magenta-dark" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#microprofile-3x-notes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Jerome Boyer&#39;s Personal Site" class="md-header__button md-logo" aria-label="Jerome Boyer's Personal Site" data-md-component="logo">
+      
+  <img src="../images/gear-sp-01.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jerome Boyer's Personal Site
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Microprofile 3.x
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/jbcodeforce/jbcodeforce.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Jerome Boyer&#39;s Personal Site" class="md-nav__button md-logo" aria-label="Jerome Boyer's Personal Site" data-md-component="logo">
+      
+  <img src="../images/gear-sp-01.jpg" alt="logo">
+
+    </a>
+    Jerome Boyer's Personal Site
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jbcodeforce/jbcodeforce.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Blogs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skill.html" class="md-nav__link">
+        Skill
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assets.html" class="md-nav__link">
+        List of contributions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5">
+        Knowledge base
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Knowledge base" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Knowledge base
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      <label class="md-nav__link" for="__nav_5_1">
+        Architecture
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecture" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/eda.html" class="md-nav__link">
+        Event Driven Architecture
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/architectural-decisions.html" class="md-nav__link">
+        Architecture decision
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/DR.html" class="md-nav__link">
+        Disaster recovery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/gcp.html" class="md-nav__link">
+        GCP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/ibmcloud.html" class="md-nav__link">
+        IBM Cloud
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../istio/index.html" class="md-nav__link">
+        Istio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/openshift-studies" class="md-nav__link">
+        Openshift Studies
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/gettingstarted.html" class="md-nav__link">
+        Playground
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/k8s.html" class="md-nav__link">
+        Kubernetes services
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_3">
+        Data
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-topology.html" class="md-nav__link">
+        Data topology
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-integration.html" class="md-nav__link">
+        Data integration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-replication.html" class="md-nav__link">
+        Data replication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-partitioning.html" class="md-nav__link">
+        Data partitioning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ibm.com/cloud/architecture/architectures/spectrum-discover" class="md-nav__link">
+        Data catalog - spectrum discover
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/opendatahub.html" class="md-nav__link">
+        OpenData Hub
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      <label class="md-nav__link" for="__nav_5_4">
+        AI
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AI" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          AI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/ml-basics/" class="md-nav__link">
+        Machine learning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/ads.html" class="md-nav__link">
+        Automation Decision Service
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5_5">
+        Programming
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_5">
+          <span class="md-nav__icon md-icon"></span>
+          Programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5_1" type="checkbox" id="__nav_5_5_1" checked>
+      
+      <label class="md-nav__link" for="__nav_5_5_1">
+        Java Studies
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Java Studies" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Java Studies
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Microprofile 3.x
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="microprofile.html" class="md-nav__link md-nav__link--active">
+        Microprofile 3.x
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-microprofile-app" class="md-nav__link">
+    Create a microprofile app
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a microprofile app">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#with-appsody" class="md-nav__link">
+    With appsody
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-maven" class="md-nav__link">
+    With maven
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-with-docker" class="md-nav__link">
+    Run with docker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-cutting-concerns" class="md-nav__link">
+    Cross cutting concerns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programming-model" class="md-nav__link">
+    Programming model
+  </a>
+  
+    <nav class="md-nav" aria-label="Programming model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    Config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cdi" class="md-nav__link">
+    CDI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fault-tolerance" class="md-nav__link">
+    Fault tolerance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#health-check" class="md-nav__link">
+    Health Check
+  </a>
+  
+    <nav class="md-nav" aria-label="Health Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sandbox-projects" class="md-nav__link">
+    Sandbox projects
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cdi_1" class="md-nav__link">
+    CDI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssl-client-connection" class="md-nav__link">
+    SSL client connection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reactive-messaging-operator" class="md-nav__link">
+    Reactive messaging operator
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="restassured.html" class="md-nav__link">
+        Rest assured
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concurrent.html" class="md-nav__link">
+        Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding/testcontainer.html" class="md-nav__link">
+        TestContainer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="openliberty.html" class="md-nav__link">
+        Open Liberty
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quarkus.html" class="md-nav__link">
+        Quarkus
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="springcloud.html" class="md-nav__link">
+        SpringCloud
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vertx.html" class="md-nav__link">
+        Vert.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="funqy.html" class="md-nav__link">
+        Funqy
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concurrent.html" class="md-nav__link">
+        Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mqChallenge.html" class="md-nav__link">
+        MQ challenge
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FAQ.html" class="md-nav__link">
+        Java FAQ
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="java-vscode.html" class="md-nav__link">
+        VScode
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/python-code" class="md-nav__link">
+        Python Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/vuejs-studies/" class="md-nav__link">
+        Vue.js Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://cloudnative101.dev/" class="md-nav__link">
+        Cloud native content IBM
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git.html" class="md-nav__link">
+        Git summary
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding/gitops.html" class="md-nav__link">
+        GitOps
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/angular-sandbox/" class="md-nav__link">
+        Angular Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code-template.html" class="md-nav__link">
+        My code templates
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_6" type="checkbox" id="__nav_5_6" >
+      
+      <label class="md-nav__link" for="__nav_5_6">
+        Techno
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Techno" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_6">
+          <span class="md-nav__icon md-icon"></span>
+          Techno
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/apicurio.html" class="md-nav__link">
+        Apicurio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/atlas.html" class="md-nav__link">
+        Atlas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/ads.html" class="md-nav__link">
+        Automation Decision Service
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/bai.html" class="md-nav__link">
+        Self driving enterprise
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/cos.html" class="md-nav__link">
+        Cloud object storage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/code-engine.html" class="md-nav__link">
+        Code Engine
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/db-play/" class="md-nav__link">
+        Database play
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/egeria.html" class="md-nav__link">
+        Egeria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/flink-studies/" class="md-nav__link">
+        Flink Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/elasticsrch.html" class="md-nav__link">
+        Elastic Search
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/kafka-studies" class="md-nav__link">
+        Kafka Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/kar.html" class="md-nav__link">
+        KAR
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/redis.html" class="md-nav__link">
+        Redis
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/jbcodeforce/redpanda-studies/" class="md-nav__link">
+        RedPanda Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/spark-studies/" class="md-nav__link">
+        Spark Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="java-vscode.html" class="md-nav__link">
+        VScode
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-microprofile-app" class="md-nav__link">
+    Create a microprofile app
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a microprofile app">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#with-appsody" class="md-nav__link">
+    With appsody
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-maven" class="md-nav__link">
+    With maven
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-with-docker" class="md-nav__link">
+    Run with docker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-cutting-concerns" class="md-nav__link">
+    Cross cutting concerns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programming-model" class="md-nav__link">
+    Programming model
+  </a>
+  
+    <nav class="md-nav" aria-label="Programming model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    Config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cdi" class="md-nav__link">
+    CDI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fault-tolerance" class="md-nav__link">
+    Fault tolerance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#health-check" class="md-nav__link">
+    Health Check
+  </a>
+  
+    <nav class="md-nav" aria-label="Health Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sandbox-projects" class="md-nav__link">
+    Sandbox projects
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cdi_1" class="md-nav__link">
+    CDI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssl-client-connection" class="md-nav__link">
+    SSL client connection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reactive-messaging-operator" class="md-nav__link">
+    Reactive messaging operator
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jbcodeforce/jbcodeforce.github.io/edit/master/docs/java/microprofile.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="microprofile-3x-notes">Microprofile 3.x notes</h1>
+<p><a href="https://microprofile.io/">microprofile</a> is the java framework to develop microservice architecture. MicroProfile APIs establish an optimal foundation for developing microservices-based applications.</p>
+<p>This <a href="https://openliberty.io/guides/">openliberty website</a> includes very good interactive tutorials to learn more on microprofile.</p>
+<p>Two way to implement the communication between services:</p>
+<ul>
+<li><strong>Choreography</strong> defines business workflow as a sequence of domain events and service actions. Each involved service signals a successful or faulty fulfilment of its part of the workflow via a corresponding domain event. Other services may listen to this domain event and start working on their part of the workflow after receiving it.</li>
+<li><strong>Orchestration</strong>  defines one orchestrating service which sends commands to the different services and receives their responses. This could be done synchronously via RESTful calls or asynchronously with the help of queues or topics.</li>
+</ul>
+<h2 id="create-a-microprofile-app">Create a microprofile app</h2>
+<p>This section summarizes some getting started stuff on microprofile.</p>
+<h3 id="with-appsody">With appsody</h3>
+<p>Create a <a href="https://github.com/appsody/stacks/tree/master/incubator/java-openliberty">open liberty microprofile 3.3</a> with appsody command: <code>appsody init java-microprofile</code>, which downloads the java microprofile code template with "health, liveness and metrics and a hello world API".
+<code>appsody run</code> or <code>appsody test</code> to continuously see the impact from the code updates.</p>
+<p>To get the password for the metrics do the following: <code>docker exec -it my-project-dev  bash -c "grep keystore /opt/ol/wlp/usr/servers/defaultServer/server.env"</code></p>
+<h3 id="with-maven">With maven</h3>
+<p>Use the <a href="https://start.microprofile.io/">Generate tool at start.microprofile.io</a>.</p>
+<p>Run with <code>mvn liberty:dev</code> to listen to file changes.</p>
+<h3 id="run-with-docker">Run with docker</h3>
+<p>Once the application is created and built, we can also define a docker file and run it. From <a href="https://openliberty.io/guides/docker.html">this openliberty guides</a> here is a quick summary:</p>
+<ul>
+<li>The open liberty maven plugin add an execution to create the server, install features, and deploy the app as part of the <code>mvn package</code> command.</li>
+<li>docker build and then docker run it by mounting the war file:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>docker run -ti --network kafkanet -p <span class="m">9081</span>:9081 -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/target/PerfConsumerApp.war:/config/dropins/PerfConsumerApp.war ibmcase/perfconsumerapp 
+</code></pre></div>
+<h2 id="cross-cutting-concerns">Cross cutting concerns</h2>
+<p>Cross-cutting concerns are common to all microservice and include logging, monitoring of service health and metrics, fault tolerance, configuration, and security.</p>
+<ul>
+<li>Support distributed logging and tracing cross microservices, that can be merged and analyzed as a whole.</li>
+<li>Without a single point of control, each microservice needs to know if it is healthy and perform as expected.</li>
+<li>Microservices architecture needs to be resilient and fault tolerant by design. This means we must not only be able to detect but also to handle any issue automatically.</li>
+<li>Microservice accesses configurations from multiple sources in a homogeneous and transparent way</li>
+<li>Support a mechanism to handle distributed authentication and authorization</li>
+<li>Offer security context propagation</li>
+<li>Make sure that the original service call is not forged in the authentication process.</li>
+</ul>
+<h2 id="programming-model">Programming model</h2>
+<p>MicroProfile utilizes a very small subset of Java EE APIs to define its core programming model:</p>
+<ul>
+<li>CDI 2.0 for Dependency Injection</li>
+<li>JAX-RS 2.1 for REST APIs</li>
+<li>JSON P 1.1 for JSON Parsing</li>
+<li>JSON-B 1.0 for JSON Binding</li>
+</ul>
+<p><img alt="Microprofile" src="images/microprofile3.png" />
+As illustrated in the figure above Microprofile 3.0 bundles a set of features:</p>
+<h3 id="config">Config</h3>
+<p><strong>Config</strong>: externalizes configuration and obtains config via injection from config files, environment variables, system properties, or custom resource. Those configurations are static, they cannot be modified while the server is running.
+MicroProfile Config uses Contexts and Dependency Injection (CDI) to inject configuration property values directly into an application without requiring user code to retrieve them.</p>
+<div class="codehilite"><pre><span></span><code><span class="err">```</span><span class="n">java</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="n">inject</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
+<span class="nv">@Inject</span><span class="w"> </span><span class="nv">@ConfigProperty</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;topicName&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">String</span><span class="w"> </span><span class="n">topicName</span><span class="p">;</span><span class="w"></span>
+<span class="err">```</span><span class="w"></span>
+</code></pre></div>
+
+<p>MicroProfile Config combines configuration properties from multiple sources, each known as a ConfigSource. The config file is named <code>META-INF/microprofile-config.properties</code></p>
+<p>The <code>@Inject</code> annotation injects the topic name directly, the injection value is static and fixed on application starting.</p>
+<p>It is possible to have dynamic configuration by implementing the <code>org.eclipse.microprofile.config.spi.ConfigSource</code> interface and using the java.util.ServiceLoader mechanism with configuration file in <code>META-INF/services/org.eclipse.microprofile.config.spi.ConfigSource</code> to specifies the class name to use for loading configuration. The property to load dynamically has a Provider type:</p>
+<div class="highlight"><pre><span></span><code>  <span class="nd">@Inject</span>
+  <span class="nd">@ConfigProperty</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;io_openliberty_guides_inventory_inMaintenance&quot;</span><span class="p">)</span>
+  <span class="kd">private</span> <span class="n">Provider</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span> <span class="n">inMaintenance</span><span class="p">;</span>
+</code></pre></div>
+<p>It forces the service to retrieve the inMaintenance value just in time. This retrieval of the value just in time makes the config injection dynamic and able to change without having to restart the application.</p>
+<p>To enable this capability, we need <code>mpConfig-1.3</code> or <code>microprofile-3.0</code> feature.</p>
+<p>See <a href="https://github.com/eclipse/microprofile-config">configuration for microprofile git repo</a>. And <a href="https://openliberty.io/guides/microprofile-config-intro.html#example-devops-pipeline">this tutorial</a>.</p>
+<h3 id="cdi">CDI</h3>
+<p><a href="#CDI">CDI</a> Contexts and Dependency Injection (CDI) to manage scopes and inject dependencies</p>
+<h2 id="fault-tolerance">Fault tolerance</h2>
+<p><a href="https://microprofile.io/project/eclipse/microprofile-fault-tolerance">Fault Tolerance</a> enables us to build resilient microservices by separating the execution logic from business logic. Key aspects of the Fault Tolerance API includes well known resilience patterns like TimeOut, RetryPolicy, Fallback, Bulkhead (isolate failure), and Circuit Breaker (fail fast) processing.</p>
+<div class="codehilite"><pre><span></span><code><span class="n n-Quoted">`</span><span class="n n-Quoted n-Quoted-Escape">``</span><span class="n n-Quoted">java</span>
+<span class="n n-Quoted">@GET</span>
+<span class="n n-Quoted">@Timeout(500)</span>
+<span class="n n-Quoted">@Retry(delay = 200, maxRetries = 2, jitter = 100, retryOn = IOException.class)</span>
+<span class="n n-Quoted">@Fallback(fallbackMethod = “getBestsellersFallback”)</span>
+<span class="n n-Quoted">public Response getPersonalRecommendations() throws InterruptedException {</span>
+<span class="n n-Quoted">    // retrieve personal recommendations by delegating the call to</span>
+<span class="n n-Quoted">    // Personal Recommendations Microservice</span>
+<span class="n n-Quoted">}</span>
+<span class="n n-Quoted">public Response getBestsellersFallback() {</span>
+<span class="n n-Quoted">    // retrieve bestsellers instead of personal recommendations as fallback</span>
+<span class="n n-Quoted">    // by delegating the call to Bestsellers Service</span>
+<span class="n n-Quoted">}</span>
+<span class="n n-Quoted n-Quoted-Escape">``</span><span class="n n-Quoted">`</span>
+
+<span class="n">The</span> <span class="n n-Quoted">`@Timeout`</span> <span class="n">annotation</span> <span class="n">specifies</span> <span class="n">the</span> <span class="kt">time</span> <span class="k">in</span> <span class="n">milliseconds</span> <span class="n">allowed</span> <span class="k">for</span> <span class="n">the</span> <span class="n">request</span> <span class="k">to</span> <span class="n">finish</span><span class="p">.</span> <span class="n">This</span> <span class="k">is</span> <span class="k">to</span> <span class="n">avoid</span> <span class="n">the</span> <span class="k">user</span> <span class="n">interface</span> <span class="k">to</span> <span class="k">wait</span> <span class="n">forever</span><span class="p">.</span>
+<span class="n">The</span> <span class="n n-Quoted">`@Retry`</span> <span class="n">helps</span> <span class="k">to</span> <span class="k">recover</span> <span class="k">from</span> <span class="n">network</span> <span class="k">or</span> <span class="n">remote</span> <span class="n">microservice</span> <span class="n">transient</span> <span class="n">failures</span><span class="p">.</span> <span class="n">The</span> <span class="n">retryOn</span> <span class="n">specifies</span> <span class="n">the</span> <span class="n">exception</span> <span class="k">to</span> <span class="k">trigger</span> <span class="n">the</span> <span class="n">retry</span><span class="p">.</span> <span class="n n-Quoted">`delay`</span> <span class="n">specifies</span> <span class="n">the</span> <span class="n">amount</span> <span class="k">of</span> <span class="kt">time</span> <span class="k">to</span> <span class="k">wait</span> <span class="k">before</span> <span class="n">retrying</span> <span class="n">a</span> <span class="n">request</span><span class="p">.</span> <span class="n n-Quoted">`jitter`</span> <span class="n">specifies</span> <span class="n">a</span> <span class="n">variation</span> <span class="k">to</span> <span class="n">apply</span> <span class="k">to</span> <span class="n">the</span> <span class="n">delay</span> <span class="k">interval</span> <span class="k">between</span> <span class="n">retries</span><span class="p">.</span>
+</code></pre></div>
+
+<h2 id="health-check">Health Check</h2>
+<ul>
+<li>
+<p><strong>Health Check</strong> lets developers define and expose a domain-specific microservices health status (“UP” or “DOWN”) so unhealthy services can be restarted by the underlying environment. Health checks are used to determine
+both the liveness and readiness of a service. Determining the state of a service can be composed by a set
+of verification procedures. Multiple domain-specific health checks can easily be added to a microservice by implementing the corresponding HealthCheck interface.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Readiness</span>
+<span class="nd">@ApplicationScoped</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConnectionPoolCheck</span> <span class="kd">implements</span> <span class="n">HealthCheck</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">HealthCheckResponse</span> <span class="nf">call</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isConnectionPoolHealthy</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">HealthCheckResponse</span><span class="p">(</span><span class="err">“</span><span class="n">customer</span><span class="o">-</span><span class="n">cp</span><span class="err">”</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">up</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">build</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">HealthCheckResponse</span><span class="p">(</span><span class="err">“</span><span class="n">customer</span><span class="o">-</span><span class="n">cp</span><span class="err">”</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">down</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">build</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<p>The <code>@Liveness</code> annotation is used to assess if the microservice is running.</p>
+<p>The <code>@Readiness</code> annotation indicates that this particular bean is a readiness health check procedure. By pairing this annotation with the ApplicationScoped context from the Contexts and Dependency Injections API, the bean is discovered automatically when the <code>http://&lt;&gt;/health</code> endpoint receives a request</p>
+<ul>
+<li>
+<p><strong>Metrics</strong> delivers details about the microservices runtime behavior by providing a unified way for MicroProfile servers to export monitoring data to management agents. Metrics also provides a common Java API for exposing their telemetry data. Metrics serves to pinpoint issues, providing long-term trend data for capacity planning, and pro-active discovery of issues (e.g. disk usage growing without bounds) via a simple to use RESTful API. Metrics can also help scheduling-systems decide when to scale the application to run on more or fewer machines.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@POST</span>
+<span class="nd">@Produces</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION</span> <span class="n">_</span> <span class="n">JSON</span><span class="p">)</span>
+<span class="nd">@Timed</span><span class="p">(</span><span class="n">absolute</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;microprofile.ecommerce.checkout&quot;</span><span class="p">,</span>
+    <span class="n">displayName</span> <span class="o">=</span> <span class="s">&quot;check-out time&quot;</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;time of check-out process in ns&quot;</span><span class="p">,</span>
+    <span class="n">unit</span> <span class="o">=</span> <span class="n">MetricUnits</span><span class="p">.</span><span class="na">NANOSECONDS</span><span class="p">)</span>
+<span class="kd">public</span> <span class="n">Response</span> <span class="nf">checkOut</span><span class="p">(...)</span> <span class="p">{</span>
+    <span class="c1">// do some check-out specific business logic</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">.</span><span class="na">ok</span><span class="p">()</span><span class="err">…</span> <span class="n">build</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<p>The <code>@Timed</code> annotation tracks how frequently the method is invoked and how long it takes for each invocation of the method to complete. The <code>@Counted</code> annotation to a method to count how many times the matching URL is accessed monotonically, which is counting up sequentially.
+The <code>@Gauge</code> annotation to a method helps to track the number of items that are in the returned collection.</p>
+<p>In OpenLiberty the quickStartSecurity and keyStore configuration elements provide basic security to secure the server. When you visit the /metrics endpoint, use the credentials defined in the server configuration to log in and view the data.</p>
+<ul>
+<li>
+<p><strong>Open API</strong> specification provides a set of Java interfaces and programming models that allow developers to natively produce OpenAPI v3 documents. Use JAX-RS anotations with OpenAPI annotations or start from a yml file.</p>
+</li>
+<li>
+<p><strong>Rest Client</strong> simplifies building REST Clients by providing a type-safe approach for invoking RESTful services over HTTP. It uses JXRS 2.1.</p>
+</li>
+<li>
+<p><strong>JWT Authentication</strong> defines a format of JSON Web Token (JWT) used as the basis for interoperable authentication and authorization by providing role-based access control (RBAC) microservice endpoints using OpenID Connect. One of the main strategies to propagate the security state from clients to services, or even from services to services, involves the use of security tokens.</p>
+</li>
+<li>
+<p><strong>OpenTracing</strong> enables services to easily participate in a distributed tracing environment by defining an API. To accomplish distributed tracing, each service must be instrumented to log messages with a correlation id that may have been propagated from an upstream service.</p>
+</li>
+</ul>
+<h3 id="sandbox-projects">Sandbox projects</h3>
+<ul>
+<li>The proposal for <strong>Long Running Actions</strong> introduces APIs for services to coordinate activities. The main thrust of the proposal introduces an API for loosely coupled services to coordinate long running activities in such a way as to guarantee a globally consistent outcome without the need to take locks on data.</li>
+<li>The <strong>Reactive Streams Operators</strong> specification propose a set of operators for Reactive Streams. By mapping Java Streams API but for Reactive Streams, it provide a natural API to deal with stream of data, enforcing error
+propagation, completion signals, and back-pressure.</li>
+<li>The <a href="https://microprofile.io/project/eclipse/microprofile-reactive-messaging">Reactive Messaging</a> proposal explores the question „what if Java offered a new API for handling streams of messages - either point to point or from a message broker - based on the JDK 9 Flow API or alternatively on the
+JDK8 compatible Reactive Streams API - that was lighter weight and easier to use than JMS/MDBs“</li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<p><a href="https://start.microprofile.io/">MicroProfile Starter</a> helps to generate microprofile maven project with sample code.
+The folders microprofile30/service-a and service-b have the generated code. From this code the app under JEEPlay jbcodeforce.microprofile.app defines a basic template for a REST based microservice. What need to be done is:</p>
+<ul>
+<li>JAX-RS has two key concepts for creating REST APIs. The resource itself, which is modelled as a class, and a JAX-RS application, which groups all exposed resources under a common path. See the class <a href="https://github.com/jbcodeforce/java-studies/blob/master/JEEPlay/src/main/java/jbcodeforce/microprofile/app/BasicRestApp.java">BasicRestApp</a>.</li>
+<li>The @ApplicationPath annotation has a value that indicates the path within the WAR that the JAX-RS application accepts requests from.</li>
+<li>Clear have one Resource class for the same resource type. The @Path annotation on the class indicates that this resource responds to specified path of the JAX-rS application. JAX-RS maps the HTTP methods on the URL to the methods on the class. <a href="https://github.com/jbcodeforce/java-studies/blob/master/JEEPlay/src/main/java/jbcodeforce/microprofile/app/SystemPropertiesResource.java">SystemPropertiesResource</a></li>
+<li>The JAX-RS 2.1 specification mandates JSON-Binding (JSON-B) and JAX-B.</li>
+<li>Example of results : <a href="http://localhost:9080/JEEPlay/System/properties">http://localhost:9080/JEEPlay/System/properties</a></li>
+</ul>
+<h2 id="concepts">Concepts</h2>
+<h3 id="cdi_1">CDI</h3>
+<p>Use Contexts and Dependency Injection (CDI) to manage scopes and inject dependencies into microservices.
+The most fundamental services that are provided by CDI are contexts that bind the lifecycle of stateful components to well-defined contexts, and dependency injection that is the ability to inject components into an application in a typesafe way. With CDI, the container does all the daunting work of instantiating dependencies, and controlling exactly when and how these components are instantiated and destroyed.</p>
+<p>Scopes are defined by using CDI annotations.</p>
+<p>When a bean needs to be persistent between all of the clients (singleton), use the <code>@ApplicationScoped</code> annotation. This annotation indicates that this particular bean is to be initialized once per application. By making it application-scoped, the container ensures that the same instance of the bean is used whenever it is injected into the application.</p>
+<p>Add the <code>@RequestScoped</code> annotation on the class to indicate that this bean is to be initialized once for every request. Request scope is short-lived and is therefore ideal for HTTP requests.</p>
+<p>The <code>@Inject</code> annotation indicates a dependency injection for application concept beans.</p>
+<p>Important to note that access to the injected bean could not be done in the contructor of the class using this injected bean. There is a problem of life cycle and so the host bean needs to be constructed before getting the injection.</p>
+<h3 id="ssl-client-connection">SSL client connection</h3>
+<p>When an application deployed in your app server, like Open Liberty, needs to access to a server end point over TLS (SSL), we need to make the server public certificate available to the Java client JVM. The certificate is persisted in a Truststore.</p>
+<p>In open liberty the server.xml define where to find the truststore:</p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h2 id="reactive-messaging-operator">Reactive messaging operator</h2>
+<p>The implementation specification is based on <a href="https://smallrye.io/smallrye-reactive-messaging/">SmallRye</a></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="restassured.html" class="md-footer__link md-footer__link--next" aria-label="Next: Rest assured" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Rest assured
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>

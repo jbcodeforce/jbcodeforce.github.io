@@ -1,0 +1,1707 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>Java FAQ - Jerome Boyer's Personal Site</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="magenta-dark" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#faq" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Jerome Boyer&#39;s Personal Site" class="md-header__button md-logo" aria-label="Jerome Boyer's Personal Site" data-md-component="logo">
+      
+  <img src="../images/gear-sp-01.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jerome Boyer's Personal Site
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Java FAQ
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/jbcodeforce/jbcodeforce.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Jerome Boyer&#39;s Personal Site" class="md-nav__button md-logo" aria-label="Jerome Boyer's Personal Site" data-md-component="logo">
+      
+  <img src="../images/gear-sp-01.jpg" alt="logo">
+
+    </a>
+    Jerome Boyer's Personal Site
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jbcodeforce/jbcodeforce.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Blogs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skill.html" class="md-nav__link">
+        Skill
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assets.html" class="md-nav__link">
+        List of contributions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5">
+        Knowledge base
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Knowledge base" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Knowledge base
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      <label class="md-nav__link" for="__nav_5_1">
+        Architecture
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecture" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/eda.html" class="md-nav__link">
+        Event Driven Architecture
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/architectural-decisions.html" class="md-nav__link">
+        Architecture decision
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/DR.html" class="md-nav__link">
+        Disaster recovery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/gcp.html" class="md-nav__link">
+        GCP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/ibmcloud.html" class="md-nav__link">
+        IBM Cloud
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../istio/index.html" class="md-nav__link">
+        Istio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/openshift-studies" class="md-nav__link">
+        Openshift Studies
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/gettingstarted.html" class="md-nav__link">
+        Playground
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/k8s.html" class="md-nav__link">
+        Kubernetes services
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_3">
+        Data
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-topology.html" class="md-nav__link">
+        Data topology
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-integration.html" class="md-nav__link">
+        Data integration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-replication.html" class="md-nav__link">
+        Data replication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/data-partitioning.html" class="md-nav__link">
+        Data partitioning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ibm.com/cloud/architecture/architectures/spectrum-discover" class="md-nav__link">
+        Data catalog - spectrum discover
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/opendatahub.html" class="md-nav__link">
+        OpenData Hub
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      <label class="md-nav__link" for="__nav_5_4">
+        AI
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AI" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          AI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/ml-basics/" class="md-nav__link">
+        Machine learning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/ads.html" class="md-nav__link">
+        Automation Decision Service
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5_5">
+        Programming
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_5">
+          <span class="md-nav__icon md-icon"></span>
+          Programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5_1" type="checkbox" id="__nav_5_5_1" checked>
+      
+      <label class="md-nav__link" for="__nav_5_5_1">
+        Java Studies
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Java Studies" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Java Studies
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="microprofile.html" class="md-nav__link">
+        Microprofile 3.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="restassured.html" class="md-nav__link">
+        Rest assured
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concurrent.html" class="md-nav__link">
+        Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding/testcontainer.html" class="md-nav__link">
+        TestContainer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="openliberty.html" class="md-nav__link">
+        Open Liberty
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quarkus.html" class="md-nav__link">
+        Quarkus
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="springcloud.html" class="md-nav__link">
+        SpringCloud
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vertx.html" class="md-nav__link">
+        Vert.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="funqy.html" class="md-nav__link">
+        Funqy
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concurrent.html" class="md-nav__link">
+        Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mqChallenge.html" class="md-nav__link">
+        MQ challenge
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Java FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="FAQ.html" class="md-nav__link md-nav__link--active">
+        Java FAQ
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#list-current-jdk-installed" class="md-nav__link">
+    List current JDK installed
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-uuid" class="md-nav__link">
+    Get UUID
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-reflection" class="md-nav__link">
+    Java Reflection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-se" class="md-nav__link">
+    Java SE
+  </a>
+  
+    <nav class="md-nav" aria-label="Java SE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read-from-a-properties-file" class="md-nav__link">
+    Read from a properties file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-read-json-file" class="md-nav__link">
+    How to read json file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-binding-jsr-367" class="md-nav__link">
+    Json binding JSR 367
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-server-with-socket" class="md-nav__link">
+    Data server with socket
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kafka-stream-and-json-b-serdes" class="md-nav__link">
+    Kafka stream and json-b serdes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jaxrs" class="md-nav__link">
+    JAXRS
+  </a>
+  
+    <nav class="md-nav" aria-label="JAXRS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-startup-and-destroy-event" class="md-nav__link">
+    Get startup and destroy event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unit-test-when-there-is-cdi" class="md-nav__link">
+    Unit test when there is CDI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#securing-communication-with-ssl" class="md-nav__link">
+    Securing communication with SSL
+  </a>
+  
+    <nav class="md-nav" aria-label="Securing communication with SSL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#good-articles" class="md-nav__link">
+    Good articles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-summary" class="md-nav__link">
+    Concept summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-what-needs-to-be-done" class="md-nav__link">
+    Summary of what needs to be done
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="java-vscode.html" class="md-nav__link">
+        VScode
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/python-code" class="md-nav__link">
+        Python Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/vuejs-studies/" class="md-nav__link">
+        Vue.js Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://cloudnative101.dev/" class="md-nav__link">
+        Cloud native content IBM
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git.html" class="md-nav__link">
+        Git summary
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding/gitops.html" class="md-nav__link">
+        GitOps
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/angular-sandbox/" class="md-nav__link">
+        Angular Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code-template.html" class="md-nav__link">
+        My code templates
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_6" type="checkbox" id="__nav_5_6" >
+      
+      <label class="md-nav__link" for="__nav_5_6">
+        Techno
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Techno" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_6">
+          <span class="md-nav__icon md-icon"></span>
+          Techno
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/apicurio.html" class="md-nav__link">
+        Apicurio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/atlas.html" class="md-nav__link">
+        Atlas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/ads.html" class="md-nav__link">
+        Automation Decision Service
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/bai.html" class="md-nav__link">
+        Self driving enterprise
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/cos.html" class="md-nav__link">
+        Cloud object storage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/code-engine.html" class="md-nav__link">
+        Code Engine
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/db-play/" class="md-nav__link">
+        Database play
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/egeria.html" class="md-nav__link">
+        Egeria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/flink-studies/" class="md-nav__link">
+        Flink Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/elasticsrch.html" class="md-nav__link">
+        Elastic Search
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/kafka-studies" class="md-nav__link">
+        Kafka Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/kar.html" class="md-nav__link">
+        KAR
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../techno/redis.html" class="md-nav__link">
+        Redis
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/jbcodeforce/redpanda-studies/" class="md-nav__link">
+        RedPanda Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbcodeforce.github.io/spark-studies/" class="md-nav__link">
+        Spark Studies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="java-vscode.html" class="md-nav__link">
+        VScode
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#list-current-jdk-installed" class="md-nav__link">
+    List current JDK installed
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-uuid" class="md-nav__link">
+    Get UUID
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-reflection" class="md-nav__link">
+    Java Reflection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-se" class="md-nav__link">
+    Java SE
+  </a>
+  
+    <nav class="md-nav" aria-label="Java SE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read-from-a-properties-file" class="md-nav__link">
+    Read from a properties file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-read-json-file" class="md-nav__link">
+    How to read json file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-binding-jsr-367" class="md-nav__link">
+    Json binding JSR 367
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-server-with-socket" class="md-nav__link">
+    Data server with socket
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kafka-stream-and-json-b-serdes" class="md-nav__link">
+    Kafka stream and json-b serdes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jaxrs" class="md-nav__link">
+    JAXRS
+  </a>
+  
+    <nav class="md-nav" aria-label="JAXRS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-startup-and-destroy-event" class="md-nav__link">
+    Get startup and destroy event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unit-test-when-there-is-cdi" class="md-nav__link">
+    Unit test when there is CDI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#securing-communication-with-ssl" class="md-nav__link">
+    Securing communication with SSL
+  </a>
+  
+    <nav class="md-nav" aria-label="Securing communication with SSL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#good-articles" class="md-nav__link">
+    Good articles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-summary" class="md-nav__link">
+    Concept summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-what-needs-to-be-done" class="md-nav__link">
+    Summary of what needs to be done
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jbcodeforce/jbcodeforce.github.io/edit/master/docs/java/FAQ.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="faq">FAQ</h1>
+<h2 id="list-current-jdk-installed">List current JDK installed</h2>
+<div class="highlight"><pre><span></span><code>/usr/libexec/java_home -V
+</code></pre></div>
+<h2 id="get-uuid">Get UUID</h2>
+<div class="highlight"><pre><span></span><code>    <span class="n">UUID</span> <span class="n">uuid</span> <span class="o">=</span> <span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">();</span>
+    <span class="n">order</span><span class="p">.</span><span class="na">setOrderID</span><span class="p">(</span><span class="n">uuid</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+</code></pre></div>
+<h2 id="java-reflection">Java Reflection</h2>
+<p>The <a href="https://www.baeldung.com/java-reflection">baeldung tutorial</a>, with an example of getting attributes of a class. </p>
+<div class="highlight"><pre><span></span><code><span class="n">Object</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">();</span>
+<span class="n">Field</span><span class="o">[]</span> <span class="n">fields</span> <span class="o">=</span> <span class="n">person</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getDeclaredFields</span><span class="p">();</span>
+</code></pre></div>
+<ul>
+<li>Create a class instance: ClusterRepository is an interface and we can have different implementation as specified by an application properties</li>
+</ul>
+<div class="highlight"><pre><span></span><code> <span class="nd">@ConfigParameter</span><span class="p">(</span><span class="s">&quot;cluster.repository.class&quot;</span><span class="p">)</span>
+ <span class="n">String</span> <span class="n">repositoryClassToUse</span><span class="p">;</span>
+ <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="n">repositoryClassToUse</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="java-se">Java SE</h2>
+<h3 id="read-from-a-properties-file">Read from a properties file</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Properties</span> <span class="n">props</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="p">();</span>
+ <span class="k">try</span> <span class="p">{</span>
+        <span class="n">props</span><span class="p">.</span><span class="na">load</span><span class="p">(</span>  <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">filename</span><span class="p">));</span>
+ <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="p">){</span>
+         <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+ <span class="p">}</span>
+</code></pre></div>
+<h3 id="how-to-read-json-file">How to read json file</h3>
+<p>Using google parser. For the <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson">maven dependency</a></p>
+<div class="highlight"><pre><span></span><code><span class="n">FileReader</span> <span class="n">input</span><span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="p">(</span><span class="s">&quot;src/test/resources/testpumps.json&quot;</span><span class="p">);</span>
+<span class="n">Gson</span> <span class="n">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="p">();</span>
+<span class="n">AssetEvent</span><span class="o">[]</span> <span class="n">assets</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="na">fromJson</span><span class="p">(</span><span class="k">new</span> <span class="n">JsonReader</span><span class="p">(</span><span class="n">input</span><span class="p">),</span> <span class="n">AssetEvent</span><span class="o">[]</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<p>Using jsonb (quarkus)</p>
+<div class="highlight"><pre><span></span><code><span class="n">Book</span> <span class="n">book</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Book</span><span class="p">(</span><span class="s">&quot;Java 11&quot;</span><span class="p">,</span> <span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&quot;Duke&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="p">(</span><span class="mf">44.444</span><span class="p">));</span>
+<span class="n">Jsonb</span> <span class="n">jsonb</span> <span class="o">=</span> <span class="n">JsonbBuilder</span><span class="p">.</span><span class="na">create</span><span class="p">();</span>
+<span class="n">String</span> <span class="n">resultJson</span> <span class="o">=</span> <span class="n">jsonb</span><span class="p">.</span><span class="na">toJson</span><span class="p">(</span><span class="n">book</span><span class="p">);</span>
+<span class="n">Book</span> <span class="n">serializedBook</span> <span class="o">=</span> <span class="n">jsonb</span><span class="p">.</span><span class="na">fromJson</span><span class="p">(</span><span class="n">resultJson</span><span class="p">,</span> <span class="n">Book</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<p>Using jackson to serialize an object to a String</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span>
+<span class="kd">static</span> <span class="n">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="p">();</span>
+ <span class="k">try</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">order</span> <span class="o">=</span> <span class="n">mapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">JsonProcessingException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">order</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="json-binding-jsr-367">Json binding JSR 367</h3>
+<p>JSR 367 is the API for JSON processing, and implemented with JSON-B. The maven with quarkus is</p>
+<div class="highlight"><pre><span></span><code>    &lt;dependency&gt;
+      &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+      &lt;artifactId&gt;quarkus-resteasy-jsonb&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+</code></pre></div>
+<p>The main <a href="https://www.baeldung.com/java-json-binding-api#api-features">API features</a></p>
+<p>Example of sending a java object as json string with rest-assured:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Jsonb</span> <span class="n">jsonb</span> <span class="o">=</span> <span class="n">JsonbBuilder</span><span class="p">.</span><span class="na">create</span><span class="p">();</span>
+
+<span class="n">given</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">ContentType</span><span class="p">.</span><span class="na">JSON</span><span class="p">)</span>
+    <span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">jsonb</span><span class="p">.</span><span class="na">toJson</span><span class="p">(</span><span class="n">order</span><span class="p">)).</span><span class="na">post</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="na">then</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="data-server-with-socket">Data server with socket</h3>
+<p>The code read data from a csv file, listen socket connection, and once connected sends record line by line. 
+See <a href="https://github.com/jbcodeforce/flink-studies/">the class as example</a> in flink project.</p>
+<h3 id="kafka-stream-and-json-b-serdes">Kafka stream and json-b serdes</h3>
+<p>How to use a pojo as value in the stream? use the io.quarkus.kafka.client.serialization.JsonbSerde class.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">io.quarkus.kafka.client.serialization.JsonbSerde</span><span class="p">;</span>
+
+<span class="n">JsonbSerde</span><span class="o">&lt;</span><span class="n">WeatherStation</span><span class="o">&gt;</span> <span class="n">weatherStationSerde</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonbSerde</span><span class="o">&lt;&gt;</span><span class="p">(</span>
+                <span class="n">WeatherStation</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="n">JsonbSerde</span><span class="o">&lt;</span><span class="n">Aggregation</span><span class="o">&gt;</span> <span class="n">aggregationSerde</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonbSerde</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Aggregation</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="c1">// then use the serdes...</span>
+<span class="n">GlobalKTable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">WeatherStation</span><span class="o">&gt;</span> <span class="n">stations</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="na">globalTable</span><span class="p">(</span> 
+                <span class="n">WEATHER_STATIONS_TOPIC</span><span class="p">,</span>
+                <span class="n">Consumed</span><span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">Serdes</span><span class="p">.</span><span class="na">Integer</span><span class="p">(),</span> <span class="n">weatherStationSerde</span><span class="p">));</span>
+</code></pre></div>
+<h2 id="jaxrs">JAXRS</h2>
+<h3 id="get-startup-and-destroy-event">Get startup and destroy event</h3>
+<div class="highlight"><pre><span></span><code><span class="nd">@ApplicationScoped</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StartupListener</span> <span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="p">(</span><span class="nd">@Observes</span>
+                     <span class="nd">@Initialized</span><span class="p">(</span><span class="n">ApplicationScoped</span><span class="p">.</span><span class="na">class</span><span class="p">)</span> <span class="n">ServletContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Perform action during application&#39;s startup</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">destroy</span><span class="p">(</span><span class="nd">@Observes</span>
+                        <span class="nd">@Destroyed</span><span class="p">(</span><span class="n">ApplicationScoped</span><span class="p">.</span><span class="na">class</span><span class="p">)</span> <span class="n">ServletContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Perform action during application&#39;s shutdown</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h3 id="unit-test-when-there-is-cdi">Unit test when there is CDI</h3>
+<p>Add a constructor with the injectable bean as parameter:</p>
+<div class="highlight"><pre><span></span><code>    <span class="nd">@Inject</span>
+    <span class="kd">private</span> <span class="n">OrderRepository</span> <span class="n">repository</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">OrderService</span><span class="p">(</span><span class="n">OrderRepository</span> <span class="n">repository</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">repository</span> <span class="o">=</span> <span class="n">repository</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="securing-communication-with-ssl">Securing communication with SSL</h2>
+<p>To secure a service exposing end point with TLS. In Java a client can have a client key, it saves is a keystore, and then consume server certificate that needs to match a certificate saved in is truststore. </p>
+<p>Suppose the app expose a SSL end point, so it will have to define a server certificate, and then it will consume other service so it needs to import the other service end point to its truststore so during theSSL handshake, the connection can be estalished. </p>
+<h3 id="good-articles">Good articles</h3>
+<ul>
+<li><a href="https://www.baeldung.com/java-ssl">https://www.baeldung.com/java-ssl</a></li>
+<li><a href="https://docs.oracle.com/cd/E54932_01/doc.705/e54936/cssg_create_ssl_cert.htm#CSVSG180">oracle doc</a></li>
+</ul>
+<h3 id="concept-summary">Concept summary</h3>
+<p>SSL is necessary to support the three main information security principles:</p>
+<ul>
+<li>Encryption: protect data transmissions between parties</li>
+<li>Authentication: ensure the server we connect to is indeed the proper server</li>
+<li>Data integrity: guarantee that the requested data is what is effectively delivered</li>
+</ul>
+<p>A self-signed certificate is one that you create for your server, in the server's KeyStore.</p>
+<p>The truststore is the file containing trusted certificates that Java uses to validate secured connections.</p>
+<p>add the public certificate of the server to the default cacerts truststore used by Java. while initiating the SSL connection.
+Set the javax.net.ssl.trustStore environment variable to point to the truststore file so that the application can pick up that file which contains the public certificate of the server we are connecting to.
+The steps to install a new certificate into the Java default truststore are:</p>
+<p>An error like <em>unable to find valid certification path</em> to requested target while establishing the SSL connection, it indicates that we don't have the public certificate of the server which we're trying to connect in the Java truststore.</p>
+<h3 id="summary-of-what-needs-to-be-done">Summary of what needs to be done</h3>
+<ul>
+<li>
+<p>create a self signed certificate to be the server of your end point</p>
+</li>
+<li>
+<p>Import the ca certificate of the server you want to connect to.</p>
+<ul>
+<li>Extract cert from server: <code>openssl s_client -connect server:443</code></li>
+<li>Import certificate into truststore using keytool: <code>keytool -import -alias alias.server.com -keystore $JAVA_HOME/jre/lib/security/cacerts</code> or to a truststore file you can use in a dockerfile, or upload as a truststore and then mount to a pod.</li>
+</ul>
+</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="mqChallenge.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: MQ challenge" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              MQ challenge
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="java-vscode.html" class="md-footer__link md-footer__link--next" aria-label="Next: VScode" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              VScode
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>
