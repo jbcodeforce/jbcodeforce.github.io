@@ -8,6 +8,13 @@ I am currently a IBM Distinguished Engineer, responsible to evangelize event-dri
 
 ## Blogs
 
+### 04/15/2021 - Event driven architecture a hot topic
+
+All the major 500 companies are adopting loosely coupled, event-driven microservice architecture, 
+new data pipeline for their big data processing and deploying event backbone technology like Apache Kafka or Pulsar. 
+In this blog, I present the use cases, methodology and technology pointers...
+
+[>> Read more](/blogs/04-15-21)
 
 ### 01/10/2021 - Outbox Pattern with Debezium , Quarkus
 
