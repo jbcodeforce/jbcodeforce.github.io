@@ -1,10 +1,16 @@
 # Data studies
 
-There is perhaps nothing more valuable to an organization than its data. In the age of digital transformation and the empowered customer, organizations must be able to generate real-time insights based on accurate and high-quality data.
-
-I try to regroup a set of studies and analysis under the data file.
+There is perhaps nothing more valuable to an organization than its data. In the age of digital transformation 
+and the empowered customers, organizations must be able to generate real-time insights based on accurate and 
+high-quality data.
 
 ## Important concepts
+
+### Data Lake
+
+It is a vehicle for making big data available to AI and analytics. In the 90s, it was implemented using enterprise
+data warehouses, then mid 2000s Hadoop and ELK stacks was used more as an open  data formats and horizontal scaling,
+now 2020s  it is supported as cloud based data lake, pay per job, elastic scaling, data in object store, supporting real-time.
 
 ### Data topology
 

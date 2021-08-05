@@ -9,6 +9,7 @@ nav:
     - Architecture:
       - Event Driven Architecture: architecture/eda.md
       - Architecture decision: architecture/architectural-decisions.md
+      - DDD : architecture/ddd.md
       - Disaster recovery: architecture/DR.md
       - GCP: architecture/gcp.md
       - IBM Cloud: architecture/ibmcloud.md

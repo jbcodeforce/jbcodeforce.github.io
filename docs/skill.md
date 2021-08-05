@@ -26,6 +26,7 @@
 * Agile development, Lean Startup, Design Thinking, Event Storming and Domain Driven
 * Agile business rules development author
 * DevOps, Gitops
+* Domain driven design and event storming
 
 ## Solution selling
 
