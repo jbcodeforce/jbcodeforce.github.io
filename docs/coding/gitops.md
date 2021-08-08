@@ -20,8 +20,13 @@ GitOps is a natural evolution of DevOps and Infrastructure-as-Code.
 
 * Git is the source of truth.
 * Separate application source code (Java/Go) from deployment manifests i.e the application source code and the GitOps configuration reside in separate git repositories.
-* Deployment manifests are standard Kubernetes (k8s) manifests i.e Kubernetes manifests in the GitOps repository can be simply applied with nothing more than a oc apply.
-* Kustomize for defining the differences between environments i.e reusable parameters with extra resources described using kustomization.yaml.
+* Deployment manifests are standard Kubernetes (k8s) manifests i.e Kubernetes manifests in the GitOps repository can be simply applied with nothing more than a `oc apply`.
+* Kustomize for defining the differences between environments i.e reusable parameters with extra resources described using `kustomization.yaml`.
+* Minimize yaml duplication - no copy/paste
+* Support two axis of configuration: clusters and environments: prod, test, dev. Accept separating production repo if organization is willing to do so.
+* Prefer a multi-folder and/or multi-repo structure over multi-branch. Avoid dev or test confifuration in different branches. In a microservices world, a one branch per environment will quickly lead to an explosion of branches which again becomes difficult and cumbersome to maintain.
+* Minimize specific gitops tool dependencies
+* Do not put independent applications or applications managed by different teams in the same repo. 
 
 ### Concepts
 
@@ -33,6 +38,49 @@ GitOps is a natural evolution of DevOps and Infrastructure-as-Code.
 * [kam CLI from the Red Hat team gitops](https://github.com/redhat-developer/kam)
 * [Tekton](#tekton-tutorial) for continuous integration and even deployment
 * [ArgoCD](#argocd-tutorial) for continuous deployment
+* [Kustomize]()
+
+### Proposed project structure
+
+Try to adopt catalog repositories to hold common elements that will be re-used across teams and other repositories. See example in [Red Hat Canada Catalog](https://github.com/redhat-canada-gitops/catalog)
+
+Use Kustomization to reference remote repositories as a base or resource and then patch it as needed to meet your specific requirements.
+
+Reference the common repository via a tag or commit ID.
+
+In many organizations we may have few different common repositories maintained by different teams: operation with cluster configuration,
+services like Nexus, Sonarqube, argo... from devops team, and then apps team.
+
+For Application repositories, align your repositories along application and team boundaries: one gitops
+repo per application, different folders for microservices and depli=oyab le components. 
+
+Use bootstrap folder to load the application components into the cluster: this could be an ArdoCD app.
+
+Namespaces should be created in environment or cluster folders.
+
+Need to tradeoff between services (database, messaging...) into apps folder or at the same level of apps folder.
+
+Use Overlay for the different app configuration depending of the target environment.
+
+Dedicated a folder (tekton) for pipelines, tasks.
+
+if you find you are duplicating argo cd manifests in the bootstrap folder, then create a separate high 
+level argocd folder.
+
+* [Cluster Configuration](https://github.com/gnunn-gitops/cluster-config). This repo shows how Gerald Nunn configures OpenShift clusters using GitOps with ArgoCD.
+* [Product Catalog](https://github.com/gnunn-gitops/product-catalog) example of a 3 tier app with ArgoCD, tekton and kustomize. (From Gerald Nunn )
+* [real time inventory demo gitops](https://github.com/ibm-cloud-architecture/eda-lab-inventory) my own demo gitops
+
+### Process
+
+A key question in any gitops scenario is how to manage promotion of changes in manifests between different environments and clusters. 
+
+Some principles to observe:
+
+* Every change in the manifests needs to flow through the environments in hierarchical order, i.e. (dev > test > prod)
+* We do not want a change to a base flowing to all environments simultaneously
+* Tie specific environments to specific revisions so that changes in the repo can be promoted in a controlled manner
+We can manage the revision in the gitops tools or in kustomize or both.
 
 ## Playground
 

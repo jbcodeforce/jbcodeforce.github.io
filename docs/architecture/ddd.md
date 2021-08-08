@@ -15,7 +15,7 @@ Questions to consider:
 * What are the motivations behind a requirement? is it constraingned by existing system?
 
 Large problem domains can be partitioned into subdomains to manage complexity. Subdomains are abstract concepts. 
-
+Subdomains are typically reflecting the business capabilities of the business organizational structure. 
 Subdomains represent areas of capability, define business processes, and represent the functionality of a system.
 
 For core domain focus on the product rather than view it as a standalone project. Your product is an evolving succession of feature enhancements and tweaks.
@@ -69,6 +69,14 @@ May only use events, commands and aggregates in the event storming.
 This is more the ownership of the data view that will drag the coupling back to the aggregate.
 
 Think about developing scenario to validate the model and test cases to verify aggregate correctness
+
+Context boundaries can be influenced by:
+
+* Ambiguity in terminology and concepts of the domain
+* Alignment to subdomains and business capabilities
+* Team organization and physical location
+* Legacy code base
+* Third party integration
 
 ### Ensuring consistency in the Ubiquitous Language
 
@@ -193,3 +201,7 @@ Persistence, consistency, and concurrency are all important implementation detai
 Only aggregate roots can be obtained directly with database queries. The domain objects that are inner components of the
  aggregate can be accessed only via the aggregate root. Each aggregate has a matching repository that abstracts the 
  underlying database and that will only allow aggregates to be persisted and hydrated
+
+A Delete Operation Must Remove Everything within the Aggregate Boundary at Once.
+
+Avoid lazy loading except if you really need so, and mostly for performance reason.

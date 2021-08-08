@@ -92,7 +92,7 @@ To access avro classes directly add this dependencies:
 ### From schema to beans
 
 Define one to many `.avcs` file in the `src/main/avro` folder. To generate java beans from those schema 
-definitions, use the avro maven plugin. The order of schema processing is important to build the dependencies
+definitions, use the [avro maven plugin](https://mvnrepository.com/artifact/org.apache.avro/avro-maven-plugin). The order of schema processing is important to build the dependencies
  before the records using them (see imports statement below):
 
 ```xml
