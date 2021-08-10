@@ -13,7 +13,7 @@ This is the list of assets, I developed or co-developed over the years.
 
 ### Architecture
 
-* [Global EDA site](https://ibm-cloud-architecture.github.io/refarch-eda/) - started 10/2018
+* [Global EDA site](https://ibm-cloud-architecture.github.io/refarch-eda/) - started in 10/2018 - continuously updated
 * [Reefer Container shipment EDA solution implementation](https://ibm-cloud-architecture.github.io/refarch-kc/) - started 10/2018
 * [Reference Architecture and integration with analytics and machine learning](https://ibm-cloud-architecture.github.io/refarch-eda/introduction/reference-architecture/#integration-with-analytics-and-machine-learning)
 * [Advantages of Event-Driven Reference Architectures - Microservice decoupling](https://ibm-cloud-architecture.github.io/refarch-eda/advantages/microservice)
@@ -24,7 +24,7 @@ This is the list of assets, I developed or co-developed over the years.
 * [Event sourcing design pattern](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/event-sourcing/) 01/2019
 * [Dead letter queue design pattern](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/dlq/) -1/2020
 * [SAGA design pattern](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/saga/)- 01/2019, updated Q1 - 2020
-* [Modern data lake point of view](https://ibm-cloud-architecture.github.io/refarch-eda/introduction/reference-architecture/#modern-data-lake) - Q2 2020
+* [Modern data lake: point of view](https://ibm-cloud-architecture.github.io/refarch-eda/introduction/reference-architecture/#modern-data-lake) - Q2 2020
 * [Legacy integration](https://ibm-cloud-architecture.github.io/refarch-eda/introduction/reference-architecture/#legacy-integration) - Q1 2020 / Updated Q3 2020
 
 ### Development practices

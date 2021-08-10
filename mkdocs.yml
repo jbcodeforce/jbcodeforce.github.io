@@ -1,7 +1,7 @@
 site_name: Jerome Boyer's Personal Site
 repo_url: https://github.com/jbcodeforce/jbcodeforce.github.io/
 nav:
-  - Blogs: index.md
+  - Blogs: blogs/index.md
   - About: about.md
   - Skill: skill.md
   - List of contributions: assets.md
