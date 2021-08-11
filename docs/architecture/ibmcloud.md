@@ -9,10 +9,50 @@ Really same approach as AWS and GCP.
 ibmcloud login --sso
 ```
 
+## VPC - Virtual Private Cloud
+
+[Virtual Private Cloud (VPC)](https://www.ibm.com/cloud/learn/vpc) lets an enterprise establishes its own private cloud-like computing environment on shared public cloud infrastructure.
+
+A VPC’s logical isolation is implemented using virtual network functions and security features that give an enterprise customer
+ granular control over which IP addresses.
+
+The resources can be compute (virtual server or vCPU), storage (block storage quota per account) and networking with public 
+gateways, load balancers, routers, direct or dedicated links.
+
+See [this tutorial](https://cloud.ibm.com/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-console) to understand how VPCs are created.
+By default three subnets are created, and admin user needs to configure ACL to limit inbound and outbound traffic to the subnet.
+ACL can be setup to authorize TCP traffic on port 80 on any IP, deny all other protocol on any IP and any port...
+
+Once done we can add virtual server instance. A boot volume is allocated, ssh key needs to be created and different linux images are supported.
+A VSI is attached to a subnet via its network interface. We can also select which security groups to attach to each interface.
+Block storage can be added as volume and added to a VSI. We can configure the security group to define the inbound and outbound traffic that is allowed for the instance.
+
+If we want your instance to be reachable from the internet, we need to get floating IP address. 
+
+A typical 3 tiers application can have each tier allocated on its own subnet, with its own IP range.
+
+### VPE Virtual Private Endpoints
+
+VPEs are virtual IP interfaces that are bound to an endpoint gateway created on a per service, or service instance.
+
+VPE has multiple benefits like:
+
+* Public connectivity is not required and has no public data egress charges.
+* Reaches IBM Cloud assets through a private service provider.
+* A VPE lives in your network address space, extending your private and multicloud into the IBM Cloud.
+* You can apply security through Network Access Control Lists (NACLs).
+* The endpoint IP deploys in a customer-defined, virtual network.
+
+[Tutorial: Leveraging Virtual Private Endpoint in IBM Cloud VPC to Connect IBM Cloud Object Storage](https://developer.ibm.com/recipes/tutorials/leveraging-virtual-private-endpoint-in-ibm-cloud-vpc-to-connect-ibm-cloud-object-storage/)
+to present how to share the data across availability zones in VPC and DR site using IBM Cloud object storage.
+The buckets are mounted inside VSIs from source site to DR AZ:
+
+![](./images/vpe-cos.png)
+
 
 ## Cloud Object Storage
 
-Very similar service as S3. [Product doc](https://cloud.ibm.com/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
+Very similar AWS S3 service. [The product doc](https://cloud.ibm.com/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
 
 * Create a COS service to keep n buckets. 
 * IBM Cloud Object Storage is a multi-tenant system, and all instances of Object Storage share physical infrastructure
@@ -30,9 +70,9 @@ Very similar service as S3. [Product doc](https://cloud.ibm.com/docs/services/cl
 
 ### Use cases
 
-* as part of a data lake
+* as part of a data lake to keep a lot of data
 * serving static websites
-* 
+
 
 ## [IBM Cloud for VMware](https://cloud.ibm.com/infrastructure/vmware-solutions/console)
 
