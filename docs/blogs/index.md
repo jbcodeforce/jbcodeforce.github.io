@@ -7,7 +7,11 @@
 * Blog on EDA governance
 * Blog on fit for purpose
 
-## 05/29/2021
+## 08/15/2021 A new reference architecture
+
+[>> read more](/blogs/08-15-21)
+
+## 05/29/2021 A new interesting reference implementationp
 
 The Covid-19 vaccine shipment is a real challenge and last year we had to develop a proof od technology to address how
 and event based solution with linear programming could help address the vaccine order and optimize the vaccine lots shipment.
