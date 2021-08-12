@@ -1,8 +1,6 @@
 # Blogs
  
 ## TO DO
-
-* Blog on IBM EDA ref arch
 * Blog on kc container solution
 * Blog on vaccine demo
 * Blog on real time inventory
@@ -17,6 +15,14 @@ In this blog I'm presenting different components of the order optimization and r
 run it your self on OpenShift.
 
 [>> Read more](/blogs/05-29-21)
+
+## 04/15/2021 - Event Driven Architecture still a hot topic
+
+All the major 500 companies are adopting loosely coupled, event-driven microservice architecture, 
+new data pipeline for their big data processing and deploying event backbone technology like Apache Kafka or Pulsar. 
+In this blog, I present the use cases, methodology and technology pointers...
+
+[>> Read more](/blogs/04-15-21)
 
 ## 01/10/2021 - Outbox Pattern with Debezium , Quarkus
 
