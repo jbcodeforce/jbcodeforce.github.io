@@ -34,7 +34,7 @@ ADS is not yet in docker image.
 
 ## Installation
 
-Being part of Cloud Pak for Automation, we need to intall it on OpenShift. The install doc is [here](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=automation-installing). 
+Being part of Cloud Pak for Automation, we need to install it on OpenShift. The install doc is [here](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=automation-installing). 
 Installation uses  operator lifecycle manager (OLM).
 
 IBM Cloud Pak for Business Automation comes with the IBM Cloud® platform foundation which includes:
@@ -51,7 +51,7 @@ Summary of installation steps:
 * Get IBM license entitled registry key
 * Get the storage class name to use for dynamic storage
 * Preparing storage for cloud pak operator
-* download the [k8s certificates]( (https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=cluster-setting-up-admin-script)
+* download the [k8s certificates](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=cluster-setting-up-admin-script)
 ) and configuration to prepare the OCP cluster
 * Define a project where the Cloud Pak will be installed and then modify cluster_role_binding
 * Run the `cert-kubernetes/descriptors/cp4a-clusteradmin-setup.sh` script
@@ -64,7 +64,7 @@ To be able to support CI/CD we need to get the ADS Maven plugin. This is done by
 
 * Get a UMS user
 * Be sure to have installed a Nexus server to OpenShift
-* authenthicate to ADS_BASE_URL with the access token of the UMS user.
+* authenticate to ADS_BASE_URL with the access token of the UMS user.
 
 ## Not yet there
 

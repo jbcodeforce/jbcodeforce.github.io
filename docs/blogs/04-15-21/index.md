@@ -94,3 +94,5 @@ Combining event backbone and data streaming with AI is the way to go and we need
 * [Event-driven architecture body of knowledge (Always work in progress)](https://ibm-cloud-architecture.github.io/refarch-eda/)
 * [Event storming methodology](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/)
 * [Kafka fundamentals](https://developer.ibm.com/articles/event-streams-kafka-fundamentals) with some [other best practices](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-producers-consumers/)
+
+This blog was also published [to Medium](https://medium.com/@jerome.boyer/event-driven-solution-is-still-a-hot-topic-15632a8130ef)

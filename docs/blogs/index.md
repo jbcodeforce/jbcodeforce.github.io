@@ -9,6 +9,8 @@
 
 ## 08/15/2021 A new reference architecture
 
+Support new requirements and EDA governance construct in a new reference architecture
+
 [>> read more](/blogs/08-15-21)
 
 ## 05/29/2021 A new interesting reference implementationp

@@ -47,7 +47,7 @@ VPE has multiple benefits like:
 to present how to share the data across availability zones in VPC and DR site using IBM Cloud object storage.
 The buckets are mounted inside VSIs from source site to DR AZ:
 
-![](./images/vpe-cos.png)
+![](./images/vpe-cos.jpg)
 
 
 ## Cloud Object Storage
