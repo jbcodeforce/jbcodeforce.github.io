@@ -8,6 +8,6 @@ See [the agile integration concepts in EDA site](https://ibm-cloud-architecture.
 
 ## IBM Reference architecture
 
-https://www.ibm.com/cloud/architecture/architectures/modern-integration
+[IBM integration reference](https://www.ibm.com/cloud/architecture/architectures/modern-integration)
 
 ##

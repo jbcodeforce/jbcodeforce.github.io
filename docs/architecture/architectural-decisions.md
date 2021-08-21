@@ -1,8 +1,7 @@
 # Architectural Decisions Guidelines
 
-This way the method is highly iterative, so any findings during this process can result in changes to architectural decisions. However, there are never any wrong architectural decisions because the decisions take into account all the knowledge available at a certain point in time. Therefore, it’s important to document why a decision was made.
-
-The following sections provide guidelines on selecting Technology Components for each Application Component. So it is explained what Technology Component should be chosen based on given requirements and if the Application Component needs to be included at all.
+The following sections provide guidelines on selecting Technology Components for each Application Component. 
+So it is explained what Technology Component should be chosen based on given requirements and if the Application Component needs to be included at all.
 
 ## Application Component: Data Source
 

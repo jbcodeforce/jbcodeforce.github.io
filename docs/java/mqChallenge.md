@@ -1,38 +1,4 @@
-# MQ Studies
-
-## References for reading
-
-Here are a set of articles you may need to read to get ready on MQ:
-
-* [Learning MQ](http://ibm.biz/learn-mq) 
-* [MQ Essentials- Getting started with IBM MQ](
-https://developer.ibm.com/messaging/learn-mq/mq-tutorials/getting-started-mq/)
-* [First demo on docker](https://developer.ibm.com/messaging/learn-mq/mq-tutorials/mq-connect-to-queue-manager/#docker)
-* [MQ Cheat sheet](https://developer.ibm.com/messaging/learn-mq/mq-tutorials/dev-cheat-sheet/)
-* [Develop a JMS point to point application](https://developer.ibm.com/messaging/learn-mq/mq-tutorials/develop-mq-jms/) The code of this IBM tutorial is also in this repository under the `democlient/MQJMSClient` folder so we can test the configuration.
-* [IBM MQ v9.0+ product documentation](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.html)
-
-
-* [Docker image for MQ community]()
-* [Comparing Messaging Pub/Sub and Event Streams](https://community.ibm.com/community/user/imwuc/viewdocument/comparing-messaging-pubsub-and-eve?CommunityKey=b382f2ab-42f1-4932-aa8b-8786ca722d55)
-
-## Key Concepts
-
-* **Messages**: packages of data produced and consumed by applications.
-* **Queues**: addressable locations to deliver messages to and store them reliably until they need to be consumed.
-* **Queue managers**: actual MQ engines, the servers that host the queues
-* **Channels**: the way queue managers communicate with each other and with the applications.
-* **MQ networks**: loose collections of interconnected queue managers, all working together to deliver messages between applications and locations
-* **MQ clusters**: tight couplings of queue managers, enabling higher levels of scaling and availability.
-* **Point to point** for a single consumer. Senders produce messages to a queue, and receivers asynchronously consume messages from that queue. With multiple receivers, each message is only consumed by one receiver, distributing the workload across them all.
-* **Publish/subscribe** copies of messages will be delivered to all interested consuming applications. Subscribers create a subscription to topic when they want to receive messages.
-
-## MQ value proposition
-
-* No data loss, no duplicate
-* Integrate with transaction
-* Scale horizontally: add more queue managers to share tasks and distribute the messages across them. MQ Clusters will even intelligently route messages to where they’re needed. The world is full of horizontally scaled MQ systems that handle billions of messages a day.
-* High availability
+# MQ Challenges
 
 ## Getting started with MQ docker image
 
@@ -85,7 +51,7 @@ curl https://raw.githubusercontent.com/ibm-messaging/mq-dev-samples/master/getti
 # Build
 docker build -t mq-demo .
 # Run
-docker run --network labnet -ti mq-demo
+docker run -ti mq-demo
 ```
 
 Then answer the questions, using the name of `mqserver` for the hostname, as it is the name defined in the docker compose, and the password is the one defined in `MQ_APP_PASSWORD`.
@@ -129,8 +95,6 @@ Play with PUT and GET.
 
 ![](./images/mq-main-page.png)
 
-### Administre Queue
-
 
 ## Basic JMS 2.0 client
 
@@ -150,17 +114,31 @@ This is the implementation of [the MQ developer tutorial](https://developer.ibm.
 The conference event system and reseller applications are loosely coupled. Asynchronous messaging allows us to integrate these components and build in a buffer, or shock absorber. Should either component lose connectivity, fail or experience fluctuations in throughput, the messaging layer will deal with any instability.
 
 ## The Event Booking
+This is the implementation of [the MQ developer tutorial](https://developer.ibm.com/messaging/learn-mq/mq-tutorials/mq-dev-challenge/) and supports the implementation of the following solution:
 
-The event booking system runs in a container and holds an event publisher, MQ server hosting newTickets topic and purchase and confirmation queues. The code is in `EventBookingServer` folder.
+![](./images/mq-arch-ticketing.png)
 
-To build the image
+The conference event system and reseller applications are loosely coupled. Asynchronous messaging allows us to integrate
+ these components and build in a buffer, or shock absorber. Should either component lose connectivity, fail or experience 
+ fluctuations in throughput, the messaging layer will deal with any instability.
 
-```shell
-mvn package
-docker build -t jbcodeforce/mqbooking .
+The event booking system runs in a container and holds an event publisher, MQ server hosting newTickets topic and purchase 
+and confirmation queues. The code is in `java-studies/mqChallenges/MQTicketService` folder.
+
+`newTicket` messages are sent every 30 s to the `newTickets` topic. The message payload contains an EventId and the number of available tickets.
+The Reseller application uses the received payload to construct a request message to buy some tickets.
+
+The application uses JMS to send to queue or topic.
+
+See instructions in the [readme] to build and run the solution locally with docker.
+
+For any app we need the JMS api jar and the MQ all client code. Here are the two curl to use
+
+```sh
+curl -o com.ibm.mq.allclient-9.2.0.0.jar https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.2.0.0/com.ibm.mq.allclient-9.2.0.0.jar
+curl -o javax.jms-api-2.0.1.jar https://repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar
 ```
 
-And run it with the script `runBookingContainer.sh`
 
 ## The reseller app
 
@@ -168,4 +146,14 @@ The Reseller application provides the prompt to ask the user how many of the ava
 The conference event booking system will process the request message and provide a response. 
 The Reseller application will print the outcome to stdout.
 
-Build with the shell `TicketSeller/build.sh`and run it. 
+Build with the shell `./TicketSeller/build.sh` (be sure to use jdk 1.8) and run it with:
+
+```shell
+# use jdk 1.8
+sdk use java 8.0.292.j9-adpt
+# build
+./build.sh
+# run it
+./runReseller.sh
+# And buy ticket as they are published
+```

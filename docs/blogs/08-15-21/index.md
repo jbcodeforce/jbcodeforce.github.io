@@ -3,10 +3,11 @@
 It is interesting how quickly we can enter in 'save my church' discussion and argumentation, and completely do not see the elephant in the room.
 Since three years I spent my time to design event-driven architecture for customers and develop best practices around it. 
 One of the church battle was the messaging versus eventing, or queueing versus pub/sub, Kafka versus MQ.
-I have to listen and sometime have to agree with Architects who want to go full Kafka, or to the marketing messaging that claims " 'Queue' is an old stuff
-you do not need anymore".
+I have to listen and sometime have to agree with IT architects who want to go full Kafka, or to the marketing messaging that claims " 'Queue' is an old stuff
+you do not need anymore" or "with Kafka you can do all of these".
 
-But this is a completely wrong statement: when developing digital business applications we need different tools to address different semantic.
+But these are a completely dead wrong statements: when developing digital business applications we need different tools to address different semantic, but what
+we know is "messages are keys to develop scalable, resilient, elastic solution".
 
 Few years ago, experts defined a classification for [eventing versus messaging](https://ibm-cloud-architecture.github.io/refarch-eda/concepts/events-versus-messages/#messaging-versus-event-streaming): 
 even if most of the points are still relevant, it is important to note that applications are exchanging array of bytes, representing messages to be
