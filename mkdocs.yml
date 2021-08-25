@@ -11,7 +11,6 @@ nav:
       - Architecture decision: architecture/architectural-decisions.md
       - DDD : architecture/ddd.md
       - Disaster recovery: architecture/DR.md
-      - MQ: architecture/mq.md
       - GCP: architecture/gcp.md
       - IBM Cloud: architecture/ibmcloud.md
       - Istio: istio/index.md
@@ -33,21 +32,21 @@ nav:
       - Automation Decision Service: techno/ads.md
     - Programming:
       - Java Studies: 
-        - Introduction: java/index.md
-        - Microprofile 3.x: java/microprofile.md
-        - Rest assured: java/restassured.md
         - Concurrency: java/concurrent.md
-        - TestContainer: coding/testcontainer.md
+        - Funqy: java/funqy.md
+        - Introduction: java/index.md
+        - Java FAQ: java/FAQ.md
+        - Microprofile 3.x: java/microprofile.md
         - Open Liberty: java/openliberty.md
         - Quarkus: java/quarkus.md
+        - Rest assured: java/restassured.md
         - SpringCloud: java/springcloud.md 
+        - TestContainer: coding/testcontainer.md 
         - Vert.x: java/vertx.md
-        - Funqy: java/funqy.md
-        - Concurrency : java/concurrent.md
-        - MQ challenge: java/mqChallenge.md
-        - Java FAQ: java/FAQ.md
         - VScode: java/java-vscode.md
       - Python Studies: https://jbcodeforce.github.io/python-code
+      - MQ: architecture/mq.md
+      - MQ challenge: java/mqChallenge.md
       - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
       - Cloud native content IBM: https://cloudnative101.dev/
       - Git summary: git.md

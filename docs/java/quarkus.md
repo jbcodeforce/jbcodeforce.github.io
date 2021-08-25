@@ -5,6 +5,7 @@ Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and
 * [Value Propositions](#value-propositions)
 * [Getting Started](#getting-started)
 * [Quarkus maven CLI](#other-maven-quarkus-cli)
+* [Quarkus CLI](#quarkus-cli)
 * [Docker build](#docker-build)
 * [Running on OpenShift](#running-on-openshift)
 * [Testing with Quarkus](#testing-with-quarkus)
@@ -124,6 +125,40 @@ Useful capabilities:
 * **vert.x**: `./mvnw quarkus:add-extension -Dextensions="vertx"`
 * **jib**: to do container image build. See [note here](https://quarkus.io/guides/container-image) `./mvnw quarkus:add-extension -Dextensions="container-image-jib"`
 * **[Kogito](https://kogito.kie.org)**:  `./mvnw quarkus:add-extension -Dextensions="kogito"`
+
+## Quarkus CLI
+
+[Quarkus CLI](https://quarkus.io/guides/cli-tooling) lets you create projects, manage 
+extensions and do essential build and dev commands using the underlying project’s build
+ tool. It replaces the maven plugin.
+The CLI does not work on Java 1.8 so use sdk to change SDK version.
+
+
+Always use quarkus --help to get the last updated CLI.
+
+Here are some common commands:
+
+```sh
+# Create a project with groupId=com.foo, artifactId=bar, and version=1.0.0-SNAPSHOT
+quarkus create app com.foo:bar
+
+# List extension
+quarkus ext ls
+
+# Add extensions
+quarkus ext add openshift qpid-jms resteasy-reactive smallrye-openapi quarkus-resteasy-reactive-jackson
+# Build
+quarkus build
+
+quarkus dev
+```
+
+If the project could not be build because of missing maven wrapper use the following command:
+
+```
+mvn -N io.takari:maven:wrapper
+```
+
 
 ## Docker build
 

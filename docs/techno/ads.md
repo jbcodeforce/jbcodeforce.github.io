@@ -1,21 +1,21 @@
 # Automation Decision Service
 
 Automation Decision Services provides decision modeling capabilities that help business experts capture and automate repeatable decisions. 
-Automation Decision Services comes with two main components: a designer and a runtime that can be installed separately.
+Automation Decision Services comes with two main components that can be installed separately:
 
-Components:
-
-* Decision Designer to develop decision model. It is connected to Github to manage decision artifacts. It is used to build and deploy the decision runtime.
-* Decision Service: runtime
+* **Decision Designer** to develop decision model. It is connected to Github to manage decision artifacts. It is used to build and deploy the decision runtime.
+* **Decision Service**: runtime to get ruleset and executes rule engine
 
 ![](./images/ads.png)
+
+The decision model may include call to a predictive scoring done with ML model.
 
 ## Decision model
 
 Decision model diagrams are composed of a set of nodes that are used as building blocks to represent decisions in a graphical way:
 
 * Decision nodes represent the end decision, that is the decision that you want to automate, and the subdecisions that the end decision depends on.
-* Data nodes represent the data that is needed to make a decision.
+* Data nodes represent the data definition that is needed to make a decision.
 * Function nodes encapsulate computations from other decision models.
 * Prediction nodes encapsulate predictions that you can call directly from your decision model.
 
@@ -23,24 +23,26 @@ Decision model diagrams are composed of a set of nodes that are used as building
 
 * [Product doc - getting started](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=resources-getting-started-tutorial) goes over a simple decision model to send a message according to some weather data.
 * [ODM Docker image](https://hub.docker.com/r/ibmcom/odm)
+* [ADS Compose](https://github.ibm.com/dba/ads-compose)
 
-Launch locally ODM.
+Launch locally ODM for older rule implementation.
 
 ```sh
 docker run -e LICENSE=accept -p 9060:9060 -p 9443:9443  -m 2048M --memory-reservation 2048M -v $PWD:/config/dbdata/ -e SAMPLE=true ibmcom/odm:8.10
 ```
 
-ADS is not yet in docker image.
+For ADS we need access to docker images with the licensed product, and then use docker-compose to run it locally.
+Multiple services are running to make ADS. They use secure communication via TLS.
 
 ## Installation
 
 Being part of Cloud Pak for Automation, we need to install it on OpenShift. The install doc is [here](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=automation-installing). 
 Installation uses  operator lifecycle manager (OLM).
 
-IBM Cloud Pak for Business Automation comes with the IBM Cloud® platform foundation which includes:
+IBM Cloud Pak for Business Automation comes with the IBM Cloud® platform automation foundation which includes:
 
 * [Process Mining from myInvenio](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=foundation-process-mining)
-* [Robotic Process Automation]()
+* [Robotic Process Automation](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=foundation-robotic-process-automation)
 * [MongoDB]()
 * [Zen User Interface]()
 * For [BAI](/techno/bai) Apicurio Registry, Kafka, Flink, Elastic Search
@@ -52,7 +54,7 @@ Summary of installation steps:
 * Get the storage class name to use for dynamic storage
 * Preparing storage for cloud pak operator
 * download the [k8s certificates](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=cluster-setting-up-admin-script)
-) and configuration to prepare the OCP cluster
+ and configuration to prepare the OCP cluster
 * Define a project where the Cloud Pak will be installed and then modify cluster_role_binding
 * Run the `cert-kubernetes/descriptors/cp4a-clusteradmin-setup.sh` script
 * install...
@@ -64,7 +66,7 @@ To be able to support CI/CD we need to get the ADS Maven plugin. This is done by
 
 * Get a UMS user
 * Be sure to have installed a Nexus server to OpenShift
-* authenticate to ADS_BASE_URL with the access token of the UMS user.
+* Authenticate to ADS_BASE_URL with the access token of the UMS user.
 
 ## Not yet there
 

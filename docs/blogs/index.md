@@ -7,13 +7,19 @@
 * Blog on EDA governance
 * Blog on fit for purpose
 
+## 08/27/2021 
+
+A developer journey to develop an event-driven microservice from DDD to devops.
+
+[>> read more](/blogs/08-27-21)
+
 ## 08/15/2021 A new reference architecture
 
 Support new requirements and EDA governance construct in a new reference architecture
 
 [>> read more](/blogs/08-15-21)
 
-## 05/29/2021 A new interesting reference implementationp
+## 05/29/2021 A new interesting reference implementation
 
 The Covid-19 vaccine shipment is a real challenge and last year we had to develop a proof od technology to address how
 and event based solution with linear programming could help address the vaccine order and optimize the vaccine lots shipment.
