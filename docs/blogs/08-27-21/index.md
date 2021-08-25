@@ -66,7 +66,15 @@ oc new-project eda-demo
 The first thing to do, is to install operators for the different services / middleware, and then create one or more
 instance of those 'services'.
 
+Clone the [eda-environment repository](https://github.com/jbcodeforce/eda-environment.git)
+
+```sh
+git clone https://github.com/jbcodeforce/eda-environment.git
+```
+
 #### Operators
+
+It will take some time get the following operators deployed.
 
 ```sh
 # List existing catalog
@@ -78,9 +86,23 @@ oc get packagemanifests -n openshift-marketplace
 
 # Install Strimzi Kafka Operator - It will listen to any namespaces
 oc apply -f operators/strimzi-kafka/subscription.yaml
-# Install MQ Operator
+# Install Apicurio Registry Operator
+oc apply -f operators/apicurio/subscription.yaml
+# Install MQ Operator, which may also deploy IBM Cloud Pak foundational services 
 oc apply -f operators/mq/subscription.yaml
+# Verify installed operators
+oc get operators
+
+NAME                                               AGE
+apicurio-registry.openshift-operators              5m34s
+ibm-common-service-operator.openshift-operators    6m41s
+ibm-mq.openshift-operators                         8m10s
+ibm-namespace-scope-operator.ibm-common-services   4m47s
+ibm-odlm.ibm-common-services                       3m27s
+strimzi-kafka-operator.openshift-operators         7m38s
 ```
+
+Once done we will create Kafka Cluster, a MQ broker for development, Apicurio
 
 #### Instances
 
@@ -88,7 +110,7 @@ oc apply -f operators/mq/subscription.yaml
 
 ```sh
 # Create Kafka Cluster instance and a scram user and tls user
-oc apply -k  instances/strimzi-kafka 
+oc apply -k  instances/strimzi-kafka/kustomization.yaml 
 # Verify Kafka cluster runs
 oc get kafka
 oc get kafkauser 
@@ -119,7 +141,18 @@ oc describe queuemanager qm1
 
 I will focus on the way to prepare the different elements of the service to ensure keeping the coupling to the minimum.
 
-I will use Quarkus to develop the Microprofile based services. I recommend to use the [quarkus CLI]()
+I will use [Quarkus](https://quarkus.io) to develop the Microprofile based services. I recommend to use the [quarkus CLI](https://quarkus.io/guides/cli-tooling)
+to start your project on good foundations:
 
-### Defining the API from JAXRS
+```sh
+quarkus create eda-order-cmd-ms
+# Add needed extensions
+quarkus ext add smallrye-openapi qpid-jms
+```
+
+### Defining the API from JAXRS Resource and OpenAPI annotation
+
+The demo is a proof of concepts, so we will have on OrderDTO as a bean to support
+getting the data about the order at the API level.
+
 

@@ -49,8 +49,12 @@ nav:
       - MQ challenge: java/mqChallenge.md
       - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
       - Cloud native content IBM: https://cloudnative101.dev/
-      - Git summary: git.md
-      - GitOps: coding/gitops.md
+      - DevOps:
+        - Git summary: git.md
+        - GitOps: coding/gitops.md
+        - Tekton: coding/tekton.md
+        - ArgoCD: coding/argocd.md
+      - Openhift Playground: coding/playground.md
       - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
       - My code templates: code-template.md
     - Techno:
