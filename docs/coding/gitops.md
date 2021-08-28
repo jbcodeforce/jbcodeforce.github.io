@@ -52,16 +52,18 @@ Using continuous delivery approach and tool like ArgoCD, the deployment of all t
 Use a three level structure, that will match team structure and git repo structure:
 
 * application: deployment.yaml, config map... for each application, 
-* shared services like Kafka, Database, LDAP as a base, reusable between environment
+* shared services like Kafka, Database, LDAP,... as reusable services between environments
 * Cluster and infrastructure: network, cluster, storage, policies...
 
-So for each "solution" those three level will be separate repository:
+So for each "solution" those three levels will be separate repository:
 
 * <solution_name>-gitops-apps
 * <solution_name>-gitops-services
 * <solution_name>-gitops-infra
 
 Now the different deployment environments can be using different k8s clusters or the same cluster with different namespaces.
+
+With the adoption of ArgoCD we can have one bootstrap app that start apps to monitor each of those layers.
 
 ### Services 
 
@@ -209,51 +211,108 @@ An example of gitops with kustomize is in this [vaccine-gitops repo](https://git
 
 * [GitOps - Operations by Pull Request](https://www.weave.works/blog/gitops-operations-by-pull-request)
 
-## Kam
+## KAM - Gitops Application Manager
 
-Goal: create a gitops project for an existing application service as day 1 operation and then add more service.
+[KAM](https://github.com/redhat-developer/kam)'s goal: Help to create a gitops project for an existing application service as 
+[day 1 operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) and then add more services as part of day 2.
 
-* Use the following kam command:
+* To install download the last release from github: [https://github.com/redhat-developer/kam/releases/latest](https://github.com/redhat-developer/kam/releases/latest). Rename the download file, and move it to `/usr/local/bin`.
+
+### Creating a gitops project for a given solution
+
+Use the following kam command to create a gitops repository with multiple argocd applications. To run successfully, we need to be connected
+to OpenShift cluster with Sealed Secret GitOps and Pipelines operators deployed, get SSH key from github if private repositories are used
 
 ```sh
-kam bootstrap \                
+# list the  options
+kam bootstrap -- 
+# create a gitops 
+kam bootstrap \
 --service-repo-url https://github.com/jbcodeforce/refarch-eda-store-inventory \
---gitops-repo-url  https://github.com/jbcodeforce/refarch-eda-inventory-gitops \
+--gitops-repo-url  https://github.com/jbcodeforce/rt-inventory-gitops \
 --image-repo image-registry.openshift-image-registry.svc:5000/ibmcase/store-aggregator \
 --output refarch-eda-inventory-gitops \
 --git-host-access-token <agithubtoken> \
---prefix my-inventory --push-to-git=true
+--prefix rt-inventory --push-to-git=true
 ```
 
-**Kam bug:**: the application name is marching the git repo name, and there will be an issue while creating binding with a limit of 
+To retrieve [the github access token](https://github.com/redhat-developer/kam/blob/master/docs/journey/day1/prerequisites/github_access_token_steps.md).
+
+**Kam bug:**: the application name is matching the git repo name, and there will be an issue while creating binding with a limit of 
 the number of characters. kam boostrap need a --service-name argument.
 
-This will create a gitops project, pushed to github.com as private repo. The repo includes two main folders:
+This will create a gitops project, pushed to github.com as private repo. The repo includes two main folders and a 
+`pipelines.yaml` describing your first application, and configuration for a complete CI pipeline and deployments from Argo CD
 
-* `environment` includes two environment definitions for dev and stage. 
+### What is inside
+
+#### Config
+
+`config` define argocd and cicd Argo application to support deployment and build pipeline
+
+  ```sh
+    ├── config
+    │   ├── argocd
+    │   │   ├── argo-app.yaml
+    │   │   ├── cicd-app.yaml
+    │   │   ├── kustomization.yaml
+    │   │   ├── rt-inventory-dev-app-refarch-eda-store-inventory-app.yaml
+    │   │   ├── rt-inventory-dev-env-app.yaml
+    │   │   └── rt-inventory-stage-env-app.yaml
+    │   └── rt-inventory-cicd
+    │       ├── base
+    │       │   ├── 01-namespaces
+    │       │   │   └── cicd-environment.yaml
+    │       │   ├── 02-rolebindings
+    │       │   │   ├── argocd-admin.yaml
+    │       │   │   ├── pipeline-service-account.yaml
+    │       │   │   ├── pipeline-service-role.yaml
+    │       │   │   └── pipeline-service-rolebinding.yaml
+    │       │   ├── 03-tasks
+    │       │   │   ├── deploy-from-source-task.yaml
+    │       │   │   └── set-commit-status-task.yaml
+    │       │   ├── 04-pipelines
+    │       │   │   ├── app-ci-pipeline.yaml
+    │       │   │   └── ci-dryrun-from-push-pipeline.yaml
+    │       │   ├── 05-bindings
+    │       │   │   ├── github-push-binding.yaml
+    │       │   │   └── rt-inventory-dev-app-refarch-eda-store-simulator-refarch-eda-store-simulator-binding.yaml
+    │       │   ├── 06-templates
+    │       │   │   ├── app-ci-build-from-push-template.yaml
+    │       │   │   └── ci-dryrun-from-push-template.yaml
+    │       │   ├── 07-eventlisteners
+    │       │   │   └── cicd-event-listener.yaml
+    │       │   ├── 08-routes
+    │       │   │   └── gitops-webhook-event-listener.yaml
+    │       │   └── kustomization.yaml
+    │       └── overlays
+    │           └── kustomization.yaml
+  ```
+
+So major elements of this configuration:
+
+* **argo-app**: root application to manage the other applications: It points to the kustomization.yaml under `config/argocd` so when adding new microservice to the solution using `kam cli` then this kustomize will be updated triggering a new argo app to be created  
+    - argo-app.yaml
+    - cicd-app.yaml
+    - rt-inventory-dev-app-refarch-eda-store-simulator-app.yaml
+    - rt-inventory-dev-env-app.yaml
+    - rt-inventory-stage-env-app.yaml
+* **cicd-app**: Argo app to monitor `config/rt-inventory-cicd/overlays` which defines `-cicd` namespace, `pipeline` service account, then role bindings. 
+And it also defines Tekton tasks, pipelines, triggers... 
+* **rt-inventory-dev-env-app**: Argo app to monitor `environments/rt-inventory-dev/env/overlays` which defines the NameSpace, Service Account, RoleBindings, for a `dev` environment. 
+* **rt-inventory-dev-app-refarch-eda-store-simulator**: Argo app to monitor `environments/rt-inventory-dev/apps/app-refarch-eda-store-simulator/overlays`
+
+#### Environment
+
+`environment` includes two environment definitions for dev and stage. For each environment the `apps` folder includes
+the deployment of all the apps part of the solution and then a `env` folder to define the dev namespace, role bindings... 
 
   ```sh
       environments
-    │   ├── my-inventory-dev
+    │   ├── rt-inventory-dev
     │   │   ├── apps
     │   │   │   └── app-refarch-eda-store-inventory
-    │   │   │       ├── base
-    │   │   │       │   └── kustomization.yaml
-    │   │   │       ├── kustomization.yaml
-    │   │   │       ├── overlays
-    │   │   │       │   └── kustomization.yaml
-    │   │   │       └── services
-    │   │   │           └── refarch-eda-store-inventory
-    │   │   │               ├── base
-    │   │   │               │   ├── config
-    │   │   │               │   │   ├── 100-deployment.yaml
-    │   │   │               │   │   ├── 200-service.yaml
-    │   │   │               │   │   ├── 300-route.yaml
-    │   │   │               │   │   └── kustomization.yaml
-    │   │   │               │   └── kustomization.yaml
-    │   │   │               ├── kustomization.yaml
-    │   │   │               └── overlays
-    │   │   │                   └── kustomization.yaml
+                  ..... SEE BELOW
     │   │   └── env
     │   │       ├── base
     │   │       │   ├── argocd-admin.yaml
@@ -262,74 +321,81 @@ This will create a gitops project, pushed to github.com as private repo. The rep
     │   │       │   └── my-inventory-dev-rolebinding.yaml
     │   │       └── overlays
     │   │           └── kustomization.yaml
-    │   └── my-inventory-stage
+    │   └── rt-inventory-stage
     │       └── env
     │           ├── base
     │           │   ├── argocd-admin.yaml
     │           │   ├── kustomization.yaml
-    │           │   └── my-inventory-stage-environment.yaml
+    │           │   ├── rt-inventory-stage-environment.yaml
+    │           │   
     │           └── overlays
     │               └── kustomization.yaml
   ```
 
-* `config` define argocd and cicd project to support deployment and build pipeline
+In an `app` folder the `services/.../base/config` defines the manifests to configure the application. This is where we can put
+the app specific.
 
-  ```sh
-    ├── config
-    │   ├── argocd
-    │   │   ├── argo-app.yaml
-    │   │   ├── cicd-app.yaml
-    │   │   ├── kustomization.yaml
-    │   │   ├── my-inventory-dev-app-refarch-eda-store-inventory-app.yaml
-    │   │   ├── my-inventory-dev-env-app.yaml
-    │   │   └── my-inventory-stage-env-app.yaml
-    │   └── my-inventory-cicd
-    │       ├── base
-    │       │   ├── 01-namespaces
-    │       │   │   ├── cicd-environment.yaml
-    │       │   │   └── ibmcase-environment.yaml
-    │       │   ├── 02-rolebindings
-    │       │   │   ├── argocd-admin.yaml
-    │       │   │   ├── internal-registry-ibmcase-binding.yaml
-    │       │   │   ├── pipeline-service-account.yaml
-    │       │   │   ├── pipeline-service-role.yaml
-    │       │   │   ├── pipeline-service-rolebinding.yaml
-    │       │   │   └── sealed-secrets-aggregate-to-admin.yaml
-    │       │   ├── 03-secrets
-    │       │   │   ├── docker-config.yaml
-    │       │   │   ├── git-host-access-token.yaml
-    │       │   │   ├── gitops-webhook-secret.yaml
-    │       │   │   └── webhook-secret-my-inventory-dev-refarch-eda-store-inventory.yaml
-    │       │   ├── 04-tasks
-    │       │   │   ├── deploy-from-source-task.yaml
-    │       │   │   └── set-commit-status-task.yaml
-    │       │   ├── 05-pipelines
-    │       │   │   ├── app-ci-pipeline.yaml
-    │       │   │   └── ci-dryrun-from-push-pipeline.yaml
-    │       │   ├── 06-bindings
-    │       │   │   ├── github-push-binding.yaml
-    │       │   │   └── my-inventory-dev-app-refarch-eda-store-inventory-refarch-eda-store-inventory-binding.yaml
-    │       │   ├── 07-templates
-    │       │   │   ├── app-ci-build-from-push-template.yaml
-    │       │   │   └── ci-dryrun-from-push-template.yaml
-    │       │   ├── 08-eventlisteners
-    │       │   │   └── cicd-event-listener.yaml
-    │       │   ├── 09-routes
-    │       │   │   └── gitops-webhook-event-listener.yaml
-    │       │   └── kustomization.yaml
-    │       └── overlays
-    │           └── kustomization.yaml
-  ```
+```
+│   ├── rt-inventory-dev
+│   │   ├── apps
+│   │   │   └── app-refarch-eda-store-simulator
+│   │   │       ├── base
+│   │   │       │   └── kustomization.yaml
+│   │   │       ├── kustomization.yaml
+│   │   │       ├── overlays
+│   │   │       │   └── kustomization.yaml
+│   │   │       └── services
+│   │   │           └── refarch-eda-store-simulator
+│   │   │               ├── base
+│   │   │               │   ├── config
+│   │   │               │   │   ├── 100-deployment.yaml
+│   │   │               │   │   ├── 200-service.yaml
+│   │   │               │   │   ├── 300-route.yaml
+│   │   │               │   │   └── kustomization.yaml
+│   │   │               │   └── kustomization.yaml
+│   │   │               ├── kustomization.yaml
+│   │   │               └── overlays
+│   │   │                   └── kustomization.yaml
 
-The `environment` includes folders for each app of the solution.  In an app folder the `services` defines the manifests
-to configure the application. When created the image reference `nginx` we need to build the image with a pipeline with [tekton](#tekton_tutorial). 
-To bring up the argocd do `oc apply -k config/argocd/` which will create:
+```
 
-* three projects: my-inventory-cicd, my-inventory-dev, my-inventory-stage
-* a set of role bindings, secrets...
+### secrets
 
-To access the argocd application use the Grid icon in OpenShift console and admin user. The secret is define in `openshift-gitops` and secret name `argocd-cluster-cluster`. 
+At the same level as the gitops folder there is a secrets folder to be used to managed secrets without getting them into git.
+
+The approach is to us [Bitmani Sealed Secret](https://engineering.bitnami.com/articles/sealed-secrets.html):
+
+*Sealed Secrets are a "one-way" encrypted Secret that can be created by anyone, but can only be decrypted by the controller running in the target cluster.*
+
+
+* Install the Sealed Secret Operator in `sealed-secrets` project
+* Create a Sealed secret controller for ex named: `sealedsecretcontroller`
+* Then for each secrets in `secrets` folder do something
 
 ```sh
-oc get secret argocd-cluster-cluster -n openshift-gitops -ojsonpath='{.data.admin\.password}' | base64 -d
+cat gitops-webhook-secret.yaml| kubeseal --controller-namespace sealed-secrets \
+--controller-name sealedsecretcontroller-sealed-secrets --format yaml >gitops-webhook-sealedsecret.yaml
+
 ```
+
+Each sealed secret can be in github, and applied to k8s to <> namespace.
+
+```sh
+
+```
+
+### What to do from there
+
+1. Change the `environments/<>-dev/apps/app-<appname>/services/<appname>/base/config` withe th kustomization of your microservice.
+2. To bring up the argocd do `oc apply -k config/argocd/` which will create:
+
+    * three Argo applications to monitor CI/CD, Dev and Staging environments: rt-inventory-cicd, rt-inventory-dev, rt-inventory-stage
+    * One Argo Application per services to deploy: the following figure has only one of such service.
+    ![](./images/argo-rt-inv.png)
+    * Three OpensShift projects: one for cicd, one per target 'environments' (dev, stage)
+
+3. Part of the configuration bootstraps a simple `OpenShift Pipelines` pipeline for building code when a pull-request is opened.
+
+## Some notes to integrate
+
+Install Sealed Secrets operator

@@ -4,7 +4,8 @@ To implement our GitOps workflow, we used Argo CD, the GitOps continuous deliver
 Argo CD models a collection of applications as a project and uses a Git repository to store the application's desired state (a gitops repo). 
 Argo CD compares the actual state of the application in the cluster with the desired state defined in Git and
 determines if they are out of sync. When it detects the environment is out of sync, Argo CD can be configured
-to either send out a notification to kick off a separate reconciliation process or Argo CD can automatically synchronize the environments to ensure they match.
+to either send out a notification to kick off a separate reconciliation process or Argo CD 
+can automatically synchronize the environments to ensure they match.
 
 ArgoCD is deployed with OpenShift GitOps operator. 
 
@@ -13,28 +14,34 @@ If you go to the Developer's Perspective, you can see a topology:
 ![ArgoCD](./images/argocd.jpg)
 
 
-><b>OpenShift GitOps</b> is an OpenShift add-on which provides Argo CD and other tooling to enable teams to implement GitOps workflows for cluster configuration and application delivery. 
+><b>OpenShift GitOps</b> is an OpenShift add-on which provides Argo CD and other tooling 
+to enable teams to implement GitOps workflows for cluster configuration and application 
+delivery. 
 
 
 Clicking the Argo Server node that contains the URL takes you to the Argo login page.
 
-See [this getting started tutorial](https://argoproj.github.io/argo-cd/getting_started/) and the [core concept](https://argoproj.github.io/argo-cd/core_concepts/)
+See [this getting started tutorial](https://argoproj.github.io/argo-cd/getting_started/) 
+and the [core concept](https://argoproj.github.io/argo-cd/core_concepts/)
 
-* Install argocd: this will includes CRD, service account, RBAC policies, config maps, secret and deploy: Redis and argocd server. It makes sense to have
-one ArgoCD instance deploy per cluster. It can manage projects and within project, applications.
+## Installation
+
+Installing **ArgoCD** will includes CRD, service account, RBAC policies, config maps, secret and 
+will deploy `Redis` and `argocd server`. It makes sense to have
+one ArgoCD instance deployed per cluster. 
+It can manage projects and within project, applications.
+
+The better approach for installation is to use the Red Hat OpenShift GitOps operator. 
 
 ```sh
-oc new-project argocd
-oc apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+# Example of operator installation from https://github.com/jbcodeforce/eda-gitops-catalog
+
+oc apply -k openshift-gitops/operator/overlays/stable
 ```
 
-* It can be also installed via the Red Hat OpenShift GitOps operator. After installing the OpenShift GitOps 
-operator, an instance of Argo CD is installed in the `openshift-gitops` namespace which has sufficent privileges 
-for managing cluster configurations.
-
-* Finally, you can declare the operator yaml and service account and role binding as part of your gitops. See [sample in this folder](https://github.com/ibm-cloud-architecture/eda-lab-inventory/tree/master/environments/openshift-gitops).
-
-Once installed the following pods run:
+After installing the OpenShift GitOps operator, an instance of Argo CD Operator is installed 
+in the `openshift-gitops` namespace which has all needed privileges 
+to manage cluster configurations and application deployments. The following pods run:
 
  ```sh
  argocd-application-controller-0                                   1/1     Running     0          20h
@@ -44,20 +51,49 @@ Once installed the following pods run:
  argocd-server-6d4678f7f6-vqs64  
  ```
 
+## Argo CD console
+
+To get the `admin` user's password, get it from the secret
+
+```sh
+oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
+```
+A route is created to the ArgoCD server:
+
+```sh
+oc get routes -n openshift-gitops
+```
+
+Within the console we can create applications, references to git repositories, and references to kubernetes clusters.
+
+## Prepare an application
+
+In Argo CD terms, each deployable component is an **application** and applications are grouped
+ into projects. **Projects** are not required for Argo CD to be able to deploy applications, 
+but it helps to organize applications and provide some restrictions on what can be done for applications that make up a project
+
+One ArgoCD server can deploy applications to multiple k8s clusters.
+
+### Deploy from the UI
+
+Follow [the Getting started tutorial](https://argoproj.github.io/argo-cd/getting_started/), but basically the idea is to define an application, that gets information
+from git repository to deploy something to k8s as manifests. The configuration specifies what
+to monitor from the Git and where to deploy the "thing".
+
+The thing will be a `kustomization` to specify an application deployment.yaml, services, configmap... 
+(It can also use an Helm chart and values files).
+
+### Deploy using argocd CLI
+
 * Install argocd CLI
 
 On MAC: `brew install argocd`
 
-* Expose the API server: By default, the Argo CD API server is not exposed with an external IP. Update the service to use load balancer: 
+* If ArgoCD was installed manually, expose the API server: by default, the Argo CD API server is not exposed with an external IP. 
+Update the service to use load balancer: 
 
 ```sh
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-```
-
-The initial password for the admin account is auto-generated and stored as clear text in the field password in a secret named `argocd-initial-admin-secret` 
-
-```sh
-oc get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo ""
 ```
 
 Get the IP address of the argocd server: `oc get svc` then look at the LoadBalancer service (argocd-server) external-IP.
@@ -71,12 +107,40 @@ its own folder and can use Helm or Kustomize to define the deployment, service, 
 
 You use one application per target environment.
 
-Here is an example of argoCD app:
+### Deploy from Yaml
+
+Here is an example of argoCD app descriptor:
 
 ```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-q-order-ms
+  annotations:
+    argocd.argoproj.io/sync-wave: "300"
+  labels:
+    gitops.tier.layer: applications
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  project: applications
+  source:
+    path: quarkus-order-ms/config/dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
 ```
 
-On the application tile, we can use the 'SYNC' to deploy the application or use `argocd app get <appname>`.
+On the application tile, we can use the 'SYNC' to deploy the application or use `argocd app sync <appname>`.
+
+
+## ArgoCD app of app
+
+The concept is to use a bootstrap application that will start other apps from gitops repository. (See [video presentation here](https://www.youtube.com/watch?v=nyspc6HcDQA&t=2017s))
 
 
 ### Connect pipeline to deployment
@@ -87,6 +151,9 @@ descriptor with the image reference and tag defined as part of the build pipelin
 The pipeline needs to have the git credentials to be able to write to the gitops repository. Credentials are saved in a secret and a configmap
 define github host, user.
 
-### More reading
+## More reading
 
 * [ArgoCD documentation](https://argo-cd.readthedocs.io/en/stable/)
+
+
+

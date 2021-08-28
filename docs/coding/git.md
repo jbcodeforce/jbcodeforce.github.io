@@ -153,6 +153,18 @@ After you’ve resolved each of these sections in each conflicted file, run git 
 
 Stashing takes the dirty state of your working directory — that is, your modified tracked files and staged changes — and saves it on a stack of unfinished changes that you can reapply at any time.
 
+## Get SSH key for github account
+
+
+## Webhook
+
+Webhooks help to get applications to subscribe to events on GitHub. When one of those events is triggered, github'll send a HTTP POST payload 
+to the webhook's configured URL.
+
+Webhooks can be installed on an organization, a specific repository. To set up a webhook, go to the settings page
+ of your repository or organization. From there, click Webhooks, then Add webhook.
+
+
 ## VS Code git plugin
 
 Palette includes: git: clone, git... 

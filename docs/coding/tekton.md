@@ -23,14 +23,15 @@ The git source is cloned to a local volume at path `/workspace/source` where `so
 
 Tested on RedHat OpenShit Pipelines Operator version 1.2.3  6/10/21
 
-* Install Openshift pipelines operator from the operator hub or using oc cli with an operator subscription like in [EDA lab inventory openshift pipelines](https://github.com/ibm-cloud-architecture/eda-lab-inventory/tree/master/environments/openshift-pipelines)
+* Install Openshift Pipelines operator from the operator hub or using oc cli with an operator subscription like in [EDA catalog](https://github.com/jbcodeforce/eda-gitops-catalog/tree/main/openshift-pipelines-operator)
+  
 
   ```sh
-  oc apply -f https://raw.githubusercontent.com/ibm-cloud-architecture/eda-lab-inventory/master/environments/openshift-pipelines/operator.yaml
+  oc apply -k https://github.com/jbcodeforce/eda-gitops-catalog/tree/main/openshift-pipelines-operator/overlays/stable
   ```
 
 * Define a service account `pipeline` (created automatically by the OpenShift Pipeline Operator  operator)
-* Ensure Tekton pipelines is deployed and the API is availabe for use
+* Ensure Tekton pipelines is deployed and the API is available for use
 
   ```sh
   kubectl api-resources --api-group='tekton.dev'
@@ -52,7 +53,7 @@ Tested on RedHat OpenShit Pipelines Operator version 1.2.3  6/10/21
 
 ## Developer's steps:
 
-At the high level the generic steps for a given application look like:
+At the high level the generic steps for a given application are:
 
 * [Create custom task](#define-tasks) or install existing reusable Tasks
 * Create [PipelineResources](#define-resources) to specify the github source repository and the docker image name.
