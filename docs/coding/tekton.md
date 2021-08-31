@@ -1,36 +1,23 @@
 # Tekton tutorial
 
-This article is a summary based on [OpenShift pipeline tutorial](https://github.com/openshift/pipelines-tutorial), [Red Hat scholar - tekton tutorial](https://redhat-scholars.github.io/tekton-tutorial) and [this blog](https://www.openshift.com/blog/cloud-native-ci-cd-with-openshift-pipelines):
+This article is a summary based on [OpenShift pipeline tutorial](https://github.com/OpenShift/pipelines-tutorial), [Red Hat scholar - tekton tutorial](https://redhat-scholars.github.io/tekton-tutorial) and [this blog](https://www.OpenShift.com/blog/cloud-native-ci-cd-with-OpenShift-pipelines):
 
 * Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc)
 * Build images with Kubernetes tools such as S2I, Buildah, Buildpacks, Kaniko,...
-* With openshift pipelines operator, CRD, service account and cluster binding are created automatically:
+* With OpenShift Pipelines operator, CRD, service account and cluster binding are created automatically:
 
-  * install the operator via Operator Hub or using yaml:
-  * Service accounts are named `builder` and `pipeline`
-* Concepts
+## Installation
 
-    * **Task**: a reusable, loosely coupled number of steps that perform a specific task. Tasks are executed/run by creating TaskRuns. A TaskRun will schedule a Pod. Task definitions are reusable.
-    * **Pipeline**: the definition of the pipeline and the Tasks that it should perform
-    * **Resources**: build uses resources called [PipelineResource](https://github.com/tektoncd/pipeline/blob/main/docs/resources.md) that helps to configure the git repo url, the final container image name etc
-
- ![Tekton elements](./images/tekton-res.png)
-
-The task requires an input resource of type git that defines where the source is located. 
-The git source is cloned to a local volume at path `/workspace/source` where `source` comes from the name we gave to the resource
-
-## Administration steps
-
-Tested on RedHat OpenShit Pipelines Operator version 1.2.3  6/10/21
-
-* Install Openshift Pipelines operator from the operator hub or using oc cli with an operator subscription like in [EDA catalog](https://github.com/jbcodeforce/eda-gitops-catalog/tree/main/openshift-pipelines-operator)
+Install the operator via Operator Hub or using yaml: 
   
-
   ```sh
-  oc apply -k https://github.com/jbcodeforce/eda-gitops-catalog/tree/main/openshift-pipelines-operator/overlays/stable
+    # under https://github.com/jbcodeforce/eba-gitops-catalog
+    oc apply -k openshift-pipelines-operator/overlays/stable
   ```
 
-* Define a service account `pipeline` (created automatically by the OpenShift Pipeline Operator  operator)
+Or install OpenShift Pipelines operator from the operator hub.
+
+* Define a service account `pipeline` (created automatically by the OpenShift Pipeline Operator)
 * Ensure Tekton pipelines is deployed and the API is available for use
 
   ```sh
@@ -51,9 +38,21 @@ Tested on RedHat OpenShit Pipelines Operator version 1.2.3  6/10/21
   tasks                            tekton.dev   true         Task
   ```
 
+## Concepts
+
+* **Task**: a reusable, loosely coupled number of steps that perform a specific task. Tasks are executed/run by creating TaskRuns. A TaskRun will schedule a Pod. Task definitions are reusable.
+* **Pipeline**: the definition of the pipeline and the Tasks that it should perform
+* **Resources**: build uses resources called [PipelineResource](https://github.com/tektoncd/pipeline/blob/main/docs/resources.md) that helps to configure the git repo url, the final container image name etc
+
+ ![Tekton elements](./images/tekton-res.png)
+
+Task requires an input resource of type git which defines where the source is located. 
+The git source is cloned to a local volume at path `/workspace/source` where `source` comes from the name we gave to the resource
+
+
 ## Developer's steps:
 
-At the high level the generic steps for a given application are:
+At the high level, the generic steps for a given application are:
 
 * [Create custom task](#define-tasks) or install existing reusable Tasks
 * Create [PipelineResources](#define-resources) to specify the github source repository and the docker image name.
@@ -63,7 +62,7 @@ At the high level the generic steps for a given application are:
 
 ### Define tasks
 
-The fundamental resource of the Tekton process is the <em>task</em>, which contains at least one step to be executed and performs a useful function. 
+The fundamental resource of the Tekton process is the <em>task</em>, which contains at least one step to be executed to perform a useful function. 
 Tasks execute steps in the order in which they are written, with each step completing before the next step starts. While `Pipelines` execute tasks
  in parallel unless a task is directed to run after the completion of another task. This facilitates parallel execution of build / test / deploy 
  activities and is a useful characteristic that guides the user in the grouping of steps within tasks.
@@ -71,11 +70,13 @@ Tasks execute steps in the order in which they are written, with each step compl
 We need to have tasks to build the application executable, to build the docker image, push to the image registry and
 potentially deploy to the target runtime project. This last task is in fact done with ArgoCD.
 
-* first task is to clone a repo. In the [Tekton hub](https://hub.tekton.dev/) we can find the yaml for this task. But with the OpenShift pipeline operator, it is part of the clustertask:
+* first task is to clone a repo. In the [Tekton hub](https://hub.tekton.dev/) we can find the yaml 
+for this task. But with the OpenShift pipeline operator, it is part of the clustertask:
 
   ```sh
   tkn  clustertask describe git-clone
   ```
+  
   So we do not need to redefine this task. If we really need to get the last release of a task we can use a command like:
 
   ```sh
@@ -119,8 +120,8 @@ custom task using the maven docker image.
 
 The **source** is a sub-path, under which Tekton cloned the application sources.
 
-* Other task example to apply kubernetes manifests ([apply-manifests](https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.4/01_pipeline/01_apply_manifest_task.yaml)) to deploy an image.
-or [update-deployment](https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.4/01_pipeline/02_update_deployment_task.yaml) task to path the application deployment with a new `image name:tag`.
+* Other task example to apply kubernetes manifests ([apply-manifests](https://raw.githubusercontent.com/OpenShift/pipelines-tutorial/pipelines-1.4/01_pipeline/01_apply_manifest_task.yaml)) to deploy an image.
+or [update-deployment](https://raw.githubusercontent.com/OpenShift/pipelines-tutorial/pipelines-1.4/01_pipeline/02_update_deployment_task.yaml) task to path the application deployment with a new `image name:tag`.
 
 The tasks are by default tied to namespace. **ClusterTask** makes the task available in all namespaces
 
@@ -235,7 +236,7 @@ workspace into an individual step such that it is mounted. Workspaces and volume
 
 A Pipeline requires PipelineResources to provide inputs and store outputs for the Tasks that comprise it.
 
-* Declare the pipeline in a yaml file like [tutorial build and deploy](https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.4/01_pipeline/04_pipeline.yaml) 
+* Declare the pipeline in a yaml file like [tutorial build and deploy](https://raw.githubusercontent.com/OpenShift/pipelines-tutorial/pipelines-1.4/01_pipeline/04_pipeline.yaml) 
 or the [item inventory aggregator]()
 * In previous section there is an example of git clone task declared in a pipeline. It uses the pipeline parameters to get URL and revision and output to the workspace.
 

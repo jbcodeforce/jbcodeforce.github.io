@@ -1,7 +1,14 @@
 # Developer experience for an event-driven microservice
 
-In this article I will try to demonstrate a developer journey to support the implementation of an event-driven microservice
-that will participate in a Command Query Responsibility Segregation pattern.
+Event-driven solutions are complex to implement, a lot of parts need to be considered, and I did not find any article that goes into
+how to do things with the last technology available to us. So last ...  meaning August 2021.
+
+In this article I will try to propose a developer journey to support the implementation of an event-driven microservice
+that will participate in a Command Query Responsibility Segregation pattern using the following:
+
+* Quarkus 2.x with reactive messaging
+* OpenShift Pipelines, OpenShift Gitops and KAM
+* Apply Domain-Driven design methodology 
 
 ## From Domain Driven Design...
 
@@ -145,9 +152,9 @@ I will use [Quarkus](https://quarkus.io) to develop the Microprofile based servi
 to start your project on good foundations:
 
 ```sh
-quarkus create eda-order-cmd-ms
+quarkus create ibm.eda.demo:kc-freezer-cmd-ms:0.0.1 -x reactive-messaging-kafka,metrics,smallrye-openapi
 # Add needed extensions
-quarkus ext add smallrye-openapi qpid-jms
+quarkus ext add qpid-jms, openshift
 ```
 
 ### Defining the API from JAXRS Resource and OpenAPI annotation
