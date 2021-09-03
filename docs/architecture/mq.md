@@ -1,5 +1,7 @@
 # IBM MQ compendium
 
+MQ is the queue solution for cloud native applications that are aiming to be loosely coupled.
+
 ## Key Concepts
 
 * **Messages**: packages of data produced and consumed by applications.
@@ -15,8 +17,11 @@
 
 * No data loss, no duplicate
 * Integrate with transaction
-* Scale horizontally: add more queue managers to share tasks and distribute the messages across them. MQ Clusters will even intelligently route messages to where they’re needed. The world is full of horizontally scaled MQ systems that handle billions of messages a day.
-* High availability
+* Scale horizontally: add more queue managers to share tasks and distribute the messages across them. 
+MQ Clusters will even intelligently route messages to where they’re needed. 
+The world is full of horizontally scaled MQ systems that handle billions of messages a day.
+* High availability with replicated Queue managers. Active/active horizontal scaling for always on systems
+* Lightweight and scale to run in any size
 
 ## Product documentation
 
@@ -25,15 +30,58 @@
 * [Getting started with MQ](https://developer.ibm.com/gettingstarted/ibm-mq/)
 * [Run IBM® MQ in a container](https://github.com/ibm-messaging/mq-container) with relevant [developer article.](https://developer.ibm.com/tutorials/mq-connect-app-queue-manager-containers/)
 
+## Important features
+
+### Replicated Data Queue Managers
+
+MQ Advanced supports synchronous replication and fast quorum based take over for HA scenarios, recovery in seconds. 
+It also supports asynchronous replication between quorum groups to support long distance DR deployments.
+
+All nodes support concurrently running multiple different active queue managers with bidirectional asynchronous replication,
+supporting active/active HA and DR topologies.
+
+Use queue manager leader and two replicas. So messages are replicated in three locations. 
+Those are exact replicas, maintaining configuration, message order, transactional state.
+Quorum ensures consistency and rapid failure (within a second) and recovery.
+
+The  MQ operator helps to deploy MQ manager with declarative manifest, with native HA, cross availability zones,
+with all the networking services, and storage needed. Applications connected to MQ manager do not know
+how many queue managers are behind their request.
+
+### Always on MQ
+
+MQ provides a **uniform cluster** consisting of multiple active queue managers acting as a single messaging service.
+Each Queue manager has the same resource, queues, channels...
+
+### Supports
+
+* REST
+* MQTT
+* JMS
+* AMQP
+* Qpid
+* MQI
+
+### Insight to your data
+
+**Stream MQ** data by adding a new queue and specify the original queue the  name of the streaming queue
+
+### Central web console
+
+9.2.3 supports a central unique Web Console to manage multiple queue managers cross environments, of any time.
+
 ## Interesting Articles 
 
 * [My own MQ summary in EDA refarch](https://ibm-cloud-architecture.github.io/refarch-eda/technology/mq/)
 * [Learning MQ](http://ibm.biz/learn-mq) 
+* [MQ download](http://ibm.biz/mq-downloads) 
 * [MQ fundamentals](https://developer.ibm.com/articles/mq-fundamentals/): nice set of diagrams and explanation of queues, MQ managers... 
 With links to supporting programming languages.
 * [MQ Essentials- Getting started with IBM MQ](https://developer.ibm.com/messaging/learn-mq/mq-tutorials/getting-started-mq/)
 * [MQ Cheat sheet](https://developer.ibm.com/messaging/learn-mq/mq-tutorials/dev-cheat-sheet/)
 * [High availability](https://pages.github.ibm.com/cloudpakbringup/mq-deployment-guide/high-availability/intro/)
+* [IBM MQ samples and patterns](http://ibm.biz/mq-dev-patterns)
+* [AsyncAPI MQ Bindings](https://github.com/asyncapi/bindings/tree/master/ibmmq)
 
 ## Enablement
 

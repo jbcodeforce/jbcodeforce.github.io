@@ -37,7 +37,7 @@ Multiple services are running to make ADS. They use secure communication via TLS
 ## Installation
 
 Being part of Cloud Pak for Automation, we need to install it on OpenShift. The install doc is [here](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=automation-installing). 
-Installation uses  operator lifecycle manager (OLM).
+Installation uses operator lifecycle manager (OLM).
 
 IBM Cloud Pak for Business Automation comes with the IBM Cloud® platform automation foundation which includes:
 
@@ -53,7 +53,7 @@ Summary of installation steps:
 * Get IBM license entitled registry key
 * Get the storage class name to use for dynamic storage
 * Preparing storage for cloud pak operator
-* download the [k8s certificates](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=cluster-setting-up-admin-script)
+* Download the [k8s certificates](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=cluster-setting-up-admin-script)
  and configuration to prepare the OCP cluster
 * Define a project where the Cloud Pak will be installed and then modify cluster_role_binding
 * Run the `cert-kubernetes/descriptors/cp4a-clusteradmin-setup.sh` script

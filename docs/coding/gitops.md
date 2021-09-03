@@ -51,8 +51,9 @@ by the tool from the Gitops repositories.
 
 ## Proposed project structure
 
-There are different ways to organize project: one gitops repository to control the configuration and
- deployment of each services and apps for one solution. Or use a three level structure, that will match team structure and git repo structure:
+There are different ways to organize projects: one gitops repository to control the configuration and
+ deployment of each services and apps for one solution. This is what the [KAM tool](#kam-gitops-application-manager) does. 
+Or use a three level structure, that will match team structure and git repo structure:
 
 * **application**: deployment.yaml, config map... for each application. Developers lead this one
 * shared, reusable **services** like Kafka, Database, LDAP,... as reusable services between environments: Dev and operations ownership
@@ -67,8 +68,6 @@ With 3 level structure, each "solution" will have 3 separate repositories:
 Now the different deployment environments can be using different k8s clusters or the same cluster with different namespaces.
 
 With the adoption of ArgoCD we can have one bootstrap app that start other apps to monitor each of those layers.
-
-With KAM the approach is to use a unique GitOps repo.
 
 ### OpenShift Projects
 
@@ -199,10 +198,14 @@ In GitOps, the pipeline does not finish with something like `oc apply..`. but it
 
 * [GitOps - Operations by Pull Request](https://www.weave.works/blog/gitops-operations-by-pull-request)
 
-## **KAM** - Gitops Application Manager
+## **KAM** - Gitops Application Manager CLI
 
 [KAM](https://github.com/redhat-developer/kam)'s goal is to help creating a gitops project for an existing application as 
-[day 1 operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) and then add more services as part of `day 2`.
+[day 1 operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) and then add more services as part of `day 2 operation`.
+
+Gitops approach to managing deployments into one or more environments (a namespace in a Kubernetes). 
+One or more applications can be deployed into a given environment. An application is an aggregation of one or more services.
+The source code for each service (or microservice) is contained within a single Git repository
 
 * To install download the last release from github: [https://github.com/redhat-developer/kam/releases/latest](https://github.com/redhat-developer/kam/releases/latest). 
 Rename the download file, and move it to `/usr/local/bin`.
@@ -233,11 +236,13 @@ the number of characters. kam boostrap need a --service-name argument.
 This will create a gitops project, pushed to github.com as private repo. The repo includes two main folders and a 
 `pipelines.yaml` describing your first application, and configuration for a complete CI pipeline and deployments from Argo CD
 
+At the same level of the folder hierarchy, there is a secrets folder to keep secrets to do not commit to Git. See [secrets section below](#secrets)
+
 ### What is inside
 
 #### Config
 
-`config` defines argocd and cicd Argo application to support deployment and build pipeline
+The `config` folder defines `argocd` and `cicd` Argo applications to support deployment and pipeline definitions:
 
   ```sh
     ├── config
@@ -279,7 +284,7 @@ This will create a gitops project, pushed to github.com as private repo. The rep
     │           └── kustomization.yaml
   ```
 
-So major elements of this configuration:
+So the major elements of this configuration are:
 
 * **argo-app**: root application to manage the other applications: It points to the kustomization.yaml under `config/argocd` so when adding new microservice to the solution using `kam cli` then this kustomize will be updated triggering a new argo app to be created  
     - argo-app.yaml
@@ -355,7 +360,7 @@ a `services` folder to put those services.
 
 ### secrets
 
-At the same level as the gitops folder there is a secrets folder to be used to managed secrets without getting them into git.
+At the same level as the gitops folder, there is a `secrets` folder to be used to manage secrets without getting them into git.
 
 The approach is to us [Bitmani Sealed Secret](https://engineering.bitnami.com/articles/sealed-secrets.html) operators:
 
@@ -369,13 +374,23 @@ The approach is to us [Bitmani Sealed Secret](https://engineering.bitnami.com/ar
 ```sh
 cat gitops-webhook-secret.yaml| kubeseal --controller-namespace sealed-secrets \
 --controller-name sealedsecretcontroller-sealed-secrets --format yaml >gitops-webhook-sealedsecret.yaml
-
+#
+cat git-host-access-token.yaml | kubeseal --controller-namespace sealed-secrets \
+--controller-name sealedsecretcontroller-sealed-secrets --format yaml > git-host-access-token-sealedsecret.yaml
+# 
+cat docker-config.yaml | kubeseal --controller-namespace sealed-secrets \
+--controller-name sealedsecretcontroller-sealed-secrets --format yaml > docker-config-sealedsecret.yaml 
+# 
+cat git-host-basic-auth-token.yaml | kubeseal --controller-namespace sealed-secrets \
+--controller-name sealedsecretcontroller-sealed-secrets --format yaml | oc apply -f -
+# then any microservice
 ```
 
-Each sealed secret can be in github, and applied to k8s to <> namespace.
+Each sealed secret can be in github, and applied to k8s to different namespace.
 
 ```sh
 oc apply -f gitops-webhook-sealedsecret.yaml
+# this should create a k8s secret
 ```
 
 ### What to do from there
@@ -385,16 +400,32 @@ oc apply -f gitops-webhook-sealedsecret.yaml
     ```
     environments/<>-dev/services/kafka-strimzi/
     ```
-1. 
-2. Bring up the argocd do `oc apply -k config/argocd/` which will create:
+1. Bring up the argocd app of app by doing: `oc apply -k config/argocd/`, which will create:
 
     * three Argo applications to monitor CI/CD, Dev and Staging environments: rt-inventory-cicd, rt-inventory-dev, rt-inventory-stage
     * One Argo Application per service to deploy: the following figure has only one of such service.
     ![](./images/argo-rt-inv.png)
     * Three OpensShift projects: one for cicd, one per target 'environments' (dev, stage)
 
-3. Part of the configuration bootstraps a simple `OpenShift Pipelines` pipeline for building code when a pull-request is opened.
+1. Part of the configuration bootstraps a simple `OpenShift Pipelines` pipeline for building code when a pull-request is opened.
+1. Add new microservices using command like
 
-## Some notes to integrate
+    ```sh
+    kam service add --git-repo-url https://github.com/jbcodefoce/new-service.git --app-name newservicename  --env-name stage  --image-repo quay.io/jbcodefoce/new-service --service-name new-service
+    ```
+    
+    For each service, an unencrypted secret will be generated into the secrets folder. Make sure to apply these secrets to the cluster.
+1. Add webhook to each microservice repository to connect to the Pipeline event listener.
 
-Install Sealed Secrets operator
+    ```sh
+    oc get route --namespace rt-inventory-cicd
+    ```
+
+    Then in github repository > Settings > Webhook copy this address with `http://` prefix. Try to do a new push to see if the event is sent to the listener.
+    If so a new pipeline is started visible in the `Pipelines` menu on OpenShift console.
+
+## Future readings
+
+* [Creating CI/CD solutions for applications using OpenShift Pipelines (4.8)](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html)
+* [OpenShift pipeline tutorial](https://github.com/openshift/pipelines-tutorial)
+* [Github create webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks/creating-webhooks)
