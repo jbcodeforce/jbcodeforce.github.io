@@ -366,6 +366,17 @@ spec:
 To use those trigger we need to define a webhook in the source repository, so push events can be sent
 to this event listener.
 
+Here is a diagram that represents the relationship between those elements:
+
+![](./images/tekton-elements.png)
+
+* Event Listener is expose via a route so the Github webhook for the application source repository can send push events to the listener
+* The event listener links template and triggers.
+* Triggers defines the binding and interceptors that will process the HTTP POST request. 
+* Trigger template defines pipeline run
+* PipelineRun reference pipeline definition.
+
+As PipelineRun are defined inside the TriggerTemplat, they are specifics  to each application to build. 
 ### Enhancing
 
 We can use nexus to keep the maven downloaded jars. 
