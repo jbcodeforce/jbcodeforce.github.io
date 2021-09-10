@@ -51,15 +51,17 @@ by the tool from the Gitops repositories.
 
 ## Proposed project structure
 
-There are different ways to organize projects: one gitops repository to control the configuration and
- deployment of each services and apps for one solution. This is what the [KAM tool](#kam-gitops-application-manager) does. 
-Or use a three level structure, that will match team structure and git repo structure:
+There are different ways to organize projects: The [KAM tool](#kam-gitops-application-manager-cli) propose to
+create one gitops repository to control the configuration and
+ deployment of each services and apps of the solution.
+
+Or use a three level repository structure, that will match team structure and persona: dev, SRE.
 
 * **application**: deployment.yaml, config map... for each application. Developers lead this one
 * shared, reusable **services** like Kafka, Database, LDAP,... as reusable services between environments: Dev and operations ownership
 * Cluster and **infrastructure**: network, cluster, storage, policies... owned by operation
 
-With 3 level structure, each "solution" will have 3 separate repositories:
+With three level structure, each "solution" will have 3 separate repositories:
 
 * solution_name-gitops-apps
 * solution_name-gitops-services
@@ -67,7 +69,8 @@ With 3 level structure, each "solution" will have 3 separate repositories:
 
 Now the different deployment environments can be using different k8s clusters or the same cluster with different namespaces.
 
-With the adoption of ArgoCD we can have one bootstrap app that start other apps to monitor each of those layers.
+With the adoption of ArgoCD we can have one bootstrap app that starts other apps to monitor each of those layers.
+See detail in [this separate note](/coding/tekton/).
 
 ### OpenShift Projects
 
@@ -407,6 +410,12 @@ oc apply -f gitops-webhook-sealedsecret.yaml
     ![](./images/argo-rt-inv.png)
     * Three OpensShift projects: one for cicd, one per target 'environments' (dev, stage)
 
+    > depending of OCP version, there may be issue regarding controler user being able to create resource. 
+    To enable full cluster admin access on OpenShift, run the following command: 
+
+    ```sh
+    oc adm policy add-cluster-role-to-user cluster-admin -z argocd-application-co 
+    ``` 
 1. Part of the configuration bootstraps a simple `OpenShift Pipelines` pipeline for building code when a pull-request is opened.
 1. Add new microservices using command like
 

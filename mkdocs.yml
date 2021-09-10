@@ -1,4 +1,5 @@
 site_name: Jerome Boyer's Personal Site
+site_description: Knowledge acquisition personal's notes, blog drafts
 repo_url: https://github.com/jbcodeforce/jbcodeforce.github.io/
 nav:
   - Blogs: blogs/index.md
@@ -62,6 +63,7 @@ nav:
       - Atlas: techno/atlas.md
       - Automation Decision Service: techno/ads.md
       - Self driving enterprise: techno/bai.md
+      - Docker: techno/docker.md
       - Cloud object storage: techno/cos.md
       - Code Engine: techno/code-engine.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
@@ -77,11 +79,13 @@ nav:
 
 theme: 
   name: material
-  logo: 'images/gear-sp-01.jpg'
+  logo: images/gear-sp-01.jpg
   feature:
     tabs: true
   palette:
-      primary: 'magenta dark'
+    scheme: default
+    primary: 'magenta dark'
+  language: en
   social:
     - type: 'github'
       link: 'https://github.com/jbcodeforce'
@@ -90,9 +94,21 @@ theme:
     - type: 'linkedin'
       link: 'https://linkedin.com/in/jeromeboyer'
 extra_css: ["extra.css"]
+plugins:
+  - search:
+      lang: en
+      
 markdown_extensions:
   - admonition
   - codehilite
   - footnotes
   - pymdownx.smartsymbols
   - pymdownx.superfences
+  - attr_list
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.tabbed
+  - pymdownx.highlight
+  - pymdownx.tabbed
+  - pymdownx.details

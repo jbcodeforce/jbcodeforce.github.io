@@ -1,6 +1,7 @@
 # Tekton tutorial
 
-This article is a summary based on [OpenShift pipeline tutorial](https://github.com/OpenShift/pipelines-tutorial), [Red Hat scholar - tekton tutorial](https://redhat-scholars.github.io/tekton-tutorial) and [this blog](https://www.OpenShift.com/blog/cloud-native-ci-cd-with-OpenShift-pipelines):
+This article is a summary based on [OpenShift pipeline tutorial](https://github.com/OpenShift/pipelines-tutorial), [Red Hat scholar - tekton tutorial](https://redhat-scholars.github.io/tekton-tutorial) 
+and [this blog](https://cloud.redhat.com/blog/cloud-native-ci-cd-with-openshift-pipelines):
 
 * Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc)
 * Build images with Kubernetes tools such as S2I, Buildah, Buildpacks, Kaniko,...
@@ -8,14 +9,12 @@ This article is a summary based on [OpenShift pipeline tutorial](https://github.
 
 ## Installation
 
-* Install the operator via Operator Hub or using yaml: 
+* Install the operator via OpenShift Operator Hub (Search pipeline) or using yaml: 
   
   ```sh
     # under https://github.com/jbcodeforce/eda-gitops-catalog
     oc apply -k openshift-pipelines-operator/overlays/stable
   ```
-
-Or install OpenShift Pipelines operator from the operator hub.
 
 * Define a service account `pipeline` (created automatically by the OpenShift Pipeline Operator)
 * Ensure Tekton pipelines is deployed and the API is available for use
@@ -38,7 +37,7 @@ Or install OpenShift Pipelines operator from the operator hub.
   tasks                            tekton.dev   true         Task
   ```
 
-* Install the CLI tkn tool
+* Install the CLI [tkn tool](https://docs.openshift.com/container-platform/4.7/cli_reference/tkn_cli/installing-tkn.html)
 
 ## Concepts
 
@@ -370,13 +369,14 @@ Here is a diagram that represents the relationship between those elements:
 
 ![](./images/tekton-elements.png)
 
-* Event Listener is expose via a route so the Github webhook for the application source repository can send push events to the listener
+* Event Listener is exposed via a route so the Github webhook for the application source repository can send push events to the listener
 * The event listener links template and triggers.
-* Triggers defines the binding and interceptors that will process the HTTP POST request. 
+* Triggers defines the binding and interceptors that will process the HTTP POST request coming from github. 
 * Trigger template defines pipeline run
-* PipelineRun reference pipeline definition.
+* PipelineRun reference pipeline definition and optionally resources.
 
-As PipelineRun are defined inside the TriggerTemplat, they are specifics  to each application to build. 
+As `PipelineRun` are defined inside the `TriggerTemplate`, they are specifics  to each application to build. 
+
 ### Enhancing
 
 We can use nexus to keep the maven downloaded jars. 
