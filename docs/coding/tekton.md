@@ -206,27 +206,30 @@ See [other resource definitions](https://github.com/ibm-cloud-architecture/refar
 
 ### Create pipeline
 
-A Pipeline is a collection of Tasks that you define and arrange in a specific order of execution as part of your continuous integration flow:
+A Pipeline is a collection of Tasks that we define and arrange in a specific order of execution as part of our continuous integration flow:
 
 ![TektonRR](./images/tektonresourcerelationship-13.jpg)
 
 The <em>pipelineRun</em> invokes the pipeline, which contains tasks. Each task consists of a number of steps, each of which can contain elements such as command, script, volumeMounts, workingDir, parameters, resources, workspace, or image. 
 
-Generic pipeline takes the source code of the application from GitHub and then builds jar and docker image and deploys it on OpenShift. The deployment can also being done with ArgoCD.
+Generic pipeline takes the source code of the application from GitHub and then builds jar and docker image and deploys image to OpenShift. 
+The deployment part of the pipeline could also being done with ArgoCD application.
 
-* `volumeMounts` allow you to add storage to a step. Since each step runs in an isolated container, any data that is created by a step for use by another step must be stored appropriately. 
+* `volumeMounts` allows us to add storage to a step. Since each step runs in an isolated container, any data that is created by a step for use by another step must be stored appropriately. 
 If the data is accessed by a subsequent step within the same task then it is possible to use the `/workspace` directory to hold any created files and directories. 
-A further option for steps within the same task is to use an emptyDir storage mechanism which can be useful for separating out different data content for ease of use. If file stored data is to be accessed by a subsequent step that is in a different task then a Kubernetes persistent volume claim is required to be used. As explained below, this is what we do for the Travelport demo.
+A further option for steps within the same task is to use an emptyDir storage mechanism which can be useful for separating 
+out different data content for ease of use. If file stored data is to be accessed by a subsequent step that is in a 
+different task then a Kubernetes persistent volume claim is required to be used. 
 
 > Note that volumes are defined in a section of the task outside the scope of any steps, and then each step that needs the volume will mount it. 
 
 * The `workingDir` element refers to the path within the container that should be the current working directory when the command is executed.
 * `parameters`: As with volumeMounts, parameters are defined outside the scope of any step within a task and then they are referenced from within the step. 
-Parameters in this case refers to any information in text form required by a step such as a path, a name of an object, a username etc.  
-Workspace
+Parameters, in this case, refer to any information in text form required by a step such as a path, a name of an object, a username etc.  
+
 * A `workspace` is similar to a volume in that it provides storage that can be shared across multiple tasks. A persistent volume claim 
 is required to be created first and then the intent to use the volume is declared within the pipeline and task before mapping the 
-workspace into an individual step such that it is mounted. Workspaces and volumes are similar in behavior but are defined in
+workspace into an individual step. Workspaces and volumes are similar in behavior but are defined in
  slightly different places.
 
 * `Image`: Since each Tekton step runs within its own image, the image must be referenced as shown in the example below:
@@ -245,7 +248,7 @@ workspace into an individual step such that it is mounted. Workspaces and volume
 A Pipeline requires PipelineResources to provide inputs and store outputs for the Tasks that comprise it.
 
 * Declare the pipeline in a yaml file like [tutorial build and deploy](https://raw.githubusercontent.com/OpenShift/pipelines-tutorial/pipelines-1.4/01_pipeline/04_pipeline.yaml) 
-or the [item inventory aggregator pipeline in rt-inventory-gitops]()
+or the [item inventory aggregator pipeline in rt-inventory-gitops](https://github.com/jbcodeforce/rt-inventory-gitops/blob/main/config/rt-inventory-cicd/base/04-pipelines/quarkus-pipeline.yaml)
 * In previous section there is an example of git clone task declared in a pipeline. It uses the pipeline parameters to get URL and revision and output to the workspace.
 
 The workspace is declared in the pipeline, and the names must match
@@ -279,8 +282,8 @@ The workspace is declared in the pipeline, and the names must match
   ```
 
 * Use of Persistent Storage: adding persistent storage for the pipeline to allow us to cache and manage 
-state between tasks in the pipeline. For example, for its build, Maven needs all the repositories from the project dependencies. 
-Once persisted future builds do not have to download dependent jars. 
+state between tasks in the pipeline. For example, for its build, Maven needs all the repositories from the 
+project dependencies. Once persisted future builds do not have to download dependent jars. 
 
 Since each step runs in an isolated container any data that is created by a step for use by another step must be stored appropriately. 
 If the data is accessed by a subsequent step within the same task then it is possible to use the `/workspace` directory to hold any 
@@ -297,8 +300,8 @@ As a result any steps that invoke a Buildah command will mount this volume at th
 `Buildah` is a tool that facilitates building Open Container Initiative (OCI) container images. 
 It provides a command line tool that can be used to create a container from scratch or using an image as a starting point.
 
-> You need to use persistence storage when your data must still be available, even if the container, the worker node, or the cluster is removed. 
-You should use persistent storage in the following scenarios:
+> We need to use persistence storage when our data must still be available, even if the container, the worker node, or the cluster is removed. 
+We should use persistent storage in the following scenarios:
 
 >  * Stateful apps
 >  * Core business data
@@ -306,8 +309,8 @@ You should use persistent storage in the following scenarios:
 >  * Auditing
 >  * Data that must be accessed and shared across app instances. For example: 
 >
->       - <b>Access across pods</b>: When you use Kubernetes persistent volumes to access your storage, you can determine the number of pods that can mount the volume at the same time. Some storage solutions, such as block storage, can be accessed by one pod at a time only. With other storage solutions, you can share volume across multiple pods.
->       - <b>Access across zones and regions</b>: You might require your data to be accessible across zones or regions. Some storage solutions, such as file and block storage, are data center-specific and cannot be shared across zones in a multizone cluster setup.
+>       - <b>Access across pods</b>: When we use Kubernetes persistent volumes to access our storage, we can determine the number of pods that can mount the volume at the same time. Some storage solutions, such as block storage, can be accessed by one pod at a time only. With other storage solutions, we can share volume across multiple pods.
+>       - <b>Access across zones and regions</b>: we might require our data to be accessible across zones or regions. Some storage solutions, such as file and block storage, are data center-specific and cannot be shared across zones in a multizone cluster setup.
 
 
 * Execute it using a pipeline run
@@ -339,7 +342,7 @@ Triggers help to hook our Pipelines to respond to external github events.
 A **TriggerTemplate** is a resource which have parameters that can be substituted anywhere 
 within the resources of template. It maps to a PipelineRun.
 
-A **TriggerBindings** is a map enable us to capture fields from an event and store them 
+A **TriggerBindings** is a map to enable us to capture fields from an event and store them 
 as parameters, and replace them in triggerTemplate whenever an event occurs. Here is an extract of
 such trigger binding definition:
 

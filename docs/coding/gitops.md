@@ -213,6 +213,12 @@ The source code for each service (or microservice) is contained within a single 
 * To install download the last release from github: [https://github.com/redhat-developer/kam/releases/latest](https://github.com/redhat-developer/kam/releases/latest). 
 Rename the download file, and move it to `/usr/local/bin`.
 
+### Pre-requisite
+
+Have the OpenShift GitOps and OpenShift pipelines operators installed.
+
+Be connected to the cluster.
+
 ### Creating a gitops project for a given solution
 
 Use the following kam command to create a gitops repository with multiple ArgoCD applications. To run successfully, we need to be connected
@@ -234,7 +240,7 @@ kam bootstrap \
 To retrieve [the github access token see this note](https://github.com/redhat-developer/kam/blob/master/docs/journey/day1/prerequisites/github_access_token_steps.md).
 
 > **Kam bug:** the application name is matching the git repo name, and there will be an issue while creating binding with thee limit of 
-the number of characters. kam boostrap need a --service-name argument.
+the number of characters. kam bootstrap needs a --service-name argument.
 
 This will create a gitops project, pushed to github.com as private repo. The repo includes two main folders and a 
 `pipelines.yaml` describing your first application, and configuration for a complete CI pipeline and deployments from Argo CD

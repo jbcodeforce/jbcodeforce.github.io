@@ -60,8 +60,13 @@ brew install docker-compose
 ```
 * Use minikube: `minikub start --vm-driver=hyperkit`
 * Get docker env of the minikube: `minikube docker-env` or better `eval $(minikube docker-env)` so env variables are set to be used by
-the docker CLI.
+the docker CLI. Evaluating the docker-env is only valid for the current terminal. 
 * Use docker CLI, it should contact the docker daemon running inside minikube.
+* If the minikube pods are not able to contact internet add a names
+
+```
+"https://registry-1.docker.io/v2/": dial tcp: lookup registry-1.docker.io
+```
 
 ## Some docker and docker compose tricks
 

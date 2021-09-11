@@ -31,6 +31,11 @@ nav:
     - AI:
       - Machine learning: https://jbcodeforce.github.io/ml-basics/
       - Automation Decision Service: techno/ads.md
+    - DevOps:
+        - Git summary: coding/git.md
+        - GitOps: coding/gitops.md
+        - Tekton: coding/tekton.md
+        - ArgoCD: coding/argocd.md
     - Programming:
       - Java Studies: 
         - Concurrency: java/concurrent.md
@@ -49,13 +54,8 @@ nav:
       - MQ: architecture/mq.md
       - MQ challenge: java/mqChallenge.md
       - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
-      - Cloud native content IBM: https://cloudnative101.dev/
-      - DevOps:
-        - Git summary: coding/git.md
-        - GitOps: coding/gitops.md
-        - Tekton: coding/tekton.md
-        - ArgoCD: coding/argocd.md
-      - Openhift Playground: coding/playground.md
+      - Cloud native content IBM: https://cloudnative101.dev/ 
+      - Openshift Playground: coding/playground.md
       - Angular Studies: https://jbcodeforce.github.io/angular-sandbox/
       - My code templates: code-template.md
     - Techno:
