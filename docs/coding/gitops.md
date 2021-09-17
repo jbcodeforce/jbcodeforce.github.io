@@ -45,17 +45,26 @@ by the tool from the Gitops repositories.
 ## Supporting tools
 
 * [KAM CLI from the Red Hat gitops team ](https://github.com/redhat-developer/kam)
-* [Tekton](#tekton-tutorial) for continuous integration and even deployment
-* [ArgoCD](#argocd-tutorial) for continuous deployment
-* [Kustomize.io](https://kustomize.io/)
+* [Tekton](/coding/tekton) for continuous integration and even deployment
+* [ArgoCD | Openshift Gitops](#openshift-gitops) for continuous deployment
+* [Kustomize.io](https://kustomize.io/) to templatize the deployment and support overlay mechanisms.
 
-## Proposed project structure
+## OpenShift GitOps
 
-There are different ways to organize projects: The [KAM tool](#kam-gitops-application-manager-cli) propose to
+[OpenShift GitOps](https://docs.openshift.com/container-platform/4.7/cicd/gitops/understanding-openshift-gitops.html)
+is the operator and configuration to run ArgoCD, as a controller inside OpenShift.
+
+The environment configuration repository defines the desired state of the application/solution.
+
+See [installation instructions]() via the console.
+
+### Proposed git repository structure
+
+There are different ways to organize projects: The [KAM tool](#kam-gitops-application-manager-cli) proposes to
 create one gitops repository to control the configuration and
  deployment of each services and apps of the solution.
 
-Or use a three level repository structure, that will match team structure and persona: dev, SRE.
+Another solution is to use a three repositories structure, that will match team structure and persona: dev, SRE.
 
 * **application**: deployment.yaml, config map... for each application. Developers lead this one
 * shared, reusable **services** like Kafka, Database, LDAP,... as reusable services between environments: Dev and operations ownership
@@ -74,16 +83,33 @@ See detail in [this separate note](/coding/tekton/).
 
 ### OpenShift Projects
 
-For each solution we may use two projects: one projectname-cicd for ArgoCD apps, Tekton pipelines... and one projectname for the application instances.
+For each solution we may use a number of different projects: 
+
+* one projectname-cicd for Tekton pipeline run... 
+* one projectname-dev for the application instances in a development mode.
+* one projectname-staging for pre-production tests
+* one projectname-prod for production deployment. This can be in the same OCP cluster or in different one.
+
+Within the `-dev` project we can isolate the dependant applications, like Kafka cluster, or postgresql,
+where with Staging and production we can use multi tenant deployment of such applications.
+
+Those projects are defined in an environment context. See below the KAM tool that supports this approach.
 
 ### Services 
 
 For the Service level, try to adopt catalog repositories to hold common elements that will be 
 re-used across teams and other repositories. 
-See example in [Red Hat Canada Catalog git repo](https://github.com/redhat-canada-gitops/catalog). 
+See example in [Red Hat Canada Catalog git repo](https://github.com/redhat-canada-gitops/catalog)
+and our [Business automation](https://github.com/jbcodeforce/dba-gitops-catalog) one or [EDA one](https://github.com/jbcodeforce/eda-gitops-catalog). 
 
-Use Kustomization to reference remote repositories as a base or resource and then patch it 
+Use Kustomization to reference remote repositories as a base and then patch it 
 as needed to meet your specific requirements.
+
+```yaml
+bases:
+ - github.com/jbcodeforce/eda-gitops-catalog/kafka-strimzi/operator/overlay/stable?ref=main
+ - ../base
+```
 
 Reference the common repository via a tag or commit ID.
 
@@ -119,6 +145,22 @@ Some principles to observe:
 * Tie specific environments to specific revisions so that changes in the repo can be promoted in a controlled manner
 We can manage the revision in the gitops tools or in kustomize or both.
 
+### The pre and post synch processing
+
+When Argo CD starts a sync, it orders the resources in the following precedence:
+
+* The phase (See [resource hook doc](https://argoproj.github.io/argo-cd/user-guide/resource_hooks/))
+* The wave they are in (lower values first). Defined as annotations in the different resources 
+
+    ```yaml
+    metadata:
+      annotations:
+        argocd.argoproj.io/sync-wave: "5"
+    ```
+* By kind (e.g. namespaces first)
+* By name
+
+It then determines the number of the next wave to apply. This is the first number where any resource is out-of-sync or unhealthy.
 
 ## OpenShift Pipelines
 

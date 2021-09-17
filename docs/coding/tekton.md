@@ -37,7 +37,7 @@ and [this blog](https://cloud.redhat.com/blog/cloud-native-ci-cd-with-openshift-
   tasks                            tekton.dev   true         Task
   ```
 
-* Install the CLI [tkn tool](https://docs.openshift.com/container-platform/4.7/cli_reference/tkn_cli/installing-tkn.html)
+* Install the [tkn CLI](https://docs.openshift.com/container-platform/4.7/cli_reference/tkn_cli/installing-tkn.html)
 
 ## Concepts
 
@@ -53,14 +53,21 @@ The git source is cloned to a local volume at path `/workspace/source` where `so
 
 ## Developer's steps:
 
+To be able to get pipeline executed, we need to deploy OpenShift Pipeline operator. Use
+one the catalog repo (eda-gitops-catalog or dba-gitops-catalog)
+
+```sh
+oc apply -k openshift-pipelines-operator/overlays/stable 
+```
+
 At the high level, the generic steps for a given application are:
 
 * [Create custom task](#define-tasks) or install existing reusable Tasks
-* Create [PipelineResources](#define-resources) to specify the github source repository and the docker image name.
+* Create [PipelineResources](#define-resources) to specify the github source repository and the docker image name to create.
 * Create a [Pipeline](#create-pipeline) to define your application's delivery pipeline
 * Create a PersistentVolumeClaim to provide the volume/filesystem for the pipeline execution or provide a VolumeClaimTemplate which creates a PersistentVolumeClaim
 * Create a PipelineRun to instantiate and invoke the pipeline
-* Add triggers to capture events in the source repository.
+* Add triggers to capture events in the source repository that are propagated by webhook.
 
 ### Define tasks
 
@@ -71,16 +78,17 @@ Tasks execute steps in the order in which they are written, with each step compl
  activities and is a useful characteristic that guides the user in the grouping of steps within tasks.
 
 We need to have tasks to build the application executable, to build the docker image, push to the image registry and
-potentially deploy to the target runtime project. This last task is in fact done with ArgoCD.
+potentially deploy to the target runtime project. With the adoption of GitOps this last task is in fact done with ArgoCD application.
 
 Tasks are reusable between pipeline.
 
-* first task is to clone a repo. In the [Tekton hub](https://hub.tekton.dev/) we can find the yaml 
-for this task. But with the OpenShift pipeline operator, it is part of the clustertask:
+* A first task is to clone a repo. In the [Tekton hub](https://hub.tekton.dev/) we can find the yaml 
+for this task. But with the OpenShift Pipeline operator, it is part of the clustertask:
 
   ```sh
+  # List predefined task at the 'cluster level'
   tkn clustertask list
-  # 
+  # See a particular task like git-clone
   tkn  clustertask describe git-clone
   ```
   
@@ -112,12 +120,12 @@ for this task. But with the OpenShift pipeline operator, it is part of the clust
   
   See [next pipeline section](#create-pipeline) for how to configure this `git-clone` task.
 
-  **Remarks:** when using resource of type git then a clone will be done implicitly.
+  **Remarks:** when using resource of type git then a clone will be done implicitly, therefore this task is not needed.
 
 * Define a Task to build a quarkus app: this is done by using the maven task: `tkn task describe maven` or by using
-custom task using the maven docker image. 
+custom task based on the maven docker image. 
 
-  To use the Tekton predefined maven task, use:
+  To use the Tekton predefined maven task, do:
 
   ```sh
   oc  apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/maven/0.2/maven.yaml
@@ -156,12 +164,13 @@ tkn clustertasks list
 
 ### Define resources
 
-A reference to the resource is declared within the task and then the steps use the resources in commands. 
+A reference to the resource is declared within the task and then the steps use the resources in the commands. 
 A resource can be used as an output in a step within the task.
 
 In Tekton, there is no explicit Git pull command. Simply including a Git resource in a task definition will result 
 in a Git pull action taking place, before any steps execute, which will pull the content of the Git repository 
-to a location of `/workspace/<git-resource-name>`. In the example below the Git repository content is pulled to `/workspace/source`.
+to a location of `/workspace/<git-resource-name>`. 
+In the example below the Git repository content is pulled to the implicit folder: `/workspace/source`.
 
 ```yaml
 kind: Task
@@ -180,7 +189,7 @@ PipelineResource defines resources to be used as input or output to task and pip
 
 *It looks it is still in alpha release so may not be kept.*
 
-Example of resource for git repo:
+Example of PipelineResource for git repo:
 
 ```yaml
 apiVersion: tekton.dev/v1alpha1
@@ -380,7 +389,7 @@ Here is a diagram that represents the relationship between those elements:
 
 As `PipelineRun` are defined inside the `TriggerTemplate`, they are specifics  to each application to build. 
 
-### Enhancing
+## Enhancing
 
 We can use nexus to keep the maven downloaded jars. 
 
@@ -389,7 +398,10 @@ oc apply -f https://raw.githubusercontent.com/redhat-scholars/tekton-tutorial/ma
 oc expose svc nexus
 ```
 
-### Other readings
+## Quarkus app - tekton pipeline
+
+
+## Other readings
 
 * [Tekton dev documentation](https://tekton.dev/docs/)
 * [OpenShift Pipelines](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html)

@@ -65,6 +65,7 @@ nav:
       - Self driving enterprise: techno/bai.md
       - Docker: techno/docker.md
       - Cloud object storage: techno/cos.md
+      - Cloud pak integration: techno/cp4i.md
       - Code Engine: techno/code-engine.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
       - Egeria: techno/egeria.md
@@ -76,6 +77,7 @@ nav:
       - RedPanda Studies: https://github.com/jbcodeforce/redpanda-studies/
       - Spark Studies: https://jbcodeforce.github.io/spark-studies/
       - VScode: java/java-vscode.md
+      - WO: techno/wo.md
 
 theme: 
   name: material
