@@ -7,11 +7,6 @@
 * Blog on EDA governance
 * Blog on fit for purpose
 
-## 08/31/2021 
-
-A GitOps playground.
-
-[>> read more](/blogs/08-31-21)
 
 ## 08/27/2021 
 

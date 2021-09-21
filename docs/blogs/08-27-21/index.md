@@ -1,14 +1,27 @@
 # Developer experience for an event-driven microservice
 
 Event-driven solutions are complex to implement, a lot of parts need to be considered, and I did not find any article that goes into
-how to do things with the last technology available to us. So last ...  meaning August 2021.
+how to do things with the last technology available to us ('last' meaning August 2021). 
+
+I want to propose a set of articles to address this developer's experience, not fully in the perfect order of developer's activities, as normally  we should start by event-storming and DDD.
+
+So here is how I see the different high level task developers may need to follow:
+
+* Use [Domain-driven design]() and [event storming]() to discover the business process to support and discover the different bounded contexts
+which are potential microservice candidates.
+* Use a code template as a base for the event-driven microservice depending of the messaging to use: MQ or Kafka. Those templates
+use the DDD Onion architecture, and are based on Quarkus. The code also assume the services are containerized and deploy to Kubernetes or OpenShift.
+* Create a GitOps repository with KAM, deploy the pipelines and gitops to manage the solution and the different 
+deployment environments (`dev` and `staging`). Define specific pipelines tasks and pipeline flow. Connect git repository  via webhook to the pipeline tool (Tekton)
+* Define message structure using AVRO or JSON schema, generate Java Beans from the event definition
+* Connect and upload schemas to schema registry
+* Define REST end point and OpenAPI, then manage those APIs in API management
+* Apply test driven development for the business logic, assess integration tests scope and tune development environment accordingly. 
+* Ensure continuous deployment with ArgoCD 
 
 In this article I will try to propose a developer journey to support the implementation of an event-driven microservice
 that will participate in a Command Query Responsibility Segregation pattern using the following:
 
-* Quarkus 2.x with reactive messaging
-* OpenShift Pipelines, OpenShift Gitops and KAM
-* Apply Domain-Driven design methodology 
 
 ## From Domain Driven Design...
 
@@ -30,7 +43,7 @@ Commands will help to define API and REST resources and may be a service layer. 
 be persisted in the repository, but also what will be exposed via the APIs. In fact it is immediately important
 to enforce avoiding designing a data model with a canonical model, and expose a complex data model in te APIs.
 
-Finally Events will define Avro schema that will be used in the messaging layer. 
+Finally Events will define Avro schemas that will be used in the messaging layer. 
 
 I will detail OpenAPI and AsyncAPI elements, and the different layer later in this article.
 
@@ -44,6 +57,23 @@ and [this repository for environment and external service deployment](https://gi
 As presented in [this note](), CQRS is implemented in two separate code units, in our case two separate microservices. 
 As the subject of this article is about starting on strong foundations for developing event-driven microservices,
 I will address the Command part of the CQRS which will use Kafka Consumer, and MQ producer.
+
+To support a GitOps approach for development and deployment, Red Hat has delivered two operators around [Tekton]()
+for continuous integration, and [ArgoCD]() for continuous deployment. As part of the OpenShift GitOps, there is also the [KAM CLI]() tool
+ to help developer to start on the good track, at least for simple solution.
+
+The core idea of GitOps is having a Git repository that always contains declarative descriptions 
+of the infrastructure currently desired in the production environment and an automated process 
+to make the production environment match the described state in the repository.
+
+To get the basis knowledge related to this article I recommend reading the following documentations:
+
+* [Understand GitOps](https://www.gitops.tech/)
+* [Study KAM](https://github.com/redhat-developer/kam)
+* []()
+
+At the high level, by just following KAM's [Day 1 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) I want to
+manage three event-driven microservices
 
 ### Basic solution organization
 
@@ -68,16 +98,59 @@ oc login --token=.... --server=....
 oc new-project eda-demo
 ```
 
-### Install environment
+### Install environments
 
 The first thing to do, is to install operators for the different services / middleware, and then create one or more
-instance of those 'services'.
+instance of those 'services'. I will use some Open Source and IBM products for this solution. The products I'm using for the order microservices are
 
-Clone the [eda-environment repository](https://github.com/jbcodeforce/eda-environment.git)
+* IBM MQ
+* RedPanda for local development and testing and IBM Event Streams on OpenShift
+* Postgresql
+* Apicurio schema registry for local development
+
+1. Clone the [eda-gitops-catalog repository](https://github.com/ibm-cloud-architecture/eda-gitops-catalog.git) to get most of
+the dependant operators defined.
 
 ```sh
-git clone https://github.com/jbcodeforce/eda-environment.git
+git clone https://github.com/ibm-cloud-architecture/eda-gitops-catalog.git
 ```
+
+1. Get IBM product catalog added to your OpenShift cluster
+
+```sh
+# 
+oc apply -k ibm-catalog -n openshift-marketplace
+# If you do not see any IBM operators then install IBM Catalog definition
+# In the eda-gitops-catalog project
+oc apply -k ./ibm-catalog/kustomization.yaml
+```
+
+1. Obtain [IBM license entitlement key](https://github.com/IBM/cloudpak-gitops/blob/main/docs/install.md#obtain-an-entitlement-key)
+
+1. Deploy GitOps and Pipeline Operators: See the [install the openShift GitOps Operator article](https://docs.openshift.com/container-platform/4.7/cicd/gitops/installing-openshift-gitops.html#installing-gitops-operator-in-web-console_getting-started-with-openshift-gitops) or
+use the following command:
+
+```sh
+# GitOps for solution deployment
+oc apply -k ./openshift-gitops/operators/overlays/stable
+# and Pipeline for building solution
+oc apply -k ./openshift-pipelines-operator/overlays/stable/
+# To verify they are not already installed use:
+oc get operators
+```
+
+1. [Update the OCP global pull secret of the `openshift-config` project](https://github.com/IBM/cloudpak-gitops/blob/main/docs/install.md#update-the-ocp-global-pull-secret)
+
+As illustrated 
+1. deploy IBM Event Streams operator
+
+```sh
+# In the eda-gitops-catalog project
+oc apply -f ./cp4i-operators/common-services.yaml
+
+oc apply -f https://raw.githubusercontent.com/ibm-cloud-architecture/eda-gitops-catalog/main/cp4i-operators/event-streams/subscription.yaml   
+```
+
 
 #### Operators
 
@@ -144,7 +217,7 @@ oc apply -f instances/mq/mq-qm1.yaml
 oc describe queuemanager qm1
 ```
 
-## Develop the service
+## Develop the event-driven service
 
 I will focus on the way to prepare the different elements of the service to ensure keeping the coupling to the minimum.
 
@@ -162,4 +235,8 @@ quarkus ext add qpid-jms, openshift
 The demo is a proof of concepts, so we will have on OrderDTO as a bean to support
 getting the data about the order at the API level.
 
+### Defining Pipeline tasks and flow
 
+### Add webhook 
+
+We need to add a webhook to the Git repository

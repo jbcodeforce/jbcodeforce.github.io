@@ -135,7 +135,7 @@ custom task based on the maven docker image.
 
 The **source** is a sub-path, under which Tekton cloned the application sources.
 
-* Other task example to apply kubernetes manifests ([apply-manifests](https://raw.githubusercontent.com/OpenShift/pipelines-tutorial/pipelines-1.4/01_pipeline/01_apply_manifest_task.yaml)) to deploy an image.
+* Other task example to apply Kubernetes manifests ([apply-manifests](https://raw.githubusercontent.com/OpenShift/pipelines-tutorial/pipelines-1.4/01_pipeline/01_apply_manifest_task.yaml)) to deploy an image.
 or [update-deployment](https://raw.githubusercontent.com/OpenShift/pipelines-tutorial/pipelines-1.4/01_pipeline/02_update_deployment_task.yaml) task to path the application deployment with a new `image name:tag`.
 
 The tasks are by default tied to namespace. **ClusterTask** makes the task available in all namespaces
