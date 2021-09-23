@@ -20,21 +20,6 @@ Decision model diagrams are composed of a set of nodes that are used as building
 * Prediction nodes encapsulate predictions that you can call directly from your decision model.
 * *External libraries* contain data types and functions to be used inside the decision models
 
-## Getting started
-
-* [Product doc - getting started](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=resources-getting-started-tutorial) goes over a simple decision model to send a message according to some weather data.
-* [ODM Docker image](https://hub.docker.com/r/ibmcom/odm)
-* [ADS Compose](https://github.ibm.com/dba/ads-compose)
-
-Launch locally ODM for older rule implementation.
-
-```sh
-docker run -e LICENSE=accept -p 9060:9060 -p 9443:9443  -m 2048M --memory-reservation 2048M -v $PWD:/config/dbdata/ -e SAMPLE=true ibmcom/odm:8.10
-```
-
-For ADS we need access to docker images with the licensed product, and then use docker-compose to run it locally.
-Multiple services are running to make ADS. They use secure communication via TLS.
-
 ## Installation
 
 Being part of Cloud Pak for Automation, we need to install it on OpenShift. The install doc is [here](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=automation-installing). 
@@ -56,10 +41,26 @@ Summary of installation steps:
 * Prepare storage for cloud pak operator
 * Download the [k8s certificates](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=cluster-setting-up-admin-script)
  and configuration to prepare the OCP cluster
-* Define a project where the Cloud Pak will be installed and then modify cluster_role_binding
+* Define a project where the Cloud Pak will be installed and then modify the cluster_role_binding
 * Run the `cert-kubernetes/descriptors/cp4a-clusteradmin-setup.sh` script
 * Define the custom resource manifest to control the product to install, use create  or `oc create -f ...`
-* After the Automation Decision Services container is deployed to the cluster, you need to take [additional steps (add maven plugin)](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=tasks-completing-post-deployment-automation-decision-services) to be able to build and deploy decision services.
+* After the Automation Decision Services container is deployed to the cluster, 
+we need to take [additional steps (add maven plugin)](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=tasks-completing-post-deployment-automation-decision-services) to be able to build and deploy decision services.
+
+## Getting started
+
+* [Product doc - getting started](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=resources-getting-started-tutorial) goes over a simple decision model to send a message according to some weather data.
+* [ODM Docker image](https://hub.docker.com/r/ibmcom/odm)
+* [ADS Compose](https://github.ibm.com/dba/ads-compose)
+
+Launch locally ODM for older rule implementation.
+
+```sh
+docker run -e LICENSE=accept -p 9060:9060 -p 9443:9443  -m 2048M --memory-reservation 2048M -v $PWD:/config/dbdata/ -e SAMPLE=true ibmcom/odm:8.10
+```
+
+For ADS we need access to docker images with the licensed product, and then use docker-compose to run it locally.
+Multiple services are running to make ADS. They use secure communication via TLS.
 
 ## Automation Foundation
 

@@ -22,6 +22,7 @@ nav:
       - Kubernetes services: aws/k8s.md
     - Data:
       - Introduction: data/index.md
+      - Database play:  https://jbcodeforce.github.io/db-play/  
       - Data topology: data/data-topology.md 
       - Data integration: data/data-integration.md
       - Data replication: data/data-replication.md 
@@ -67,7 +68,7 @@ nav:
       - Cloud object storage: techno/cos.md
       - Cloud pak integration: techno/cp4i.md
       - Code Engine: techno/code-engine.md
-      - Database play:  https://jbcodeforce.github.io/db-play/  
+      
       - Egeria: techno/egeria.md
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/
       - Elastic Search: techno/elasticsrch.md

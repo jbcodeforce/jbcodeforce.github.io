@@ -7,6 +7,92 @@ and [this blog](https://cloud.redhat.com/blog/cloud-native-ci-cd-with-openshift-
 * Build images with Kubernetes tools such as S2I, Buildah, Buildpacks, Kaniko,...
 * With [OpenShift Pipelines](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html) operator, CRD, service account and cluster binding are created automatically.
 
+## Concepts
+
+* **Task**: a reusable, loosely coupled number of steps that perform a specific task. Tasks are executed/run by creating TaskRuns. A TaskRun will schedule a Pod. Task definitions are reusable.
+* **Pipeline**: the definition of the pipeline and the Tasks that it should perform
+* **Resources**: build uses resources called [PipelineResource](https://github.com/tektoncd/pipeline/blob/main/docs/resources.md) that helps to configure the git repo url, the final container image name etc
+
+ ![Tekton elements](./images/tekton-res.png)
+
+Task requires an input resource of type git which defines where the source is located. 
+The git source is cloned to a local volume at path `/workspace/source` where `source` comes from the name we gave to the resource
+
+A Pipeline is a collection of Tasks that we define and arrange in a specific order of execution as part of our continuous integration flow:
+
+![TektonRR](./images/tektonresourcerelationship-13.jpg)
+
+The <em>pipelineRun</em> invokes the pipeline, which contains tasks. Each task consists of a number of steps, each of which can contain elements such as command, script, volumeMounts, workingDir, parameters, resources, workspace, or image. 
+
+The pipelines can be triggered by events coming from GitHub. To do so Tekton defines the following constructs:
+
+* **Triggers** help to hook our Pipelines to respond to external github (or other csm tools) events. 
+Trigger combines TriggerTemplate, TriggerBindings and interceptors. They are used as ref inside the EventListener.
+* **TriggerTemplate** is a resource which have parameters that can be substituted anywhere 
+within the resources of template. It maps to a PipelineRun.
+* **TriggerBindings** is a map to capture fields from an event and store them 
+as parameters, and replace them in TriggerTemplate whenever an event occurs. Here is an extract of
+such trigger binding definition:
+
+```yaml
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  creationTimestamp: null
+  name: github-push-binding
+  namespace: risk-scoring-cicd
+spec:
+  params:
+  - name: gitrepositoryurl
+    value: $(body.repository.clone_url)
+  - name: fullname
+    value: $(body.repository.full_name)
+```
+
+
+* **[Event Listener](https://tekton.dev/vault/triggers-v0.6.1/eventlisteners/)** sets up a Service and listens for events in JSON format.
+It connects a TriggerTemplate to a TriggerBinding, into an addressable endpoint. Each EventListener can consist of one or more triggers.
+The `triggers.bingings` section list the bindings to use and the name of `TriggerTemplate` to use.
+Bindings may have `interceptors` to modify payload or behavior on the events:
+
+```yaml
+    interceptors:
+    - github:
+        secretRef:
+          secretKey: webhook-secret-key
+          secretName: gitops-webhook-secret
+    - cel:
+        filter: (header.match('X-GitHub-Event', 'push') && body.repository.full_name
+          == 'jbcodeforce/ads-risk-scoring-gitops')
+        overlays:
+        - expression: body.ref.split('/')[2]
+          key: ref
+```
+
+`GitHub Interceptors` contain logic to validate and filter webhooks that come from GitHub. 
+To use this Interceptor as a filter, add the event types you would like to accept to the eventTypes field.
+
+The CEL interceptors can be used to filter or modify incoming events
+
+To use those trigger we need to define a webhook in the source git repository (using Settings > Webhooks > Add webhook), so `push` events can be sent
+to this event listener. The Webhook URL end point is retrieved by getting the route of the event listener for the cicd project:
+
+```sh
+oc get route -n solution-cicd
+```
+
+Here is a diagram to represent the relationship between all those elements:
+
+![](./images/tekton-elements.png)
+
+* Event Listener is exposed via a route so the Github webhook for the application source repository can send push events to the listener
+* The event listener links template and triggers.
+* Triggers defines the binding and interceptors that will process the HTTP POST request coming from github. 
+* Trigger template defines pipeline run
+* PipelineRun reference pipeline definition and optionally resources.
+
+As `PipelineRun` are defined inside the `TriggerTemplate`, they are specifics to each application to build. 
+
 ## Installation
 
 * Install the operator via OpenShift Operator Hub (Search pipeline) or using yaml: 
@@ -38,18 +124,6 @@ and [this blog](https://cloud.redhat.com/blog/cloud-native-ci-cd-with-openshift-
   ```
 
 * Install the [tkn CLI](https://docs.openshift.com/container-platform/4.7/cli_reference/tkn_cli/installing-tkn.html)
-
-## Concepts
-
-* **Task**: a reusable, loosely coupled number of steps that perform a specific task. Tasks are executed/run by creating TaskRuns. A TaskRun will schedule a Pod. Task definitions are reusable.
-* **Pipeline**: the definition of the pipeline and the Tasks that it should perform
-* **Resources**: build uses resources called [PipelineResource](https://github.com/tektoncd/pipeline/blob/main/docs/resources.md) that helps to configure the git repo url, the final container image name etc
-
- ![Tekton elements](./images/tekton-res.png)
-
-Task requires an input resource of type git which defines where the source is located. 
-The git source is cloned to a local volume at path `/workspace/source` where `source` comes from the name we gave to the resource
-
 
 ## Developer's steps:
 
@@ -138,9 +212,9 @@ The **source** is a sub-path, under which Tekton cloned the application sources.
 * Other task example to apply Kubernetes manifests ([apply-manifests](https://raw.githubusercontent.com/OpenShift/pipelines-tutorial/pipelines-1.4/01_pipeline/01_apply_manifest_task.yaml)) to deploy an image.
 or [update-deployment](https://raw.githubusercontent.com/OpenShift/pipelines-tutorial/pipelines-1.4/01_pipeline/02_update_deployment_task.yaml) task to path the application deployment with a new `image name:tag`.
 
-The tasks are by default tied to namespace. **ClusterTask** makes the task available in all namespaces
+The tasks are by default tied to namespace. **ClusterTask** makes the task available in all namespaces.
 
-* list the tasks defined in current project (Tasks are local to a namespace): 
+* list the tasks defined in current project: 
 
 ```sh
 tkn task list
@@ -215,14 +289,8 @@ See [other resource definitions](https://github.com/ibm-cloud-architecture/refar
 
 ### Create pipeline
 
-A Pipeline is a collection of Tasks that we define and arrange in a specific order of execution as part of our continuous integration flow:
-
-![TektonRR](./images/tektonresourcerelationship-13.jpg)
-
-The <em>pipelineRun</em> invokes the pipeline, which contains tasks. Each task consists of a number of steps, each of which can contain elements such as command, script, volumeMounts, workingDir, parameters, resources, workspace, or image. 
-
-Generic pipeline takes the source code of the application from GitHub and then builds jar and docker image and deploys image to OpenShift. 
-The deployment part of the pipeline could also being done with ArgoCD application.
+Generic pipeline takes the source code of the application from GitHub and then builds jar and docker image, and deploys image to OpenShift. 
+The deployment part of the pipeline definition could also being done with ArgoCD application.
 
 * `volumeMounts` allows us to add storage to a step. Since each step runs in an isolated container, any data that is created by a step for use by another step must be stored appropriately. 
 If the data is accessed by a subsequent step within the same task then it is possible to use the `/workspace` directory to hold any created files and directories. 
@@ -344,52 +412,7 @@ tkn pipelinerun list
 * Build failed to access internal registry with `x509: certificate signed by unknown authority`. 
 We may need to do not verify TLS while pushing image to the internal docker registry or use a public registry
 
-### Triggers
-
-Triggers help to hook our Pipelines to respond to external github events.
-
-A **TriggerTemplate** is a resource which have parameters that can be substituted anywhere 
-within the resources of template. It maps to a PipelineRun.
-
-A **TriggerBindings** is a map to enable us to capture fields from an event and store them 
-as parameters, and replace them in triggerTemplate whenever an event occurs. Here is an extract of
-such trigger binding definition:
-
-```yaml
-apiVersion: triggers.tekton.dev/v1alpha1
-kind: TriggerBinding
-metadata:
-  creationTimestamp: null
-  name: github-push-binding
-  namespace: ads-risk-scoring-cicd
-spec:
-  params:
-  - name: gitrepositoryurl
-    value: $(body.repository.clone_url)
-  - name: fullname
-    value: $(body.repository.full_name)
-```
-
-**Trigger** combines TriggerTemplate, TriggerBindings and interceptors. They are used as ref inside the EventListener.
-
-**Event Listener** sets up a Service and listens for events. It connects a TriggerTemplate to a TriggerBinding, into an addressable endpoint.
-
-To use those trigger we need to define a webhook in the source repository, so push events can be sent
-to this event listener.
-
-Here is a diagram that represents the relationship between those elements:
-
-![](./images/tekton-elements.png)
-
-* Event Listener is exposed via a route so the Github webhook for the application source repository can send push events to the listener
-* The event listener links template and triggers.
-* Triggers defines the binding and interceptors that will process the HTTP POST request coming from github. 
-* Trigger template defines pipeline run
-* PipelineRun reference pipeline definition and optionally resources.
-
-As `PipelineRun` are defined inside the `TriggerTemplate`, they are specifics  to each application to build. 
-
-## Enhancing
+### Enhancing your solution
 
 We can use nexus to keep the maven downloaded jars. 
 
@@ -397,9 +420,6 @@ We can use nexus to keep the maven downloaded jars.
 oc apply -f https://raw.githubusercontent.com/redhat-scholars/tekton-tutorial/master/install/utils/nexus.yaml
 oc expose svc nexus
 ```
-
-## Quarkus app - tekton pipeline
-
 
 ## Other readings
 

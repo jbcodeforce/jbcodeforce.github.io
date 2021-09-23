@@ -7,25 +7,27 @@ I want to propose a set of articles to address this developer's experience, not 
 
 So here is how I see the different high level task developers may need to follow:
 
-* Use [Domain-driven design]() and [event storming]() to discover the business process to support and discover the different bounded contexts
-which are potential microservice candidates.
-* Use a code template as a base for the event-driven microservice depending of the messaging to use: MQ or Kafka. Those templates
-use the DDD Onion architecture, and are based on Quarkus. The code also assume the services are containerized and deploy to Kubernetes or OpenShift.
-* Create a GitOps repository with KAM, deploy the pipelines and gitops to manage the solution and the different 
-deployment environments (`dev` and `staging`). Define specific pipelines tasks and pipeline flow. Connect git repository  via webhook to the pipeline tool (Tekton)
-* Define message structure using AVRO or JSON schema, generate Java Beans from the event definition
+* Use [Domain-driven design](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/) and [event storming](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/) to discover the business process to support 
+and discover the different bounded contexts which will be mapped to microservices.
+* Use a code template as a base for the event-driven microservice: to avoid reinventing configuration definitions for the different messaging used (MQ or Kafka or other). Those templates
+use the DDD Onion architecture, and are based on Quarkus. The code also assumes the services are containerized and deployed to Kubernetes or OpenShift.
+* Create a GitOps repository with [KAM](https://github.com/redhat-developer/kam), deploy the pipelines and GitOps to manage the solution and the different 
+deployment environments (`dev` and `staging`). Define specific pipelines tasks and pipeline flowto build the code and docker images. Connect git repository  via webhook to the pipeline tool (Tekton)
+* Define message structure using AVRO or JSON schemas, generate Java Beans from the event definitions using maven or other tool.
 * Connect and upload schemas to schema registry
 * Define REST end point and OpenAPI, then manage those APIs in API management
 * Apply test driven development for the business logic, assess integration tests scope and tune development environment accordingly. 
 * Ensure continuous deployment with ArgoCD 
 
-In this article I will try to propose a developer journey to support the implementation of an event-driven microservice
-that will participate in a Command Query Responsibility Segregation pattern using the following:
+In this article, I propose to do a simple implementation of the Command Query Responsibility Segregation pattern for an Loan Application Entity
+which will be managed by a command microservice, and uses a decision service to score the risk on the loan.
 
+![](./images/loan-origination.png)
+**Figure 1: a complete solution diagram**
 
 ## From Domain Driven Design...
 
-The journey starts from an event storming workshop where architect, Subject Matter Experts, analysts and developers work together
+The journey starts from an [event storming](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/) workshop where architect, Subject Matter Experts, analysts and developers work together
 to discover the business process with an event focus. Then applying domain-driven design practices, they should identify
 bounded contexts and context map. The last part of the architecture decision activity will be to map bounded contexts to microservices.
 This is not a one to one mapping, but the classical approach is to manage  big entity in its own microservices.
@@ -36,12 +38,13 @@ some basic DDD elements: Commands in blue, Entity-aggregate in dark green, value
 
 ![](./images/evt-driv-ms.png)
 
-The right side of the diagram presents a DDD approach of application architecture, describes in layers. 
-We can use also the onion architecture, but the important approach is to isolate the layers.
+The right side of the diagram presents a DDD approach of the application architecture, described in layers. 
+We can use also the onion architecture, but the important development practice is to isolate the layers.
 
-Commands will help to define API and REST resources and may be a service layer. Root aggregate defines what will
+Commands will help to define APIs and REST resources and may be the service layer. Root aggregate defines what will
 be persisted in the repository, but also what will be exposed via the APIs. In fact it is immediately important
-to enforce avoiding designing a data model with a canonical model, and expose a complex data model in te APIs.
+to enforce avoiding designing a data model with a canonical model approach, as it will expose a complex data model in the APIs, where
+we may need to have APIs designed for the service and the clients.
 
 Finally Events will define Avro schemas that will be used in the messaging layer. 
 
@@ -50,41 +53,37 @@ I will detail OpenAPI and AsyncAPI elements, and the different layer later in th
 ## ... To code repositories
 
 Developer starts to create a code repository in its preferred Software Configuration Manager, 
-I will use GitHub (See [this repo for the command order microservice](https://github.com/jbcodeforce/eda-order-cmd-ms)) code
-and [the separate gitops repository](https://github.com/jbcodeforce/eda-order-gitops) for CI/CD 
-and [this repository for environment and external service deployment](https://github.com/ibm-cloud-architecture/eda-environment) .
+I will use GitHub (See [this repo for the command loan application microservice](https://github.com/jbcodeforce/loan-origin-cmd-ms)) code
+and [the separate GitOps repository](https://github.com/jbcodeforce/eda-order-gitops) for CI/CD 
+and environment deployments.
 
-As presented in [this note](), CQRS is implemented in two separate code units, in our case two separate microservices. 
+As presented in [this note](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/cqrs/), CQRS is implemented in two separate code units, in our case two separate microservices, and so two Git repositories. 
 As the subject of this article is about starting on strong foundations for developing event-driven microservices,
 I will address the Command part of the CQRS which will use Kafka Consumer, and MQ producer.
 
-To support a GitOps approach for development and deployment, Red Hat has delivered two operators around [Tekton]()
-for continuous integration, and [ArgoCD]() for continuous deployment. As part of the OpenShift GitOps, there is also the [KAM CLI]() tool
- to help developer to start on the good track, at least for simple solution.
+To support a GitOps approach for development and deployment, Red Hat has delivered two operators around [Tekton / OpenShift Pipelines](https://docs.openshift.com/container-platform/4.7/cicd/pipelines/understanding-openshift-pipelines.html)
+for continuous integration, and [ArgoCD / OpenShift GitOps](https://docs.openshift.com/container-platform/4.7/cicd/gitops/understanding-openshift-gitops.html) for continuous deployment. 
+As part of the OpenShift GitOps, there is also the [KAM CLI](https://github.com/redhat-developer/kam) tool
+ to help developer to start on the good track for structuring the different deployment configurations and ArgoCD app configurations.
 
 The core idea of GitOps is having a Git repository that always contains declarative descriptions 
 of the infrastructure currently desired in the production environment and an automated process 
 to make the production environment match the described state in the repository.
 
-To get the basis knowledge related to this article I recommend reading the following documentations:
+To get the basic knowledge related to this article, I recommend reading the following documentations:
 
 * [Understand GitOps](https://www.gitops.tech/)
 * [Study KAM](https://github.com/redhat-developer/kam)
-* []()
 
-At the high level, by just following KAM's [Day 1 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) I want to
-manage three event-driven microservices
+From the Figure 1, and using the KAM's [Day 1 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) practices, 
+we will need to create the following git repositories:
 
-### Basic solution organization
-
-While adopting a GitOps approach for continuous integration and deployment, developer needs to create:
-
-* One repository for environment, for the dependant product configuration and deployment. We recommend starting
-from our [EDA environment repository](https://github.com/ibm-cloud-architecture/eda-environment) to get Strimzi or IBM Event Streams deployment.
-* One repository for GitOps of the solution, to control application  configuration and continuous deployment
 * One repository for the Command microservice
-* One repository for the Query microservice
+* One repository for the automation decision service
+* One repository for GitOps of the solution, to control application  configuration and continuous deployment
 * One repository for integration tests
+
+![](./images/loan-solution-repo.png)
 
 ## Getting Started
 
@@ -94,80 +93,179 @@ Login to your cluster, and create a project.
 
 ```sh
 oc login --token=.... --server=....
-# Create a project for the demo and Kafka, MQ and postgresql
-oc new-project eda-demo
 ```
 
-### Install environments
+### Install pre-requisites
 
-The first thing to do, is to install operators for the different services / middleware, and then create one or more
-instance of those 'services'. I will use some Open Source and IBM products for this solution. The products I'm using for the order microservices are
+The first thing to do, is to install the different services / middleware operators, and then create one or more
+instance of those 'services'. I will combine Open Source and IBM products for this solution. 
+The products I'm using for the order microservices are:
 
-* IBM MQ
-* RedPanda for local development and testing and IBM Event Streams on OpenShift
-* Postgresql
-* Apicurio schema registry for local development
+>   * IBM MQ
+>   * IBM Event Streams on OpenShift for Kafka
+>   * Postgresql
+>   * Elastic Search
 
-1. Clone the [eda-gitops-catalog repository](https://github.com/ibm-cloud-architecture/eda-gitops-catalog.git) to get most of
-the dependant operators defined.
+1. Clone the [eda-gitops-catalog repository](https://github.com/ibm-cloud-architecture/eda-gitops-catalog.git) to get the
+operators definitions of the products used: 
 
-```sh
-git clone https://github.com/ibm-cloud-architecture/eda-gitops-catalog.git
-```
+    ```sh
+    git clone https://github.com/ibm-cloud-architecture/eda-gitops-catalog.git
+    cd eda-gitops-catalog
+    ```
 
-1. Get IBM product catalog added to your OpenShift cluster
+1. Add the IBM product catalog references to your OpenShift cluster
 
-```sh
-# 
-oc apply -k ibm-catalog -n openshift-marketplace
-# If you do not see any IBM operators then install IBM Catalog definition
-# In the eda-gitops-catalog project
-oc apply -k ./ibm-catalog/kustomization.yaml
-```
-
-1. Obtain [IBM license entitlement key](https://github.com/IBM/cloudpak-gitops/blob/main/docs/install.md#obtain-an-entitlement-key)
+    ```sh
+    # List existing catalog
+    oc get catalogsource -n openshift-marketplace
+    # If you do not see any IBM operators then install IBM Catalog definition
+    # In the eda-gitops-catalog project
+    oc apply -k ./ibm-catalog/
+    ```
 
 1. Deploy GitOps and Pipeline Operators: See the [install the openShift GitOps Operator article](https://docs.openshift.com/container-platform/4.7/cicd/gitops/installing-openshift-gitops.html#installing-gitops-operator-in-web-console_getting-started-with-openshift-gitops) or
 use the following command:
 
+    ```sh
+    # GitOps for solution deployment
+    oc apply -k ./openshift-gitops/operators/overlays/stable
+    # and Pipeline for building solution
+    oc apply -k ./openshift-pipelines-operator/overlays/stable/
+    # To verify they are not already installed use:
+    oc get operators
+    ```
+
+1. Obtain [IBM license entitlement key](https://github.com/IBM/cloudpak-gitops/blob/main/docs/install.md#obtain-an-entitlement-key)
+
+1. Update the [OCP global pull secret of the `openshift-gitops` project](https://github.com/IBM/cloudpak-gitops/blob/main/docs/install.md#update-the-ocp-global-pull-secret)
+with the entitlement key
+
+    ```sh
+    oc create secret docker-registry ibm-entitlement-key \
+        --docker-username=cp \
+        --docker-server=cp.icr.io \
+        --namespace=openshift-gitops \
+        --docker-password=your_entitlement_key 
+    ```
+
+1. If not already done, install [Quarkus CLI](https://quarkus.io/guides/cli-tooling)
+
+    ```sh
+    curl -Ls https://sh.jbang.dev | bash -s - app install --fresh --force quarkus@quarkusio
+    ```
+
+1. Install [KAM](https://github.com/redhat-developer/kam/releases/latest) and put the downloaded binary into your `$PATH`
+
+1. Get the external image repository secret to authenticate image pushes on successful pipeline execution. See [this note for Quay.io](https://github.com/redhat-developer/kam/blob/master/docs/journey/day1/prerequisites/quay.md)
+to create a Robot Account with Write permission.
+
+    ![](./images/quay-robot.png)
+
+    then download the Kubernetes Secret definition to be defined in your cicd project.
+
+    ![](./images/quay-k8s-secret.png)
+
+1. Get Github access token, to be used in the KAM bootstrap command, in future steps.
+
+    ![](./images/github-access-tk.png)
+
+### Create foundation for the first microservice
+
+Using the new Quarkus CLI to create a basic project:
+
 ```sh
-# GitOps for solution deployment
-oc apply -k ./openshift-gitops/operators/overlays/stable
-# and Pipeline for building solution
-oc apply -k ./openshift-pipelines-operator/overlays/stable/
-# To verify they are not already installed use:
-oc get operators
+# Get the help
+quarkus create app --help
+# create a loan-origination bff app
+quarkus create app  -x openapi,metrics, ibm.gtm.dba:loan-origin-cmd-ms:1.0.0
+# Verify the app works
+cd loan-origin-cmd-ms
+quarkus dev
+curl localhost:8080
 ```
 
-1. [Update the OCP global pull secret of the `openshift-config` project](https://github.com/IBM/cloudpak-gitops/blob/main/docs/install.md#update-the-ocp-global-pull-secret)
+Push to a github repository that you need to create in github. I will use `loan-origin-cmd-ms.git`.
 
-As illustrated 
+```sh
+git init
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/jbcodeforce/loan-origin-cmd-ms.git
+git push -u origin main
+```
+
+Be sure to have an Access Token defined in your github account so application can access your repositories.
+
+### Bootstrap GitOps
+
+1. Use kam cli to create the gitops project for our solution with reference to our first microservice
+
+    ```sh
+    kam bootstrap \
+    --service-repo-url https://github.com/jbcodeforce/loan-origin-cmd-ms \
+    --gitops-repo-url  https://github.com/jbcodeforce/loan-origin-gitops \
+    --image-repo quay.io/jbcodforce/loan-origin-cmd-ms \
+    --git-host-access-token <your-github-token> \
+    --prefix los --push-to-git=true
+    ```
+
+1. Add a `bootstrap` folder and define argoCD project descriptor. 
+See [this file, as one example of ArgoCD project]() definition: the structure looks like below: 
+
+    ```yaml
+    apiVersion: argoproj.io/v1alpha1
+    kind: AppProject
+    metadata:
+    name: loan-origination
+    namespace: openshift-gitops
+    spec:
+    sourceRepos: []
+    destinations: []
+    roles: []
+    ```
+
+    ```sh
+    oc apply -k bootstrap/risk-scoring
+    ```
+
+1. Bootstrap the ArgoCD apps to deploy CI/CD and the different application's services
+
+    ```sh
+    oc apply -k config/argocd 
+    ```
+
+1. Get ArgoCD admin password and Console URL
+
+    ```sh
+    oc describe route openshift-gitops-server  -n openshift-gitops
+    oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
+    ```
+
 1. deploy IBM Event Streams operator
 
-```sh
-# In the eda-gitops-catalog project
-oc apply -f ./cp4i-operators/common-services.yaml
+    ```sh
+    # In the eda-gitops-catalog project
+    oc apply -f ./cp4i-operators/common-services.yaml
 
-oc apply -f https://raw.githubusercontent.com/ibm-cloud-architecture/eda-gitops-catalog/main/cp4i-operators/event-streams/subscription.yaml   
+    oc apply -f ./cp4i-operators/event-streams/subscription.yaml   
+    ```
+
+
+1. [Optional] If you want to use Kafka open source uses the Strimzi operator
+
+    ```sh
+    # Install Strimzi Kafka Operator - It will listen to any namespaces
+    oc apply -k ./kafka-strimzi/operator/overlays/stable
+    ```
+    
+    Then install Apicurio Registry Operator. 
+
+    ```sh
+    oc apply -k apicurio/operator/overlays/stable
+    ```
+
 ```
-
-
-#### Operators
-
-It will take some time get the following operators deployed.
-
-```sh
-# List existing catalog
-oc get catalogsource -n openshift-marketplace
-# If the IBM catalogs are not displayed add the following:
-oc apply -f operators/ibm-catalog/catalog_source.yaml -n openshift-marketplace
-# With this catalog we should be able to install MQ operator
-oc get packagemanifests -n openshift-marketplace
-
-# Install Strimzi Kafka Operator - It will listen to any namespaces
-oc apply -f operators/strimzi-kafka/subscription.yaml
-# Install Apicurio Registry Operator
-oc apply -f operators/apicurio/subscription.yaml
 # Install MQ Operator, which may also deploy IBM Cloud Pak foundational services 
 oc apply -f operators/mq/subscription.yaml
 # Verify installed operators
@@ -235,8 +333,11 @@ quarkus ext add qpid-jms, openshift
 The demo is a proof of concepts, so we will have on OrderDTO as a bean to support
 getting the data about the order at the API level.
 
-### Defining Pipeline tasks and flow
 
-### Add webhook 
+## Clean your gitops environment
 
-We need to add a webhook to the Git repository
+* Delete the pipeline custom resources: [see this note](https://docs.openshift.com/container-platform/4.7/cicd/pipelines/uninstalling-pipelines.html)
+
+## Related product documentation
+
+* [Cloud Native PostgreSQL Operator](https://docs.enterprisedb.io/cloud-native-postgresql/1.8.0/)

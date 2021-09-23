@@ -255,7 +255,7 @@ The source code for each service (or microservice) is contained within a single 
 * To install download the last release from github: [https://github.com/redhat-developer/kam/releases/latest](https://github.com/redhat-developer/kam/releases/latest). 
 Rename the download file, and move it to `/usr/local/bin`.
 
-### Pre-requisite
+### Pre-requisites
 
 Have the OpenShift GitOps and OpenShift pipelines operators installed.
 
@@ -419,27 +419,44 @@ The approach is to us [Bitmani Sealed Secret](https://engineering.bitnami.com/ar
 
 
 * Install the Sealed Secret Operator in `sealed-secrets` project
-* Create a Sealed secret controller: for example `sealedsecretcontroller`
+
+  ```sh
+  # Under one of the catalog repo: eda or dba
+  oc apply -k sealed-secrets-operator/overlays/default
+  ```
+
+* Create a Sealed secret controller: for example `sealed-secrets-controller`. The previous command will create it.
+
+   ```sh
+   oc get pods -n sealed-secrets
+   NAME                                       READY   STATUS    RESTARTS   AGE
+   sealed-secrets-controller-8dd96b4d-4zq2b   1/1     Running   0          4m39s
+   ```
+
 * Then for each secrets in `secrets` folder do something like:
 
 ```sh
 cat gitops-webhook-secret.yaml| kubeseal --controller-namespace sealed-secrets \
---controller-name sealedsecretcontroller-sealed-secrets --format yaml >gitops-webhook-sealedsecret.yaml
+--controller-name sealed-secrets-controller --format yaml >gitops-webhook-sealedsecret.yaml
 #
 cat git-host-access-token.yaml | kubeseal --controller-namespace sealed-secrets \
---controller-name sealedsecretcontroller-sealed-secrets --format yaml > git-host-access-token-sealedsecret.yaml
+--controller-name sealed-secrets-controller --format yaml > git-host-access-token-sealedsecret.yaml
 # 
 cat docker-config.yaml | kubeseal --controller-namespace sealed-secrets \
---controller-name sealedsecretcontroller-sealed-secrets --format yaml > docker-config-sealedsecret.yaml 
+--controller-name sealed-secrets-controller --format yaml > docker-config-sealedsecret.yaml 
 # 
 cat git-host-basic-auth-token.yaml | kubeseal --controller-namespace sealed-secrets \
---controller-name sealedsecretcontroller-sealed-secrets --format yaml | oc apply -f -
-# then any microservice
+--controller-name sealed-secrets-controller --format yaml > git-host-basic-auth-token-sealed.yaml
+# then continue with any microservice webhook secret 
 ```
 
-Each sealed secret can be in github, and applied to k8s to different namespace.
+Each sealed secret can be in uploaded to github, and applied to k8s to different namespace.
 
 ```sh
+# mv all the sealed.yaml to config/...-cicd/base/09-secrets folder
+# in secrets folder
+mv *-sealed.yaml ../*gitops/config/
+
 oc apply -f gitops-webhook-sealedsecret.yaml
 # this should create a k8s secret
 ```
