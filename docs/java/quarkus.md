@@ -28,30 +28,74 @@ Quarkus HTTP support is based on a non-blocking and reactive engine (Eclipse Ver
 
 ## Getting Started
 
+### Quarkus CLI
+
+[Quarkus CLI](https://quarkus.io/guides/cli-tooling) lets you create projects, manage 
+extensions and do essential build and dev commands using the underlying project’s build
+ tool. It replaces the maven plugin.
+The CLI does not work on Java 1.8 so use sdk to change SDK version.
+
+
+Always use quarkus --help to get the last updated CLI.
+
+Here are some common commands:
+
+```sh
+# Create a project with groupId=com.foo, artifactId=bar, and version=1.0.0-SNAPSHOT
+quarkus create app com.foo:bar
+
+# List extension
+quarkus ext ls
+
+# Add extensions
+quarkus ext add openshift qpid-jms resteasy-reactive smallrye-openapi quarkus-resteasy-reactive-jackson
+# Build
+quarkus build
+
+quarkus dev
+```
+
+If the project could not be build because of missing maven wrapper use the following command:
+
+```
+mvn -N io.takari:maven:wrapper
+```
+
+
 ### Create a project
 
 ```shell
-mvn io.quarkus:quarkus-maven-plugin:1.13.3.Final:create \
+# new way with cli
+quarkus create app  -x openapi,metrics,openshift,resteasy-reactive,resteasy-reactive-jackson ibm.gtm.dba:app-name:1.0.0
+# old way
+mvn io.quarkus:quarkus-maven-plugin:2.2.3.Final:create \
     -DprojectGroupId=ibm.gse.eda \
     -DprojectArtifactId=app-name \
-    -DclassName="ibm.gse.eda.GreetingResource" \
     -Dpath="/greeting"
 cd app-name
 ```
 
-Modify resource, service,... 
-
-Example for a Reactive messaging:
-
-```
-mvn io.quarkus:quarkus-maven-plugin:1.13.3.Final:create -DprojectGroupId=ibm.gse.eda  -DprojectArtifactId=app-name -Dextensions="kubernetes-config,openshift,smallrye-health,resteasy-jackson,quarkus-smallrye-openapi,quarkus-smallrye-reactive-messaging"
-```
-
 ### Package & run
 
-Run with automatic compilation `./mvnw compile quarkus:dev`.
+Run with automatic compilation 
 
-Can be packaged using `./mvnw clean package` or `./mvnw clean package -Pnative` for native execution, you need a Graalvm installed locally, or use the command: `./mvnw package -Pnative -Dquarkus.native.container-build=true` to build with a docker build image. 
+```sh
+quarkus build
+# older way
+./mvnw compile quarkus:dev
+# packaging
+./mvnw clean package
+# or for native
+./mvnw clean package -Pnative
+```
+
+We need a Graalvm installed locally, or use the command: 
+
+```sh
+./mvnw package -Pnative -Dquarkus.native.container-build=true
+```
+
+to build with a docker build image. 
 
 For native build see [QUARKUS - TIPS FOR WRITING NATIVE APPLICATIONS](https://quarkus.io/guides/writing-native-applications-tips)
 
@@ -59,14 +103,17 @@ Start and override properties at runtime:
 
 `java -Dquarkus.datasource.password=youshallnotpass -jar target/myapp-runner.jar`
 
-for a native executable: `./target/myapp-runner -Dquarkus.datasource.password=youshallnotpass`
+for a native executable: 
+
+```sh
+./target/myapp-runner -Dquarkus.datasource.password=youshallnotpass
+```
 
 See the [Building a native executable](https://quarkus.io/guides/building-native-image) guide to develop with graalvm:
 
 * Use [Mandrel](https://developers.redhat.com/blog/2020/06/05/mandrel-a-community-distribution-of-graalvm-for-the-red-hat-build-of-quarkus/) for java 11+ app, for linux OS
 * Use Graalvm community edition for development JDK 1.8 Apps.
 * Install native image with: `${GRAALVM_HOME}/bin/gu install native-image`
-* `./mvnw clean package -Pnative` for native execution
 * To generate debug symbols, add `-Dquarkus.native.debug.enabled=true` flag when generating the native executable.
 * run the tests against a native executable that has already been built: `./mvnw test-compile failsafe:integration-test` 
 * The following command will create a linux executable container without graalvm installed: `./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true`
@@ -107,6 +154,12 @@ mvn io.quarkus:quarkus-maven-plugin:1.13.0.Final:create
 
 Useful capabilities:
 
+```sh
+quarkus ext add health,openapi,kafka
+```
+
+older way
+
 * **Heath** for liveness and readiness: `./mvnw quarkus:add-extension -Dextensions="smallrye-health"`
 * **Metrics** for application monitoring: `./mvnw quarkus:add-extension -Dextensions="smallrye-metrics"`
 * Use API over HTTP in the JSON format: `./mvnw quarkus:add-extension -Dextensions="resteasy-jsonb"`.
@@ -126,38 +179,6 @@ Useful capabilities:
 * **jib**: to do container image build. See [note here](https://quarkus.io/guides/container-image) `./mvnw quarkus:add-extension -Dextensions="container-image-jib"`
 * **[Kogito](https://kogito.kie.org)**:  `./mvnw quarkus:add-extension -Dextensions="kogito"`
 
-## Quarkus CLI
-
-[Quarkus CLI](https://quarkus.io/guides/cli-tooling) lets you create projects, manage 
-extensions and do essential build and dev commands using the underlying project’s build
- tool. It replaces the maven plugin.
-The CLI does not work on Java 1.8 so use sdk to change SDK version.
-
-
-Always use quarkus --help to get the last updated CLI.
-
-Here are some common commands:
-
-```sh
-# Create a project with groupId=com.foo, artifactId=bar, and version=1.0.0-SNAPSHOT
-quarkus create app com.foo:bar
-
-# List extension
-quarkus ext ls
-
-# Add extensions
-quarkus ext add openshift qpid-jms resteasy-reactive smallrye-openapi quarkus-resteasy-reactive-jackson
-# Build
-quarkus build
-
-quarkus dev
-```
-
-If the project could not be build because of missing maven wrapper use the following command:
-
-```
-mvn -N io.takari:maven:wrapper
-```
 
 
 ## Docker build
@@ -314,7 +335,7 @@ quarkus.openshift.secret-volumes.es-cert.secret-name=light-es-cluster-ca-cert
           secretName: sandbox-rp-cluster-ca-cert
  ```
 
- See [OpenShift options](https://quarkus.io/guides/deploying-to-kubernetes#openshift)
+See [OpenShift options](https://quarkus.io/guides/deploying-to-kubernetes#openshift)
 
 To change the value of a specific property in the application properties, we can use environment variables: The convention is to convert the name of the property to uppercase and replace every dot (.) with an underscore (_). So define a config map to define those environment variables in `src/main/kubernetes` folder.
 
@@ -704,10 +725,6 @@ Add the extension: `./mvnw quarkus:add-extension -Dextensions="vertx"`. Get acce
 When using the Mutiny API to program in reactive approach, then the Vert.x package is `io.vertx.mutiny.core.Vertx`.
 
 ## Typical problems
-
-### Examples
-
-* Quarkus with kafka and kubernetes deployment: []()
 
 ### Running cloud native
 

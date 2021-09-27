@@ -407,10 +407,20 @@ tkn pipeline start
 tkn pipelinerun list
 ```
 
-### Some potential errors
+### Troubleshooting
 
 * Build failed to access internal registry with `x509: certificate signed by unknown authority`. 
 We may need to do not verify TLS while pushing image to the internal docker registry or use a public registry
+
+* Github events not propagated or accepted
+
+    * First verify the webhook settings, it needs to include `http` URL, uses application/json  and reference git secret 
+  which includes the password of the webhook secret defined for this application in the `-cicd` project. 
+    * Go to the event listener pod in the `-cicd` project to assess the log
+    * `interceptor stopped trigger processing: rpc error: code = FailedPrecondition desc = no X-Hub-Signature header set` looks to be linked to secret being wrong.
+    * `interceptor stopped trigger processing: rpc error: code = FailedPrecondition desc = payload signature check failed` looks to be also a wrong secret. there is bug open
+    as the HTTP return code should be 401 and not 202
+    * There are two secrets defined, for example (` gitops-webhook-secret` and `webhook-secret-risk-scoring-app`)
 
 ### Enhancing your solution
 
@@ -420,6 +430,7 @@ We can use nexus to keep the maven downloaded jars.
 oc apply -f https://raw.githubusercontent.com/redhat-scholars/tekton-tutorial/master/install/utils/nexus.yaml
 oc expose svc nexus
 ```
+
 
 ## Other readings
 

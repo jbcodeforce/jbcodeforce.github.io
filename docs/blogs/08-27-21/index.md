@@ -211,7 +211,7 @@ Be sure to have an Access Token defined in your github account so application ca
     ```
 
 1. Add a `bootstrap` folder and define argoCD project descriptor. 
-See [this file, as one example of ArgoCD project]() definition: the structure looks like below: 
+See [this file, as one example of ArgoCD project](https://raw.githubusercontent.com/jbcodeforce/ads-risk-scoring-gitops/main/bootstrap/risk-scoring/argo-project.yaml) definition: the structure looks like below: 
 
     ```yaml
     apiVersion: argoproj.io/v1alpha1
