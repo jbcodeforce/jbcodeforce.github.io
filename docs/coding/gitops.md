@@ -489,13 +489,21 @@ oc apply -f gitops-webhook-sealedsecret.yaml
     ```
     
     For each service, an unencrypted secret will be generated into the secrets folder. Make sure to apply these secrets to the cluster.
-1. Add webhook to each microservice repository to connect to the Pipeline event listener.
+1. Add a webhook to each microservice repository to connect to the Pipeline event listener.
 
     ```sh
+    # Get the event listener route end point
     oc get route --namespace rt-inventory-cicd
     ```
 
-    Then in github repository > Settings > Webhook copy this address with `http://` prefix. Try to do a new push to see if the event is sent to the listener.
+    Then in the application github repository do the following:
+    
+    * Add a secret with the same password as the created by kam: something like `webhook-secret-rt-inventory-dev-refarch-eda-store-simulator`. 
+
+    ```sh
+     oc get secret  webhook-secret-rt-inventory-dev-refarch-eda-store-simulator -o jsonpath='{.data.webhook-secret-key}' | base64
+    ```
+    * use, > Settings > Webhook > add new webhook, copy this address with `http://` prefix.  Try to do a new push to see if the event is sent to the listener.
     If so a new pipeline is started visible in the `Pipelines` menu on OpenShift console.
 
 ## Future readings

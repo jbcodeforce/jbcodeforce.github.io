@@ -129,7 +129,7 @@ public class LoanApplicationResource {
 }
 ```
 
-* Install OpenShift Pipeline and OpenShift Gitops operators. if not already done yet.
+* Install OpenShift Pipeline and OpenShift Gitops operators. 
 * Create a gitops repo
 
 ```sh
@@ -164,7 +164,7 @@ oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
 oc apply -k config/argocd/
 ```
 
-4 to 5 applications will be created
+At least 5 ArgoCD applications will be created
 
 ```
 application.argoproj.io/rt-argo-app created
@@ -173,3 +173,5 @@ application.argoproj.io/rt-inventory-dev-app-refarch-eda-store-simulator created
 application.argoproj.io/rt-inventory-dev-env created
 application.argoproj.io/rt-inventory-dev-services created
 ```
+
+* 

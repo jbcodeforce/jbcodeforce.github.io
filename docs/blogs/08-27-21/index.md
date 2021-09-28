@@ -157,12 +157,12 @@ with the entitlement key
 
 1. Install [KAM](https://github.com/redhat-developer/kam/releases/latest) and put the downloaded binary into your `$PATH`
 
-1. Get the external image repository secret to authenticate image pushes on successful pipeline execution. See [this note for Quay.io](https://github.com/redhat-developer/kam/blob/master/docs/journey/day1/prerequisites/quay.md)
-to create a Robot Account with Write permission.
+1. If you are using an external image repository, get its secret to authenticate the `pipeline` service account to push image on successful pipeline execution. For Quay.io see [this note](https://github.com/redhat-developer/kam/blob/master/docs/journey/day1/prerequisites/quay.md)
+on how to create a Robot Account with Write permission.
 
     ![](./images/quay-robot.png)
 
-    then download the Kubernetes Secret definition to be defined in your cicd project.
+    download the Kubernetes Secret definition to be defined in your cicd project.
 
     ![](./images/quay-k8s-secret.png)
 
@@ -265,7 +265,7 @@ See [this file, as one example of ArgoCD project](https://raw.githubusercontent.
     oc apply -k apicurio/operator/overlays/stable
     ```
 
-```
+```sh
 # Install MQ Operator, which may also deploy IBM Cloud Pak foundational services 
 oc apply -f operators/mq/subscription.yaml
 # Verify installed operators
@@ -341,3 +341,4 @@ getting the data about the order at the API level.
 ## Related product documentation
 
 * [Cloud Native PostgreSQL Operator](https://docs.enterprisedb.io/cloud-native-postgresql/1.8.0/)
+* [Step by step quarkus app dev with pipeline and gitops](/bloggs/08-27-21/steps-to-dev-ms/)

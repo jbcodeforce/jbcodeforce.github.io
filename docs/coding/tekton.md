@@ -409,6 +409,8 @@ tkn pipelinerun list
 
 ### Troubleshooting
 
+* Not able to clone git with error like: `translating TaskSpec to Pod: secrets "regcred" not found.`. 
+Need to create a secret named `regcred` using the kam generated secrets and using sealedsecret.
 * Build failed to access internal registry with `x509: certificate signed by unknown authority`. 
 We may need to do not verify TLS while pushing image to the internal docker registry or use a public registry
 
@@ -417,7 +419,24 @@ We may need to do not verify TLS while pushing image to the internal docker regi
     * First verify the webhook settings, it needs to include `http` URL, uses application/json  and reference git secret 
   which includes the password of the webhook secret defined for this application in the `-cicd` project. 
     * Go to the event listener pod in the `-cicd` project to assess the log
-    * `interceptor stopped trigger processing: rpc error: code = FailedPrecondition desc = no X-Hub-Signature header set` looks to be linked to secret being wrong.
+    * `interceptor stopped trigger processing: rpc error: code = FailedPrecondition desc = no X-Hub-Signature header set` looks to be linked to secret not sent wrong. 
+    To verify if the secret is sent, see the request in github:
+
+    ```
+    Request URL: http://gitops-webhook-event-listener-route-rt-inventory-cicd.ac-dal10-b3c-4x16-1e3af63cfd19e855098d645120e18baf-0000.us-south.containers.appdomain.cloud/
+Request method: POST
+Accept: */*
+content-type: application/json
+User-Agent: GitHub-Hookshot/2d9cb65
+X-GitHub-Delivery: c82ac020-1ffb-11ec-8eb9-f5811b108768
+X-GitHub-Event: ping
+X-GitHub-Hook-ID: 320462617
+X-GitHub-Hook-Installation-Target-ID: 375430795
+X-GitHub-Hook-Installation-Target-Type: repository
+X-Hub-Signature: sha1=.....secretkeyt
+X-Hub-Signature-256: sha256=....secretkey-inanotherformat
+    ```
+
     * `interceptor stopped trigger processing: rpc error: code = FailedPrecondition desc = payload signature check failed` looks to be also a wrong secret. there is bug open
     as the HTTP return code should be 401 and not 202
     * There are two secrets defined, for example (` gitops-webhook-secret` and `webhook-secret-risk-scoring-app`)
