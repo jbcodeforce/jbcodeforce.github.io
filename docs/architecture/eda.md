@@ -1,6 +1,6 @@
 # Event Driven Architecture
 
-* [Main EDA website](https://jbcodeforce.github.io/refarch-eda)
+* [The main EDA content website](https://jbcodeforce.github.io/refarch-eda)
 * [Main EDA reference implementation](https://jbcodeforce.github.io/refarch-kc)
 * [Vaccine reference implementation](https://jbcodeforce.github.io/vaccine-solution)
 * [Kafka notes](https://jbcodeforce.github.io/refarch-eda/technology/kafka-overview/)

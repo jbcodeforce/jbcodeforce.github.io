@@ -14,6 +14,7 @@ nav:
       - Disaster recovery: architecture/DR.md
       - GCP: architecture/gcp.md
       - IBM Cloud: architecture/ibmcloud.md
+      - IBM Cloud Satellite: architecture/satellite.md
       - Istio: istio/index.md
       - Openshift Studies: https://jbcodeforce.github.io/openshift-studies
     - AWS: 

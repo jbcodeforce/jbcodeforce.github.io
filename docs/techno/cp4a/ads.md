@@ -71,14 +71,14 @@ Data enters through input data nodes, and is processed by rules in decision node
 
 * create a decision model using DMNotation
 * Add data model to define input and output types
-* Add rules and decision model
+* Add rules and decision tables to the different decision nodes
 * Define an operation used to call the service. 
 * Connect to github repository
 * Deploy to a run time server
 * Get the service end point URL
 * Use the integrated swagger-ui to test the service
 
-See [this how to with screen shots]()
+See [this how to document with screen shots](/blogs/09-30-21/)
 
 ### Client app
 
