@@ -78,7 +78,11 @@ confluentinc/cp-zookeeper:5.5.1                           2181/tcp, 2888/tcp, 0.
 * How to take better benefit of BPM process execution data and inject Machine Learning techniques to predict the duration of BPMN processes, 
 based on the data captured by the process
 
-## Sources
+## Samples
+
+[Sample data for IBM Business Automation Insights](https://github.com/icp4a/bai-data-samples)
+
+## More reading
 
 * [BAI product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=services-business-automation-insights)
 * [ODM Kibana dashboard](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=dashboards-odm-decisions)

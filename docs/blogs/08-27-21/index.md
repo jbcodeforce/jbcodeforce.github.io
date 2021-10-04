@@ -128,12 +128,16 @@ operators definitions of the products used:
 use the following command:
 
     ```sh
+    # for OpenShift 4.7+
     # GitOps for solution deployment
     oc apply -k ./openshift-gitops/operators/overlays/stable
     # and Pipeline for building solution
-    oc apply -k ./openshift-pipelines-operator/overlays/stable/
+    oc apply -k ./openshift-pipelines-operator/overlays/stable
     # To verify they are not already installed use:
     oc get operators
+    # for OpenShift 4.6
+    oc apply -k ./openshift-gitops/operators/overlays/preview
+    oc apply -k ./openshift-pipelines-operator/overlays/preview
     ```
 
 1. Obtain [IBM license entitlement key](https://github.com/IBM/cloudpak-gitops/blob/main/docs/install.md#obtain-an-entitlement-key)

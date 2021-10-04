@@ -129,7 +129,16 @@ public class LoanApplicationResource {
 }
 ```
 
-* Install OpenShift Pipeline and OpenShift Gitops operators. 
+* Install OpenShift Pipeline and OpenShift Gitops operators, can be done via the OpenShift Console, Operator Hub or with CLI.
+
+   ```sh
+    # for OpenShift 4.7+
+    # GitOps for solution deployment
+    oc apply -k ./openshift-gitops/operators/overlays/stable
+    # and Pipeline for building solution
+    oc apply -k ./openshift-pipelines-operator/overlays/stable
+   ```
+
 * Create a gitops repo
 
 ```sh
@@ -141,7 +150,8 @@ kam bootstrap \
     --prefix los --push-to-git=true
 ```
 
-* In the -gitops project, add a bootstrap folder with an ArgoProject definition. See example in [this project](https://raw.githubusercontent.com/jbcodeforce/rt-inventory-gitops/main/bootstrap/rt-inventory/argo-project.yaml).
+* In the -gitops project, add a `bootstrap` folder and add an `ArgoProject` definition so we will not use 
+the `default` project. See example in [this project](https://raw.githubusercontent.com/jbcodeforce/rt-inventory-gitops/main/bootstrap/rt-inventory/argo-project.yaml).
 
   ```yaml
   apiVersion: argoproj.io/v1alpha1
@@ -149,6 +159,8 @@ kam bootstrap \
   metadata:
     name: rt-inventory
   ```
+
+  `oc apply -f argo-project.yaml`
 
 * Get Argo CD Console URL and admin user password
 
@@ -174,4 +186,12 @@ application.argoproj.io/rt-inventory-dev-env created
 application.argoproj.io/rt-inventory-dev-services created
 ```
 
-* 
+* create sealed secret
+* Define secrets
+* create deployment
+* Tune deployment for the application
+* add privileged scc to pipeline sa
+
+* add webhook in each microservice git repo - use the secret 
+* create openapi doc
+* create asyncAPI doc

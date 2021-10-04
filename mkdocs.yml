@@ -62,10 +62,11 @@ nav:
     - Techno:
       - Apicurio: techno/apicurio.md
       - Atlas: techno/atlas.md
-      - Automation Decision Service: techno/ads.md
+      - Automation Decision Service: techno/cp4a/ads.md
       - Self driving enterprise: techno/bai.md
       - Docker: techno/docker.md
       - Cloud object storage: techno/cos.md
+      - Cloud Pak Automation: techno/cp4a/index.md
       - Cloud pak integration: techno/cp4i.md
       - Code Engine: techno/code-engine.md
       

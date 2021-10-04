@@ -1,6 +1,6 @@
 # GitOps
 
-[Gitops](https://www.gitops.tech/)  is a way of implementing Continuous Deployment for containerized applications.
+[Gitops](https://www.gitops.tech/) is a way of implementing Continuous Deployment for containerized applications.
 
 The core idea of GitOps is having a Git repository that always contains declarative descriptions 
 of the infrastructure currently desired in the production environment and an automated process 
@@ -9,7 +9,7 @@ to make the production environment matches the described state in the repository
 From the infrastructure point of view, we want to control the governance of the infrastructure and be 
 sure that what is expected, is what happened.
 
-## Needs
+## Requirements
 
 Developer and operation teams want to:
 
@@ -36,7 +36,7 @@ which again becomes difficult and cumbersome to maintain.
 * Do not put independent applications or applications managed by different teams in the same repo. 
 
 * [Day 1 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) are actions that users take to bootstrap a GitOps 
-configuration and on how to set up GitOps and Sealed Secret.
+configuration and on how to set up GitOps and Sealed Secrets.
 * [Day 2 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day2) are actions that users take to change a GitOps system.
 
 Using continuous delivery approach and tool like ArgoCD, the deployment of all the components is controlled 
@@ -56,7 +56,23 @@ is the operator and configuration to run ArgoCD, as a controller inside OpenShif
 
 The environment configuration repository defines the desired state of the application/solution.
 
-See [installation instructions]() via the console.
+Using OpenShift console > Operator Hub, search for GitOps and select Red Hat OpenShift GitOps operator:
+
+![](./images/rh-gitops-operator.png)
+
+Then click install and use the default parameters.
+
+To do it via oc CLI, use the [eda-gitops-catalog]() gitops repository and the command:
+
+```sh
+oc apply -k openshift-gitops/operator/overlays/stable/
+```
+
+It can take some minutes to get it installed.
+
+```sh
+oc describe operator openshift-gitops-operator.openshift-operators 
+```
 
 ### Proposed git repository structure
 
@@ -70,7 +86,7 @@ Another solution is to use a three repositories structure, that will match team 
 * shared, reusable **services** like Kafka, Database, LDAP,... as reusable services between environments: Dev and operations ownership
 * Cluster and **infrastructure**: network, cluster, storage, policies... owned by operation
 
-With three level structure, each "solution" will have 3 separate repositories:
+With this three level structure, each "solution" will have 3 separate repositories:
 
 * solution_name-gitops-apps
 * solution_name-gitops-services
@@ -78,36 +94,37 @@ With three level structure, each "solution" will have 3 separate repositories:
 
 Now the different deployment environments can be using different k8s clusters or the same cluster with different namespaces.
 
-With the adoption of ArgoCD we can have one bootstrap app that starts other apps to monitor each of those layers.
-See detail in [this separate note](/coding/tekton/).
+With the adoption of ArgoCD we can have one bootstrap app that starts other apps and monitor each of those layers.
+
+See detail in [this separate note](/coding/argocd/).
 
 ### OpenShift Projects
 
 For each solution we may use a number of different projects: 
 
-* one projectname-cicd for Tekton pipeline run... 
-* one projectname-dev for the application instances in a development mode.
-* one projectname-staging for pre-production tests
-* one projectname-prod for production deployment. This can be in the same OCP cluster or in different one.
+* one solutionname-cicd for Tekton pipeline run... 
+* one solutionname-dev for the application instances in a development mode.
+* one solutionname-staging for pre-production tests
+* one solutionname-prod for production deployment. This can be in the same OCP cluster or in different one.
 
 Within the `-dev` project we can isolate the dependant applications, like Kafka cluster, or postgresql,
-where with Staging and production we can use multi tenant deployment of such applications.
+where with Staging and production we can use multi-tenant deployment of such applications.
 
-Those projects are defined in an environment context. See below the KAM tool that supports this approach.
+The KAM tool supports this approach.
 
 ### Services 
 
 For the Service level, try to adopt catalog repositories to hold common elements that will be 
-re-used across teams and other repositories. 
+re-used across teams and across other repositories. 
 See example in [Red Hat Canada Catalog git repo](https://github.com/redhat-canada-gitops/catalog)
-and our [Business automation](https://github.com/jbcodeforce/dba-gitops-catalog) one or [EDA one](https://github.com/jbcodeforce/eda-gitops-catalog). 
+and our [Business automation](https://github.com/jbcodeforce/dba-gitops-catalog) or [EDA catalogs](https://github.com/jbcodeforce/eda-gitops-catalog). 
 
 Use Kustomization to reference remote repositories as a base and then patch it 
 as needed to meet your specific requirements.
 
 ```yaml
 bases:
- - github.com/jbcodeforce/eda-gitops-catalog/kafka-strimzi/operator/overlay/stable?ref=main
+ - github.com/ibm-cloud-architecture/eda-gitops-catalog/kafka-strimzi/operator/overlay/stable?ref=main
  - ../base
 ```
 
@@ -119,8 +136,6 @@ For Application repositories, align your repositories along application and team
 repo per application, different folders for microservices and deployable components. 
 
 Use bootstrap folder to load the application components into the cluster: this will be an ArdoCD app.
-
-Namespaces should be created in environment or cluster folders.
 
 Use Overlay for the different app configuration depending of the target environment.
 
@@ -191,7 +206,7 @@ code source is updated. Pipelines build the container image and deploy the modif
 * **Pull-based:** An operator takes over the role of the pipeline by continuously comparing the 
 desired state in the environment repository with the actual state in the deployed infrastructure.
 
-A CICD based on git action will build the image and edit Kustomize patch to bump the expected container
+A CI/CD based on git action will build the image and edit Kustomize patch to bump the expected container
  tag using the new docker image tag, then will commit this changes to the gitops repo.
 
 [Kustomize](https://kustomize.io/) is used to simplify the configuration of application and environment.
@@ -235,7 +250,6 @@ to the base kustomization. You must also add these files to the same repo as the
 such as `overlay/dev`. These resource configuration files can contain small changes that are merged
  to the base configuration files of the same name as a patch.
 
-
 In GitOps, the pipeline does not finish with something like `oc apply..`. but it’s an external tool 
 ([Argo CD](/coding/argocd) or Flux) that detects the drift in the Git repository and will run these commands.
 
@@ -263,8 +277,8 @@ Be connected to the cluster.
 
 ### Creating a gitops project for a given solution
 
-Use the following kam command to create a gitops repository with multiple ArgoCD applications. To run successfully, we need to be connected
-to OpenShift cluster with Sealed Secret GitOps and Pipelines operators deployed, get SSH key from github if private repositories are used:
+Use the following `kam` command to create a gitops repository with multiple ArgoCD applications. To run successfully, we need to be connected
+to OpenShift cluster with Sealed Secret, GitOps and Pipelines operators deployed, get SSH key from github if private repositories are used:
 
 ```sh
 # list the  available options
@@ -279,9 +293,9 @@ kam bootstrap \
 --prefix rt-inventory --push-to-git=true
 ```
 
-To retrieve [the github access token see this note](https://github.com/redhat-developer/kam/blob/master/docs/journey/day1/prerequisites/github_access_token_steps.md).
+To retrieve the github access token [see this note](https://github.com/redhat-developer/kam/blob/master/docs/journey/day1/prerequisites/github_access_token_steps.md).
 
-> **Kam bug:** the application name is matching the git repo name, and there will be an issue while creating binding with thee limit of 
+> **Kam bug:** the application name is matching the git repo name, and there will be an issue while creating binding with the limit of 
 the number of characters. kam bootstrap needs a --service-name argument.
 
 This will create a gitops project, pushed to github.com as private repo. The repo includes two main folders and a 
@@ -378,7 +392,7 @@ the deployment of all the apps part of the solution and then a `env` folder to d
     │               └── kustomization.yaml
   ```
 
-In an `app` folder the `services/${app-name-here}/base/config` defines the manifests to configure the application. This is where we can put
+In an `apps` folder the `services/${app-name-here}/base/config` defines the manifests to configure the application. This is where we can put
 the app specific.
 
 ```
@@ -411,7 +425,8 @@ a `services` folder to put those services.
 
 ### secrets
 
-At the same level as the gitops folder, there is a `secrets` folder to be used to manage secrets without getting them into git.
+At the same level as the gitops folder created by `kam`, there is a `secrets` folder 
+to be used to manage secrets without getting them into git.
 
 The approach is to us [Bitmani Sealed Secret](https://engineering.bitnami.com/articles/sealed-secrets.html) operators:
 
@@ -483,6 +498,9 @@ oc apply -f gitops-webhook-sealedsecret.yaml
     ``` 
 1. Part of the configuration bootstraps a simple `OpenShift Pipelines` pipeline for building code when a pull-request is opened.
 1. Add new microservices using command like
+
+> Attention there is an issue with KAM as it will overwrite any update in previously generated file, so for example 
+bringing the project name back to default. We need to tunes the pipelines.yaml file
 
     ```sh
     kam service add --git-repo-url https://github.com/jbcodefoce/new-service.git --app-name newservicename  --env-name stage  --image-repo quay.io/jbcodefoce/new-service --service-name new-service

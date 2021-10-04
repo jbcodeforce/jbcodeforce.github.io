@@ -1,12 +1,18 @@
 # Blogs
  
 ## TO DO
+
 * Blog on kc container solution
 * Blog on vaccine demo
 * Blog on real time inventory
 * Blog on EDA governance
 * Blog on fit for purpose
 
+## 09/30/21
+
+Develop a decision service with IBM Automation Decision Service and Quarkus App as client.
+
+[>> read more](/blogs/09-30-21)
 
 ## 08/27/2021 
 
