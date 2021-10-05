@@ -1,34 +1,45 @@
-# Develop a loan risk scoring decision service
+# Develop a loan risk scoring simple solution
 
-In this article I am covering how to develop a decision service with the new IBM Automation
-Decision Service product using Decision Model Notation and a Quarkus app to call the deployed
-service. 
+In this article I am covering how to develop a simple decision service with the new IBM Automation
+Decision Service product using Decision Model Notation, a Quarkus app to call the deployed
+service and a Watson ML scoring model. This article is inspired from the work done by [Pierre Berlandier](https://www.linkedin.com/in/pierreberlandier/).
 
 To get started there is a [nice tutorial in ADS product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=resources-getting-started-tutorial).
-I am detailing some parts of this tutorial and add some other development practices.
+I am detailing some parts of this tutorial and add other development practices like Quarkus integration,
+adopting event processing and Predictive scoring.
+
+The business use case is quite simple as it is based on a person asking for a credit to his/her bank.
+Each person is classified as good or bad and then rules defined combined risk score from other business rules and a predictive score.
+
 
 ## Pre-requisites
 
-You need to get
+You need to get the following available to your development environment
 
 * Maven
-* Quarkus CLI
-* Access to an OpenShift Cluster. For example using Red Hat OpenShift on IBM Cloud
+* [Quarkus CLI](https://quarkus.io/guides/cli-tooling)
+* Access to an [OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). For example using Red Hat OpenShift on IBM Cloud.
 
  ![](./images/ic-rock-cluster.png)
 
- Open the Openshift Console and get access to the login CLI
+ Open the OpenShift Console and get access to the login CLI
 
   ```sh
   oc login --token=..... --server=https://...
   ```
 
-* Get Cloud Pak for Automation deployed with ADS configured
+* Get [Cloud Pak for Automation]() deployed with ADS configured. We recommend to follow this gi
+* Get one Waston Studio instance on IBM Cloud
 
 ## Too long to read
 
 If you just want to see the code, go to [this repository](https://github.com/jbcodeforce/assess-loan-application-ds) and browse the solution, or import
-it in your own Automation Studio.
+it in your own Automation Studio: to do so perform the following steps:
+
+1. Clone this git repository `git clone https://github.com/jbcodeforce/assess-loan-application-ds`
+1. Connect to Automation Studio (See [this section](#connect-to-automation-studio) for instruction summary)
+1. Add Decision Automation Service project. (See [this section](#create-a-new-decision-automation))
+1. Navigate the decision model
 
 ## Connect to Automation Studio
 
@@ -50,7 +61,9 @@ Look at the `bastudio-access-info`. The address may start with `https://cpd-<pro
 
   ![](./images/cp4a-biz-auto.png)
 
-## Create a new decision automation
+## Work on the Automation Decision Service
+
+### Create a new decision automation
 
 * Select the `Create` button and the `Decision Automation` choice, 
 
@@ -64,7 +77,7 @@ Look at the `bastudio-access-info`. The address may start with `https://cpd-<pro
 
 ![](./images/assess-loan-ds-home.png)
 
-## Create Decision Services
+### Create Decision Services
 
 Create a decision service to start creating all the artifacts you need to capture your decision.
 
@@ -74,7 +87,7 @@ In the Decision Service page, start by adding model:
 
   ![](./images/ds-home.png)
 
-## Define Decision Model
+### Define Decision Model
 
 This is where the analysis work done before by the business analysts will help define the elements of the decision model.
 
@@ -97,7 +110,7 @@ When we first open the data modeler, we need to specify a model name `LoanModel`
    ![](./images/create-data-model.png)
 
 
-### Define the decision output
+#### Define the decision output
 
 * The we can define enumeration type (Like a `RiskLevel` with `low, medium, high` values):
 
@@ -114,7 +127,7 @@ The Business Analysts and load underwriter defined the following requirements:
 * Once the Risk and Risk Level are defined we can change the output of the decision to be a Risk, using the `Output Type`
 combo-list.
 
-### Some business decision analysis
+#### Some business decision analysis
 
 What kind of input do we need to use to compute a risk?. In this example we will make it simply
 by looking at the following requirements:
@@ -126,16 +139,16 @@ type of employment, and the number of years with the same bank.
 * Finally the loan application, the expected duration, type, amount to borrow, and property value.
 * The loan to value ratio can be computed if not set by the decision service client.
 
-### Extend the input model 
+#### Extend the input model 
 
 So we need Borrower, LoanApplication, Account as Composite types. We do not need to detail all attributes
 for each entities. Later as we will connect to a git repository, the model will be persisted
-in different model files. Those files can be see [here]() and you can get inspiration from
+in different model files. Those files can be seen [here]() and you can get inspiration from
 those class definitions to develop your model. 
 
  ![](./images/borrower-model.png)
 
-## Defining the business logic
+### Defining the business logic
 
 We want to use two sud-decisions and then combined them to build a combined risk. So in the Editor,
 we select the Assess Risk and add two decisions. We defined the Risk Level to be the output of
@@ -144,14 +157,14 @@ both decisions, and then link the Loan Application input to those two decisions.
  ![](./images/dm-dm-2.png)
 
 
-### Assess loan amount risk
+#### Assess loan amount risk
 
 Select the `Assess loan amount` node and add a decision table using the `logic` button:
 
   ![](./images/add-dt.png)
 
 
-### Assess relationship to the bank risk
+#### Assess relationship to the bank risk
 
 To add some of the business rules or tables, we select the decision node and then the `logic` choice,
 and then select 'Decision table`:
@@ -160,7 +173,7 @@ and then select 'Decision table`:
   
   ![](./images/assess-relationship.png)
 
-### Combine the two risks
+#### Combine the two risks
 
 To combine the two risk, we build another decision table:
 
@@ -170,7 +183,7 @@ Add a default rule
 
   ![](./images/default-rule.png)
 
-## Change the terms so they can be more readable and reflect ubiquitous language
+### Change the terms so they can be more readable and reflect ubiquitous language
  
 The default rules is showing use that the current 'verbalization' is not perfect, so we need
 to change some working on the decision names:
@@ -178,7 +191,7 @@ to change some working on the decision names:
 * Rename `Assess relationship` decision node to `Assess bank relationship risk decision`.
 * Rename `Assess loan amount` node to `Assess loan amount risk decision`
 
-## Test locally
+### Test locally
 
 Using the `Run` tab we reach a panel where we can enter some test data and then run:
 
@@ -193,7 +206,7 @@ something is returned.
 Normally we need to do more testing, and also extract to json input documents to be able to use
 them with deployed code.
 
-## Deploy 
+### Deploy 
 
 The next step is to deploy to an ADS run time. To deploy a decision service, we must define an operation that is used to call the service.
 
@@ -225,8 +238,7 @@ Looking at the trace the build process should be successful, it should build a j
 [INFO] BUILD SUCCESS
 ```
 
-
-## Share with Git
+### Share with Git
 
 In gitHub, create a public repository, for example `assess-loan-application-ds`. The suffix `-ds` for decision
 service. Be sure to have defined a git access Token on your github account to let the Automation Studio
@@ -254,4 +266,15 @@ for the first sharing operation.
  
   ![](./images/git-folder-1.png)
 
-## Future Reading
+
+## Predictive scoring development
+
+This section is inspired by the work done by [Pierre Berlandier]() on the Kaggle Risk Data.
+
+## Credit application client development
+
+![]()
+
+## Future Readings
+
+* [German Credit Risk - Credit Classification - Kaggle project](https://www.kaggle.com/uciml/german-credit)
