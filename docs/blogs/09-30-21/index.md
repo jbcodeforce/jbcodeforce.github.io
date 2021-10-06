@@ -1,10 +1,18 @@
-# Develop a loan risk scoring simple solution
+# Develop a credit risk scoring simple solution
 
 In this article I am covering how to develop a simple decision service with the new IBM Automation
 Decision Service product using Decision Model Notation, a Quarkus app to call the deployed
-service and a Watson ML scoring model. This article is inspired from the work done by [Pierre Berlandier](https://www.linkedin.com/in/pierreberlandier/).
+service and a Watson ML predictive scoring model. This article is inspired from the work done by [Pierre Berlandier](https://www.linkedin.com/in/pierreberlandier/) on that subject.
 
-To get started there is a [nice tutorial in ADS product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=resources-getting-started-tutorial).
+At the highest level the solution looks like in the system context diagram:
+
+![](./images/System-ctx.png)
+
+But we are more interested by the components involved in the demo:
+
+![](./images/Component-view.png)
+
+To get started with ADS product, I recommend to follow the [ADS product documentation Getting Started tutorial](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=resources-getting-started-tutorial).
 I am detailing some parts of this tutorial and add other development practices like Quarkus integration,
 adopting event processing and Predictive scoring.
 
@@ -37,9 +45,10 @@ If you just want to see the code, go to [this repository](https://github.com/jbc
 it in your own Automation Studio: to do so perform the following steps:
 
 1. Clone this git repository `git clone https://github.com/jbcodeforce/assess-loan-application-ds`
-1. Connect to Automation Studio (See [this section](#connect-to-automation-studio) for instruction summary)
-1. Add Decision Automation Service project. (See [this section](#create-a-new-decision-automation))
-1. Navigate the decision model
+1. Connect to Automation Decision Designer (See [this section](#connect-to-automation-studio) for instruction summary)
+1. Add Decision Automation Service project, see [this section](#create-a-new-decision-automation)) for detail but come back here once done.
+1. Import the decision model
+1. Navigate into the decision model using the Designer.
 
 ## Connect to Automation Studio
 

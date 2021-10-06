@@ -10,7 +10,7 @@
 
 ## 09/30/21
 
-Develop a decision service with IBM Automation Decision Service and Quarkus App as client.
+Develop a decision service with IBM Automation Decision Service, predictive scoring with Watson Studio and Quarkus App as client.
 
 [>> read more](/blogs/09-30-21)
 
