@@ -2,7 +2,7 @@
 
 Goal: BAI processes event data (from IBM Business automation products) so that you can derive insights into the performance of your business.
 
-This is evolving to self driving enterprise.
+It will be the foundation for self driving enterprise.
 
 ## Value propositions
 

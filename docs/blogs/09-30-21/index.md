@@ -1,4 +1,4 @@
-# Develop a credit risk scoring simple solution
+# Develop a credit risk scoring solution with ADS and Watson Studio
 
 In this article I am covering how to develop a simple decision service with the new IBM Automation
 Decision Service product using Decision Model Notation, a Quarkus app to call the deployed
@@ -6,7 +6,7 @@ service and a Watson ML predictive scoring model. This article is inspired from 
 
 At the highest level the solution looks like in the system context diagram:
 
-![](./images/System-ctx.png)
+![](./images/System-Ctx.png)
 
 But we are more interested by the components involved in the demo:
 
@@ -45,8 +45,8 @@ If you just want to see the code, go to [this repository](https://github.com/jbc
 it in your own Automation Studio: to do so perform the following steps:
 
 1. Clone this git repository `git clone https://github.com/jbcodeforce/assess-loan-application-ds`
-1. Connect to Automation Decision Designer (See [this section](#connect-to-automation-studio) for instruction summary)
-1. Add Decision Automation Service project, see [this section](#create-a-new-decision-automation)) for detail but come back here once done.
+1. Connect to Automation Decision Designer: If you need details on how to connect, see [this section](#connect-to-automation-studio)
+1. Add Decision Automation Service project, see [this section](#create-a-new-decision-automation)) for details but come back here once done.
 1. Import the decision model
 1. Navigate into the decision model using the Designer.
 
