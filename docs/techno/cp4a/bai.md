@@ -9,8 +9,8 @@ It will be the foundation for self driving enterprise.
 * AI continuously listen to events to correlate and derive business context to actionable insight in real time
 * Deliver visibility, apply analytics or machine learning algorithms that add intelligence to the platform and 
 provide guidance to knowledge workers and business owners.
-* **Detect** The insights engine builds a 360° view of the business to correlate events in-context, derives insights by applying analytics and detect business-relevant situations by applying rules, CEP and ML. 
-* Business owners keep contorl when automation fails
+* **Detect**: the insights engine builds a 360° view of the business to correlate events in-context, derives insights by applying analytics and detect business-relevant situations by applying rules, CEP and ML. 
+* Business owners keep control when automation fails
 * Able to fully explain and account for its observations, correlations and actions
 * Self-driving automations leapfrog traditional automation of tasks and workflow, by triggering actions 
 based on insights and their impact on objectives and KPIs and automates across Business and IT silos
@@ -25,11 +25,15 @@ based on insights and their impact on objectives and KPIs and automates across B
 * Business Performance Center to visualize your data and monitor business performance
 * Add anonymization rules to secure sensitive data
 
+[21.0.x product documentatiopn](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=software-business-automation-insights-server)
+
 ## Architecture
 
 The features above are supported by different components as illustrated below:
 
 ![](./images/BAI_HL.png)
+
+Event Source systems will be Business Automation products.
 
 Looking at the components, the BAI processing is based on Flink jobs: The distribution includes a set of jars for each supported event source.
 
@@ -48,9 +52,13 @@ tasks, gateways, timers, messages, and tracking groups. Aggregation of process t
 
 ## Getting started
 
-See [the product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=installing-business-automation-insights-without-kubernetes) 
-and [for MacOS](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=kubernetes-installing-macos).
-Need to get the images from Passport Advantage searching 'business automation insight', to get a zip named 
+It is possible to run BAI on linux or mac laptop, but the main deployment is on OpenShift.
+
+### On mac
+
+See [the product documentation for MacOS deployment](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=kubernetes-installing-macos)
+
+We need to get the images from Passport Advantage searching 'business automation insight', to get a zip named 
 `CP4Auto_20.0.3-bai4s.tgz`. Unzip and start the `bai-start --acceptLicense ` with `--init` for the first time to get certificates and users set up.
 The error message about port numbers not set for any of the services started by docker compose is due to not executing 
 the `.env`. The questions asked help to populate this .env file.
@@ -71,6 +79,44 @@ bai-for-server/bai-elasticsearch:20.0.3                   9200/tcp, 9300/tcp    
 bai-for-server/bai-management:20.0.3                                                                  data_management_1
 confluentinc/cp-zookeeper:5.5.1                           2181/tcp, 2888/tcp, 0.0.0.0:2121->2121/tcp, 3888/tcp   data_zookeeper_1
 ```
+
+### On ROKS
+
+Get a 4.7 OCP cluster.
+
+Some capabilities to remember:
+
+* Multiple installations of the Cloud Pak are supported, but each deployment must be installed in a different namespace and the operator needs to be installed for each namespace
+* Install an instance of Lightweight Directory Access Protocol (LDAP) for your intended deployment
+
+[The questionnaire to assess before installation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=deployments-quick-reference-qa-demo)
+
+from 21.0.2 BAI is now part of Automation Foundation.
+
+For demo purpose, using OperatorHub the steps are:
+
+1. Install oc, yq, 
+1. Ensure to have dynamic storage provisioning capability for the cluster.
+
+  > On IBM Cloud (ROKS), you can use the gidstorage classes: `ibmc-file-bronze-gid`, `ibmc-file-silver-gid`, and `ibmc-file-gold-gid`. 
+  > But this will not run on a multi zone cluster.
+
+1. Download the different scripts and configuration from [CloudPak Github](https://github.com/IBM/cloud-pak/) 
+
+   ```sh
+   curl https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-automation-3.1.0.tgz
+   tar -xvzf ibm-cp-automation-3.1.0.tgz
+   cd ibm-cp-automation/inventory/cp4aOperatorSdk/files/deploy/crs
+   tar -xvzf cert-k8s-21.0.2.tar
+   ```
+1. Create project: `oc new-project cp4a`
+1. Create PVCs for storage and logs
+
+  ```sh
+  # in ibm-cp-automation/inventory/cp4aOperatorSdk/files/deploy/crs/cert-kubernetes/descriptors
+  # update with the storage classes (file) to use in operator-shared-pvc.yaml 
+  oc apply -f operator-shared-pvc.yaml 
+  ```
 
 ## Use cases
 

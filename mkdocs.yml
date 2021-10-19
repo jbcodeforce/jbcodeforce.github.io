@@ -63,12 +63,15 @@ nav:
     - Techno:
       - Apicurio: techno/apicurio.md
       - Atlas: techno/atlas.md
-      - Automation Decision Service: techno/cp4a/ads.md
+      
       - Docker: techno/docker.md
       - Cloud object storage: techno/cos.md
-      - Cloud Pak Automation: techno/cp4a/index.md
+      - Cloud Pak Automation: 
+          - Overview: techno/cp4a/index.md
+          - BAI: techno/cp4a/bai.md
+          - Automation Decision Service: techno/cp4a/ads.md
+          - Process mining: techno/cp4a/process-mining.md
       - Cloud Pak integration: techno/cp4i.md
-      - BAI: techno/cp4a/bai.md
       - Code Engine: techno/code-engine.md 
       - Egeria: techno/egeria.md
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/
