@@ -6,13 +6,18 @@ of analyzing the event data, generated during the execution of the process.
 [IBM Process Mining](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=foundation-process-mining) 
 automatically discovers, constantly monitors, and optimizes business processes.
 
+During process mining, specialized data mining algorithms are applied to identify trends, 
+patterns, and details contained in event logs recorded by an information system.
+
 ## Features
 
 * Ingest data of process execution from business apps, or middleware or logs
 * Simulation capability:  business analysts can use to test unlimited process change. 
-It combines historical data with contextual data, like decision rules, to create what-if scenarios that are then analyzed
+It combines historical data with contextual data, like decision routing rules, to create what-if scenarios that are then analyzed
 * Calculate metrics
-* Task Mining captures and sends real user interaction data to process mining server
+* Task Mining captures and sends real user interaction data on desktops to process mining server.
+* Task mining helps to discover how much time users are allocating on the process and how much time the activities are idle because of context switches. 
+It can identify deviation and inefficiencies, and potential task to automate.
 
 ## Architecture
 
@@ -23,11 +28,15 @@ It combines historical data with contextual data, like decision rules, to create
     * Analytics
     * Admin to manage tenants, groups, users,...
 
-* Task Mining has 3 components
+* Task Miner has an **Agent** running locally to the client Windows workstation to track user activities, 
+encrypt the data and sends to the Data Collector (at a configured threshold).
 
-    * Data collector
+* On the server side, Task Mining has 3 components
+
+    * Data Collector: 
     * Data processor
     * Task miner
+    * We can add a persistence layer to keep projects and anonymized collected data.
 
 ![](./images/pm-components.png)
 
@@ -35,9 +44,99 @@ Which can be seen for a production deployment as:
 
 ![](./images/pm-prod-arch.png)
 
+Important to not that process engine is supporting analysts users and data at rest processing. 
+So the impact on resource requirements are the number of concurrent users from 2 to 30 (?),
+and the complexity of the process. One key performance factor is the data quality.
+
+
 ## Use Cases
 
+Understand the `procure to pay` process which connects the procurement and entire supply 
+chain processes within a company through the goods receipt process, and finally 
+to the payment issued to the vendor. The system is SAP, the top level activities are
+
+* Purchase requisition
+* purchase order
+* send PO to Vendor
+* Good receipt
+* Invoice receipt
+* payment
+
+Process mining helps business analysts to identify maverick buying by looking for:
+
+* Orders without a purchase requisition
+* Invoices without an order
+
+![](./images/pm-mavericks.png)
+
+We can use process mining to identify **process path deviations** and discover the root causes and the 
+impact of those deviations such as a cost associated with extra resources and process delays. 
+Process deviations are discovered by comparing model discovered from process mining data with a reference model 
+that could come from Blueworks live or other BPM tools.
+
+![](./images/pm-conformance.png)
+
+The non-conformant activities can be identified by the red background color and 
+the non-conformant transitions are also set to red.
+
 ## Getting started
+
+Access to a Process Mining Server via the NGInx server address. 
+
+* If needed create an organization
+* Create a process 
+
+  ![](./images/pm-create-p.png)
+
+* To analyze the process, you will need to upload a log file (.CSV or .XES) containing mined process data
+into the Data Source
+* Once data loaded, maps identify data columns:  Process ID, Activity, Start time, End Time, Resource and Role
+
+  ![](./images/pm-map-fields.png)
+
+* After mapping the logfile, you can visualize the process by creating process Model. Every time something changes in the Workspace or more data is added you will need to recreate the process Model.
+
+  ![](./images/pm-visu-p.png)
+
+!!! info
+    The Model automatically displays the frequency analysis. The dark blue color 
+    highlights the most frequent activities, whilst the bold arrows highlight the 
+    most frequent transitions.
+     
+      * The numbers next to the lines shows how many times that specific process flow 
+    has been followed.
+      * The numbers within the rectangles shows the number of times that the activity is performed
+      * The description in the rectangles indicates the name of the activity and the roles by which the activity is carried out.
+      * The Activity border reflects the multilevel nature of the process.
+      * Control % of Activities (occurrences) and % of Relations by expanding Model details section
+
+* **Dashboard** contains process and case statistics with perf stats over time.
+
+  ![](./images/pm-dashboard.png)
+
+* **BPMN** view is built from the process data model. Some decision gateways are added to represent OR or XOR routing logic. 
+`Rule Discovery` option will analyze the data and try to define conditional statements for those routing decisions. 
+The problem will become, as those rules really relevant for the process flow.
+The BPMN flow can be exported and imported into BlueWorks Live or BAW. 
+* **Activity Map** are used to analyze human resources by name and job title. It highlights if employees
+are doing what they are supposed to be doing: activity by team, teams by activity...
+  
+  ![](./images/pm-activity-map.png)
+
+* **Social net** allows you to discover and analyze the relationships between users and groups that are
+formed within a process. In the `Doing similar tasks` view:
+
+  ![](./images/pm-similar-task.png)
+
+!!! info
+    * The bullets represent resources
+    * Resources are clustered by common activities carried out
+    * The bullet will be bigger for those resources who are sharing more activities
+    * Different colors identify different roles
+
+* Analytics offers a set of predefined Dashboards to assess mavericks. 
+
+  
 
 ## Installation
 
@@ -95,6 +194,10 @@ See the process mining subscription in [dba-gitops-catalog](https://github.com/i
 
 ## Integration with data ingestion
 
+As of now there is no direct integration with real data streaming, like Kafka or MQ. So for a Kafka deployment
+we need to use S3 Sink with some record to CSV transformation.
+
+ ![](./images/pm-wt-kafka.png)
 
 ## Read more
 

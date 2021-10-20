@@ -115,6 +115,7 @@ This is the implementation of [the MQ developer tutorial](https://developer.ibm.
 The conference event system and reseller applications are loosely coupled. Asynchronous messaging allows us to integrate these components and build in a buffer, or shock absorber. Should either component lose connectivity, fail or experience fluctuations in throughput, the messaging layer will deal with any instability.
 
 ## The Event Booking
+
 This is the implementation of [the MQ developer tutorial](https://developer.ibm.com/messaging/learn-mq/mq-tutorials/mq-dev-challenge/) and supports the implementation of the following solution:
 
 ![](./images/mq-arch-ticketing.png)
