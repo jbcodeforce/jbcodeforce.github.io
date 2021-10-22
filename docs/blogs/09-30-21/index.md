@@ -2,9 +2,10 @@
 
 In this article I am covering how to develop a simple decision service with the new IBM Automation
 Decision Service product using Decision Model Notation, a Quarkus app to call the deployed
-service and a Watson ML predictive scoring model. This article is inspired from the work done by [Pierre Berlandier](https://www.linkedin.com/in/pierreberlandier/) on that subject.
+service and a Watson ML predictive scoring model. 
+This article is inspired from the work done by [Pierre Berlandier](https://www.linkedin.com/in/pierreberlandier/) on that subject.
 
-At the highest level the solution looks like in the system context diagram:
+At the highest level the solution looks like in the following system context diagram:
 
 ![](./images/System-Ctx.png)
 
@@ -13,16 +14,18 @@ But we are more interested by the components involved in the demo:
 ![](./images/Component-view.png)
 
 To get started with ADS product, I recommend to follow the [ADS product documentation Getting Started tutorial](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=resources-getting-started-tutorial).
-I am detailing some parts of this tutorial and add other development practices like Quarkus integration,
-adopting event processing and Predictive scoring.
+In this article, I am detailing some sections of this tutorial and add other development practices like Quarkus integration,
+adopting event processing and predictive scoring.
 
 The business use case is quite simple as it is based on a person asking for a credit to his/her bank.
-Each person is classified as good or bad and then rules defined combined risk score from other business rules and a predictive score.
+Each person is classified as good or bad and then rules defined combined risk score from other business rules 
+and a predictive score.
 
+The credit scoring predictive model is based on the [Kaggle German credit data set](https://www.kaggle.com/uciml/german-credit). 
 
 ## Pre-requisites
 
-You need to get the following available to your development environment
+You need to get the following products / tool available to your environment
 
 * Maven
 * [Quarkus CLI](https://quarkus.io/guides/cli-tooling)

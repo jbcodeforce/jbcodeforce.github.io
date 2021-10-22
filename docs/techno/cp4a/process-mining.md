@@ -203,3 +203,4 @@ we need to use S3 Sink with some record to CSV transformation.
 
 * [Academic papers on process mining](https://sebastiaanvanzelst.com/?page_id=62)
 * [Product marketing page](https://www.ibm.com/cloud/cloud-pak-for-business-automation/process-mining)
+* [Process mining REST API](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=mining-process-rest-api)

@@ -1,4 +1,4 @@
-# Self driving enterprise
+# Business Automation Insight -> Self driving enterprise
 
 Goal: BAI processes event data (from IBM Business automation products) so that you can derive insights into the performance of your business.
 
@@ -38,6 +38,19 @@ Event Source systems will be Business Automation products.
 Looking at the components, the BAI processing is based on Flink jobs: The distribution includes a set of jars for each supported event source.
 
 ![](./images/BAI_details.png)
+
+The BAI operators creates a set up jobs to configure Elastic search and Kibana dashboard for Automation components like BAW, BPMN, ICM, Content.
+
+![](./images/BAI-operators.png)
+
+Elasticsearch and kafka are deployed with IAF automation base. Flink cluster is defined with IAF Event Processor and BAI operator
+
+The Kubernetes jobs are here to create resources like Flink cluster, and for each job, like the BPMN job, contains the jars file for Flink job. 
+The Flink jobs are specifics for each component event processing needs.
+
+The management service is the facade for to submit Flink job.
+
+There is a generic Flink job, call the event-forwarder to process events from kafka and send telemetries to elasticsearch. 
 
 ### Event Sources
 

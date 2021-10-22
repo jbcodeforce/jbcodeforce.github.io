@@ -32,7 +32,8 @@ Decision model diagrams are composed of a set of nodes that are used as building
 
 ## Installation
 
-Being part of Cloud Pak for Automation, we need to install it on OpenShift. The install doc is [here](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=automation-installing). 
+Being part of Cloud Pak for Automation, we need to install it on OpenShift. 
+The install doc is [here](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=automation-installing). 
 Installation uses operator lifecycle manager (OLM).
 
 IBM Cloud Pak for Business Automation comes with the IBM Cloud® platform automation foundation which includes:
@@ -41,7 +42,8 @@ IBM Cloud Pak for Business Automation comes with the IBM Cloud® platform automa
 * [Robotic Process Automation](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=foundation-robotic-process-automation)
 * [MongoDB]()
 * [Zen User Interface]()
-* [Biz Automation Insight](/techno/bai) Apicurio Registry, Kafka, Flink, Elastic Search is now part of Foundation
+* [Biz Automation Insight](/techno/bai) Apicurio Registry, Kafka, Flink, Elastic Search is now part of 
+Automation Foundation
 * Common services: IAM, certificate management, User Management Services, Admin UI, license operator
 
 Summary of installation steps:
@@ -59,7 +61,7 @@ we need to take [additional steps (add maven plugin)](https://www.ibm.com/docs/e
 
 ## Getting started
 
-Get access to a CP4Automation console, use to the Business Automation  Studio.
+Get access to a CP4Automation console, use to the Business Automation Studio.
 
 Got to Design, and click Business automation > Decision > Create and select Decision automation
 

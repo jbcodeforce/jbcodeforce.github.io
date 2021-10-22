@@ -1,16 +1,17 @@
 # Cloud Pak for Automation
 
-A quick summary and how to.
-
 ## Operators
 
-* IBM Cloud platform foundation: build on two modules: 
+The following operators are installed with Cloud Pak for Automation
 
-    * Core services: RPA-driven automation, process mining, mongoDB for Identity and Access Management (IAM), metering, OpenID,..  Zen UI and event processor.
-    * common services: Cloud Pak foundational services: (bedrock - common services) [Product doc](https://www.ibm.com/docs/en/cpfs). It includes IAM and certificate management.
+* **IBM® Automation Foundation Core**: 
 
-   
-* [BAI](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=services-business-automation-insights)
+    * RPA-driven automation, process mining, mongoDB for Identity and Access Management (IAM), metering, OpenID,..  Zen UI and event processor.
+
+* **Cloud Pak foundational services**: (bedrock - common services) [Product doc](https://www.ibm.com/docs/en/cpfs). It includes IAM and certificate management.
+* **IBM® Automation foundation** operator installs the required dependency operators, such as the IBM Events Operator, the Elasticsearch Operator and the Event Processing Operator.
+* **Cloud Pak for Business Automation** delivers an integrated and managed collection of containerized services
+
 
 ## Getting Started
 
@@ -26,7 +27,6 @@ oc describe cm icp4adeploy-cp4ba-access-info
 ```
 oc get csv --all-namespaces | grep common-service-
 ```
-
 
 ## Dependencies
 
