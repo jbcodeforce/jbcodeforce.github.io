@@ -1,6 +1,53 @@
 site_name: Jerome Boyer's Personal Site
 site_description: Knowledge acquisition personal's notes, blog drafts
 repo_url: https://github.com/jbcodeforce/jbcodeforce.github.io/
+docs_dir: docs
+site_dir: public
+edit_uri: edit/master/docs
+theme: 
+  name: material
+  logo: images/cloud.png
+  feature:
+    tabs: true
+  palette:
+    scheme: default
+    primary: 'magenta dark'
+  language: en
+  features:
+      - navigation.tabs
+      - navigation.instant
+      - navigation.tracking
+      - navigation.tabs.sticky
+      - navigation.top
+  social:
+    - type: 'github'
+      link: 'https://github.com/jbcodeforce'
+    - type: 'twitter'
+      link: 'https://twitter.com/agileitarch'
+    - type: 'linkedin'
+      link: 'https://linkedin.com/in/jeromeboyer'
+extra_css: ["extra.css"]
+plugins:
+  - search:
+      lang: en
+  - minify:
+      minify_html: true
+      
+markdown_extensions:
+  - attr_list
+  - admonition
+  - codehilite
+  - footnotes
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - attr_list
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.tabbed
+  - pymdownx.highlight
+  - pymdownx.details
+
 nav:
   - Blogs: blogs/index.md
   - About: about.md
@@ -84,38 +131,3 @@ nav:
       - VScode: java/java-vscode.md
       - WO: techno/wo.md
 
-theme: 
-  name: material
-  logo: images/gear-sp-01.jpg
-  feature:
-    tabs: true
-  palette:
-    scheme: default
-    primary: 'magenta dark'
-  language: en
-  social:
-    - type: 'github'
-      link: 'https://github.com/jbcodeforce'
-    - type: 'twitter'
-      link: 'https://twitter.com/agileitarch'
-    - type: 'linkedin'
-      link: 'https://linkedin.com/in/jeromeboyer'
-extra_css: ["extra.css"]
-plugins:
-  - search:
-      lang: en
-      
-markdown_extensions:
-  - admonition
-  - codehilite
-  - footnotes
-  - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - attr_list
-  - toc:
-      permalink: true
-      toc_depth: 3
-  - pymdownx.tabbed
-  - pymdownx.highlight
-  - pymdownx.tabbed
-  - pymdownx.details

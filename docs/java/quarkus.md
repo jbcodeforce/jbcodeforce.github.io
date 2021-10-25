@@ -1,15 +1,7 @@
 # Quarkus Summary and trick
 
-Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and the [workshop](https://quarkus.io/quarkus-workshops/)
 
-* [Value Propositions](#value-propositions)
-* [Getting Started](#getting-started)
-* [Quarkus maven CLI](#other-maven-quarkus-cli)
-* [Quarkus CLI](#quarkus-cli)
-* [Docker build](#docker-build)
-* [Running on OpenShift](#running-on-openshift)
-* [Testing with Quarkus](#testing-with-quarkus)
-* [Development practices](#development-practices)
+Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and the [workshop](https://quarkus.io/quarkus-workshops/)
 
 Updated 05/11/2021
 
@@ -33,10 +25,9 @@ Quarkus HTTP support is based on a non-blocking and reactive engine (Eclipse Ver
 [Quarkus CLI](https://quarkus.io/guides/cli-tooling) lets you create projects, manage 
 extensions and do essential build and dev commands using the underlying project’s build
  tool. It replaces the maven plugin.
-The CLI does not work on Java 1.8 so use sdk to change SDK version.
+The CLI does not work on Java 1.8 so use `sdk` to change the SDK version.
 
-
-Always use quarkus --help to get the last updated CLI.
+Always use `quarkus --help` and `quarkus --version` to get the last updated CLI.
 
 Here are some common commands:
 
@@ -61,7 +52,6 @@ If the project could not be build because of missing maven wrapper use the follo
 mvn -N io.takari:maven:wrapper
 ```
 
-
 ### Create a project
 
 ```shell
@@ -80,6 +70,8 @@ cd app-name
 Run with automatic compilation 
 
 ```sh
+quarkus dev
+# build and  package
 quarkus build
 # older way
 ./mvnw compile quarkus:dev
@@ -138,12 +130,6 @@ Start debugger:  shift -> cmd -> P: `Quarkus:  Debug current Quarkus Project` to
 [See Maven tooling guide](https://quarkus.io/guides/maven-tooling)
 
 ```shell
-# create a project
-mvn io.quarkus:quarkus-maven-plugin:1.13.0.Final:create
-# getting extension
-./mvnw quarkus:list-extensions
-# Build native executable
-./mvnw package -Pnative
 # Run integration tests on native app
 ./mvnw verify -Pnative
 # Generate configuration for the application
@@ -155,7 +141,7 @@ mvn io.quarkus:quarkus-maven-plugin:1.13.0.Final:create
 Useful capabilities:
 
 ```sh
-quarkus ext add health,openapi,kafka
+quarkus ext add health,smallrye-openapi,kafka
 ```
 
 older way
@@ -178,8 +164,6 @@ older way
 * **vert.x**: `./mvnw quarkus:add-extension -Dextensions="vertx"`
 * **jib**: to do container image build. See [note here](https://quarkus.io/guides/container-image) `./mvnw quarkus:add-extension -Dextensions="container-image-jib"`
 * **[Kogito](https://kogito.kie.org)**:  `./mvnw quarkus:add-extension -Dextensions="kogito"`
-
-
 
 ## Docker build
 
@@ -266,13 +250,19 @@ The guide is [here](https://quarkus.io/guides/deploying-to-openshift) and the ma
     * Apply the manifests: service account, service, image stream, build config, and deployment config as defined by the generated `openshift.yaml`
 * Three pods are visible: build, deploy and running app.
 
-### Some customization needed
-
-* To expose a route add:
-
-```properties
-quarkus.openshift.expose.route=true
+```sh
+# Remote build on OCP
+mvn clean package -Dquarkus.container-image.build=true
+# Get image streams
+oc get is
+# From the created image
+# Create an application in openshift- ex:
+oc new-app --name=credit-application-mgr jb-credit-app/credit-application-mgr:1.0.0 
 ```
+
+See all [the configuration parameters here](https://quarkus.io/guides/deploying-to-openshift#configuration-reference).
+
+###  Play with environment variables
 
 * To define environment variables, use config map:
 
@@ -316,6 +306,7 @@ quarkus.openshift.secret-volumes.es-cert.secret-name=light-es-cluster-ca-cert
 ```
 
  That will generate the following spec:
+
  ```yaml
     envFrom:
       - configMapRef:
@@ -341,9 +332,28 @@ To change the value of a specific property in the application properties, we can
 
 To delete a deployed app, remove the deployment config.
 
+### Some reusable configuration 
+
+* To expose a route add:
+
+```properties
+quarkus.openshift.expose.route=true
+```
+
+* Set logging level
+
+```properties
+quarkus.log.console.enable=true
+quarkus.log.console.format=%d{HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n
+quarkus.log.console.level=DEBUG
+quarkus.log.console.color=true
+```
+
 ### Remote dev mode
 
-For running Quarkus app on OpenShift while developing locally so change done on code, pom, properties are sent to the remote quarkus use the following settings:
+For running Quarkus app on OpenShift while developing locally so change done on code, pom.xml, properties are sent to the remote quarkus use the following settings:
+
+See [this guide section](https://quarkus.io/guides/maven-tooling#remote-development-mode).
 
 * Add in application.properties:
 
@@ -439,7 +449,7 @@ public void shouldNotHaveStore_7_fromGetStoreNames(){
     }
 ```
 
-## Maven profile and quarkus test
+### Maven profile and quarkus test
 
 The properties can be prefixed with `%staging` or `%prod` or `%dev` to set those properties according to the deployment. If we use a custom prefix like `staging` then we need to run quarkus with a specific profile. For that set `export QUARKUS_PROFILE=staging` in your `.env` file. 
 
@@ -448,6 +458,10 @@ The properties can be prefixed with `%staging` or `%prod` or `%dev` to set those
 ```
 
 By default, Quarkus tests in JVM mode are run using the test configuration profile
+
+## Vue app with quarkus app
+
+See [this separate note](https://jbcodeforce.github.io/vuejs-studies/#vue-app-with-quarkus-app)
 
 ## Reactive CRUD app with Postgres
 
@@ -707,6 +721,17 @@ In the service class, the incoming channel is connected to Kafka and the outgoin
         return inAlert;
     }
 ```
+
+### REST Client
+
+* Install client jars
+
+```sh
+quarkus ext  add rest-client-reactive-jackson
+```
+
+* Add an interface
+
 
 ## Adopting Vertx
 

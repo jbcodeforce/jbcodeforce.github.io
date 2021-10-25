@@ -9,7 +9,7 @@ At the highest level the solution looks like in the following system context dia
 
 ![](./images/System-Ctx.png)
 
-But we are more interested by the components involved in the demo:
+But we are more interested by the components involved in this demo:
 
 ![](./images/Component-view.png)
 
@@ -39,18 +39,18 @@ You need to get the following products / tool available to your environment
   oc login --token=..... --server=https://...
   ```
 
-* Get [Cloud Pak for Automation]() deployed with ADS configured. We recommend to follow this gi
+* Get [Cloud Pak for Automation]() deployed with ADS configured. 
 * Get one Waston Studio instance on IBM Cloud
 
 ## Too long to read
 
-If you just want to see the code, go to [this repository](https://github.com/jbcodeforce/assess-loan-application-ds) and browse the solution, or import
+If you just want to see the code, go to [this repository](https://github.com/ibm-cloud-architecture/ads-assess-credit-risk) and browse the solution, or import
 it in your own Automation Studio: to do so perform the following steps:
 
-1. Clone this git repository `git clone https://github.com/jbcodeforce/assess-loan-application-ds`
+1. Clone this git repository `git clone https://github.com/ibm-cloud-architecture/ads-assess-credit-risk`
 1. Connect to Automation Decision Designer: If you need details on how to connect, see [this section](#connect-to-automation-studio)
 1. Add Decision Automation Service project, see [this section](#create-a-new-decision-automation)) for details but come back here once done.
-1. Import the decision model
+1. [Import the decision service](#import-the-demo)
 1. Navigate into the decision model using the Designer.
 
 ## Connect to Automation Studio
@@ -73,6 +73,71 @@ Look at the `bastudio-access-info`. The address may start with `https://cpd-<pro
 
   ![](./images/cp4a-biz-auto.png)
 
+## Play with existing solution
+
+!!! warning
+    If you want to develop the solution continue on the next section. If not import and review the content of the decision service.
+
+### Import the demo
+
+* Use `Import` button from main Business Automation home page, select the `assess-credit-risk.zip` file from the `ads-assess-credit-risk` cloned repository.
+
+![](./images/import-ds.png)
+
+* Select `ads-assess-credit-risk` tile from the `Decision Services` view, you should see the assess risk decision and a risk prediction.
+
+![](./images/risk-ds-0.png)
+
+### Navigate into the content:
+
+The model designer is giving us the current model implementation. 
+
+* Select the `Assess Risk` decision model, which lead to the decision model designer view:
+
+   ![](./images/risk-model-0.png)
+
+   The diagram shows us the combined risk assessment is defined from the loan data, a risk prediction and a relationship assessment.
+
+* From there you can review  the `Loan` entity, and using the `Go to Data model` button, you can 
+look at the data model definition
+
+   ![](./images/loan-data-model.png)
+
+* Selecting the `relationship assessment` node in the DMN, and then the `Logic` button, we can see a decision table
+which is setting a risk value according to the number of owned accounts, and the number of years as 
+bank customer.
+
+  ![](./images/bank-relation.png)
+
+  You can continue to navigate into this simple decision model
+
+### Test it
+
+Selecting Run will help us to test the model. Running with no data will return a `null` output.
+
+  ![](./images/run-)
+
+```json
+{
+  "loan": {
+    "borrower": {
+      "accountses": [
+        {
+          "type": "Primary",
+          "balance": 2000
+        }
+      ],
+      "years with bank": 5,
+      "years employed": "",
+      "years at current address": 6,
+      "age": 30
+    }
+  }
+}
+```
+### Deploy it
+
+
 ## Work on the Automation Decision Service
 
 ### Create a new decision automation
@@ -83,11 +148,12 @@ Look at the `bastudio-access-info`. The address may start with `https://cpd-<pro
 
   Define a name according to the business intent: 
   
-   ![](./images/assess-load-risk-0.png)
+   ![](./images/assess-credit-risk-0.png)
 
 * From the home page for the decision automation, we need  to add decision service, define decisions, model...
 
-![](./images/assess-loan-ds-home.png)
+![](./images/ads-home-page.png)
+
 
 ### Create Decision Services
 

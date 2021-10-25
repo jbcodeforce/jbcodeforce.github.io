@@ -8,7 +8,7 @@ Automation Decision Services comes with two main components that can be installe
 * **Decision Designer** to develop decision model. It is connected to Github to manage decision artifacts. It is used to build and deploy the decision runtime.
 * **Decision Service**: runtime to get ruleset and executes rule engine
 
-![](./images/ads.png)
+![](./images/ads.png){: style="max-width:600px"}
 
 A decision service uses decision artifacts to define a business decision:
 
@@ -67,20 +67,41 @@ Got to Design, and click Business automation > Decision > Create and select Deci
 
 * Once project is created, need to add a decision service
 
-![](./images/ads-create-ds.png)
+![](./images/ads-create-ds.png){: style="max-width:600px"}
 
 Data enters through input data nodes, and is processed by rules in decision nodes. The rules define the logic of the decision. They are expressed in business rules and decision tables
 
 * create a decision model using DMNotation
 * Add data model to define input and output types
-* Add rules and decision tables to the different decision nodes
+* Add rules and decision tables to the different decision nodes. Combine  node output to input to chain decisions.
 * Define an operation used to call the service. 
-* Connect to github repository
+* Connect to github repository (first time the repository needs to be empty)
 * Deploy to a run time server
-* Get the service end point URL
-* Use the integrated swagger-ui to test the service
+* Get the service end point URL. Which is based on a schema like
 
-See [this how to document with screen shots](/blogs/09-30-21/)
+  `/deploymentSpaces/{deploymentSpaceId}/decisions/{decisionId}/operations/{operation}/execute/`
+
+  The `deploymentSpaceId` is `embedded`, the `decisionId` is coming from the deployment, it has a jar name inside, 
+  and the operation is the  name of the decision service operation selected. 
+
+  The root URL is  the ads-runtime which we  can get from 
+
+   ```sh
+    ADS-runtime-access-info:
+    ----
+    Runtime URL: https://ads-runtime-ibm-cloudpaks.....-0000.us-east.containers.appdomain.cloud/ads/runtime/api/swagger-ui
+    username: drs
+    password: .....
+   ```
+
+  The route is using the `icp4adeploy-ads-runtime-service` service, so if we deploy an app on the same cluster
+  we should be able to get the internal URL.
+   
+* Use the integrated swagger-ui to test the service. Use the Authorize to define the user to use to connect.
+This is the `drs` service user and the password is used.
+  
+ 
+See [this article with screen shots for a bigger example with predictive scoring](/blogs/09-30-21/)
 
 ### Client app
 
