@@ -6,6 +6,7 @@ asWebApp/node_modules/
 site/
 /tmp
 asWebApp/out-tsc
+public/
 
 # IDEs and editors
 /.idea

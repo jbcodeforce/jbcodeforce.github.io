@@ -278,7 +278,7 @@ Be connected to the cluster.
 ### Creating a gitops project for a given solution
 
 Use the following `kam` command to create a gitops repository with multiple ArgoCD applications. To run successfully, we need to be connected
-to OpenShift cluster with Sealed Secret, GitOps and Pipelines operators deployed, get SSH key from github if private repositories are used:
+to OpenShift cluster with Sealed Secret, GitOps and Pipelines operators deployed, get SSH key from github if repositories are used:
 
 ```sh
 # list the  available options
@@ -478,11 +478,15 @@ oc apply -f gitops-webhook-sealedsecret.yaml
 
 ### What to do from there
 
-1. Change the `environments/<>-dev/apps/app-<appname>/services/<appname>/base/config` with the kustomization of your microservice.
+1. Assess if you need pipeline or not (example is to provide demo environment only with public docker images). If not using pipeline comment
+in the `config/argocd/kustomization.yaml` the `cicd-app.yaml`. Also assess if you need stage environment.
+1. Change the `environments/<>-dev/apps/app-<appname>/services/<appname>/base/config` file with the kustomization of your microservice.
 1. Add any cross microservice/application dependent services under a new structure per environment. Ex
+
     ```
     environments/<>-dev/services/kafka-strimzi/
     ```
+
 1. Bring up the argocd app of app by doing: `oc apply -k config/argocd/`, which will create:
 
     * three Argo applications to monitor CI/CD, Dev and Staging environments: rt-inventory-cicd, rt-inventory-dev, rt-inventory-stage

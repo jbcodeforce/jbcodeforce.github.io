@@ -252,7 +252,9 @@ The guide is [here](https://quarkus.io/guides/deploying-to-openshift) and the ma
 
 ```sh
 # Remote build on OCP
-mvn clean package -Dquarkus.container-image.build=true
+mvn clean package -Dquarkus.container-image.build=true -Dquarkus.kubernetes.deploy=true -DskipTests
+# example from store simulator with UI
+mvn clean package -Dui.deps -Dui.dev -Dquarkus.container-image.build=true -Dquarkus.container-image.group=ibmcase -Dquarkus.container-image.tag=1.0.0 -Dquarkus.kubernetes.deploy=true -DskipTests
 # Get image streams
 oc get is
 # From the created image

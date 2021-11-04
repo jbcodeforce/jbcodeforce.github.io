@@ -1,12 +1,5 @@
 # Blogs
  
-## TO DO
-
-* Blog on kc container solution
-* Blog on vaccine demo
-* Blog on real time inventory
-* Blog on EDA governance
-* Blog on fit for purpose
 
 ## 09/30/21
 
@@ -55,3 +48,12 @@ The Transactional outbox pattern helps to save within the same database transact
 IT environments are now fundamentally hybrid and multicloud in nature. Devices, systems, and people are spread across the globe and at the same time are virtualized. Achieving integration across this ever-changing environment, providing it at the pace of modern digital initiatives, and still being able to manage the landscape is a significant challenge
 
 [>> Read more](/blogs/10-11-20)
+
+
+## TO DO
+
+* Blog on kc container solution
+* Blog on vaccine demo
+* Blog on real time inventory
+* Blog on EDA governance
+* Blog on fit for purpose
