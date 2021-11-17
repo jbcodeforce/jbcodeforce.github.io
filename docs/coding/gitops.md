@@ -259,10 +259,10 @@ In GitOps, the pipeline does not finish with something like `oc apply..`. but it
 
 ## **KAM** - Gitops Application Manager CLI
 
-[KAM](https://github.com/redhat-developer/kam)'s goal is to help creating a gitops project for an existing application as 
+[KAM](https://github.com/redhat-developer/kam)'s goal is to help creating a GitOps project for an existing application as 
 [day 1 operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) and then add more services as part of `day 2 operation`.
 
-Gitops approach to managing deployments into one or more environments (a namespace in a Kubernetes). 
+GitOps approach is to manage deployments into one or more environments (a namespace in a Kubernetes). 
 One or more applications can be deployed into a given environment. An application is an aggregation of one or more services.
 The source code for each service (or microservice) is contained within a single Git repository
 
@@ -271,11 +271,11 @@ Rename the download file, and move it to `/usr/local/bin`.
 
 ### Pre-requisites
 
-Have the OpenShift GitOps and OpenShift pipelines operators installed.
+Have the OpenShift GitOps and OpenShift Pipelines operators installed.
 
 Be connected to the cluster.
 
-### Creating a gitops project for a given solution
+### Creating a GitOps project for a given solution
 
 Use the following `kam` command to create a gitops repository with multiple ArgoCD applications. To run successfully, we need to be connected
 to OpenShift cluster with Sealed Secret, GitOps and Pipelines operators deployed, get SSH key from github if repositories are used:
@@ -298,10 +298,10 @@ To retrieve the github access token [see this note](https://github.com/redhat-de
 > **Kam bug:** the application name is matching the git repo name, and there will be an issue while creating binding with the limit of 
 the number of characters. kam bootstrap needs a --service-name argument.
 
-This will create a gitops project, pushed to github.com as private repo. The repo includes two main folders and a 
-`pipelines.yaml` describing your first application, and configuration for a complete CI pipeline and deployments from Argo CD
+This will create a GitOps project, push to github.com as private repo. The repo includes two main folders and a 
+`pipelines.yaml` describing your first application, and the configuration for a complete CI pipeline and deployments from Argo CD.
 
-At the same level of the folder hierarchy, there is a secrets folder to keep secrets to do not commit to Git. See [secrets section below](#secrets)
+At the same level of the folder hierarchy, there is a secrets folder to keep secrets to do not commit to Git. See [secrets section below](#secrets).
 
 ### What is inside
 
@@ -349,7 +349,7 @@ The `config` folder defines `argocd` and `cicd` Argo applications to support dep
     │           └── kustomization.yaml
   ```
 
-So the major elements of this configuration are:
+The major elements of this configuration are:
 
 * **argo-app**: root application to manage the other applications: It points to the kustomization.yaml under `config/argocd` so when adding new microservice to the solution using `kam cli` then this kustomize will be updated triggering a new argo app to be created  
     - argo-app.yaml
@@ -393,7 +393,7 @@ the deployment of all the apps part of the solution and then a `env` folder to d
   ```
 
 In an `apps` folder the `services/${app-name-here}/base/config` defines the manifests to configure the application. This is where we can put
-the app specific.
+you app specific configuration.
 
 ```
 │   ├── rt-inventory-dev
@@ -419,16 +419,17 @@ the app specific.
 
 ```
 
-> Attention!, if a service is cross microservice, like Kafka, then we need to add under `environments/....-dev/` folder
-a `services` folder to put those services.
+> Attention! if a service is used between multiple applications, ( for exmaple Kafka), 
+then we need to add under the `environments/....-dev/` folder 
+a `services` folder to declare such services. To see an example of this approach go to [this repo](https://github.com/ibm-cloud-architecture/store-mq-gitops/tree/main/environments/smq-dev/apps/services).
 
 
-### secrets
+### Secrets
 
-At the same level as the gitops folder created by `kam`, there is a `secrets` folder 
+At the same level as the GitOps folder created by `kam`, there is a `secrets` folder 
 to be used to manage secrets without getting them into git.
 
-The approach is to us [Bitmani Sealed Secret](https://engineering.bitnami.com/articles/sealed-secrets.html) operators:
+The approach is to ues [Bitmani Sealed Secret](https://engineering.bitnami.com/articles/sealed-secrets.html) operators:
 
 *Sealed Secrets are a "one-way" encrypted Secret that can be created by anyone, but can only be decrypted by the controller running in the target cluster.*
 
@@ -465,7 +466,7 @@ cat git-host-basic-auth-token.yaml | kubeseal --controller-namespace sealed-secr
 # then continue with any microservice webhook secret 
 ```
 
-Each sealed secret can be in uploaded to github, and applied to k8s to different namespace.
+Each sealed secret can be in uploaded to github, and applied to different k8s namespace.
 
 ```sh
 # mv all the sealed.yaml to config/...-cicd/base/09-secrets folder
@@ -478,39 +479,43 @@ oc apply -f gitops-webhook-sealedsecret.yaml
 
 ### What to do from there
 
-1. Assess if you need pipeline or not (example is to provide demo environment only with public docker images). If not using pipeline comment
-in the `config/argocd/kustomization.yaml` the `cicd-app.yaml`. Also assess if you need stage environment.
-1. Change the `environments/<>-dev/apps/app-<appname>/services/<appname>/base/config` file with the kustomization of your microservice.
+1. Assess if you need the Pipeline or not (for example when defining a demo environment with public docker images we do not need Pipeline). 
+If you do not use Pipeline, comment
+in the `config/argocd/kustomization.yaml` the call to `cicd-app.yaml`. 
+1. Assess if you need `stage` environment. For demo one environment is needed.
+1. Change the `environments/<>-dev/apps/app-<appname>/services/<appname>/base/config` file with the kustomization files of your application.
 1. Add any cross microservice/application dependent services under a new structure per environment. Ex
 
-    ```
+    ```sh
     environments/<>-dev/services/kafka-strimzi/
     ```
 
-1. Bring up the argocd app of app by doing: `oc apply -k config/argocd/`, which will create:
+1. Create a `bootstrap` folder and add the declaration for the ArgoCD project to avoid using `default` project. See example in [this repo](https://github.com/ibm-cloud-architecture/store-mq-gitops/tree/main/bootstrap/argocd-project).
+1. Bring up the Argocd app of app by doing: `oc apply -k config/argocd/`, which will create:
 
     * three Argo applications to monitor CI/CD, Dev and Staging environments: rt-inventory-cicd, rt-inventory-dev, rt-inventory-stage
     * One Argo Application per service to deploy: the following figure has only one of such service.
     ![](./images/argo-rt-inv.png)
     * Three OpensShift projects: one for cicd, one per target 'environments' (dev, stage)
 
-    > depending of OCP version, there may be issue regarding controler user being able to create resource. 
+    > depending of OCP version, there may be issue regarding `controller user` being able to create resource. 
     To enable full cluster admin access on OpenShift, run the following command: 
 
     ```sh
     oc adm policy add-cluster-role-to-user cluster-admin -z argocd-application-co 
     ``` 
-1. Part of the configuration bootstraps a simple `OpenShift Pipelines` pipeline for building code when a pull-request is opened.
-1. Add new microservices using command like
 
-> Attention there is an issue with KAM as it will overwrite any update in previously generated file, so for example 
-bringing the project name back to default. We need to tunes the pipelines.yaml file
+1. Part of the configuration bootstraps a simple `OpenShift Pipelines` pipeline for building code when a pull-request is opened.
+1. Add new microservices using command like:
 
     ```sh
     kam service add --git-repo-url https://github.com/jbcodefoce/new-service.git --app-name newservicename  --env-name stage  --image-repo quay.io/jbcodefoce/new-service --service-name new-service
     ```
-    
+
+    > Attention there is an issue with KAM as it will overwrite any update in previously generated file, so for example  bringing the project name back to default. We need to tunes the pipelines.yaml file
+
     For each service, an unencrypted secret will be generated into the secrets folder. Make sure to apply these secrets to the cluster.
+
 1. Add a webhook to each microservice repository to connect to the Pipeline event listener.
 
     ```sh
