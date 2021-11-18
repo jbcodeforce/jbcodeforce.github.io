@@ -36,7 +36,7 @@ There are some common types of disaster recovery solutions:
  provide point-in-time snapshots. These features are widely used by applications that directly use files to store data and don't
  require a short recovery point objective (RPO) and recovery time objective (RTO).
 * **Fabric-based disaster recovery solutions**: These methods are focused on transferring data within the storage network from
- a source fabric to a destination fabric using special hardware like Storage Area Network porducts which provides both Global
+ a source fabric to a destination fabric using special hardware like Storage Area Network products which providep both Global
  and Metro mirror capabilities to implement data protection. These solutions are attractive because they can accommodate different
 storage subsystems. 
 * **Storage subsystem-based disaster recovery solutions**: These are also called controller-based solutions because they use a
@@ -48,6 +48,7 @@ storage subsystems.
 ## What should be considered to prepare for disaster recovery?   
 
 There are three type of data to consider:
+
 * Installation data is the data associated with the installation of a given product, Operating System, and database.
 * Configuration data is the data associated with profile configuration, applications, resource configuration
 * Runtime data is the data associated with transaction logs, messages saved in the database table, 
