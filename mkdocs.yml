@@ -56,6 +56,7 @@ nav:
   - Knowledge base: 
     - Architecture:
       - Event Driven Architecture: architecture/eda.md
+      - Flow architectures: architecture/flow-architectures.md
       - Architecture decision: architecture/architectural-decisions.md
       - DDD : architecture/ddd.md
       - Disaster recovery: architecture/DR.md

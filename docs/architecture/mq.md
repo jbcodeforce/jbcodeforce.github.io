@@ -62,6 +62,30 @@ Each Queue manager has the same resource, queues, channels...
 * Qpid
 * MQI
 
+### AMQP
+
+* Good article ["Developing JMS apps with Quarkus and GraalVM"](https://developer.ibm.com/tutorials/mq-running-ibm-mq-apps-on-quarkus-and-graalvm-using-qpid-amqp-jms-classes/)
+* [Building an image with custom MQSC and INI files, using the Red Hat OpenShift CLI](https://www.ibm.com/docs/en/ibm-mq/9.2?topic=dcqmumo-building-image-custom-mqsc-ini-files-using-red-hat-openshift-cli)
+
+Here are the step to build a custom image for MQ
+
+* clone https://github.com/ibm-messaging/mq-container.git
+* download last MQ release tar file from ibm support or ppa
+* copy the tar to mq-container/downloads
+* Edit the `install-mq.sh` file and change the var
+
+    ```sh
+    export genmqpkg_incamqp=1
+    ```
+* Set up AMQP authority, channel, and service properties by adding the contents of the `add-dev.mqsc.tpl` file 
+to the bottom of the `/incubating/mqadvanced-server-dev/10-dev.mqsc.tpl` file in your cloned repository
+
+* Start the build
+
+  ```sh
+  MQ_ARCHIVE=IBM_MQ_9.2.0.4_LINUX_X86-64.tar.gz MQ_VERSION=9.2.0.4 LTS=true make build-advancedserver
+  ```
+
 ### Insight to your data
 
 **Stream MQ** data by adding a new queue and specify the original queue the  name of the streaming queue
