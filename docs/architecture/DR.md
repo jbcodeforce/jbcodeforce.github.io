@@ -69,3 +69,10 @@ Key requirement: All runtime data must be replicated in a consistent fashion whi
 BPM State in the Databases & WAS transaction Logs.
 Some DR strategies call for a replicated database to exist in the DR data center. Some caution should be exercised with such a solution. 
 A best practice DR deployment would take into account WAS XA Transaction logs in the same consistency group as the database.
+
+## Product specifics
+
+* In Liberty Profile servers the transaction logs are located in the DB2 database, so will 
+be replicated with DB2 HA
+* In active-active settings, Kubernetes ETCD does not need to be replicated, content is local to the clusters. 
+With 
