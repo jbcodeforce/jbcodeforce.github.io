@@ -218,7 +218,3 @@ In open liberty the server.xml define where to find the truststore:
 ```
 
 ```
-
-## Reactive messaging operator
-
-The implementation specification is based on [SmallRye](https://smallrye.io/smallrye-reactive-messaging/)

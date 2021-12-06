@@ -12,7 +12,7 @@ provide guidance to knowledge workers and business owners.
 * **Detect**: the insights engine builds a 360° view of the business to correlate events in-context, derives insights by applying analytics and detect business-relevant situations by applying rules, CEP and ML. 
 * Business owners keep control when automation fails
 * Able to fully explain and account for its observations, correlations and actions
-* Self-driving automations leapfrog traditional automation of tasks and workflow, by triggering actions 
+* Self-driving automation leapfrog traditional automation of tasks and workflow, by triggering actions 
 based on insights and their impact on objectives and KPIs and automates across Business and IT silos
 
 ## Features
@@ -20,12 +20,19 @@ based on insights and their impact on objectives and KPIs and automates across B
 * Ingest and process records from Kafka, store to Elastic Search
 * Unify on single event framework for Automation and AI.
 * Aggregate these events into business-relevant KPIs
-* Monitoring with Kibana dashboards: Kibana uses index patterns to search indexes defined within Elasticsearch. An index pattern can match the name of a single index, or include a wildcard (*) to match multiple indexes
+* Monitoring with Kibana dashboards: Kibana uses index patterns to search indexes defined within Elasticsearch. 
+An index pattern can match the name of a single index, or include a wildcard (*) to match multiple indexes
 * Store events to data lake like HDFS for off line queries
 * Business Performance Center to visualize your data and monitor business performance
 * Add anonymization rules to secure sensitive data
 
-[21.0.x product documentatiopn](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=software-business-automation-insights-server)
+[21.0.x product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=software-business-automation-insights-server)
+
+## Use cases
+
+* Apply analytics with Brunel library to get insights on the decisions done in ODM, for example on loan origination, and the variables used to do eligibility.
+* How to take better benefit of BPM process execution data and inject Machine Learning techniques to predict the duration of BPMN processes, 
+based on the data captured by the process
 
 ## Architecture
 
@@ -131,11 +138,7 @@ For demo purpose, using OperatorHub the steps are:
   oc apply -f operator-shared-pvc.yaml 
   ```
 
-## Use cases
 
-* Apply analytics with Brunel library to get insights on the decisions done in ODM, for example on loan origination, and the variables used to do eligibility.
-* How to take better benefit of BPM process execution data and inject Machine Learning techniques to predict the duration of BPMN processes, 
-based on the data captured by the process
 
 ## Samples
 

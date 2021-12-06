@@ -111,8 +111,8 @@ nav:
     - Techno:
       - Apicurio: techno/apicurio.md
       - Atlas: techno/atlas.md
-      
       - Docker: techno/docker.md
+      - Minikube: techno/minikub.md
       - Cloud object storage: techno/cos.md
       - Cloud Pak Automation: 
           - Overview: techno/cp4a/index.md

@@ -3,7 +3,7 @@
 
 Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and the [workshop](https://quarkus.io/quarkus-workshops/)
 
-Updated 05/11/2021
+Updated 12/03/2021
 
 ## Value Propositions
 
@@ -39,7 +39,7 @@ quarkus create app com.foo:bar
 quarkus ext ls
 
 # Add extensions
-quarkus ext add openshift qpid-jms resteasy-reactive smallrye-openapi quarkus-resteasy-reactive-jackson
+quarkus ext add openshift qpid-jms resteasy-reactive smallrye-openapi smallrye-health quarkus-resteasy-reactive-jackson
 # Build
 quarkus build
 
@@ -330,9 +330,10 @@ quarkus.openshift.secret-volumes.es-cert.secret-name=light-es-cluster-ca-cert
 
 See [OpenShift options](https://quarkus.io/guides/deploying-to-kubernetes#openshift)
 
-To change the value of a specific property in the application properties, we can use environment variables: The convention is to convert the name of the property to uppercase and replace every dot (.) with an underscore (_). So define a config map to define those environment variables in `src/main/kubernetes` folder.
-
-To delete a deployed app, remove the deployment config.
+To change the value of a specific property in the application properties, we can use environment 
+variables: The convention is to convert the name of the property to uppercase and replace 
+every dot (.) with an underscore (_). So define a config map to define those environment
+ variables in `src/main/kubernetes` folder.
 
 ### Some reusable configuration 
 
@@ -372,7 +373,13 @@ This is done via a HTTP based long polling transport, that will synchronize your
 
 ## Testing with Quarkus
 
-Quarkus uses junit 5, and QuarkusTest to access to CDI and other quarkus goodies. See [the test guide here](https://quarkus.io/guides/getting-started-testing). To test via HTTP, and rest-assured. 
+Quarkus uses junit 5, and QuarkusTest to access to CDI and other quarkus goodies. 
+`quarkus dev` enables continuous testing, and understands what tests are affected by code changes.
+
+See [the test guide here](https://quarkus.io/guides/getting-started-testing). 
+
+With the dev console (`/q/dev`) offers access to the test UI.
+To test via HTTP, and rest-assured. 
 
 Here is an example for post testing:
 
@@ -590,7 +597,9 @@ import javax.enterprise.event.Observes;
 
 ### Reactive with Mutiny
 
-[Mutiny](https://smallrye.io/smallrye-mutiny/) is a reactive programming library to offer a more guided API than traditional reactive framework and API. It supports asynchrony, non-blocking programming and streams, events, back-pressure and data flows.
+[Mutiny](https://smallrye.io/smallrye-mutiny/) is a reactive programming library to offer 
+a more guided API than traditional reactive framework and API. It supports asynchronous, 
+non-blocking programming and streams, events, back-pressure and data flows.
 
 Add the `resteasy-mutiny` package.
 
@@ -601,7 +610,8 @@ Add the `resteasy-mutiny` package.
   </dependency>
 ```
 
-* To asynchronously handle HTTP requests, the endpoint method must return a java.util.concurrent.CompletionStage or an `io.smallrye.mutiny.Uni`  or `io.smallrye.mutiny.Multi`(requires the quarkus-resteasy-mutiny extension).
+* To asynchronously handle HTTP requests, the endpoint method must return a java.util.concurrent.CompletionStage 
+or an `io.smallrye.mutiny.Uni`  or `io.smallrye.mutiny.Multi`(requires the quarkus-resteasy-mutiny extension).
 
 With Mutiny both `Uni` and `Multi` expose event-driven APIs: you express what you want to do upon a given event (success, failure, etc.). These APIs are divided into groups (types of operations) to make it more expressive and avoid having 100s of methods attached to a single class.
 
@@ -650,15 +660,43 @@ Here are some basic examples:
 
 ### Reactive messaging
 
-For a quick review of the reactive messaging with Quarkus tutorial is [here](https://quarkus.io/guides/kafka)
+For a quick review of a reactive messaging guide search `reactive messaging` Quarkus tutorial 
+is [here](https://quarkus.io/guides/kafka-reactive-getting-started)
 
 Quick summary:
 
-* define an application scoped bean for your service
-* using @Incoming and @Outcoming annotation with channel name on top of function to process the message
+* Add extension: `quarkus ext add smallrye-reactive-messaging-kafka`
+* No need to start a Kafka broker when using the dev mode or for tests. Quarkus starts redpanda
+* define an application scoped bean for your service. See code template in [eda-quickstarts/quarkus-reactive-kafka-producer](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-reactive-kafka-producer)
+
+  ```java
+  @ApplicationScoped
+  public class OrderService {
+      @Channel("orders")
+	    public Emitter<OrderEvent> eventProducer ;
+
+      public OrderEntity createOrder(OrderEntity order){
+        OrderEvent orderEvent = OrderEvent.from(order);
+        eventProducer.send(orderEvent);
+      }
+  ```
 * define channel properties in `application.properties`.
+
+  ```sh
+  mp.messaging.outgoing.orders.connector=smallrye-kafka
+  mp.messaging.outgoing.orders.topic=orders
+  mp.messaging.outgoing.orders.value.serializer=io.quarkus.kafka.client.serialization.ObjectMapperSerializer
+  # automatically register the schema with the registry, if not present
+  mp.messaging.outgoing.orders.apicurio.registry.auto-register=true
+  ```
+
+* On the consumer side, use `@Incoming` annotation with channel name on top of function to process the message from kafka
+
 * Use Kafka connector: `mp.messaging.incoming.[channel-name].connector=smallrye-kafka`
-* Implement Deserializer using Jsonb or Jackson. See [this section](https://quarkus.io/guides/kafka#serializing-via-json-b). If using Avro and Apicurio schema registry then the deserializer needs to be `io.apicurio.registry.utils.serde.AvroKafkaDeserializer`
+* Implement Deserializer using Jsonb or Jackson. See [this section](https://quarkus.io/guides/kafka#serializing-via-json-b). 
+
+* When using Avro and Apicurio schema registry then the deserializer needs to be `io.apicurio.registry.utils.serde.AvroKafkaDeserializer`
+But with Quarkus 2.5 the deserializer and serializer are set by default.
 
 ```yaml
 mp.messaging.incoming.shipments.value.deserializer=io.apicurio.registry.utils.serde.AvroKafkaDeserializer

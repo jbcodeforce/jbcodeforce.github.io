@@ -90,4 +90,30 @@ manageable and retain a memory of its past.
 
 Serverless, stream processing, machine learning, will create alternative to batch processing.
 
-## 3- Value chain
+## 3- Market
+
+SOA has brought challenges for adoption and scaling. Many applications have their own interfaces
+and even protocols to expose their functionality, so most integrations need protocol and 
+data model translation. 
+
+The adoption of queues and adaptors to do data and protocol translation was a scalable solution. 
+Extending this central layer of adaptation was the Enterprise Service Bus, is intelligent
+pipes / flows. 
+
+Message queues and ESBs are important to the development of streaming architectures but
+to support scalability and address complexity more decoupling is needed between 
+producers and consumers.
+
+For IoT [MQTT](https://mqtt.org/) is the standard for messaging protocols in a lightweight pub/sub 
+transport protocol. MQTT supports 3 service levels: 0 - at most once, 1- at least once, 2 - exactly once.
+It allows for messaging between device to cloud and cloud to device. It supports for persistent sessions
+ reduces the time to reconnect the client with the broker.
+The MQTT broker manages a list of topics, which enable it to identify groups of subscribers interested in a collection of messages.
+
+For event processing three type of engines:
+
+* Functions (including low-code or no-code processors): WAS lambda, Knative eventing, Flink, Storm. Mendix and Vantiq have event-driven low code platform.
+* log-based event streaming platforms: Apache Kafka, Apache Pulsar, AWS Kinesis, and Microsoft Azure Event Hubs. Topic becomes a system of record, as event sourcing pattern implementation.
+* real-time stateful systems: *Digital twins* are software agents supporting the problem domain
+in a stateful manner. Behavior is supported by code or rules, and relationship between agents. 
+Agents can monitor the overall system state. [Swim.ai](https://www.swim.ai/) builds its model dynamically from the event stream and provides built-in machine learning capabilities that enable both continuous learning and high performance model execution

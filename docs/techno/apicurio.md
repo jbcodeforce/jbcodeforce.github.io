@@ -91,7 +91,16 @@ To access avro classes directly add this dependencies:
 
 ### From schema to beans
 
-Define one to many `.avcs` file in the `src/main/avro` folder. To generate java beans from those schema 
+!!! News
+    With Quarkus 2.x the extension `apicurio-registry-avro` auto generates the java classes from .avcs declaration in `src/main/avro`. 
+    The `.avsc` file needs to be an union of schema definitions. See [this quarkus guide](https://quarkus.io/guides/kafka-schema-registry-avro), 
+    [quarkus dev and apicurio](https://quarkus.io/guides/apicurio-registry-dev-services) 
+    and [this reactive messaging project](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-reactive-kafka-producer)
+    See [Clement Escoffier's blog](https://quarkus.io/blog/kafka-avro/)
+
+Define one to many `.avcs` file in the `src/main/avro` folder. 
+
+See note above, the following is for older quarkus or pure java: to generate java beans from those schema 
 definitions, use the [avro maven plugin](https://mvnrepository.com/artifact/org.apache.avro/avro-maven-plugin). The order of schema processing is important to build the dependencies
  before the records using them (see imports statement below):
 
@@ -112,7 +121,7 @@ definitions, use the [avro maven plugin](https://mvnrepository.com/artifact/org.
               <!-- need to specify order for dependencies -->
               <imports>
                 <import>src/main/avro/Address.avsc</import>
-                <import>src/main/avro/OrderCreatedEvent.avsc</import>
+                <import>src/main/avro/OrderEvent.avsc</import>
               </imports>
               <stringType>String</stringType>
             </configuration>
@@ -131,28 +140,29 @@ The beans created will be in the Java package as defined by the `namespace attri
     "fields": []
 ```
 
-See the project template [quarkus-kafka-producer](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-kafka-producer) for example of order events Avro Schema with bean generation.
 
 ### From beans to schema
 
-The [Jackson parser](https://github.com/FasterXML/jackson-dataformats-binary/tree/master/avro#generating-avro-schema-from-pojo-definition) offers such capability, so you can add a small program to create a schema from your beans, using the AvroFactory, SchemaGenerator...
+The [Jackson parser](https://github.com/FasterXML/jackson-dataformats-binary/tree/master/avro#generating-avro-schema-from-pojo-definition) offers such 
+capability, so you can add a small program to create a schema from your beans, using 
+the AvroFactory, SchemaGenerator...
 
 Add this to your pom:
 
 ```xml
  <dependency>
-            <groupId>io.apicurio</groupId>
-            <artifactId>apicurio-registry-utils-converter</artifactId>
-            <version>${apicurio.registry.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-avro</artifactId>
-            <version>${jackson2-version}</version>
-        </dependency>
+    <groupId>io.apicurio</groupId>
+    <artifactId>apicurio-registry-utils-converter</artifactId>
+    <version>${apicurio.registry.version}</version>
+</dependency>
+<dependency>
+    <groupId>com.fasterxml.jackson.dataformat</groupId>
+    <artifactId>jackson-dataformat-avro</artifactId>
+    <version>${jackson2-version}</version>
+</dependency>
 ```
 
-Here how to get the `RootType.class` schema definition:
+Here how to get the `RootType.class` schema definition using Avro API:
 
 ```java
 ObjectMapper mapper = new ObjectMapper(new AvroFactory());
@@ -277,7 +287,7 @@ private static void createSchemaInServiceRegistry(String artifactId, String sche
 
 Example of output:
 
-```s
+```sh
 Successfully created Avro Schema artifact in Service Registry: 
 ArtifactMetaData{name='BasicMessage', description='null', labels='[]', createdBy='null', createdOn=1615340019637, modifiedBy='null', modifiedOn=1615340019637, id='test', version=1, type=AVRO, globalId=18, state=ENABLED, properties={}}
 ```
@@ -313,7 +323,7 @@ The consumer uses the GenericRecord class
 ## Code using Apicurio
 
 * [Quarkus kafka producer template](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-kafka-producer)
-* [Postgresql, Debezium Outbox Quarkus plugin and Debezium change data capture with Kafka Conncet](https://github.com/ibm-cloud-architecture/vaccine-order-mgr-pg)
+* [Postgresql, Debezium Outbox Quarkus plugin and Debezium change data capture with Kafka Connect](https://github.com/ibm-cloud-architecture/vaccine-order-mgr-pg)
 * [Freezer service](https://github.com/ibm-cloud-architecture/vaccine-freezer-mgr)
 
 ## Useful links
