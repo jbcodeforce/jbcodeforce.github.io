@@ -1,29 +1,56 @@
 # Developer experience for an event-driven microservice
 
 Event-driven solutions are complex to implement, a lot of parts need to be considered, and I did not find any article that goes into
-how to do things with the last technology available to us ('last' meaning August 2021). 
+how to do things with the last technology available to us ('last' meaning November 2021). 
 
-I want to propose a set of articles to address this developer's experience, not fully in the perfect order of developer's activities, as normally  we should start by event-storming and DDD.
+I want to propose a set of articles to address this developer's experience, not fully in the perfect order of developer's activities, 
+as normally  we should start by event-storming workshop with the business subject matter experts and apply Domain Driven Design.
+
+At the minimum level an event solution will have producer applications, event brokers, consumer applications but
+if you want some governance we need to add schema registry and OpenAPI and AsyncAPI management.
+
+The following figure illustrates the minimum components we will consider for this article:
+
+![](./images/components.png)
+**Figure 1: a component view of a simple solution**
+
+We should consider the developer of the producer application. This application can take different form, but let
+assume it will be a Java microprofile, reactive messaging app. The application exposes REST resources defined
+via OpenApi document. During the development process the OpenAPI document will be pushed to an API management,
+and deployed to an API gateway (Step 1 in figure above). We do not want to focus on that. 
+When the application starts to be deployed and produces events to the `order` topic, the schemas defined
+for this messages, are pushed to a schema registry at mostly the same time as the message is published (Step 2). The schema
+could also have been pushed via API or user interface. We will address DevOps deployment of schema in another articles.
+
+To make this topic and schema governed and known, it is possible to connect API management to the kafka topic
+ and add metadata to document who own the "contract" of this topic. The asyncAPI document is then managed inside 
+ the API management (IBM App Connect) (Step 3). 
+
+Now if we are a developer of consumer applications, we will get the list of topics and their metadata inside the developer
+portal of the API management. We download the asyncAPI (Step 4) and get the contract and avro schemas. We develop this consumer
+application, and when the application start, it will consume from a topic, get the schema identifier
+from the record header and will download the schema definition from the schema registry (Step 5). The 
+application is using Kafka API / reactive messaging to access Kafka broker. But in fact the URL is proxy by
+the event gateway service. This event gateway can enforce traffic and access policies.
 
 So here is how I see the different high level task developers may need to follow:
 
-* Use [Domain-driven design](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/) and [event storming](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/) to discover the business process to support 
+* Use [domain-driven design](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/) and [event storming](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/) to discover the business process to support 
 and discover the different bounded contexts which will be mapped to microservices.
 * Use a code template as a base for the event-driven microservice: to avoid reinventing configuration definitions for the different messaging used (MQ or Kafka or other). Those templates
-use the DDD Onion architecture, and are based on Quarkus. The code also assumes the services are containerized and deployed to Kubernetes or OpenShift.
+use the DDD Onion architecture, and are based on [Quarkus](https://quarkus.io/) or Spring cloud. 
+The code templates also assume the services are containerized and deployed to Kubernetes or OpenShift.
 * Create a GitOps repository with [KAM](https://github.com/redhat-developer/kam), deploy the pipelines and GitOps to manage the solution and the different 
-deployment environments (`dev` and `staging`). Define specific pipelines tasks and pipeline flowto build the code and docker images. Connect git repository  via webhook to the pipeline tool (Tekton)
+deployment environments (`dev`, `staging`, `prod`). Define specific pipelines tasks and pipeline flows to build the code and the docker images. 
+Connect git repository  via webhook to the pipeline tool (e.g. Tekton)
 * Define message structure using AVRO or JSON schemas, generate Java Beans from the event definitions using maven or other tool.
 * Connect and upload schemas to schema registry
-* Define REST end point and OpenAPI, then manage those APIs in API management
+* Define REST end point and OpenAPI, then defines and supports those APIs
 * Apply test driven development for the business logic, assess integration tests scope and tune development environment accordingly. 
 * Ensure continuous deployment with ArgoCD 
 
-In this article, I propose to do a simple implementation of the Command Query Responsibility Segregation pattern for an Loan Application Entity
-which will be managed by a command microservice, and uses a decision service to score the risk on the loan.
-
-![](./images/loan-origination.png)
-**Figure 1: a complete solution diagram**
+In this article, I propose to reuse our code Quarkus reactive message producer and consumer templates from
+[this repository](https://github.com/ibm-cloud-architecture/eda-quickstarts).
 
 ## From Domain Driven Design...
 
@@ -32,34 +59,31 @@ to discover the business process with an event focus. Then applying domain-drive
 bounded contexts and context map. The last part of the architecture decision activity will be to map bounded contexts to microservices.
 This is not a one to one mapping, but the classical approach is to manage  big entity in its own microservices.
 
-So if we take the traditional order processing domain, wee will discover events about the Order entity life cycle
-and the Order entities with its value objects and references to other services. The figure below presents
+So if we take the traditional order processing domain, we will discover events about the Order entity life cycle
+and the Order entity with its value objects and references to other services. The figure below presents
 some basic DDD elements: Commands in blue, Entity-aggregate in dark green, value-objects in light green, and events in orange.
 
 ![](./images/evt-driv-ms.png)
 
 The right side of the diagram presents a DDD approach of the application architecture, described in layers. 
-We can use also the onion architecture, but the important development practice is to isolate the layers.
+We can also use the onion architecture, but the important development practice is to apply separation of concern
+and isolate the layers so for example code to produce messages are not in the business logic.
 
 Commands will help to define APIs and REST resources and may be the service layer. Root aggregate defines what will
-be persisted in the repository, but also what will be exposed via the APIs. In fact it is immediately important
-to enforce avoiding designing a data model with a canonical model approach, as it will expose a complex data model in the APIs, where
-we may need to have APIs designed for the service and the clients.
+be persisted in the repository, but also what will be exposed via the APIs. In fact it is important
+to enforce avoiding designing a data model with a canonical model approach, as it will expose a complex data model at the API level, where
+we may need to have APIs designed for the service and the clients. The old Data Transfer Object pattern should be used.
 
-Finally Events will define Avro schemas that will be used in the messaging layer. 
+Events will define Avro schemas that will be used in the messaging layer. 
 
-I will detail OpenAPI and AsyncAPI elements, and the different layer later in this article.
+I will detail OpenAPI and AsyncAPI elements later in this article.
 
 ## ... To code repositories
 
 Developer starts to create a code repository in its preferred Software Configuration Manager, 
-I will use GitHub (See [this repo for the command loan application microservice](https://github.com/jbcodeforce/loan-origin-cmd-ms)) code
+I will use GitHub (See [this repo for the command order application microservice](https://github.com/jbcodeforce/eda-demo-order-ms)) code
 and [the separate GitOps repository](https://github.com/jbcodeforce/eda-order-gitops) for CI/CD 
 and environment deployments.
-
-As presented in [this note](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/cqrs/), CQRS is implemented in two separate code units, in our case two separate microservices, and so two Git repositories. 
-As the subject of this article is about starting on strong foundations for developing event-driven microservices,
-I will address the Command part of the CQRS which will use Kafka Consumer, and MQ producer.
 
 To support a GitOps approach for development and deployment, Red Hat has delivered two operators around [Tekton / OpenShift Pipelines](https://docs.openshift.com/container-platform/4.7/cicd/pipelines/understanding-openshift-pipelines.html)
 for continuous integration, and [ArgoCD / OpenShift GitOps](https://docs.openshift.com/container-platform/4.7/cicd/gitops/understanding-openshift-gitops.html) for continuous deployment. 
@@ -78,12 +102,11 @@ To get the basic knowledge related to this article, I recommend reading the foll
 From the Figure 1, and using the KAM's [Day 1 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) practices, 
 we will need to create the following git repositories:
 
-* One repository for the Command microservice
-* One repository for the automation decision service
+* One repository for the Order management microservice, producer of Order Events
 * One repository for GitOps of the solution, to control application  configuration and continuous deployment
-* One repository for integration tests
+* One repository for the consumer of the order events.
 
-![](./images/loan-solution-repo.png)
+![](./images/gitops-solution-repo.png)
 
 ## Getting Started
 
