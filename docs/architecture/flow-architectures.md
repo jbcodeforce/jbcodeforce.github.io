@@ -117,3 +117,77 @@ For event processing three type of engines:
 * real-time stateful systems: *Digital twins* are software agents supporting the problem domain
 in a stateful manner. Behavior is supported by code or rules, and relationship between agents. 
 Agents can monitor the overall system state. [Swim.ai](https://www.swim.ai/) builds its model dynamically from the event stream and provides built-in machine learning capabilities that enable both continuous learning and high performance model execution
+
+Mainstream adoption of flow itself will be five to ten years from now 2020. Flow will have to prove that 
+it meets security criteria for everything from electronic payments to health-care data to classified
+ information. The CNCF’s CloudEvents specification, for instance, strongly suggests payloads be encrypted.
+There is no single approach to defining an event with encryption explicitly supported 
+that can be read by any event-consuming application (MQTT, AMQP, have different encryption and TLS add more for 
+TCP connection).
+
+Consumers need assurances that the data they receive in an event is valid and accurate, a practice 
+known as **data provenance**.  
+
+> Data provenance is defined as “a record of the inputs, entities, 
+systems, and processes that influence data of interest, providing a historical record of the 
+data and its origins"
+
+Provenance has to maintained by the producer as a checksum number created by parsing the event data, and encrypted
+by the producer's key. CloudEvent has metadata about the message. When sent to Kafka they are 
+immutable record. Now the traceability of the consumers in kafka world is a major challenge.
+Blockchain may also be used to track immutable record with network parties attest its accuracy.
+
+
+Applying the concept of data loose value over time, it is important to act on data as early
+as possible, close to creation time. After a period of time data becomes less valuable.
+
+Two time factors are important in this data processing: **latency** (time to deliver data to consumers)
+and **retention** (time to keep data). For latency try to reduce the number of network segment between
+producer and consumers. Considering edge computing as a way to bring event processing close to the source.
+The event processing add time to the end to end latency. Considering constraining the processing time frame.
+
+*Retention* is a problem linked to the business requirements, and we need to assess for each topic how long
+an event is still valuable for the consumers. Not keeping enough events will impact correctness of consumer state, 
+projection views... keeping for too long, increase the cost of storage, but also the time to rebuild data 
+projection. 
+
+Finally, producers will want to trust that only authorized consumers are using the events they produce.
+Also it may be possible to imagine a way to control the intellectual property of the data so producer can keep 
+its ownership. Data consumption should be done via payment like we do with music subscription.
+
+## Flow patterns:
+
+### Collector pattern
+
+The Collector pattern is a pattern in which a single consumer subscribes to topics from multiple producers. 
+
+### Distributor pattern
+
+Each event in a stream is distributed to multiple consumers. It could be a hard problem to solve
+when doing it across geographically distributed systems. Edge computing can be used to distribute
+ streaming endpoints closer to the consumers that need those streams. Alternate
+ is to moving the event processing close to the source. For many Distributor use cases, 
+ partitioning the data by region is probably smart, and flow interfaces will need to take 
+ this into account.
+
+### Signal pattern
+
+The Signal pattern is a general pattern that represents functions that exchange data between
+ actors based on a distinct function or process, in can be seen as a traffic cop. 
+ It supports multiple producers and multiple consumers. The signal pattern is supported
+ by multiple event processing each handling one aspect of the event processing.
+
+Stream processing may route event streams between several distributed edge computing services as 
+well as core shared services, but then we need management layer to get global view of the systems.
+They need to be integrated into observability tool. But the "single pane of glass" is often a lure
+as distributed systems require distributed decision-making. More local solutions are more agile, flexible
+and better address local problems for improved resilience.  
+
+One of the challenge of complex adaptive systems is that any agent participating in 
+the system has difficulty seeing how the system as a whole operates,
+because of its limited connections to other neighbor agents.
+
+### Facilitator pattern
+
+A specialized form of Signal pattern, facilitator is a "broker" to match producers' events to
+consumers' demands. It is like matching sellers with buyers.

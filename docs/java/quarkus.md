@@ -412,8 +412,10 @@ Response rep = given()
 ```
 Application configuration will be used in any active profile. The built-in profiles in Quarkus are: `dev, prod and test`. The `test` profile will be used every time you run the @QuarkusTest
 
-@QuarkusTest helps to get the CDI working. But there is still an issue on inject properties that may not be loaded due to proxy instance creation. So in test class the properties need to be accessed via getter:
-For example to be sure the hostname is loaded from the application.properties do:
+@QuarkusTest helps to get the CDI working. But there is still an issue on inject properties
+ that may not be loaded due to proxy instance creation. So in test class 
+ the properties need to be accessed via getter:
+For example to be sure the hostname is loaded from the `application.properties` do:
 
 ```Java 
 @ApplicationScoped

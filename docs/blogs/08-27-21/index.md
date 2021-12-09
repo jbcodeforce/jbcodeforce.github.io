@@ -6,34 +6,49 @@ how to do things with the last technology available to us ('last' meaning Novemb
 I want to propose a set of articles to address this developer's experience, not fully in the perfect order of developer's activities, 
 as normally  we should start by event-storming workshop with the business subject matter experts and apply Domain Driven Design.
 
-At the minimum level an event solution will have producer applications, event brokers, consumer applications but
-if you want some governance we need to add schema registry and OpenAPI and AsyncAPI management.
+At the minimum level an event solution will have producer applications, event brokers, consumer applications for event processing and 
+sinks to move data for long term persistence. As we want governance to understand how to consume
+data and who is doing what in this distributed solution, we need to add schema registry 
+OpenAPI and AsyncAPI management and metadata management. 
 
-The following figure illustrates the minimum components we will consider for this article:
+The following figure illustrates a minimum set of components we may need to use in any event-driven solution:
 
 ![](./images/components.png)
 **Figure 1: a component view of a simple solution**
 
-We should consider the developer of the producer application. This application can take different form, but let
+Components:
+
+* Kafka producer exposing REST API to get data from a mobile or webapp
+* Kafka Brokers in this case IBM Event Streams
+* A schema registry in this case the one in IBM Event Streams
+* One to many consumers, here an example of consumer using streaming processing to consume, process, publish events.
+* Integrate API management for both REST end points and asyncAPI for Kafka topics
+* Event end point gateway to control communication between consumers and kafka brokers 
+* S3 sink Kafka connector to move events for longer term storage like S3 buckets in cloud object storage.
+
+From the flow point of view:
+
+1. We should consider the developer of the producer application. This application can take different form, but let
 assume it will be a Java microprofile, reactive messaging app. The application exposes REST resources defined
 via OpenApi document. During the development process the OpenAPI document will be pushed to an API management,
 and deployed to an API gateway (Step 1 in figure above). We do not want to focus on that. 
-When the application starts to be deployed and produces events to the `order` topic, the schemas defined
-for this messages, are pushed to a schema registry at mostly the same time as the message is published (Step 2). The schema
-could also have been pushed via API or user interface. We will address DevOps deployment of schema in another articles.
-
-To make this topic and schema governed and known, it is possible to connect API management to the kafka topic
+1. When the application starts to be deployed, it produces events to the `orders` topic, the schemas defined
+for this messages, is pushed to a schema registry at mostly the same time as the message is published (Step 2). 
+The schema could also have been pushed via API or user interface. We will address DevOps avro schema deployment later.
+1. To make this topic and schema governed and known, it is possible to connect API management to the kafka topic
  and add metadata to document who own the "contract" of this topic. The asyncAPI document is then managed inside 
  the API management (IBM App Connect) (Step 3). 
+1. Now the developer of the consumer application will get the list of topics and their metadata inside the developer
+portal of the API management. He downloads the asyncAPI (Step 4) and get the contract and avro schemas. 
+1. When the application starts, it will consume from a topic, get the schema identifier
+from the record header and will download the schema definition from the schema registry (Step 5). 
 
-Now if we are a developer of consumer applications, we will get the list of topics and their metadata inside the developer
-portal of the API management. We download the asyncAPI (Step 4) and get the contract and avro schemas. We develop this consumer
-application, and when the application start, it will consume from a topic, get the schema identifier
-from the record header and will download the schema definition from the schema registry (Step 5). The 
-application is using Kafka API / reactive messaging to access Kafka broker. But in fact the URL is proxy by
+The application is using Kafka API / reactive messaging to access Kafka broker. But in fact the URL is proxied by
 the event gateway service. This event gateway can enforce traffic and access policies.
 
-So here is how I see the different high level task developers may need to follow:
+## High level developer's tasks
+
+So here is how I see the different high level developer tasks may look like:
 
 * Use [domain-driven design](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/) and [event storming](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/) to discover the business process to support 
 and discover the different bounded contexts which will be mapped to microservices.
@@ -45,12 +60,16 @@ deployment environments (`dev`, `staging`, `prod`). Define specific pipelines ta
 Connect git repository  via webhook to the pipeline tool (e.g. Tekton)
 * Define message structure using AVRO or JSON schemas, generate Java Beans from the event definitions using maven or other tool.
 * Connect and upload schemas to schema registry
-* Define REST end point and OpenAPI, then defines and supports those APIs
-* Apply test driven development for the business logic, assess integration tests scope and tune development environment accordingly. 
-* Ensure continuous deployment with ArgoCD 
+* Define REST end point and OpenAPI and upload them to API management
+* Apply test driven development for the business logic, assess integration tests scope and 
+tune development environment accordingly. 
+* Ensure continuous deployment with ArgoCD
+* Create the consumer application, get AsyncAPI document from API management portal
 
-In this article, I propose to reuse our code Quarkus reactive message producer and consumer templates from
+In this article, I propose to reuse our  reactive message Quarkus producer and consumer code templates from
 [this repository](https://github.com/ibm-cloud-architecture/eda-quickstarts).
+
+To learn more from AsyncAPI see the videos from Dale Lane [here](https://dalelane.co.uk/blog/?p=4380)
 
 ## From Domain Driven Design...
 
@@ -110,12 +129,13 @@ we will need to create the following git repositories:
 
 ## Getting Started
 
-We assume you have access to an OpenShift 4.7 Cluster: if not you can use [IBM OpenLab](https://developer.ibm.com/openlabs) to get a free cluster for one hour. 
+We assume, you have access to an OpenShift 4.7 or newer Cluster: if not you can use [IBM OpenLab](https://developer.ibm.com/openlabs) to get a free cluster for one hour. 
 
 Login to your cluster, and create a project.
 
 ```sh
 oc login --token=.... --server=....
+oc new-project demo-order
 ```
 
 ### Install pre-requisites

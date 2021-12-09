@@ -13,14 +13,8 @@ Two way to implement the communication between services:
 
 This section summarizes some getting started stuff on microprofile.
 
-### With appsody
 
-Create a [open liberty microprofile 3.3](https://github.com/appsody/stacks/tree/master/incubator/java-openliberty) with appsody command: `appsody init java-microprofile`, which downloads the java microprofile code template with "health, liveness and metrics and a hello world API".
-`appsody run` or `appsody test` to continuously see the impact from the code updates.
-
-To get the password for the metrics do the following: `docker exec -it my-project-dev  bash -c "grep keystore /opt/ol/wlp/usr/servers/defaultServer/server.env"`
-
-### With maven
+### With maven Liberty
 
 Use the [Generate tool at start.microprofile.io](https://start.microprofile.io/).
 
