@@ -568,7 +568,7 @@ Quarkus does much of its configuration and bootstrap at build time. But some pro
 // does fail as it return -
  Assertions.assertEquals(2.0, assessor.temperatureThreshold);
 // while this works!
-  Assertions.assertEquals(2.0, assessor.getTemperatureThreshold());
+Assertions.assertEquals(2.0, assessor.getTemperatureThreshold());
 ```
 
 The content can be combined with environment variables See [this section in quarkus guide](https://quarkus.io/guides/config#combining-property-expressions-and-environment-variables)
@@ -601,7 +601,11 @@ import javax.enterprise.event.Observes;
 
 [Mutiny](https://smallrye.io/smallrye-mutiny/) is a reactive programming library to offer 
 a more guided API than traditional reactive framework and API. It supports asynchronous, 
-non-blocking programming and streams, events, back-pressure and data flows.
+non-blocking programming, streams, event driven, back-pressure and data flows and only two types
+to manage asynchronous actions (Uni and Multi).
+
+Quarkus uses an event-loop to implement the reactive mode, based on Vert.X as reactive engine. To program with reactive 
+or imperative, we use different APIs. Mutiny is such API.
 
 Add the `resteasy-mutiny` package.
 
@@ -615,7 +619,8 @@ Add the `resteasy-mutiny` package.
 * To asynchronously handle HTTP requests, the endpoint method must return a java.util.concurrent.CompletionStage 
 or an `io.smallrye.mutiny.Uni`  or `io.smallrye.mutiny.Multi`(requires the quarkus-resteasy-mutiny extension).
 
-With Mutiny both `Uni` and `Multi` expose event-driven APIs: you express what you want to do upon a given event (success, failure, etc.). These APIs are divided into groups (types of operations) to make it more expressive and avoid having 100s of methods attached to a single class.
+With Mutiny both `Uni` and `Multi` expose event-driven APIs: you express what you want to do upon a given event (success, failure, etc.). 
+These APIs are divided into groups (types of operations) to make it more expressive and avoid having 100s of methods attached to a single class.
 
 [This section of the product documentation](https://smallrye.io/smallrye-mutiny/#_uni_and_multi) goes over some examples on how to use Uni/ Multi.
 
@@ -660,16 +665,23 @@ Here are some basic examples:
                     failure -> System.out.println("Failed with " + failure.getMessage()));
 ```
 
+Events won’t begin flowing through the data streams until a subscriber requests them.
+
 ### Reactive messaging
+
+Content built from Quarkus guide and Clement Escoffier's book.
 
 For a quick review of a reactive messaging guide search `reactive messaging` Quarkus tutorial 
 is [here](https://quarkus.io/guides/kafka-reactive-getting-started)
 
+See [also this article](https://ibm-cloud-architecture.github.io/refarch-eda/advantages/reactive/) for reactive programming and system summary.
+
 Quick summary:
 
+* Reactive Messaging integrates with various messaging technologies, such as Apache Kafka, AMQP, and others...
 * Add extension: `quarkus ext add smallrye-reactive-messaging-kafka`
-* No need to start a Kafka broker when using the dev mode or for tests. Quarkus starts redpanda
-* define an application scoped bean for your service. See code template in [eda-quickstarts/quarkus-reactive-kafka-producer](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-reactive-kafka-producer)
+* No need to start a Kafka broker when using the dev mode or for tests. Quarkus starts redpanda container and apicurio if using schema
+* Define an application scoped bean for your service. See code template in [eda-quickstarts/quarkus-reactive-kafka-producer](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-reactive-kafka-producer)
 
   ```java
   @ApplicationScoped

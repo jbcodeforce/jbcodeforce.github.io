@@ -47,11 +47,11 @@ storage subsystems.
 
 ## What should be considered to prepare for disaster recovery?   
 
-There are three type of data to consider:
+There are three types of data to consider:
 
-* Installation data is the data associated with the installation of a given product, Operating System, and database.
-* Configuration data is the data associated with profile configuration, applications, resource configuration
-* Runtime data is the data associated with transaction logs, messages saved in the database table, 
+* **Installation** data is the data associated with the installation of a given product, Operating System, and database.
+* **Configuration** data is the data associated with profile configuration, applications, resource configuration
+* **Runtime** data is the data associated with transaction logs, messages saved in the database table, 
 process instance information persisted in the database table, and other persistent business states
 
 For installation and configuration date, the change is infrequent & consistency is important so copy this via snapshots before and after changes done. 

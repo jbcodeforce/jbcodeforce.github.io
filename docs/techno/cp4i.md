@@ -95,6 +95,29 @@ spec:
 
 ### Event streams
 
+* Create a namespace
+* Copy the entitlement key
+* Deploy event streams operators
+* Create a event streams cluster instance: can be done with the Operator UI or with CLI
+
+  ```sh
+  oc apply -k c4pi-operators/event-streams/operator/overlays/v2.4
+  ```
+  
+
+### Event end point management
+
+* Create a namespace
+* Copy the entitlement key
+* From IBM API Connect operator add an Event Endpoint Manager instance
+
+  ```sh
+  # In eda-gitop-catalog
+  oc apply -k c4pi-operators/event-endpoint
+  ```
+
+To debug the installation go to the `openshift-operators` and the `apic-connect` pod. Postgresql pod can take time to be created.
+
 ## Reading Sources
 
 * [Product documentation](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=installing-installation-options)
