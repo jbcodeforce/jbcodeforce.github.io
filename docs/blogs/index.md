@@ -1,17 +1,18 @@
 # Blogs
  
 
+## 12/27/2021 
+
+A developer journey to develop an event-driven microservice from DDD to devops.
+
+[>> read more](/blogs/12-27-21)
+
 ## 09/30/21
 
 Develop a decision service with IBM Automation Decision Service, predictive scoring with Watson Studio and Quarkus App as client.
 
 [>> read more](/blogs/09-30-21)
 
-## 08/27/2021 
-
-A developer journey to develop an event-driven microservice from DDD to devops.
-
-[>> read more](/blogs/08-27-21)
 
 ## 08/15/2021 A new reference architecture
 

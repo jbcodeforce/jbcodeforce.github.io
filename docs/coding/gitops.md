@@ -65,13 +65,13 @@ Then click install and use the default parameters.
 To do it via oc CLI, use the [eda-gitops-catalog]() gitops repository and the command:
 
 ```sh
-oc apply -k openshift-gitops/operator/overlays/stable/
+oc apply -k openshift-gitops/operator/overlays/
 ```
 
 It can take some minutes to get it installed.
 
 ```sh
-oc describe operator openshift-gitops-operator.openshift-operators 
+oc describe operator openshift-gitops-operator
 ```
 
 ### Proposed git repository structure
@@ -172,6 +172,7 @@ When Argo CD starts a sync, it orders the resources in the following precedence:
       annotations:
         argocd.argoproj.io/sync-wave: "5"
     ```
+    
 * By kind (e.g. namespaces first)
 * By name
 

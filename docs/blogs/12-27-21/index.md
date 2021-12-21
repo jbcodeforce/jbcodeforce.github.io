@@ -1,37 +1,45 @@
-# Developer experience for an event-driven microservice
+# Developer experience for an event-driven solution
 
-Event-driven solutions are complex to implement, a lot of parts need to be considered, and I did not find any article that goes into
-how to do things with the last technology available to us ('last' meaning November 2021). 
+Event-driven solutions are complex to implement, a lot of parts need to be considered, and I did 
+not find any article that goes into how to do things with the last technology available 
+to us ('last' meaning November 2021). 
 
-I want to propose a set of articles to address this developer's experience, not fully in the perfect order of developer's activities, 
-as normally  we should start by event-storming workshop with the business subject matter experts and apply Domain Driven Design.
+I want to propose a set of articles to address this end-to-end developer's experience, not 
+fully in the perfect order of developer's activities, 
+as normally  we should start by event-storming workshop with the business subject matter experts 
+and apply Domain Driven Design approach, but with enough content, tools and practices to let
+you start your journey.
 
-At the minimum level an event solution will have producer applications, event brokers, consumer applications for event processing and 
-sinks to move data for long term persistence. As we want governance to understand how to consume
-data and who is doing what in this distributed solution, we need to add schema registry 
-OpenAPI and AsyncAPI management and metadata management. 
+At the minimum level an event-driven solution will have producer applications, event brokers, 
+consumer applications for event processing and 
+sinks to keep data for longer term. As we want governance to understand how to consume
+data and who is doing what in this distributed solution, we need to add schema registry, 
+[OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) management complemented with metadata management. 
 
-The following figure illustrates a minimum set of components we may need to use in any event-driven solution:
+So we have a lot to cover.
+
+The following figure illustrates a minimum set of components, we will need to consider 
+in any event-driven solution:
 
 ![](./images/components.png)
 **Figure 1: a component view of a simple solution**
 
-Components:
-
-* Kafka producer exposing REST API to get data from a mobile or webapp
-* Kafka Brokers in this case IBM Event Streams
-* A schema registry in this case the one in IBM Event Streams
-* One to many consumers, here an example of consumer using streaming processing to consume, process, publish events.
-* Integrate API management for both REST end points and asyncAPI for Kafka topics
+* Kafka producer(s) exposing REST API to get data from a IoT, mobile or webapp. 
+* Kafka Brokers, in this article I will use IBM Event Streams
+* A schema registry, [apicur.io](https://www.apicur.io/) which is in IBM Event Streams
+* One to many consumers, here an example of consumer using streaming processing to consume, 
+process, and publish events.
+* Integrate API management for both REST end points and asyncAPI definitions. The AsyncAPI is defined
+for Kafka binding.
 * Event end point gateway to control communication between consumers and kafka brokers 
-* S3 sink Kafka connector to move events for longer term storage like S3 buckets in cloud object storage.
+* S3 sink Kafka connector to move events for longer term storage like S3 buckets. We will use IBM cloud object storage.
 
-From the flow point of view:
+The numbered flows highlight :
 
 1. We should consider the developer of the producer application. This application can take different form, but let
 assume it will be a Java microprofile, reactive messaging app. The application exposes REST resources defined
 via OpenApi document. During the development process the OpenAPI document will be pushed to an API management,
-and deployed to an API gateway (Step 1 in figure above). We do not want to focus on that. 
+and deployed to an API gateway (Step 1 in figure above). 
 1. When the application starts to be deployed, it produces events to the `orders` topic, the schemas defined
 for this messages, is pushed to a schema registry at mostly the same time as the message is published (Step 2). 
 The schema could also have been pushed via API or user interface. We will address DevOps avro schema deployment later.
@@ -64,79 +72,117 @@ Connect git repository  via webhook to the pipeline tool (e.g. Tekton)
 * Apply test driven development for the business logic, assess integration tests scope and 
 tune development environment accordingly. 
 * Ensure continuous deployment with ArgoCD
-* Create the consumer application, get AsyncAPI document from API management portal
+* Create the consumer application, get AsyncAPI document from API management portal. (To learn more from AsyncAPI see the videos from Dale Lane [here](https://dalelane.co.uk/blog/?p=4380))
 
-In this article, I propose to reuse our  reactive message Quarkus producer and consumer code templates from
-[this repository](https://github.com/ibm-cloud-architecture/eda-quickstarts).
-
-To learn more from AsyncAPI see the videos from Dale Lane [here](https://dalelane.co.uk/blog/?p=4380)
+In this article, I propose to reuse our reactive messaging Quarkus producer and consumer code templates from
+[the eda-quickstarts repository](https://github.com/ibm-cloud-architecture/eda-quickstarts). This is
+not a step-by-step tutorial, but more a see journey of developing and deploying a basic solution.
 
 ## From Domain Driven Design...
 
-The journey starts from an [event storming](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/) workshop where architect, Subject Matter Experts, analysts and developers work together
-to discover the business process with an event focus. Then applying domain-driven design practices, they should identify
-bounded contexts and context map. The last part of the architecture decision activity will be to map bounded contexts to microservices.
-This is not a one to one mapping, but the classical approach is to manage  big entity in its own microservices.
+In real life project, the journey starts from an [event storming](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/) workshop where architect, 
+Subject Matter Experts, analysts and developers work together
+to discover the business process in scope with an event focus. They apply domain-driven design 
+practices, to identify
+bounded contexts and context map. As part of the solution design, a challenging architecture 
+decision is to map bounded contexts to microservices. This is not a one to one mapping, 
+but the classical approach is to manage a DDD aggregate in its own microservices. We have 
+documented a set of DDD principles in [this DDD article](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/).
 
-So if we take the traditional order processing domain, we will discover events about the Order entity life cycle
-and the Order entity with its value objects and references to other services. The figure below presents
-some basic DDD elements: Commands in blue, Entity-aggregate in dark green, value-objects in light green, and events in orange.
+So if we take the traditional order processing domain, we will discover events about the 
+Order business entity's life cycle and the Order entity information with its attached value objects. 
+The figure below presents
+some basic DDD elements: Commands are in blue rectangles, 
+Entity-aggregate in dark green, value-objects in light green, and events in orange.
 
 ![](./images/evt-driv-ms.png)
 
-The right side of the diagram presents a DDD approach of the application architecture, described in layers. 
-We can also use the onion architecture, but the important development practice is to apply separation of concern
-and isolate the layers so for example code to produce messages are not in the business logic.
+**Figure 2: from DDD to microservice**
 
-Commands will help to define APIs and REST resources and may be the service layer. Root aggregate defines what will
-be persisted in the repository, but also what will be exposed via the APIs. In fact it is important
-to enforce avoiding designing a data model with a canonical model approach, as it will expose a complex data model at the API level, where
-we may need to have APIs designed for the service and the clients. The old Data Transfer Object pattern should be used.
+The right side of the diagram presents a DDD approach of the application architecture, 
+described in layers. 
+We could have use the onion architecture, but the important development practice is to apply 
+clear separation of concerns 
+and isolate the layers so for example code to produce messages are not in the business logic layer.
 
-Events will define Avro schemas that will be used in the messaging layer. 
+Commands will help to define APIs and REST resources and may be the service layer. 
+Root aggregate defines what will
+be persisted in the repository, but also what will be exposed via the APIs. In fact it is 
+important to enforce avoiding designing a data model with a canonical model approach, as it 
+will expose a complex data model at the API level, where
+we may need to have APIs designed for the service and the client contexts. 
+The old [Data Transfer Object pattern](https://www.baeldung.com/java-dto-pattern) should be used
+ to present view of the complex data model.
 
-I will detail OpenAPI and AsyncAPI elements later in this article.
+Events are defined with Avro schemas that are used in the messaging layer, schema registry, and AsyncAPI definition. 
 
-## ... To code repositories
+## ... To code repositories and GitOps
 
 Developer starts to create a code repository in its preferred Software Configuration Manager, 
 I will use GitHub (See [this repo for the command order application microservice](https://github.com/jbcodeforce/eda-demo-order-ms)) code
-and [the separate GitOps repository](https://github.com/jbcodeforce/eda-order-gitops) for CI/CD 
-and environment deployments.
+and [the separate GitOps repository](https://github.com/jbcodeforce/eda-order-gitops) to define pipelines
+and environment deployments. 
 
-To support a GitOps approach for development and deployment, Red Hat has delivered two operators around [Tekton / OpenShift Pipelines](https://docs.openshift.com/container-platform/4.7/cicd/pipelines/understanding-openshift-pipelines.html)
-for continuous integration, and [ArgoCD / OpenShift GitOps](https://docs.openshift.com/container-platform/4.7/cicd/gitops/understanding-openshift-gitops.html) for continuous deployment. 
+To support a GitOps approach for development and deployment, Red Hat has delivered two operators: 
+
+* [Tekton / OpenShift Pipelines](https://docs.openshift.com/container-platform/4.7/cicd/pipelines/understanding-openshift-pipelines.html)
+for continuous integration
+* [ArgoCD / OpenShift GitOps](https://docs.openshift.com/container-platform/4.7/cicd/gitops/understanding-openshift-gitops.html) for continuous deployment. 
+
 As part of the OpenShift GitOps, there is also the [KAM CLI](https://github.com/redhat-developer/kam) tool
- to help developer to start on the good track for structuring the different deployment configurations and ArgoCD app configurations.
+ to help developers to start on the good track for structuring the different deployment 
+ configurations and ArgoCD app configurations. The [Order GitOps repository](https://github.com/jbcodeforce/eda-order-gitops) was
+ created with kam. See the repository main readme for more details.
 
 The core idea of GitOps is having a Git repository that always contains declarative descriptions 
 of the infrastructure currently desired in the production environment and an automated process 
 to make the production environment match the described state in the repository.
 
-To get the basic knowledge related to this article, I recommend reading the following documentations:
+To get the basic GitOps knowledge related to this article, I recommend reading the following documentations:
 
 * [Understand GitOps](https://www.gitops.tech/)
-* [Study KAM](https://github.com/redhat-developer/kam)
+* [KAM presentation](https://github.com/redhat-developer/kam)
 
-From the Figure 1, and using the KAM's [Day 1 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) practices, 
+From the Figure 1 above , and using the KAM's [Day 1 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) practices, 
 we will need to create the following git repositories:
 
 * One repository for the Order management microservice, producer of Order Events
-* One repository for GitOps of the solution, to control application  configuration and continuous deployment
+* One repository for GitOps of the solution, to control application configuration and continuous deployment
 * One repository for the consumer of the order events.
 
 ![](./images/gitops-solution-repo.png)
 
-## Getting Started
+* The Kafka connector configurations are in services in the GitOps repo.
 
-We assume, you have access to an OpenShift 4.7 or newer Cluster: if not you can use [IBM OpenLab](https://developer.ibm.com/openlabs) to get a free cluster for one hour. 
+### Create the producer app code based
 
-Login to your cluster, and create a project.
+As we use Quarkus for our implementation of event-driven, reactive microservice we can use the `quarkus cli` to
+create the application. It will be too long to go over everything in this blog and 
+the subject is well covered in [Quarkus guides](https://quarkus.io/guides/). The [order management microservice](https://github.com/jbcodeforce/eda-demo-order-ms) readme
+file explains how the service was created.
 
-```sh
-oc login --token=.... --server=....
-oc new-project demo-order
-```
+You can fork and clone this repo to try running this solution.
+
+> The application created with quarkus CLI may be deployed to OpenShift, and Tekton pipeline
+can be defined to manage the continuous integration, as well as ArgoCD application can also be defined to
+deploy the application. 
+
+The [Order GitOps repository](https://github.com/jbcodeforce/eda-order-gitops) includes
+such elements:
+
+ * ArgoCD for continuous deployment of the application (dev-app-eda-demo-order-ms-app.yaml): [config/argocd/ folder](https://github.com/jbcodeforce/eda-demo-order-gitops/blob/main/config/argocd/edademo-dev-app-eda-demo-order-ms-app.yaml)
+ * application deployment: `` folder
+ * service deployment
+ * Pipeline 
+
+We will go over how to use and build those elements in next sections.
+
+## Environment Setup
+
+From the GitOps, developers have to define the different target environment and how to build
+and deploy each applications. First let define Event Streams Cluster and API Connect end point management.
+
+We assume, you have access to an OpenShift 4.7 or newer version cluster, we used cluster version 4.8. Login to your cluster.
 
 ### Install pre-requisites
 
@@ -144,57 +190,24 @@ The first thing to do, is to install the different services / middleware operato
 instance of those 'services'. I will combine Open Source and IBM products for this solution. 
 The products I'm using for the order microservices are:
 
->   * IBM MQ
 >   * IBM Event Streams on OpenShift for Kafka
->   * Postgresql
->   * Elastic Search
+>   * IBM API Connect to manage API definitions
 
-1. Clone the [eda-gitops-catalog repository](https://github.com/ibm-cloud-architecture/eda-gitops-catalog.git) to get the
-operators definitions of the products used: 
+We have defined a public github repository to define operator subscriptions with some examples of 
+cluster instances (operandes) for Event Streams, MQ and other IBM Automation products. 
+See [the eda-gitops-catalog repository](https://github.com/ibm-cloud-architecture/eda-gitops-catalog.git) readme to get more information on the catalog.
 
-    ```sh
-    git clone https://github.com/ibm-cloud-architecture/eda-gitops-catalog.git
-    cd eda-gitops-catalog
-    ```
+The GitOps repository for the solution will reuse the catalog.
 
-1. Add the IBM product catalog references to your OpenShift cluster
+1. Clone the [Order GitOps repository](https://github.com/jbcodeforce/eda-order-gitops)
 
     ```sh
-    # List existing catalog
-    oc get catalogsource -n openshift-marketplace
-    # If you do not see any IBM operators then install IBM Catalog definition
-    # In the eda-gitops-catalog project
-    oc apply -k ./ibm-catalog/
+    git clone https://github.com/jbcodeforce/eda-order-gitops
+    cd eda-order-gitops
     ```
 
-1. Deploy GitOps and Pipeline Operators: See the [install the openShift GitOps Operator article](https://docs.openshift.com/container-platform/4.7/cicd/gitops/installing-openshift-gitops.html#installing-gitops-operator-in-web-console_getting-started-with-openshift-gitops) or
-use the following command:
+    Then to install the IBM Event Streams and bootstrap GitOps and Pipelines, follow the `how to use` explanations in the repository Readme.
 
-    ```sh
-    # for OpenShift 4.7+
-    # GitOps for solution deployment
-    oc apply -k ./openshift-gitops/operators/overlays/stable
-    # and Pipeline for building solution
-    oc apply -k ./openshift-pipelines-operator/overlays/stable
-    # To verify they are not already installed use:
-    oc get operators
-    # for OpenShift 4.6
-    oc apply -k ./openshift-gitops/operators/overlays/preview
-    oc apply -k ./openshift-pipelines-operator/overlays/preview
-    ```
-
-1. Obtain [IBM license entitlement key](https://github.com/IBM/cloudpak-gitops/blob/main/docs/install.md#obtain-an-entitlement-key)
-
-1. Update the [OCP global pull secret of the `openshift-gitops` project](https://github.com/IBM/cloudpak-gitops/blob/main/docs/install.md#update-the-ocp-global-pull-secret)
-with the entitlement key
-
-    ```sh
-    oc create secret docker-registry ibm-entitlement-key \
-        --docker-username=cp \
-        --docker-server=cp.icr.io \
-        --namespace=openshift-gitops \
-        --docker-password=your_entitlement_key 
-    ```
 
 1. If not already done, install [Quarkus CLI](https://quarkus.io/guides/cli-tooling)
 
@@ -204,7 +217,8 @@ with the entitlement key
 
 1. Install [KAM](https://github.com/redhat-developer/kam/releases/latest) and put the downloaded binary into your `$PATH`
 
-1. If you are using an external image repository, get its secret to authenticate the `pipeline` service account to push image on successful pipeline execution. For Quay.io see [this note](https://github.com/redhat-developer/kam/blob/master/docs/journey/day1/prerequisites/quay.md)
+1. If you are using an external image repository, get its secret to authenticate the `pipeline` service account 
+to push image on successful pipeline execution. For Quay.io see [this note](https://github.com/redhat-developer/kam/blob/master/docs/journey/day1/prerequisites/quay.md)
 on how to create a Robot Account with Write permission.
 
     ![](./images/quay-robot.png)
@@ -213,9 +227,6 @@ on how to create a Robot Account with Write permission.
 
     ![](./images/quay-k8s-secret.png)
 
-1. Get Github access token, to be used in the KAM bootstrap command, in future steps.
-
-    ![](./images/github-access-tk.png)
 
 ### Create foundation for the first microservice
 
@@ -377,9 +388,9 @@ quarkus ext add qpid-jms, openshift
 
 ### Defining the API from JAXRS Resource and OpenAPI annotation
 
-The demo is a proof of concepts, so we will have on OrderDTO as a bean to support
-getting the data about the order at the API level.
+### Push the OpenAPI document to API management
 
+### 
 
 ## Clean your gitops environment
 
