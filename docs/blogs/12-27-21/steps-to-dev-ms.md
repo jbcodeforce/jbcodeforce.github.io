@@ -1,8 +1,5 @@
 # Steps to develop an event driven microservices
 
-With MQ, Kafka, Postgresql
-
-* Build quarkus app with: `quarkus create app  -x openapi,metrics,openshift,resteasy-reactive,resteasy-reactive-jackson ibm.gtm.dba:loan-origin-cmd-ms:1.0.0`
 * Add all needed extensions
 
   ```sh
