@@ -1,5 +1,7 @@
 # Cloud Pak for Integration
 
+See [this gitops catalog](https://github.com/ibm-cloud-architecture/eda-gitops-catalog) for operators and some operand definitions
+
 ## Installation Summary
 
 1. Prepare a suitable Red Hat OpenShift cluster with suitable storage.

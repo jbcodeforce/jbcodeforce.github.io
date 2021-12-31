@@ -166,7 +166,7 @@ we will need to create the following git repositories:
 
 * The Kafka connector configurations are in services in the GitOps repo.
 
-#### Create the producer app  
+## Part 2: Create the producer app  
 
 As we use Quarkus for our implementation of event-driven, reactive microservice we can use the `quarkus cli` to
 create the application. It will be too long to go over everything in this blog and 
