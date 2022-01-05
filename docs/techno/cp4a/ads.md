@@ -144,3 +144,9 @@ Launch locally ODM for older rule implementation.
 ```sh
 docker run -e LICENSE=accept -p 9060:9060 -p 9443:9443  -m 2048M --memory-reservation 2048M -v $PWD:/config/dbdata/ -e SAMPLE=true ibmcom/odm:8.10
 ```
+
+## ODM ci/cd articles
+
+* [Peter Warder's article](https://www.linkedin.com/pulse/building-automated-cicd-pipelines-ibm-odm-peter-warde/)
+* [Rule Designer build automation tool](https://www.ibm.com/docs/en/odmoc?topic=builds-rule-designer-build-automation-tool)
+* [Automated deployment of decision services](https://www.ibm.com/docs/en/odm/8.11.0?topic=services-automated-deployment-decision)
