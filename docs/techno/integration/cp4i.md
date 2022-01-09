@@ -1,12 +1,21 @@
 # Cloud Pak for Integration
 
-See [this gitops catalog](https://github.com/ibm-cloud-architecture/eda-gitops-catalog) for operators and some operand definitions
+!!! info
+    Updated 1/7/2022
+    
+There are different sources for installing Cloud Pak for integration.
 
-## Installation Summary
+* [Product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=installing)
+* [Joel Gomez's Tinkering CP4I site](https://github.ibm.com/joel-gomez/tinkering-cp4i/) where most of the yamls are also in 
+the larger project:
+* [The EDA gitops catalog](https://github.com/ibm-cloud-architecture/eda-gitops-catalog) for operators, and operand definitions. The
+readme for this project is kept up to date.
+
+## Installation Steps Overview
 
 1. Prepare a suitable Red Hat OpenShift cluster with suitable storage.
 
-    [IBM Cloud storage supports](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.2?topic=requirements-supported-options-cloud)
+    [IBM Cloud storage supports](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=requirements-supported-options-cloud)
 
 1. Make the operators available to the cluster. 
 
@@ -22,15 +31,17 @@ See [this gitops catalog](https://github.com/ibm-cloud-architecture/eda-gitops-c
     `Operators > OperatorHub > Integration & Delivery > IBM Cloud Pak for Integration operator`.
 
 The first four steps are done by cluster administrator, while developer or solution
- administrator deploys operator runtimes.
+ administrator deploys operator runtimes and define operands.
 
 If the operators are installed at namespace scope, each namespace effectively behaves as a different tenant.
 
-All IBM Cloud Paks installed in a cluster must be installed in the same mode.
+All IBM Cloud Paks installed in a cluster must be installed in the same mode, we cannot mix cross namespaces or within a namespace.
 
-When Cloud Pak for Integration is installed in the **All namespaces** (the operator is installed in `openshift-operators`), there can be only **one Platform Navigator** per cluster, and all Cloud Pak instances are owned by that Platform Navigator.
+When Cloud Pak for Integration is installed in the **All namespaces** (the operator is installed in `openshift-operators`), 
+there can be only **one Platform Navigator** per cluster, and all Cloud Pak instances are owned by that Platform Navigator.
 
-A single instance of IBM Cloud Pak foundational services is installed in the ibm-common-services namespace if the foundational services operator is not already installed on the cluster.
+A single instance of IBM Cloud Pak foundational services is installed in the `ibm-common-services` namespace if the foundational services
+ operator is not already installed on the cluster.
 
 Operators need a small set of cluster level permissions to allow manipulation of resources defined at cluster scope, such as reading Custom Resource Definitions.
 

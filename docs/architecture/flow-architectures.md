@@ -15,7 +15,7 @@ Since the beginning of IT as an industry, we are digitizing and automating the e
 a lot of time and money to execute key transactions with less human intervention.
 However, most of the integrations we execute across organizational boundaries today are not
 in real time. Today, most—perhaps all—digital financial transactions in the world economy
- still rely on batch processing at some point in the course of settlement.
+still rely on batch processing at some point in the course of settlement.
 
 There is no consistent and agreed-upon mechanism for exchanging signals for immediate action across companies or industries.
 

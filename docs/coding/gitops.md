@@ -48,6 +48,21 @@ by the tool from the Gitops repositories.
 * [Tekton](/coding/tekton) for continuous integration and even deployment
 * [ArgoCD | Openshift Gitops](#openshift-gitops) for continuous deployment
 * [Kustomize.io](https://kustomize.io/) to templatize the deployment and support overlay mechanisms.
+* [git Action](#git-action) for continuous execution of development workflows right in your repository
+
+## Git Action
+
+[Git Action](https://docs.github.com/en/actions)
+
+Configure github SECRETS for each project:
+
+* DOCKER_REGISTRY  quay.io
+* DOCKER_REPOSITORY ibmcase or jbcodeforce
+* DOCKER_USERNAME  jbcodeforce
+* DOCKER_PASSWORD
+* DOCKER_IMAGE_NAME  the name of the application
+
+Define a .github/workflow/dockerbuild.yaml to declare how to build the app.
 
 ## OpenShift GitOps
 

@@ -26,7 +26,7 @@ and seamlessly access the breadth of AWS services in the region.
 
 Choose an AWS region, depending of your requirements like:
 
-* compliance with data govenance and legal requirements
+* compliance with data governance and legal requirements
 * close to users to reduce latency
 * [availability of service within a region](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) 
 * pricing
@@ -49,8 +49,8 @@ Policy is a json doc which consists of a effect, a principals (to apply the poli
 
 * EC2 is a renting machine
 * Storing data on virtual drives: [EBS](#EBS)
-* Distribute load across machines: ELB
-* Auto scale the service ASG
+* Distribute load across machines using ELB
+* Auto scale the service: ASG
 
 Amazon Machine Image: AMI, image for OS and preinstalled softwares. Amazon Linux 2 for linux base image.
 
