@@ -15,13 +15,13 @@ and improved portability.
 
 **Container Federation** is the concept to share capabilities between products:
 
-    * Task federation (PFS)
-    * Single UI (Navigator)
-    * Common content services (CPE)
-    * Global Teams (UMS)
-    * Aggregated monitoring/KPIs (BAI)
-    * Federated BPM Portal
-    * All application tier federated by default (BAW) 
+* Task federation (PFS)
+* Single UI (Navigator)
+* Common content services (CPE)
+* Global Teams (UMS)
+* Aggregated monitoring/KPIs (BAI)
+* Federated BPM Portal
+* All application tier federated by default (BAW) 
 
 Automation foundation provides common services, used by CP4I and CP4D.
 
@@ -39,7 +39,14 @@ The following operators are installed with Cloud Pak for Automation
 * **IBM® Automation foundation** operator installs the required dependency operators, such as the IBM Events Operator, the Elasticsearch Operator and the Event Processing Operator.
 * **Cloud Pak for Business Automation** delivers an integrated and managed collection of containerized services
 
-## Rapid deployment
+## Product documentation install summary
+
+* [Preparing OpenShift Cluster](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=deployment-preparing-your-cluster):
+The installation needs a dynamic storage class and a block storage class. 
+ If any other Cloud Pak needs to be installed in the same cluster, you must use the same choice for the namespaces because IBM Automation foundation is a shared resource between Cloud Paks.
+* Install an instance of LDAP for your intended deployment. [For dev purpose we can try OpenLDAP](#deploying-openldap)
+
+## Rapid deployment for demo
 
 For production deployment see the [product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation)
 
@@ -55,7 +62,7 @@ A cluster will all capabilities needs 11 nodes (see [system requirements](https:
 * Master (3 nodes): 4 vCPU and 8 Gi memory on each node.
 * Worker (8 nodes): 16 vCPU and 32 Gi memory on each node.
 
-For ADP and deep learning processing of document, node needs to get GPU and CPU must meet TensorFlow AVX requirements.
+For ADP and deep learning processing of document, som Nodes need to get GPU and CPU must meet TensorFlow AVX requirements.
 
 For demo purpose 3 nodes are enough. 
 
@@ -64,24 +71,23 @@ For demo purpose 3 nodes are enough.
 
 >>>> We can only have one instance of Cloud pak automation on one cluster
 
-## Installation
-
 The [Container Application Software for Enterprises (CASE) repository](https://github.com/IBM/cloud-pak) includes
-a zip file (cert-kubernetes) with configurations and scripts according to the product version.
+a zip file (cert-kubernetes) with configurations and scripts linked to the product version.
 
-Here is a curl to get this zip
+Here is a curl to get this zip:
 
 ```sh
-export SCRIPT_VERSION=3.1.4
-export CERT_VERSION=21.0.2
+export SCRIPT_VERSION=3.2.0
+export CERT_VERSION=21.0.3
 curl -o ./assets/ibm-cp-automation-${SCRIPT_VERSION}.tgz -LJO https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-automation/${SCRIPT_VERSION}/ibm-cp-automation-${SCRIPT_VERSION}.tgz
 ```
 
-see also [this script to run this curl and more in a silent setup](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/setup_silent.sh).
+This is the first step of [the bootstrap script](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/bootstrap.sh).
 
-This script runs `cp4a-clusteradmin-setup.sh` which deploys CP4A- operator.
+This script runs `cp4a-clusteradmin-setup.sh` which deploys CP4A-operators.
 
-Inside this archive there is a script to build the CR for the CP4Automation components you want to deploy.
+Inside this `ibm-cp-automation`archive, there is a script to build the CR for the CP4Automation components you want to deploy.
+
 
 ### Deploying OpenLDAP
 
@@ -90,9 +96,18 @@ Inside this archive there is a script to build the CR for the CP4Automation comp
 
 See [openLDAP instance configuration in ibm-cloud-architecture/dba-gitops-catalog](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/tree/main/instances/openLDAP)
 
+```sh
+oc apply -k environments/openLDAP
+# Test it:
+oc rsh $(oc get po -o name -n openldap| grep ldap) -n openldap
+# In pod shell
+ldapsearch -x -H ldap://localhost:1389 dc=example,dc=org -D "cn=admin,dc=example,dc=org" -w adminpassword
+```
+
 ### Deploy PostgreSQL
 
-The postgreSQL operator defines a new Kubernetes resource called "Cluster" representing a PostgreSQL cluster made up of a single primary and an optional number of replicas that co-exist in a chosen Kubernetes namespace 
+The postgreSQL operator defines a new Kubernetes resource called "Cluster" representing 
+a PostgreSQL cluster made up of a single primary and an optional number of replicas that co-exist in a chosen Kubernetes namespace 
 for High Availability and offloading of read-only queries..
 
 ### Deploy Foundation operators 

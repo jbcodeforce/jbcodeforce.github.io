@@ -3,6 +3,18 @@
 !!! info
     Updated 1/7/2022
     
+## 2021.4 release
+
+*  Event Endpoint Management to support buying at the API calls per month level to access kafka events or at the 
+resource usage level.
+* AI-driven API Test generation is designed to automate the process of generating these API test cases. 
+Watson Insights for suggested tests are generated through analysing production OpenTracing data. 
+This helps to determine distinct behaviours in an API implementation
+* Support OpenShift on IBM z Integrated Facility for Linux, and on IBM Power Systems
+
+
+## Installation Steps Overview
+
 There are different sources for installing Cloud Pak for integration.
 
 * [Product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=installing)
@@ -11,8 +23,19 @@ the larger project:
 * [The EDA gitops catalog](https://github.com/ibm-cloud-architecture/eda-gitops-catalog) for operators, and operand definitions. The
 readme for this project is kept up to date.
 
-## Installation Steps Overview
+1. Decide if the operators are installed at namespace scope or at cluster level. 
+With namespace scope, each project effectively behaves as a different tenant.
+There can be one Platform Navigator installed in each namespace, and that Platform Navigator owns only the instances in that namespace.
+A single instance ofIBM Cloud Pak foundational services is installed in the ibm-common-services namespace.
+1. Get your **IBM Entitlement Key**: The IBM Entitlement Key is required to pull IBM Cloud Pak specific container 
+images from the IBM Entitled Registry. To get an entitlement key, log in to MyIBM 
+Container Software Library with an IBMid and password associated with the entitled software. See
+[https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-obtaining-your-entitlement-key](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-obtaining-your-entitlement-key) 
 
+    * Select the View library option to verify your entitlement(s).
+    * Select the Get entitlement key to retrieve the key, place it in a file called `./assets/entitlement_key.text`
+    * Enter the email address used to generate the entitlement key in a file called `./assets/ibm_email.text`
+   
 1. Prepare a suitable Red Hat OpenShift cluster with suitable storage.
 
     [IBM Cloud storage supports](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=requirements-supported-options-cloud)
@@ -45,7 +68,7 @@ A single instance of IBM Cloud Pak foundational services is installed in the `ib
 
 Operators need a small set of cluster level permissions to allow manipulation of resources defined at cluster scope, such as reading Custom Resource Definitions.
 
-## Add Catalog
+## Add IBM Catalog
 
 ```sh
 oc apply -f https://raw.githubusercontent.com/ibm-cloud-architecture/eda-gitops-catalog/main/ibm-catalog/catalog-source.yaml
@@ -75,22 +98,11 @@ You can install any combination of operators. Any dependencies will be pulled in
 
 See the operator and matching names in [this table](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.2?topic=installing-operators).
 
-If we need to install the components in a specific namespace then we need to
+For deployment using CLI: Use the [EDA gitops catalog](https://github.com/ibm-cloud-architecture/eda-gitops-catalog.git)
 
-* create the project
-* Add an OperatorGroup
-
-```yaml
-apiVersion: operators.coreos.com/v1
-kind: OperatorGroup
-metadata:
-  name: ibm-integration-operatorgroup
-  namespace: <namespace>
-spec:
-  targetNamespaces:
-  - <namespace>
-```
-
+* create the `cp4i` project: `oc new-project cp4i`
+* Get the entitlement key and create a secret from it.
+* 2021.4: Not seemt to be needed !. Add an OperatorGroup `oc apply -f cp4i-operators/operator-group.yaml`
 * Add a subscription with the namespace being the one created or `openshift-operators`, to install the operator in All namespaces on the cluster.
 
 ```yaml
@@ -98,7 +110,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: ibm-cp-integration
-  namespace: <namespace>
+  namespace: cp4i
 spec:
   channel: v1.3
   name: ibm-cp-integration
@@ -106,32 +118,56 @@ spec:
   sourceNamespace: openshift-marketplace
 ```
 
-### Event streams
+* Validate installed operators
 
-* Create a namespace
-* Copy the entitlement key
-* Deploy event streams operators
+```sh
+oc get csv -n cp4i
+# example
+datapower-operator.v1.5.0                        IBM DataPower Gateway                 1.5.0                                                      Failed
+ibm-ai-wmltraining.v1.1.0                        WML Core Training                     1.1.0                ibm-ai-wmltraining.v1.0.0             Failed
+ibm-apiconnect.v2.4.0                            IBM API Connect                       2.4.0                                                      Failed
+ibm-common-service-operator.v3.14.2              IBM Cloud Pak foundational services   3.14.2               ibm-common-service-operator.v3.14.1   Failed
+ibm-eventstreams.v2.5.1                          IBM Event Streams                     2.5.1     
+```
+
+### Event streams example
+
+* Deploy event streams operators for this namespace
+
+  ```sh
+  oc apply -k cp4i-operators/event-streams/operator/overlays/v2.5
+  ```
+
+* Verify operator pod is running
 * Create a event streams cluster instance: can be done with the Operator UI or with CLI
 
   ```sh
-  oc apply -k c4pi-operators/event-streams/operator/overlays/v2.4
+  oc apply -k c4pi-operators/event-streams/operands/dev
   ```
   
+  > this will install operators in the `ibm-common-services` project too.
+  > And 3 kafka pods, 3 zookeeper pods, 1 Event Streams operator pod, cluster and entities operator pods,
+  schema registry, adminapi, ui, RESTAPI, metrics pods.
 
 ### Event end point management
 
-* Create a namespace
-* Copy the entitlement key
+[Last product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.3?topic=runtimes-event-endpoint-management-deployment)
+
+* API Connect requires these cluster-scoped permission
+
+```
+```
+
 * From IBM API Connect operator add an Event Endpoint Manager instance
 
   ```sh
   # In eda-gitop-catalog
-  oc apply -k c4pi-operators/event-endpoint
+  oc apply -k c4pi-operators/event-endpoint/operands/dev/
   ```
 
-To debug the installation go to the `openshift-operators` and the `apic-connect` pod. Postgresql pod can take time to be created.
+To debug the installation go to the `cp4i` and the `apic-connect` pod. Postgresql pod can take time to be created.
 
-## Reading Sources
+## Other resources
 
 * [Product documentation](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=installing-installation-options)
 * [Red Hat marketplace for CP4I](https://marketplace.redhat.com/en-us/products/ibm-cloud-pak-for-integration)

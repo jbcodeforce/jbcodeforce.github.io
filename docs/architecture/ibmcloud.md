@@ -1,6 +1,6 @@
 # IBM Public Cloud
 
-Really same approach as AWS and GCP. 
+Bring elasticity to IT infrastructure, software services, data replication and app deployments. 
 
 ## ibmcloud CLI summary
 
@@ -87,26 +87,6 @@ Use cases:
 * DR, automated Dev+Test pipeline on a consistent VMware hypervisor platform, spin-up hourly on demand for resiliency
 * Regulators mount up: FS cloud
 
-## Satellite
-
-The goal for [Satellite](https://cloud.ibm.com/satellite/overview) is to run workloads where it makes the most sense. Based on kubernetes, it is a API driven cloud services to achieve consistent application deployment and performance across any environments (own data center, cloud or edge location).
-
-Based on the concept of location that groups your data center and IBM cloud. Manage all the locations from the IBM console UI (Single glass management)
-
-Challenges to address:
-
-* Latency: data processing close to te data
-* Data residency: stay in country
-* Lack of agility: app run across many locations
-* Lack of visibility: ops operate 5 to 8 clouds and need visibility for platform and apps
-* Local management
-* Lack of version control
-* Inconsistent talent availability
-* Inability to instantly customize
-
-![](./images/satellite.png)
-
-K8s: maintenance is quickly becoming difficult.
 
 ## Function As A Service
 
@@ -127,3 +107,5 @@ K8s: maintenance is quickly becoming difficult.
  * Define actions and sequences of actions in the Function as service:
  * Define APIs and API gateway to expose the action sequences as external public route
  * Deploy static web page with HTML et js to access the exposed APIs
+
+ ## Cloud Engine

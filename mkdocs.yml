@@ -113,11 +113,13 @@ nav:
       - Apicurio: techno/apicurio.md
       - Atlas: techno/atlas.md
       - Docker: techno/docker.md
+      - Microcks: techno/microcks.md
       - Minikube: techno/minikub.md
       - Cloud object storage: techno/cos.md
       - Cloud Pak Automation: 
           - Overview: techno/cp4a/index.md
           - BAI: techno/cp4a/bai.md
+          - ODM: techno/cp4a/odm.md
           - Automation Decision Service: techno/cp4a/ads.md
           - Process mining: techno/cp4a/process-mining.md
       - Cloud Pak integration: techno/integration/cp4i.md

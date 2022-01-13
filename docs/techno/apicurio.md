@@ -29,6 +29,12 @@ There are three runtime components in Apicurio and one Keycloak authentication s
 * **apicurio-studio-ws** - a WebSocket based API used only by the Apicurio Editor to provide real-time collaboration with other users.
 * **apicurio-studio-ui** - the Angular 5+ based user interface.
 
+To run a light version of Studio use Apicurito (edit locally OpenAPI doc):
+
+```sh
+docker run -it -p 8080:8080 apicurio/apicurito-ui:1.2.4
+```
+
 ## V1.3.x
 
 As of Event Streams version 10.5, the schema registry is based on Apicur.io 1.3.x. This section is some how to for this version.
@@ -112,6 +118,49 @@ See simplest code in the `apicurio` folder of [Kafka Studies](https://github.com
 Or Kafka producer code template in [Kafka with API and apicur.io](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-kafka-producer)
 and consumer.
 
+## Apicur.io 2.x
+
+The version 2.x is using different APIs and rest client code.
+It supports OpenAPI, AsyncAPI, GraphQL, Apache Avro, Google protocol buffers, JSON Schema, Kafka Connect schema, WSDL, XML Schema (XSD)
+
+The registry can be configured to store data in various back-end storage systems depending on use-case, including Kafka, PostgreSQL, and Infinispan
+
+Quarkus dev mode with the extension: `quarkus-apicurio-registry-avro` start apicurio 2.x container,
+and reactive messaging with the `` serializer create schema definition directly to the registry.
+
+### Installation
+
+Via OpenShift Operator hub or via subscription.yaml see [eda-gitops-catalog/apicurio/operator](https://github.com/ibm-cloud-architecture/eda-gitops-catalog/tree/main/apicurio)
+
+See [quarkus-reactive-kafka-producer template](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-reactive-kafka-producer) or [demo app](https://github.com/jbcodeforce/eda-demo-order-ms) that is using version 2.x.
+
+### Reactive messaging
+
+For the configuration consider:
+
+* Set at least the value serializer to use AvroKafkaSerializer so it can transparently manage auto registry of 
+the schema
+
+```sh
+mp.messaging.outgoing.orders.key.serializer=org.apache.kafka.common.serialization.StringSerializer
+mp.messaging.outgoing.orders.value.serializer=io.apicurio.registry.serde.avro.AvroKafkaSerializer
+mp.messaging.outgoing.orders.apicurio.registry.auto-register=true
+mp.messaging.outgoing.orders.apicurio.registry.artifact-id=io.apicurio.registry.utils.serde.strategy.SimpleTopicIdStrategy
+mp.messaging.outgoing.orders.apicurio.registry.global-id=io.apicurio.registry.utils.serde.strategy.GetOrCreateIdStrategy
+```
+
+* For securited connection
+
+```sh
+# Use same schema registry server cross channel
+%prod.mp.messaging.connector.smallrye-kafka.apicurio.registry.url=${ES_APICURIO_URL}
+# For a per channel setting
+%prod.mp.messaging.outgoing.orders.apicurio.registry.url=${ES_APICURIO_URL}
+```
+
+Be sure the URL finishes with `/apis/registry/v2`. It can be set in config map, as in
+[eda-demo-order-gitops app-eda-demo-order-ms](https://raw.githubusercontent.com/jbcodeforce/eda-demo-order-gitops/main/environments/edademo-dev/apps/app-eda-demo-order-ms/services/eda-demo-order-ms/base/config/configmap.yaml)
+
 ## Developer experience
 
 * Define your microservice with JAXRS and Swagger annotation. Here is a [guide for quarkus openapi and swagger-ui](https://quarkus.io/guides/openapi-swaggerui) for details.
@@ -129,26 +178,16 @@ Below is an example of properties to add to a quarkus `application.properties` f
   mp.openapi.extensions.smallrye.info.license.url=https://www.apache.org/licenses/LICENSE-2.0.html
   ```
   
-* For top down approach, starting from the API openAPI document, we can push the api as file to 
+* When starting from the openAPI document, we can push the api as file to 
 the `META-INF/openapi.yaml` or as a `.json`
 * Get the OpenAPI definition using curl [http://localhost:8080/q/openapi](http://localhost:8080/q/openapi)
 * Define an artifact group to group elements inside Apicurio Registry - can be by environment or can be line of business 
 or any thing to group elements.
 * Decide if you want to use Avro or JSON Schema - Apicurio has both serdes to integrate into you code:
 
-```xml
- <dependency>
-      <groupId>io.apicurio</groupId>
-      <artifactId>apicurio-registry-serdes-avro-serde</artifactId>
-      <version>2.0.0.Final</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.jboss.spec.javax.interceptor</groupId>
-          <artifactId>jboss-interceptors-api_1.2_spec</artifactId>
-        </exclusion>
-      </exclusions>
-  </dependency>
-```
+### Producer
+
+Define AsyncAPI.
 
 ### Consumer
 
