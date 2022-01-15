@@ -28,6 +28,7 @@ docker compose up -d
 ```sh
 kubectl apply -f https://microcks.io/operator/operator-latest.yaml
 ```
+
 * Define a deployment
 
 ```yaml

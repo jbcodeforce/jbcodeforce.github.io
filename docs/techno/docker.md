@@ -52,21 +52,22 @@ CMD ["httpd", "-D", "FOREGROUND"]
 
 * Install a VM hyperviser: `brew install hyperkit`
 * Install minikube: `brew install minikube`
-* install CLIs
+* Install CLIs
 
-```sh
-brew install docker
-brew install docker-compose
-```
+  ```sh
+  brew install docker
+  brew install docker-compose
+  ```
+
 * Use minikube: `minikub start --vm-driver=hyperkit`
 * Get docker env of the minikube: `minikube docker-env` or better `eval $(minikube docker-env)` so env variables are set to be used by
 the docker CLI. Evaluating the docker-env is only valid for the current terminal. 
 * Use docker CLI, it should contact the docker daemon running inside minikube.
 * If the minikube pods are not able to contact internet add a names
 
-```
-"https://registry-1.docker.io/v2/": dial tcp: lookup registry-1.docker.io
-```
+  ```
+  "https://registry-1.docker.io/v2/": dial tcp: lookup registry-1.docker.io
+  ```
 
 ## Some docker and docker compose tricks
 
@@ -108,7 +109,7 @@ docker run -v /var/dbfiles:/var/lib/mysql rhmap47/mysql
 docker system df
 ```
 
-(https://rmoff.net/post/what-to-do-when-docker-runs-out-of-space/)
+[what-to-do-when-docker-runs-out-of-space post](https://rmoff.net/post/what-to-do-when-docker-runs-out-of-space/)
 
 ### Docker network
 
@@ -172,14 +173,14 @@ Examples of interesting docker-compose file:
 
 * An interesting option to start the container is to build the image if it does not exist locally:
 
- ```shell
- docker-compose -f docker-compose-db2.yaml up --build
-# where the declaration includes build statements
-db2server:
+  ```shell
+  docker-compose -f docker-compose-db2.yaml up --build
+  # where the declaration includes build statements
+  db2server:
     image: debezium/db2-cdc:${DEBEZIUM_VERSION}
     build:
       context: ./debezium-db2-init/db2server
     ...
- ```
+  ```
 
  See [this note for the build declaration](https://docs.docker.com/compose/compose-file/#build).

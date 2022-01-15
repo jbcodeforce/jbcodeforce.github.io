@@ -27,3 +27,8 @@ Comparable to [AWS S3](/architecture/aws/#s3) service
 * **Query data in place**: IBM Cloud SQL Query is a fully managed service that lets developers analyze and transform data stored across multiple files in various formats using ANSI SQL statements. 
 * Perform Apache Spark analytics
 * Perform intelligent data discover using Watson Knowledge Catalog
+
+## Code
+
+A demo of loud object storage as Sink of Kafka topic. [cos tutorial](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/cos-tutorial)
+and this [demo gitops](https://github.com/jbcodeforce/eda-demo-order-gitops) to deploy Kafka connector
