@@ -34,23 +34,23 @@ in any event-driven solution:
 ![](./images/components.png)
 **Figure 1: a component view of a simple solution**
 
-* Kafka producer(s) exposing REST API to get data from a IoT, mobile or webapp. 
-* Kafka Brokers, in this article I will use IBM Event Streams
-* A schema registry, [apicur.io](https://www.apicur.io/) which is in IBM Event Streams
-* One to many consumers, here an example of consumer using streaming processing to consume, 
-process, and publish events.
-* Integrate API management for both REST end points and asyncAPI definitions. The AsyncAPI is defined
-for Kafka binding.
-* Event end point gateway to control communication between consumers and kafka brokers 
-* S3 sink Kafka connector to move events for longer term storage like S3 buckets. We will use IBM cloud object storage.
-* Elastic Search sink Kafka connector to move events to indexing and searching component like Elastic Search.
-* Egeria as a metadata management framework to manage metadata about brokers, topics, producer, streaming and consumer apps.
+* Kafka producer(s) (green boxes on the left) are exposing REST API to get data from external sources like IoT, mobile or webapp forms. They produce
+records to Kafka topic.
+* Kafka Brokers, in this article I will use IBM Event Streams which is a Kafka packaging with enhanced features.
+* A schema registry, based on the [apicur.io](https://www.apicur.io/) open source project which is also included in IBM Event Streams
+* One or more consumers (green boxes on the right), can consume order events, using streaming processing or actingg as a sink.
+* Integrated API management (IBM API connect) to manage both REST end points and asyncAPI definitions. The AsyncAPI is defined
+for Kafka binding by connecting to the Event Stream Kafka Topic. It will work for any Kafka brokers.
+* Event end-point gateway to control the communication between consumers and kafka brokers, and an API gateway is doing in REST APIs context.
+* S3 sink Kafka connector to move events for longer term storage like S3 buckets. We will use IBM cloud object storage in the demonstration.
+* Elastic Search sink Kafka connector to move events to indexing and searching product like Elastic Search.
+* The open source project, Egeria as a metadata management framework to manage metadata about brokers, topics, producer, streaming and consumer apps.
 
 The numbered flows highlight :
 
 1. We should consider the developer of the producer application. This application can take different form, but let
-assume it will be a Java microprofile, reactive messaging app. The application exposes REST resources defined
-via OpenApi document. During the development process the OpenAPI document will be pushed to an API management,
+assume it will be a Java microprofile, reactive messaging app (based on [Quarkus](http://quarkus.io)). The application exposes REST resources defined
+via OpenApi document. During the development process the OpenAPI document is created from JAXRS annotation, and is pushed to an API management,
 and deployed to an API gateway (Step 1 in figure above). 
 1. When the application starts to be deployed, it produces events to the `orders` topic, the schemas defined
 for this messages, is pushed to a schema registry at mostly the same time as the message is published (Step 2). 
@@ -162,7 +162,7 @@ we will need to create the following git repositories:
 * One repository for GitOps of the solution, to control application configuration and continuous deployment
 * One repository for the consumer of the order events.
 
-![](./images/gitops-solution-repo.png)
+    ![](./images/gitops-solution-repo.png)
 
 * The Kafka connector configurations are in services in the GitOps repo.
 
@@ -235,11 +235,11 @@ downloaded binary into a folder of your `$PATH`
 to push image on successful pipeline execution. For Quay.io see [this note](https://github.com/redhat-developer/kam/blob/master/docs/journey/day1/prerequisites/quay.md)
 on how to create a Robot Account with Write permission. Below is an example of robot account for quay.io:
 
-    ![](./images/quay-robot.png)
+![](./images/quay-robot.png)
 
 Download the Kubernetes Secret definition to be defined in your cicd project.
 
-    ![](./images/quay-k8s-secret.png)
+![](./images/quay-k8s-secret.png)
 
 #### Environment up and running
 
@@ -260,6 +260,9 @@ project git repository under `src/main/apis` folder.
 ### Push the OpenAPI document to API management
 
 ### Manage AsyncAPI from Kafka Topic
+
+
+## Part 3: Develop a consumer app
 
 ## Clean your gitops environment
 
