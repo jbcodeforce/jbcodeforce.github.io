@@ -1,9 +1,10 @@
 # Apicurio
 
-[Apicur.io](https://www.apicur.io) includes a registry to store schema definitions. 
+[Apicur.io](https://www.apicur.io) includes a [schema registry](https://www.apicur.io/registry/docs/apicurio-registry/2.1.x/index.html) to store schema definitions. 
 It supports Avro, json, protobuf schemas, and an API registry to manage OpenApi and AsynchAPI.
 
-It is a Cloud-native Quarkus Java runtime for low memory footprint and fast deployment times. It supports [different persistences](https://www.apicur.io/registry/docs/apicurio-registry/2.0.0.Final/getting-started/assembly-intro-to-the-registry.html#registry-distros) like Kafka, Postgresql, Infinispan and supports different deployment models.
+It is a Cloud-native Quarkus Java runtime for low memory footprint and fast deployment times. It supports [different persistences](apicurio-registry/2.1.x/getting-started/assembly-intro-to-the-registry.html#registry-storage_registry)
+like Kafka, Postgresql, Infinispan and supports different deployment models.
 
 ## Registry Characteristics
 
@@ -18,6 +19,14 @@ Apicurio is compatible with existing Confluent schema registry client applicatio
 * Operator-based installation of Apicurio Registry on OpenShift
 * Use the concept of artifact group to collect schema and APIs logically related.
 * Support search for artifacts by label, name, group, and description
+
+When using Kafka as persistence, special Kafka topic `<kafkastore.topic>` (default `_schemas`), with a single partition, is used as a highly available write ahead log. 
+All schemas, subject/version and ID metadata, and compatibility settings are appended as messages to this log. 
+A Schema Registry instance therefore both produces and consumes messages under the `_schemas` topic. 
+It produces messages to the log when, for example, new schemas are registered under a subject, or when updates to 
+compatibility settings are registered. Schema Registry consumes from the `_schemas` log in a background thread, and updates its local 
+caches on consumption of each new `_schemas` message to reflect the newly added schema or compatibility setting. 
+Updating local state from the Kafka log in this manner ensures durability, ordering, and easy recoverability.
 
 ## Apicurio Studio
 

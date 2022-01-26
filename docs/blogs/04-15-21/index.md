@@ -1,5 +1,8 @@
 # Event Driven Architecture still a hot subject
 
+!!! info
+    This blog was published to [Medium, here](https://medium.com/codex/event-driven-solution-is-still-a-hot-topic-15632a8130ef) and to [blogspot](https://jeromeboyer.blogspot.com/2022/01/event-driven-solution-is-still-hot-topic.html).
+
 Recently I have to justify why Event-Driven Architecture is still a hot topic on the current market: as I work with a lot of companies in financial, healthcare or retailer industries, I see strong adoption for loosely coupled, event-driven microservice solutions, with new data pipeline used to inject data to modern data lakes, and the adoption of event backbone technology like Apache Kafka, or Apache Pulsar.
 
 With my team, we are working on reference architectures, reference implementations, and first-of-a-kind solutions based on event-driven implementations.

@@ -58,6 +58,10 @@ An administrator can configure the role and role binding resources for each appl
 
 The Cloud Pak for Business Automation operator uses a custom resource definition (CRD), which describes what the operator is meant to watch.
 
+### CRs
+
+Then Automation is using a single CR to define the capabilities you want to deploy.
+
 ## Product installation
 
 * [Preparing OpenShift Cluster](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=deployment-preparing-your-cluster):
@@ -98,7 +102,7 @@ This section is a summary of the [product documentation](https://www.ibm.com/doc
     curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" 
     ```
 
-* Get `podman` CLI instead of docker one.
+* Get `podman` CLI instead of the docker CLI.
 * Download the [Container Application Software for Enterprises (CASE) repository](https://github.com/IBM/cloud-pak)  which includes
 a zip file (cert-kubernetes) with configurations and scripts linked to the product version. The [dba-gitops-catalog repo](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/) has script to
 get this CASE.
@@ -106,18 +110,22 @@ get this CASE.
     ```sh
     git clone https://github.com/ibm-cloud-architecture/dba-gitops-catalog/
     # under dba-gitops-catalog
-    # Modify the script for any new product version
-    ./scripts/getCpAutomationSDK.sh
+    # Modify the following script to specify any new product version
+    code ./scripts/getCpAutomationSDK.sh
     ```
 
-Inside this `ibm-cp-automation`archive, there is a script to build the CR for the CP4Automation components you want to deploy.
-See the [getCpAutomationSDK script](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/scripts/getCpAutomationSDK.sh) to automate this deployment.
+    > Inside this `ibm-cp-automation`archive, there is a script to build the CR for the CP4Automation components you want to deploy. See the [getCpAutomationSDK script](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/scripts/getCpAutomationSDK.sh) to automate the 
+download and extraction of the CASE asset.
 
 * Get entitlement key and create a secret named `ibm-entitlement-key` and one named `admin.registrykey`.
 
     ```sh
+    # need that if Operator is set on All namespace
     ./scripts/defineRegistrySecret.sh ibm-entitlement-key openshift-operators
     ./scripts/defineRegistrySecret.sh admin.registrykey openshift-operators
+    # need this for each namespace where the product will be installed
+    ./scripts/defineRegistrySecret.sh admin.registrykey cp4a
+    ./scripts/defineRegistrySecret.sh ibm-entitlement-key cp4a
     ```
 
 * Define IBM Catalog source:
@@ -147,10 +155,11 @@ What you should get as deployed operators (use different namespace if deploy on 
     ibm-cp4a-wfps-operator.openshift-operators                26h
     ```
 
-* Get two storage classes: File storage keeps data as a hierarchy of files in folders (`ibmc-file-gold-gid`). 
-Block storage chunks data into organized and evenly sized volumes (`ibmc-block-gold-gid`).
+* Get two storage classes: 
 
-* Get role and cluster role names of the operator to give access to `cpadmin` user:
+    > File storage keeps data as a hierarchy of files in folders (`ibmc-file-gold-gid`). Block storage chunks data into organized and evenly sized volumes (`ibmc-block-gold-gid`).
+
+* Get role and cluster role names of the operator to give access to `cp4admin` user:
 
     ```sh
     oc get role -n openshift-operators | grep ibm-cp4a-operator | sort -t"t" -k1r | awk 'NR==1{print $1}'
@@ -163,13 +172,29 @@ Block storage chunks data into organized and evenly sized volumes (`ibmc-block-g
 
 The "starter" deployment provisions Db2® and OpenLDAP with the default values, so you do not need to prepare them in advance
 
-* Create a CP4BA deployment cluster
+Deployment is centralized by one unique CR that specifies the capabilities to use, and to configure how to access
+the external services like LDAP.
 
-  ```
-  ```
-  
-* Get the  `cp4ba-access-info` ConfigMaps for URL to access the deployment.
+The `cert-kubernetes` folder includes the [./scripts/cp4a-deployment.sh script to build](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=scripts-installing-capabilities-by-running-deployment-script) 
+to be used to create Custom Resource.
 
+* Create a CP4BA deployment cluster CR: See example in [BAW BAI CR](https://github.com/ibm-cloud-architecture/dba-infra-gitops/blob/main/environments/dba-dev/services/baw-bai/base/baw-bai-cr.yaml) in
+a dba-infra-gitops project. Can be done manually or with the `./cert-kubernetes/scripts/cp4a-deployment.sh ` tool.
+
+
+  ```sh
+    # from dba-infra-gitops/    
+    oc apply -f environments/dba-dev/services/baw-bai-cr.yaml
+  ```
+
+* Get the  `cp4ba-access-info` ConfigMaps for the different URLs to access the deployed capacities.
+
+  ```sh
+  oc describe cm icp4adeploy-cp4ba-access-info
+  ```
+
+
+* Troubleshooting: [https://www.ibm.com/support/pages/node/6426995](https://www.ibm.com/support/pages/node/6426995)
 
 See also [the SWAT team repository](https://github.com/IBM/cp4ba-rapid-deployment) to setup CP4Automation for demonstration purpose.
 
@@ -177,6 +202,10 @@ See also [the SWAT team repository](https://github.com/IBM/cp4ba-rapid-deploymen
 This is the first step of [the bootstrap script](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/bootstrap.sh).
 
 This script runs `cp4a-clusteradmin-setup.sh` which deploys CP4A-operators.
+
+### Production deployment
+
+For production deployment see the [product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation)
 
 #### Deploying OpenLDAP
 
@@ -225,51 +254,6 @@ This script will ask:
         (b) Runtime Environment 
 
 
-### ODM specifics
-
-Follow [link](http://www.ibm.com/support/knowledgecenter/SSYHZ8_21.0.x/com.ibm.dba.offerings/topics/con_odm_prod.html) for details about this product.
-
-* Need LDAP
-* Need a database like Postgresql
-* You do not have to integrate with the User Management Service (UMS)
-* Running the `./cp4a-deployment.sh` script and selecting ODM, you have the choice to select ODM sub components like
-
-        1) Decision Center (Selected)
-        2) Rule Execution Server (Selected)
-        3) Decision Runner 
-        4) User Management Service 
-        5) Business Automation Insights 
-
-   When doing Enterprise deployment the LDAP type supported does not include OpenLDAP, we can select microsoft active directory and modify the generated CR.yaml.
-
-The CR has the following declarations to review
-
-    ```yaml
-    sc_deployment_type: "enterprise"
-    sc_deployment_platform: "ROKS"
-    sc_deployment_patterns: "foundation,decisions"
-    sc_optional_components: "decisionCenter,decisionServerRuntime"
-    odm_configuration:
-    # To enable ODM Runtime.
-    decisionServerRuntime:
-        enabled: true
-        replicaCount: 2
-    # To enable the Authoring part
-    decisionRunner:
-        enabled: false
-        replicaCount: 2
-    decisionCenter:
-        enabled: true
-        replicaCount: 2
-    ```
-
-And more to update for LDAP and Postgresql DB
-
-* Install [Rule Designer from the Eclipse Marketplace](https://marketplace.eclipse.org/content/ibm-operational-decision-manager-developers-v-8105-rule-designer).
-
-### Production deployment
-
-For production deployment see the [product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation)
 
 
 ## Getting Started
@@ -309,4 +293,4 @@ The back-office workflow using the Workflow capability may involve an account ma
 * Use RPA to update older applications
 
 
-See this [](https://github.com/IBM/cp4ba-rapid-deployment/blob/main/cp4ba-21-0-2/00selectTemplate.md#template-for-the-client-onboarding-demo)
+See this [template-for-the-client-onboarding-demo](https://github.com/IBM/cp4ba-rapid-deployment/blob/main/cp4ba-21-0-2/00selectTemplate.md#template-for-the-client-onboarding-demo)

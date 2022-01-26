@@ -626,6 +626,8 @@ These APIs are divided into groups (types of operations) to make it more express
 
 Here are some basic examples:
 
+* Support asynchronous REST end point
+
 ```java
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -647,6 +649,37 @@ Here are some basic examples:
         return Uni.createFrom().item(o);
     }
 ```
+
+* Calling an external service
+
+    1. Create an interface about this service
+    1. Call the service and use the different event to process success and failure 
+
+    ```java
+
+      interface GreetingService {
+        Uni<String> greeting(String name);
+      }
+      
+    //somewhere in a class
+     greetingService.greeting("Luke")
+                .subscribe().with(
+                item -> System.out.println(item),
+                failure -> System.out.println("Oh no! " + failure.getMessage())
+        );
+      ```
+
+* Processing data as stream:
+
+    ```java
+     Multi<String> stream = Multi.createFrom().items("a", "b", "c", "d");
+        stream
+                .subscribe().with(
+                    item -> System.out.println("Received an item: " + item),
+                    failure -> System.out.println("Oh no! Received a failure: " + failure.getMessage()),
+                    () -> System.out.println("Received the completion signal")
+        );
+    ```
 
 * Create a multi from a list and send to kafka
 
