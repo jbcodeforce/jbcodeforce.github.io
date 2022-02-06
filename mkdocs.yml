@@ -100,6 +100,7 @@ nav:
         - TestContainer: coding/testcontainer.md 
         - Vert.x: java/vertx.md
         - VScode: java/java-vscode.md
+      - podman: coding/podman.md
       - Python: https://jbcodeforce.github.io/python-code
       - MQ: architecture/mq.md
       - MQ challenge: java/mqChallenge.md
@@ -113,8 +114,10 @@ nav:
       - Apicurio: techno/apicurio.md
       - Atlas: techno/atlas.md
       - Docker: techno/docker.md
+      - Podman: techno/podman.md
       - Microcks: techno/microcks.md
-      - Minikube: techno/minikub.md
+      - Minikube: techno/minikube.md
+      - Rancher Desktop: techno/rancherdesktop.md
       - Cloud object storage: techno/cos.md
       - Cloud Pak Automation: 
           - Overview: techno/cp4a/index.md

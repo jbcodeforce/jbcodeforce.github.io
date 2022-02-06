@@ -1,9 +1,9 @@
 # Cloud Pak for Automation
 
 !!! info
-    Updated 1/19/2022
+    Updated 1/28/2022
 
-IBM Cloud Pak for Business Automation is a set of integrated market-leading software, running on top
+[IBM Cloud Pak for Business Automation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3) is a set of integrated market-leading software, running on top
 of Red Hat OpenShift and therefore built for any hybrid cloud.
 Support following business automation capabilities — for content, decisions, process mining,
 RPA, workflows, and document processing, but add uniform platform experience, better component reuse.
@@ -40,10 +40,10 @@ The following operators are installed with Cloud Pak for Automation
 
 * **IBM® Automation Foundation Core**: 
 
-    * RPA-driven automation, process mining, mongoDB for Identity and Access Management (IAM), metering, OpenID,..  Zen UI and event processor.
+    * RPA-driven automation, process mining, mongoDB for Identity and Access Management (IAM), metering, OpenID,..  Zen UI.
 
 * **Cloud Pak foundational services**: (bedrock - common services) [Product doc](https://www.ibm.com/docs/en/cpfs). It includes IAM and certificate management.
-* **IBM® Automation foundation** operator installs the required dependency operators, such as the IBM Events Operator, the Elasticsearch Operator and the Event Processing Operator.
+* **IBM® Automation Insights foundation** operator installs the required dependency operators, such as the IBM Events Operator, the Elasticsearch Operator and the Event Processing Operator.
 * **Cloud Pak for Business Automation** includes Business Automation Studio and Business Automation Navigator to provide a unified authoring environment and an entry point to various low-code design tools with a single sign-on (SSO) experience and team management.
 
 
@@ -141,7 +141,7 @@ download and extraction of the CASE asset.
     oc apply -k ./cp4ba-operator/overlays
     ```
 
-What you should get as deployed operators (use different namespace if deploy on specific scoped ns):
+    What you should get as deployed operators (use different namespace if deployed on specific scoped ns):
 
     ```sh
     oc get operators -n openshift-operators
@@ -157,7 +157,7 @@ What you should get as deployed operators (use different namespace if deploy on 
 
 * Get two storage classes: 
 
-    > File storage keeps data as a hierarchy of files in folders (`ibmc-file-gold-gid`). Block storage chunks data into organized and evenly sized volumes (`ibmc-block-gold-gid`).
+    > File storage keeps data as a hierarchy of files in folders (`ibmc-file-gold-gid`). Block storage chunks data into organized and evenly sized volumes (used in RWO) ( In ROKS the class is: `ibmc-block-gold-gid`).
 
 * Get role and cluster role names of the operator to give access to `cp4admin` user:
 

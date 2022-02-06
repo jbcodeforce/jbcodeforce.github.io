@@ -2,7 +2,14 @@
 
 [Official getting started](https://minikube.sigs.k8s.io/docs/start/)
 
-Personal script is ~/bin/ministart
+```sh
+minikube update-check
+# install new version
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
+sudo install minikube-darwin-amd64 /usr/local/bin/minikube
+```
+
+Personal script is `~/bin/ministart`, amy take some time if it downloads new VM image.
 
 * Retrieve all Kubernetes context (they are saved in `~/bin/.kube/config`)
 
@@ -31,10 +38,24 @@ kubectl get nodes
 minikube addons enable metrics-server
 ```
 
+* Dashboard UI
+
+```sh
+minikube dashboard
+```
+
+## Use docker CLI to build image
+
+* Install docker CLI
+
+```
+brew install docker
+```
+
 * Expose the Docker daemon from minikube to the local terminal environment.
 
 ```sh
-eval $(minikube -p minikube docker-env)
+eval $(minikube docker-env)
 ```
 
 * Enable docker local daemon to push images to minikube registry
@@ -54,4 +75,17 @@ mvn verify -Dquarkus.kubernetes.deploy=true
 ```sh
 kubectl get svc
 minikube service quarkus-reactive-kafka-producer --url
+```
+
+* Deploy an existing app
+
+```sh
+kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+```
+
+
+* Build docker image
+
+```
 ```

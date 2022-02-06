@@ -10,7 +10,7 @@ Created in 2002, and launched as AWS in 2004 with SQS as first service offering.
 
 ## Organization
 
-AWS is a [global infrastructure](https://infrastructure.aws) with 24 regions and 2 to 6 availability zones per region. Ex: us-west-1-2a. 
+AWS is a [global infrastructure](https://infrastructure.aws) with 26 regions and 2 to 6 availability zones per region. Ex: us-west-1-2a. 
 
 AZ is one or more DC with redundant power, networking and connectivity. Isolated from disasters. Interconnected with low latency network. 
 Some services are local or global:
@@ -33,43 +33,98 @@ Choose an AWS region, depending of your requirements like:
 
 ## IAM Identity and Access Management
 
+* This is global services so defined at the account level and cross regions
 * Define user (physical person), group and roles, and permissions
-* One role per application
-* Users are defined as global service encompasses all regions
-* Policies are written in JSON, to define permissions for users to access AWS services, groups and roles
-* Least privilege permission: Give users the minimal amount of permissions they need to do their job
-* Assign users to groups and assign policies to groups and not to individual user.
+* Do not use root user, but create user and always use them when login. `jerome` and `mathieu` are users
+* get user as administrator, meaning it will be part of an admin group with admin priviledges, like `AdmintratorAccess`
+* Assign users to groups (`admin` and `developers`) and assign policies to groups and not to individual user.
 * Groups can only contain users, not other groups
 * Users can belong to multiple groups
+
+* Users are defined as global service encompasses all regions
+* AWS Accoung has a unique ID but can be set with an alias: `jbcodeforce` so to login to the console the URL becomes
+[https://jbcodeforce.signin.aws.amazon.com/console](https://jbcodeforce.signin.aws.amazon.com/console)
+* Policies are written in JSON, to define permissions ()`Allow`, `Deny` for users to access AWS services, groups and roles
+* Policy applies to Principal: account/user/role, list the actions (what is allowed or denied) on the given resources
+* Least privilege permission: Give users the minimal amount of permissions they need to do their job
+* Policy is a json doc:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:List*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+* Policy can define the password type `> Account settings > Password policy`, and when users are allowed to change the password.
+* Multi Factor Authentication -  always protect root account.MFA = password + device we own. The device could be a universal 2nd factor security key. (ubikey) 
+* Authy is a multi-device service. We can have multiple users on the same device
 * For identity federation, SAML standard is used
 
-Policy is a json doc which consists of a effect, a principals (to apply the policy to), an action (what is allowed or denied) and resources sections.
+### IAM Roles
+
+* To get WAS services doing work on other service, we usee IAM Role. They are assigned per application, EC2 or lambda...
+
+![](./images/iam-roles.png)
+
+### Security tools
+
+* In IAM, use `> Credentials report` to download account based report.
+* In IAM, use `> Users > select one user (jerome) and then Access Advisor`: 
+Access Advisor shows the services that this user can access and when those services were last accessed
+
+## CLI
+
+We can access AWS using the CLI or the SDK which both use access keys generated from the console (> Users > jerome > Security credentials > Access Keys).
+
+The keys are saved in ~/.aws/credentials
+
+[aws-cli version 2](https://github.com/aws/aws-cli/tree/v2)
+
+```sh
+aws --version
+# gte your users
+aws iam list-users
+```
+
+With Cloudshell we can use aws cli and then have file that will be kept in the filesystems of the cloud shell.
 
 ## EC2 components
 
 * EC2 is a renting machine
 * Storing data on virtual drives: [EBS](#EBS)
 * Distribute load across machines using ELB
-* Auto scale the service: ASG
+* Auto scale the service via group: ASG
 
+EC2 can havee MacOS, Linux ad Windows OS.
 Amazon Machine Image: AMI, image for OS and preinstalled softwares. Amazon Linux 2 for linux base image.
 
  ![0](./images/EC2-instance.png)
 
-When creating an instance, we can select the VPC, the AZ subnet, and the storage (EBS) for root folder to get the OS. The security group helps to isolate 
-the instance, for example, authorizing ssh on port 22 or HTTP port 80.
+When creating an instance, we can select the OS, CPU, RAM, the VPC, the AZ subnet, and the storage (EBS) 
+for root folder to get the OS, the network card, and the firewall rules as security group. 
+The security group helps to isolate the instance, for example, authorizing ssh on port 22 and HTTP port 80.
 Get the public ssh key, and when the instance is started, use: `ssh -i EC2key.pem  ec2-user@ec2-52-8-75-8.us-west-1.compute.amazonaws.com ` to connect to the EC2
 
 Can also use **EC2 Instance Connect** to open a terminal in the web browser. Need to get SSH port open.
 
-EC2 has a section to add `User data`, which could be used to define a bash script to install dependent software and start some services.
+EC2 has a section to add `User data`, which could be used to define a bash script to install dependent software
+ and start some services at boot time.
 
-EC2 **instance types**: (see [ec2instances.info](https://www.ec2instances.info))
+EC2 **instance types**: (see [ec2instances.info](https://www.ec2instances.info) or the reference [aws ec2/instance-types](https://aws.amazon.com/ec2/instance-types/))
 
-* R: applications that needs a lot of RAM – in-memory caches
-* C: applications that needs good CPU – compute / databases
-* M: applications that are balanced (think “medium”) – general / web app
-* I: applications that need good local I/O (instance storage) – databases
+* R: (memory) applications that needs a lot of RAM – in-memory caches
+* C: (Compute Optimized) applications that needs good CPU – compute / databases, ETLm media transcoding, High Perf web servers, scientific modeling
+* M:  applications that are balanced (think “medium”) – general / web app
+* I: (storage) applications that need good local I/O (instance storage) – databases, NoSQL, cache like Redis, data warehousing, distributed file systems
 * G: applications that need a GPU
 * T2/T3 for burstable instance: When the machine needs to process something unexpected (a spike in
 load for example), it can burst. Use burst credits to control CPU usage.
@@ -134,18 +189,28 @@ A customer gateway is a physical device or software appliance on your side of th
 
 ## Security group
 
-Define inbound and outbound security rules.  They regulate access to ports, authorized IP ranges, control inbound and outbound network. By default all inbound traffic is denied and outbound authorized.
+Define inbound and outbound security rules.  They regulate access to ports, authorized IP ranges IPv4 and IPv6, 
+control inbound and outbound network. By default all inbound traffic is denied and outbound authorized.
 
+* They contain allow rules only.
 * Can be attached to multiple EC2 instances and to load balancers
 * Locked down to a region / VPC combination
 * Live outside of the EC2
-* Define one security group for SSH access
+* Define one separate security group for SSH access where you can authorize only one IP@
 * Application not accessible is a security group
 * Connect refused in an application error or is not launched
 * Instances with the same security group can access each other
 * Security group can reference other security groups, IP address, CIDR but no DNS server
 
  ![2](./images/security-group.png)
+
+Important Ports:
+
+* 22 for SSH and SFTP
+* 21 for FTP
+* 80 for HTTP
+* 443 for https
+* 3389: Remote desktop protocol
 
 ## Networking
 

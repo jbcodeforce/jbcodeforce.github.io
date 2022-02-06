@@ -32,4 +32,5 @@ On each case, partition rebalancing impacts the routing. There are some complex 
 
 ## Parallel queries
 
-In analytics we need to perform complex queries combining filtering, joins, grouping by and aggregates. Massively parallel processing is used to split the query into stages and partitions to be executed in parallel. 
+In analytics we need to perform complex queries combining filtering, joins, grouping by and aggregates. 
+Massively parallel processing is used to split the query into stages and partitions to be executed in parallel. 

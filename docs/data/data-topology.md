@@ -32,14 +32,16 @@ Figure 1 shows the primitive zones that are used in a zone map.
 
 It is only a leaf zone that is associated with the instantiation of data.
 
-Non-primitive zones include a virtual zone that may cluster multiple zones together and reflect groups for data virtualization or data federation.
+Non-primitive zones include a virtual zone that may cluster multiple zones together and 
+reflect groups for data virtualization or data federation.
 
 ### Data Flow
 
 The data flow shows the *flow of Data* and helps
 to illustrate the points of integration or interoperability between the zones.  
 
-This can also help to detect circular data flows occurring across zones, to be flagged for investigation as data integrity may potentially be compromised if not well managed (designed and governed).
+This can also help to detect circular data flows occurring across zones, to be flagged for 
+investigation as data integrity may potentially be compromised if not well managed (designed and governed).
 
 ### Data Layer
 
