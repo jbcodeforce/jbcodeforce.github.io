@@ -71,10 +71,18 @@ Choose an AWS region, depending of your requirements like:
 
 ### IAM Roles
 
-* To get WAS services doing work on other service, we usee IAM Role. They are assigned per application, EC2 or lambda...
+* To get AWS services doing work on other service, we use IAM Role. Roles are assigned per application, or EC2 or lambda function...
 
 ![](./images/iam-roles.png)
 
+When connected to an EC2 manchine via ssh or using EC2 instance connect, we need to set the IAM roles for who an use the EC2. A command like
+`aws iam list-users` will not work until a role it attached.
+
+To authorzie access to a EC2 instance, we use IAM Roles. The DemoEC2Role, for example, is defined to access EC2 in read only:
+
+![](./images/aws-iam-role.png)
+
+This role is then defined in the EC2 / Security  > attach IAM role.
 ### Security tools
 
 * In IAM, use `> Credentials report` to download account based report.
@@ -104,7 +112,7 @@ With Cloudshell we can use aws cli and then have file that will be kept in the f
 * Distribute load across machines using ELB
 * Auto scale the service via group: ASG
 
-EC2 can havee MacOS, Linux ad Windows OS.
+EC2 can have MacOS, Linux ad Windows OS.
 Amazon Machine Image: AMI, image for OS and preinstalled softwares. Amazon Linux 2 for linux base image.
 
  ![0](./images/EC2-instance.png)
@@ -112,9 +120,10 @@ Amazon Machine Image: AMI, image for OS and preinstalled softwares. Amazon Linux
 When creating an instance, we can select the OS, CPU, RAM, the VPC, the AZ subnet, and the storage (EBS) 
 for root folder to get the OS, the network card, and the firewall rules as security group. 
 The security group helps to isolate the instance, for example, authorizing ssh on port 22 and HTTP port 80.
-Get the public ssh key, and when the instance is started, use: `ssh -i EC2key.pem  ec2-user@ec2-52-8-75-8.us-west-1.compute.amazonaws.com ` to connect to the EC2
+Get the public ssh key, and when the instance is started, use: `ssh -i EC2key.pem  ec2-user@ec2-52-8-75-8.us-west-1.compute.amazonaws.com ` to connect to the EC2.
+The `.pem` file need to be restricted with `chmod 0400`
 
-Can also use **EC2 Instance Connect** to open a terminal in the web browser. Need to get SSH port open.
+Can also use **EC2 Instance Connect** to open a terminal in the web browser. Still need to get SSH port open.
 
 EC2 has a section to add `User data`, which could be used to define a bash script to install dependent software
  and start some services at boot time.

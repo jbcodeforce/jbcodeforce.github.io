@@ -75,4 +75,5 @@ A best practice DR deployment would take into account WAS XA Transaction logs in
 * In Liberty Profile servers the transaction logs are located in the DB2 database, so will 
 be replicated with DB2 HA
 * In active-active settings, Kubernetes ETCD does not need to be replicated, content is local to the clusters. 
-With 
+
+

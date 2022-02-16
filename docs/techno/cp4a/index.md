@@ -1,10 +1,9 @@
 # Cloud Pak for Automation
 
 !!! info
-    Updated 1/28/2022
+    Updated 2/14/2022
 
-[IBM Cloud Pak for Business Automation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3) is a set of integrated market-leading software, running on top
-of Red Hat OpenShift and therefore built for any hybrid cloud.
+[IBM Cloud Pak for Business Automation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3) is a set of integrated market-leading software, running on top of Red Hat OpenShift and therefore built for any hybrid cloud.
 Support following business automation capabilities — for content, decisions, process mining,
 RPA, workflows, and document processing, but add uniform platform experience, better component reuse.
 
@@ -12,6 +11,80 @@ RPA, workflows, and document processing, but add uniform platform experience, be
 
 Running in containers and Kubernetes is to improve cost of operation and deployment. For example using
 Liberty will reduce the packaging from multiple GB to only 800MB, start faster 10s, and simpler configuration.
+
+## Value propositions
+
+Companies need to apply intelligent automation across the enterprise to improve profitability, revenue growth
+
+* Reduce customer service disruptions
+* Improve management of IT service requests
+* Empower LOBs through low-code tooling to quickly develop simple business application
+* Identify gaps in operations workers
+
+### Use cases:
+
+* Digitize processes to maintain business continuity
+* Approve operations tickets and exceptions
+* Automate KYC regulatory compliance
+* Quickly identify fraudulent transactions
+* Reduce time from procure to pay
+* Speed order to cash
+* Speed employee onboarding
+
+#### [Refund request](https://ibm-cloud-architecture.github.io/refarch-dba/use-cases/refund-req/) automation
+
+* Model as-is processes to identify process opportunities
+* Digitize and capture data from refund request forms
+* Create customer facing application using low-code tools
+* Mine process data from line of business systems to help analyze existing performance gaps
+* Monitor customer support KPIs around refund processing with real time dashboard
+* Automate important refund decisions: warranty checks, troubleshooting pathways, fraud detection, etc. - prior to approval
+* Automatically route requests requiring manual review to the appropriate customer support representative(s)
+* Use workflow to streamline the refund process and help ensure timely refunds for valid request
+
+### Common challenges
+
+* Business data is inaccessible and siloed preventing a complete view of customers and hindering compliance initiatives
+* Performance gaps caused by manual systems prevent efficiency and lack of reliable insights prevents operational visibility
+* Execution on key initiaives is slowed because of the lack of the right tools or right skills
+
+### Product capabilities
+
+* Process mining: to discover inefficiencies in existing business process.
+* Robotic process automation: digital employees
+* Operational intelligence: gain insights with built-in AI to provide recommended actions
+* Capture: extract information from document.
+* Content: share and manage content - connect content to process
+* Decision
+* Workflow: choreograph human and systems. Improve consistency across buiness operations with increased visibility. 
+
+### Business Automation Workflow Authoring and Automation Workstream Services
+
+Workflow automation orchestrates multiple business processes (straight-through, human-assisted or case management) within operations and provides visibility into each step. Automation Workstream Services (AWS) provides a no-code solution for streamlining, automating, and accelerating activities in your daily work
+
+When selecting BAW, we can have optional components like Case, Content integratio, or workstreams.
+
+### ODM to CP4Automation
+
+* Access to New Value-Added Offerings and Containerized IBM Middleware
+* Access to Industry-Leading Red Hat Cloud Platform & Solutions
+* License Flexibility
+* Cloud Friendly metrics: VPC and MVS metrics
+* Full stack certification including open source support
+
+* Monitor rules execution in real-time using dashboards (BAI only available on CP4A)
+* Collect operational data for analysis and ML to identify patterns for continuous improvement of rules. (BAI)
+* Extend the value of rules by automating employee tasks and processes
+* Gain enterprise-grade container security and simplified administration
+* Improve the quality of automated decisions with data from unstructured documents (Data CAP)
+
+### Business automation application
+
+Use Business Automation Application (BAA) to create and run business applications that use the capabilities of the platform. Build low-code business applications using Application Designer, test them with Playback Application Engine and run them in Application Engine. These applications are available to users in Business Automation Navigator.
+
+When selecting busness automation application, we can select business automation navigator and business orchestration optional components.
+
+## Concepts
 
 Docker images help to maintain product delivery and access to iFixes from a central registry. 
 Kubernetes helps to standardize on Operation and SRE skillset, innate HA, better application isolation, 
@@ -25,8 +98,6 @@ and improved portability.
 * Aggregated monitoring/KPIs (BAI)
 * Federated BPM Portal
 * All application tier federated by default (BAW) 
-
-Automation foundation provides common services, used by CP4I and CP4D.
 
 
 ## Operators
@@ -43,6 +114,7 @@ The following operators are installed with Cloud Pak for Automation
     * RPA-driven automation, process mining, mongoDB for Identity and Access Management (IAM), metering, OpenID,..  Zen UI.
 
 * **Cloud Pak foundational services**: (bedrock - common services) [Product doc](https://www.ibm.com/docs/en/cpfs). It includes IAM and certificate management.
+The services connect all IBM Cloud Paks with Operand Deployment Lifecycle Manager (ODLM) and use a specific namespace (ibm-common-services) to manage the service instances
 * **IBM® Automation Insights foundation** operator installs the required dependency operators, such as the IBM Events Operator, the Elasticsearch Operator and the Event Processing Operator.
 * **Cloud Pak for Business Automation** includes Business Automation Studio and Business Automation Navigator to provide a unified authoring environment and an entry point to various low-code design tools with a single sign-on (SSO) experience and team management.
 
@@ -52,27 +124,34 @@ The following operators are installed with Cloud Pak for Automation
 Divide workloads into dedicated namespaces for the application life cycle: dev, staging, production. **Meter** can be used to understand
 the deployments against entitlements.
 
-An administrator can configure the role and role binding resources for each application before any operator is deployed. Each application must specify a serviceAccountName in its pod spec, and the service account must be created.
+An administrator can configure the role and role binding resources for each application before any operator is deployed. 
+Each application must specify a serviceAccountName in its pod spec, and the service account must be created.
 
 ### CRD
 
-The Cloud Pak for Business Automation operator uses a custom resource definition (CRD), which describes what the operator is meant to watch.
+The Cloud Pak for Business Automation operator uses a custom resource definition (CRD), which describes 
+what the operator is meant to watch.
 
 ### CRs
 
 Then Automation is using a single CR to define the capabilities you want to deploy.
 
-## Product installation
+Here is an [important note](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=deployment-capabilities-starter-deployments) on relationship between capabilities and operators. 
+
+Depending on the selected capabilities, the needed components of the foundation are installed. The final custom resource file combines capabilities and components from one or more capabilities.
+
+## Product installation general steps
 
 * [Preparing OpenShift Cluster](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=deployment-preparing-your-cluster):
 The installation needs a dynamic storage class and a block storage class. 
- If any other Cloud Pak needs to be installed in the same cluster, you must use the same choice for the namespaces because IBM Automation foundation is a shared resource between Cloud Paks.
+If any other Cloud Pak needs to be installed into the same cluster, you must use the same choice for the namespaces because IBM Automation foundation is a shared resource between Cloud Paks.
 * Get entitlement key
 * Install an instance of LDAP for your intended deployment. [For dev purpose we use OpenLDAP](#deploying-openldap) and see [DBA GitOps catalog]() for that. 
 For production deployment Tivoli Active Directory or Microsoft Active Directory are recommended.
-* Install GitOps operators
-* Install Cloud Pak Automation operators
-* Install operand using Custom Resource
+* Install Openshift GitOps operator
+* Install Cloud Pak Business Automation operator in `openshift-operators` monitoring All namespaces.
+* Install operand using Custom Resource for each targeted environment (dev, staging, production)
+
 
 ### Capacity
 
@@ -102,16 +181,15 @@ This section is a summary of the [product documentation](https://www.ibm.com/doc
     curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" 
     ```
 
-* Get `podman` CLI instead of the docker CLI.
-* Download the [Container Application Software for Enterprises (CASE) repository](https://github.com/IBM/cloud-pak)  which includes
-a zip file (cert-kubernetes) with configurations and scripts linked to the product version. The [dba-gitops-catalog repo](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/) has script to
-get this CASE.
+* Get `podman` CLI or the `docker` CLI.
+* Get entitlement key and create a secret named `ibm-entitlement-key` and set it in environment variable: `IBM_ENTITLEMENT_KEY`
+* To create CR usiing IBM script, download the [Container Application Software for Enterprises (CASE) repository](https://github.com/IBM/cloud-pak)  which includes a zip file (cert-kubernetes) with configurations and scripts linked to the product version. The [dba-gitops-catalog repo](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/) includes operators subscriptions, and the [dba-infra-gitops](https://github.com/ibm-cloud-architecture/dba-infra-gitops) include boostrap scripts to get this CASE containt. 
+
 
     ```sh
-    git clone https://github.com/ibm-cloud-architecture/dba-gitops-catalog/
-    # under dba-gitops-catalog
-    # Modify the following script to specify any new product version
-    code ./scripts/getCpAutomationSDK.sh
+    git clone https://github.com/ibm-cloud-architecture/dba-infra-gitops/
+    # Modify the following script to specify any new product version and your IAM user name
+    code ./bootstrap.sh
     ```
 
     > Inside this `ibm-cp-automation`archive, there is a script to build the CR for the CP4Automation components you want to deploy. See the [getCpAutomationSDK script](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/scripts/getCpAutomationSDK.sh) to automate the 
@@ -131,8 +209,7 @@ download and extraction of the CASE asset.
 * Define IBM Catalog source:
 
     ```sh
-    oc apply -f ibm-catalog/catalog_source.yaml
-    oc apply -k ibm-cp4a-catalog/overlays       
+    oc apply -f ibm-catalog/catalog_source.yaml    
     ```
 
 * Create one namespace: `cp4a`, create one service accounts, create operator-shared pvc and log pvc.
@@ -170,7 +247,7 @@ download and extraction of the CASE asset.
 
 #### Installing
 
-The "starter" deployment provisions Db2® and OpenLDAP with the default values, so you do not need to prepare them in advance
+The "starter" deployment provisions Db2® and OpenLDAP with the default values, so you do not need to prepare them in advance.
 
 Deployment is centralized by one unique CR that specifies the capabilities to use, and to configure how to access
 the external services like LDAP.
@@ -252,8 +329,6 @@ This script will ask:
         7) IBM Automation Document Processing 
         (a) Development Environment 
         (b) Runtime Environment 
-
-
 
 
 ## Getting Started

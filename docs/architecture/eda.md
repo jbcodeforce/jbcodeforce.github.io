@@ -16,7 +16,6 @@
 
 * [Event Streams on Cloud lab](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/es-cloud/)
 * [Security and access control with IBM Cloud lab](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/security/)
-
 * [Real time inventory management with kafka streams and kafka connect](https://ibm-cloud-architecture.github.io/refarch-eda/scenarios/realtime-inventory/):
 
 
@@ -25,7 +24,7 @@
 * Order demos based on developer experience article:
 
     * [Order demo gitops](https://github.com/jbcodeforce/eda-demo-order-gitops)  The readme is up to date
-    * [Order producer]()
+    * [Order producer](https://github.com/jbcodeforce/eda-demo-order-ms)
     * [Order consumer]()
 
 * [Angular app with nodejs BFF](https://github.com/jbcodeforce/refarch-kc-ui) to present the container shipment demonstration

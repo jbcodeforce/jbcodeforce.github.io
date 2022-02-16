@@ -3,7 +3,7 @@
 [Apicur.io](https://www.apicur.io) includes a [schema registry](https://www.apicur.io/registry/docs/apicurio-registry/2.1.x/index.html) to store schema definitions. 
 It supports Avro, json, protobuf schemas, and an API registry to manage OpenApi and AsynchAPI.
 
-It is a Cloud-native Quarkus Java runtime for low memory footprint and fast deployment times. It supports [different persistences](apicurio-registry/2.1.x/getting-started/assembly-intro-to-the-registry.html#registry-storage_registry)
+It is a Cloud-native Quarkus Java runtime for low memory footprint and fast deployment times. It supports [different persistences](https://www.apicur.io/registry/docs/apicurio-registry/2.1.x/getting-started/assembly-intro-to-the-registry.html#registry-storage_registry)
 like Kafka, Postgresql, Infinispan and supports different deployment models.
 
 ## Registry Characteristics

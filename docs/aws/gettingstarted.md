@@ -16,7 +16,7 @@ The credentials and API key are in `~/.aws/credentials`
 [my summary on IAM](/aws/#iam-identity-and-access-management)
 
 * Search for IAM and then...
-* login to the account https://jbcodeforce.signin.aws.amazon.com/console with admin user `jerome`
+* login to the account [https://jbcodeforce.signin.aws.amazon.com/console](https://jbcodeforce.signin.aws.amazon.com/console]) with admin user `jerome`
 * Create groups (Developers), define basic policies.
 * Add users (mathieu) assign him to a group
 
@@ -65,4 +65,18 @@ to provision a micro EC2 instance:
 terraform apply
 # inspect state
 terraform show
+```
+
+## Install nginx inside a EC2 t2.micro.
+
+Be sure to have a policy to authorize HTTP inbound traffic on port 80 for 0.0.0.0/0
+In the user data add web server:
+
+```
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+echo "<h1>Hello from $(hostname -f)</h1>" > /var/www/html/index.html
 ```
