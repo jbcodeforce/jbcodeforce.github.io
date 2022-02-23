@@ -446,10 +446,11 @@ At the same level as the GitOps folder created by `kam`, there is a `secrets` fo
 to be used to manage secrets without getting them into git.
 
 The approach is to use [Bitmani Sealed Secret](https://engineering.bitnami.com/articles/sealed-secrets.html) operators to 
-deploy a server on OpenShift to decrypt in the final format, encoded secrets that could be in:
+deploy a server on OpenShift to decrypt in the final format, encoded sealed secrets to a kubernetes secret into target namespace.
 
 *Sealed Secrets are a "one-way" encrypted Secret that can be created by anyone, but can only be decrypted by the controller running in the target cluster.*
 
+It needs kubeseal CLI on the client side to do encryption that only the controller can decrypt.
 
 * Install the Sealed Secret Operator in `sealed-secrets` project
 
@@ -493,6 +494,8 @@ mv *-sealed.yaml ../*gitops/config/
 oc apply -f gitops-webhook-sealedsecret.yaml
 # this should create a k8s secret
 ```
+
+*ERROR: giving up: no key could decrypt secret (.dockerconfigjson)*
 
 ### What to do from there
 

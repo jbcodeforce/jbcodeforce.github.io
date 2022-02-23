@@ -141,7 +141,7 @@ load for example), it can burst. Use burst credits to control CPU usage.
 ### Launch types
 
 * **On demand**: short workload, predictable pricing, pay per second after first minute.
-* **Reserved** for at least for one year, used for long workloads like database. Get discounted rate from on-demand.
+* **Reserved** for one or 3 years, used for long workloads like database. Get discounted rate from on-demand.
 * **Convertible reserved** instance for changing resource capacity over time.
 * **Scheduled reserved** instance for job based workload.
 * **Spot instance** for very short - 90% discount on on-demand - used for work resilient to failure like batch job, data analysis, image processing,...
@@ -154,7 +154,7 @@ load for example), it can burst. Use burst credits to control CPU usage.
     
 * **Dedicated hosts** to book entire physical server and control instance placement. # years. BYOL. 
 
-Use **EC2 launch templates** to automate instance launches, simplify permission policies, and enforce best practices across the organization. (Look very similar as docker image)
+Use **EC2 launch templates** to automate instance launches, simplify permission policies, and enforce best practices across the organization. (Look very similar to docker image)
 
 ### AMI
 
