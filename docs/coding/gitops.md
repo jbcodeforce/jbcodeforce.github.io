@@ -518,7 +518,7 @@ in the `config/argocd/kustomization.yaml` the call to `cicd-app.yaml`.
     ![](./images/argo-rt-inv.png)
     * Three OpensShift projects: one for cicd, one per target 'environments' (dev, stage)
 
-    > depending of OCP version, there may be issue regarding `controller user` being able to create resource. 
+    > depending of the OCP version, there may be issue regarding `controller user` being able to create resource. 
     To enable full cluster admin access on OpenShift, run the following command: 
 
     ```sh

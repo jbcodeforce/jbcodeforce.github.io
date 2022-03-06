@@ -2,7 +2,7 @@
 
 [Testcontainers](https://www.testcontainers.org/) is a Java library that supports JUnit tests, providing lightweight, throwaway instances that can run in Docker.
 
-The product quickstart documentation explains the basic practices. Below are some practices for the components I am using often.
+The product quickstart documentation explains the basic practices. Below are some practices for the components I am often using.
 
 ## Test container with Kafka
 

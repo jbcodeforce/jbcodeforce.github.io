@@ -1,8 +1,31 @@
 # Cloud Pak for Integration
 
 !!! info
-    Updated 1/7/2022
-    
+    Updated 2/22/2022
+
+## Addressing integration challenges
+
+* Manual tasks requiring expert integration skills -> cp4i will bring automate integrations powered by AI
+* Lack of operational visibility to improve integrations -> improve quality with continuous feedback based on real-world data
+* Only one integration style -> Use varied integration methods and styles to you advantages
+* Drive new engagement models and digital transformation
+
+   * Manage APIs, define new channels
+   * respond to events in real-time for engaging experiences
+   * Access and move data in fast, secure way
+
+* Accelerate integration while reducing costs
+
+   * AI powered integration: recommend integration patterns, flow mapping, and config changes
+   * Reuse integration: decompose larger integration into independant integrations. Integration asset repository.
+   * Simplify operation: easy to build with CI/CD workflows. Easy to deploy to same platform, no more central ESB
+
+* Reduce exposure to business and security risks
+
+   * Secure access to critical assets
+   * Protect transactional integrity
+   * Balance workloads
+
 ## 2021.4 release
 
 *  Event Endpoint Management to support buying at the API calls per month level to access kafka events or at the 
@@ -155,8 +178,8 @@ ibm-eventstreams.v2.5.1                          IBM Event Streams              
 
 * API Connect requires these cluster-scoped permission
 
-```
-```
+  ```
+  ```
 
 * From IBM API Connect operator add an Event Endpoint Manager instance
 

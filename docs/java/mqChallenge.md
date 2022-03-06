@@ -4,7 +4,9 @@
 
 See the docker compose file in the mqChallenge folder. Once the mqserver is running, open a bash:  `docker exec -ti mqserver bash`
 
-* Display the MQ server information
+[See this last mq connect app to qm in container article](https://developer.ibm.com/tutorials/mq-connect-app-queue-manager-containers/)
+
+* Display the MQ server information by exec in the container and use command `dspmqver`.
 
 ```shell
 bash-4.4$ dspmqver
@@ -39,6 +41,14 @@ Queue DEV.QUEUE.1
 Channel DEV.APP.SVRCONN
 Listener DEV.LISTENER.TCP on port 1414
 ```
+
+The queue that you will be using, DEV.QUEUE.1, “lives” on the queue manager QM1. The queue manager also has a listener that 
+listens for incoming connections, for example, on port 1414. Client applications can connect to the queue manager 
+and can open, put, and get messages, and close the queue.
+
+Applications use an MQ channel to connect to the queue manager. Access to these three objects is restricted in different ways. 
+For example, user “app”, who is a member of the group “mqclient” is permitted to use the channel DEV.APP.SVRCONN to connect 
+to the queue manager QM1 and is authorized to put and get messages to and from the queue DEV.QUEUE.1.
 
 ## Demo app
 
@@ -95,6 +105,32 @@ Play with PUT and GET.
 
 ![](./images/mq-main-page.png)
 
+## MQ concepts
+
+[EDA summmary](https://ibm-cloud-architecture.github.io/refarch-eda/technology/mq/)
+
+Configure MQ with Qmgr and config map. See [this store-mq-gitops repo](https://github.com/ibm-cloud-architecture/store-mq-gitops/blob/main/environments/smq-dev/apps/services/mq/base/qmgr.yaml)
+
+Example of config map
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mq-mqsc-config
+data:
+  example.mqsc: |
+    DEFINE QLOCAL('ITEMS') REPLACE
+    DEFINE CHANNEL('DEV.ADMIN.SVRCONN') CHLTYPE(SVRCONN) REPLACE
+    DEFINE QLOCAL('DEV.DEAD.LETTER.QUEUE') REPLACE
+    ALTER QMGR DEADQ('DEV.DEAD.LETTER.QUEUE')
+    DEFINE CHANNEL(DEV.APP.SVRCONN) CHLTYPE(SVRCONN) 
+    ALTER QMGR CHLAUTH (DISABLED)
+    REFRESH SECURITY TYPE(CONNAUTH)
+```
+
+???+ Tutorials
+    * [Developer.ibm](https://developer.ibm.com/components/ibm-mq/tutorials/)
 
 ## Basic JMS 2.0 client
 
@@ -105,6 +141,35 @@ The code under JMSMQclient is an adaption of [the develop MQ client tutorial](ht
 * Offer API to get the consumed message.
 * Inject configuration from properties file.
 * Expose API via swagger.
+
+### Send Text message and use correlationID to be used as key
+
+See the code in the store simulator [MQItemGenerator class](https://github.com/ibm-cloud-architecture/refarch-eda-store-simulator/blob/master/backend/src/main/java/ibm/gse/eda/stores/infra/mq/MQItemGenerator.java):
+
+```java
+private void sendToMQ(Item item) {
+      try { 
+        String msg = parser.toJson(item);
+        TextMessage message = jmsContext.createTextMessage(msg);
+        message.setJMSCorrelationID(item.storeName);
+        producer.send(destination, message);
+        logger.info("sent to MQ:" + msg);
+      } catch( Exception e) {
+        e.printStackTrace();
+      }   
+}
+```
+
+And the corresponding kafka connector configuration in [mq-source.properties](https://github.com/ibm-cloud-architecture/eda-rt-inventory-gitops/blob/main/local-demo/kconnect/mq-source.properties):
+
+```properties
+ mq.connection.mode=client
+ key.converter=org.apache.kafka.connect.storage.StringConverter
+ mq.message.body.jms=true
+ value.converter=org.apache.kafka.connect.storage.StringConverter
+ mq.record.builder=com.ibm.eventstreams.connect.mqsource.builders.DefaultRecordBuilder
+ mq.record.builder.key.header=JMSCorrelationID
+```
 
 ## Publisher / Subscribe on MQ
 

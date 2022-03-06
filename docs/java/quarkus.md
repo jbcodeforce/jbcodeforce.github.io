@@ -373,7 +373,7 @@ This is done via a HTTP based long polling transport, that will synchronize your
 
 ## Testing with Quarkus
 
-Quarkus uses junit 5, and QuarkusTest to access to CDI and other quarkus goodies. 
+Quarkus uses junit 5, and QuarkusTest to access to CDI and other Quarkus goodies. 
 `quarkus dev` enables continuous testing, and understands what tests are affected by code changes.
 
 See [the test guide here](https://quarkus.io/guides/getting-started-testing). 
@@ -410,9 +410,10 @@ Response rep = given()
         Assertions.assertNotNull(names);
         Assertions.assertEquals(3,names.length);
 ```
-Application configuration will be used in any active profile. The built-in profiles in Quarkus are: `dev, prod and test`. The `test` profile will be used every time you run the @QuarkusTest
 
-@QuarkusTest helps to get the CDI working. But there is still an issue on inject properties
+Application configuration will be used in any active profile. The built-in profiles in Quarkus are: `dev, prod and test`. The `test` profile will be used every time you run the `@QuarkusTest`.
+
+`@QuarkusTest` helps to get the CDI working. But there is still an issue on inject properties
  that may not be loaded due to proxy instance creation. So in test class 
  the properties need to be accessed via getter:
 For example to be sure the hostname is loaded from the `application.properties` do:
@@ -595,6 +596,18 @@ import javax.enterprise.event.Observes;
  void onStart(@Observes StartupEvent ev){}
 
  void onStop(@Observes ShutdownEvent ev) { }
+```
+
+### Testing with Moquito
+
+Declare the beans to Injected in the Test class. Then a static method to create and moquito them. See [this quarkus blog](https://quarkus.io/blog/mocking/)
+
+[Mockito API](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)
+
+```java
+ JMSQueueWriter mockJMSWriter = Mockito.mock(JMSQueueWriter.class);  
+        Mockito.when(mockJMSWriter.sendMessage(any(),anyString())).thenReturn("Success");
+        QuarkusMock.installMockForType(mockJMSWriter, JMSQueueWriter.class);  
 ```
 
 ### Reactive with Mutiny

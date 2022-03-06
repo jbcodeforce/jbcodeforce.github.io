@@ -102,34 +102,32 @@ confluentinc/cp-zookeeper:5.5.1                           2181/tcp, 2888/tcp, 0.
 
 ### On ROKS
 
-Get a 4.7 OCP cluster.
+???- Documentation
+    * [Preparing to install Business Automation Insights](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=capabilities-business-automation-insights)
 
 Some capabilities to remember:
 
 * Multiple installations of the Cloud Pak are supported, but each deployment must be installed in a different namespace and the operator needs to be installed for each namespace
-* Install an instance of Lightweight Directory Access Protocol (LDAP) for your intended deployment
+* Install an instance of Lightweight Directory Access Protocol (LDAP) for your intended deployment. Not necessary for BAI.
 
 [The questionnaire to assess before installation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=deployments-quick-reference-qa-demo)
 
-from 21.0.2 BAI is now part of Automation Foundation.
+Starting with 21.0.2, BAI is part of Automation Foundation.
 
-For demo purpose, using OperatorHub the steps are:
-
-1. Install oc, yq, 
-1. Ensure to have dynamic storage provisioning capability for the cluster.
-
-  > On IBM Cloud (ROKS), you can use the gidstorage classes: `ibmc-file-bronze-gid`, `ibmc-file-silver-gid`, and `ibmc-file-gold-gid`. 
-  > But this will not run on a multi zone cluster.
-
-1. Download the different scripts and configuration from [CloudPak Github](https://github.com/IBM/cloud-pak/) 
-
+* You sould use a custom deployment for the AutomationBase resource to control your Kafka and ElasticSearch deployment.
+   
    ```sh
-   curl https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-automation-3.1.0.tgz
-   tar -xvzf ibm-cp-automation-3.1.0.tgz
-   cd ibm-cp-automation/inventory/cp4aOperatorSdk/files/deploy/crs
-   tar -xvzf cert-k8s-21.0.2.tar
+   oc edit automationbase foundation-iaf
    ```
-1. Create project: `oc new-project cp4a`
+* When doing so modify the CP4BA custom resource to do not use the default deployment
+
+   ```yaml
+   shared_configuration:
+     sc_install_automation_base: false
+   ```
+
+* Define data permission access for Business Performance Center
+
 1. Create PVCs for storage and logs
 
   ```sh
