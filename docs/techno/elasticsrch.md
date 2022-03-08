@@ -30,7 +30,7 @@ Cluster can be extended by adding new node.
 
 ## Concepts:
 
-* **Documents**: things we are searching for, text or Json. Every document has a unique ID and a type
+* **Documents**: things we are searching for, text or Json. Every document has a unique ID and a type. They are immutable and has a `_version` field which is increase at each update. Old document is marked for deletion.
 * **Indices**: supports search into all documents within a collection of types. Indices contain *inverted indices* that let us search across 
 everything within them at once. *Mappings* define schema for the data within.
 * TF-IDF: Term Frequency (how often a term appears in a given document) * Inverse Document Frequency (term appears in all document). TF/ DF measures the *relevance* of a term in a document.
@@ -39,7 +39,8 @@ everything within them at once. *Mappings* define schema for the data within.
 * An index has two primary shards and two replicas. 
 * Write requests are routed to the primary shard then replicated
 * Read request are routed to the primary or any replica
-* number of primary shards can not be changed later
+* Number of primary shards can not be changed later
+* As a fully distributed solution, two clients can try to update at the same time. So Elasticsearch uses the "Optimistic Consurrency Control", by adding `_seq_no` and `_primary_term` fields to each document. With those fields a second update will generate an error. 
 
 ## Getting started
 
@@ -54,7 +55,7 @@ Use Kibana dev tools console to put documents and do query.
 From first experience with Kibana, use the `Sample eCommerce orders` from Analytics > Overview > Add data menu. See [this kibana tutorial](https://www.elastic.co/guide/en/kibana/7.x/get-started.html).
 
 
-### Movie rating
+### Some examples / playground
 
 The files are in this projectL `studies/elasticsearch/ml-latest-small` folder.
 
@@ -73,13 +74,21 @@ The ouput is
 {"_index":"movies","_id":"109487","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":0,"_primary_term":1}
 ```
 
-* Upload the movies:
+* Upload movies using bulk
 
 ```sh
-curl -X PUT localhost:9200/movies -H 'content-type: application/json' -d'@movies.csv'
+curl -X POST localhost:9200/movies/_bulk -H 'content-type: application/json' -d'@movies.json'
 ```
 
-To specify a date mapping do
+* Upload a new collection
+
+```sh
+ curl -X PUT localhost:9200/_bulk  -H 'content-type: application/json' --data-binary @series.json
+```
+
+[Bulk API documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html)
+
+* To specify a date mapping do
 
 ```sh
 curl -X PUT localhost:9200/movies -H 'content-type: application/json' -d '
@@ -111,6 +120,158 @@ curl -X GET localhost:9200/movies/_mapping
             "description" : { "analyzer": "english" }
         }
     ```
+
+* Search using [Lucene query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
+
+```sh
+# with ID
+curl -X GET "localhost:9200/movies/_doc/58559?pretty"
+
+# with query
+curl -X GET "localhost:9200/movies/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "match": {
+      "title": "Star Trek"  
+    }
+  }
+}
+'
+```
+The results will include records wil Star or Trek or both in the title. It will add a confident `_score`.
+
+```json
+  "max_score" : 2.4749136,
+  "hits" : [
+      {
+        "_index" : "movies",
+        "_id" : "135569",
+        "_score" : 2.4749136,
+        "_source" : {
+          "id" : "135569",
+          "title" : "Star Trek Beyond",
+          "year" : 2016,
+          "genre" : [
+            "Action",
+            "Adventure",
+            "Sci-Fi"
+          ]
+        }
+      },
+      {
+        "_index" : "movies",
+        "_id" : "122886",
+        "_score" : 0.6511494,
+        "_source" : {
+          "id" : "122886",
+          "title" : "Star Wars: Episode VII - The Force Awakens",
+          "year" : 2015,
+          "genre" : [
+            "Action",
+            "Adventure",
+            "Fantasy",
+            "Sci-Fi",
+            "IMAX"
+          ]
+        }
+      }
+```
+
+* **Update:** can be done with a PUT and the full document as payload or use a partial update with a POST.
+
+```sh
+curl -X PUT  -H 'content-type: application/json'  localhost:9200/movies/_doc/109487  -d '\n{\n    "genre": ["IMAX", "Sci-Fi"], "title": "Interstellar", "year": 2024\n}\n'
+# OR Partial update
+curl -X POST  -H 'content-type: application/json'  localhost:9200/movies/_doc/109487/_update -d '{"title": "Interstellar 2"}'
+# Partial update with retry conflict
+curl -X POST  -H 'content-type: application/json'  localhost:9200/movies/_doc/109487/_update?retry_on_conflict=5 -d '{"doc": {"title": "Interstellar 2"}}'
+```
+
+### Searching
+
+To search on exact word , for example on some enumerated value, use a mapping for the enumerated field to be of type `keyword`.
+
+### Data Modeling
+
+Recall that, **normalized** data is used to reduce storage space, and it makes easy to change one field in one of the aggregated records. But it requires two queries to get the full expected data: the movie title and the rating.
+
+For parent-child relationship we can create series by joining two collections. This is done by defining a mappings of type `join`.
+
+```sh
+curl -X PUT localhost:9200/series -H 'content-type: application/json' -d '
+{
+    "mappings": {
+        "properties": {
+            "film_to_franchise" : {
+                "type": "join",
+                "relations": {"franchise": "film" }
+            }
+        }
+    }
+}'
+# results
+{"acknowledged":true,"shards_acknowledged":true,"index":"series"}
+```
+* Get default mappings for an index
+
+```sh
+curl -XGET "http://127.0.0.1:9200/demo-default/_mapping?pretty=true"
+```
+* Upload data: (see folde/studies/elasticsearch/ml-latest-small)
+
+```sh
+curl -X PUT localhost:9200/_bulk  -H 'content-type: application/json' --data-binary @series.json
+```
+
+* Search using the parent - child relationship
+```json
+{ 
+    "query": { 
+        "has_parent": { 
+            "parent_type": "franchise", 
+            "query": {
+                "match": { 
+                    "title": "Star Wars"}
+            }
+        }
+    }
+}
+```
+Should return the films from Start Wars franchise.
+
+or
+
+```json
+{ 
+    "query": { 
+        "has_child": { 
+            "type": "film", 
+            "query": {
+                "match": { 
+                    "title": "The Force Awakens"}
+            }
+        }
+    }
+}
+```
+
+Should return "Star Wars" franchise.
+
+## Flattened Datatype
+
+To control the explosion of mappings, when the data model is hierarchy, ElasticSearch uses the concepts of flattened datatype. The host content is flattened:
+
+```
+curl -XPUT "http://127.0.0.1:9200/demo-flattened/_mapping" -d'{
+  "properties": {
+    "host": {
+      "type": "flattened"
+    }
+  }
+}'
+```
+
+No tokenizer or analyzer will be used in flattened. 
 
 ## Deploying on OpenShift
 
@@ -151,3 +312,7 @@ curl -X POST  -w "%{http_code}" -H 'content-type: application/json' -d@"../kconn
 
 * [Sundog material from the Udimy training](https://sundog-education.com/elasticsearch/)
 * [Quarkus elasticsearch guide](https://quarkus.io/guides/elasticsearch) for simple CRUD of java bean to json doc into ES.
+
+
+## Kibana
+
