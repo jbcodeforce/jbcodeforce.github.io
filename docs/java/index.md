@@ -316,3 +316,13 @@ Projects where I used it:
             .withEnv("COUCHDB_USER", "admin").withEnv("COUCHDB_PASSWORD", "password");
     public static  PersonRepository repo = new PersonRepository();
 ```
+
+## Enterprise Inject
+
+`javax.enterprise.inject.Produces`: Identifies a producer method or field. [CDI specification](http://download.oracle.com/otn-pub/jcp/web_beans-1.0-fr-eval-oth-JSpec/web_beans-1_0-fr-eval-spec.pdf). A producer method acts as a source of objects to be injected, where:
+
+* the objects to be injected are not required to be instances of beans, or
+* the concrete type of the objects to be injected may vary at runtime, or
+* the objects require some custom initialization that is not performed by the bean constructor.
+
+The container is responsible for processing all methods and fields marked with a @Produces annotation, and will normally do this when your application is deployed. The processed methods and fields will then be used as part of the injection point resolution for managed beans, as needed

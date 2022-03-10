@@ -316,3 +316,12 @@ curl -X POST  -w "%{http_code}" -H 'content-type: application/json' -d@"../kconn
 
 ## Kibana
 
+[Product documentation](https://www.elastic.co/guide/en/kibana/current/index.html)
+
+Major constructs we can manage in Kibana:
+
+* Analytics
+
+* Ingestion
+* Indices
+* Data Views
