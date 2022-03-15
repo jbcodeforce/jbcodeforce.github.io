@@ -1,7 +1,7 @@
 # Cloud Pak for Automation
 
 !!! info
-    Updated 2/14/2022
+    Updated 3/14/2022
 
 [IBM Cloud Pak for Business Automation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3) is a set of integrated market-leading software, running on top of Red Hat OpenShift and therefore built for any hybrid cloud.
 Support following business automation capabilities — for content, decisions, process mining,
@@ -46,9 +46,11 @@ Companies need to apply intelligent automation across the enterprise to improve 
 
 * Business data is inaccessible and siloed preventing a complete view of customers and hindering compliance initiatives
 * Performance gaps caused by manual systems prevent efficiency and lack of reliable insights prevents operational visibility
-* Execution on key initiaives is slowed because of the lack of the right tools or right skills
+* Execution on key initiatives is slowed because of the lack of the right tools or right skills
 
-### Product capabilities
+---
+
+## Product capabilities
 
 * Process mining: to discover inefficiencies in existing business process.
 * Robotic process automation: digital employees
@@ -57,6 +59,12 @@ Companies need to apply intelligent automation across the enterprise to improve 
 * Content: share and manage content - connect content to process
 * Decision
 * Workflow: choreograph human and systems. Improve consistency across buiness operations with increased visibility. 
+
+### Foundational services
+
+* Zen UI hostname is now the only hostname that is exposed externally - it is the unique front door to access any capabilities
+* Authentication and single sign-on (SSO) are now provided by IBM Cloud Pak foundational services. If Zen cannot authenticate the user, then the request is redirected to the Identity and Access Management (IAM) service for authentication. If the user is authenticated, Zen issues a JWT token. Zen JWT tokens are understood and shared by all the Cloud Pak components.
+
 
 ### Business Automation Workflow Authoring and Automation Workstream Services
 
@@ -84,7 +92,11 @@ Use Business Automation Application (BAA) to create and run business application
 
 When selecting busness automation application, we can select business automation navigator and business orchestration optional components.
 
-## Concepts
+---
+
+## Installation
+
+### Concepts
 
 Docker images help to maintain product delivery and access to iFixes from a central registry. 
 Kubernetes helps to standardize on Operation and SRE skillset, innate HA, better application isolation, 
@@ -100,12 +112,11 @@ and improved portability.
 * All application tier federated by default (BAW) 
 
 
-## Operators
+### Operators
 
 * **Operator** is a long running process to perform products (Operands) deployment and Day 2 operations, like upgrades, failover, or scaling. Operator is constantly watching your cluster’s desired state for the software installed. 
 * **Operator Lifecycle Manager (OLM)**: Helps you to deploy, and update, and generally manage the lifecycle of all of the Operators (and their associated services) running across your clusters.
 The operator lifecycle manager (OLM) acts as the management system for the operators on that cluster. Cluster administrators control which operators are available and who can interact with the running operators.
-
 
 The following operators are installed with Cloud Pak for Automation
 
@@ -140,7 +151,7 @@ Here is an [important note](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automa
 
 Depending on the selected capabilities, the needed components of the foundation are installed. The final custom resource file combines capabilities and components from one or more capabilities.
 
-## Product installation general steps
+### Product installation general steps
 
 * [Preparing OpenShift Cluster](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=deployment-preparing-your-cluster):
 The installation needs a dynamic storage class and a block storage class. 
@@ -150,7 +161,7 @@ If any other Cloud Pak needs to be installed into the same cluster, you must use
 For production deployment Tivoli Active Directory or Microsoft Active Directory are recommended.
 * Install Openshift GitOps operator
 * Install Cloud Pak Business Automation operator in `openshift-operators` monitoring All namespaces.
-* Install operand using Custom Resource for each targeted environment (dev, staging, production)
+* Install operand using Custom Resource for each targeted environment (dev, staging, production). This is the tricky part as coherence is needed.
 
 
 ### Capacity
@@ -173,77 +184,11 @@ For demo purpose 3 nodes are enough.
 
 This section is a summary of the [product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=openshift-installing-starter-deployments) with links to assets to deploy with CLI.
 
-#### Preparing
+### Preparing
 
-* Get last compatible `kubectl` and [oc](https://mirror.openshift.com/pub/openshift-v4/clients/oc/) CLIs
-
-    ```sh
-    curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" 
-    ```
-
-* Get `podman` CLI or the `docker` CLI.
-* Get entitlement key and create a secret named `ibm-entitlement-key` and set it in environment variable: `IBM_ENTITLEMENT_KEY`
-* To create CR usiing IBM script, download the [Container Application Software for Enterprises (CASE) repository](https://github.com/IBM/cloud-pak)  which includes a zip file (cert-kubernetes) with configurations and scripts linked to the product version. The [dba-gitops-catalog repo](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/) includes operators subscriptions, and the [dba-infra-gitops](https://github.com/ibm-cloud-architecture/dba-infra-gitops) include boostrap scripts to get this CASE containt. 
+[See the instructions in infra repo](https://github.com/ibm-cloud-architecture/dba-infra-gitops/)
 
 
-    ```sh
-    git clone https://github.com/ibm-cloud-architecture/dba-infra-gitops/
-    # Modify the following script to specify any new product version and your IAM user name
-    code ./bootstrap.sh
-    ```
-
-    > Inside this `ibm-cp-automation`archive, there is a script to build the CR for the CP4Automation components you want to deploy. See the [getCpAutomationSDK script](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/scripts/getCpAutomationSDK.sh) to automate the 
-download and extraction of the CASE asset.
-
-* Get entitlement key and create a secret named `ibm-entitlement-key` and one named `admin.registrykey`.
-
-    ```sh
-    # need that if Operator is set on All namespace
-    ./scripts/defineRegistrySecret.sh ibm-entitlement-key openshift-operators
-    ./scripts/defineRegistrySecret.sh admin.registrykey openshift-operators
-    # need this for each namespace where the product will be installed
-    ./scripts/defineRegistrySecret.sh admin.registrykey cp4a
-    ./scripts/defineRegistrySecret.sh ibm-entitlement-key cp4a
-    ```
-
-* Define IBM Catalog source:
-
-    ```sh
-    oc apply -f ibm-catalog/catalog_source.yaml    
-    ```
-
-* Create one namespace: `cp4a`, create one service accounts, create operator-shared pvc and log pvc.
-
-    ```sh
-    oc apply -k ./cp4ba-operator/overlays
-    ```
-
-    What you should get as deployed operators (use different namespace if deployed on specific scoped ns):
-
-    ```sh
-    oc get operators -n openshift-operators
-
-    ibm-automation-elastic.openshift-operators                26h
-    ibm-automation-eventprocessing.openshift-operators        26h
-    ibm-automation-flink.openshift-operators                  26h
-    ibm-automation-insightsengine.openshift-operators         26h
-    ibm-automation.openshift-operators                        26h
-    ibm-cp4a-operator.openshift-operators                     26h
-    ibm-cp4a-wfps-operator.openshift-operators                26h
-    ```
-
-* Get two storage classes: 
-
-    > File storage keeps data as a hierarchy of files in folders (`ibmc-file-gold-gid`). Block storage chunks data into organized and evenly sized volumes (used in RWO) ( In ROKS the class is: `ibmc-block-gold-gid`).
-
-* Get role and cluster role names of the operator to give access to `cp4admin` user:
-
-    ```sh
-    oc get role -n openshift-operators | grep ibm-cp4a-operator | sort -t"t" -k1r | awk 'NR==1{print $1}'
-    > ibm-cp4a-operator.v21.3.2-ibm-cp4a-operator-6667999868
-    oc get clusterrole -n openshift-operators | grep ibm-cp4a-operator | sort -t"t" -k1r | awk 'NR==1{print $1}'
-    
-    ```
 
 #### Installing
 
@@ -252,11 +197,7 @@ The "starter" deployment provisions Db2® and OpenLDAP with the default values, 
 Deployment is centralized by one unique CR that specifies the capabilities to use, and to configure how to access
 the external services like LDAP.
 
-The `cert-kubernetes` folder includes the [./scripts/cp4a-deployment.sh script to build](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=scripts-installing-capabilities-by-running-deployment-script) 
-to be used to create Custom Resource.
-
-* Create a CP4BA deployment cluster CR: See example in [BAW BAI CR](https://github.com/ibm-cloud-architecture/dba-infra-gitops/blob/main/environments/dba-dev/services/baw-bai/base/baw-bai-cr.yaml) in
-a dba-infra-gitops project. Can be done manually or with the `./cert-kubernetes/scripts/cp4a-deployment.sh ` tool.
+* Create a CP4BA deployment cluster CR: See example in [BAW BAI CR](https://github.com/ibm-cloud-architecture/dba-infra-gitops/blob/main/environments/dba-dev/services/baw-bai/base/baw-bai-cr.yaml) in a dba-infra-gitops project. Can be done manually or with the `./cert-kubernetes/scripts/cp4a-deployment.sh ` tool.
 
 
   ```sh
@@ -276,9 +217,24 @@ a dba-infra-gitops project. Can be done manually or with the `./cert-kubernetes/
 See also [the SWAT team repository](https://github.com/IBM/cp4ba-rapid-deployment) to setup CP4Automation for demonstration purpose.
 
 
-This is the first step of [the bootstrap script](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/bootstrap.sh).
+### Air Gapped
 
-This script runs `cp4a-clusteradmin-setup.sh` which deploys CP4A-operators.
+* Need to have an existing container image registry, protected with a TLS certificate signed by a Custom CA
+* Update pull-secret by adding the information fo your own registry
+
+    ```sh
+
+    ```
+* Mirror OpenShift Container Platform
+* Mirror RedHat Operator Catalog (OperatorHub)
+* Mirroring CloudPak Container Images
+
+> TBC
+
+???- "See documentation"
+    * [OpenShift: Mirroring images for a disconnected installation](https://docs.openshift.com/container-platform/4.9/installing/installing-mirroring-installation-images.html)
+    * [Production deployment gitops note](https://production-gitops.dev/infrastructure/restricted-networks/)
+
 
 ### Production deployment
 
@@ -318,6 +274,7 @@ This script will ask:
 * deployment type (demo, enterprise)
 * OpenShift deployment type (ROKS, OCP, CNCF)
 * Automation capability: 
+
         1) FileNet Content Manager 
         2) Operational Decision Manager 
         3) Automation Decision Services 
@@ -333,7 +290,7 @@ This script will ask:
 
 ## Getting Started
 
-Once installed, all the URLs, user and password information, you need will be present in the `icp4adeploy-cp4ba-access-info` config map
+Once installed, all the URLs, user and password information, you will need are in the `icp4adeploy-cp4ba-access-info` config map
 
 ```sh
 oc describe cm icp4adeploy-cp4ba-access-info 
@@ -346,6 +303,7 @@ oc describe cm icp4adeploy-cp4ba-access-info
 oc get csv --all-namespaces | grep common-service-
 ```
 
+> TBC
 
 ## The Client Onboarding demo
 

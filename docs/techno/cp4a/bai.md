@@ -61,11 +61,14 @@ There is a generic Flink job, call the event-forwarder to process events from ka
 
 ### Event Sources
 
+Sources of events for BAI are any of:
+
 * Components of the IBM Cloud Pak for Business Automation platform
 * Any Kafka records in Kafka Topics
 * Supports BPM events to monitor the lifecycles of processes and activities, looped activities, 
 tasks, gateways, timers, messages, and tracking groups. Aggregation of process time series, or from the business data
-* Most of the older DBA products sent events in a predefined format, while ADS, Workforce Insight or custom event source use Avro Schema.
+* Most of the older DBA products sent events in a predefined format, while ADS, Workforce Insight or custom event source uses Avro Schema.
+
 
 ### High Availability
 
@@ -102,7 +105,7 @@ confluentinc/cp-zookeeper:5.5.1                           2181/tcp, 2888/tcp, 0.
 
 ### On ROKS
 
-???- Documentation
+???- "Documentation"
     * [Preparing to install Business Automation Insights](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=capabilities-business-automation-insights)
 
 Some capabilities to remember:
@@ -142,11 +145,10 @@ Starting with 21.0.2, BAI is part of Automation Foundation.
 
 [Sample data for IBM Business Automation Insights](https://github.com/icp4a/bai-data-samples)
 
-## More reading
-
-* [BAI product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=services-business-automation-insights)
-* [ODM Kibana dashboard](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=dashboards-odm-decisions)
-* [BPM or ODM sample dashboards](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=insights-samples)
-* [ODM and BAI Getting Started document](https://github.com/ODMDev/decisions-bai-gettingstarted)
-* [handle custom events](https://github.com/icp4a/bai-emitter-samples)
-* [Notebooks for Machine learning with Business Automation Insights](https://github.com/IBM-DBA/bai-ai-samples)
+???- "More reading"
+    * [BAI product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=services-business-automation-insights)
+    * [ODM Kibana dashboard](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=dashboards-odm-decisions)
+    * [BPM or ODM sample dashboards](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=insights-samples)
+    * [ODM and BAI Getting Started document](https://github.com/ODMDev/decisions-bai-gettingstarted)
+    * [handle custom events](https://github.com/icp4a/bai-emitter-samples)
+    * [Notebooks for Machine learning with Business Automation Insights](https://github.com/IBM-DBA/bai-ai-samples)
