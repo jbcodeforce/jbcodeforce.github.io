@@ -315,15 +315,15 @@ oc get csv --all-namespaces | grep common-service-
 Day 1 is installation. Day 2 is about keeping steady state of the application and platform.
 
 1. Present Operator Hub Catalog - search for IBM product
-1. Present Gitops Catalog: https://github.com/ibm-cloud-architecture/dba-gitops-catalog and the the [IBM catalog definition](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/ibm-catalog/catalog_source.yaml)
-1. In the `openshift-operators` project explain that operators are running as pod and are monitoring all Namespaces. so Operands can be deploy anywhere. Some common services operators are running in the `ibm-common-services` project. It is possible to isolate the deployment in one project.
+1. Present Gitops Catalog: [dba-gitops-catalog](https://github.com/ibm-cloud-architecture/dba-gitops-catalog) and the the [IBM catalog definition](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/ibm-catalog/catalog_source.yaml)
+1. In the `openshift-operators` project, explain that operators are running as pods and are monitoring all Namespaces. so Operands can be deployed anywhere. Some common services operators are running in the `ibm-common-services` project. It is possible to isolate the deployment in one project like in the cp4ba project in below figure (also techzone pre-deployed cp4ba).
 
     ![](./images/CP4BA_Operators.png)
 
-1. Those operators were deployed from a set of subscriptions: See the https://github.com/ibm-cloud-architecture/dba-gitops-catalog/tree/main/ibm-cp4a-operator/operator/base subscription.yaml file.
-1. Go to the `IBM Cloud Pak for Business Automation` to explain the main operator cp4ba deploy with the subscription. 
+1. Those operators were deployed from a set of subscriptions: See [this subscription.yaml](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/tree/main/ibm-cp4a-operator/operator/base) file.
+1. Go to the `IBM Cloud Pak for Business Automation` operator UI to explain the operator UI, review the subscription yaml. 
 1. Review the structure of the [dba-infra-gitops](https://github.com/ibm-cloud-architecture/dba-infra-gitops) as a GitOps repository for bootstrapping operators, secrets and then deploy to different environments. 
-1. Review of the [BAW-BAI custom resource](https://github.com/ibm-cloud-architecture/dba-infra-gitops/) explain the configuration and options
+1. Review of the [BAW-BAI custom resource](https://github.com/ibm-cloud-architecture/dba-infra-gitops/blob/main/environments/cp4ba/services/all-dba/icp4acluster-icp4adeploy.yaml) explain the configuration and options
 
       ```yaml
       sc_deployment_patterns: "foundation,workflow-workstreams"
@@ -350,7 +350,8 @@ Day 1 is installation. Day 2 is about keeping steady state of the application an
 
 1. Quick access to product Zen UI(cpd)
 
-    A ConfigMap is created in the namespace to provide the cluster-specific details to access the services and applications. The IBM Cloud Pak Platform (Zen) UI is used to provide a role-based user interface for all Cloud Pak capabilities. 
+    A ConfigMap is created in the namespace to provide the cluster-specific details to access the services and applications. The IBM Cloud Pak Platform (Zen) UI is used to provide a role-based user interface for all Cloud Pak capabilities:
+    
     * Get the cpd URL from the access-info configmap in the OpenShift console.
     * Use LDAP enterprise loing, `cp4admin` user
     * In the main Automation Console, use Design > Business automations menu to start the designer front end. Select Workflow, > Hiring Sample, and open it.
