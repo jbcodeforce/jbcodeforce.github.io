@@ -2,21 +2,20 @@
 
 Event-driven solutions are complex to implement, a lot of parts need to be considered, and I did 
 not find any articles that goes into how to do things with the last technologies available 
-to us ('last' meaning November 2021). 
+to us ('last' meaning March 2022). 
 
 I want to propose a set of articles to address this end-to-end developer's experience, not 
 fully in the perfect order of developer's activities, 
-as normally  we should start by event-storming workshop with the business subject matter experts 
-and apply Domain Driven Design approach, but with enough content, tools and practices to let
-you start your journey. 
+as normally  we should start by doing an event-storming workshop with the business subject matter experts 
+and apply Domain Driven Design approach to design the different event-driven microservices. 
 
-At the minimum level an event-driven solution will have producer applications, event brokers, 
+At the minimum level, an event-driven solution will have producer applications, event brokers, 
 consumer applications for event processing and 
-sinks to keep data for longer term. As we want governance to understand how to consume
+sinks to keep data for longer term or do other function like indexing and querying. As we want governance to understand how to consume
 data and who is doing what in this distributed solution, we need to add schema registry, 
 [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) management complemented with metadata management. 
 
-So we have a lot to cover.
+So we have a lot to cover, but three parts should be enough to swallow.
 
 * Part 1: is about reviewing the components to consider and getting started with GitOps to deploy all the components
 * Part 2: addresses producer code development with OpenAPI and AsyncAPI
@@ -24,40 +23,39 @@ So we have a lot to cover.
 
 ---
 
-## Part 1: Event-driven solution component and getting started
+## Part 1: Event-driven solution components and getting started
 
 ### Components view
 
 The following figure illustrates a minimum set of components, we will need to consider 
-in any event-driven solution:
+in any event-driven solution to address production deployment:
 
 ![](./images/components.png)
 **Figure 1: a component view of a simple solution**
 
-* Kafka producer(s) (green boxes on the left) are exposing REST API to get data from external sources like IoT, mobile or webapp forms. They produce
-records to Kafka topic.
-* Kafka Brokers, in this article I will use IBM Event Streams which is a Kafka packaging with enhanced features.
-* A schema registry, based on the [apicur.io](https://www.apicur.io/) open source project which is also included in IBM Event Streams
-* One or more consumers (green boxes on the right), can consume order events, using streaming processing or actingg as a sink.
+* On the left, first green box is a microservice, we will do an order management service, that manage Order Entity life cycle, exposes REST APIs to be used by a single page webapp or a mobile app. The service produces records to Kafka topic to represent fact about the Order Entity life cycle: OrderCreated, OrderUpdated, OrderDelivered, OrderCancelled...
+* A cluster of Kafka Brokers, in this article I will use IBM Event Streams which is an open-source Kafka packaging with enhanced features.
+* A schema registry, based on the [apicur.io](https://www.apicur.io/) open source project which is also included in IBM Event Streams.
+* One or more consumers (green boxes on the right), can consume order events, using streaming processing. I will do a simple reactive messaging app as consumer, but also a stateful streaming processing with Apache Flink.
 * Integrated API management (IBM API connect) to manage both REST end points and asyncAPI definitions. The AsyncAPI is defined
 for Kafka binding by connecting to the Event Stream Kafka Topic. It will work for any Kafka brokers.
-* Event end-point gateway to control the communication between consumers and kafka brokers, and an API gateway is doing in REST APIs context.
-* S3 sink Kafka connector to move events for longer term storage like S3 buckets. We will use IBM cloud object storage in the demonstration.
-* Elastic Search sink Kafka connector to move events to indexing and searching product like Elastic Search.
-* The open source project, Egeria as a metadata management framework to manage metadata about brokers, topics, producer, streaming and consumer apps.
+* Event end-point gateway to control the communication between consumers and kafka brokers, and an API gateway is controlling REST APIs traffic. I will not deploy such gateway as there are already a lot of content in this practices since multiple years.
+* S3 sink Kafka connector to move events to a long-term storage capability like S3 buckets. We will use IBM Cloud Object Storage in the demonstration.
+* Elastic Search sink Kafka connector to move events to indeces in Elastic Search.
+* The open source project, Apache Atlas is used to keep metadata about brokers, topics, producer, streaming and consumer apps.
 
-The numbered flows highlight :
+The numbers highlight some top-level developer's activities:
 
-1. We should consider the developer of the producer application. This application can take different form, but let
+1. We should consider the developer of the producer application. This application can take different forms, but let
 assume it will be a Java microprofile, reactive messaging app (based on [Quarkus](http://quarkus.io)). The application exposes REST resources defined
 via OpenApi document. During the development process the OpenAPI document is created from JAXRS annotation, and is pushed to an API management,
 and deployed to an API gateway (Step 1 in figure above). 
 1. When the application starts to be deployed, it produces events to the `orders` topic, the schemas defined
 for this messages, is pushed to a schema registry at mostly the same time as the message is published (Step 2). 
-The schema could also have been pushed via API or user interface. We will address DevOps avro schema deployment later.
-1. To make this topic and schema governed and known, it is possible to connect API management to the kafka topic
- and add metadata to document who own the "contract" of this topic. The asyncAPI document is then managed inside 
- the API management (IBM App Connect) (Step 3). 
+The schema could also have been pushed via API or user interface. We will address the DevOps avro schema deployment later.
+1. To make this topic and schema governed and known, it is possible to connect IBM API Connect to the kafka topic
+ and add any metadata to document who own the "contract" of this topic (the producer application). The asyncAPI document is then managed inside 
+ the API management (Step 3). 
 1. Now the developer of the consumer application will get the list of topics and their metadata inside the developer
 portal of the API management. He downloads the asyncAPI (Step 4) and get the contract and avro schemas. 
 1. When the application starts, it will consume from a topic, get the schema identifier

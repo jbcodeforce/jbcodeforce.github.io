@@ -1,7 +1,7 @@
 # Cloud Pak for Automation
 
 !!! info
-    Updated 3/14/2022
+    Updated 3/17/2022
 
 [IBM Cloud Pak for Business Automation](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3) is a set of integrated market-leading software, running on top of Red Hat OpenShift and therefore built for any hybrid cloud.
 Support following business automation capabilities — for content, decisions, process mining,
@@ -188,8 +188,6 @@ This section is a summary of the [product documentation](https://www.ibm.com/doc
 
 [See the instructions in infra repo](https://github.com/ibm-cloud-architecture/dba-infra-gitops/)
 
-
-
 #### Installing
 
 The "starter" deployment provisions Db2® and OpenLDAP with the default values, so you do not need to prepare them in advance.
@@ -287,6 +285,13 @@ This script will ask:
         (a) Development Environment 
         (b) Runtime Environment 
 
+#### [Uninstall](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=uc-uninstalling-capabilities-from-command-line)
+
+* Start by deleting the operator
+* You can delete your custom resource deployments by deleting the CR YAML file or the CR instance.
+* After you uninstall, you might want to clean up certain files and secrets that you applied to the cluster for specific capabilities.
+* [Unsintall foundation services](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=online-uninstalling-foundational-services)
+* []()
 
 ## Getting Started
 
@@ -304,6 +309,88 @@ oc get csv --all-namespaces | grep common-service-
 ```
 
 > TBC
+
+## Day 1 & Day 2 Demo script
+
+Day 1 is installation. Day 2 is about keeping steady state of the application and platform.
+
+1. Present Operator Hub Catalog - search for IBM product
+1. Present Gitops Catalog: https://github.com/ibm-cloud-architecture/dba-gitops-catalog and the the [IBM catalog definition](https://github.com/ibm-cloud-architecture/dba-gitops-catalog/blob/main/ibm-catalog/catalog_source.yaml)
+1. In the `openshift-operators` project explain that operators are running as pod and are monitoring all Namespaces. so Operands can be deploy anywhere. Some common services operators are running in the `ibm-common-services` project. It is possible to isolate the deployment in one project.
+
+    ![](./images/CP4BA_Operators.png)
+
+1. Those operators were deployed from a set of subscriptions: See the https://github.com/ibm-cloud-architecture/dba-gitops-catalog/tree/main/ibm-cp4a-operator/operator/base subscription.yaml file.
+1. Go to the `IBM Cloud Pak for Business Automation` to explain the main operator cp4ba deploy with the subscription. 
+1. Review the structure of the [dba-infra-gitops](https://github.com/ibm-cloud-architecture/dba-infra-gitops) as a GitOps repository for bootstrapping operators, secrets and then deploy to different environments. 
+1. Review of the [BAW-BAI custom resource](https://github.com/ibm-cloud-architecture/dba-infra-gitops/) explain the configuration and options
+
+      ```yaml
+      sc_deployment_patterns: "foundation,workflow-workstreams"
+      ## The optional components for the "foundation pattern" are ums, bas and bai.  If the user selects any of those optional components,
+      ## it will be set here. Available option:
+      sc_optional_components: "baw_authoring,business_orchestration,workstreams,bai"
+      ```
+
+1. Go to ArgoCD UI and demonstrate that argo applications are monitoring the git repository for any updates, and apply change to the target manifests.
+  
+    * Get GitOps admin user's password
+
+      ```sh
+      oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
+      ```
+
+    * Get URL:
+    
+      ```sh
+       chrome https://$(oc get route openshift-gitops-server -o jsonpath='{.status.ingress[].host}'  -n openshift-gitops)
+      ```
+
+    ![](./images/argocd-apps.png)
+
+1. Quick access to product Zen UI(cpd)
+
+    A ConfigMap is created in the namespace to provide the cluster-specific details to access the services and applications. The IBM Cloud Pak Platform (Zen) UI is used to provide a role-based user interface for all Cloud Pak capabilities. 
+    * Get the cpd URL from the access-info configmap in the OpenShift console.
+    * Use LDAP enterprise loing, `cp4admin` user
+    * In the main Automation Console, use Design > Business automations menu to start the designer front end. Select Workflow, > Hiring Sample, and open it.
+
+    ![](./images/bpmn-editor.png)
+    
+    * You can run the process step by step using the top right arrow.
+
+1. Product update: 
+
+    * An update to the custom resource (CR) overwrites the deployed resources. The operator applies the changes during the control loop (observe, analyze, act) that occurs as a result of constantly watching the state of the Kubernetes resources.
+    * To remove a capability from the deployment, locate the specific XXX_configuration section and delete this line along with all of its parameters.
+    * In some cases, changes that you make in the custom resource YAML by using the operator or directly in the environment are not automatically propagated to all pods
+
+1. Product upgrade 
+
+    * Before you start an upgrade, define a backup recovery process and take snapshots to enable rollback if needed
+    * [Preparing your deployed custom resource for an upgrade](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=containers-preparing-your-deployed-custom-resource-upgrade)
+    * Transparent upgrade by changing the operator release / channel
+    * Modify the differemt Custom Resource
+
+1. Explain monitoring
+
+    * With Red Hat OpenShift Container Platform, you can monitor the OpenShift platform.
+    * The monitoring stack for the platform is based on Prometheus and Grafana.
+    * During Day 1 operation you may want to keep time series data in a persistence volume, and configure the alert manager to forward to the good destination
+
+    ![](./images/ocp-monitoring.png)
+
+    * Day 02 operations include verifying platform metrics, performance data, and alerts are reaching the correct destination
+    * Knowledge base: [IBM Cloud architecture red-hat-openshift-container-platform-day-2-ops](https://www.ibm.com/cloud/architecture/content/course/red-hat-openshift-container-platform-day-2-ops). Some guiding principles for the definition and design of Site Reliability Engineer activities:
+
+        * Immutable / Disposable Infrastructure
+        * Infrastructure as Code
+        * Automate as much as possible
+
+    * At the application level spend time to define the saturation monitor goals. On Day 2, verify application metrics, monitor app to verify it acts as expected, liveness, health check.
+    * Go to Monitoring in OCP console Monitor> 
+
+    ![](./images/grafana-ocp.png)
 
 ## The Client Onboarding demo
 

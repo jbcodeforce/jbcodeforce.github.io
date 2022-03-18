@@ -126,7 +126,9 @@ nav:
           - ODM: techno/cp4a/odm.md
           - Automation Decision Service: techno/cp4a/ads.md
           - Process mining: techno/cp4a/process-mining.md
-      - Cloud Pak integration: techno/integration/cp4i.md
+      - Cloud Pak integration: 
+          - Overview: techno/integration/cp4i.md
+          - EEPM: techno/integration/eepm.md
       - Code Engine: techno/code-engine.md 
       - Egeria: techno/egeria.md
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/

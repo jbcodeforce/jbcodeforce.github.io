@@ -26,9 +26,17 @@
    * Protect transactional integrity
    * Balance workloads
 
+## CP4I
+
+All components of CP4I can be combined in any way as required and are deployed 100% as containers. Each capability is deployed and managed by a corresponding operator.
+
+CP4I also provides an optional Platform Navigator, an over-arching Management UI layer that provides a common UI experience for various installed integration capabilities. Platform Navigator is not required to deploy individual CP4I capabilities, as each integration capability can be deployed independently leveraging its cloud native deployment operators.
+
+Currently, foundational services mostly are focused on identity and access management for Platform Navigator UI, single sign-on experience for UI, license metering
+
 ## 2021.4 release
 
-*  Event Endpoint Management to support buying at the API calls per month level to access kafka events or at the 
+* [Event Endpoint Management](/eepm) to support buying at the API calls per month level to access kafka events or at the 
 resource usage level.
 * AI-driven API Test generation is designed to automate the process of generating these API test cases. 
 Watson Insights for suggested tests are generated through analysing production OpenTracing data. 
@@ -42,22 +50,28 @@ There are different sources for installing Cloud Pak for integration.
 
 * [Product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=installing)
 * [Joel Gomez's Tinkering CP4I site](https://github.ibm.com/joel-gomez/tinkering-cp4i/) where most of the yamls are also in 
-the larger project:
+the larger project: []()
 * [The EDA gitops catalog](https://github.com/ibm-cloud-architecture/eda-gitops-catalog) for operators, and operand definitions. The
 readme for this project is kept up to date.
 
 1. Decide if the operators are installed at namespace scope or at cluster level. 
 With namespace scope, each project effectively behaves as a different tenant.
 There can be one Platform Navigator installed in each namespace, and that Platform Navigator owns only the instances in that namespace.
-A single instance ofIBM Cloud Pak foundational services is installed in the ibm-common-services namespace.
+A single instance of IBM Cloud Pak foundational services is installed in the ibm-common-services namespace.
+
+    Here are the operators to be installed:
+
+    * **IBM Cloud Pak for Integration**: Top level Cloud Pak for Integration operator that install all other Cloud Pak for Integration operators automatically
+    * **IBM Cloud Pak for Integration Platform Navigator**: Provides a dashboard and central services
+    * **IBM Automation foundation assets**: Stores, manages, retrieves and searches for integration assets
+    * **IBM Cloud Pak for Integration Operations Dashboard** tracing across instances to allow troubleshooting
+    * Then any product specific operator.
+
 1. Get your **IBM Entitlement Key**: The IBM Entitlement Key is required to pull IBM Cloud Pak specific container 
 images from the IBM Entitled Registry. To get an entitlement key, log in to MyIBM 
 Container Software Library with an IBMid and password associated with the entitled software. See
 [https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-obtaining-your-entitlement-key](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-obtaining-your-entitlement-key) 
 
-    * Select the View library option to verify your entitlement(s).
-    * Select the Get entitlement key to retrieve the key, place it in a file called `./assets/entitlement_key.text`
-    * Enter the email address used to generate the entitlement key in a file called `./assets/ibm_email.text`
    
 1. Prepare a suitable Red Hat OpenShift cluster with suitable storage.
 
