@@ -258,7 +258,7 @@ To access avro classes directly add this dependencies:
 
 Define one to many `.avcs` file in the `src/main/avro` folder. 
 
-See note above, the following is for older quarkus or pure java: to generate java beans from those schema 
+See note above, the following is for older quarkus version or pure java: to generate java beans from those schema 
 definitions, use the [avro maven plugin](https://mvnrepository.com/artifact/org.apache.avro/avro-maven-plugin). The order of schema processing is important to build the dependencies
  before the records using them (see imports statement below):
 
@@ -295,6 +295,55 @@ The beans created will be in the Java package as defined by the `namespace attri
   "type": "record",
   "name": "OrderEvent",
   "fields": []
+```
+
+### CloudEvent and Avro
+
+Need to get the following maven dependencies
+
+```xml
+    <dependency>
+      <groupId>io.cloudevents</groupId>
+      <artifactId>cloudevents-kafka</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-apicurio-registry-avro</artifactId>
+    </dependency>
+```
+
+With `quarkus-apicurio-registry-avro` a set of beans are created under target/generated-source/avsc
+
+```java
+     CloudEventBuilder ceb = CloudEventBuilder.v1().withSource(URI.create("https://github.com/jbcodeforce/eda-demo-order-count-kstream/"))
+        .withType("OrderEvent");
+        Address address = Address.newBuilder()
+            .setStreet("mission street")
+            .setCity("San Francisco")
+            .setState("CA")
+            .setCountry("USA")
+            .setZipcode("94000")
+            .build();
+        OrderEvent oe = OrderEvent.newBuilder()
+        .setOrderID("O01")
+        .setCustomerID("C01")
+        .setProductID("P01")
+        .setQuantity(10)
+        .setStatus("Pending")
+        .setCreationDate("2022-03-10")
+        .setUpdateDate("2022-03-15")
+        .setEventType("OrderCreated")
+        .setShippingAddress(address)
+        .build();
+        System.out.println(oe.toString());
+        String id = UUID.randomUUID().toString();
+        ByteBuffer bb = OrderEvent.getEncoder().encode(oe);
+        System.out.println(bb.toString());
+        byte[] data = new byte[bb.remaining()];
+        bb.get(data, 0, data.length);
+        CloudEvent ce = ceb.newBuilder().withId(id).withData("application/avro",  data).build();
+        System.out.println(ce.toString());
 ```
 
 ### From beans to schema

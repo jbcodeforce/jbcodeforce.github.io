@@ -24,7 +24,8 @@
 * Use yaml from one of the solution, be sure to include the namespace for the target project where EEPM will run.
 
 ```sh
-oc apply -k 
+# For rt-inventory demo
+oc apply -k environments/rt-inventory-dev/services/event-endpoint/overlays
 ```
 
 * Verify
@@ -46,9 +47,11 @@ oc get eventendpointmanager eda-eepm -ojsonpath={.status.phase}
 | nat cluster | NATS servers |
 | nats  cluster | NATS servers |
 
-...wait some time...
+...wait some long time...
 
 ## Getting Started
+
+### API Connect components
 
 An IBM API Connect cluster (defined through its APIConnectCluster Custom Resource Definition - CRD), deploys the following subsystems:
 
@@ -64,6 +67,18 @@ An IBM API Connect cluster (defined through its APIConnectCluster Custom Resourc
 
 * [Key initial configuration tasks that you must complete in the Cloud Manager user interface after installing and deploying IBM® API Connect](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=environment-cloud-manager-configuration-checklist)
 
+### Registering event gateway service
+
+Access to your event sources can be controlled by the Event Gateway Service. The service enforces runtime policies to secure and control access to Kafka topics hosted on one or more backend Kafka clusters.
+The Evt Gtw Service needs to be in the catalog. See [these instructions](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=sources-registering-event-gateway-service) to register the service.
+
+    ```sh
+    # example for getting the URL
+    oc get eventgatewaycluster apim-demo-egw -ojsonpath='{.status.endpoints[?(@.name=="eventGateway")].uri}'
+    ```
+
+To see current TLS certificated used by the service, go to Cloud Manager > Manage resources > TLS > keystore
+
 ???- "More Reading"
     * [AsyncAPI - summary](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/api-mgt/#support-for-async-api)
-    * [](https://developer.ibm.com/patterns/share-event-based-apis-with-event-endpoint-management/?mhsrc=ibmsearch_a&mhq=event%20endpoint)
+    * [Developer ibm share-event-based-apis-with-event-endpoint-management](https://developer.ibm.com/patterns/share-event-based-apis-with-event-endpoint-management/?mhsrc=ibmsearch_a&mhq=event%20endpoint)
