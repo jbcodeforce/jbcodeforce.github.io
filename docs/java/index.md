@@ -2,6 +2,112 @@
 
 [Java studies repository with a bench of code](https://github.com/jbcodeforce/java-studies)
 
+## 1.8 new features
+
+[Java 8 tutorials](https://mkyong.com/tutorials/java-8-tutorials/)
+
+### Functional programming
+
+A functional programming function is like a mathematical function, which produces an output that typically depends only on its arguments.
+Functions exhibit referential transparency, which means you could replace a function call with its resulting value without changing the computation's meaning. With function Java becomes declarative while with object it is imperative.
+
+```java
+// compute the length of a string. 
+Function<String, Integer> func = x -> x.length();
+Assertions.assertEquals(6,func.apply("jerome"));
+// can chain functions
+Function<Integer, Integer> func2 = x -> x * 2;
+Assertions.assertEquals(12,func.andThen(func2).apply("jerome"));
+``` 
+They favor immutability, which means the state cannot change. Function doe not support variable assignments.
+
+[Function examples](https://mkyong.com/java8/java-8-function-examples/)
+
+### Lambdas
+
+* single method classes that represent behavior
+* can be assigned to a variable
+* can be pass as argument to a method
+* The type of any lambda is a functional interface: A functional interface is a special interface with one and only one abstract method.
+
+```java
+@FunctionalInterface
+public interface Function<T, R> {
+      R apply(T t);
+}
+```
+
+	* It has one and only one abstract method.
+	* It can be decorated with an optional @FunctionalInterface
+
+### New date
+
+Java 8 created a series of new date and time APIs in java.time package
+
+### Streams
+
+A Stream is a sequence of elements from a source that supports aggregate operations.
+Streams API lets you process data in a declarative way. Aggregate functions are SQL-like operations and common operations from functional programing languages, such as `filter, map, reduce, find, match, sorted`.
+
+Streams can leverage multi-core architectures without you having to write a single line of multithread code.
+
+```java
+List<String> lines = Arrays.asList("spring", "node", "quarkus");
+List<String> result = lines.stream()                // convert list to stream
+             .filter(line -> !"spring".equals(line))     // we dont like spring
+             .collect(Collectors.toList());              // collect the output and convert streams to a List
+
+result.forEach(System.out::println);                
+```
+
+Search within a list
+```java
+Person result1 = persons.stream()                        
+                .filter(x -> "jack".equals(x.getName()))        // we want "jack" only
+                .findAny()                                      // If 'findAny' then return found
+                .orElse(null); 
+```
+
+Many stream operations return a stream themselves. This allows operations to be chained to form a larger pipeline, which can be seen as forming a query on the data.
+
+```java
+List<Integer> transactionsIds = 
+    transactions.stream()
+                .filter(t -> t.getType() == Transaction.GROCERY)
+                .sorted(comparing(Transaction::getValue).reversed())
+                .map(Transaction::getId)
+                .collect(toList());
+```
+
+`map()` is used to extract information. No work is actually done until collect is invoked. The collect operation will start processing the pipeline to return a result.
+`toList()` describes a recipe for converting a Stream into a List.
+
+* Stream operations that can be connected are called **intermediate operations**. 
+* Operations that close a stream pipeline are called **terminal operations**.
+
+[See streams tests in](https://github.com/jbcodeforce/java-studies/tree/master/data-structure-play/streams-play)
+
+???- "More readings"
+    * [Streams filter examples](https://mkyong.com/java8/java-8-streams-filter-examples/)
+    * [Processing Data with Java SE 8 Streams](https://www.oracle.com/technical-resources/articles/java/ma14-java-se-8-streams.html)
+    * [java.util .stream.Stream](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html)
+
+### Enterprise Context
+
+The `Context` refers to the interface used to interact with your runtime environment. In java we have Servlet's ServletContext, JSF's FacesContext, Spring's ApplicationContext, Android's Context, JNDI's InitialContext,...
+
+!!! note
+		Recall that Java EE servers host several application component types that correspond to the tiers in a multi-tiers application. The Java EE server provides services to these components in the form of a container.
+
+		* The web container is the interface between web components and the web server. The container manages the component’s life cycle, dispatches requests to application components, and provides interfaces to context data, such as information about the current request. 
+		* EJB container is the interface between enterprise beans, which provide the business logic in a Java EE application.
+		* The application client container runs on the client machine and is the gateway between the client application and the Java EE server components.
+
+javax.enterprise.context is a set of annotation APIs to define component scope. See [ApplicationScoped](https://javaee.github.io/javaee-spec/javadocs/javax/enterprise/context/ApplicationScoped.html).
+
+## Java 11 updates
+
+
 ## Web sites with good content
 
 Good web sites I like to go back to for excellent source of knowledge
@@ -150,38 +256,6 @@ The folder Algo play has its own pom, and the following problems are implemented
 
 * Searching in a graph using DPS and Transversal in a graph. See nice article [here](https://www.baeldung.com/java-graphs)
 
-## 1.8 new features
-
-### Functional programming
-
-A functional programming function is like a mathematical function, which produces an output that typically depends only on its arguments.
-Functions exhibit referential transparency, which means you could replace a function
- call with its resulting value without changing the computation's meaning.
- With function Java becomes declarative while with object it is imperative.
- 
-They favor immutability, which means the state cannot change. Function doe not support variable assignments
-
-### Lambdas
-
-* single method classes that represent behavior
-* can be assigned to a variable
-* can be pass as argument to a method
-* The type of any lambda is a functional interface: A functional interface is a special interface with one and only one abstract method.
-	* It has one and only one abstract method.
-	* It can be decorated with an optional @FunctionalInterface
-
-### Enterprise Context
-
-The context refers to the interface used to interact with your runtime environment. In java we have Servlet's ServletContext, JSF's FacesContext, Spring's ApplicationContext, Android's Context, JNDI's InitialContext,...
-
-!!! note
-		Recall that Java EE servers host several application component types that correspond to the tiers in a multitiered application. The Java EE server provides services to these components in the form of a container.
-
-		* The web container is the interface between web components and the web server. The container manages the component’s life cycle, dispatches requests to application components, and provides interfaces to context data, such as information about the current request. 
-		*  EJB container is the interface between enterprise beans, which provide the business logic in a Java EE application.
-		* The application client container runs on the client machine and is the gateway between the client application and the Java EE server components.
-
-javax.enterprise.context is a set of annotation APIs to define component scope. See [ApplicationScoped](https://javaee.github.io/javaee-spec/javadocs/javax/enterprise/context/ApplicationScoped.html).
 
 
 ## Jakarta EE 8

@@ -88,11 +88,13 @@ nav:
         - ArgoCD: coding/argocd.md
         - Cloud Native Toolkit: coding/cnt.md
     - Programming:
+      - Fun problems:
+        - interview: fun/interview.md
       - Java: 
-        - Concurrency: java/concurrent.md
-        - Funqy: java/funqy.md
         - Introduction: java/index.md
         - Java FAQ: java/FAQ.md
+        - Concurrency: java/concurrent.md
+        - Funqy: java/funqy.md
         - Microprofile 3.x: java/microprofile.md
         - Open Liberty: java/openliberty.md
         - Quarkus: java/quarkus.md
