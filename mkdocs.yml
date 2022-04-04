@@ -56,6 +56,7 @@ nav:
     - Architecture:
       - Event Driven Architecture: architecture/eda.md
       - Flow architectures: architecture/flow-architectures.md
+      - Streaming processing: architecture/streaming.md
       - Architecture decision: architecture/architectural-decisions.md
       - DDD : architecture/ddd.md
       - Disaster recovery: architecture/DR.md
@@ -75,6 +76,7 @@ nav:
       - Data integration: data/data-integration.md
       - Data replication: data/data-replication.md 
       - Data partitioning: data/data-partitioning.md 
+      - Streaming processing: architecture/streaming.md
       - Data catalog - spectrum discover: https://www.ibm.com/cloud/architecture/architectures/spectrum-discover
       - OpenData Hub: architecture/opendatahub.md
       - OLAP: data/olap.md
@@ -89,7 +91,7 @@ nav:
         - Cloud Native Toolkit: coding/cnt.md
     - Programming:
       - Fun problems:
-        - interview: fun/interview.md
+        - puzzles: fun/puzzles.md
       - Java: 
         - Introduction: java/index.md
         - Java FAQ: java/FAQ.md
