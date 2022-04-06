@@ -36,8 +36,7 @@ Currently, foundational services mostly are focused on identity and access manag
 
 ## 2021.4 release
 
-* [Event Endpoint Management](/eepm) to support buying at the API calls per month level to access kafka events or at the 
-resource usage level.
+* [Event Endpoint Management](/eepm) to support buying at the API calls per month level to access kafka events or at the resource usage level.
 * AI-driven API Test generation is designed to automate the process of generating these API test cases. 
 Watson Insights for suggested tests are generated through analysing production OpenTracing data. 
 This helps to determine distinct behaviours in an API implementation
@@ -51,8 +50,7 @@ There are different sources for installing Cloud Pak for integration.
 * [Product documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=installing)
 * [Joel Gomez's Tinkering CP4I site](https://github.ibm.com/joel-gomez/tinkering-cp4i/) where most of the yamls are also in 
 the larger project: []()
-* [The EDA gitops catalog](https://github.com/ibm-cloud-architecture/eda-gitops-catalog) for operators, and operand definitions. The
-readme for this project is kept up to date.
+* [The EDA gitops catalog](https://github.com/ibm-cloud-architecture/eda-gitops-catalog) for operators, and operand definitions. The readme for this project is kept up to date.
 
 1. Decide if the operators are installed at namespace scope or at cluster level. 
 With namespace scope, each project effectively behaves as a different tenant.

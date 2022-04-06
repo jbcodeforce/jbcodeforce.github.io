@@ -34,6 +34,7 @@ Binary tree helps to have efficient search in O(log(N)) as the binary search doe
     ```
 
 * [Same approach, different implementation, of the binary tree traversal in python](https://github.com/jbcodeforce/python-code/blob/master/algorithms/traversalbinarytree.py)
+* See [Tree class in java + test cases]().
 
 ### Travering Graph or tree
 
