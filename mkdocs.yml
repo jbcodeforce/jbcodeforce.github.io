@@ -83,7 +83,8 @@ nav:
     - AI:
       - Machine learning: https://jbcodeforce.github.io/ml-basics/
       - Automation Decision Service: techno/cp4a/ads.md
-    - DevOps:
+    - Dev & Ops:
+        - Agile: coding/agile.md
         - Git summary: coding/git.md
         - GitOps: coding/gitops.md
         - Tekton: coding/tekton.md

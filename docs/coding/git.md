@@ -28,7 +28,6 @@ A **feature branch** workflow implements safety mechanisms to protect the stabil
 
 In a feature branch workflow, each new feature is implemented in a dedicated branch.
 
-
 The **Forked** repository workflow is often used with large open source projects. With a large number of contributors, managing feature branches in a central repository is difficult. Additionally, the project owner may not want to allow contributors to create branches in the code repository. In this scenario, branch creation on the central repository is limited to a small number of team members. Once forked, clone your repo and add the upstream repository (the one you forked from).  `git remote add upstream <url of the git repository source of your fork>`. It's good practice to regularly sync your work with the upstream repository. To do this, you'll need to use Git on the command line:
 
 ```shell
