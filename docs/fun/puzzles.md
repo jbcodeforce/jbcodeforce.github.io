@@ -1,6 +1,6 @@
 # Coding interview and fun problems to solve
 
-Source of problems to solve:
+Source of common software engineering problems to study and play with:
 
 * [geeks for geeks](https://www.geeksforgeeks.org)
 * [leet code](https://leetcode.com/)
@@ -16,7 +16,7 @@ O(N) is the same as T = K .N   O for "Order of"
 
 ## Review Sorting
 
-Arrays class offers different sort methods.
+Java Arrays class offers different sort methods.
 
 To sort any custom object, we need to implement the interface java.lang.Comparable. Or gives a comparator to the sort method.
 
@@ -36,9 +36,10 @@ public static final Comparator<Customer> NAME_COMPARATOR = Comparator
 * Counting sort is a particular sorting algorithm in O(n + k): k = number of possible values. 
 
 * [Quicksort](https://github.com/jbcodeforce/java-studies/blob/master/data-structure-play/otherpuzzles/src/main/java/jbcodeforce/fun/sorting/QuickSort.java) works according to the "divide and conquer" principle. The data set is divided into small and large elements: small elements move to the left, large elements to the right. Each of the created partitions is then recursively partitioned again until a partition contains only one element and is therefore considered sorted.
-* [Heapsort](): 
+* **Heap sort**: utilizes the heap data structure to perform comparison-based sorting. Heap sort is an in-place algorithm. Heap can be represented by an array and then if the parent node is at index i, then the left child node is at 2i+1 and the right child is at 2i+2. Using a maxheap. We will swap the first element, i.e., the largest element with the last element of the heap, and then reduce the size of the heap by 1. Once we have successfully done that, we will call the heapify method for the root of the tree. We will then repeat this step until the size of the heap is greater than 1. 
+The time complexity of heap sort is O(nlog(n)). See code [HeapSort class](https://github.com/jbcodeforce/java-studies/blob/master/data-structure-play/tree-play/src/main/java/jbcodeforce/fun/tree/HeapSort.java)
 
-* Merge two sorted list, [see example using iteration or recursion](https://github.com/jbcodeforce/java-studies/blob/master/data-structure-play/otherpuzzles/src/main/java/jbcodeforce/fun/sorting/MergeTwoSortedList.java).
+* Merge two sorted lists, [see example using iteration or recursion](https://github.com/jbcodeforce/java-studies/blob/master/data-structure-play/otherpuzzles/src/main/java/jbcodeforce/fun/sorting/MergeTwoSortedList.java).
 
 
 ## Basic problems from leetcode
@@ -221,7 +222,6 @@ Binary tree helps to have efficient search in O(log(N)) as the binary search doe
 * See a very complete example of [BinaryTree class in java + test cases](https://github.com/jbcodeforce/java-studies/blob/master/data-structure-play/tree-play/src/test/java/jbcodeforce/fun/tree/TestBinaryTree.java).
 
 
-
 Special binary tree is the [heap](https://en.wikipedia.org/wiki/Heap_(data_structure)) which includes as root the highest priority node.  In a max heap, for any given node C, if P is a parent node of C, then the key (the value) of P is greater than or equal to the key of C. In a min heap, the key of P is less than or equal to the key of C.
 
 
@@ -384,8 +384,29 @@ See implementation in [SearchBestBlock](https://github.com/jbcodeforce/java-stud
 
 ### Inverting a binary tree
 
-Given a binary tree move left and right branches at every node level.
+Given a binary tree move left and right branches at every node level. It is simple with recursion:
 
+* Call invert for left-subtree.
+* Call invert for right-subtree.
+* Swap left and right subtrees.
+
+```java
+    Node invert(Node node) 
+	{ 
+		if (node == null) 
+			return node; 
+
+		/* recursive calls */
+		Node left = invert(node.left); 
+		Node right = invert(node.right); 
+
+		/* swap the left and right pointers */
+		node.left = right; 
+		node.right = left; 
+
+		return node; 
+	}   
+```
 ## Heap
 
 [Heap](https://en.wikipedia.org/wiki/Heap_(data_structure)) is a Complete Binary Tree. A node is at level k of the tree if the distance between this node and the root node is k. 

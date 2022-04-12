@@ -107,7 +107,31 @@ javax.enterprise.context is a set of annotation APIs to define component scope. 
 
 ## Java 11 updates
 
+[Baeldung Java 11 new features](https://www.baeldung.com/java-11-new-features)
 
+* OpenJDK as Hotspot is licenced now
+* New String methods like isBlank, lines, repeat, strip...
+
+  ```java
+  String multilineString = "Baeldung helps \n \n developers \n explore Java.";
+  List<String> lines = multilineString.lines()
+    .filter(line -> !line.isBlank())
+    .map(String::strip)
+    .collect(Collectors.toList());
+  assertThat(lines).containsExactly("Baeldung helps", "developers", "explore Java.");
+  ```
+
+* Add stream capability, Not Predicate 
+* local variable in lambda
+
+   ```java
+   sampleList.stream().map((@Nonnull var x) -> x.toUpperCase())
+  ```
+
+* HTTP client: improves overall performance and provides support for both HTTP/1.1 and HTTP/2
+* we can directly run the file using the java command, no more need to explicitly call javac
+* Improved Aarch64 Intrinsics to leverage CPU capabilities
+* Java Flight Recorder (JFR) is open source and used for jvm profiling.
 ## Web sites with good content
 
 Good web sites I like to go back to for excellent source of knowledge
