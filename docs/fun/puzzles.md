@@ -45,11 +45,12 @@ The time complexity of heap sort is O(nlog(n)). See code [HeapSort class](https:
 ## Basic problems from leetcode
 
 ### roman to integer
-* Transform string representing a [roman number to its integer value](https://github.com/jbcodeforce/java-studies/blob/master/data-structure-play/otherpuzzles/src/main/java/jbcodeforce/fun/basic/RomanToInteger.java)
+
+* Transform a string representing a [roman number to its integer value](https://github.com/jbcodeforce/java-studies/blob/master/data-structure-play/otherpuzzles/src/main/java/jbcodeforce/fun/basic/RomanToInteger.java)
 
 ### Palindrome
 
-* Verify a number of a string [is a palindrome?](https://github.com/jbcodeforce/java-studies/blob/master/data-structure-play/otherpuzzles/src/main/java/jbcodeforce/fun/basic/Palindrome.java) Given the head of a singly linked list, return true if it is a palindrome.
+* Verify a string with digits in it,  [to be a palindrome?](https://github.com/jbcodeforce/java-studies/blob/master/data-structure-play/otherpuzzles/src/main/java/jbcodeforce/fun/basic/Palindrome.java) Given the head of a singly linked list, return true if it is a palindrome.
 
 ### String with only char
 
@@ -89,7 +90,7 @@ The time complexity of heap sort is O(nlog(n)). See code [HeapSort class](https:
 
 f(n) = f(n-2) + f(n-1)
 
-Example of finding the combinaison of steps to climb a staircase of N steps = fibonacci
+Can be used in different problem, like finding the combinaison of steps to climb a staircase of N steps.
 
 ```python
 def staircase(n):
@@ -103,8 +104,8 @@ def staircase(n):
 Sources of information:
 
 * [IQ opengenus - array problems](https://iq.opengenus.org/list-of-array-problems/)
-* Dynamic array means we double the size of the array when the size and the number of elements in the arrays are equals. So resize needs to create a temp array and then copy existing content to the tem array (with double size) and then return the temp array.
-*
+* Dynamic array means we double the size of the array when the size and the number of elements in the arrays are equals. So resize needs to create a temp array and then copy existing content to the temp array (with double size) and then return the temp array.
+
 
 To represent a dynamic array that can extend at less memory footprint, is to use the Hash Arrays Tree, which is a 2 dimension arrays with 2^x elements in each dimensions.
 
@@ -123,7 +124,7 @@ See code [BinarySearch.java](https://github.com/jbcodeforce/java-studies/blob/ma
 
 ### Find the least frequent element presents in an array
 
-Use HashMap to keep the count, and go over the element one time
+Use HashMap to keep the count, and go over the element one at a time. Ex in python:
 
 ```python
 def findLeastFreqElementOptimized(c):
@@ -161,16 +162,28 @@ snapshotArr.get(0,0);  // Get the value of array[0] with snap_id = 0, return 5
 
 ### Reverse a linkedList
 
+Need to keep previous, current, and currentNext pointers.
+
 [InverseLinkedList](https://github.com/jbcodeforce/java-studies/tree/master/data-structure-play/tree-play/src/main/java/jbcodeforce/fun/tree/InverseLinkedList.java)
 
+???- "Solution"
+    ```java
+    while (current != null) {
+                Node nextOfCurrent = current.next;
+                current.next = previous;
+                previous = current;
+                current = nextOfCurrent;
+            }
+            Node reversedList = previous;
+    ```
 ### Find the tuple from two arrays that the sum of their number are closed to a target number
 
 A = [-1, 3, 8,  2, 9,  5]
 B = [ 4, 1, 2, 10, 5, 20]
 Target 24 . response -> (5,20) or (3,20)
-A and B have same size.
+A and B have same size. Not ordered.
 
-* Bruce force solution: compute each pair based on element of (A,B)- Which is a O(N^2), sort them by their sum and find where the target is in the sorted collection, take the exact sum or the left and right elements as the closest to the target.
+* Brute force solution: compute each pair based on element of (A,B)- Which is a O(N^2), sort them by their sum and find where the target is in the sorted collection, take the exact sum or the left and right elements as the closest to the target.
 * Think to a simpler problem by searching what is the expected number to get the target by searching in A for each value of (target - b). The following solution is in O(N)
 
     ```java
@@ -187,7 +200,7 @@ A and B have same size.
 * Think of the problem with simpler samples. 
 * Try to visualization in a matrix or a tree
 
-Final solution is using sorting the two arrays and walk the matrix from the one of the highest number. The sort could is in O(n.log(n)) and then go over the matrix will be O(n) 
+Final solution is to sort the two arrays and then walk the matrix from the one of the highest number. The sort could is in O(n.log(n)) and then go over the matrix will be O(n) 
 
     ```java
     sort(A), sort(B)
