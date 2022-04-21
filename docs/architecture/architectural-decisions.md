@@ -85,21 +85,6 @@ Apache Spark is often the primary choice when it comes to cluster-grade data pro
 
 * What type of fault tolerance and delivery guarantees are necessary? Apache Spark Structured Streaming supports exactly once delivery guarantees and depending on the type of data source, complete crash fault tolerance.
 
-#### IBM Streams
-
-IBM Streams is a fast streaming engine. Originally designed for low-latency, high throughput network monitoring applications, IBM Streams has its roots in cybersecurity.
-
-* What throughput is required? IBM Streams can handle high data throughput rates, up to millions of events or messages per second.
-
-* What latency is accepted? IBM Streams latency goes down to microseconds.
-
-* Which data types must be supported? Through IBM Streams binary transfer mode, any type of data type can be supported.
-
-* What type of algorithms run on the system? Only relational algebra or advanced modeling? IBM Streams in its core supports all relational algebra. Also, through toolkits, various machine learning algorithms can be used. Toolkits are an open system, and there are many third-party toolkits.
-
-* What’s the variance of the workload and what are the elasticity requirements? Through its fault tolerant nature, IBM Streams clusters can be grown and shrunk dynamically.
-
-* What type of fault tolerance and delivery guarantees are necessary? IBM Streams supports exactly once delivery guarantees and complete crash fault tolerance.
 
 #### Node-RED
 
@@ -135,13 +120,6 @@ IBM Streams is a fast streaming engine. Originally designed for low-latency, hig
 * What type of fault tolerance and delivery guarantees are necessary? Nifi supports end-to-end guaranteed exactly once delivery.
 
 Also, fault tolerance can be configured, but automatic recovery is not possible. Another important feature is backpressure and pressure release, which causes the upstream nodes to stop accepting new data and discarding unprocessed data if an age threshold is exceeded.
-
-#### Apache Kafka
-
-
-#### Others
-
-There are also other technologies like Apache Samza, Apache Flink, Apache Storm, Total.js Flow, Eclipse Kura, and Flogo that might be worth looking at if the ones mentioned don’t meet all of your requirements.
 
 ## Application Component: Data Integration
 
