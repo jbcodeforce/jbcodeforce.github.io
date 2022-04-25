@@ -1,10 +1,11 @@
 # Cloud Pak for Integration
 
 !!! info
-    Updated 2/22/2022
+    Updated 4/21/2022
 
 ## Addressing integration challenges
 
+* 70% of digital transformation projects fail due to lack of integratio quality (2019).
 * Manual tasks requiring expert integration skills -> cp4i will bring automate integrations powered by AI
 * Lack of operational visibility to improve integrations -> improve quality with continuous feedback based on real-world data
 * Only one integration style -> Use varied integration methods and styles to you advantages
@@ -42,7 +43,23 @@ Watson Insights for suggested tests are generated through analysing production O
 This helps to determine distinct behaviours in an API implementation
 * Support OpenShift on IBM z Integrated Facility for Linux, and on IBM Power Systems
 
+## Foundational services (bedrock) overview
 
+* layer between OCP and the cloud pak
+* Origanized into 5 distinct pillars
+
+  * application services
+  * data & event services
+  * operational services
+  * security services
+  * user experience services
+
+* Want to be able to start small.
+* Certification for k8s process in place and key for foundational services layer
+* pluggability: taking advantage of existing vendor's public cloud.
+* Based on operators
+
+![](./images/foundational-svc.png)
 ## Installation Steps Overview
 
 There are different sources for installing Cloud Pak for integration.

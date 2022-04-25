@@ -115,7 +115,7 @@ We can also query those data by adding an intermediate components to create sche
 
 | Product | Description |
 | ---- | ---- |
-| AWS S3 | [Service](https://s3.console.aws.amazon.com/s3/). [data lake with s3](https://aws.amazon.com/big-data/datalakes-and-analytics/) |
+| AWS S3 | [Service](https://s3.console.aws.amazon.com/s3/). [data lake with s3](https://aws.amazon.com/big-data/datalakes-and-analytics/). 11 9's% for durability. Pay as you go. Offers different level of backup with Glacier |
 | Google Cloud Storage | [introduction](https://cloud.google.com/storage/docs/introduction). Use hierarchy like: organization -> project -> bucket -> object. [Tutorial](https://cloud.google.com/architecture?text=Cloud%20Storage)|
 | IBM Cloud Object Storage | [doc](https://www.ibm.com/cloud/object-storage)| 
 | Azure Blob | [doc](https://azure.microsoft.com/en-us/services/storage/blobs/) | 
@@ -134,6 +134,7 @@ With enhanced progress CAP is becoming weaker, but still applies. A is really lo
     * AP: Cassandra: C is lost because of the time to replicate
     * CP: Mongodb, HBASE, dynamoDB
 
+Single-master designs favor consistency and partition tolerance.
 ## Caching
 
 Goal: limit to access disk to get data, or go over the network.
@@ -147,14 +148,75 @@ The hotspot may bring challenge for cache efficiency, need to cache also on load
 
 Different eviction policies can be done:
 
-* LRU: least recently used. HashMap for key and then doubly linked-list, head points to MRU and tail points to the LRU
-* LFU: least frequently used
+* LRU: least recently used. HashMap for key and then doubly linked-list, head points to MRU and tail points to the LRU. Evicts data that hasn't been accessed in the longest amount of time once memory for the cache fills up.
+* LFU: least frequently used. 
 * FIFO
 
 Redis, Memcached, ehcache. AWS Elasticache
 ### Content Delivery Networks
 
-Distribute read data geographically (css, images, js, html...), can event apply to ML model execution.
+Distribute read data geographically (css, images, js, html...), can even apply to ML model execution.
+
+Load balancers and caching technologies such as Redis can also be parts of low-latency designs, but are not specifically for the problem of global traffic.
+
+## Resiliency
+
+Assess what could happen is a blade/ server, a rack, an AZ, a data center, a region goes down.  Mission critical applications should not loose data. Use 3 tiers app classification schemas.
+
+Use Geo-location load balancer then geo LB. 
+
+Need to plan for capacity to be able to get traffic from failed region to 'backup region'.
+
+Secondary replicas should be spread to different servers, racks and then data centers. 
+
+Balance budget over availability. Amazon with infinite money does over-provisioning. 
+
+### HDFS
+
+Files are broken into blocks. Blocks are replicated within the cluster. Replicas are rack aware. 
+
+Clients try to read from nearest replica.
+
+The Name node coordinate the blocks placement operations. For HA the name nodes is a 3 nodes cluster, so a single point of failure for a very short time period.
+
+If a client app is running in the same server as HDFS the data it accesses may be moved to it.
+
+## SLA
+
+- durability: % chance of losing data
+- latency to get the time for a service to return a response to a request. 99.9% response time is under 100ms
+- 99.9999% availability is 30 s down time. 99% is 3.45 days out
+
+## Big Data 
+### Apache Spark
+
+Goal: parallelize processing on big amount of data.
+
+On classical HADOOP 2 - architecture for big data: 
+
+* HDFS to distribute data
+* Yarn (yet another resource negotiator) to manage access to the data in HDFS
+* MapReduce processing (old google - map to extract data and reduce to combine for aggregation )or Spark.
+
+Spark is a replacement of MapReduce. It decides how to send processing to run it in parallel. Work with in memory caching. Compute aggregation on data at rest. You can use it for interactive queries with Spark SQL. 
+
+The drive program (or **SparkContext**) is the one who define what are the input, output, and the processing to do. They are scheduled by Spark to run within a cluster. SparkContext sends app code to **executors**.
+
+### Flink
+
+## Cloud computing services
+
+|  | AWS | Google | Azure |
+| --- | --- | --- | --- |
+| **Storage** | s3 | cloud storage | Disk, blob, data lake |
+| **Compute** | EC2 | Compute engine | VM |
+| **NoSQL** | DynamoDB | BigTable | CosmosDB / Table Storage |
+| **Containers** | Kubernetes / ECR / ECS |  Kubernetes | Kubernetes |
+| **Data streams** | Kinesis | DataFlow | Stream Analytics |
+| **Spark / Hadoop** | EMR  | Dataproc | Databricks |
+| **Data warehouse** | RedShift | BigQuery | Azure SQL / Database |
+| **Caching** | ElastiCache (Redis) | Memorystore (Redis or memcached) | Redis |
+
 
 
 ## Zookeeper review
