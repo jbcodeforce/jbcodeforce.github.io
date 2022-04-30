@@ -8,6 +8,8 @@
     * What are the expected outcome and inputs
     * How to measure success?
 
+* Think about end user's experience - working backward
+
 * Establish scope
 
     * list some potential features
@@ -18,10 +20,16 @@
 * Design according to scale
 
     * What is the expected read-to-write ratio?
+    * what volumes in term of transactions/ requests 
     * How many concurrent requests should we expect?
     * What’s the average expected response time?
     * What’s the limit of the data we allow users to provide?
     * De we need to expose read data in different geographys?
+
+* Defining latency requirements
+
+    * how fast is fast enough?
+    * Try to express in SLA language: 100ms at 3-nines
 
 * From high level to drill down
 
@@ -37,6 +45,8 @@
     * What caching solutions are out there? Which would you choose and why?
     * What frameworks can we use as infrastructure in your ecosystem of choice?
 
+
+* Do not be defending
 ## Scalability
 
 ### Single server design
@@ -220,3 +230,13 @@ The drive program (or **SparkContext**) is the one who define what are the input
 
 
 ## Zookeeper review
+
+
+## Mock interview
+
+### URL shortening service
+
+* talking about bit.ly: a service where anyone can shorten an existing URL and then the service is managing redirecting the traffic.
+* what sort of scale? 
+* Any restriction on chars to be used?
+* Are short is short?

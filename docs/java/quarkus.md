@@ -768,7 +768,7 @@ mp.messaging.incoming.shipments.apicurio.registry.as-confluent=true
 
 Nice [cheat sheet](https://lordofthejars.github.io/quarkus-cheat-sheet/#_reactive_messaging) to combine Mutiny, Reactive messaging.
 
-* It is possible to combine imperative and reactive: so on a POST api emits event to Kafka. We just need to inject an emitter as below:
+* It is possible to combine imperative and reactive: so on a POST api, the code emits event to Kafka. We just need to inject an emitter as below:
 
 ```java
   @Inject @Channel("items") Emitter<KafkaRecord<String, Item>> emitter;
@@ -809,7 +809,7 @@ In the API resource class:
     }
 ```
 
-In the service class, the incoming channel is connected to Kafka and the outgoing is an internal to broadcast to.
+In the service class, the incoming channel is connected to Kafka and the outgoing is an internal channel to broadcast message to it.
 
 ```java
     @Incoming("reefer-alerts")                                     
