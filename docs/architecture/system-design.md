@@ -232,7 +232,7 @@ The drive program (or **SparkContext**) is the one who define what are the input
 ## Zookeeper review
 
 
-## Mock interview
+## Mock interviews
 
 ### URL shortening service
 
@@ -240,3 +240,88 @@ The drive program (or **SparkContext**) is the one who define what are the input
 * what sort of scale? 
 * Any restriction on chars to be used?
 * Are short is short?
+
+The approach is to design the potential API, then the components, present a data model for persistence and then address the redirect.
+
+| Verb | APIs |
+| --- | --- |
+| POST | New long url, user-id returns short url and status |  
+| POST | Propose vanity long url, vanity URL, user-id returns status | 
+| GET | mapping between long and short |
+| PATCH | update:  short URL, long URL, user id, returns status |
+| DELETE | short URL, user id return status |
+| GET | short URL, redirect to long URL |
+
+
+![](./images/short-url-comps.png)
+
+To redirect the HTTP response status can be 301 or 302. 301 is a permant redirect, so intermediate components will keep the mapping. But if you want to keep analytics on your web site traffic you want to know how many redirects are done per day, so 302 is a better choice. This is a temporary redirect.
+
+### A restaurant system like OpenTable
+
+A a customer / diner I want to
+
+* specify my number member for the dining party
+* select a time slot and a specify a location
+* select a restaurant by name 
+* select a type of food
+* book the table for the selected timeslot, by specifying phone number and email address.
+* specify how to be contacted when closer to the time
+* register as a recurring user
+
+Other customer of this application will be restaurant owners, who want to see their booking, but also get more information about the customers, the forecast, and the number of search not leading to their restaurant. may be expose their menu.
+
+NFR: thousands of restaurants, millions of users.
+
+Need to scale and be reliable. Cost is not an issue.
+
+Data model: 
+
+- search: location, time - date, party size, type of food
+- list of restaurants
+- reservation: restaurant, party size, time date
+- list of time slots
+- reservation: restaurant, party size, time slot, email, phone number, type of contact
+- booking status with reservation ID to be able to cancel
+
+So we need: 
+
+* Restaurant to discribe physical location, # tables.., how they can group tables for bigger party.
+* Customer representing physical contact, 
+* A schedule per 15 mn time slots, table list per restaurant
+* Reservation to link customer to restaurant by using their primary keys.
+* A Search: time slot, party, location
+* The reservation function need to take into account capability of the restaurant on how to organize tables.
+This is a normalized data model, as it is easier and really for reservation there is one transaction on a simple object. Restaurant and customer are read model in  this context.
+
+Out side of authentication APIs, login, password... we need few api to do reservations.
+
+| Verb | APIs |
+| --- | --- |
+| GET | search with query? location, date, party | 
+| POST | reservation |
+| DELETE | reservation | 
+
+Other APIs are needed to do CRUD for each business entities.
+
+The servers are scaled horizontally, rack and AZ allocated, and even geo-routed.
+
+![](./images/opentable.png)
+
+DB system may be no sql based, and can be highly available and support horizontal scaling too.
+
+## Web Crawler for a search
+
+Need to parse html, keep text only, may be pictures in the future, billions of web pages, and run every week.
+Need to do a update of existing page refs if changed. 
+
+HTML = text + ref to URL
+singleton web crawler will put links into a LIFO pile. if we consider the web crawling as a graph navigation. we want to do BFS, so we need a pile.
+
+As we need to run every week, we can in fact runs all the time with a single instance of the crawler.
+The solution is batch, and no end user per say. Except that we still need to provide metrics that display coverage: pile size, total number of page processed, link occurence.
+
+Need to avoid looping into pages, so need to keep a visited pages.
+If we need to run in parallel, then pile and visited pages tree will be shared and distributed.
+So we need a partition key, may be a hash of the url.
+
