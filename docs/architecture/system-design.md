@@ -347,8 +347,10 @@ Sell is product ID, category, date of sell
 batch processing compute top seller per category, save for distributed cache. 
 
 The amount of data is massive so querying per category and sort by date of sell will put stress to SQL database. We can replicate the DB and work on the datawarehouse, or adopt s3 bucket with category being the bucket. For the job processing we could use Flink or Spark to compute the top-sell product. 
-Job will run in parallel and flink will distribute data. It will compute for each product a score based in t- purchase time, decaying older sells. We sort by this score.
+Job will run in parallel and flink will distribute data. It will compute for each product a score based in (t - purchase time) time, decaying older sells. We sort by this score.
 
 The top-seller data store does not need to support a big amount of data, may be keep the top 20 or 50 items per category, and may be hundred of thousand of category. DynamoDB can be used.
 
 To support scaling and low latency at the web page level, we need distributed caching, and scale web server horizontally. 
+
+![](./images/topseller.png)

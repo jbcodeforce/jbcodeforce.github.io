@@ -1,6 +1,6 @@
 # Stream processing
 
-This article is theory about stream processing and then links concrete studies on specific technos. There is a need to understand the problems related to data processing in distributed computing.
+This article is a summary of stream processing with links to concrete studies of specific technologies. There is a need to understand the problems related to data processing in distributed computing.
 
 ## Concepts
 
@@ -14,7 +14,7 @@ This article is theory about stream processing and then links concrete studies o
 ## Challenges
 
 * Using a database to keep events may work for small scale, but polling becomes expensive. Notifying consumers is one way to solve this problem, but then it means using subscription. DBs were not designed for notifications. Triggers may help but do not scale.
-* Messaging system is the technology to push event to consumers. The pub/sub model.
+* Messaging system is the technology to push event to consumers. The pub/sub model support multile consumers.
 
 ### Questions to assess
 
@@ -22,12 +22,12 @@ This article is theory about stream processing and then links concrete studies o
 
     * drop messages
     * buffer messages - (see later section on append log)
-    * apply backpressure, or flow control to slow down producer
+    * apply backpressure, or flow control to slow down the producer
 
-* What happens if nodes crash or temporarily go offline—are any messages lost?
+* What happens if nodes crash or temporarily go offline — are any messages lost?
 
     * when losing messages the throughput is higher and even the latency is lower 
-    * If you are counting events, it is more important that they are delivered reliably, since every lost message means incorrect counters.
+    * if you are counting events, it is more important that they are delivered reliably, since every lost message means incorrect counters.
 
 ## High level technology concepts
 
