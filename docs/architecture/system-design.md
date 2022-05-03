@@ -316,12 +316,39 @@ Need to parse html, keep text only, may be pictures in the future, billions of w
 Need to do a update of existing page refs if changed. 
 
 HTML = text + ref to URL
-singleton web crawler will put links into a LIFO pile. if we consider the web crawling as a graph navigation. we want to do BFS, so we need a pile.
+singleton web crawler will put links into a LIFO pile. If we consider the web crawling as a graph navigation. we want to do BFS, so we need a pile.
 
 As we need to run every week, we can in fact runs all the time with a single instance of the crawler.
 The solution is batch, and no end user per say. Except that we still need to provide metrics that display coverage: pile size, total number of page processed, link occurence.
 
-Need to avoid looping into pages, so need to keep a visited pages.
+Need to avoid looping into pages, so need to keep the visited pages.
 If we need to run in parallel, then pile and visited pages tree will be shared and distributed.
 So we need a partition key, may be a hash of the url.
 
+The solution will look like
+
+![](./images/webcrawler.png)
+
+## Top sellers in e-commerce
+
+Present the top sellers per category / sub-category. We can hace thousand of requests per second.
+
+top seller means trending: so # of sell over a time period.
+time period is variable for low sell item, so item sold few time per year, needs to be visible for a category. We can also use a weight algorithm to put less impact on older sells.
+
+
+<img src="https://latex.codecogs.com/svg.image?w&space;=&space;e^{-\lambda&space;t}"/>
+
+The update can be done few time a day for most active category.
+
+customer experience, when searching and looking at a category of items, a list of top seller is proposed under the product description.
+
+Sell is product ID, category, date of sell
+batch processing compute top seller per category, save for distributed cache. 
+
+The amount of data is massive so querying per category and sort by date of sell will put stress to SQL database. We can replicate the DB and work on the datawarehouse, or adopt s3 bucket with category being the bucket. For the job processing we could use Flink or Spark to compute the top-sell product. 
+Job will run in parallel and flink will distribute data. It will compute for each product a score based in t- purchase time, decaying older sells. We sort by this score.
+
+The top-seller data store does not need to support a big amount of data, may be keep the top 20 or 50 items per category, and may be hundred of thousand of category. DynamoDB can be used.
+
+To support scaling and low latency at the web page level, we need distributed caching, and scale web server horizontally. 
