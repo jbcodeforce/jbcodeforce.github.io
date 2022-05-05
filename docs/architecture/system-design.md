@@ -354,3 +354,23 @@ The top-seller data store does not need to support a big amount of data, may be 
 To support scaling and low latency at the web page level, we need distributed caching, and scale web server horizontally. 
 
 ![](./images/topseller.png)
+
+## BPEL to microservices
+
+Taking into source a BPEL flow like the one below, how do you migrate to a microservices, may be event-driven?
+
+![](./images/bpel-1.png)
+
+* Input can come from HTTP SOAP requests or messages in queue
+* Green components are SCA services
+* Customer validation, and persistence can be retried multiple times
+* With BPEL engine state transfer will be persisted to process server database.
+* The big white rectangle represents an orchestrator
+* Acknowledgement is to send the customer a message
+* B2B call is idempotent
+* Generate only once a unique id response
+* Exception is about business exception
+* Compensation flow: if persistence fails, we want to roll back the exception message persistence and restarts from the point before the parallel processing 
+* 
+*There is no mention the flow is part of an external transaction, so to avoid loosing message as soon as the flow gets http soap request or message from MQ it needs to persist those messages and starts the process of customer validation, form validation... If this STP takes 5 seconds to run, it is possible to loose data.*
+

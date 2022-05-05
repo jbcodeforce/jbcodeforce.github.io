@@ -218,7 +218,7 @@ metadata:
 spec: {}
 ```
 
-Verify it runs successfully by looking at the predefeind services:
+Verify it runs successfully by looking at the predefined services:
 
 ```shell 
 kubectl api-resources --api-group='sources.knative.dev'
@@ -330,7 +330,10 @@ item-kafka-producer   item-kafka-producer-65kbv                 False     Revisi
 
 ## Sources
 
+* [knative.dev](https://knative.dev/docs/)
 * [Red Hat knative tutorial on github](https://redhat-developer-demos.github.io/knative-tutorial/knative-tutorial/index.html).
 * [Knative Cookbook on O'Reilly portal](https://learning.oreilly.com/library/view/knative-cookbook)
 * [REd Hat Knative Tutorial](https://redhat-developer-demos.github.io/knative-tutorial/knative-tutorial/index.html)
 * [Quarkus Funqy Knative events binding guide](https://quarkus.io/guides/funqy-knative-events)
+* [Eventing example with cloud engine - lionel villard](https://github.com/lionelvillard/knative-examples)
+* [Twitter to knative - michael maximilien](https://github.com/maximilien/knfun)
