@@ -366,11 +366,36 @@ Taking into source a BPEL flow like the one below, how do you migrate to a micro
 * Customer validation, and persistence can be retried multiple times
 * With BPEL engine state transfer will be persisted to process server database.
 * The big white rectangle represents an orchestrator
-* Acknowledgement is to send the customer a message
+* Acknowledgement service is to send the customer a message, so we do not want to send duplicate message
 * B2B call is idempotent
-* Generate only once a unique id response
-* Exception is about business exception
-* Compensation flow: if persistence fails, we want to roll back the exception message persistence and restarts from the point before the parallel processing 
+* Generate a unique id as part of the response: tx_id
+* Exception is about business exception so will be defined inside of any business service.
+* Exception management may trigger human activities to clean the data, gather more information
+* Compensation flow: if persistence fails, we want to roll back the exception message persistence and restarts from the point before the parallel processing. There are points in the process where we can restart a process, but they are points where the only solution is to cancel the full case.
 * 
-*There is no mention the flow is part of an external transaction, so to avoid loosing message as soon as the flow gets http soap request or message from MQ it needs to persist those messages and starts the process of customer validation, form validation... If this STP takes 5 seconds to run, it is possible to loose data.*
+
+*There is no mention that the flow is part of an external transaction, so to avoid loosing message as soon as the flow gets http soap request or message from MQ, it needs to persist those messages and starts the process of customer validation, form validation... If this STP takes 5 seconds to run, it is possible to loose data.*
+
+HTTP response needs to be returned, so is this flow needs to be terminated before sending the response? If not it means the process will take more time, and so there is a need to be able to contact the person / submitter that something went wrong.
+
+One of the question is is this white big rectangle could be part of a 'transaction' so needs to offer rolling back state controlled by other.
+
+Saga: is the solution for distributed long running transaction. In Saga, a compensating transaction must be idempotent and retryable.
+
+Saga as atomicity, consistency, durability but is not isolated. Kafka and event sourcing can be user to implement the SAGA. The event is the source of trust. Kafka is the data base for this saga transaction.
+What does it mean to be consistent with event sourcing? 
+
+The Saga Execution Coordinator is the central component to implement a Saga flow. It contains a Saga log that captures the sequence of events of a distributed transaction. For any failure, the SEC component inspects the Saga log to identify the components impacted and the sequence in which the compensating transactions should execute.
+
+For any failure in the SEC component, it can read the Saga log once it’s coming back up. It can then identify the transactions successfully rolled back, which ones are pending, and can take appropriate actions:
+
+In the Saga Choreography pattern, each microservices that is part of the transaction publishes an event that is processed by the next microservice. To use this pattern, one needs to make a decision whether the microservice will be part of the Saga.
+The Choreography pattern is suitable for greenfield microservice application development. 
+
+With [Camel SAGA](https://camel.apache.org/components/3.16.x/eips/saga-eip.html) the Saga EIP implementation based on the MicroProfile sandbox spec (see camel-lra) is indeed called LRA that stands for "Long Running Action".
+
+There is another solution that it is purely on top of Kafka: [the Simple source is an open source project for event sourcing with Kafka](https://simplesource.io/simple_sourcing_docs_home.html) and Kafka Streams which can be used for SAGA. 
+
+Microprofile Long Running Action is the supported approach in Java to do SAGA. [This project](https://github.com/jbcodeforce/saga-lra-quarkus) presents how to use it in the context of kc-solution.
+
 
