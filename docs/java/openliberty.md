@@ -7,32 +7,63 @@
 ### From starting repo
 
 ```shell
+git clone https://github.com/openliberty/guide-getting-started.git
+# or
 git clone https://github.com/OpenLiberty/sample-getting-started.git
 cd sample-getting-started
 mvn liberty:dev
 ```
+### maven commands
 
-### From templates
+```sh
+# dev mode: The Open Liberty server automatically reloads the configuration without restarting
+mvn liberty:dev
+# dev mode with docker
+#builds a Docker image, mounts the required directories, binds the required ports, and then runs the application inside of a container
+mvn liberty:devc 
+# or control the start, stop...
+mvn liberty:run
+mvn liberty:start
+mvn liberty:stop
+```
 
-See folder MyTemplates/OpenLiberty
+These messages are also logged to the `target/liberty/wlp/usr/servers/defaultServer/logs/console.log`. You can find the error logs in the ffdc directory and the tracing logs in the trace.log file.
 
-| Repo | What inside |
-| --- | :--- |
-| jaxrs-order-mp | Microprofile 3.0 Order CRUD with repository as hashmap, metrics, OpenApi |
-
-
-### With maven archetype
-
-The runtime dependencies
+To set properties, they can be set in the server.xml
 
 ```xml
-<dependency>
-<groupId>io.openliberty</groupId>
-<artifactId>openliberty-runtime</artifactId>
-<version>[20.0.0.5,)</version>
-<type>zip</type>
-</dependency>
+  <variable name="app.inMaintenance" value="false"/>
 ```
+
+### Build . test . package
+
+
+```sh
+mvn package
+# will create a war file with the <artifactId> name
+```
+
+Instead of creating a server package, you can generate a runnable JAR file that contains the application along with a server runtime. As a result, the generated JAR file is only about 50 MB.
+
+```sh
+mvn liberty:package -Dinclude=runnable
+# execute
+java -jar yourapp.jar
+```
+
+
+## Features
+
+
+* **mpHealth-4.0**" health Check and Readiness classes
+
+### CDI
+
+When bean must be persistent between all of the clients, which means multiple clients need to share the same instance. Simply add the `@ApplicationScoped` annotation onto the class.
+
+With the `@RequestScoped` annotation, the bean is instantiated when the request is received and destroyed when a response is sent back to the client. A request scope is short-lived.
+
+The `@Inject` annotation indicates a dependency injection
 
 ## OpenLiberty Operator
 
@@ -42,29 +73,7 @@ To build a openliberty app docker image [follow guidelines here](https://github.
 
 Install it using the Operator Hub. Once installed the following commands 
 
-## Appsody stack
 
-The appsody stack for [open liberty using operator](https://github.com/appsody/stacks/tree/master/incubator/java-openliberty) is a good way to start a project.
-
-### Specific open liberty maven declaration
-
-```xml
-<parent>
-	<groupId>net.wasdev.wlp.maven.parent</groupId>
-	<artifactId>liberty-maven-app-parent</artifactId>
-	<version>RELEASE</version>
-</parent>
-```
-
-Properties:
-```
-<app.name>${project.artifactId}</app.name>
-<testServerHttpPort>9080</testServerHttpPort>
-<testServerHttpsPort>9443</testServerHttpsPort>
-<warContext>${app.name}</warContext>
-<package.file>${project.build.directory}/${app.name}.zip</package.file>
-<packaging.type>usr</packaging.type>
-```
 
 ### Open liberty links
 
