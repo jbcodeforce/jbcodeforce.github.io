@@ -7,8 +7,6 @@ edit_uri: edit/master/docs
 theme: 
   name: material
   logo: images/cloud.png
-  feature:
-    tabs: true
   palette:
     scheme: default
     primary: 'magenta dark'
@@ -36,14 +34,12 @@ plugins:
 markdown_extensions:
   - attr_list
   - admonition
-  - codehilite
   - footnotes
   - pymdownx.smartsymbols
   - pymdownx.superfences
   - toc:
       permalink: true
       toc_depth: 3
-  - pymdownx.tabbed
   - pymdownx.highlight
   - pymdownx.details
 
