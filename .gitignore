@@ -1,11 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+studies/redpanda/pinot-ex/flights-data.json
 # compiled output
-asWebApp/dist/
-asWebApp/node_modules/
+
 site/
 /tmp
-asWebApp/out-tsc
 public/
 
 # IDEs and editors
