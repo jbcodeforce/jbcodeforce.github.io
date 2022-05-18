@@ -141,6 +141,7 @@ nav:
       - Flink Studies: https://jbcodeforce.github.io/flink-studies/
       - Elastic Search: techno/elasticsrch.md
       - Kafka Studies: https://jbcodeforce.github.io/kafka-studies
+      - Red Panda: techno/redpanda.md
       - KAR: techno/kar.md
       - Redis: techno/redis.md 
       - RedPanda Studies: https://github.com/jbcodeforce/redpanda-studies/
