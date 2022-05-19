@@ -47,6 +47,18 @@
 
 
 * Do not be defending
+* Demonstrate perceverance - determination: internal drive to search for a solution - collaboratively. 
+
+    * Behavioral interviewing, tell the stories when you demonstrate perceverance.
+    * Independent thought: getting your solution from your own
+    * Independent learning
+    * Never give up and never surrender
+
+* Tech skills matter but they are just table stakes
+* Demonstration self motivated: bring with your own. 
+* Do not be the guy "let me google for you!"
+* They do not want to see people following step by step instructions/ recipes, because it demonstrates you cannot solve new problem
+* Work as no value until demonstrate to customers
 ## Scalability
 
 ### Single server design
@@ -214,6 +226,7 @@ The drive program (or **SparkContext**) is the one who define what are the input
 
 ### Flink
 
+Scalable streaming platform for inbound and outbound data.
 ## Cloud computing services
 
 |  | AWS | Google | Azure |
@@ -354,6 +367,63 @@ The top-seller data store does not need to support a big amount of data, may be 
 To support scaling and low latency at the web page level, we need distributed caching, and scale web server horizontally. 
 
 ![](./images/topseller.png)
+
+## Video sharing service
+
+Some thing like youtube.
+
+* anybody in the workd can upload video, and anybody can view it
+* massive scale
+* Users and videos in billions 
+* Video upload and playing back those videos
+
+Feel free to use existing services.
+
+Customer centric design:
+
+* Watching user: video search, video metadata and video player 
+
+    * Need a web server returning video URL and metadata: name, url, length, author, thumbmail picture,
+    * Big table to keep metadata. Key value pair. Easy to replicate and cache in different geographies
+    * Video needs to be closed to user, like a CDN, with transcoded videos. Need distributed storage, and able to scale at billions of file. File between 50 Mb to 4 Gb may be.
+    * Object Store can be used for the video persistence. The key for each video may include compression type, resolution...
+    * The video play will be able to switch between resolution, or advance in the video time.  
+
+To reduce the cost of this system as CDN and object storage are not cheap. 
+
+    * can classify videos that will be in CDN versus one staying on own servers.
+    * Long tail meaning faming - popularity - 
+    * predict a likelihood to get a video watch today so it can be pushed to the CDN
+    * CDN per region per language.
+
+* for uploading video, user create metadata, and then the upload the raw video in a distributed storage, then it needs to be transcoded to the different format. We can apply queueing to let the transcoders always feeded and also being able to run in parallel.
+* Metadata needs to keep the state of if the video transcoding is complete or not, to avoid publishing reference to video not yet transcoded.
+
+![](./images/youtube.png)
+
+## Designing search engine
+
+* Like google, billions of people and billions of page
+* The problem is really how to get accurate results for a query.
+* Start from a reporting database with URL of pages 
+
+* Need to avoid people adding thousand of the same keyword in a unique page to get the hit.
+* Accurate result means the search will return a list of most likely what the user's expects. So need to get metrics on page accuracy. 
+* we can compute how many times a user reperform a search after page results were displayed within a specific time window.
+
+Elaborate an algorithm:
+
+* TF/IDF : term frequency / document frequency to assess how a term is relevant cross document.  is ok for a small document base. With internet scale the denominator is mostly impossible to compute.
+* To address a better solution we need to thing about what to present to the user: a list of top 10 hits. So we need an inverted index: searched keyword -> list of pages sorted by relevance.
+* Page rank was developed for Google to assign a rank based on number of link to the page.
+* How to evaluate relevance of a term within a doc: terms in the documentation, the position, the title, the font size, heading, formatting, metadata attached to the document.
+
+* Starting for the repository of web pages
+* Need to build a forward indexing to extract word count in document, then reverse it to build for word -> documents list
+* Then compute backlinks: the link reaching a given page
+
+![](./images/search.png)
+
 
 ## BPEL to microservices
 
