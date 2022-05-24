@@ -21,8 +21,7 @@ Some services are local or global:
 **AWS Local Zone** location is an extension of an AWS Region where you can run your latency sensitive application in geography close to end-users.
 
 **AWS Wavelength** enables developers to build applications that deliver single-digit millisecond latencies to mobile devices and end-users. 
-AWS infrastructure deployments that embed AWS compute and storage services within the telecommunications providers’ datacenters at the edge of the 5G networks,
-and seamlessly access the breadth of AWS services in the region.
+AWS infrastructure deployments that embed AWS compute and storage services within the telecommunications providers’ datacenters at the edge of the 5G networks, and seamlessly access the breadth of AWS services in the region.
 
 Choose an AWS region, depending of your requirements like:
 
@@ -42,9 +41,9 @@ Choose an AWS region, depending of your requirements like:
 * Users can belong to multiple groups
 
 * Users are defined as global service encompasses all regions
-* AWS Accoung has a unique ID but can be set with an alias: `jbcodeforce` so to login to the console the URL becomes
+* AWS Account has a unique ID but can be set with an alias: `jbcodeforce` so to login to the console the URL becomes
 [https://jbcodeforce.signin.aws.amazon.com/console](https://jbcodeforce.signin.aws.amazon.com/console)
-* Policies are written in JSON, to define permissions ()`Allow`, `Deny` for users to access AWS services, groups and roles
+* Policies are written in JSON, to define permissions `Allow`, `Deny` for users to access AWS services, groups and roles
 * Policy applies to Principal: account/user/role, list the actions (what is allowed or denied) on the given resources
 * Least privilege permission: Give users the minimal amount of permissions they need to do their job
 * Policy is a json doc:
@@ -65,7 +64,7 @@ Choose an AWS region, depending of your requirements like:
 ```
 
 * Policy can define the password type `> Account settings > Password policy`, and when users are allowed to change the password.
-* Multi Factor Authentication -  always protect root account.MFA = password + device we own. The device could be a universal 2nd factor security key. (ubikey) 
+* Multi Factor Authentication -  always protect root account. MFA = password + device we own. The device could be a universal 2nd factor security key. (ubikey) 
 * Authy is a multi-device service. We can have multiple users on the same device
 * For identity federation, SAML standard is used
 
@@ -75,10 +74,9 @@ Choose an AWS region, depending of your requirements like:
 
 ![](./images/iam-roles.png)
 
-When connected to an EC2 manchine via ssh or using EC2 instance connect, we need to set the IAM roles for who an use the EC2. A command like
-`aws iam list-users` will not work until a role it attached.
+When connected to an EC2 machine via ssh or using EC2 instance connect, we need to set the IAM roles for who can use the EC2. A command like `aws iam list-users` will not work until a role it attached.
 
-To authorzie access to a EC2 instance, we use IAM Roles. The DemoEC2Role, for example, is defined to access EC2 in read only:
+To authorize access to a EC2 instance, we use IAM Roles. The DemoEC2Role, for example, is defined to access EC2 in read only:
 
 ![](./images/aws-iam-role.png)
 
@@ -93,13 +91,13 @@ Access Advisor shows the services that this user can access and when those servi
 
 We can access AWS using the CLI or the SDK which both use access keys generated from the console (> Users > jerome > Security credentials > Access Keys).
 
-The keys are saved in ~/.aws/credentials
+The keys are saved in `~/.aws/credentials`
 
 [aws-cli version 2](https://github.com/aws/aws-cli/tree/v2)
 
 ```sh
 aws --version
-# gte your users
+# get your users
 aws iam list-users
 ```
 
@@ -123,12 +121,12 @@ The security group helps to isolate the instance, for example, authorizing ssh o
 Get the public ssh key, and when the instance is started, use: `ssh -i EC2key.pem  ec2-user@ec2-52-8-75-8.us-west-1.compute.amazonaws.com ` to connect to the EC2.
 The `.pem` file need to be restricted with `chmod 0400`
 
-Can also use **EC2 Instance Connect** to open a terminal in the web browser. Still need to get SSH port open.
+Can also use **EC2 Instance Connect** to open a terminal in the web browser. Still needs to get SSH port open.
 
 EC2 has a section to add `User data`, which could be used to define a bash script to install dependent software
- and start some services at boot time.
+ and to start some services at boot time.
 
-EC2 **instance types**: (see [ec2instances.info](https://www.ec2instances.info) or the reference [aws ec2/instance-types](https://aws.amazon.com/ec2/instance-types/))
+EC2 **instance types** (see [ec2instances.info](https://www.ec2instances.info) or the reference [aws ec2/instance-types](https://aws.amazon.com/ec2/instance-types/)) includes:
 
 * R: (memory) applications that needs a lot of RAM – in-memory caches
 * C: (Compute Optimized) applications that needs good CPU – compute / databases, ETLm media transcoding, High Perf web servers, scientific modeling
@@ -138,6 +136,11 @@ EC2 **instance types**: (see [ec2instances.info](https://www.ec2instances.info) 
 * T2/T3 for burstable instance: When the machine needs to process something unexpected (a spike in
 load for example), it can burst. Use burst credits to control CPU usage.
 
+### EC2 Nitro
+
+Next generation of EC2. It uses new virtualization schema. Supports IPv6, better I/O on ESB and better security.  Name starts with C5, D5,...
+
+vCPU represents thread running on core CPU. You can optimize vCPU allocation on the EC2 instance, once created, by updating the launch configuration.
 ### Launch types
 
 * **On demand**: short workload, predictable pricing, pay per second after first minute.
@@ -148,7 +151,7 @@ load for example), it can burst. Use burst credits to control CPU usage.
 
     * Define a **max spot price** and get the instance while the current spot price < max. The hourly spot price varies based on offer and capacity. 
     * if the current spot price > max, then instance will be stopped
-    * with spot block we can a time frame without interruptions.
+    * with spot block we can define a time frame without interruptions.
     * The expected state is defined in a 'spot request' which can be cancelled. One time or persistent request types are supported. Cancel a spot request does not terminate instances, but need to be the first thing to do and then terminate the instances.
     * Spot fleets allow to automatically request spot instance with the lowest price.
     
@@ -173,7 +176,7 @@ A virtual private cloud (VPC) is a virtual network dedicated to your AWS account
 It is logically isolated from other virtual networks in the AWS Cloud. You can launch your AWS resources, such as Amazon EC2 instances,
  into your VPC. You can specify an IP address range for the VPC, add subnets, associate security groups, and configure route tables.
 
-VPC HelpS to:
+VPC Helps to:
 
 * assign static IP addresses, potentially multiple addresses for the same instance
 * Change security group membership for your instances while they're running
@@ -185,8 +188,7 @@ VPC HelpS to:
 * non-default subnet has a private IPv4 address, but no public IPv4 
 
 You can enable internet access for an instance launched into a non-default subnet by attaching an internet gateway to its VPC. 
-Alternatively, to allow an instance in your VPC to initiate outbound connections to the internet but prevent unsolicited inbound connections from the internet, 
-you can use a network address translation (NAT) device for IPv4 traffic. NAT maps multiple private IPv4 addresses to a single public IPv4 address. 
+Alternatively, to allow an instance in your VPC to initiate outbound connections to the internet but prevent unsolicited inbound connections from the internet, you can use a network address translation (NAT) device for IPv4 traffic. NAT maps multiple private IPv4 addresses to a single public IPv4 address. 
 A NAT device has an Elastic IP address and is connected to the internet through an internet gateway.
 You can optionally connect your VPC to your own corporate data center using an IPsec AWS managed VPN connection, 
 making the AWS Cloud an extension of your data center. A VPN connection consists of a virtual private gateway attached 
@@ -201,13 +203,12 @@ A customer gateway is a physical device or software appliance on your side of th
 Define inbound and outbound security rules.  They regulate access to ports, authorized IP ranges IPv4 and IPv6, 
 control inbound and outbound network. By default all inbound traffic is denied and outbound authorized.
 
-* They contain allow rules only.
+* They contain `allow rules` only.
 * Can be attached to multiple EC2 instances and to load balancers
 * Locked down to a region / VPC combination
 * Live outside of the EC2
 * Define one separate security group for SSH access where you can authorize only one IP@
-* Application not accessible is a security group
-* Connect refused in an application error or is not launched
+* Connect refused is an application error or the app is not launched
 * Instances with the same security group can access each other
 * Security group can reference other security groups, IP address, CIDR but no DNS server
 
@@ -225,7 +226,8 @@ Important Ports:
 
 IPv4 allows 3.7 billions of different addresses. Private IP @ is for private network connections. Internet gateway has public and private connections. Public IP can be geo-located. When connected to an EC2 the prompt lists the private IP (`ec2-user@ip-172-31-18-48`). Private IP stays stable on instance restart, while public may change.
 
-With Elastic IP address we can mask an EC2 instance failure by rapidly remapping the address to another instance. But better to use DNS.
+With Elastic IP address, we can mask an EC2 instance failure by rapidly remapping the address to another instance. But better to use DNS.
+Elastic IP is a public IPv4 that you own as long as you want and you can attach it to one EC2 instance at a time.
 
 ### Playing with Apache HTTP
 
@@ -253,7 +255,7 @@ This script can be added as User Data (Under Advanced Details while configuring 
 
 ENI is a logical component in a VPC that represents a virtual network card. It has the following attributes:
 
-* Primary private IPv4, one or more secondary IPv4
+* One primary private IPv4, one or more secondary IPv4
 * One Elastic IP (IPv4) per private IPv4
 * One Public IPv4
 * One or more security groups
@@ -286,7 +288,7 @@ Access from network and policies menu, define the group with expected strategy, 
 
 ## Load balancer
 
-Route traffic into the different EC2 instances. It also exposes a single point of access (DNS) to the deployed application. In case of failure, it can route to a new instance, transparently and cross multiple AZ. It uses health check (/health on the app called the `ping path`) to asses instance availability. It provides SSL termination. It supports to separate private (internal) to public (external) traffic.
+Route traffic into the different EC2 instances. It also exposes a single point of access (DNS) to the deployed application. In case of failure, it can route to a new instance, transparently and cross multiple AZs. It uses health check (/health on the app called the `ping path`) to asses instance availability. It provides SSL termination. It supports to separate private (internal) to public (external) traffic.
 
  ![1](./images/EC2-AZ.png)
 
@@ -303,9 +305,9 @@ ELB: EC2 load balancer is the managed service by Amazon. Three types supported:
     * handle millions request/s
     * use to get a public static IP address
 
-To control that only the load balancer is sending traffic to the application, we need to set up an application security group on HTTP, and HTTPS with the source behind the security group id of the ELB. LBs can scale but need to engage AWS operational team.
+To control that only the load balancer is sending traffic to the application, we need to set up an application security group on HTTP, and HTTPS with the source being the security group id of the ELB. LBs can scale but need to engage AWS operational team.
 
-HTTP 503 means LB is at capacity or not register target. Verify security group in case of no communication between LB and app.
+HTTP 503 means LB is at capacity or target app is not registered. Verify security group in case of no communication between LB and app.
 
 Target group defines protocol to use, health check checking and what applications to reach (instance, IP or lambda). 
 
@@ -315,7 +317,7 @@ Example of listener rule for an ALB:
 
 ### Load balancer stickiness
 
-Used when the same client needs to interact with the same backend instance. A cookie, with expiration date, is used to identify the client. The classical or ALB manage the routing. This could lead to inbalance traffic so overloading one instance. 
+Used when the same client needs to interact with the same backend instance. A cookie, with expiration date, is used to identify the client. The classical gateway or ALB manage the routing. This could lead to inbalance traffic so overloading one instance. 
 With ALB it is configured in the target group properties.
 
 ### Cross Zone Load Balancing
@@ -333,7 +335,7 @@ An SSL/TLS Certificate allows traffic between our clients and our load balancer 
 
 ### Connection draining
 
-This is a setting to control connection timeout and reconnect when an instance is not responding. It is to set up the time to complete “in-flight requests”. When an instance is "draining", ELB stops sending new requests to the instance. THe time out can be adjusted, depending of the application, from 1 to 3600 seconds, default is 300
+This is a setting to control connection timeout and reconnect when an instance is not responding. It is to set up the time to complete “in-flight requests”. When an instance is "draining", ELB stops sending new requests to the instance. The time out can be adjusted, depending of the application, from 1 to 3600 seconds, default is 300
 seconds, or disabled (set value to 0).
 
 ### Auto Scaling Group (ASG)
@@ -359,7 +361,7 @@ Automatically Register new instances to a load balancer.
 * when creating scaling policies, **CloudWatch** alarms are created. Ex: "Create an alarm if: CPUUtilization < 36 for 15 data points within 15 minutes".
 * ASG tries the balance the number of instances across AZ by default, and then delete based on the age of the launch configuration
 * The capacity of our ASG cannot go over the maximum capacity ee have allocated during scale out events
-* when an ALB validate an health check issue it terminate the EC2 instance.
+* when an ALB validates an health check issue it terminates the EC2 instance.
 
 ## EBS Volume
 
@@ -388,14 +390,14 @@ sudo mount  /dev/xvdb /data
 
 ### Volume types
 
-* GP2: used for most workload up to 16 TB at 16000 IOPS max  (3 IOPS per GB brustable to 3000)
-* io 1: critical app with large database workloads. max ratio 50:1 IOPS/GB. Min 100 iops and 4G to 16T
-* st 1: Streaming workloads requiring consistent, fast throughput at a low price. For Big data, Data warehouses, Log processing, Apache Kafka
-* sc 1: throughput oriented storage.  500G- 16T, 500MiB/s. Max IOPs at 250. Used for cold HDD, and infrequently accessed data.
+* **GP2**: used for most workload up to 16 TB at 16000 IOPS max  (3 IOPS per GB brustable to 3000)
+* **io 1**: critical app with large database workloads. max ratio 50:1 IOPS/GB. Min 100 iops and 4G to 16T
+* **st 1**: Streaming workloads requiring consistent, fast throughput at a low price. For Big data, Data warehouses, Log processing, Apache Kafka
+* **sc 1**: throughput oriented storage.  500G- 16T, 500MiB/s. Max IOPs at 250. Used for cold HDD, and infrequently accessed data.
 
 Encryption has a minimum impact on latency. It encrypts data at rest and during snapshots.
 
-Instance store is a volume attached to the instance, used for root folder. It is a ephemeral storage but has millions read per s and 700k write IOPS. It provides the best disk performance and can be used to have high performance cache for our application.
+Instance store is a volume attached to the instance, used for root folder. It is a ephemeral storage but has millions read per s and 700k write IOPS. It provides the best disk performance and can be used to have high performance cache for our applications.
 
 ![5](./images/ephemeral.png)
 

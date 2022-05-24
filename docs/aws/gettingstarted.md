@@ -72,7 +72,7 @@ terraform show
 Be sure to have a policy to authorize HTTP inbound traffic on port 80 for 0.0.0.0/0
 In the user data add web server:
 
-```
+```sh
 #!/bin/bash
 yum update -y
 yum install -y httpd
@@ -80,3 +80,4 @@ systemctl start httpd
 systemctl enable httpd
 echo "<h1>Hello from $(hostname -f)</h1>" > /var/www/html/index.html
 ```
+
