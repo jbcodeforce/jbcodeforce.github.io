@@ -1,7 +1,15 @@
 # Amazon Web Service studies
 
-Created in 2002, and launched as AWS in 2004 with SQS as first service offering. 
+* Created in 2002, and launched as AWS in 2004 with SQS as first service offering. 
+* 2003 amazon.com was $5.2B retail business. 7800 employees
+## Why cloud
 
+* moving from capex to variable expense
+* economies of scale: EC2 instance different pricing model
+* Elactic capacity: pay for what you use
+* Speed anf agility to define infrastructure in minutes not weeks
+* Focus on business apps, not IT infrastructure
+* Global reach in a minutes
 ## Use cases
 
 * Enable to build scalable apps, adaptable to business demand
@@ -138,7 +146,7 @@ load for example), it can burst. Use burst credits to control CPU usage.
 
 ### EC2 Nitro
 
-Next generation of EC2. It uses new virtualization schema. Supports IPv6, better I/O on ESB and better security.  Name starts with C5, D5,...
+Next generation of EC2. It uses new virtualization schema. Supports IPv6, better I/O on EBS and better security.  Name starts with C5, D5,...
 
 vCPU represents thread running on core CPU. You can optimize vCPU allocation on the EC2 instance, once created, by updating the launch configuration.
 ### Launch types
@@ -232,7 +240,7 @@ Elastic IP is a public IPv4 that you own as long as you want and you can attach 
 ### Playing with Apache HTTP
 
 ```shell
-# Swap to roo
+# Swap to root
 sudo su
 # update OS
 yum update -y
@@ -270,7 +278,7 @@ ENI is a logical component in a VPC that represents a virtual network card. It h
 Define strategy to place EC2 instances:
 
 * **Cluster**: groups instances into a low-latency group in a single Availability Zone
-    * highest performance while talking to each other as We're performing big data analysis
+    * highest performance while talking to each other as when performing big data analysis
 * **Spread**: groups across underlying hardware (max 7 instances per group per AZ)
     * Reduced risk is simultaneous failure
     * EC2 Instances are on different physical hardware
@@ -288,20 +296,23 @@ Access from network and policies menu, define the group with expected strategy, 
 
 ## Load balancer
 
-Route traffic into the different EC2 instances. It also exposes a single point of access (DNS) to the deployed application. In case of failure, it can route to a new instance, transparently and cross multiple AZs. It uses health check (/health on the app called the `ping path`) to asses instance availability. It provides SSL termination. It supports to separate private (internal) to public (external) traffic.
+Route traffic into the different EC2 instances. It also exposes a single point of access (DNS) to the deployed application. In case of EC2 failure, it can route to a new instance, transparently and cross multiple AZs. It uses health check (/health on the app called the `ping path`) to assess instance availability. It also provides SSL termination. It supports to separate private (internal) to public (external) traffic.
 
  ![1](./images/EC2-AZ.png)
 
 ELB: EC2 load balancer is the managed service by Amazon. Three types supported:
 
-* Classic load balancer: older generation. For each instance created, update the load balancer configuration so it can route the traffic.
+* **Classic** load balancer: older generation. For each instance created, update the load balancer configuration so it can route the traffic.
 * **Application load balancer**: HTTP, HTTPS (layer 7), Web Socket. 
+
     * It specifies availability zones: it routes traffic to the targets in these Availability Zones. Each AZ has one subnet. To increase availability, we need at least two AZs.
     * It uses target groups, to group applications
     * route on URL, hostname and query string
     * Get a fixed hostname
     * the application do not see the IP address of the client directly (ELB does a connection termination), but ELB put it in the header `X-Forwarded-For`, `X-Forwarded-Port` and `X-Forwarded-Proto`.
+
 * **Network load balancer**: TCP, UDP (layer 4), TLS
+
     * handle millions request/s
     * use to get a public static IP address
 
@@ -335,8 +346,7 @@ An SSL/TLS Certificate allows traffic between our clients and our load balancer 
 
 ### Connection draining
 
-This is a setting to control connection timeout and reconnect when an instance is not responding. It is to set up the time to complete “in-flight requests”. When an instance is "draining", ELB stops sending new requests to the instance. The time out can be adjusted, depending of the application, from 1 to 3600 seconds, default is 300
-seconds, or disabled (set value to 0).
+This is a setting to control connection timeout and reconnect when an instance is not responding. It is to set up the time to complete “in-flight requests”. When an instance is "draining", ELB stops sending new requests to the instance. The time out can be adjusted, depending of the application, from 1 to 3600 seconds, default is 300 seconds, or disabled (set value to 0).
 
 ### Auto Scaling Group (ASG)
 
@@ -360,7 +370,7 @@ Automatically Register new instances to a load balancer.
 
 * when creating scaling policies, **CloudWatch** alarms are created. Ex: "Create an alarm if: CPUUtilization < 36 for 15 data points within 15 minutes".
 * ASG tries the balance the number of instances across AZ by default, and then delete based on the age of the launch configuration
-* The capacity of our ASG cannot go over the maximum capacity ee have allocated during scale out events
+* The capacity of our ASG cannot go over the maximum capacity we have allocated during scale out events
 * when an ALB validates an health check issue it terminates the EC2 instance.
 
 ## EBS Volume
@@ -467,7 +477,7 @@ With Aurora global database one primary region is used for write and then up to 
 ## ElastiCache
 
 Get a managed Redis or Memcached cluster. Applications queries ElastiCache, if not available, get from RDS and store in ElastiCache. Key-Value store.
-It can be used for user session store so user interaction can got to different application instances.
+It can be used for user session store so user interaction can go to different application instances.
 
 **Redis** is a multi AZ with Auto-Failover, supports read replicas to scale and for high availability. It can persist data using AOF persistence, and has backup and restore features.
 
@@ -475,9 +485,9 @@ It can be used for user session store so user interaction can got to different a
 
 Some patterns for ElastiCache:
 
-* Lazy Loading: all the read data is cached, data can become stale in cache
-* Write Through: Adds or update data in the cache when written to a DB (no stale data)
-* Session Store: store temporary session data in a cache (using TTL features)
+* **Lazy Loading**: all the read data is cached, data can become stale in cache
+* **Write Through**: Adds or update data in the cache when written to a DB (no stale data)
+* **Session Store**: store temporary session data in a cache (using TTL features)
 
 Sub millisecond performance, in memory read replicas for sharding. 
 
@@ -516,7 +526,7 @@ The **weighted** routing policy controls the % of the requests that go to specif
 
 The **latency** routing Policy redirects to the server that has the least latency close to the client. Latency is evaluated in terms of user to designated AWS Region.
 
-**Health check** monitors he health and performance of the app servers or endpoints and assess DNS failure. We can have HTTP, TCP or HTTPS health checks. We can define from which region to run the health check. They are charged per HC / month. It is recommended to have one HC per app deployment. It can also monitor latency,
+**Health check** monitors the health and performance of the app servers or endpoints and assess DNS failure. We can have HTTP, TCP or HTTPS health checks. We can define from which region to run the health check. They are charged per HC / month. It is recommended to have one HC per app deployment. It can also monitor latency.
 
 The **failover** routing policy helps us to specify a record set to point to a primary and then a secondary instance for DR. 
 
@@ -526,11 +536,11 @@ The **Multi Value** routing policy is used to access multiple resources. The rec
 
 ## Some application patterns
 
-For solution architecture we need to assess cost, performance, reliability, security and operational excellence.
+For solution architecture, we need to assess cost, performance, reliability, security and operational excellence.
 
 ### Stateless App
 
-The step to grow a stateless app: add vertical scaling by changing the EC2 profile, but while changing user has out of service. Second step is to scale horizontal, each EC2 instance has static IP address and DNS is configured with 'A record' to get each EC2 end point. But is one instance is gone, the client App will see it down until TTL expires.
+The step to grow a stateless app: add vertical scaling by changing the EC2 profile, but while changing, user has out of service. Second step is to scale horizontal, each EC2 instance has static IP address and DNS is configured with 'A record' to get each EC2 end point. But if one instance is gone, the client App will see it down until TTL expires.
 
 The reference architecture includes DNS record set with alias record (to point to ALB. Using alias as ALB address may change over time) with TTL of 1 hour. Use load balancers in 3 AZs (to survive disaster) to hide the horizontal scaling of EC2 instances (managed with auto scaling group) where the app runs. Health checks are added to keep system auto adaptable and hide system down, and restricted security group rules to control EC2 instance accesses. ALB and EC instances are in multi different AZs. The EC instances can be set up with reserved capacity to control cost.
 
@@ -538,7 +548,7 @@ The reference architecture includes DNS record set with alias record (to point t
 
 ### Stateful app
 
-In this case we will add the pattern of shopping cart. If we apply the same architecture as before, at each interaction of the user, it is possible the traffic will be sent to another EC2 instance that started to process the shopping cart. Using ELB with stickiness will help to keep the traffic to the same EC2, but in case of EC2 failure we still loose the cart. An alternate is to use user cookies to keep the cart at each interaction. It is back to a stateless app as state is managed by client and cookie. For security reason the app needs to validate the cookie content. cookie as a limit of 4K data.
+In this case we will add the pattern of shopping cart. If we apply the same architecture as before, at each interaction of the user, it is possible the traffic will be sent to another EC2 instance that started to process the shopping cart. Using ELB with stickiness will help to keep the traffic to the same EC2, but in case of EC2 failure we still loose the cart. An alternate is to use user cookies to keep the cart at each interaction. It is back to a stateless app as state is managed by client and cookie. For security reason the app needs to validate the cookie content. cookie has a limit of 4K data.
 
 Another solution is to keep session data into an elastic cache, like Redis, and use the sessionId as key and persisted in a user cookie. So EC2 managing the interaction can get the cart data from the cache using the sessionID. It can be enhanced with a RDS to keep user data. Which can also support the CQRS pattern with read replicas. Cache can be update with data from RDS so if the user is requesting data in session, it hits the cache.
 
@@ -556,7 +566,7 @@ The easiest solution is to create AMI containing OS, dependencies and app binary
 
 ## S3
 
-Amazon S3 allows people to store objects (files) in **buckets** (directories), which must have a globally unique name (cross users!). They are defined at the region level. **Object** in a bucket, is referenced as a **key** which can be seen to a file path in a file system. The max size for an object is 5 TB but need to be uploaded in multi part using 5GB max size.
+Amazon S3 allows people to store objects (files) in **buckets** (directories), which must have a globally unique name (cross users!). They are defined at the region level. **Object** in a bucket, is referenced as a **key** which can be seen as a file path in a file system. The max size for an object is 5 TB but need to be uploaded in multi part using 5GB max size.
 
 S3 supports versioning at the bucket level. So file can be restored from previous version, and even deleted file can be retrieved from a previous version.
 
@@ -564,7 +574,7 @@ Objects can also be encrypted, and different mechanisms are available:
 
 * **SSE-S3**: server-side encrypted S3 objects using keys handled & managed by AWS using AES-256 protocol must set `x-amz-server-side-encryption: "AES256"` header in the POST request.
 * **SSE-KMS**: leverage AWS Key Management Service to manage encryption keys. `x-amz-server-side-encryption: "aws:kms"` header. Server side encrypted. It gives user control of the key rotation policy and audit trail.
-* **SSE-C**: when We want to manage our own encryption keys. Server-side encrypted. Encryption key must provided in HTTP headers, for every HTTP request made. HTTPS is mandatory
+* **SSE-C**: when we want to manage our own encryption keys. Server-side encrypted. Encryption key must be provided in HTTP headers, for every HTTP request made. HTTPS is mandatory
 * **Client Side Encryption**: encrypt before sending object.
 
 ### Security control
@@ -592,7 +602,7 @@ Finally S3 is eventual consistent.
 
 #### S3 replication
 
-Once versioning enabled, a bucket can be replicated in the same region or cross regions. The replication is done asynchronously. SRR is for log aggregation for example while CRR is used for compliance and DR or replication across accounts. Delete operations are not replicated.
+Once versioning enabled, a bucket can be replicated in the same region or cross regions. The replication is done asynchronously. SRR is for log aggregation for example, while CRR is used for compliance and DR or replication across accounts. Delete operations are not replicated.
 
 ### S3 Storage classes
 
@@ -602,9 +612,9 @@ When uploading a document into an existing bucket we can specify the storage cla
 
 To prevent accidental file deletes, we can setup MFA Delete to use MFA tokens before deleting objects.
 
-Amazon Glacier is for archiving, like writing to tapes. 
+Amazon **Glacier** is for archiving, like writing to tapes. 
 
-We can transition objects between storage classes. For infrequently accessed object, move them to STANDARD_IA. For archive objects We don’t need in real-time, GLACIER or DEEP_ARCHIVE. Moving objects can be automated using a lifecycle configuration
+We can transition objects between storage classes. For infrequently accessed object, move them to STANDARD_IA. For archive objects, that we don’t need in real-time, use GLACIER or DEEP_ARCHIVE. Moving objects can be automated using a lifecycle configuration
 
 At the bucket level, a user can define lifecycle rules for when to transition an object to another storage class.
 
@@ -620,7 +630,7 @@ To improve performance, a big file can be split and then uploaded with local con
 
 No need for complex ETL jobs to prepare your data for analytics.
 
-Integrated with AWS Glue Data Catalog, allowing you to create a unified metadata repository across various services, crawl data sources to discover schemas and populate your Catalog with new and modified table and partition definitions, and maintain schema versioning.
+Integrated with AWS **Glue Data Catalog**, allowing you to create a unified metadata repository across various services, crawl data sources to discover schemas and populate your Catalog with new and modified table and partition definitions, and maintain schema versioning.
 
 ## AWS CLI
 
@@ -638,10 +648,10 @@ For EC2 instance, the security group needs to accept traffic from edge location 
 
 It is possible to control with geo restriction.
 
-It also supports the concept of signed URL. When you want to distribute content to different user groups over the world: We attach a policy with:
+It also supports the concept of signed URL. When you want to distribute content to different user groups over the world, attach a policy with:
 
-* Includes URL expiration
-* Includes IP ranges to access the data from
+* URL expiration
+* IP ranges to access the data from
 * Trusted signers (which AWS accounts can create signed URLs)
 * How long should the URL be valid for?
 * Shared content (movie, music): make it short (a few minutes)
@@ -661,9 +671,9 @@ Snowball Edge brings computing capabilities to allow data pre-processing while i
 
 Storage gateway expose an API in front of S3. Three gateway types:
 
-* file: S3 bucket accessible using NFS or SMB protocols. Controlled access via IAM roles. File gateway is installed on-premise and communicate with AWS.
-* volume: this is a block storage using iSCSI protocol. On-premise and visible as a local volume backed by S3.
-* tape: same approach but with virtual tape library. Can go to S3 and Glacier.
+* **file**: S3 bucket accessible using NFS or SMB protocols. Controlled access via IAM roles. File gateway is installed on-premise and communicate with AWS.
+* **volume**: this is a block storage using iSCSI protocol. On-premise and visible as a local volume backed by S3.
+* **tape**: same approach but with virtual tape library. Can go to S3 and Glacier.
 
 ### Storage comparison
 
@@ -686,9 +696,9 @@ Oldest queueing service on AWS. The default retention is 4 days up to 14 days. l
 
 Specific SDK to integrate to SendMessage...
 
-Consumer receive, process and then delete. Parallel is possible on the different messages. The consumers can be in an auto scaling group so with CloudWatch, it is possible to monitor the queue size / # of instances and on the CloudWatch alarm action, trigger scaling. Max size is 256KB. 
+Consumers receive, process and then delete. Parallelism is possible on the different messages. The consumers can be in an auto scaling group so with CloudWatch, it is possible to monitor the queue size / # of instances and on the CloudWatch alarm action, trigger scaling. Max mesage size is 256KB. 
 
-Message has metadata out of the box. After a message is polled by a consumer, it becomes invisible to other consumers. By default, the “message visibility timeout” is 30 seconds, which means the message has 30 seconds to be processed (Amazon SQS prevents other consumers from receiving and processing the message.). After the message visibility timeout is over, the message is “visible” in SQS, so it will be processed twice. But a consumer could call the ChangeMessageVisibility API to get more time. When the visibility timeout is high (hours), and the consumer crashes then the re-processing of all the message will take time. If it is set too low (seconds), we may get duplicates
+Message has metadata out of the box. After a message is polled by a consumer, it becomes invisible to other consumers. By default, the “message visibility timeout” is 30 seconds, which means the message has 30 seconds to be processed (Amazon SQS prevents other consumers from receiving and processing the message). After the message visibility timeout is over, the message is “visible” in SQS, so it may be processed twice. But a consumer could call the ChangeMessageVisibility API to get more time. When the visibility timeout is high (hours), and the consumer crashes then the re-processing of all the message will take time. If it is set too low (seconds), we may get duplicates
 
  ![SQS](./images/sqs-msg.png)
 
@@ -704,7 +714,7 @@ Queue can be set as FIFO to guaranty the order: limited to throughput at 300 msg
 
 ### Simple Notification Service is for topic pub/sub
 
-SNS supports up to 10,000,000 subscriptions per topic, 100,000 topics limit. The subscribers can publish to topic via SDK and can use different protocols like: HTTP / HTTPS (with delivery retries – how many times), SMTP,  SMS, ... The subscribers can be a SQS, a Lambda, emails, Emails...
+SNS supports up to 10,000,000 subscriptions per topic, 100,000 topics limit. The subscribers can publish to topic via SDK and can use different protocols like: HTTP / HTTPS (with delivery retries – how many times), SMTP,  SMS, ... The subscribers can be a SQS, a Lambda, Emails...
 Many AWS services can send data directly to SNS for notifications: CloudWatch (for alarms), Auto Scaling Groups notifications, Amazon S3 (on bucket events), CloudFormation.
 
 SNS can be combined with SQS: Producers push once in SNS, receive in all SQS queues that they subscribed to. It is fully decoupled without any data loss. SQS allows for data persistence, delayed processing and retries. SNS cannot send messages to SQS FIFO queues.
@@ -715,11 +725,11 @@ It is like a managed alternative to Kafka. It uses the same principle and featur
 
  ![kin](./images/kinesis.png)
 
-Data can be kept up to 7 days. Ability to replay data, multiple apps consume the same stream. Only one consumer per shard
+Data can be kept up to 7 days. hability to replay data, multiple apps consume the same stream. Only one consumer per shard
 
 * **Kinesis Streams**: low latency streaming ingest at scale. They offer patterns for data stream processing.
 * **Kinesis Analytics**: perform real-time analytics on streams using SQL
-* **Kinesis Firehose**: load streams into S3, Redshift, ElasticSearch. Mo administration, auto scaling, serverless.
+* **Kinesis Firehose**: load streams into S3, Redshift, ElasticSearch. No administration, auto scaling, serverless.
 
 One stream is made of many different shards (like Kafka partition). Capacity of 1MB/s or 1000 messages/s at write PER SHARD, and 2MB/s at read PER SHARD. Billing is per shard provisioned, can have as many shards as we want. Batching available or per message calls.
 
@@ -730,12 +740,11 @@ It offer a CLI to get stream, list streams, list shard...
 ### EventBridge
 
 [EventBridge](https://aws.amazon.com/eventbridge/) is a serverless event bus that makes it easier to 
-build event-driven applications at scale using events generated from your applications, integrated Software-as-a-Service (SaaS) applications, and AWS services
+build event-driven applications at scale using events generated from your applications, integrated Software-as-a-Service (SaaS) applications, and AWS services.
 
 You can ingest, filter, transform and deliver events without writing custom code. 
 
-Integrate schema registry stores a collection of easy-to-find event schemas and enables
- you to download code bindings for those schemas in your IDE so you can represent events as a strongly-typed objects in your code
+Integrate schema registry stores a collection of easy-to-find event schemas and enables you to download code bindings for those schemas in your IDE so you can represent events as a strongly-typed objects in your code
 
 ## Serverless 
 
@@ -743,8 +752,9 @@ Serveless on AWS is supported by a lot of services:
 
 * **AWS Lambda**: Limited by time - short executions, runs on-demand, and automated scaling. Pay per call, duration and memory used.
 * **DynamoDB**: no sql db, with HA supported by replication across three AZs. millions req/s, trillions rows, 100s TB storage. low latency on read. Support event driven programming with streams: lambda function can read the stream (24h retention). Table oriented, with dynamic attribute but primary key. 400KB max size for one document. It uses the concept of Read Capacity Unit and Write CU. It supports auto-scaling and on-demand throughput. A burst credit is authorized, when empty we get ProvisionedThroughputException. Finally it use the DynamoDB Accelerator to cache data to authorize micro second latency for cached reads. Supports transactions and bulk tx with up to 10 items. 
-* AWS Cognito: gives users an identity to interact with the app.
-* AWS API Gateway: API versioning, websocket supported, different environment, support authentication and authorization. Handle request throttling. Cache API response. SDK. Support different security approaches:
+* AWS **Cognito**: gives users an identity to interact with the app.
+* AWS **API Gateway**: API versioning, websocket support, different environment, support authentication and authorization. Handle request throttling. Cache API response. SDK. Support different security approaches:
+
     * IAM:
         * Great for users / roles already within your AWS account
         * Handle authentication + authorization
@@ -765,7 +775,7 @@ Serveless on AWS is supported by a lot of services:
 * Step Functions
 * Fargate
 
-Lambda@Edge is used to deploy Lambda functions alongside your CloudFront CDN, it is for building more responsive applications. Lambda is deployed globally. Here are some use cases: Website security and privacy, dynamic webapp at the edge, search engine optimization (SEO), intelligent route across origins and data centers, bot mitigation at the edge, real-time image transformation, A/B testing, user authentication and authorization, user prioritization, user tracking and analytics.
+Lambda@Edge is used to deploy Lambda functions alongside your CloudFront CDN, it is for building more responsive applications, closer to the end user. Lambda is deployed globally. Here are some use cases: Website security and privacy, dynamic webapp at the edge, search engine optimization (SEO), intelligent route across origins and data centers, bot mitigation at the edge, real-time image transformation, A/B testing, user authentication and authorization, user prioritization, user tracking and analytics.
 
 ### Serverless architecture patterns
 
@@ -777,11 +787,11 @@ The mobile application access application via REST HTTPS through API gateway. Th
 
 Each of the component supports auto scaling. To improve read throughput cache is used with DAX. Also some of the REST request could be cached in the API gateway. As the application needs to access S3 directly, Cognito generates temporary credentials with STS so the application can authenticate to S3. User's credentials are not saved on the client app. Restricted policy is set to control access to S3 too.
 
-To improve throughput we can add DAX as a caching layer in front of DynamoDB: this will also reduce the sizing for DynamoDB. Some of the response can also be cached at the API gateway level.
+To improve throughput we can add DAX as a caching layer in front of DynamoDB: this will also reduce the sizing for DynamoDB. Some of the responses can also be cached at the API gateway level.
 
 #### Serverless hosted web site (Blog)
 
-The public web site should scale globally, focus to scale on read, pure static files with some write. To secure access to S3 content, we use Origin Access Identity and Bucket policy to authorize read only from OAI.
+The public web site should scale globally, focus to scale on read, pure static files with some writes. To secure access to S3 content, we use Origin Access Identity and Bucket policy to authorize read only from OAI.
 
 ![](./images/aws-app-blog.png)
 

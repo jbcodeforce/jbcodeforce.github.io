@@ -375,29 +375,9 @@ Day 1 is installation. Day 2 is about keeping steady state of the application an
 
 1. Explain monitoring
 
-    * With Red Hat OpenShift Container Platform, you can monitor the OpenShift platform.
-    * The monitoring stack for the platform is based on Prometheus and Grafana.
-    * During Day 1 operation you may want to keep time series data in a persistence volume, and configure the alert manager to forward to the good destination
+  See [this prometheus introduction](../prometheus.md)
 
-    ![](./images/ocp-monitoring.png)
-
-    | Component | |
-    | --- | --- |
-    | Prometheus	| Used to provide a time-series data store for metrics, rule evaluation engine and alert generation.|
-    | AlertManager |	Responsible for alerts handling and notification to external systems. |
-    | Thanos	| Responsible for metric aggregation across Prometheus instances as well as alert generation engine. |
-    | Grafana	| Used to provide dashboard and metric visualization capabilities.  This is a read only instance of Grafana to show platform metrics |
-    
-    * Day 02 operations include verifying platform metrics, performance data, and alerts are reaching the correct destination
-
-    * Knowledge base: [IBM Cloud architecture red-hat-openshift-container-platform-day-2-ops](https://www.ibm.com/cloud/architecture/content/course/red-hat-openshift-container-platform-day-2-ops). Some guiding principles for the definition and design of Site Reliability Engineer activities:
-
-        * Immutable / Disposable Infrastructure
-        * Infrastructure as Code
-        * Automate as much as possible
-
-    * At the application level spend time to define the saturation monitor goals. On Day 2, verify application metrics, monitor app to verify it acts as expected, liveness, health check.
-    * As Cloud Pak for automation are custom applications in the context of OpenShift monitoring, we need to define  `User Project Monitoring`. To do so 
+  * As Cloud Pak for automation are custom applications in the context of OpenShift monitoring, we need to define  `User Project Monitoring`. To do so 
 
       ```sh
       # in infra gitops project
@@ -406,7 +386,7 @@ Day 1 is installation. Day 2 is about keeping steady state of the application an
       oc get pods -n openshift-user-workload-monitoring
       ```
 
-    * the IBM Cloud Pak Foundational Services makes it easy to deploy an additional instance of Grafana.
+  * the IBM Cloud Pak Foundational Services makes it easy to deploy an additional instance of Grafana.
 
       ```sh
       # verify Grafana services are deployed
@@ -415,7 +395,7 @@ Day 1 is installation. Day 2 is about keeping steady state of the application an
 
       The Grafana based services are deployed and managed by the IBM Monitoring Grafana Operator.
     
-    * Verify grafana is running
+  * Verify grafana is running
 
       ```sh
       oc get pods -w -n ibm-common-services -l app=grafana
@@ -424,26 +404,26 @@ Day 1 is installation. Day 2 is about keeping steady state of the application an
       # login with OCP admin user, and then the monitoring option on the left.
       # This should take you to the Grafana UI. 
       ```
-    * Enable monitoring in the custom resource if not already done. 
-    * Notify Prometheus of additional targets where it can scrape custom metrics from. Use a ServiceMonitor provided by the Prometheus operator to specify additional endpoints for a Prometheus instance
+  * Enable monitoring in the custom resource if not already done. 
+  * Notify Prometheus of additional targets where it can scrape custom metrics from. Use a ServiceMonitor provided by the Prometheus operator to specify additional endpoints for a Prometheus instance
 
-      ```sh
-      oc apply -f environments/cp4ba/services/monitoring/cp4a-operator-monitor.yaml -n cp4ba
-      ```
+    ```sh
+    oc apply -f environments/cp4ba/services/monitoring/cp4a-operator-monitor.yaml -n cp4ba
+    ```
 
-    * Define Grafana dashboard and set the organization to be `cp4ba`, and click on the sample dashboard.
+  * Define Grafana dashboard and set the organization to be `cp4ba`, and click on the sample dashboard.
 
-      ```sh
-      oc apply -f environments/cp4ba/services/monitoring/cp4ba-sample-dashboard.yaml 
-      ```
+    ```sh
+    oc apply -f environments/cp4ba/services/monitoring/cp4ba-sample-dashboard.yaml 
+    ```
 
-    The simple dashboard visualizes the `ansible_operator_reconciles_count` counter and the rate of change for the `workqueue_unfinished_work_seconds` counter.
+  The simple dashboard visualizes the `ansible_operator_reconciles_count` counter and the rate of change for the `workqueue_unfinished_work_seconds` counter.
 
-    ![](./images/grafana-cp4ba-ope-count.png)
+  ![](./images/grafana-cp4ba-ope-count.png)
 
-    * Go to Monitoring in OCP console Monitor> 
+  * Go to Monitoring in OCP console Monitor> 
 
-    ![](./images/grafana-ocp.png)
+  ![](./images/grafana-ocp.png)
 
 ???- "More reading"
     * [Monitor Components of the IBM Cloud Pak For Business Automation](https://community.ibm.com/community/user/automation/blogs/jorge-rodriguez1/2021/10/04/how-to-monitor-ibm-cloud-pak-for-ba)
