@@ -88,6 +88,7 @@ nav:
       - Data catalog - spectrum discover: https://www.ibm.com/cloud/architecture/architectures/spectrum-discover
       - OpenData Hub: architecture/opendatahub.md
       - OLAP: data/olap.md
+      - Cassandra: data/cassandra.md
     - AI:
       - Machine learning: https://jbcodeforce.github.io/ml-basics/
       - Automation Decision Service: techno/cp4a/ads.md

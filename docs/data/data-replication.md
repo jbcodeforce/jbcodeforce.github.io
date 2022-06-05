@@ -18,7 +18,7 @@ Data replication encompasses duplication of transactions on an ongoing basis, so
  updated state and synchronized with the source.
 
 The database centric replication mechanism involves different techniques to apply data replication between databases of 
-the same product (DB2 to DB2, Postgresqsl to Postgresql). The approach is to control availability and consistency.
+the same product (DB2 to DB2, Postgresql to Postgresql). The approach is to control availability and consistency.
 
 Replication implementations are most of the time, black box for the business application developers, but we want to present
  three types of replication architecture:
@@ -31,7 +31,7 @@ happen on any node, and followers are specifically read-only. This is a pattern 
 
 * **multi-leader**: multiple nodes accept write operations (they are leaders), and act as follower for other leaders. 
 * **leaderless**: each node accept write operations. Client sends write to multiple replicas, accept p acknowledges 
-(p <= number of nodes), but also performs n reads to assess eventual stale data. (This type is used in Cassandra or DynamoDB)
+(p <= number of nodes), but also performs n reads to assess eventual stale data. (This type is used in [Cassandra](./cassandra.md) or DynamoDB)
 
 ### Single leader
 
@@ -65,16 +65,14 @@ a monolitic read: user makes several reads in sequence, they will not see time g
 by ensuring the reads for a given user are done on the same follower. This is what kafka does by assigning a consumer 
 to partition.
 
-With asynch replica, if the leader fails, data not yet replicated to the followers, is lost until a new leader starts 
-to accept new writes. 
+With asynch replica, if the leader fails, data not yet replicated to the followers, is lost (write operation 2 and 3 in figure below). When a new leader is elected, write operation succeed. 
 
 ![](./images/data-lost.png)
 
 
 Also **adding a new follower** brings other challenges: as the data are continuously being written to the leader database, 
 copying the database files to the new follower will not be consistent. One adopted solution is to snapshot the database, 
-without locking write operations, and copy the data to the follower, then from this snapshot, consumes the update log. 
-To work the snapshot position needs to be known in the replication log. 
+without locking write operations, and copy the data to the follower.  Then from this snapshot, consumes the update log. The snapshot position needs to be known in the replication log. 
 
 ![](./images/add-follower.png)
 
@@ -133,7 +131,7 @@ same node_id at the current node id is discarded.
 ### Leaderless
 
 In this last replication technique, the client application is doing write operation on any replicas. There is no leader. 
-This is the approach used by Cassandra and Dynamo system. The write operations order is not maintained. With leaderless 
+This is the approach used by Cassandra and DynamoDB system. The write operations order is not maintained. With leaderless 
 failover does not exist, in case of node failure the client has to accept n missing acknowledges. If the client read 
 back data from a previously failed node, that just restarted, it may read old / stale data. To mitigate this problem, 
 reads are done to multiple nodes in parallel, and the client needs to consolidate the returned value (may be using 
@@ -179,7 +177,7 @@ Two important derived use cases:
 
 ### Data lake technologies
 
-There are multiple alternatives to build a data lake solution. In the field, the following technologies are usually used: Hadoop, Apache Spark, cloud object storage, and Apache Kafka. 
+There are multiple alternatives to build a data lake solution. In the field, the following technologies are usually used: Hadoop, S3 bucket, Apache Spark, cloud object storage, and Apache Kafka. 
 
 * **Hadoop/HDFS** (Hadoop File System) is designed to process large relatively static data sets.  
 It provides a cost effective vehicle for storing massive amounts of data due to its commodity hardware underpinnings 
@@ -199,13 +197,14 @@ Storage, process it with full standard SQL syntax, and write the results to Clou
 you analyze and process data where it is stored - there is no ETL, no databases, and no infrastructure to manage. 
 The service is highly available, offers a Multi-AZ deployment, and autoscales based on your workload.
 
+* [AWS S3](../../aws/#s3)
 * **Kafka** is designed from the outset to easily cope with constantly changing data and events. It has built in 
 capabilities for data management such as log compaction that enable Kafka to emulate updates and deletes. The data 
 storage may be self described JSON document wrapped in [Apache Avro](https://avro.apache.org/docs/current/) binary format. 
 Kafka exploits the scalability and availability of inexpensive commodity hardware. Although Kafka supports persisting data 
 in queues for weeks or even months, it's not yet a proved technology for long term storage, even if companies are already 
 adopting it for event sourcing. Kafka provides a means of maintaining one and only one version of a “record” much like 
-in a keyed database. But an adjustable persistence time window lets you control how much data is retained.
+in a keyed database. But an adjustable persistence time window lets you control how much data is retained. Important to note that [RedPanda](https://jbcodeforce.github.io/redpanda-studies/) is a modern, fully compatible, to Kafka to support the same use cases, but also supporting webassembly to deploy code to broker.
 
 Data Replication solutions provide both bulk and continuous delivery of changing structured operational data to both 
 Hadoop and Kafka.  
@@ -325,4 +324,4 @@ In distributed deployment, the connector supports scaling by adding new workers 
 * [Using Kafka Connect as a CDC solution](https://www.confluent.io/blog/no-more-silos-how-to-integrate-your-databases-with-apache-kafka-and-cdc)
 * [Debezium tutorial](https://debezium.io/docs/tutorial/)
 * [Ensure data resilience - author: Neal Fishman](https://www.ibm.com/cloud/garage/practices/manage/ensure-data-resilience/)
-* [RedPanda ]()
+* [RedPanda](https://jbcodeforce.github.io/redpanda-studies/)

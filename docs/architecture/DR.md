@@ -54,7 +54,7 @@ There are three types of data to consider:
 * **Runtime** data is the data associated with transaction logs, messages saved in the database table, 
 process instance information persisted in the database table, and other persistent business states
 
-For installation and configuration date, the change is infrequent & consistency is important so copy this via snapshots before and after changes done. 
+For installation and configuration data, the change is infrequent & consistency is important so copy these via snapshots before and after changes done. 
 With the adoption of environment as scripts and DevOps configurations are no more manual and can be kept as source code in Git repository.
 
 ### Runtime Data
@@ -69,7 +69,9 @@ Key requirement: All runtime data must be replicated in a consistent fashion whi
 BPM State in the Databases & WAS transaction Logs.
 Some DR strategies call for a replicated database to exist in the DR data center. Some caution should be exercised with such a solution. 
 A best practice DR deployment would take into account WAS XA Transaction logs in the same consistency group as the database.
-
+"
+???+ Read more"
+    * [Data replication](../data/data-replication.md)
 ## Product specifics
 
 * In Liberty Profile servers the transaction logs are located in the DB2 database, so will 

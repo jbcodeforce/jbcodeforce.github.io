@@ -4,9 +4,12 @@ The [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected
 
 ## Quick notes
 
+Those are the questions to ask for designing a cloud native solution by understanding the potential impact . All hardware are becoming software.
+
+**Workload** represents interrelated applications, infrastructure, policies, governance and operations. 
 ### Six pilards
 
-When architecting technology solutions, never neglect the six pillars
+When architecting technology solutions, never neglect the six pillars of:
 
 * Operational Excellence
 * Security
@@ -26,9 +29,16 @@ When architecting technology solutions, never neglect the six pillars
 
 ### Operational Excellence
 
-support development and run workloads effectively, gain insight into their operations, and to continuously improve supporting processes and procedures. 
+Support development and run workloads effectively, gain insight into their operations, and to continuously improve supporting processes and procedures. 
 
-Design principles:
+Four area of focus:
+
+* Organization: define clear responsabilities, roles, and success interdependencies
+* Prepare: design telemetry (logs, metrics...), improve flow, mitigate deployment risks, understand operational readiness
+* Operate: understand workload health, operation health, achievement of business outcome. Runbooks and playbooks should define escalation process, and define owneship for each action
+* Evolve: learn from experience, make improvements, share with teams
+
+**Design principles:**
 
 * Perform operations as code
 * Make frequent, small, reversible changes
@@ -80,7 +90,7 @@ Ensure that you have a way to quickly grant access for your security team, and a
 
 ### Reliability
 
-the ability of a workload to perform its intended function correctly and consistently.
+The ability of a workload to perform its intended function correctly and *consistently*.
 
 * Design principles:
 
@@ -90,7 +100,7 @@ the ability of a workload to perform its intended function correctly and consist
     * Stop guessing capacity: monitor demand and workload utilization, and automate the addition or removal of resources to maintain the optimal level to satisfy demand without over- or under-provisioning
     * Manage change in automation
 
-Before architecting any system, foundational requirements that influence reliability should be in place
+Before architecting any system, foundational requirements that influence reliability should be in place.
 
 | Questions to assess|
 | --- |
@@ -99,3 +109,4 @@ Before architecting any system, foundational requirements that influence reliabi
 | How do you design your workload service architecture? |
 | How do you design interactions in a distributed system to prevent failures? |
 | How do you design interactions in a distributed system to mitigate or withstand failures? | 
+| |
