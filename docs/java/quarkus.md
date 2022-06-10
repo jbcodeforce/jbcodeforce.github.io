@@ -3,7 +3,8 @@
 
 Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and the [workshop](https://quarkus.io/quarkus-workshops/)
 
-Updated 12/03/2021
+!!! Info
+    Updated 06/08/2022
 
 ## Value Propositions
 
@@ -48,7 +49,7 @@ quarkus dev
 
 If the project could not be build because of missing maven wrapper use the following command:
 
-```
+```sh
 mvn -N io.takari:maven:wrapper
 ```
 
@@ -79,21 +80,17 @@ quarkus build
 ./mvnw clean package
 # or for native
 ./mvnw clean package -Pnative
+#  build with a docker build image
+./mvnw package -Pnative -Dquarkus.native.container-build=true  -Dquarkus.container-image.build=true
 ```
-
-We need a Graalvm installed locally, or use the command: 
-
-```sh
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
-
-to build with a docker build image. 
 
 For native build see [QUARKUS - TIPS FOR WRITING NATIVE APPLICATIONS](https://quarkus.io/guides/writing-native-applications-tips)
 
 Start and override properties at runtime:
 
-`java -Dquarkus.datasource.password=youshallnotpass -jar target/myapp-runner.jar`
+```sh
+java -Dquarkus.datasource.password=youshallnotpass -jar target/myapp-runner.jar
+```
 
 for a native executable: 
 
@@ -107,15 +104,7 @@ See the [Building a native executable](https://quarkus.io/guides/building-native
 * Use Graalvm community edition for development JDK 1.8 Apps.
 * Install native image with: `${GRAALVM_HOME}/bin/gu install native-image`
 * To generate debug symbols, add `-Dquarkus.native.debug.enabled=true` flag when generating the native executable.
-* run the tests against a native executable that has already been built: `./mvnw test-compile failsafe:integration-test` 
-* The following command will create a linux executable container without graalvm installed: `./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true`
-* Build native executable
-
-```
-./mvnw package -Pnative
-./mvnw package -Pnative -DskipTests
-```
-
+* Run the tests against a native executable that has already been built: `./mvnw test-compile failsafe:integration-test` 
 * Build and deploy on OpenShift: add OpenShift plugin and do [these steps](#running-on-openshift).
 
 Can also use environment variables: Environment variables names are following the [conversion rules of Eclipse MicroProfile](https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configsources.asciidoc#default-configsources).
@@ -123,7 +112,6 @@ Can also use environment variables: Environment variables names are following th
 ### Debug within VSCode
 
 Start debugger:  shift -> cmd -> P: `Quarkus:  Debug current Quarkus Project` to create a configuration.
-
 
 ## Other Maven Quarkus CLI
 
@@ -418,7 +406,7 @@ Application configuration will be used in any active profile. The built-in profi
  the properties need to be accessed via getter:
 For example to be sure the hostname is loaded from the `application.properties` do:
 
-```Java 
+```java 
 @ApplicationScoped
 public class RabbitMQItemGenerator {
 
@@ -464,10 +452,6 @@ public void shouldNotHaveStore_7_fromGetStoreNames(){
 ### Maven profile and quarkus test
 
 The properties can be prefixed with `%staging` or `%prod` or `%dev` to set those properties according to the deployment. If we use a custom prefix like `staging` then we need to run quarkus with a specific profile. For that set `export QUARKUS_PROFILE=staging` in your `.env` file. 
-
-```
-./mvnw quarkus:dev 
-```
 
 By default, Quarkus tests in JVM mode are run using the test configuration profile
 
@@ -740,6 +724,7 @@ Quick summary:
         eventProducer.send(orderEvent);
       }
   ```
+  
 * define channel properties in `application.properties`.
 
   ```sh

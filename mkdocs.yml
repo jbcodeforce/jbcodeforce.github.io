@@ -9,7 +9,7 @@ theme:
   logo: images/cloud.png
   palette:
     scheme: default
-    primary: 'magenta dark'
+    primary: blue
   language: en
   features:
       - content.code.annotate

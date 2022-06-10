@@ -16,7 +16,7 @@
 * Extend Enterprise IT
 * Support flexible big data analytics
 
-## Organization
+## Infrastructure
 
 AWS is a [global infrastructure](https://infrastructure.aws) with 26 regions and 2 to 6 availability zones per region. Ex: us-west-1-2a. 
 
@@ -38,6 +38,18 @@ Choose an AWS region, depending of your requirements like:
 * [availability of service within a region](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) 
 * pricing
 
+## Organization
+
+Helps to group accounts, and simplify account creation. Consolidate billing.
+
+Concepts:
+
+* root
+* Organization unit (OU)
+* account be part of 1 OU
+* Define service control policies
+
+[Organization console](https://us-east-1.console.aws.amazon.com/organizations/v2/home?region=us-east-1#)
 ## IAM Identity and Access Management
 
 * This is global services so defined at the account level and cross regions

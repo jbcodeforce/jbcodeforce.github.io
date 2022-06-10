@@ -90,7 +90,7 @@ Ensure that you have a way to quickly grant access for your security team, and a
 
 ### Reliability
 
-The ability of a workload to perform its intended function correctly and *consistently*.
+The ability of a workload to perform its intended function correctly and *consistently*. Reliability requires that your workload be aware of failures as they occur and take action to avoid impact on availability. Workloads must be able to both withstand failures and automatically repair issues.
 
 * Design principles:
 
@@ -100,13 +100,91 @@ The ability of a workload to perform its intended function correctly and *consis
     * Stop guessing capacity: monitor demand and workload utilization, and automate the addition or removal of resources to maintain the optimal level to satisfy demand without over- or under-provisioning
     * Manage change in automation
 
+
 Before architecting any system, foundational requirements that influence reliability should be in place.
 
-| Questions to assess|
-| --- |
-| How do you manage service quotas and constraints? |
-| How do you plan your network topology? |
-| How do you design your workload service architecture? |
-| How do you design interactions in a distributed system to prevent failures? |
-| How do you design interactions in a distributed system to mitigate or withstand failures? | 
-| |
+| Questions to assess| Comments |
+| --- | --- |
+| How do you manage service quotas and constraints? | |
+| How do you plan your network topology? | |
+| How do you design your workload service architecture? | |
+| How do you design interactions in a distributed system to prevent failures? | Search to improve mean time between failures (MTBF) |
+| How do you design interactions in a distributed system to mitigate or withstand failures? | Look to improve mean time to recovery (MTTR) |
+|  How do you monitor workload resources? | Monitor Logs and metrics |
+| How do you design your workload to adapt to changes in demand? |  Add or remove resources automatically to adapt to the demand |
+| How do you implement change? |  Controlled changes to deploy new feature, patched or replaced in a predictable manner | 
+| How do you back up data? | Helps to addres [RTO and RPO](../../architecture/DR/#concepts) |
+| How do you use fault isolation to protect your workload? | Components outside of the boundary should not be affected by the failure. |
+| How do you design your workload to withstand component failures? | | 
+| How do you test reliability? | testing is the only way to ensure that it will operate as designed |
+| How do you plan for disaster recovery (DR)? | Regularly back up your data and test your backup files to ensure that you can recover from both logical and physical errors |
+
+Use AZ, regions and bulkhead (elements of an application are isolated into pools so that if one fails, the others will continue to function)
+### Performance efficiency
+
+Use computing resources efficiently to meet system requirements, and to maintain that efficiency as demand changes and technologies evolve.
+
+* Design principles:
+
+    * Democratize advanced technologies: delegate to your cloud vendor.
+    * Go global in minutes
+    * Use serverless architectures
+    * Experiment more often
+    * Consider mechanical sympathy: always use the technology approach that aligns best with your workload goal
+
+
+In AWS, compute is available in three forms: instances, containers, and functions. Storage is available in three forms: object, block, and file. Databases include relational, key-value, document, in-memory, graph, time series, and ledger databases.
+
+| Questions to assess| Comments |
+| --- | --- |
+| How do you select the best performing architecture? | Use a data-driven approach to select the patterns and implementation for your architecture and achieve a cost effective solution. |
+| How do you select your compute solution? | Varies based on application design, usage patterns, and configuration settings |
+| How do you select your storage solution? | The optimal storage solution for a system varies based on the kind of access method (block, file, or object), patterns of access (random or sequential), required throughput, frequency of access (online, offline, archival), frequency of update (WORM, dynamic), and availability and durability constraints |
+| How do you select your database solution? | Consider requirements for availability, consistency, partition tolerance, latency, durability, scalability, and query capability | 
+| How do you configure your networking solution? | varies based on latency, throughput requirements, jitter, and bandwidth |
+| How do you evolve your workload to take advantage of new releases? | |
+| How do you monitor your resources to ensure they are performing? | |
+| How do you use tradeoffs to improve performance? |  improve performance by trading consistency, durability, and space for time and latency. |
+
+Amazon **CloudWatch** is a monitoring and observability service that provides you with data and actionable insights to monitor your workload, respond to system-wide performance changes, optimize resource utilization, and get a unified view of operational health
+
+AWS [cloudformation]() to define infrastructure as code.
+### Cost optimization
+
+ run systems to deliver business value at the lowest price point
+
+* Design principles:
+
+    * Implement Cloud Financial Management practices / team
+    * Adopt a concumption model
+    * Measure overall efficiency: Measure the business output of the workload and the costs associated with delivering it
+    * Stop spending mone on undifferentiated heavy lifting
+
+| Questions to assess| Comments |
+| --- | --- |
+| How do you govern usage? | | 
+| How do you monitor usage and cost? | |
+| How do you decommission resources? | |
+| How do you evaluate cost when you select services? | Trade off between low level service like EC2, S3, EBS versus higher level like DynamoDB | 
+| How do you meet cost targets when you select resource type, size and number? | |
+| How do you plan for data transfer charges? | | 
+
+ As your requirements change, be aggressive in decommissioning resources, entire services, and systems that you no longer require.
+
+## Sustainability
+
+ Focuses on environmental impacts, especially energy consumption and efficiency.
+
+ * Scale infrastructure to continually match user load and ensure that only the minimum resources required to support users are deployed
+ * identify redundancy, underutilization, and potential decommission targets
+ * Implement patterns for performing load smoothing and maintaining consistent high utilization of deployed resources to minimize the resources consumed. 
+ * Monitor workload activity to identify application components that consume the most resources.
+ * Understand how data is used within your workload, consumed by your users, transferred, and stored.
+ * Lifecycle data to more efficient, less performant storage when requirements decrease, and delete data that’s no longer required.
+ * Adopt shared storage and single sources of truth to avoid data duplication and reduce the total storage requirements of your workload
+ * Back up data only when difficult to recreate
+ * Minimize the amount of hardware needed to provision and deploy
+ * Use automation and infrastructure as code to bring pre-production environments up when needed and take them down when not used.
+
+
+
