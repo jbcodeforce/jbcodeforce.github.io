@@ -24,20 +24,21 @@
     * How many concurrent requests should we expect?
     * What’s the average expected response time?
     * What’s the limit of the data we allow users to provide?
-    * De we need to expose read data in different geographys?
+    * Do we need to expose read data in different geographies?
 
 * Defining latency requirements
 
     * how fast is fast enough?
-    * Try to express in SLA language: 100ms at 3-nines
+    * Try to express in SLA language: 100ms at 3-nines - 99.9% of availability is around 9h down per year. 5 nines is 5 minutes down.
 
 * From high level to drill down
 
+    * Start by high level view
     * Cover end to end process
     * Go when necessary to detail of an API, data stores,..
-    * look at potential performance bottle neck
+    * Look at potential performance bottle neck
 
-* Review data structure and algorithms to support distributed system and scaling
+* Review [data structure and algorithms](../../fun/puzzles/) to support distributed system and scaling
 
 * Be able to argument around
 
@@ -50,7 +51,7 @@
 * Demonstrate perceverance - determination: internal drive to search for a solution - collaboratively. 
 
     * Behavioral interviewing, tell the stories when you demonstrate perceverance.
-    * Independent thought: getting your solution from your own
+    * Independent thought: getting your solution from your own experience
     * Independent learning
     * Never give up and never surrender
 
@@ -63,7 +64,7 @@
 
 ### Single server design
 
-* Unique server with HTTP and Database on a unique server. But single point of failure: impact is to change DNS routing with new server. Get backup
+* Unique server with HTTP and Database on a unique server. Simple but has a single point of failure: impact is to change DNS routing with new server. Get backup
 * Separate out the DB help to scale DB and server independently. 
 
 ### Vertical scaling
@@ -112,8 +113,7 @@ For example MongoDB uses mongos on each app server to distribute the data among 
 In case of primary server, the secondary servers will elect a new primary. Primary looks like SPOF, but the recover quickly via the secondary taking the lead. Need at least 3 servers to elect a primary.
 Traffic is partitioning according to a scheme, which is saved in a config servers. 
 
-Cassandra uses node rings, a shard is replicated multiple times to other nodes, but each node is a primary of a shard. So
-data needs to be fully replicated, and eventually will be consistent. 
+Cassandra uses node rings, a shard is replicated multiple times to other nodes, but each node is a primary of a shard. So data needs to be fully replicated, and eventually will be consistent. 
 
 Resharding is a challenge for the database.
 

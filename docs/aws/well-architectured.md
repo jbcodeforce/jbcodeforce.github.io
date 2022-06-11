@@ -188,3 +188,6 @@ AWS [cloudformation]() to define infrastructure as code.
 
 
 
+## More readings
+
+* [system design exercices use AWS services](../../architecture/system-design/)

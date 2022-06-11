@@ -190,6 +190,27 @@ AMI are built for a specific AWS region. But they can be copied and shared [See 
 The in memory state is preserved, persisted to a file in the root EBS volume. It helps to make the instance startup time quicker. The root EBS volume is encrypted.
 Constrained by 150GB RAM. No more than 60 days.
 
+### Basic Fault Tolerance
+
+The following diagram illustrates some fault tolerance principles offered by the basic AWS services:
+
+![](./images/ec2-fault-tolerance.png)
+
+* AMI defines image for the EC@ with static or dynamic configuration. From an AMI we can scale by adding same EC2
+* Instance failure can be replace by starting a new instance from the same AMI
+* Auto scaling group defines EC2 instance, and can start new EC2 instance automatically
+* To minimize down time, we can have one EC2 instance in standby, and use elastic IP addresses. 
+* Data is saved on EBS and replicated to other EBS inside the same availabiltiy zone.
+* Snapshot backup can be done to replicate data between AZ, and persisted for long retention in S3. 
+* Need to flush data from memory to disk before any snapshot
+* Auto scaling adjusts the capacity of EC2 and EC2 instance within the group
+* Applications can be deployed between AZs.
+* Elastic Load Balancer balances traffic among servers in multiple AZs and DNS will route traffic to the good server.
+* Data can be replicated between regions
+* Elastic IP addresses are static and defined at the AWS account level. New EC2 instance can be reallocated to Elastic IP @, but they are mapped by internet gateway to the private address of the EC2. The service may be down until new EC2 instace is restarted.
+* ELB ensures higher fault tolerance for EC2s, containers, lambdas, IP addresses  and physical servers
+* Application LB load balances at the HTTP, HTTPS level, and within a VPC based on the content of the request.
+* NLB is for TCP, UDP, TLS routing and load balancing.  
 ## VPC
 
 A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. 
@@ -271,7 +292,7 @@ echo "<h3>Hello World from $(hostname -f) in AZ= $EC2_AZ </h3>" > /var/www/html/
 
 This script can be added as User Data (Under Advanced Details while configuring new instance) so when the instance starts it executes this code.
 
-### Elastic Network Instances
+### Elastic Network Insterfaces
 
 ENI is a logical component in a VPC that represents a virtual network card. It has the following attributes:
 
@@ -308,11 +329,11 @@ Access from network and policies menu, define the group with expected strategy, 
 
 ## Load balancer
 
-Route traffic into the different EC2 instances. It also exposes a single point of access (DNS) to the deployed application. In case of EC2 failure, it can route to a new instance, transparently and cross multiple AZs. It uses health check (/health on the app called the `ping path`) to assess instance availability. It also provides SSL termination. It supports to separate private (internal) to public (external) traffic.
+Route traffic into the different EC2 instances. It also exposes a single point of access (DNS) to the deployed application. In case of EC2 failure, it can route to a new instance, transparently and across multiple AZs. It uses health check (/health on the app called the `ping path`) to assess instance availability. It also provides SSL termination. It supports to separate private (internal) to public (external) traffic.
 
  ![1](./images/EC2-AZ.png)
 
-ELB: EC2 load balancer is the managed service by Amazon. Three types supported:
+Three types of ELB supported:
 
 * **Classic** load balancer: older generation. For each instance created, update the load balancer configuration so it can route the traffic.
 * **Application load balancer**: HTTP, HTTPS (layer 7), Web Socket. 
@@ -340,8 +361,8 @@ Example of listener rule for an ALB:
 
 ### Load balancer stickiness
 
-Used when the same client needs to interact with the same backend instance. A cookie, with expiration date, is used to identify the client. The classical gateway or ALB manage the routing. This could lead to inbalance traffic so overloading one instance. 
-With ALB it is configured in the target group properties.
+Used when the same client needs to interact with the same backend instance. A cookie, with expiration date, is used to identify the client. The classical gateway or ALB manages the routing. This could lead to unbalance traffic so overloading one instance. 
+With ALB, stickness is configured in the target group properties.
 
 ### Cross Zone Load Balancing
 
@@ -349,7 +370,7 @@ Each load balancer instance distributes traffic evenly across all registered ins
 
 ### TLS - Transport Layer Security,
 
-An SSL/TLS Certificate allows traffic between our clients and our load balancer to be encrypted in transit (in-flight encryption).
+An SSL/TLS Certificate allows traffic between clients and load balancer to be encrypted in transit (in-flight encryption).
 
 * Load balancer uses an X.509 certificate (SSL/TLS server certificate). 
 * Manage certificates using ACM (AWS Certificate Manager)
