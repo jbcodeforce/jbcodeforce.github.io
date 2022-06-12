@@ -6,6 +6,7 @@ center. During normal operations, the live system is used. The backup programs r
 
 ## Concepts
 
+![](./images/rto-rpo.png)
 ### RTO - Recovery Time Objective 
 
 It is related to downtime and measure the time required to restore the environment after the primary site becomes unavailable. 
@@ -46,6 +47,11 @@ storage subsystems.
  For example, Global or Metro Mirror can be configured between two IBM System Storage DS series systems to implement disaster recovery.
 
 ## What should be considered to prepare for disaster recovery?   
+
+* Not all applications need to be active - active.
+* Active active really means that a user will loose connection to a site and be routed to another side in milliseconds.
+* Distributed reads is also a requirement for active - active 
+* The biggest challenge is to avoid data collision in the same data store. So entity created in two regions in less than 100ms can collide when replicated. 
 
 There are three types of data to consider:
 

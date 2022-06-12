@@ -76,6 +76,7 @@ nav:
       - Introduction: aws/index.md
       - Playground: aws/gettingstarted.md
       - Well Architectured: aws/well-architectured.md
+      - Solution design: aws/sol-design.md
       - Kubernetes services: aws/k8s.md
     - Data:
       - Introduction: data/index.md

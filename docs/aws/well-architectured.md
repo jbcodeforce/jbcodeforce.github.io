@@ -2,12 +2,10 @@
 
 The [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html) helps you understand the pros and cons of decisions you make while building systems on AWS.
 
-## Quick notes
-
 Those are the questions to ask for designing a cloud native solution by understanding the potential impact . All hardware are becoming software.
 
 **Workload** represents interrelated applications, infrastructure, policies, governance and operations. 
-### Six pilards
+## Six pilards
 
 When architecting technology solutions, never neglect the six pillars of:
 
@@ -18,7 +16,7 @@ When architecting technology solutions, never neglect the six pillars of:
 * Cost Optimization
 * Sustainability 
 
-### Design Principles
+## Design Principles
 
 * **Stop guessing your capacity needs**: use as much or as little capacity as you need, and scale up and down automatically.
 * **Test systems at production scale**, then decommission the resources. 
@@ -171,7 +169,7 @@ AWS [cloudformation]() to define infrastructure as code.
 
  As your requirements change, be aggressive in decommissioning resources, entire services, and systems that you no longer require.
 
-## Sustainability
+### Sustainability
 
  Focuses on environmental impacts, especially energy consumption and efficiency.
 

@@ -64,7 +64,7 @@
 
 ### Single server design
 
-* Unique server with HTTP and Database on a unique server. Simple but has a single point of failure: impact is to change DNS routing with new server. Get backup
+* Unique server with HTTP and Database on a unique server. Simple but has a single point of failure: impact is to change DNS routing with new server.
 * Separate out the DB help to scale DB and server independently. 
 
 ### Vertical scaling
@@ -81,13 +81,15 @@ Serverless solution from AWS, Lambda, kinesis, athena
 
 ## Failover
 
+See also [DR article](./DR.md) and [data replication](../data/data-replication.md)
 ### Cold standby
 
 * periodic backup
 * restore backup on DR site
 * reconnect front end server to new DB server
-* Data done after the database backup is lost
+* Data gone after the database backup is lost
 * Take time to get the new server up and running.
+* RPO can be day (snapshot frequency) - RTO hours
 
 ###  Warm Standby
 
