@@ -612,7 +612,7 @@ Objects can also be encrypted, and different mechanisms are available:
 
 ### Security control
 
-Explicit DENY in an IAM policy will take precedence over a bucket policy permission
+Explicit DENY in an IAM policy will take precedence over a bucket policy permission.
 
 ### S3 Website
 
@@ -635,7 +635,7 @@ Finally S3 is eventual consistent.
 
 #### S3 replication
 
-Once versioning enabled, a bucket can be replicated in the same region or cross regions. The replication is done asynchronously. SRR is for log aggregation for example, while CRR is used for compliance and DR or replication across accounts. Delete operations are not replicated.
+Once versioning enabled, a bucket can be replicated in the same region or cross regions. S3 replication is done on at least 3 AZs. Each AZ can be up to 8 data centers. One DC down does not impact S3 availability. The replication is done asynchronously. SRR is for log aggregation for example, while CRR is used for compliance and DR or replication across accounts. Delete operations are not replicated.
 
 ### S3 Storage classes
 

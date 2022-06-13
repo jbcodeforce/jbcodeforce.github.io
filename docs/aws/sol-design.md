@@ -23,4 +23,28 @@ RTO is now in minutes, and RPO average time between DB snapshots.
 
 ## Active - Active between multi regions
 
-### Write once - multi read pattern
+### Write global - read local pattern
+
+Users close to one region will read from this region and all write operations go to a global service / region.
+
+![](./images/write-global.png)
+
+Database replications and snapshot replications are done to keep data eventually consistent between regions. Those synchronisations are in sub second.
+
+### Write to origin - read local pattern
+
+To increase in complexity, R/W can go the local region. So when a user writes new records, he/she is associated to a region, so the application is sharding the data. When the user moved to another region, write operation will still go to the first region, while read could happened on the region close to him.
+
+This applies to applications with write to read ratio around 50%.
+
+### Write / read local anti-pattern
+
+This pattern uses two master DB, one in each region so user can write and read locally. Dual writes, in each region, at the same time may generate the same key but record will have different data. 
+You have inconsistency, and it is difficult to figure out, and rollback.
+So use this pattern only if you can do the two previous ones.
+
+### AWS Services supporting HA and DR multi-regions
+
+* [S3](/aws/#s3)
+* [EBS](/aws/#ebs-volume)
+* [dynamoDB](/aws/#dynamodb)
