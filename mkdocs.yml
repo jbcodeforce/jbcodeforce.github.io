@@ -39,6 +39,7 @@ markdown_extensions:
   - meta
   - abbr
   - attr_list
+  - md_in_html
   - admonition
   - footnotes
   - pymdownx.smartsymbols
@@ -62,6 +63,7 @@ nav:
     - Architecture:
       - Conduct System Design: architecture/system-design.md
       - Event Driven Architecture: architecture/eda.md
+      - TPC/IP summary: architecture/tcpip.md
       - Flow architectures: architecture/flow-architectures.md
       - Streaming processing: architecture/streaming.md
       - Architecture decision: architecture/architectural-decisions.md

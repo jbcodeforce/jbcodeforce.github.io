@@ -10,6 +10,7 @@
 * Speed anf agility to define infrastructure in minutes not weeks
 * Focus on business apps, not IT infrastructure
 * Global reach in a minutes
+
 ## Use cases
 
 * Enable to build scalable apps, adaptable to business demand
@@ -219,26 +220,40 @@ It is logically isolated from other virtual networks in the AWS Cloud. You can l
 
 VPC Helps to:
 
-* assign static IP addresses, potentially multiple addresses for the same instance
+* Assign static IP addresses, potentially multiple addresses for the same instance
 * Change security group membership for your instances while they're running
 * Control the outbound traffic from your instances (egress filtering) in addition to controlling the inbound traffic to them (ingress filtering)
 * Default VPC includes an internet gateway 
 
-![](./images/vpc.png)
+The following diagram illustrates classical VPC, as defined years ago, with one vpc, 2 availability zones, 2 subnets with EC2 instances within those subnet and AZs.
+
+![](./images/vpc.png){ width=600}
+
 
 * non-default subnet has a private IPv4 address, but no public IPv4 
 
-You can enable internet access for an instance launched into a non-default subnet by attaching an internet gateway to its VPC. 
-Alternatively, to allow an instance in your VPC to initiate outbound connections to the internet but prevent unsolicited inbound connections from the internet, you can use a network address translation (NAT) device for IPv4 traffic. NAT maps multiple private IPv4 addresses to a single public IPv4 address. 
-A NAT device has an Elastic IP address and is connected to the internet through an internet gateway.
-You can optionally connect your VPC to your own corporate data center using an IPsec AWS managed VPN connection, 
-making the AWS Cloud an extension of your data center. A VPN connection consists of a virtual private gateway attached 
-to your VPC and a customer gateway located in your data center. 
+You can enable internet access for an EC2 instance launched into a non-default subnet by attaching an internet gateway to its VPC. 
+
+Route tables defines `172.3` as local with `/20` CIDR address range, internal to the VPC. Default route to internet goes to the IGW, which has an elastic IP address assigned to it.
+Because the VPC is cross AZs, we need a router to route between subnets. (See [TCP/IP summary](../architecture/tcpip.md))
+
+Alternatively, to allow an instance in your VPC to initiate outbound connections to the internet but prevent unsolicited inbound connections from the internet, you can use a network address translation (NAT) service for IPv4 traffic. NAT maps multiple private IPv4 addresses to a single public IPv4 address. 
+
+A NAT device has an Elastic IP address and is connected to the internet through an internet gateway. 
+
+![](./images/vpc-annim.gif)
+
+** figure: Full VPC diagram**
+
+You can have [VPC end point service]() to access a [lot of AWS services](https://docs.aws.amazon.com/vpc/latest/privatelink/aws-services-privatelink-support.html), like S3, privately as those services will be in your VPC. TCP traffic is isolated. It is part of a larger offering called [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html) establishes private connectivity between VPCs and services hosted on AWS or on-premises, without exposing data to the internet (No internet gateway, no NAT, no public IP @).
+
+You can optionally connect your VPC to your own corporate data center using an IPsec AWS managed VPN connection, making the AWS Cloud an extension of your data center. A VPN connection consists of a virtual private gateway (VGW) attached to your VPC and a customer gateway located in your data center. 
 A virtual private gateway is the VPN concentrator on the Amazon side of the VPN connection. 
 A customer gateway is a physical device or software appliance on your side of the VPN connection.
 
 ![](./images/vpc-vpn.png)
 
+As seen in "Full VPC diagram", the `VPC peering` helps to connect between VPCs in different region, or within the same region. And [Transit GTW](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) is used to interconnect your virtual private clouds (VPCs) and on-premises networks
 ## Security group
 
 Define inbound and outbound security rules.  They regulate access to ports, authorized IP ranges IPv4 and IPv6, 
