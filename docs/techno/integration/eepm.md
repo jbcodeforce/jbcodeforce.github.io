@@ -23,16 +23,16 @@
 * There are different deployment profiles: minimum with one node, and then 3 nodes 
 * Use yaml from one of the solution, be sure to include the namespace for the target project where EEPM will run.
 
-```sh
-# For rt-inventory demo
-oc apply -k environments/rt-inventory-dev/services/event-endpoint/overlays
-```
+    ```sh
+    # For rt-inventory demo
+    oc apply -k environments/rt-inventory-dev/services/event-endpoint/overlays
+    ```
 
 * Verify
 
-```
-oc get eventendpointmanager eda-eepm -ojsonpath={.status.phase}
-```
+    ```sh
+    oc get eventendpointmanager eda-eepm -ojsonpath={.status.phase}
+    ```
 
     The installation creates the following pods
     
@@ -44,8 +44,8 @@ oc get eventendpointmanager eda-eepm -ojsonpath={.status.phase}
 | pgbouncer | |
 | LDAP | | 
 | nats operator | NATS middleware operator| 
-| nat cluster | NATS servers |
-| nats  cluster | NATS servers |
+| nats cluster | NATS servers |
+
 
 ...wait some long time...
 
@@ -72,12 +72,15 @@ An IBM API Connect cluster (defined through its APIConnectCluster Custom Resourc
 Access to your event sources can be controlled by the Event Gateway Service. The service enforces runtime policies to secure and control access to Kafka topics hosted on one or more backend Kafka clusters.
 The Evt Gtw Service needs to be in the catalog. See [these instructions](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=sources-registering-event-gateway-service) to register the service.
 
-    ```sh
-    # example for getting the URL
-    oc get eventgatewaycluster apim-demo-egw -ojsonpath='{.status.endpoints[?(@.name=="eventGateway")].uri}'
-    ```
+```sh
+# example for getting the URL
+oc get eventgatewaycluster apim-demo-egw -ojsonpath='{.status.endpoints[?(@.name=="eventGateway")].uri}'
+```
 
 To see current TLS certificated used by the service, go to Cloud Manager > Manage resources > TLS > keystore
+
+### Connecting the consumer app
+
 
 ???- "More Reading"
     * [AsyncAPI - summary](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/api-mgt/#support-for-async-api)

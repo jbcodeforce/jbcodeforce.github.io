@@ -85,10 +85,25 @@ For example at home with AT&T ISP router is on 192.168.1.254 all devices in the 
 ### How does web browser communicate to http server?
 
 - user enters a URL, the port number can be 80 or something else specified
-- browser does a NS lookup to get IP address for the specified host. The DNS server
+- browser does a NS lookup to get IP address for the specified host. The DNS server returns IP addresses of the load balancers which will route to the target backend apps.
 - browser initiates a TCP connection to the web server
 - After the server completes acknowledgment of its side of the TCP connection, the browser sends HTTP requests to the server to retrieve the content
+- To avoid re-initializing the HTTP connection, HTTP offers the keep-alive protocol. HTTP 1.1 supports persistent connections by default. 
 - the browser may also save temporary information about its connections to local files on the client computer called cookies
+
+### What is HTTP pipelining?
+
+Because HTTP 1.1 relies on persistent connections, you can use it to send multiple queries in a row and expect responses in the same order. This is called **HTTP pipelining**.
+
+ However, the drawback is that requests must queue up on the connection until the requests in front of them complete. This is called **head-of-line blocking**.
+
+### HTTP/2
+
+HTTP/2 is a redesign of HTTP to support low latency with full request and response multiplexing. Connection header is now forbidden and all clients and servers must persist connections. 
+
+A client can send multiple requests in parallel on the same connection, which is called **multiplexing**.
+
+It supports the notion of a **stream**, which allows a bidirectional flow of bytes to be exchanged over a persistent TCP connection. Each stream can carry one or more messages. A message is a complete sequence of frames that map to a logical request or response.
 
 ### How to setup static IP address with a Guest ubuntu running on Mac using VMfusion?
 

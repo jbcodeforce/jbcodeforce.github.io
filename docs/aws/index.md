@@ -241,7 +241,7 @@ Alternatively, to allow an instance in your VPC to initiate outbound connections
 
 A NAT device has an Elastic IP address and is connected to the internet through an internet gateway. 
 
-![](./images/vpc-annim.gif)
+![](./images/vpc-anim.gif)
 
 ** figure: Full VPC diagram**
 
@@ -336,19 +336,28 @@ Define strategy to place EC2 instances:
     * Partition is a set of racks
     * Up to 100s of EC2 instances
     * The instances in a partition do not share racks with the instances in the other partitions
-    * A partition failure can affect many EC2 but won’t affect other partitions
+    * A partition failure can affect many EC2s but won’t affect other partitions
     * EC2 instances get access to the partition information as metadata
     * HDFS, HBase, Cassandra, Kafka
 
 Access from network and policies menu, define the group with expected strategy, and then it is used when creating the EC2 instance by adding the instance to a placement group.
 
-## Load balancer
+## Elastic Load balancer
 
-Route traffic into the different EC2 instances. It also exposes a single point of access (DNS) to the deployed application. In case of EC2 failure, it can route to a new instance, transparently and across multiple AZs. It uses health check (/health on the app called the `ping path`) to assess instance availability. It also provides SSL termination. It supports to separate private (internal) to public (external) traffic.
+Route traffic into the different EC2 instances. Elastic Load Balancing scales your load balancer capacity automatically in response to changes in incoming traffic.
+
+It also exposes a single point of access (DNS) to the deployed applications. In case of EC2 failure, it can route to a new instance, transparently and across multiple AZs. It uses health check (/health on the app called the `ping path`) to assess instance availability. It also provides SSL termination. It supports to separate private (internal) to public (external) traffic.
 
  ![1](./images/EC2-AZ.png)
 
-Three types of ELB supported:
+Need to enable availability zone to be able to route traffic between target groups in different AZs.
+
+When you create a load balancer, you must choose whether to make it an internal load balancer or an internet-facing load balancer. 
+Internet-facing load balancer have public IP addresses. The DNS name of an internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Internal load balancer have only private IP addresses.  Internal load balancers can only route requests from clients with access to the VPC for the load balancer.
+
+![2](./images/elb-scheme.png)
+
+Four types of ELB supported:
 
 * **Classic** load balancer: older generation. For each instance created, update the load balancer configuration so it can route the traffic.
 * **Application load balancer**: HTTP, HTTPS (layer 7), Web Socket. 
@@ -359,10 +368,15 @@ Three types of ELB supported:
     * Get a fixed hostname
     * the application do not see the IP address of the client directly (ELB does a connection termination), but ELB put it in the header `X-Forwarded-For`, `X-Forwarded-Port` and `X-Forwarded-Proto`.
 
+* **Gateway LB**: also use target group.
 * **Network load balancer**: TCP, UDP (layer 4), TLS
 
     * handle millions request/s
     * use to get a public static IP address
+    * Routes each individual TCP connection to a single target for the life of the connection
+
+
+To route traffic, first the DNS name of the load balancer is resolved. (They are part of the `amazaonaws.com` domain). 1 to many IP Addresses are sent back to the client. With NLBs, Elastic Load Balancing creates a network interface for each Availability Zone that you enable. Each load balancer node in the Availability Zone uses this network interface to get a static IP address. ELB scales your load balancer and updates the DNS entry. The time to live is set to 60s. 
 
 To control that only the load balancer is sending traffic to the application, we need to set up an application security group on HTTP, and HTTPS with the source being the security group id of the ELB. LBs can scale but need to engage AWS operational team.
 
@@ -374,6 +388,7 @@ Example of listener rule for an ALB:
 
  ![3](./images/ALB-listener-rules.png)
 
+ALB and Classic can use [HTTP connection multiplexing](https://www.haproxy.com/blog/http-keep-alive-pipelining-multiplexing-and-connection-pooling/) to keep one connection with the backend application. Connection multiplexing improves latency and reduces the load on your applications.
 ### Load balancer stickiness
 
 Used when the same client needs to interact with the same backend instance. A cookie, with expiration date, is used to identify the client. The classical gateway or ALB manages the routing. This could lead to unbalance traffic so overloading one instance. 
@@ -381,7 +396,7 @@ With ALB, stickness is configured in the target group properties.
 
 ### Cross Zone Load Balancing
 
-Each load balancer instance distributes traffic evenly across all registered instances in all availability zones. This is the default setting for ALB and free of charge. It is disabled by default for NLB.
+Each load balancer instance distributes traffic evenly across all registered instances in all availability zones. If one AZ has 2 targets and another one has 8 targets, then with cross-zone, the LBs in each availability zone will route to any instance, so each will receive 10% of the traffic. Without that, the 2 targets zone will receive 25% traffic each, and the instance on the othe AZ only 6.25% of the traffic. This is the default setting for ALB and free of charge. It is disabled by default for NLB.
 
 ### TLS - Transport Layer Security,
 
