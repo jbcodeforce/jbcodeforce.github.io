@@ -1,7 +1,7 @@
 # Apicurio
 
 [Apicur.io](https://www.apicur.io) includes a [schema registry](https://www.apicur.io/registry/docs/apicurio-registry/2.1.x/index.html) to store schema definitions. 
-It supports Avro, json, protobuf schemas, and an API registry to manage OpenApi and AsynchAPI.
+It supports Avro, json, protobuf schemas, and an API registry to manage OpenApi and AsynchAPI definitions.
 
 It is a Cloud-native Quarkus Java runtime for low memory footprint and fast deployment times. It supports [different persistences](https://www.apicur.io/registry/docs/apicurio-registry/2.1.x/getting-started/assembly-intro-to-the-registry.html#registry-storage_registry)
 like Kafka, Postgresql, Infinispan and supports different deployment models.
@@ -41,12 +41,13 @@ There are three runtime components in Apicurio and one Keycloak authentication s
 To run a light version of Studio use Apicurito (edit locally OpenAPI doc):
 
 ```sh
-docker run -it -p 8080:8080 apicurio/apicurito-ui:1.2.4
+docker run -it -p 8080:8080 -p 8443:8443 apicurio/apicurio-studio-ui:latest-release
 ```
+
 
 ## V1.3.x
 
-As of Event Streams version 10.5, the schema registry is based on Apicur.io 1.3.x. This section is some how to for this version.
+As of Event Streams version 10.5, the schema registry is based on Apicur.io 1.3.x.
 
 [Product documentation](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/index.html).
 
@@ -127,28 +128,41 @@ See simplest code in the `apicurio` folder of [Kafka Studies](https://github.com
 Or Kafka producer code template in [Kafka with API and apicur.io](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-kafka-producer)
 and consumer.
 
-## Apicur.io 2.x
+## Apicur.io 2.2.x
 
-The version 2.x is using different APIs and rest client code.
+Event Streams [version 11.0.x uses Apicur.io 2.2.x](https://ibm.github.io/event-streams/schemas/overview/#schema-registry). This version is using different APIs and rest client code.
+
 It supports OpenAPI, AsyncAPI, GraphQL, Apache Avro, Google protocol buffers, JSON Schema, Kafka Connect schema, WSDL, XML Schema (XSD)
 
 The registry can be configured to store data in various back-end storage systems depending on use-case, including Kafka, PostgreSQL, and Infinispan
 
 Quarkus dev mode with the extension: `quarkus-apicurio-registry-avro` start apicurio 2.x container,
-and reactive messaging with the `` serializer create schema definition directly to the registry.
+and reactive messaging with the `io.apicurio.registry.serde.avro.AvroKafkaSerializer` serializer create schema definition directly to the registry.
 
 ### Installation
 
+* For Event Streams - schema registry deployment the installation is done by adding the following into the cluster definition (see [this deployment](https://github.com/ibm-cloud-architecture/eda-rt-inventory-gitops/blob/main/environments/rt-inventory-dev/services/ibm-eventstreams/base/eventstreams-dev.yaml)):
+
+```yaml
+  apicurioRegistry:
+    livenessProbe:
+      initialDelaySeconds: 120
+```
+
+The Event Stream UI includes a way to manage schema by human. For code based management we need to have a user with ACL to create schema.
+
+* We can install a standalone Apicur.io registry outside of IBM Event Streams, which may make sense when we need to manage different clusters.
+
 Via OpenShift Operator hub or via subscription.yaml see [eda-gitops-catalog/apicurio/operator](https://github.com/ibm-cloud-architecture/eda-gitops-catalog/tree/main/apicurio)
 
-See [quarkus-reactive-kafka-producer template](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-reactive-kafka-producer) or [demo app](https://github.com/jbcodeforce/eda-demo-order-ms) that is using version 2.x.
+For application code that use version 2.x [quarkus-reactive-kafka-producer template](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-reactive-kafka-producer) or [demo app](https://github.com/jbcodeforce/eda-demo-order-ms).
 
 ### Reactive messaging
 
-For the configuration consider:
+For the Microprofile Reactive messaging configuration consider the following:
 
 * Set at least the value serializer to use AvroKafkaSerializer so it can transparently manage auto registry of 
-the schema
+the schema. (example for the `orders` channel)
 
 ```sh
 mp.messaging.outgoing.orders.key.serializer=org.apache.kafka.common.serialization.StringSerializer
@@ -158,18 +172,21 @@ mp.messaging.outgoing.orders.apicurio.registry.artifact-id=io.apicurio.registry.
 mp.messaging.outgoing.orders.apicurio.registry.global-id=io.apicurio.registry.utils.serde.strategy.GetOrCreateIdStrategy
 ```
 
-* For securited connection
+* For securized connection, add TLS and authentication
 
 ```sh
 # Use same schema registry server cross channel
 %prod.mp.messaging.connector.smallrye-kafka.apicurio.registry.url=${ES_APICURIO_URL}
-# For a per channel setting
+# Or by using a per channel setting
 %prod.mp.messaging.outgoing.orders.apicurio.registry.url=${ES_APICURIO_URL}
 ```
 
-Be sure the URL finishes with `/apis/registry/v2`. It can be set in config map, as in
-[eda-demo-order-gitops app-eda-demo-order-ms](https://raw.githubusercontent.com/jbcodeforce/eda-demo-order-gitops/main/environments/edademo-dev/apps/app-eda-demo-order-ms/services/eda-demo-order-ms/base/config/configmap.yaml)
+Be sure the URL finishes with `/apis/registry/v2`. URL may be set in a config map, as in the 
+[eda-demo-order-gitops app-eda-demo-order-ms](https://raw.githubusercontent.com/jbcodeforce/eda-demo-order-gitops/main/environments/edademo-dev/apps/app-eda-demo-order-ms/base/configmap.yaml) project.
 
+For mTLS authentication to schema registry see the [Store simulator project](https://github.com/ibm-cloud-architecture/refarch-eda-store-simulator).
+
+For order consumer with schema registry see the [eda-demo-order-mp-consumer](https://github.com/jbcodeforce/eda-demo-order-mp-consumer) project.
 ## Developer experience
 
 * Define your microservice with JAXRS and Swagger annotation. Here is a [guide for quarkus openapi and swagger-ui](https://quarkus.io/guides/openapi-swaggerui) for details.

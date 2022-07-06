@@ -629,9 +629,22 @@ The easiest solution is to create AMI containing OS, dependencies and app binary
 
 ## S3
 
-Amazon S3 allows people to store objects (files) in **buckets** (directories), which must have a globally unique name (cross users!). They are defined at the region level. **Object** in a bucket, is referenced as a **key** which can be seen as a file path in a file system. The max size for an object is 5 TB but need to be uploaded in multi part using 5GB max size.
+[Amazon S3](https://s3.console.aws.amazon.com/s3/get-started?region=us-west-1) allows people to store objects (files) in **buckets** (directories), which must have a globally unique name (cross users!). They are defined at the region level. **Object** in a bucket, is referenced as a **key** which can be seen as a file path in a file system. The max size for an object is 5 TB but big file needs to be uploaded in multipart using 5GB max size.
 
 S3 supports versioning at the bucket level. So file can be restored from previous version, and even deleted file can be retrieved from a previous version.
+
+### Use cases
+
+* Backup and restore
+* DR
+* Archive
+* [Data lakes](https://aws.amazon.com/big-data/datalakes-and-analytics/)
+* Hybrid cloud storage: seamless connection between on-premises applications and S3 with AWS Storage Gateway.
+* Cloud-native application data
+
+
+[GETTIG started](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html)
+### Security control
 
 Objects can also be encrypted, and different mechanisms are available:
 
@@ -640,7 +653,6 @@ Objects can also be encrypted, and different mechanisms are available:
 * **SSE-C**: when we want to manage our own encryption keys. Server-side encrypted. Encryption key must be provided in HTTP headers, for every HTTP request made. HTTPS is mandatory
 * **Client Side Encryption**: encrypt before sending object.
 
-### Security control
 
 Explicit DENY in an IAM policy will take precedence over a bucket policy permission.
 
@@ -661,7 +673,7 @@ We can have static web site on S3. Once html pages are uploaded, setting the pro
 </CORSConfiguration>
 ```
 
-Finally S3 is eventual consistent.
+Finally S3 is eventually consistent.
 
 #### S3 replication
 

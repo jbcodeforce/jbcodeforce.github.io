@@ -38,7 +38,7 @@ CP4I also provides an optional Platform Navigator, an over-arching Management UI
 
 Currently, foundational services mostly are focused on identity and access management for Platform Navigator UI, single sign-on experience for UI, license metering
 
-## 2021.4 release
+### 2021.4 release
 
 * [Event Endpoint Management](/eepm) to support buying at the API calls per month level to access kafka events or at the resource usage level.
 * AI-driven API Test generation is designed to automate the process of generating these API test cases. 
@@ -46,6 +46,12 @@ Watson Insights for suggested tests are generated through analysing production O
 This helps to determine distinct behaviours in an API implementation
 * Support OpenShift on IBM z Integrated Facility for Linux, and on IBM Power Systems
 
+### 2022.2.1
+
+* no more dependencies on RWX storage
+* interactive install guide: from the IBM Docs
+* combined integration
+* enhanced observability
 ## Foundational services (bedrock) overview
 
 * layer between OCP and the cloud pak

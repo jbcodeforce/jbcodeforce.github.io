@@ -1,7 +1,6 @@
 # Getting started
 
-General [AWS console](https://us-west-1.console.aws.amazon.com/) from which we can login as root usr or as
-an IAM user.
+General [AWS console](https://us-west-1.console.aws.amazon.com/) from which we can login as root user or as an IAM user.
 
 Or the one for my account alias `jbcodeforce`: [https://jbcodeforce.signin.aws.amazon.com/console](https://jbcodeforce.signin.aws.amazon.com/console)
 and user jerome
@@ -9,7 +8,7 @@ and user jerome
 The credentials and API key are in `~/.aws/credentials`
 
 * Select a region to create your resources: N California
-* Look at the services
+* Look at the services.
 
 ## Defined users and groups with IAM
 
