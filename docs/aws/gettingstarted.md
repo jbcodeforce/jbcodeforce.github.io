@@ -80,3 +80,6 @@ systemctl enable httpd
 echo "<h1>Hello from $(hostname -f)</h1>" > /var/www/html/index.html
 ```
 
+## Define load balancer
+
+![](./images/aws-lb-1.png)

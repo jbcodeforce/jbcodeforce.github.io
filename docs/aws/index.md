@@ -359,7 +359,7 @@ Internet-facing load balancer have public IP addresses. The DNS name of an inter
 
 Four types of ELB supported:
 
-* **Classic** load balancer: older generation. For each instance created, update the load balancer configuration so it can route the traffic.
+* **Classic** load balancer: older generation. TCP and HTTP layer. For each instance created, update the load balancer configuration so it can route the traffic.
 * **Application load balancer**: HTTP, HTTPS (layer 7), Web Socket. 
 
     * It specifies availability zones: it routes traffic to the targets in these Availability Zones. Each AZ has one subnet. To increase availability, we need at least two AZs.
@@ -367,12 +367,14 @@ Four types of ELB supported:
     * route on URL, hostname and query string
     * Get a fixed hostname
     * the application do not see the IP address of the client directly (ELB does a connection termination), but ELB put it in the header `X-Forwarded-For`, `X-Forwarded-Port` and `X-Forwarded-Proto`.
+    * Great for microservices or for container based apps.
 
 * **Gateway LB**: also use target group.
 * **Network load balancer**: TCP, UDP (layer 4), TLS
 
     * handle millions request/s
-    * use to get a public static IP address
+    * reach less than 100ms latency while ALB is at 400ms
+    * use to get a public static IP address per availability zone
     * Routes each individual TCP connection to a single target for the life of the connection
 
 
