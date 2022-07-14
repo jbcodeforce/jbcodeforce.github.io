@@ -368,6 +368,7 @@ Four types of ELB supported:
     * Get a fixed hostname
     * the application do not see the IP address of the client directly (ELB does a connection termination), but ELB put it in the header `X-Forwarded-For`, `X-Forwarded-Port` and `X-Forwarded-Proto`.
     * Great for microservices or for container based apps.
+    * Free to get started
 
 * **Gateway LB**: also use target group.
 * **Network load balancer**: TCP, UDP (layer 4), TLS
@@ -376,6 +377,7 @@ Four types of ELB supported:
     * reach less than 100ms latency while ALB is at 400ms
     * use to get a public static IP address per availability zone
     * Routes each individual TCP connection to a single target for the life of the connection
+    * not free
 
 
 To route traffic, first the DNS name of the load balancer is resolved. (They are part of the `amazaonaws.com` domain). 1 to many IP Addresses are sent back to the client. With NLBs, Elastic Load Balancing creates a network interface for each Availability Zone that you enable. Each load balancer node in the Availability Zone uses this network interface to get a static IP address. ELB scales your load balancer and updates the DNS entry. The time to live is set to 60s. 

@@ -120,8 +120,9 @@ nav:
         - VScode: java/java-vscode.md
       - podman: techno/podman.md
       - Python: https://jbcodeforce.github.io/python-code
-      - MQ: architecture/mq.md
-      - MQ challenge: java/mqChallenge.md
+      - MQ: 
+        - Overview: architecture/mq.md
+        - MQ challenge: java/mqChallenge.md
       - Knative: coding/knative.md
       - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
       - Cloud native content IBM: https://cloudnative101.dev/ 
