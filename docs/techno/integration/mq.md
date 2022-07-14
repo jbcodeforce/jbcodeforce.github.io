@@ -15,6 +15,7 @@ MQ Clusters will even intelligently route messages to where they’re needed.
 The world is full of horizontally scaled MQ systems that handle billions of messages a day.
 * High availability with replicated Queue managers. Active/active horizontal scaling for always on systems
 * Lightweight and scale to run in any size
+
 ### Comparing MQ Pub/Sub and Event Streams
 
 Assess the following characteristics:
@@ -25,6 +26,7 @@ are partitioned and consumers get all the events from one to many partition.
 * **Scalable Consumption:** if 100 consumers subscribe to all events on a topic, IBM MQ will create 100 messages for each published event (with the exception of multicast Pub/Sub). Each of event will be stored and, 
 if required, persisted to disk using system resources.
 * **Transactional Behavior:** With pub/sub thee tx requirement is less critical, than in queues
+
 ### Replicated Data Queue Managers
 
 MQ Advanced supports synchronous replication and fast quorum based take over for HA scenarios, recovery in seconds. 
@@ -51,6 +53,16 @@ Each Queue manager has the same resource, queues, channels...
 
 **Stream MQ** data by adding a new queue and specify the original queue the  name of the streaming queue
 
+## MQSC commands 
+
+Use [MQSC commands](https://www.ibm.com/docs/en/ibm-mq/9.0?topic=reference-mqsc) to manage queue manager objects, including the queue manager itself, queues, process definitions, channels, client connection channels, listeners, services, namelists, clusters, and authentication information objects.
+
+* Example of common commands: (start a bash in the docker image and use `runmqsc` tool)
+
+```sh
+display queue(rawtx)
+```
+
 ## AMQP
 
 [Advanced Message Queuing Protocol](https://www.amqp.org/) is a standard to integrate with messaging product. IBM MQ supports [AMQP 1.0](https://www.ibm.com/docs/en/ibm-mq/9.3?topic=applications-developing-amqp-client).
@@ -67,27 +79,31 @@ Each Queue manager has the same resource, queues, channels...
 Here are the step to build a custom image for MQ
 
 * clone https://github.com/ibm-messaging/mq-container.git
-* Select the branch for the version of MQ to be used: `git checkout 9.2.5`
-* download last MQ release tar file from ibm support or ppa (Select something like `IBM MQ 9.3 Long Term Support Release for Containers for Linux on x86 64-bit Multilingual`)
-* copy the `tar.gz` file  to `mq-container/downloads` folder
+* Select the branch for the version of MQ to be used: `git checkout 9.2.5`  or `git checkout master`
+* For production image download last MQ release tar file from ibm support or ppa (Select something like `IBM MQ 9.3 Long Term Support Release for Containers for Linux on x86 64-bit Multilingual`), then copy the `tar.gz` file  to `mq-container/downloads` folder
+* for developer image no need to download it will go to developerwork site to get image
 * Edit the `install-mq.sh` file and change the following variable to use AMQP channel
 
     ```sh
     export genmqpkg_incamqp=1
     ```
+
 * Set up AMQP authority, channel, and service properties by adding the contents of the [add-dev.mqsc.tpl](https://github.com/ibm-messaging/mq-dev-patterns/blob/master/amqp-qpid/add-dev.mqsc.tpl) file 
 to the bottom of the `/incubating/mqadvanced-server-dev/10-dev.mqsc.tpl` file in your cloned repository
 
 * Start the build
 
   ```sh
-  # 9.3
   export MQ_ARCHIVE_DEV=IBM_MQ_9.3_LIN_X86-64_NOINST.tar.gz 
   export MQ_VERSION=9.3 
   export LTS=true 
+  export DOCKER_BUILDKIT=0 
   export REGISTRY_USER=jbcodeforce  
   export REGISTRY_PASS='quotethepasswordandescape$with\$'
+  # Development image
   make build-devserver
+  # Production image
+  make build-advancedserver
   ```
 
 > If you get this error: `Error response from daemon: network with name build already exists` do
@@ -98,12 +114,24 @@ docker network rm build
 ```
 
 > Error ` This is due that docker build does not support `--network` anymore.
+
+## Configuring the Queue Manager
+
+It is recommended that you configure MQ in your own custom image. See [this tech note](https://github.com/ibm-messaging/mq-container/blob/master/docs/usage.md#customizing-the-queue-manager-configuration).
+
+Another way is to use `mqsc` inside of the running container:
+
+```sh
+docker exec -ti ibmmq bash
+dspmq
+```
+
 ## Compendium
 
 * [Release 9.3](https://www.ibm.com/docs/en/ibm-mq/9.3)
 * [Developer IBM articles - query](https://developer.ibm.com/?q=MQ)
 * [Getting started with MQ](https://developer.ibm.com/gettingstarted/ibm-mq/)
-* [Run IBM® MQ in a container](https://github.com/ibm-messaging/mq-container) with relevant [developer article.](https://developer.ibm.com/tutorials/mq-connect-app-queue-manager-containers/)
+* [Run IBM® MQ in a container](https://github.com/ibm-messaging/mq-container) with relevant [developer article.](https://developer.ibm.com/tutorials/mq-connect-app-queue-manager-containers/) and [Usage of the docker](https://github.com/ibm-messaging/mq-container/blob/master/docs/usage.md) image.
 * [Learning MQ](http://ibm.biz/learn-mq) 
 * [MQ download](http://ibm.biz/mq-downloads) 
 * [MQ fundamentals](https://developer.ibm.com/articles/mq-fundamentals/): nice set of diagrams and explanation of queues, MQ managers... 
@@ -118,6 +146,7 @@ With links to supporting programming languages.
 * [Develop a JMS point to point application](https://developer.ibm.com/tutorials/mq-develop-mq-jms/) The code of this IBM tutorial is also in this repository under the `democlient/MQJMSClient` folder so we can test the configuration.
 
 ## My own studies
+
 ### MQ messaging coding challenge
 
 See [this note](/java/mqChallenge) in this repository.
