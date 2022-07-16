@@ -188,8 +188,6 @@ We have done two implementations for persisting `asset` data into Cassandra, one
 
 ## Cassandra client API
 
-The code is under `asset-consumer` project and can be loaded into Eclipse. This component is deployed as container inside a kubernetes cluster like ICP. See code explanation, how to build and run in [this note](../../asset-consumer/README.md)
-
 In the pom.xml we added the following dependencies to get access to the core driver API:
 
 ```xml
@@ -201,11 +199,13 @@ In the pom.xml we added the following dependencies to get access to the core dri
 ```
 
 The DAO code is `CassandraRepo.java` and it basically connects to the Cassandra cluster when the DAO class is created...
+
 ```
 Builder b = Cluster.builder().addContactPoints(endpoints);
 cluster = b.build();
 session = cluster.connect();
 ```
+
 The trick is in the endpoints name. We externalize this setting in a configuration properties and use the cassandra-svc name when deploy in ICP.
 
 It is possible also to create keyspace and tables by API if they do not exist by building CQL query string and use the session.execute(aquery) method. See [this section below](#use-cassandra-java-api-to-create-objects)

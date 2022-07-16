@@ -1,5 +1,7 @@
 # Conduct system design
 
+## Approach
+
 * Verify the goals
 
     * Why we are doing this application / solution
@@ -60,6 +62,7 @@
 * Do not be the guy "let me google for you!"
 * They do not want to see people following step by step instructions/ recipes, because it demonstrates you cannot solve new problem
 * Work as no value until demonstrate to customers
+
 ## Scalability
 
 ### Single server design
@@ -79,9 +82,25 @@ This is easier if your web server is stateless, that means we do not keep state 
 
 Serverless solution from AWS, Lambda, kinesis, athena
 
+![](./images/classic-2-tier.png)
+
+A master database generally only supports write operations. A slave database gets copies of the data from the master database and only supports read operations.
+
+By replicating data across different locations, your website remains in operation even if a database is offline as you can access data stored in another database server.
+
+This is important to remember that user session needs to be kept, for example to avoid re-authenticate to a web server if the new request reaches another web server. Stateful web tier is not encouraged for scalability. So stateless architecture is used, where HTTP requests from users can be sent to any web servers, which fetch state data from a shared data store. The shared data store could be a relational database, Memcached/Redis, NoSQL,... 
+
 ## Failover
 
-See also [DR article](./DR.md) and [data replication](../data/data-replication.md)
+See also [DR article](./DR.md) and [data replication blog.](../data/data-replication.md)
+
+To access transparently server on two different data center, we use geoDNS, which is a DNS service that allows domain names to be resolved to IP addresses based on the location of a user. In the event of any significant data center outage, we direct all traffic to a healthy data center.
+
+Important challenges to consider are:
+
+* Traffic redirection: Effective tools are needed to direct traffic to the correct data center.
+* Data synchronization: Users from different regions could use different local databases or caches. In failover cases, traffic might be routed to a data center where data is unavailable.
+
 ### Cold standby
 
 * periodic backup
@@ -100,7 +119,7 @@ See also [DR article](./DR.md) and [data replication](../data/data-replication.m
 ### Hot Standby
 
 * Write to both servers simultanuously 
-* can distribute the read
+* Can distribute the read
 
 ## Sharding database
 
@@ -111,7 +130,7 @@ See also [DR article](./DR.md) and [data replication](../data/data-replication.m
 * Organize data in key value, to easy the hashing. 
 * Value can be an object and let the client being able to interpret.
 
-For example MongoDB uses mongos on each app server to distribute the data among a replica sets. Replica sets are managed by primary server and secondary servers to manage shards.
+For example MongoDB uses mongos on each app server to distribute the data among a replica set. Replica sets are managed by primary server and secondary servers to manage shards.
 In case of primary server, the secondary servers will elect a new primary. Primary looks like SPOF, but the recover quickly via the secondary taking the lead. Need at least 3 servers to elect a primary.
 Traffic is partitioning according to a scheme, which is saved in a config servers. 
 
@@ -154,15 +173,16 @@ We can also query those data by adding an intermediate components to create sche
 **CAP theorem**: We can have only 2 of the 3: Consistency, Availability and Partition tolerance.
 With enhanced progress CAP is becoming weaker, but still applies. A is really looking at single point of failure when something going down. So MongoDB for example may loose A for a few seconds maximum (find a new primary leader), which may be fine.
 
-    * AC: is supported by classical DBs like mySQL
-    * AP: Cassandra: C is lost because of the time to replicate
-    * CP: Mongodb, HBASE, dynamoDB
+* AC: is supported by classical DBs like mySQL
+* AP: Cassandra: C is lost because of the time to replicate
+* CP: Mongodb, HBASE, dynamoDB
 
 Single-master designs favor consistency and partition tolerance.
 ## Caching
 
 Goal: limit to access disk to get data, or go over the network.
-Solution is to add a cachine layer in front of the DB to keep the most asked data, or the most recent... Caching services can be used to be able to scale horizontally.
+
+Solution is to add a cache layer in front of the DB to keep the most asked data, or the most recent... Caching services can be used to be able to scale horizontally.
 
 Every cache server is managing a partition of the data, using hashing.
 
@@ -170,7 +190,9 @@ Approriate for applications with more reads than writes. Expiration policies dic
 
 The hotspot may bring challenge for cache efficiency, need to cache also on load distribution and not just on hash. Finally starting the cache is also a challenge, as all requests will go to the DB.
 
-Different eviction policies can be done:
+Inconsistency can happen because data-modifying operations on the data store and cache are not in a single transaction. When scaling across multiple regions, maintaining consistency between the data store and cache is challenging.
+
+Manage the cache size with different eviction policies:
 
 * LRU: least recently used. HashMap for key and then doubly linked-list, head points to MRU and tail points to the LRU. Evicts data that hasn't been accessed in the longest amount of time once memory for the cache fills up.
 * LFU: least frequently used. 
@@ -179,9 +201,12 @@ Different eviction policies can be done:
 Redis, Memcached, ehcache. AWS Elasticache
 ### Content Delivery Networks
 
-Distribute read data geographically (css, images, js, html...), can even apply to ML model execution.
+when a user visits a website, a CDN server closest to the user will deliver static content. 
+CDN distributes read data geographically (css, images, js, html...), can even apply to ML model execution.
 
 Load balancers and caching technologies such as Redis can also be parts of low-latency designs, but are not specifically for the problem of global traffic.
+
+CDNs are run by third-party providers, and you are charged for data transfers in and out of the CDN.
 
 ## Resiliency
 
