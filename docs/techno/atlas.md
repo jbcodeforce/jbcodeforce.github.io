@@ -245,6 +245,11 @@ a data land.
 
 ## Deploy to Kubernetes
 
+Apache Atlas requires 3 applications to be installed
+
+* Solr: This is used to index the Atlas Data so that we can search the data in Atlas UI.
+* Cassandra: It acts as a backend and stores the data ingested by Apache Atlas, which is nothing but the Metadata.
+* Zookeeper: for cluster management.
 
 ## Source of readings
 

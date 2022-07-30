@@ -236,6 +236,7 @@ The guide is [here](https://quarkus.io/guides/deploying-to-openshift) and the ma
     * Generate Dockerfile and build the image on server
     * Push image to private registry
     * Apply the manifests: service account, service, image stream, build config, and deployment config as defined by the generated `openshift.yaml`
+
 * Three pods are visible: build, deploy and running app.
 
 ```sh
@@ -406,23 +407,23 @@ Application configuration will be used in any active profile. The built-in profi
  the properties need to be accessed via getter:
 For example to be sure the hostname is loaded from the `application.properties` do:
 
-```java 
-@ApplicationScoped
-public class RabbitMQItemGenerator {
+  ```java 
+  @ApplicationScoped
+  public class RabbitMQItemGenerator {
 
-  @ConfigProperty(name = "amqp.host")
-  public String hostname;
-...
+    @ConfigProperty(name = "amqp.host")
+    public String hostname;
+  ...
 
-@QuarkusTest
-public class TestRabbitGenerator {
-    
-    @Inject
-    RabbitMQItemGenerator generator;
+  @QuarkusTest
+  public class TestRabbitGenerator {
+      
+      @Inject
+      RabbitMQItemGenerator generator;
 
-    ...
-    Assertions.assertNotNull(generator.getHost());
-```
+      ...
+      Assertions.assertNotNull(generator.getHost());
+  ```
 
 Things to do:
 
@@ -551,7 +552,7 @@ Quarkus does much of its configuration and bootstrap at build time. But some pro
 
 ```java
 // does fail as it return -
- Assertions.assertEquals(2.0, assessor.temperatureThreshold);
+Assertions.assertEquals(2.0, assessor.temperatureThreshold);
 // while this works!
 Assertions.assertEquals(2.0, assessor.getTemperatureThreshold());
 ```
@@ -604,16 +605,7 @@ to manage asynchronous actions (Uni and Multi).
 Quarkus uses an event-loop to implement the reactive mode, based on Vert.X as reactive engine. To program with reactive 
 or imperative, we use different APIs. Mutiny is such API.
 
-Add the `resteasy-mutiny` package.
-
-```xml
-  <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-mutiny</artifactId>
-  </dependency>
-```
-
-* To asynchronously handle HTTP requests, the endpoint method must return a java.util.concurrent.CompletionStage 
+To asynchronously handle HTTP requests, the endpoint method must return a java.util.concurrent.CompletionStage 
 or an `io.smallrye.mutiny.Uni`  or `io.smallrye.mutiny.Multi`(requires the quarkus-resteasy-mutiny extension).
 
 With Mutiny both `Uni` and `Multi` expose event-driven APIs: you express what you want to do upon a given event (success, failure, etc.). 
@@ -664,7 +656,7 @@ Here are some basic examples:
                 item -> System.out.println(item),
                 failure -> System.out.println("Oh no! " + failure.getMessage())
         );
-      ```
+    ```
 
 * Processing data as stream:
 
@@ -713,27 +705,27 @@ Quick summary:
 * No need to start a Kafka broker when using the dev mode or for tests. Quarkus starts redpanda container and apicurio if using schema
 * Define an application scoped bean for your service. See code template in [eda-quickstarts/quarkus-reactive-kafka-producer](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-reactive-kafka-producer)
 
-  ```java
-  @ApplicationScoped
-  public class OrderService {
-      @Channel("orders")
-	    public Emitter<OrderEvent> eventProducer ;
+```java
+@ApplicationScoped
+public class OrderService {
+    @Channel("orders")
+    public Emitter<OrderEvent> eventProducer ;
 
-      public OrderEntity createOrder(OrderEntity order){
-        OrderEvent orderEvent = OrderEvent.from(order);
-        eventProducer.send(orderEvent);
-      }
-  ```
+    public OrderEntity createOrder(OrderEntity order){
+      OrderEvent orderEvent = OrderEvent.from(order);
+      eventProducer.send(orderEvent);
+    }
+```
   
 * define channel properties in `application.properties`.
 
-  ```sh
-  mp.messaging.outgoing.orders.connector=smallrye-kafka
-  mp.messaging.outgoing.orders.topic=orders
-  mp.messaging.outgoing.orders.value.serializer=io.quarkus.kafka.client.serialization.ObjectMapperSerializer
-  # automatically register the schema with the registry, if not present
-  mp.messaging.outgoing.orders.apicurio.registry.auto-register=true
-  ```
+```sh
+mp.messaging.outgoing.orders.connector=smallrye-kafka
+mp.messaging.outgoing.orders.topic=orders
+mp.messaging.outgoing.orders.value.serializer=io.quarkus.kafka.client.serialization.ObjectMapperSerializer
+# automatically register the schema with the registry, if not present
+mp.messaging.outgoing.orders.apicurio.registry.auto-register=true
+```
 
 * On the consumer side, use `@Incoming` annotation with channel name on top of function to process the message from kafka
 
