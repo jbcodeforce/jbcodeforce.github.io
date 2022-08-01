@@ -1,5 +1,13 @@
 # Lessons analysis
 
+## Training plan
+
+* 20 balls wedge warm up - line on the ground - make contact - 30, 50 and 70 yards. Work way up to full swing
+* 30 balls: mechanicals: back to the feeling with 9 iron
+* 25 balls: Skill work on ball fligh control. Games with a score 
+* 25 balls: Game like strikes: Driver, club, pitch.
+
+Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate target -> breeze -> line up -> view target - ball x2 -> swing
 ## Full Swing
 
 ### 2021 8/11: Full swing analysis
@@ -194,3 +202,18 @@ A higher, floating shot requires more clubhead speed, so extend the length of th
 ### Distance control: A factor of swing length & rhythm
 
 To control distance in the pitching arena; a ‘clockface’ principle that involves matching body rotation and length of arm swing on either side of the ball to identify with the ‘best’ (i.e. most consistent) landing distances using the lofted scoring clubs.
+
+
+## Putter
+
+* use long putt to pu in a 5 foot square.
+* 3 to 5 foot putts exercise with 10 balls
+* Alignment exercise with two poles or club on the ground - follow the rails
+* pass the gate with straight line
+* pass the gate with curve.
+
+## recover from bad hole
+
+* Take 10 steps: Let yourself get mad about the shot you’ve just hit for 10 steps. When you take that 11th step, move on. 
+* Breathe in for five seconds, hold that breath for five seconds and breathe out for five seconds.
+* Yaking things “one shot at a time” 
