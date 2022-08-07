@@ -33,6 +33,13 @@
     * how fast is fast enough?
     * Try to express in SLA language: 100ms at 3-nines - 99.9% of availability is around 9h down per year. 5 nines is 5 minutes down.
 
+???- "Information"
+    * AWS offers TCP connections up to the edge and then use AWS private backbone (global accelerator), which improves performane by 60% 
+    * Try to use Real User Monitoring tool to measure network performance
+    * Try to measure: **Throughput** – the amount of data or number of data packets that can be delivered in a predefined timeframe, **Latency** in connection – also called round-trip times or RTT, **Network jitter** – the variability over time of the network latency, and **Packet loss**. Get 1,000 samples every hour for a day.
+    * [Apache Bench](https://www.tutorialspoint.com/apache_bench/apache_bench_quick_guide.htm) helps to test throughput and latency of HTTP servers
+    * round-trip time (RTT) is the total time that it takes a data packet to travel from one point to another on the network and for a response to be sent back to the source. It is a key perf metric for latency. Ping measure ICMP RTT.
+
 * From high level to drill down
 
     * Start by high level view

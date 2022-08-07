@@ -197,12 +197,12 @@ The following diagram illustrates some fault tolerance principles offered by the
 
 ![](./images/ec2-fault-tolerance.png)
 
-* AMI defines image for the EC@ with static or dynamic configuration. From an AMI we can scale by adding same EC2
-* Instance failure can be replace by starting a new instance from the same AMI
-* Auto scaling group defines EC2 instance, and can start new EC2 instance automatically
+* AMI defines image for the EC2 with static or dynamic configuration. From one AMI, we can scale by adding new EC2 based on same image.
+* Instance failure can be replaced by starting a new instance from the same AMI
+* Auto scaling group defines a set of EC2 instances, and can start new EC2 instance automatically
 * To minimize down time, we can have one EC2 instance in standby, and use elastic IP addresses. 
 * Data is saved on EBS and replicated to other EBS inside the same availabiltiy zone.
-* Snapshot backup can be done to replicate data between AZ, and persisted for long retention in S3. 
+* Snapshot backup can be done to replicate data between AZs, and persisted for long retention in S3. 
 * Need to flush data from memory to disk before any snapshot
 * Auto scaling adjusts the capacity of EC2 and EC2 instance within the group
 * Applications can be deployed between AZs.
