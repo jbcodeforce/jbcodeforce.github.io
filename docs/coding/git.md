@@ -108,7 +108,7 @@ git remote set-url origin <url>
 
 * `git log -10 --stat`: To see the last 10 commits done on master
 * disable using ssl: `git config --global http.sslverify false`
-
+* In case the push did not return and hangs, it may be a problem of buffer size, then use `git config http.postBuffer 524288000`.
 ## Branching
 
 Branching means you diverge from the main line of development and continue to do work without messing with that main line. Git encourages a workflow that branches and merges often, even multiple times in a day.

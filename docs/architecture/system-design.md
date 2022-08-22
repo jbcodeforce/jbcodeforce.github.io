@@ -16,7 +16,7 @@
 
     * list some potential features
     * Are we looking at end to end experience or API design
-    * type of client applications or device
+    * type of client application or device
     * Do we require authentication? Analytics? Integrating with existing systems?
 
 * Design according to scale

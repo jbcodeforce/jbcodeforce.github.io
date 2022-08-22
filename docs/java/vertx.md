@@ -4,19 +4,19 @@ A polyglot library to develop event driven non blocking apps. The main website [
 
 ## Concepts
 
-* Vert.x is not a restrictive framework, and don't force the correct way to write an application.
+* Vert.x is not a restrictive framework, and doesn't force the correct way to write an application.
 * It uses an event loop thread to process requests with non blocking IO, and dispatch to event handlers. 
 * Verticles are pieces of code that Vert.x engine executes
 * An application would typically be composed of multiple verticles running in the same Vert.x instance and communicate with each other using events via the event bus
 * In Quarkus every IO interaction passes through the non-blocking and reactive Vert.x engine
 * Verticles remain dormant until they receive a message or event.
 * Message handling is ideally asynchronous, messages are queued to the event bus, and control is returned to the sender
-* Vert.x offers an  event bus  allowing the different components of an application to interact using  messages. Messages are sent to  addresses and have a set of  headers  and a  body.
+* Vert.x includes an  event bus  allowing the different components of an application to interact using  messages. Messages are sent to  addresses and have a set of  headers  and a  body.
 * By starting a Vert.x application in cluster  mode, nodes are connected to enable shared data structure, hard-stop failure detection, and load-balancing group communication. Vert.x uses [Hazelcast](https://vertx.io/docs/vertx-hazelcast/java/) by default to support the cluster management.
 
 ## Get started
 
-Use the [app generator](https://start.vertx.io/) to get starting code and pom.xml or Quarkus app generator as it has a Vert.x engine embedded inside it.
+Use the [app generator](https://start.vertx.io/) to get starting code and pom.xml or use Quarkus app generator as it has a Vert.x engine embedded inside it.
 
 See all the [vert.x samples here](https://github.com/vert-x3/vertx-examples/tree/4.x).
 
@@ -28,7 +28,7 @@ See all the [vert.x samples here](https://github.com/vert-x3/vertx-examples/tree
   * [Circuit breaker](#circuit-breaker)
   * [Kafka consumer and producer](#kafka-and-vertx)
 
-vertx has a CLI to run verticle, to bypass maven or graddle.
+vertx has a CLI to run verticle, by bypassing maven or graddle.
 
 
 * Start a http server with vertx: `vertx run io.vertx.examples.openshift.MyHttpVerticle -cp target/clustered-application-http-3.9.0.jar `
@@ -37,7 +37,7 @@ vertx has a CLI to run verticle, to bypass maven or graddle.
 
 Event bus is used by different verticles to communicate through asynchronous message passing  (JSON). 
 
-A receiver on a point to point
+A receiver on a point to point channel
 
 ```java
 public void start() throws Exception {
@@ -56,14 +56,14 @@ public void start() throws Exception {
 ```
 
 Start with cluster option so Hazelcast will manage the verticles and netty will support the TCP connection
-A sender 
+
+A sender looks like:
 
 ```java
 public void start() throws Exception {
     EventBus eb = vertx.eventBus();
 
     // Send a message every second
-
     vertx.setPeriodic(1000, v -> {
 
       eb.request("ping-address", "ping!", reply -> {
@@ -81,7 +81,7 @@ public void start() throws Exception {
 
 ## Run with docker
 
-Using [vert.x with docker](https://vertx.io/docs/vertx-docker/) to get a Java environment with Vert.x jars ready to go. 
+Using [vert.x with docker](https://vertx.io/docs/vertx-docker/) to get a Java environment with the Vert.x jars ready to go. 
 
 To run a Verticle:
 
@@ -94,7 +94,7 @@ docker run -i -t -p 8080:8080 \
 
 ## Deploy existing application with a dockerfile
 
-```shel
+```sh
 oc new-build --binary --name=vertx-greeting-application -l app=vertx-greeting-application
 mvn dependency:copy-dependencies compile
 oc start-build vertx-greeting-application --from-dir=. --follow
@@ -114,12 +114,13 @@ curl $URL
  ![Example of circuit breaker](https://github.com/vert-x3/vertx-examples/tree/4.x/circuit-breaker-examples)
 
 To use the circuit breaker you need to:
+
 * Create a circuit breaker, with the configuration you want (timeout, number of failure before opening the circuit)
 * Execute some code using the breaker
 
 `vertx run io.vertx.example.circuit.breaker.Client -cp target/circuit-breaker-exales-3.9.0.jar `
 
-Operations guarded by a circuit breaker are intended to by non-blocking and asynchronous in order to benefits from the Vert.x execution mode
+Operations guarded by a circuit breaker are intended to be non-blocking and asynchronous, in order to benefit from the Vert.x execution mode
 
 ## Kafka and vert.x
 
@@ -137,7 +138,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
   public void start() throws Exception {
     // Get the kafka producer config
     JsonObject config = config();
-    // Create the producer, ith key as string and value as jsonObject
+    // Create the producer, with key as string and value as jsonObject
     producer = KafkaWriteStream.create(vertx, config.getMap(), String.class, JsonObject.class);
     // get messages and write:
     producer.write(new ProducerRecord<>("the_topic", new JsonObject().put(key, payload)));
@@ -188,13 +189,13 @@ mvn quarkus:add-extension -Dextension=resteasy-mutiny
 
  ![](https://quarkus.io/guides/images/http-architecture.png)
 
-Get access to Vert.x via injection in any beans (different Vertx classes are available depending of the api to use for reactive programming): 
+Get access to Vert.x via injection in any beans (different Vertx classes are available depending of the api used for reactive programming): 
 
 ```java
 @Inject io.vertx.mutiny.core.Vertx vertx;
 ```
 
-To asynchronously handle the HTTP request, the endpoint method must return a `java.util.concurrent.CompletionStage` or an `io.smallrye.mutiny.Uni` or `Multi`:
+To asynchronously handle the HTTP request, the endpoint method must return a `java.util.concurrent.CompletionStage` or an `io.smallrye.mutiny.Uni` or `Multi` from the mutiny framework:
 
 ```java
 @GET

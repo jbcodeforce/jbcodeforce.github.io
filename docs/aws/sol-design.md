@@ -1,19 +1,19 @@
 # Solution design with AWS services
 
 
-We try to address disaster and recovery for different needs, knowing that not all applications need active active deployment.
+We try to address disaster and recovery for different needs, knowing that not all applications need active/active deployment.
 
 ## Backup multi-regions
 
-The simple resilience solution is to use backup and restore mechanism. Data, configuration can be moved to S3 with the second region. For even longer time w ecan use Glacier. Use database service to ensure HA at the zone level, and replicate data within AZ.
+The simplest resilience solution is to use backup and restore mechanism. Data and configuration can be moved to S3 in the second region. For even longer time we can use Glacier. Use database service to ensure HA at the zone level, and replicate data within AZ.
 
 ![](./images/backup-mr.png)
 
-RPO will be average time between snapshot - and RTO at the day level.
+RPO will be average time between snapshots - and RTO at the day level.
 
 ## Warm region
 
-For applications, where we want limit out of services time, the approach is to replicate AMI images so app servers, in DR region, can be restarted quickly. And Database are replicated and warm on the second region. Web servers are also warm but not receiving traffic.
+For applications, where we want to limit out of services time, the approach is to replicate AMI images so app servers, in DR region, can be restarted quickly. And Database are replicated and warm on the second region. Web servers are also warm but not receiving traffic.
 
 ![](./images/warm-dr.png)
 
