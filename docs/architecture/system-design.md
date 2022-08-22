@@ -121,7 +121,7 @@ Important challenges to consider are:
 
 * Continuous replicated: the DB is ready to get connected
 * Tiny window to get data loss
-* Vertical scaling still
+* Still using vertical scaling 
 
 ### Hot Standby
 
@@ -137,11 +137,11 @@ Important challenges to consider are:
 * Organize data in key value, to easy the hashing. 
 * Value can be an object and let the client being able to interpret.
 
-For example MongoDB uses mongos on each app server to distribute the data among a replica set. Replica sets are managed by primary server and secondary servers to manage shards.
-In case of primary server, the secondary servers will elect a new primary. Primary looks like SPOF, but the recover quickly via the secondary taking the lead. Need at least 3 servers to elect a primary.
+For example MongoDB uses `mongos` on each app server to distribute the data among a replica set. Replica sets are managed by primary server and secondary servers manage shards.
+In case of primary server fails, the secondary servers will elect a new primary. Primary looks like a SPOF, but it recovers quickly via the secondary taking the lead. Need at least 3 servers to elect a primary.
 Traffic is partitioning according to a scheme, which is saved in a config servers. 
 
-Cassandra uses node rings, a shard is replicated multiple times to other nodes, but each node is a primary of a shard. So data needs to be fully replicated, and eventually will be consistent. 
+[Cassandra](../data/cassandra.md) uses node rings, a shard is replicated multiple times to other nodes, but each node is a primary of a shard. So data needs to be fully replicated, and eventually will be consistent. 
 
 Resharding is a challenge for the database.
 
@@ -153,9 +153,9 @@ to simplify future queries: organize them by date, or entity key...
 
 We normalize the data to use less storage and updates in one place. But need more lookups.
 
-Denormalize duplicates data, use more storage, one lookup to get the data, and updates are hard.
+Denormalize duplicates data, use more storage, but uses one lookup to get the data, but updates are harder.
 
-To assess what is a better fit, Start with normalize, we need to think about the customer experience, depending of the type of queries.
+To assess what is a better fit, start with normalize, aas we need to think about the customer experience, and consider different types of query.
 
 ## Data lake
 
@@ -178,11 +178,11 @@ We can also query those data by adding an intermediate components to create sche
 * **Durability**: once a tx is committed, it stays, event if the system crashes.
 
 **CAP theorem**: We can have only 2 of the 3: Consistency, Availability and Partition tolerance.
-With enhanced progress CAP is becoming weaker, but still applies. A is really looking at single point of failure when something going down. So MongoDB for example may loose A for a few seconds maximum (find a new primary leader), which may be fine.
+With enhanced progress, CAP is becoming weaker, but still applies. A is really looking at single point of failure when something going down. MongoDB for example may loose A for a few seconds maximum (find a new primary leader), which may be fine.
 
 * AC: is supported by classical DBs like mySQL
 * AP: Cassandra: C is lost because of the time to replicate
-* CP: Mongodb, HBASE, dynamoDB
+* CP: Mongodb, HBASE, dynamoDB: strong consisten read reques, it returns a response with the most up-to-date data that reflects updates by all prior related write operations to which DynamoDB returned a successful response, so network delay or outage does no guaranty A.
 
 Single-master designs favor consistency and partition tolerance.
 ## Caching
@@ -209,11 +209,13 @@ Redis, Memcached, ehcache. AWS Elasticache
 ### Content Delivery Networks
 
 when a user visits a website, a CDN server closest to the user will deliver static content. 
-CDN distributes read data geographically (css, images, js, html...), can even apply to ML model execution.
+CDN distributes read data geographically (css, images, js, html...), can even being used for ML model execution.
 
 Load balancers and caching technologies such as Redis can also be parts of low-latency designs, but are not specifically for the problem of global traffic.
 
-CDNs are run by third-party providers, and you are charged for data transfers in and out of the CDN.
+CDNs may run by third-party providers, and you are charged for data transfers in and out of the CDN.
+
+AWS cloudfront is a CDN
 
 ## Resiliency
 
@@ -252,7 +254,7 @@ On classical HADOOP 2 - architecture for big data:
 
 * HDFS to distribute data
 * Yarn (yet another resource negotiator) to manage access to the data in HDFS
-* MapReduce processing (old google - map to extract data and reduce to combine for aggregation )or Spark.
+* MapReduce processing (old google - map to extract data and reduce to combine for aggregation) or Spark.
 
 Spark is a replacement of MapReduce. It decides how to send processing to run it in parallel. Work with in memory caching. Compute aggregation on data at rest. You can use it for interactive queries with Spark SQL. 
 
@@ -260,7 +262,7 @@ The drive program (or **SparkContext**) is the one who define what are the input
 
 ### Flink
 
-Scalable streaming platform for inbound and outbound data.
+Scalable streaming platform for inbound and outbound data. See [dedicated study](https://jbcodeforce.github.io/flink-studies/)
 ## Cloud computing services
 
 |  | AWS | Google | Azure |
@@ -273,7 +275,6 @@ Scalable streaming platform for inbound and outbound data.
 | **Spark / Hadoop** | EMR  | Dataproc | Databricks |
 | **Data warehouse** | RedShift | BigQuery | Azure SQL / Database |
 | **Caching** | ElastiCache (Redis) | Memorystore (Redis or memcached) | Redis |
-
 
 
 ## Zookeeper review
@@ -299,24 +300,23 @@ The approach is to design the potential API, then the components, present a data
 | DELETE | short URL, user id return status |
 | GET | short URL, redirect to long URL |
 
-
 ![](./images/short-url-comps.png)
 
-To redirect the HTTP response status can be 301 or 302. 301 is a permant redirect, so intermediate components will keep the mapping. But if you want to keep analytics on your web site traffic you want to know how many redirects are done per day, so 302 is a better choice. This is a temporary redirect.
+To redirect the HTTP response status may be 301 or 302. 301 is a permanent redirect, so intermediate components will keep the mapping. But if you want to keep analytics (search engine) on your web site traffic you want to know how many redirects are done per day, so 302 is a better choice. This is a temporary redirect.
 
 ### A restaurant system like OpenTable
 
 A a customer / diner I want to
 
-* specify my number member for the dining party
-* select a time slot and a specify a location
+* specify the number of members for the dining party
+* select a time slot and specify a location
 * select a restaurant by name 
 * select a type of food
 * book the table for the selected timeslot, by specifying phone number and email address.
-* specify how to be contacted when closer to the time
-* register as a recurring user
+* specify how to be contacted when closer to the time (sms)
+* register as a recurring user to get royalty points
 
-Other customer of this application will be restaurant owners, who want to see their booking, but also get more information about the customers, the forecast, and the number of search not leading to their restaurant. may be expose their menu.
+Other customer of this application will be restaurant owners, who want to see their booking, but also get more information about the customers, the forecast, and the number of search not leading to their restaurant. May be expose their menu. Get statistic on customer navigation into menu items.
 
 NFR: thousands of restaurants, millions of users.
 
@@ -326,19 +326,19 @@ Data model:
 
 - search: location, time - date, party size, type of food
 - list of restaurants
-- reservation: restaurant, party size, time date
 - list of time slots
 - reservation: restaurant, party size, time slot, email, phone number, type of contact
-- booking status with reservation ID to be able to cancel
+- return booking status with reservation ID to be able to cancel
 
 So we need: 
 
-* Restaurant to discribe physical location, # tables.., how they can group tables for bigger party.
+* Restaurant to describe physical location, # tables.., how they can group tables for bigger party.
 * Customer representing physical contact, 
 * A schedule per 15 mn time slots, table list per restaurant
 * Reservation to link customer to restaurant by using their primary keys.
 * A Search: time slot, party, location
 * The reservation function need to take into account capability of the restaurant on how to organize tables.
+
 This is a normalized data model, as it is easier and really for reservation there is one transaction on a simple object. Restaurant and customer are read model in  this context.
 
 Out side of authentication APIs, login, password... we need few api to do reservations.
@@ -353,17 +353,18 @@ Other APIs are needed to do CRUD for each business entities.
 
 The servers are scaled horizontally, rack and AZ allocated, and even geo-routed.
 
-![](./images/opentable.png)
+![](./images/opentable.png){ width="900" }
 
 DB system may be no sql based, and can be highly available and support horizontal scaling too.
 
 ## Web Crawler for a search
 
 Need to parse html, keep text only, may be pictures in the future, billions of web pages, and run every week.
-Need to do a update of existing page refs if changed. 
+Need to update of existing page refs if they changed. 
 
 HTML = text + ref to URL
-singleton web crawler will put links into a LIFO pile. If we consider the web crawling as a graph navigation. we want to do BFS, so we need a pile.
+
+singleton web crawler will put links into a LIFO pile. If we consider the web crawling as a graph navigation. we want to do BFS, so we need a pile as data structure.
 
 As we need to run every week, we can in fact runs all the time with a single instance of the crawler.
 The solution is batch, and no end user per say. Except that we still need to provide metrics that display coverage: pile size, total number of page processed, link occurence.
@@ -374,7 +375,7 @@ So we need a partition key, may be a hash of the url.
 
 The solution will look like
 
-![](./images/webcrawler.png)
+![](./images/webcrawler.png){ width="900" }
 
 ## Top sellers in e-commerce
 

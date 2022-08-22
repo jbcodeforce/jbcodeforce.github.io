@@ -36,7 +36,6 @@ plugins:
       minify_html: true
       
 markdown_extensions:
-  - meta
   - abbr
   - attr_list
   - md_in_html
@@ -52,7 +51,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.details
-  - pymdownx.superfences
+
 
 nav:
   - Blogs: blogs/index.md

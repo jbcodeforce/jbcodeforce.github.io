@@ -37,11 +37,11 @@ To increase in complexity, R/W can go the local region. So when a user writes ne
 
 This applies to applications with write to read ratio around 50%.
 
-### Write / read local anti-pattern
+### Write / read local (anti) pattern
 
 This pattern uses two master DB, one in each region so user can write and read locally. Dual writes, in each region, at the same time may generate the same key but record will have different data. 
 You have inconsistency, and it is difficult to figure out, and rollback.
-So use this pattern only if you can do the two previous ones.
+So use this pattern only if you cannot do the two previous patterns.
 
 ### AWS Services supporting HA and DR multi-regions
 
