@@ -55,7 +55,7 @@ Create pull request against the integration branch of the upstream repository.
 
 * **git config**: Short for “configure,” this is most useful when you’re setting up Git for the first time
 
-```
+```sh
 git config --global user.name "Your Name Here"
 ```
 
@@ -109,6 +109,22 @@ git remote set-url origin <url>
 * `git log -10 --stat`: To see the last 10 commits done on master
 * disable using ssl: `git config --global http.sslverify false`
 * In case the push did not return and hangs, it may be a problem of buffer size, then use `git config http.postBuffer 524288000`.
+
+## Practices
+
+* Link a commit to an issue to close it. The commit message need to just include one of the following:
+
+```
+fix #xxx
+fixes #xxx
+fixed #xxx
+close #xxx
+closes #xxx
+closed #xxx
+resolve #xxx
+resolves #xxx
+resolved #xxx
+```
 ## Branching
 
 Branching means you diverge from the main line of development and continue to do work without messing with that main line. Git encourages a workflow that branches and merges often, even multiple times in a day.

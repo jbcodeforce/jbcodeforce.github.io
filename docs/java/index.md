@@ -165,6 +165,12 @@ sdk use java 8.0.265.hs-adpt
 
 Update maven cli: download it from http://maven.apache.org/download.cgi, unzip to ~/Tools. modify $PATH.
 
+### Create a java project with maven
+
+```sh
+mvn archetype:generate -DgroupId=jbcodeforce -DartifactId=apicurio-client -DarchetypeArtifactId=maven-archetype-quickstart
+```
+
 ### Multi-module maven
 
 This project includes different modules to test different subjects related to the java last language features and other topics on Java, like reactive messaging, kafka, ...

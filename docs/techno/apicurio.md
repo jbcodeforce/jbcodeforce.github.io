@@ -30,7 +30,7 @@ Updating local state from the Kafka log in this manner ensures durability, order
 
 ## Apicurio Studio
 
-The [The apicurio studio project](https://github.com/apicurio/apicurio-studio) is a standalone API design studio that can be used to create new or edit existing API designs.
+[The apicurio studio project](https://github.com/apicurio/apicurio-studio) is a standalone API design studio that can be used to create new or edit existing API designs.
 
 There are three runtime components in Apicurio and one Keycloak authentication server:
 
@@ -44,14 +44,13 @@ To run a light version of Studio use Apicurito (edit locally OpenAPI doc):
 docker run -it -p 8080:8080 -p 8443:8443 apicurio/apicurio-studio-ui:latest-release
 ```
 
-
 ## V1.3.x
 
-As of Event Streams version 10.5, the schema registry is based on Apicur.io 1.3.x.
+As of Event Streams version 10.5, the schema registry was based on Apicur.io 1.3.x.
 
 [Product documentation](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/index.html).
 
-The docker compose in [EDA quickstarts environment: kafka-2.8-apicurio-1.3](https://github.com/ibm-cloud-architecture/eda-quickstarts/blob/main/environment/local/strimzi/kafka-2.8-apicurio-1.3.yaml) uses 1.3.2 in-memory image for development.
+The docker compose in [EDA quickstarts environment: kafka-2.8-apicurio-1.3](https://github.com/ibm-cloud-architecture/eda-quickstarts/blob/main/environment/local/strimzi/kafka-2.8-apicurio-1.3.yaml) uses 1.3.2 in-memory image for development purpose.
 
 Access the user interface with: http://localhost:8091/ui
 
@@ -134,14 +133,16 @@ Event Streams [version 11.0.x uses Apicur.io 2.2.x](https://ibm.github.io/event-
 
 It supports OpenAPI, AsyncAPI, GraphQL, Apache Avro, Google protocol buffers, JSON Schema, Kafka Connect schema, WSDL, XML Schema (XSD)
 
-The registry can be configured to store data in various back-end storage systems depending on use-case, including Kafka, PostgreSQL, and Infinispan
+The registry can be configured to store data in various back-end storage systems depending on use-case, including Kafka, PostgreSQL, and Infinispan.
 
 Quarkus dev mode with the extension: `quarkus-apicurio-registry-avro` start apicurio 2.x container,
 and reactive messaging with the `io.apicurio.registry.serde.avro.AvroKafkaSerializer` serializer create schema definition directly to the registry.
 
-### Installation
+See [Quarkus apicur.io dev mode guide](https://quarkus.io/guides/apicurio-registry-dev-services) and the [kafka - apicur.io guide](https://quarkus.io/guides/kafka-schema-registry-avro).
 
-* For Event Streams - schema registry deployment the installation is done by adding the following into the cluster definition (see [this deployment](https://github.com/ibm-cloud-architecture/eda-rt-inventory-gitops/blob/main/environments/rt-inventory-dev/services/ibm-eventstreams/base/eventstreams-dev.yaml)):
+### Installation in the context of event streams
+
+* For Event Streams - schema registry deployment the installation is done by adding the following element into the kafka cluster definition (see [this deployment](https://github.com/ibm-cloud-architecture/eda-rt-inventory-gitops/blob/main/environments/rt-inventory-dev/services/ibm-eventstreams/base/eventstreams-dev.yaml)):
 
 ```yaml
   apicurioRegistry:
@@ -151,18 +152,29 @@ and reactive messaging with the `io.apicurio.registry.serde.avro.AvroKafkaSerial
 
 The Event Stream UI includes a way to manage schema by human. For code based management we need to have a user with ACL to create schema.
 
-* We can install a standalone Apicur.io registry outside of IBM Event Streams, which may make sense when we need to manage different clusters.
+* We can install a standalone Apicur.io registry outside of IBM Event Streams, which may make sense when we need to manage multiple Kafka clusters.
 
 Via OpenShift Operator hub or via subscription.yaml see [eda-gitops-catalog/apicurio/operator](https://github.com/ibm-cloud-architecture/eda-gitops-catalog/tree/main/apicurio)
 
-For application code that use version 2.x [quarkus-reactive-kafka-producer template](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-reactive-kafka-producer) or [demo app](https://github.com/jbcodeforce/eda-demo-order-ms).
+For application code that uses version 2.x [quarkus-reactive-kafka-producer template](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/quarkus-reactive-kafka-producer) or [the order demo app (producer)](https://github.com/jbcodeforce/eda-demo-order-ms) and the [simplest string consumer](https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient).
+
+### Installing standalone in OCP
+
+* Install Apicurio operator (search from registry in Operator Hub for `Apicurio Registry Operator`)
+* Get Kafka bootstrap internal listener address
+* Define one registry instance
+
+```yaml
+```
+
+* Create the `storage-topic` and `global-id-topic` topics
 
 ### Reactive messaging
 
 For the Microprofile Reactive messaging configuration consider the following:
 
 * Set at least the value serializer to use AvroKafkaSerializer so it can transparently manage auto registry of 
-the schema. (example for the `orders` channel)
+the schema. (example for the `orders` channel). NOT needed any more with quarkus that will use as the `apicurio.avro` extension is in the libraries. 
 
 ```sh
 mp.messaging.outgoing.orders.key.serializer=org.apache.kafka.common.serialization.StringSerializer
@@ -172,11 +184,18 @@ mp.messaging.outgoing.orders.apicurio.registry.artifact-id=io.apicurio.registry.
 mp.messaging.outgoing.orders.apicurio.registry.global-id=io.apicurio.registry.utils.serde.strategy.GetOrCreateIdStrategy
 ```
 
+if you want to configure cross channels then move the declaration at kafka level:
+
+```sh
+kafka.apicurio.registry.auto-register=true
+kafka.apicurio.registry.url=http://localhost:8081/apis/registry/v2
+```
+
 * For securized connection, add TLS and authentication
 
 ```sh
 # Use same schema registry server cross channel
-%prod.mp.messaging.connector.smallrye-kafka.apicurio.registry.url=${ES_APICURIO_URL}
+%prod.kafka.apicurio.registry.url=${ES_APICURIO_URL}
 # Or by using a per channel setting
 %prod.mp.messaging.outgoing.orders.apicurio.registry.url=${ES_APICURIO_URL}
 ```
@@ -184,9 +203,15 @@ mp.messaging.outgoing.orders.apicurio.registry.global-id=io.apicurio.registry.ut
 Be sure the URL finishes with `/apis/registry/v2`. URL may be set in a config map, as in the 
 [eda-demo-order-gitops app-eda-demo-order-ms](https://raw.githubusercontent.com/jbcodeforce/eda-demo-order-gitops/main/environments/edademo-dev/apps/app-eda-demo-order-ms/base/configmap.yaml) project.
 
+In the Quarkus guide in quarkus-quickstarts, running in `quarkus dev`, we need to look at the trace to get the apicurio URL, then we can use the api to search for the movies schema already created. The id of the schema is the topic name + `-value`.
+
+```sh
+http://localhost:61272/apis/registry/v2/search/artifacts
+```
 For mTLS authentication to schema registry see the [Store simulator project](https://github.com/ibm-cloud-architecture/refarch-eda-store-simulator).
 
 For order consumer with schema registry see the [eda-demo-order-mp-consumer](https://github.com/jbcodeforce/eda-demo-order-mp-consumer) project.
+
 ## Developer experience
 
 * Define your microservice with JAXRS and Swagger annotation. Here is a [guide for quarkus openapi and swagger-ui](https://quarkus.io/guides/openapi-swaggerui) for details.
@@ -245,6 +270,10 @@ The consumer uses the GenericRecord class
 
 * [Official demo](https://github.com/Apicurio/apicurio-registry-demo)
 * [Using Debezium With the Apicurio API and Schema Registry](https://debezium.io/blog/2020/04/09/using-debezium-with-apicurio-api-schema-registry/)
+* [Quarkus apicur.io dev mode guide](https://quarkus.io/guides/apicurio-registry-dev-services)
+* [kafka - apicur.io Quarkus guide](https://quarkus.io/guides/kafka-schema-registry-avro).
+* [Clement Escoffier's blog](https://quarkus.io/blog/kafka-avro/)
+* [Kafka Quarkus reference guide](https://quarkus.io/guides/kafka)
 
 ## Avro
 

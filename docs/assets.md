@@ -30,6 +30,8 @@ This is the list of assets, I developed or co-developed over the years.
 * [Modern data lake: point of view](https://ibm-cloud-architecture.github.io/refarch-eda/introduction/reference-architecture/#modern-data-lake) - Q2 2020
 * [Legacy integration](https://ibm-cloud-architecture.github.io/refarch-eda/introduction/reference-architecture/#legacy-integration) - Q1 2020 / Updated Q3 2020
 * [Business Automation products on top of EDA](https://ibm-cloud-architecture.github.io/refarch-eda/introduction/reference-architecture/#integrating-with-ibm-automation-products)
+* [integration with a potential MQ transactional framework with kafka / life insurance demo](https://github.com/jbcodeforce/life-insurance-demo/)
+* [EDA governance with Apache Atlas](https://github.com/jbcodeforce/eda-governance)
 
 ### Development practices
 
@@ -47,6 +49,7 @@ This is the list of assets, I developed or co-developed over the years.
 * [Gitops with kustomize for Vaccine solution](https://github.com/ibm-cloud-architecture/vaccine-gitops) - 03/2021
 * [Spring cloud stream project template with apicurio](https://github.com/ibm-cloud-architecture/eda-quickstarts/tree/main/spring-cloud-stream). 05/2021
 * [EDA quickstart code templates](https://github.com/ibm-cloud-architecture/eda-quickstarts)
+* [IBM Tech academy](https://ibm-cloud-architecture.github.io/eda-tech-academy)
 
 ### Technology
 
@@ -61,6 +64,7 @@ This is the list of assets, I developed or co-developed over the years.
 * [Event Streams on Cloud - security with IAM - labs](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/security/) Q1 2020
 * [Event Streams on Cloud - Consumer group lab](https://ibm-cloud-architecture.github.io/refarch-eda/technology/event-streams/consumergrp/) Q1 -2020
 * [Event Streams on Cloud - monitoring](https://ibm-cloud-architecture.github.io/refarch-eda/use-cases/monitoring-on-cloud/)  Q1 -2020
+* [Flink studies](http://github.com/jbcodeforce/flink_studies)
 
 ## Integration
 

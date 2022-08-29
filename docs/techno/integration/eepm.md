@@ -1,6 +1,45 @@
-# Event end point management
+# Event endpoint management
 
+Event Endpoint management is a platform to manage asyncAPI definitions and enforces consumer applications to go to event gateway to control consumer traffic.
 
+![](./images/eepm-overview.png)
+
+Next section is for the flows: 1,2,3,4. 
+## Process of managing AsyncAPI
+
+A Kafka topic owner can define an asyncAPI bottom up (using editors and may tools to extract data from schema, cluster and topic definition), or uses API management to define an asyncAPI document from an existing deployed topic:
+
+* From the API Connect home page
+
+![](./images/apic-home.png)
+
+* He defines asyncAPI with basic name, version and summary
+
+![](./images/asyncapi-info.png)
+
+* completed with Kafka server bootstrap URL, topic name and schema definition:
+
+![](./images/asyncapi-server.png)
+
+* complement with how to securely access the Kafka cluster, using a user with consumer ACL on specific topic, and the CA certificate in .pem format:
+
+![](./images/asyncapi-cluster-conn.png)
+
+* As the API needs to be visible in the Catalog, he publishes it as a product:
+
+![](./images/asyncapi-publish.png)
+
+* The outcome is the address of the event gateway and API key and secret to be used by future applications:
+
+![](./images/asyncapi-summary.png)
+
+* Newly create product is in the sandbox catalog:
+
+![](./images/apic-catalog.png)
+
+![](./images/apic-catalog-products.png)
+
+Once in the catalog the product is visible in the API portal so other developers can subscribe to the product. See [tech-adamy lab](https://ibm-cloud-architecture.github.io/eda-tech-academy/getting-started/eepm/) for that.
 ## Event Endpoint Management deployment
 
 ### CP4I Installation
@@ -36,15 +75,15 @@
 
     The installation creates the following pods
     
-| pods | description |
-| ---  |  --- |
-| postgres-operator| a dedicated operator to manage local postgresql servers |
-| postgreql server | |
-| backrest repo | an postgresql server for REST  repository |
-| pgbouncer | |
-| LDAP | | 
-| nats operator | NATS middleware operator| 
-| nats cluster | NATS servers |
+    | pods | description |
+    | ---  |  --- |
+    | postgres-operator| a dedicated operator to manage local postgresql servers |
+    | postgreql server | |
+    | backrest repo | an postgresql server for REST  repository |
+    | pgbouncer | |
+    | LDAP | | 
+    | nats operator | NATS middleware operator| 
+    | nats cluster | NATS servers |
 
 
 ...wait some long time...
@@ -63,7 +102,7 @@ An IBM API Connect cluster (defined through its APIConnectCluster Custom Resourc
 ![](./images/apic-subsystems.png)
 
 ???- tip "Info"
-    The reason for the IBM API Connect subsystems to be called clusters is because each of those can be easily deployed highly available by using the profile property. As a result, it is common to see and strongly recommended, specially on production environments, to deploy all of these IBM API Connect subsystems using their highly available profile, which will deploy 3 replicas of each.
+    The reason for the IBM API Connect subsystems to be called clusters is because each of those can be easily deployed highly available by using the profile property. As a result, it is common to see and strongly recommended, specially on production environments, to deploy all of these IBM API Connect subsystems using their highly available profile, which will deploy 3 replicas of each componet.
 
 * [Key initial configuration tasks that you must complete in the Cloud Manager user interface after installing and deploying IBM® API Connect](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=environment-cloud-manager-configuration-checklist)
 
@@ -81,7 +120,9 @@ To see current TLS certificated used by the service, go to Cloud Manager > Manag
 
 ### Connecting the consumer app
 
+See the [tech-academy lab](https://ibm-cloud-architecture.github.io/eda-tech-academy/getting-started/eepm/) for subsribing to the AsyncAPI and get server credential.
 
 ???- "More Reading"
     * [AsyncAPI - summary](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/api-mgt/#support-for-async-api)
     * [Developer ibm share-event-based-apis-with-event-endpoint-management](https://developer.ibm.com/patterns/share-event-based-apis-with-event-endpoint-management/?mhsrc=ibmsearch_a&mhq=event%20endpoint)
+    * [Dale Lane blog- A Kafka Developer’s Guide to AsyncAPI](https://dalelane.co.uk/blog/?p=4314)

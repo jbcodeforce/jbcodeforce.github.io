@@ -2,7 +2,7 @@
 
 ## Getting started with MQ docker image
 
-See the docker compose file in the mqChallenge folder. Once the mqserver is running, open a bash:  `docker exec -ti mqserver bash`
+See the docker compose file in the [Java Studies mqChallenges folder](https://github.com/jbcodeforce/java-studies/tree/master/mqChallenges). Once the mqserver is running, open a bash:  `docker exec -ti mqserver bash`
 
 [See this last mq connect app to qm in container article](https://developer.ibm.com/tutorials/mq-connect-app-queue-manager-containers/)
 
@@ -107,9 +107,9 @@ Play with PUT and GET.
 
 ## MQ concepts
 
-[EDA summmary](https://ibm-cloud-architecture.github.io/refarch-eda/technology/mq/)
+See [my notes](../techno/integration/mq.md)
 
-Configure MQ with Qmgr and config map. See [this store-mq-gitops repo](https://github.com/ibm-cloud-architecture/store-mq-gitops/blob/main/environments/smq-dev/apps/services/mq/base/qmgr.yaml)
+Configure MQ Qmgr with config map. See [this real time inventory gitops repo](https://github.com/ibm-cloud-architecture/store-mq-gitops/blob/main/environments/smq-dev/apps/services/mq/base/qmgr.yaml)
 
 Example of config map
 
