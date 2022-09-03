@@ -8,6 +8,8 @@
 * 25 balls: Game like strikes: Driver, club, pitch.
 
 Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate target -> breeze -> line up -> view target - ball x2 -> swing
+
+* Try to train a lot on: Wedges, Driver, Putter.
 ## Full Swing
 
 ### 2021 8/11: Full swing analysis
@@ -20,6 +22,12 @@ Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate t
 ![](./images/0811-01.png)
 
 * He keeps them lower at the end of the back swing and not going that .
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2odG0NPBh_Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<iframe width="884" height="499" src="https://www.youtube.com/embed/2bJMJeH6hN4?t=33" title="SwingVision: Zach Johnson's Round 3 Tee-Shot" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 * I go way too far on back swing
 
 ![](./images/0811-02.png)
@@ -146,7 +154,15 @@ shoulders tilted on average at 49d. Image water dripping from right ear.
 
 > On followthrough the right shoulder should go down to the ground. Then swing more from the inside and swing out rightward
 
+### Other full swing videos from practices
 
+* Practice 09/02-2022 - bad swings: after 2 weeks of hitting thin, topping, with bad draws, let tapes what's going on...
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/j5-MuY8aILk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+* Better swings: still need to work on arms extension at and after impact, be sure to start by the belt bucklet.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Gl-CwCUwJus" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 ## Pitching
 
 From [Pete Cowen's article](https://golftoday.co.uk/proshop-features-2014-pitching-lesson-html/) core principles:
@@ -203,6 +219,12 @@ A higher, floating shot requires more clubhead speed, so extend the length of th
 
 To control distance in the pitching arena; a ‘clockface’ principle that involves matching body rotation and length of arm swing on either side of the ball to identify with the ‘best’ (i.e. most consistent) landing distances using the lofted scoring clubs.
 
+
+### Personal videos
+
+* [Pitch Practice 09/02-2022](https://youtu.be/CzdIs0qaArE)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/CzdIs0qaArE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Putter
 

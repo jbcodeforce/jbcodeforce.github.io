@@ -171,6 +171,53 @@ Update maven cli: download it from http://maven.apache.org/download.cgi, unzip t
 mvn archetype:generate -DgroupId=jbcodeforce -DartifactId=apicurio-client -DarchetypeArtifactId=maven-archetype-quickstart
 ```
 
+### Create executable Java
+
+* Need to generate the manifest from the class, for that we use the following plugin
+
+```xml
+  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>ibm.swat.KafkaClientV35</mainClass>
+              <classpathPrefix>dependency-jars/</classpathPrefix>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+```
+
+* it also needs to get dependencies
+
+```xml
+ <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.5.1</version>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>
+                ${project.build.directory}/dependency-jars/
+              </outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+
+      </plugin>
+```
+
+See tech academy [tech jam pom file]().
 ### Multi-module maven
 
 This project includes different modules to test different subjects related to the java last language features and other topics on Java, like reactive messaging, kafka, ...
