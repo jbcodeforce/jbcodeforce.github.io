@@ -5,6 +5,7 @@ The [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected
 Those are the questions to ask for designing a cloud native solution by understanding the potential impact . All hardware are becoming software.
 
 **Workload** represents interrelated applications, infrastructure, policies, governance and operations. 
+
 ## Six pilards
 
 When architecting technology solutions, never neglect the six pillars of:

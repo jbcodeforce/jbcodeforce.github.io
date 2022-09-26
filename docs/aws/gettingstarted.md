@@ -10,6 +10,10 @@ The credentials and API key are in `~/.aws/credentials`
 * Select a region to create your resources: N California
 * Look at the services.
 
+## aws CLI
+
+Installation: [aws cli]()
+
 ## Defined users and groups with IAM
 
 [my summary on IAM](/aws/#iam-identity-and-access-management)
@@ -83,3 +87,11 @@ echo "<h1>Hello from $(hostname -f)</h1>" > /var/www/html/index.html
 ## Define load balancer
 
 ![](./images/aws-lb-1.png)
+
+## Deploy a Web App on AWS Elastic Beanstalk
+
+Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS
+
+[Guide](https://aws.amazon.com/getting-started/guides/deploy-webapp-elb/)
+
+

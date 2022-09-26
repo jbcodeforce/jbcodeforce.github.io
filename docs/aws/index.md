@@ -1,14 +1,15 @@
 # Amazon Web Service studies
 
 * Created in 2002, and launched as AWS in 2004 with SQS as first service offering. 
-* 2003 amazon.com was $5.2B retail business. 7800 employees
+* 2003 amazon.com was $5.2B retail businesses. 7800 employees
+
 ## Why cloud
 
 * moving from capex to variable expense
-* economies of scale: EC2 instance different pricing model
-* Elactic capacity: pay for what you use
-* Speed anf agility to define infrastructure in minutes not weeks
-* Focus on business apps, not IT infrastructure
+* economy of scale: EC2 instance with different pricing model. Usage from hundreds of thousands of customers is aggregated in the cloud
+* Elactic capacity: pay for what you use. Scale up and down so no need to guessed capacity.
+* Speed and agility to define infrastructure in minutes not weeks
+* Focus on business apps, not IT infrastructure and data centers.
 * Global reach in a minutes
 
 ## Use cases
