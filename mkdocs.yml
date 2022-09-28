@@ -73,12 +73,7 @@ nav:
       - IBM Cloud Satellite: architecture/satellite.md
       - Istio: istio/index.md
       - Openshift Studies: https://jbcodeforce.github.io/openshift-studies
-    - AWS: 
-      - Introduction: aws/index.md
-      - Playground: aws/gettingstarted.md
-      - Well Architectured: aws/well-architectured.md
-      - Solution design: aws/sol-design.md
-      - Kubernetes services: aws/k8s.md
+    - AWS: https://jbcodeforce.github.io/aws-studies
     - Data:
       - Introduction: data/index.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
