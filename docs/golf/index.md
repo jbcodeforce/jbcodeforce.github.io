@@ -10,6 +10,22 @@
 Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate target -> breeze -> line up -> view target - ball x2 -> swing
 
 * Try to train a lot on: Wedges, Driver, Putter.
+
+### Prepare before a 18 holes cource
+
+* Warm slowly but cover all game plays
+* Divide by segments
+
+![](./images/prep-segment.png)
+
+* **Warm-up**: all muscles - stretch - 1 minutes
+* **Sensation**: 10 to 15 balls - Half swing - SandWedge or Approach Wedge - use head weight
+* **Rythm**: 30 balls max Wedge - full swing with alignment and preparation - view the shot before doing it
+* **Full Sing**: 20 balls - iron 7 or 6 - 2 clubes on the ground for alignment - use the routine 
+* **Alignment**: 10 balls - wood and driver - focus on rythm - finish with half swing on wedge
+* **Chipping**: 15 minutes - 10 shots with different clubs: S, P, 8. -> put 9 balls in 3m circle. Think landing zone and adapt club and swing height
+* **Putting**: 5 minutes - sensation and speed. 
+
 ## Full Swing
 
 ### 2021 8/11: Full swing analysis
@@ -234,7 +250,13 @@ To control distance in the pitching arena; a ‘clockface’ principle that invo
 * pass the gate with straight line
 * pass the gate with curve.
 
-## recover from bad hole
+## Mental Game
+
+### Difficult shots
+
+* Think you are already after a penality or a second bunker shot -> it will increase the chance to get a better shot.
+
+### recover from bad hole
 
 * Take 10 steps: Let yourself get mad about the shot you’ve just hit for 10 steps. When you take that 11th step, move on. 
 * Breathe in for five seconds, hold that breath for five seconds and breathe out for five seconds.
