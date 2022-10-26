@@ -17,7 +17,7 @@ theme:
       - navigation.tabs
       - navigation.instant
       #- navigation.tracking
-      - navigation.sections
+      # - navigation.sections
       - navigation.expand
       - navigation.tabs.sticky
       - navigation.top
@@ -69,8 +69,6 @@ nav:
       - DDD : architecture/ddd.md
       - Disaster recovery: architecture/DR.md
       - GCP: architecture/gcp.md
-      - IBM Cloud: architecture/ibmcloud.md
-      - IBM Cloud Satellite: architecture/satellite.md
       - Istio: istio/index.md
       - Openshift Studies: https://jbcodeforce.github.io/openshift-studies
     - AWS: https://jbcodeforce.github.io/aws-studies
@@ -82,13 +80,11 @@ nav:
       - Data replication: data/data-replication.md 
       - Data partitioning: data/data-partitioning.md 
       - Streaming processing: architecture/streaming.md
-      - Data catalog - spectrum discover: https://www.ibm.com/cloud/architecture/architectures/spectrum-discover
       - OpenData Hub: architecture/opendatahub.md
       - OLAP: data/olap.md
       - Cassandra: data/cassandra.md
     - AI:
       - Machine learning: https://jbcodeforce.github.io/ml-basics/
-      - Automation Decision Service: techno/cp4a/ads.md
     - Dev & Ops:
         - Agile: coding/agile.md
         - Git summary: coding/git.md
@@ -128,20 +124,6 @@ nav:
       - Microcks: techno/microcks.md
       - Minikube: techno/minikube.md
       - Rancher Desktop: techno/rancherdesktop.md
-      - Cloud object storage: techno/cos.md
-      - Cloud Pak Automation: 
-          - Overview: techno/cp4a/index.md
-          - BAI: techno/cp4a/bai.md
-          - ODM: techno/cp4a/odm.md
-          - Automation Decision Service: techno/cp4a/ads.md
-          - Process mining: techno/cp4a/process-mining.md
-      - Cloud Pak integration: 
-          - Overview: techno/integration/cp4i.md
-          - APIC: techno/integration/apic.md
-          - EEPM: techno/integration/eepm.md
-          - MQ: 
-            - Overview: techno/integration/mq.md
-            - MQ challenge: java/mqChallenge.md
       - Code Engine: techno/code-engine.md 
       - Egeria: techno/egeria.md
       - Prometheus: techno/prometheus.md
@@ -154,4 +136,20 @@ nav:
       - Spark Studies: https://jbcodeforce.github.io/spark-studies/
       - VScode: java/java-vscode.md
       - WO: techno/wo.md
-
+    - IBM:
+        - IBM Cloud: architecture/ibmcloud.md
+        - IBM Cloud Satellite: architecture/satellite.md
+        - Cloud object storage: techno/cos.md
+        - Cloud Pak Automation: 
+          - Overview: techno/cp4a/index.md
+          - BAI: techno/cp4a/bai.md
+          - ODM: techno/cp4a/odm.md
+          - Automation Decision Service: techno/cp4a/ads.md
+          - Process mining: techno/cp4a/process-mining.md
+        - Cloud Pak integration: 
+          - Overview: techno/integration/cp4i.md
+          - APIC: techno/integration/apic.md
+          - EEPM: techno/integration/eepm.md
+          - MQ: 
+            - Overview: techno/integration/mq.md
+            - MQ challenge: java/mqChallenge.md
