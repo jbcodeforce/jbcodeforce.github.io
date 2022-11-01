@@ -4,7 +4,8 @@
 
 ## About me
 
-I am currently a IBM Distinguished Engineer, responsible to evangelize event-driven, cloud-native solutions, real time analytics and complex event processing. I also help customers integrate AI to business applications and processes. I try to be as much hands-on as possible, to be able to provide good and tested recommendations to our customers.
+I am currently Principal Solution Architect at AWS supporting customer to adopt the cloud computing capabilities.
+Before that I was a Distinguished Engineer at IBM, like a CTO for Event-driven architecture and solutions, which includes modern data pipeline, reactive microservices and real-time analytics on top of OpenShift / Kubernetes.
 
 ## Blogs
 

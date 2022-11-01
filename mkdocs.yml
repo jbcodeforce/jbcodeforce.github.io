@@ -18,7 +18,7 @@ theme:
       - navigation.instant
       #- navigation.tracking
       # - navigation.sections
-      - navigation.expand
+      # - navigation.expand
       - navigation.tabs.sticky
       - navigation.top
   social:
