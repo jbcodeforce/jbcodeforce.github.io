@@ -7,6 +7,7 @@ center. During normal operations, the live system is used. The backup programs r
 ## Concepts
 
 ![](./images/rto-rpo.png)
+
 ### RTO - Recovery Time Objective 
 
 It is related to downtime and measure the time required to restore the environment after the primary site becomes unavailable. 
@@ -37,28 +38,22 @@ There are some common types of disaster recovery solutions:
  provide point-in-time snapshots. These features are widely used by applications that directly use files to store data and don't
  require a short recovery point objective (RPO) and recovery time objective (RTO).
 * **Fabric-based disaster recovery solutions**: These methods are focused on transferring data within the storage network from
- a source fabric to a destination fabric using special hardware like Storage Area Network products which providep both Global
- and Metro mirror capabilities to implement data protection. These solutions are attractive because they can accommodate different
-storage subsystems. 
-* **Storage subsystem-based disaster recovery solutions**: These are also called controller-based solutions because they use a
- storage controller to transfer data from a source storage subsystem to a destination storage subsystem. 
- Usually controller-based solutions are homogeneous, with data copied between disk arrays from the same manufacturer and often
- within the same family of products. A dedicated transport channel is commonly required to link the two sites. 
- For example, Global or Metro Mirror can be configured between two IBM System Storage DS series systems to implement disaster recovery.
+ a source fabric to a destination fabric using special hardware like Storage Area Network products which provides both Global and Metro mirror capabilities to implement data protection. These solutions are attractive because they can accommodate different storage subsystems. 
+* **Storage subsystem-based disaster recovery solutions**: These are also called controller-based solutions because they use a storage controller to transfer data from a source storage subsystem to a destination storage subsystem. Usually controller-based solutions are homogeneous, with data copied between disk arrays from the same manufacturer and often within the same family of products. A dedicated transport channel is commonly required to link the two sites. For example, Global or Metro Mirror can be configured between two IBM System Storage DS series systems to implement disaster recovery.
 
 ## What should be considered to prepare for disaster recovery?   
 
 * Not all applications need to be active - active.
-* Active active really means that a user will loose connection to a site and be routed to another side in milliseconds.
+* Active/active really means that a user will loose connection to a site and be routed to another site in milliseconds.
 * Distributed reads is also a requirement for active - active 
 * The biggest challenge is to avoid data collision in the same data store. So entity created in two regions in less than 100ms can collide when replicated. 
 
 There are three types of data to consider:
 
 * **Installation** data is the data associated with the installation of a given product, Operating System, and database.
-* **Configuration** data is the data associated with profile configuration, applications, resource configuration
+* **Configuration** data is the data associated with profile configuration, applications, resource configuration.
 * **Runtime** data is the data associated with transaction logs, messages saved in the database table, 
-process instance information persisted in the database table, and other persistent business states
+process instance information persisted in the database table, and other persistent business states.
 
 For installation and configuration data, the change is infrequent & consistency is important so copy these via snapshots before and after changes done. 
 With the adoption of environment as scripts and DevOps configurations are no more manual and can be kept as source code in Git repository.
@@ -67,17 +62,13 @@ With the adoption of environment as scripts and DevOps configurations are no mor
 
 Application requirements determine replication strategy:
 
-* Aggressive RPO & RTO objectives: Favor asynchronous replication via Storage System tooling where replication may be done while servers are on line and active.
-* Lenient RPO & RTO objectives: Favor synchronous replication via Operating System tooling (file copy) where replication must be done off line, while the different runtime solutions are quiesced (a maintenance window)
-* DB-managed replication: This approach leverages transaction logs to be stored in a DB. Remark that this approach is applicable only if the single database stores all application resources that need to be replicated
+* **Aggressive RPO & RTO objectives:** Favor asynchronous replication via Storage System tooling where replication may be done while servers are online and active.
+* **Lenient RPO & RTO objectives:** Favor synchronous replication via Operating System tooling (file copy) where replication must be done off line, while the different runtime solutions are quiesced (a maintenance window)
+* **DB-managed replication:** This approach leverages transaction logs to be stored in a DB. Remark that this approach is applicable only if the single database stores all application resources that need to be replicated
 
-Key requirement: All runtime data must be replicated in a consistent fashion which includes application state in the Database & Messaging Providers and
-BPM State in the Databases & WAS transaction Logs.
-Some DR strategies call for a replicated database to exist in the DR data center. Some caution should be exercised with such a solution. 
-A best practice DR deployment would take into account WAS XA Transaction logs in the same consistency group as the database.
-"
 ???+ Read more"
     * [Data replication](../data/data-replication.md)
+
 ## Product specifics
 
 * In Liberty Profile servers the transaction logs are located in the DB2 database, so will 
