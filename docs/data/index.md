@@ -4,13 +4,31 @@ There is perhaps nothing more valuable to an organization than its data. In the 
 and the empowered customers, organizations must be able to generate real-time insights based on accurate and 
 high-quality data.
 
+## Business cases
+
+* Data as an organizational asset: no more kept in silos or as the property of individual departments
+* Data is accessible: access to one who needs to
+* Data is put to work: used in analytics and ML to make better decisions, create efficiencies and drive new innovations.
+* A data strategy focused in data lakes address scaling the data ingestion, persistence and consumption at the best price-performance ratio, and should address:
+
+    * Non-relational databases
+    * Big Data Analytics
+    * Relational database
+    * Machine learning
+    * Data Catalog and Governance
+    * Data warehousing
+    * Logs analytics
+
+    ![](./diagrams/data-strategy.drawio.png)
+
+* [AWS 100 pres: Put your data to work wiht data lake](https://pages.awscloud.com/Put-Your-Data-to-Work-with-the-Best-of-Both-Data-Lakes-and-Purpose-Built-Data-Stores_2021_0925-ABD_OD.html)
+
 ## Important concepts
 
 ### Data Lake
 
-It is a vehicle for making big data available to AI and analytics. In the 90s, it was implemented using enterprise
-data warehouses, then mid 2000s Hadoop and ELK stacks was used more as an open  data formats and horizontal scaling,
-now 2020s  it is supported as cloud based data lake, pay per job, elastic scaling, data in object store, supporting real-time.
+It is a vehicle for making big data available to AI and analytics. In the 90s, it was implemented using enterprise data warehouses, then mid 2000s Hadoop and ELK stacks was used more as an open data formats and horizontal scaling,
+Now in the 2020s  it is supported as cloud based data lake, pay per job, elastic scaling, data in object store, supporting real-time queries.
 
 ### Data topology
 
@@ -22,34 +40,34 @@ The continual expansion has given rise to the phenomenon known as `data gravity`
 
 #### Requirements and context
 
-* Get data more accessible: data is distributed between apps, data repository, data center, in the cloud, at the edges. 
+* Get data more accessible: data is distributed between apps, data repositories, data centers, in the cloud, at the edges. 
 * Hybrid cloud deployment introduces complexities, where analytic workload is in dedicated environment instead to close to the data.
-* Extensive copying and transfer of data creates the potential for performance, security, governance, and quality issues.
+* Extensive copying and transfer of data creates the potential for performance, security, governance, quality issues, and operational cost.
 * Data lake is a gravity force, it attracts because of the diversity of the data and the size of data set.
 * IT spends too much time and effort readying their data for analytic and AI work. Moving massive datasets into analytic clusters is an ineffective — not to mention expensive — process.
-* Cloud technology has allowed for massive expansion of data bodies, which has served to increase data gravity rather than diffuse it. Or it allows scalable processing close to the data too.
-* Data should be the first job to digital business transformation
-* Strategy based on developing new and improved products and services based on data and analytics 
+* Cloud technology has allowed for massive expansion of data bodies, which has served to increase data gravity rather than diffuses it. New cloud adoption allows scalable processing close to the data too.
+* Data should be the first job to digital business transformation.
+* Product strategies are based on developing new and improved products and services based on data and analytics.
 * Organizations have big plans for data, analytics, and AI, and real-time insights: input data is processed within milliseconds so that it is available virtually immediately for use in business and operational processes.
 * Preparing data for analytics and AI is challenging:
 
-    * **Latency** (time from which a transaction occurs to the time when the data is available for query) is a major challenge: getting insights where and when they are needed
+    * **Latency** (time from which a transaction occurs to the time when the data is available for query) is a major challenge: getting insights where and when they are needed.
     * **Preparation**: Keeping data secure and of high quality: concerns around data transfer and data governance.
-    * **Automation**: Still a lot of manual steps when integrating data for analytics and AI: difficulty integrating data from multiple sources is the number one technical challenge
-    * Ethical and regulatory issues keep them from deploying AI models into production
+    * **Automation**: Still a lot of manual steps when integrating data for analytics and AI: difficulty integrating data from multiple sources is the number one technical challenge.
+    * Ethical and regulatory issues keep them from deploying AI models into production.
 
 #### Recommendations:
 
-* Analytics and insights are best done where the data lies: Example is to implement real time analytics in data streams.
-* Hybrid cloud initiatives require a data gravity strategy
+* Analytics and insights are best done where the data lies: Example is to implement real-time analytics in data streams.
+* Hybrid cloud initiatives require a data gravity strategy.
 * With data gravity strategy you minimize data movement and remote processing, so reducing the security risk.
-* Data gravity has to be taken into account any time the data needs to be migrated
+* Data gravity has to be taken into account any time the data needs to be migrated.
 * Consider data virtualization technology.
 * Push AI/ML scoring to the transactional processing platform. Leveraging ML algorithms and models at source systems can help with aggregation, summarization, integration, and transformation for data to support quicker analysis.
 
-Data topology is a good methodology to identify data source and semantics, consumer and producer of the data. It does not directly enforces Data Gravity.
+Data topology is a good methodology to identify data sources and semantics, consumers and producers of the data. It does not directly enforces Data Gravity.
 
-#### Sources:
+#### Sources
 
 * [Forester paper on data gravity](https://www.ibm.com/downloads/cas/ZEOENRB1)
 * [Talend: Data Gravity: What it Means for Your Data](https://www.talend.com/resources/what-is-data-gravity/)
@@ -104,7 +122,7 @@ which are considered as `truths of the business domains`.
 * Secure access to datasets is applied at the time of access to each data product
 * Common data infrastructure as a self serving platform is needed combined with global governance to ensure interoperability.
 
- #### Sources
+#### Sources
 
  * [How to Move Beyond a Monolithic Data Lake to a Distributed Data Mesh](https://martinfowler.com/articles/data-monolith-to-mesh.html)
  * [The Data Dichotomy: Rethinking the Way We Treat Data and Services](https://www.confluent.io/blog/data-dichotomy-rethinking-the-way-we-treat-data-and-services)

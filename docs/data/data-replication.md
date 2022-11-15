@@ -197,36 +197,27 @@ Storage, process it with full standard SQL syntax, and write the results to Clou
 you analyze and process data where it is stored - there is no ETL, no databases, and no infrastructure to manage. 
 The service is highly available, offers a Multi-AZ deployment, and autoscales based on your workload.
 
-* [AWS S3](../../aws/#s3)
+* [AWS S3](https://jbcodeforce.github.io/aws-studies/infra/storage/#s3-simple-storage-service).
 * **Kafka** is designed from the outset to easily cope with constantly changing data and events. It has built in 
 capabilities for data management such as log compaction that enable Kafka to emulate updates and deletes. The data 
 storage may be self described JSON document wrapped in [Apache Avro](https://avro.apache.org/docs/current/) binary format. 
-Kafka exploits the scalability and availability of inexpensive commodity hardware. Although Kafka supports persisting data 
-in queues for weeks or even months, it's not yet a proved technology for long term storage, even if companies are already 
-adopting it for event sourcing. Kafka provides a means of maintaining one and only one version of a “record” much like 
-in a keyed database. But an adjustable persistence time window lets you control how much data is retained. Important to note that [RedPanda](https://jbcodeforce.github.io/redpanda-studies/) is a modern, fully compatible, to Kafka to support the same use cases, but also supporting webassembly to deploy code to broker.
+Kafka exploits the scalability and availability of inexpensive commodity hardware. Although Kafka supports persisting data in queues for weeks or even months, it's not yet a proved technology for long term storage, even if companies are already adopting it for event sourcing. Kafka provides a means of maintaining one and only one version of a “record” much like in a keyed database. But an adjustable persistence time window lets you control how much data is retained. Important to note that [RedPanda](https://jbcodeforce.github.io/redpanda-studies/) is a modern, fully compatible, to Kafka to support the same use cases, but also supporting webassembly to deploy code to broker.
 
 Data Replication solutions provide both bulk and continuous delivery of changing structured operational data to both 
 Hadoop and Kafka.  
 
-There are more and more organizations choosing to replicate their changing operational data to Kafka rather than directly 
-into Hadoop. Kafka’s ability to self manage its storage, emulate the concept of a keyed record and provide self describing 
-structural metadata combined with the benefits of scalability and open source interfaces makes it an ideal streaming 
-and staging area for enterprise analytics.  
+There are more and more organizations choosing to replicate their changing operational data to Kafka rather than directly  into Hadoop. Kafka’s ability to self manage its storage, emulate the concept of a keyed record and provide self describing structural metadata combined with the benefits of scalability and open source interfaces makes it an ideal streaming and staging area for enterprise analytics.  
 
-If needed, data can be staged in Kafka for periodic delivery into Hadoop for a more controlled data lake, preventing the 
-lake from becoming a swamp with millions of files.  
+If needed, data can be staged in Kafka for periodic delivery into Hadoop for a more controlled data lake, preventing the lake from becoming a swamp with millions of files.  
 
 Data stored in Kafka can be consumed by real time microservices and real time analytics engines.
 
 Kafka can also be used as a modern operational data store. It has the built in advantages of low cost scalability and 
-fault tolerance with the benefits of open interfaces and an ever growing list of data producers (feeding data into Kafka) 
-and data consumers (pulling data from Kafka), all with self managed storage.
+fault tolerance with the benefits of open interfaces and an ever growing list of data producers (feeding data into Kafka) and data consumers (pulling data from Kafka), all with self managed storage.
 
 Other use cases are related to auditing and historical query on what happened on specific records. Using event 
-sourcing, delivered out of the box with kafka, this will be easier to support. It can be used to propagate data changes 
-to remote caches and invalidate them, to projection view in CQRS microservices, populate full text search in 
-Elasticsearch, Apache Solr, etc...
+sourcing, delivered out of the box with kafka, this will be easier to support. It can be used to propagate data changes to remote caches and invalidate them, to projection view in CQRS microservices, populate full text search in 
+ElasticSearch, Apache Solr, etc...
 
 ### Change data capture (CDC)
 
