@@ -11,8 +11,7 @@ center. During normal operations, the live system is used. The backup programs r
 ### RTO - Recovery Time Objective 
 
 It is related to downtime and measure the time required to restore the environment after the primary site becomes unavailable. 
-This is the maximum time your business can be unavailable. RTO refers then to the amount of time the system's data is unavailable
- or inaccessible preventing normal service.
+This is the maximum time your business can be unavailable. RTO refers then to the amount of time the system's data is unavailable or inaccessible preventing normal service.
 
 ### RPO - Recovery Point Objective 
 
@@ -23,9 +22,7 @@ reflects the amount of data that potentially could be lost during a disaster rec
 
 Synchronous replication could deliver a replica with zero lag and, therefore, a recovery point could match the source exactly.
 
-Because asynchronous replication does not guarantee that all updates to the source are simultaneously applied at the replica,
- the recovery point metric is important. The amount of lag will depend upon the details of the replication management software,
- but generally a smaller recovery point measure (less lag) is more expensive.
+Because asynchronous replication does not guarantee that all updates to the source are simultaneously applied at the replica, the recovery point metric is important. The amount of lag will depend upon the details of the replication management software, but generally a smaller recovery point measure (less lag) is more expensive.
 
 ## Disaster Recovery patterns
 
