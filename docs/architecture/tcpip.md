@@ -28,7 +28,13 @@ Routers constitute logical or physical borders between the subnets, and manage t
 
 ### What the /24 number means after an ip address? 
 
-Instead of writing out a full subnet mask such as 255.255.255.0, we can shorten this to /24. To come to this number, we simply add the number of subnet bits (1's) in the subnet mask.
+Instead of writing out a full subnet mask such as 255.255.255.0, we can shorten this to /24. To come to this number, we simply add the number of subnet bits (1's) in the subnet mask. /24 specifies the number of bits that do not change. So with 192.128.0.0/24 only the last 2^8 bit can be used to assign IP addresses. 
+
+* 192.128.23.31/32 means one IP @.
+* 192.128.23.0/31 means we have 192.128.23.0 and 192.128.23.1 possible IP addresses.
+* 0.0.0.0/0 means all IP @.
+
+[https://www.ipaddressguide.com/cidr](http://www.ipaddressguide.com/cidr)
 
 ### what is CIDR?
 
