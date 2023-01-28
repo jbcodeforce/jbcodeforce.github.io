@@ -63,3 +63,16 @@ Two types of compute resource:
 
 * [Databricks enablement for admin](https://www.databricks.com/p/thank-you/databricks-onboarding-sessions-thank-you)
 * [Product documentation](https://docs.databricks.com/introduction/index.html)
+
+## Serverless deployment
+
+The serverless deployment is running Databricks control plane as pods in EKS, and customers can run their Sparks job (SQL processing as of now), in nodes added dynamically inside EKS cluster. For security reason the Spark job manager runs in VM to provide better isolation. The VM hypervisor is [QEMU](https://www.qemu.org/), but it could be AWS [Firecracker](https://firecracker-microvm.github.io/). 
+
+![](./diagrams/db-eks-ec2.drawio.png)
+
+The goal is to support different node types: spot instance, or microVM on EC2 baremetal. The performance goal is to be able to start VMs within a second, and be able to recycling them in less than 5 seconds. In the serverless world it possible to have thousand of VMs / nodes in kubernetes cluster and hundred of start/stop events per second.
+
+Each job processing is done on data that could come from S3 buckets within Databricks account, in the same region, or copied from customer's S3 buckets to EBS volumes attached to the EC2.
+
+For real-time processing, Spark streaming may be used and connected to Kafka, Kinesis, and any queueing systems. 
+Java or Scala based processing will take longer time to start than SQL based deployment.
