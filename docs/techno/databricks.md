@@ -14,7 +14,30 @@ Based on Apache Sparks, Delta Lake, MLFlow, HDFS, and AWS resources like EC2, EK
 
 ## Value proposition
 
+Data warehouse solutions were developed to address data silos done by using multiple, decentralized operational databases. The goal was to provide an architectural model for the flow of data from operational sys- tems to decision support environments. Data warehouse has limitations to support big data, unstructured data, support ML use cases.
+
+Data lake, with Hadoop, was aiming to support big data processing, on parallel servers organized in cluster. Shortly after the introduction of Hadoop, **Apache Spark** was introduced. Spark was the first unified analytics engine that facilitated large- scale data processing, SQL analytics, and ML.
+
+Data lakes do not support transactions, do not enforce data quality, very difficult to mix append and reads, batch and streaming jobs. We can add that modifying existing data is difficult, like a delete operation for GDPR compliance. With data lakes it is difficult to manage large metadata, and data catalogs.
+
+A lakehouse is a new architecture that combines the best elements of data lakes and data warehouses. It enables users to do everything from BI, SQL analytics, data science, and ML on a single platform. It supports ACID transactions, large metadata, indexing, bloom filters, schema validation. Data is saved in open data formats.
+
+![](./diagrams/db-lakehouse-pipeline.drawio.png)
+
+**Figure 1: Data lake - data pipeline**
+
+The [lakehouse](https://delta.io/) approach to data pipelines offers modern data engineering best practices for improved productivity, system stability, and data reliability, including streaming data to enable reliable real-time analytics.
+
 Big data and AI complexity slows innovation: managing big data infrastructure, define data pipelines to produce stale data with poor performance, and isolated, no collaboration for data scientists and data engineers. 
+
+Delta Lake is available with multiple AWS services, such as AWS Glue Spark jobs, Amazon EMR, Amazon Athena, and Amazon Redshift Spectrum.
+
+### Deeper Dive
+
+* [Delta Lake documentation](https://docs.delta.io/latest/index.html)
+* [Crawl Delta Lake tables using AWS Glue crawlers](https://aws.amazon.com/blogs/big-data/crawl-delta-lake-tables-using-aws-glue-crawlers/)
+* [Introducing native Delta Lake table support with AWS Glue crawlers](https://aws.amazon.com/blogs/big-data/introducing-native-delta-lake-table-support-with-aws-glue-crawlers/)
+* [Process Apache Hudi, Delta Lake, Apache Iceberg datasets at scale, part 1: AWS Glue Studio Notebook](https://aws.amazon.com/blogs/big-data/part-1-integrate-apache-hudi-delta-lake-apache-iceberg-datasets-at-scale-aws-glue-studio-notebook/)
 
 ## Architecture
 
