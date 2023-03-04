@@ -1,10 +1,10 @@
 # Lessons analysis
 
-## Training plan
+## Training session plan
 
-* 20 balls wedge warm up - line on the ground - make contact - 30, 50 and 70 yards. Work way up to full swing
-* 30 balls: mechanicals: back to the feeling with 9 iron
-* 25 balls: Skill work on ball fligh control. Games with a score 
+* 20 balls wedge warm up - line on the ground - goal is to make contact - 30, 50 and 70 yards. Work way up to full swing.
+* 30 balls: mechanicals: back to the feeling with 9 iron.
+* 25 balls: Skill work on ball fligh control. Games with a score. 
 * 25 balls: Game like strikes: Driver, club, pitch.
 
 Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate target -> breeze -> line up -> view target - ball x2 -> swing
@@ -19,11 +19,11 @@ Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate t
 ![](./images/prep-segment.png)
 
 * **Warm-up**: all muscles - stretch - 1 minutes
-* **Sensation**: 10 to 15 balls - Half swing - SandWedge or Approach Wedge - use head weight
-* **Rythm**: 30 balls max Wedge - full swing with alignment and preparation - view the shot before doing it
-* **Full Sing**: 20 balls - iron 7 or 6 - 2 clubes on the ground for alignment - use the routine 
-* **Alignment**: 10 balls - wood and driver - focus on rythm - finish with half swing on wedge
-* **Chipping**: 15 minutes - 10 shots with different clubs: S, P, 8. -> put 9 balls in 3m circle. Think landing zone and adapt club and swing height
+* **Sensation**: 10 to 15 balls - Half swing - SandWedge or Approach Wedge - Use head weight - feeling.
+* **Rythm**: 30 balls max Wedge - full swing with alignment and preparation - view the shot before doing it.
+* **Full Sing**: 20 balls - iron 7 or 6 - 2 clubs on the ground for alignment - use the routine.
+* **Alignment**: 10 balls - wood and driver - focus on rythm - finish with half swing on wedge.
+* **Chipping**: 15 minutes - 10 shots with different clubs: S, P, 8. -> put 9 balls in 3m circle. Think landing zone and adapt with club and swing height.
 * **Putting**: 5 minutes - sensation and speed. 
 
 ## Full Swing
@@ -31,13 +31,13 @@ Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate t
 ### 2021 8/11: Full swing analysis
 
 * need to get shoulder tilt at 8% right
-* hand too high beginning of back swing, hips do not start to turn
+* hand too high at the beginning of back swing, hips do not start to turn.
 * swing started by hand not hip turn
-* Zach has the hand low.
+* Zach has the hand lower.
 
 ![](./images/0811-01.png)
 
-* He keeps them lower at the end of the back swing and not going that .
+* He keeps them lower at the end of the back swing and not going that far.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2odG0NPBh_Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -48,15 +48,15 @@ Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate t
 
 ![](./images/0811-02.png)
 
-* Shoulders tilt is good, down enought
+* Shoulders tilt is good, down enought.
 * Shoulders turn is over exagerating at 95/99 degrees
-* Hip turn should be 44 and not 37
+* Hip turn should be 44 and not 37 degrees
 
-* front view, the hands needs to be lightly moved on th left.
+* Front view, the hands needs to be lightly moved on the left.
 
 ![](./images/0811-03.png)
 
-* At position 2, hand by the belt buckle, club horizontal // to the ground
+* At position 2, hands by the belt buckle, club horizontal // to the ground
 
 ![](./images/0811-04.png)
 
@@ -64,23 +64,22 @@ Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate t
 
 ![](./images/0811-05.png)
 
- > we can see also the left did not move. it has to move forward to help turning the hips  
+ > we can see also the left part of the body did not move. It has to move forward to help turning the hips  
 
-* Head starts to move out of the position to the right. not good
-* shoulders turn supposed to be at 77, here 72 is good, and tilt should be 35. 30 is still good
+* Head starts to move out of the position to the right. Avoid head movement.
+* Shoulders turn supposed to be at 77, here 72 is good, and tilt should be 35. 30 is still good.
 
-* Position 4: Zach is start hip sway on the left, going to the target. His head does not move at all
-* My arms bend, arms should not be use
+* Position 4: Zach starts hip sway on the left, going to the target. His head does not move at all.
+* My arms bend, arms should not be used
 
 ![](./images/0811-06.png)
 
  > arms just hold the club.
 
-* too much back swing, left knee blocked
+* Too much back swing, left knee blocked.
 
 * when going way down, hit sway should be around 3 toward and not 5.1
-* Zach has a longer distance hand to belt buckler because he started to move his hips to target before
-his back swing
+* Zach has a longer distance hand to belt buckler because he started to move his hips to target before his back swing
 
 ![](./images/0811-07.png)
 
@@ -88,17 +87,17 @@ his back swing
 
 ![](./images/0811-08.png)
 
-But the hand are wrong as the right hand is going over the left (flipped) to compensate a pulling and turning effect
+But the hand are wrong as the right hand is going over the left (flipped) to compensate a pulling and turning effect. Right hand plam should be parallel to the club face.
 
 * Finally extension of the arms and lower right shoulder.
 
 ![](./images/0811-09.png)
 
-#### Action to improve
+#### Actions to improve
 
 * Fligh pattern observed: push slices.
-* Resolution: keep wight on your left side
-* left quad pushes left knee over the left foot, at the same time the left shoulder should go down to the ground as well. feel you hands go behind you as you take the club back.
+* Resolution: keep weight on the left side
+* Left quad pushes left knee over the left foot, at the same time the left shoulder should go down to the ground as well. Feel the hands go behind you as you take the club back.
 
 #### Drills
 
@@ -109,28 +108,27 @@ more over the ball.
 
 ![](./images/knee-flex.png)
 
-* Problem: swing plane. most golfer are moving the hands high too quickly or too far from th hip as soon as they start backswing and then drag the golf back
+* Problem: swing plane. most golfer are moving the hands high too quickly or too far from the hip as soon as they start doing a backswing and then drag the golf club back
 leading to inconsistency. 
 
-Use the [HAND PATH EXERCISE WITH HULA HOOP](https://clubhouse.golftec.com/weblesson/1027285152) hands are tracing the hula loop circle.
+Use the [HAND PATH EXERCISE WITH HULA HOOP](https://clubhouse.golftec.com/weblesson/1027285152): hands are tracing the hula loop circle.
 
 ![](./images/hula-hoop.png)
 
 ### 2021 8/24
 
-* Back swing going too far. Once shoulder have turned, arms continue
+* Back swing going too far. Once shoulder have turned, arms continue.
 * Arms are taking over the shoulders
 * Hands go too high. 
 * Left elbow too far from the rips: train with a towel under the arm to learn to keep
-arms compact and not moving hands too high
+arms compact and not moving hands too high.
 
 ![](./images/0824-01.png)
 
-* Head moving back to the left, shoulders too flat
+* Head moving back to the left, shoulders too flat.
 
 
-* Fix the elbow, (left photo) closer now to the rips, which improve the shoulder tilt to 33d.
-Target could be 37d
+* Fix the elbow, (left photo) closer now to the rips, which improves the shoulder tilt to 33d. Target could be 37d.
 
 ![](./images/0824-02.png)
 
@@ -165,20 +163,21 @@ To avoid moving the arms too high, place tees or towels under both arm pits and 
 
 #### Drills: 
 
-* Shoulder tilt exercise: tilt to thee right on the followthrough. Pros have their
-shoulders tilted on average at 49d. Image water dripping from right ear.
+* Shoulder tilt exercise: tilt to the right on the followthrough. Pros have their
+shoulders tilted on average at 49d. Use the image of water dripping from right ear.
 
-> On followthrough the right shoulder should go down to the ground. Then swing more from the inside and swing out rightward
+> On followthrough the right shoulder should go down to the ground. Then swing more from the inside and swing out rightward.
 
 ### Other full swing videos from practices
 
-* Practice 09/02-2022 - bad swings: after 2 weeks of hitting thin, topping, with bad draws, let tapes what's going on...
+* Practice 09/02-2022 - bad swings: after 2 weeks of hitting thin, topping, with bad draws, let tape what's going on...
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/j5-MuY8aILk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-* Better swings: still need to work on arms extension at and after impact, be sure to start by the belt bucklet.
+* Better swings: still need to work on arms extension at and after impact, be sure to start by the belt buckler.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Gl-CwCUwJus" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Pitching
 
 From [Pete Cowen's article](https://golftoday.co.uk/proshop-features-2014-pitching-lesson-html/) core principles:
@@ -189,17 +188,17 @@ From [Pete Cowen's article](https://golftoday.co.uk/proshop-features-2014-pitchi
 
 ### Drill #1
 
-* comfortable set-up, the feet fairly close together, left toe turned out slightly, and weight just favouring the left side
+* Comfortable set-up, the feet fairly close together, left toe turned out slightly, and weight just favouring the left side.
 * Take the right hand off the grip and place it on the left shoulder. Get the sensation of left side control. Hold on the grip, while placing the right hand on the left shoulder simply raises the awareness of that area of the upper body.
 
 ![](./images/pitching_lesson_1.jpg)
 
-* make a simple swing, and focus being on controlling the motion with the turning of the left shoulder 
-* feel that the right hand pulls the left shoulder down and around into the backswing, setting off a chain reaction as the arm and hand respond, the left wrist cocking gently in response to the weight of the clubhead.
+* Make a simple swing, and focus being on controlling the motion with the turning of the left shoulder 
+* Feel that the right hand pulls the left shoulder down and around into the backswing, setting off a chain reaction as the arms and hands respond, the left wrist cocking gently in response to the weight of the clubhead.
 
 ![](./images/pitching_lesson_2.jpg)
 
-* feel the upper body paces the return journey, the left arm/hand following this momentum, the left wrist uncocking naturally and the clubhead collecting the ball in the process. There is no manipulation whatsoever in the strike. It is neutral as the left arm and body work in unison. 
+* Feel the upper body paces the return journey, the left arm/hand following this momentum, the left wrist uncocking naturally and the clubhead collecting the ball in the process. There is no manipulation whatsoever in the strike. It is neutral as the left arm and body work in unison. 
 * The shaft is seen to be leaning toward the target at impact.
 
 **The key here is that you feel and mobilise the muscles within the left shoulder to control the movement of the arms and, ultimately the club**
@@ -211,13 +210,13 @@ From [Pete Cowen's article](https://golftoday.co.uk/proshop-features-2014-pitchi
 
 ![](./images/pitching_lesson_3.jpg)
 
-* (L) Hands gently ahead of the ball, leaning the shaft angle toward the target
-* (C) Left shoulder works down, left arm swings across the chest to create controlled backswing, hands relatively passive
-* (R) Weight rotates into the left side as the upper body controls the delivery of the arms and club
+* (L) Hands gently ahead of the ball, leaning the shaft angle toward the target.
+* (C) Left shoulder works down, left arm swings across the chest to create controlled backswing, hands relatively passive.
+* (R) Weight rotates into the left side as the upper body controls the delivery of the arms and club.
 
 ![](./images/pitching_lesson_4.jpg)
 
-* For **higher ball** play the ball a little further forward in the stance, lean the shaft away from the target a little
+* For **higher ball**, play the ball a little further forward in the stance, lean the shaft away from the target a little
 
 ![](./images/pitching_lesson_5.jpg)
 
@@ -244,11 +243,11 @@ To control distance in the pitching arena; a ‘clockface’ principle that invo
 
 ## Putter
 
-* use long putt to pu in a 5 foot square.
+* Use long putt to putt in a 5 foot square.
 * 3 to 5 foot putts exercise with 10 balls
 * Alignment exercise with two poles or club on the ground - follow the rails
-* pass the gate with straight line
-* pass the gate with curve.
+* Pass the gate with straight line
+* Pass the gate with curve.
 
 ## Mental Game
 
@@ -256,7 +255,7 @@ To control distance in the pitching arena; a ‘clockface’ principle that invo
 
 * Think you are already after a penality or a second bunker shot -> it will increase the chance to get a better shot.
 
-### recover from bad hole
+### Recover from bad hole
 
 * Take 10 steps: Let yourself get mad about the shot you’ve just hit for 10 steps. When you take that 11th step, move on. 
 * Breathe in for five seconds, hold that breath for five seconds and breathe out for five seconds.
