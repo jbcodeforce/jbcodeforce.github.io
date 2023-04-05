@@ -89,7 +89,6 @@ nav:
         - GitOps: coding/gitops.md
         - Tekton: coding/tekton.md
         - ArgoCD: coding/argocd.md
-        - Cloud Native Toolkit: coding/cnt.md
     - Programming:
       - Fun problems:
         - puzzles: fun/puzzles.md
