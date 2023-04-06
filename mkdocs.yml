@@ -116,7 +116,7 @@ nav:
     - Techno:
       - Apicurio: techno/apicurio.md
       - Atlas: techno/atlas.md
-      - Databricks: techno/databricks.md
+      - Databricks: techno/databricks/index.md
       - Docker: techno/docker.md
       - Podman: techno/podman.md
       - Microcks: techno/microcks.md
