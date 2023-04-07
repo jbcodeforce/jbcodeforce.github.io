@@ -16,6 +16,12 @@ Workspace manages assets for a user:
 
 ![](./images/db-assets.png)
 
+* **Repos** is to support integration with Git compatible repositories and clone locally in the workspace
+* **Clusters** to define different cluster run time to run notebooks or jobs
+* **Secrets** to keep keys and other sensitive information
+* **Pipelines** for data processing pipelines.
+* **Pools** keeps idle VMs
+
 ## Value propositions
 
 Data warehouse solutions were developed to address data silos done by using multiple, decentralized operational databases. The goal was to provide an architectural model for the flow of data from operational systems to decision support environments. Data warehouse has limitations to support big data, unstructured data, and to support ML use cases. Most of the time uses proprietary formats.
@@ -172,6 +178,8 @@ For real-time processing, Spark streaming may be used and connected to Kafka, Ki
 Java or Scala based processing will take longer time to start than SQL based deployment.
 
 ## Hands on enablement
+
+See [my Apache Sparks study](https://jbcodeforce.github.io/spark-studies/) and [ML study]().
 
 * Example of python to read csv file and save it in Delta Lake format
 
