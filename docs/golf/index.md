@@ -1,5 +1,7 @@
 # Lessons analysis
 
+See also [new Renaud Poupard training](./golf.md)
+
 ## Training session plan
 
 * 20 balls wedge warm up - line on the ground - goal is to make contact - 30, 50 and 70 yards. Work way up to full swing.

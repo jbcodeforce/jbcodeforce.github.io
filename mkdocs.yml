@@ -38,6 +38,7 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - admonition
+  - codehilite
   - footnotes
   - pymdownx.smartsymbols
   - pymdownx.superfences
@@ -50,6 +51,9 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.details
 
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
 
 nav:
   - Blogs: blogs/index.md
@@ -89,6 +93,7 @@ nav:
         - GitOps: coding/gitops.md
         - Tekton: coding/tekton.md
         - ArgoCD: coding/argocd.md
+        - Finch: coding/finch.md
     - Programming:
       - Fun problems:
         - puzzles: fun/puzzles.md

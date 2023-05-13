@@ -125,6 +125,7 @@ resolve #xxx
 resolves #xxx
 resolved #xxx
 ```
+
 ## Branching
 
 Branching means you diverge from the main line of development and continue to do work without messing with that main line. Git encourages a workflow that branches and merges often, even multiple times in a day.
@@ -145,7 +146,7 @@ It’s important to note that when you switch branches in Git, files in your wor
 
 Because a branch in Git is in actuality a simple file that contains the 40 character SHA-1 checksum of the commit it points to, branches are cheap to create and destroy.
 
-If you need to apply fix to existing master branch do a git checkout master and the local working directory is exactly the way it was before you started working on the branch. Then add a new branch as hotfix, work on the code, and proceed to merge it back to the main branch using git merge.
+If you need to apply fix to existing master branch, do a `git checkout master` and the local working directory is exactly the way it was before you started working on the branch. Then add a new branch as hotfix, work on the code, and proceed to merge it back to the main branch using git merge.
 
 When you try to merge one commit with a commit that can be reached by following the first commit’s history, Git simplifies things by moving the pointer forward because there is no divergent work to merge together — this is called a "fast forward".
 
@@ -169,6 +170,24 @@ After you’ve resolved each of these sections in each conflicted file, run git 
 Stashing takes the dirty state of your working directory — that is, your modified tracked files and staged changes — and saves it on a stack of unfinished changes that you can reapply at any time.
 
 ## Get SSH key for github account
+
+Use OpenSSH client, which comes pre-installed on GNU/Linux, macOS, and Windows 10 to define public key. Existing ssh keys are under `.ssh/` folder. The file `id_rsa.pub` is the public key for RSA encrypted key.
+
+If needed generate key with:
+
+```sh
+ssh-keygen -t rsa -b 2048 -C "<comment>"
+```
+
+To debug the ssh authentication
+
+```sh
+ssh -vvvv git@ssh.gitlab.aws.dev
+```
+
+### Access to CodeCommit from AWS
+
+See [this note](https://jbcodeforce.github.io/aws-studies/coding/#codecommit) and [AWS doc to setup ssh](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-ssh-unixes.html).
 
 
 ## Webhook
