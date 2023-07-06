@@ -168,7 +168,7 @@ The ML service uses MLFlow which includes the following components:
 
 The serverless deployment is running Databricks control plane as pods in EKS, and customers can run their Sparks job (SQL processing as of now), in nodes added dynamically inside EKS cluster. For security reason the Spark job manager runs in VM to provide better isolation. The VM hypervisor is [QEMU](https://www.qemu.org/), but it could be AWS [Firecracker](https://firecracker-microvm.github.io/). 
 
-![](./diagrams/db-eks-ec2.drawio.png)
+![](./diagrams/db-eks-ec2.drawio.png){ width=900 }
 
 The goal is to support different node types: spot instance, or microVM on EC2 baremetal. The performance goal is to be able to start VMs within a second, and be able to recycling them in less than 5 seconds. In the serverless world it possible to have thousand of VMs / nodes in kubernetes cluster and hundred of start/stop events per second.
 

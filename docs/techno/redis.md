@@ -2,13 +2,13 @@
 
 [Redis](https://redis.io/) is in-memory data structure store `<key-value>`, used as a database, cache, and message broker. 
 
-Redis provides 
+Redis provides:
 
 * Support to different data structures such as Strings, hashes, lists, sets, sorted sets, range queries, bitmaps, hyperloglogs, geospatial indexes, and **streams**. 
-* built-in replication
-* transactions
-* different levels of on-disk persistence
-* high availability via Redis Sentinel and automatic partitioning with Redis Cluster
+* built-in replication.
+* transactions support.
+* different levels of on-disk persistence.
+* high availability via Redis Sentinel and automatic partitioning with Redis Cluster.
 
 ## Getting started / concepts
 
@@ -62,11 +62,12 @@ See [some details on Redislab documentation](https://redislabs.com/redis-enterpr
 
 ## Redis client
 
-* [Jedis]()
+* [Jedis](https://github.com/redis/jedis) redis client for Java.
 * [Redisson](https://redisson.org/) is the most advanced and easiest Redis Java client.
 * [Spring data](https://spring.io/projects/spring-data-redis), looks very similar to JMS Spring template.
 * [Quarkus](https://quarkus.io/guides/redis)
-* [Flink Redis sink connector]()
+* [Flink Redis sink connector](https://bahir.apache.org/docs/flink/current/flink-streaming-redis/)
+* [Redis python client](https://redis.io/docs/clients/python/)
 
 ## Using redis in quarkus
 
@@ -121,7 +122,8 @@ Uni<List<String>> keys() {
             });
 }
 ```
-f you are using the `quarkus-smallrye-health` extension, `quarkus-vertx-redis` will automatically add a readiness 
+
+If you are using the `quarkus-smallrye-health` extension, `quarkus-vertx-redis` will automatically add a readiness 
 health check to validate the connection to the Redis server.
 
 ## Redis as streaming
@@ -245,3 +247,7 @@ Redis will fit well for
 and support consumer parallelism. 
 * more polyvalent
 * Value is structure data, like a Hash
+
+## Redis on AWS
+
+* [Use Amazon ElastiCache for Redis cluster](https://aws.amazon.com/getting-started/hands-on/setting-up-a-redis-cluster-with-amazon-elasticache/)

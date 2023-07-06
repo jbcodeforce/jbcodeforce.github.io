@@ -1,9 +1,11 @@
 # Event Driven Architecture
 
 !!! info
-    Updated 1/7/2022
+    Updated 7/7/2022
 
-* [The main EDA content website](https://ibm-cloud-architecture.github.io/refarch-eda)
+* [New EDA studies, from generic to specific on AWS](https://jbcodeforce.github.io/eda-studies/)
+
+* [My EDA for IBM content website](https://ibm-cloud-architecture.github.io/refarch-eda)
 * [Main EDA reference implementation](https://ibm-cloud-architecture.github.io/refarch-kc)
 * [Vaccine reference implementation](https://ibm-cloud-architecture.github.io/vaccine-solution)
 * [Kafka notes](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-overview/)

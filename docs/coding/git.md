@@ -57,6 +57,8 @@ Create pull request against the integration branch of the upstream repository.
 
 ```sh
 git config --global user.name "Your Name Here"
+# change email address
+git config --global user.email "MY_NAME@example.com"
 ```
 
 * **git init**: Initializes a new Git repository. Until you run this command inside a repository or directory, it’s just a regular folder. Only after you input this does it accept further Git commands.
