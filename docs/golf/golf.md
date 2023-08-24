@@ -15,11 +15,13 @@
     ![](./images/poupard/loose-back.png){ width=500 }
 
 * Do not accept bad sensation.
-* **Shallow swing** exercise: to build the snail image (head of the club designing a snail): short low backswing, being confortable, most important is to get the club inertia, extended arms, vertical club at 180 and finish on balance.
+* **Shallow swing** exercise: send the club shallow, flat. The left shoulder falls under the shin, the head of club pass under the ball. Imagine to send the ball as a ricochet. 
+* Build the snail image (head of the club designing a snail): short low backswing, being confortable, most important is to get the club inertia, extended arms, vertical club at 180 and finish on balance. The term is **under swing**.
 * Let the gravity play, on the descent the club fall with gravity, the right shoulder goes down with the club too.
 
     ![](./images/poupard/gravity-inertia-vertical.png)
 
+* The club is hitting the ball in descent, not the human, the lowest point is in front of sternum. Even when hands are on left leg, the club head will still be at the bottom of the arc. 
 * To get longer distance, we need to build a bigger circle: so go farther and lower on backswing, ease the arms, to get them extended at the impact, and be taller.
 
 ### Module 1

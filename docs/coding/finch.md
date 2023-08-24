@@ -6,7 +6,7 @@ Architecture:
 
 ![](./images/finch-arch.png){ width=600 }
 
-It does not share the local image registry of docker. And as `sam cli` has dependencies on docker v7.0 API, sam does not work yet with finch.
+It does not share the local image registry of docker. And as `sam cli` has dependencies on docker v7.0 API, sam does not work yet with Finch.
 
 ## Value propositions
 

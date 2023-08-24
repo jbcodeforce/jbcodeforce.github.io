@@ -1,10 +1,11 @@
-# Steps to develop an event driven microservices
+# Steps to develop an event driven microservices with Quarkus
 
 * Add all needed extensions
 
   ```sh
   quarkus ext add reactive-messaging-kafka,reactive-mq,hibernate-reactive-panache,reactive-pg-client,rest-client-jackson
   ```
+
 * Define a docker compose with mq, redpanda, postgresql
 
 ```yaml
@@ -98,6 +99,7 @@ compose file. The hostname = postgres and port 5432 and not localhost, as the co
         public String loanPurposeType;
     }
     ```
+    
 * add `import.sql` in the `src/main/resources` to add one record to the table
 * restart the application `quarkus dev`
 * Within the PGAdmin console, verify the record is created in database using the option `scripts > SELECT scripts` at the table level, and then run it.

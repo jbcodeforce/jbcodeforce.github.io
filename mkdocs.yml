@@ -60,8 +60,8 @@ nav:
   - About: about.md
   - Skill: skill.md
   - List of contributions: assets.md
-  - Astronomy: astronomy/index.md
   - Knowledge base: 
+    - The SA job: blogs/consultant-job.md
     - Architecture:
       - Conduct System Design: architecture/system-design.md
       - Event Driven Architecture: https://jbcodeforce.github.io/eda-studies
@@ -140,6 +140,7 @@ nav:
       - Spark Studies: https://jbcodeforce.github.io/spark-studies/
       - VScode: java/java-vscode.md
       - WO: techno/wo.md
+    - Astronomy: astronomy/index.md
     - IBM:
         - IBM Cloud: architecture/ibmcloud.md
         - IBM Cloud Satellite: architecture/satellite.md

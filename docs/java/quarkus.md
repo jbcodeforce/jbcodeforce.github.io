@@ -1,10 +1,10 @@
 # Quarkus Summary and trick
 
 
-Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and the [workshop](https://quarkus.io/quarkus-workshops/)
+Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and the [workshop](https://quarkus.io/quarkus-workshops/).
 
 !!! Info
-    Updated 06/08/2022
+    Updated 08/23/2023 for version 3.3
 
 ## Value Propositions
 
@@ -458,7 +458,7 @@ By default, Quarkus tests in JVM mode are run using the test configuration profi
 
 ## Vue app with quarkus app
 
-See [this separate note](https://jbcodeforce.github.io/vuejs-studies/#vue-app-with-quarkus-app)
+See [this separate note](https://jbcodeforce.github.io/vuejs-studies/#vue-app-with-quarkus-app).
 
 ## Reactive CRUD app with Postgres
 
