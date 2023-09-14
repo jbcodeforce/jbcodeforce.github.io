@@ -46,11 +46,13 @@ Delta lake is an open approach to bring data management and governance on top of
 
 * reliability via ACID transaction
 * performance via indexing to maximize the efficiency of the query
-* governance using Unity catalog to enforce access control list on table
+* governance using Unity Catalog to enforce access control list on table
 * quality to support different busines needs.
 
-Data Scientists can define flows ans pipelines to process data from raw to filtered-cleaned-augmented, as a source of truth to business level aggregates.
+Data Scientists can define flows and pipelines to process data from raw to filtered-cleaned-augmented, as a source of truth to business level aggregates.
 
+The persistence format of data on cloud object stores is parquet. Delta lake persists transaction logs in the same folder as data, and it is easy, with Delta API, to get the state of the data inside parquet, for merge-on-read operation. The protocol supports addressing data in file.
+ 
 Delta Lake is available with multiple AWS services, such as AWS Glue Spark jobs, Amazon EMR, Amazon Athena, and Amazon Redshift Spectrum.
 
 ### Deeper Dive
@@ -105,11 +107,11 @@ Two types of compute resource:
 
 ## Unity Catalog
 
-The Unity Catalog offers a fine-grained governance for data lakes across cloud and is based on ANSI SQL. It provides a centrally shared (via delta shaing protocol), auditable (what is used, who used, data lineage), secured, management capability for all data types (tables, files, columns and ML models ). It integrates with existing data catalogs, and storages.
+The Unity Catalog offers a fine-grained governance for data lakes across cloud and is based on ANSI SQL. It provides a centrally shared (via delta sharing protocol), auditable (what is used, who used, data lineage), secured, management capability for all data types (tables, files, columns and ML models ). It integrates with existing data catalogs and storages.
 
 ## Databricks SQL
 
-Run SQL queries through SQL optimized clusters, powered by Photon that directly query Delta Lake tables. 
+Run SQL queries through SQL optimized clusters, powered by Photon, that directly query Delta Lake tables. 
 
 ![](./images/db-sql-query.png)
 

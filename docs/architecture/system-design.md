@@ -33,10 +33,16 @@
     * how fast is fast enough?
     * Try to express in SLA language: 100ms at 3-nines - 99.9% of availability is around 9h down per year. 5 nines is 5 minutes down.
 
-???- "Information"
+???+ note "Information"
     * AWS offers TCP connections up to the edge and then use AWS private backbone (global accelerator), which improves performane by 60% 
     * Try to use Real User Monitoring tool to measure network performance
-    * Try to measure: **Throughput** – the amount of data or number of data packets that can be delivered in a predefined timeframe, **Latency** in connection – also called round-trip times or RTT, **Network jitter** – the variability over time of the network latency, and **Packet loss**. Get 1,000 samples every hour for a day.
+    * Try to measure: 
+    
+        * **Throughput** – the amount of data or number of data packets that can be delivered in a predefined timeframe, 
+        * **Latency** in connection – also called round-trip times or RTT, 
+        * **Network jitter** – the variability over time of the network latency, and 
+        * **Packet loss**. Get 1,000 samples every hour for a day.
+    
     * [Apache Bench](https://www.tutorialspoint.com/apache_bench/apache_bench_quick_guide.htm) helps to test throughput and latency of HTTP servers
     * round-trip time (RTT) is the total time that it takes a data packet to travel from one point to another on the network and for a response to be sent back to the source. It is a key perf metric for latency. Ping measure ICMP RTT.
 
@@ -85,28 +91,26 @@ Pros is the limited number of things to maintain.
 ### Horizontal scaling
 
 Load balancer sends traffic to a farm of servers.
-This is easier if your web server is stateless, that means we do not keep state of the conversation. Any server can get request at any time.
-
-Serverless solution from AWS, Lambda, kinesis, athena
+This is easier if the web server is stateless, that means we do not keep state of the conversation. Any server can get request at any time.
 
 ![](./images/classic-2-tier.png)
 
-A master database generally only supports write operations. A slave database gets copies of the data from the master database and only supports read operations.
+A master database generally only supports write operations. A slave database gets copies of the data from the master database and supports read operations.
 
-By replicating data across different locations, your website remains in operation even if a database is offline as you can access data stored in another database server.
+By replicating data across different locations, the website remains in operation even if a database is offline as it can access data stored in another database server.
 
-This is important to remember that user session needs to be kept, for example to avoid re-authenticate to a web server if the new request reaches another web server. Stateful web tier is not encouraged for scalability. So stateless architecture is used, where HTTP requests from users can be sent to any web servers, which fetch state data from a shared data store. The shared data store could be a relational database, Memcached/Redis, NoSQL,... 
+This is important to remember that user session needs to be kept, for example to avoid re-authenticate if the new request reaches another web server. Stateful web tier is not encouraged for scalability. So stateless architecture is used, where HTTP requests from users can be sent to any web servers, which fetch state data from a shared data store. The shared data store could be a relational database, Memcached/Redis, NoSQL,... 
 
 ## Failover
 
 See also [DR article](./DR.md) and [data replication blog.](../data/data-replication.md)
 
-To access transparently server on two different data center, we use geoDNS, which is a DNS service that allows domain names to be resolved to IP addresses based on the location of a user. In the event of any significant data center outage, we direct all traffic to a healthy data center.
+To access transparently server on two different data centers, we use geoDNS, which is a DNS service that allows domain names to be resolved to IP addresses based on the location of a user. In the event of any significant data center outage, we direct all traffic to a healthy data center.
 
 Important challenges to consider are:
 
 * Traffic redirection: Effective tools are needed to direct traffic to the correct data center.
-* Data synchronization: Users from different regions could use different local databases or caches. In failover cases, traffic might be routed to a data center where data is unavailable.
+* Data synchronization: Users from different regions could use different local database or cache. In failover cases, traffic might be routed to a data center where data is unavailable.
 
 ### Cold standby
 
@@ -147,15 +151,15 @@ Resharding is a challenge for the database.
 
 NoSQL really means sharded database, as some DB can support most of SQL operations.  
 
-**Need to address how to partition the raw data for best performance**. For example organize the bucket or folder structure
-to simplify future queries: organize them by date, or entity key...
+**Need to address how to partition the raw data for best performance**. For example organize the bucket or folder structure to simplify future queries: organize them by date, or entity key...
+
 ### Denormalizing
 
 We normalize the data to use less storage and updates in one place. But need more lookups.
 
-Denormalize duplicates data, use more storage, but uses one lookup to get the data, but updates are harder.
+Denormalize duplicates data, use more storage, but uses one lookup to get the data, which leads to have  harder update.
 
-To assess what is a better fit, start with normalize, aas we need to think about the customer experience, and consider different types of query.
+To assess what is a better fit, start with normalize, as we need to think about the customer experience, and consider different types of query.
 
 ## Data lake
 
@@ -180,22 +184,23 @@ We can also query those data by adding an intermediate components to create sche
 **CAP theorem**: We can have only 2 of the 3: Consistency, Availability and Partition tolerance.
 With enhanced progress, CAP is becoming weaker, but still applies. A is really looking at single point of failure when something going down. MongoDB for example may loose A for a few seconds maximum (find a new primary leader), which may be fine.
 
-* AC: is supported by classical DBs like mySQL
+* AC: is supported by classical DBs like mySQL, postgresql
 * AP: Cassandra: C is lost because of the time to replicate
-* CP: Mongodb, HBASE, dynamoDB: strong consisten read reques, it returns a response with the most up-to-date data that reflects updates by all prior related write operations to which DynamoDB returned a successful response, so network delay or outage does no guaranty A.
+* CP: Mongodb, HBASE, dynamoDB: strong consistent read request, it returns a response with the most up-to-date data that reflects updates by all prior related write operations to which DynamoDB returned a successful response, so network delay or outtage does no guaranty A.
 
 Single-master designs favor consistency and partition tolerance.
+
 ## Caching
 
-Goal: limit to access disk to get data, or go over the network.
+**Goal:** limit the access to disk to get data, or go over the network.
 
-Solution is to add a cache layer in front of the DB to keep the most asked data, or the most recent... Caching services can be used to be able to scale horizontally.
+**Solution** is to add a cache layer in front of the DB to keep the most asked data, or the most recent... Caching services can be used to be able to scale horizontally.
 
 Every cache server is managing a partition of the data, using hashing.
 
-Approriate for applications with more reads than writes. Expiration policies dictate how long data stays in cache. Avoid data go stale.
+Appropriate for applications with more reads than writes. Expiration policies dictate how long data stays in cache. Avoid data go stale.
 
-The hotspot may bring challenge for cache efficiency, need to cache also on load distribution and not just on hash. Finally starting the cache is also a challenge, as all requests will go to the DB.
+Hotspot may bring challenge for cache efficiency, need to cache also on load distribution and not just on hash. Finally starting the cache is also a challenge, as all requests will go to the DB.
 
 Inconsistency can happen because data-modifying operations on the data store and cache are not in a single transaction. When scaling across multiple regions, maintaining consistency between the data store and cache is challenging.
 
@@ -206,6 +211,7 @@ Manage the cache size with different eviction policies:
 * FIFO
 
 Redis, Memcached, ehcache. AWS Elasticache
+
 ### Content Delivery Networks
 
 when a user visits a website, a CDN server closest to the user will deliver static content. 
@@ -215,7 +221,7 @@ Load balancers and caching technologies such as Redis can also be parts of low-l
 
 CDNs may run by third-party providers, and you are charged for data transfers in and out of the CDN.
 
-AWS cloudfront is a CDN
+AWS cloudfront is a CDN.
 
 ## Resiliency
 
@@ -241,12 +247,13 @@ If a client app is running in the same server as HDFS the data it accesses may b
 
 ## SLA
 
-- durability: % chance of losing data
-- latency to get the time for a service to return a response to a request. 99.9% response time is under 100ms
-- 99.9999% availability is 30 s down time. 99% is 3.45 days out
+- **Durability**: % chance of losing data
+- **Latency** to get the time for a service to return a response to a request. 99.9% response time is under 100ms
+- 99.9999% **availability** is 30 s down time. 99% is 3.45 days out
 
 ## Big Data 
-### Apache Spark
+
+### [Apache Spark](https://jbcodeforce.github.io/spark-studies/)
 
 Goal: parallelize processing on big amount of data.
 
@@ -277,10 +284,7 @@ Scalable streaming platform for inbound and outbound data. See [dedicated study]
 | **Caching** | ElastiCache (Redis) | Memorystore (Redis or memcached) | Redis |
 
 
-## Zookeeper review
-
-
-## Mock interviews
+## Mock system design interviews
 
 ### URL shortening service
 
@@ -306,7 +310,7 @@ To redirect the HTTP response status may be 301 or 302. 301 is a permanent redir
 
 ### A restaurant system like OpenTable
 
-A a customer / diner I want to
+A customer / diner I want to:
 
 * specify the number of members for the dining party
 * select a time slot and specify a location
@@ -316,9 +320,9 @@ A a customer / diner I want to
 * specify how to be contacted when closer to the time (sms)
 * register as a recurring user to get royalty points
 
-Other customer of this application will be restaurant owners, who want to see their booking, but also get more information about the customers, the forecast, and the number of search not leading to their restaurant. May be expose their menu. Get statistic on customer navigation into menu items.
+Other customers of this application will be restaurant owners, who want to see their booking, but also get more information about the customers, the forecast, and the number of search not leading to their restaurant. May be expose their menu. Get statistic on customer navigation into menu items.
 
-NFR: thousands of restaurants, millions of users.
+NFR: thousands of restaurants, national, millions of users.
 
 Need to scale and be reliable. Cost is not an issue.
 
@@ -339,9 +343,9 @@ So we need:
 * A Search: time slot, party, location
 * The reservation function need to take into account capability of the restaurant on how to organize tables.
 
-This is a normalized data model, as it is easier and really for reservation there is one transaction on a simple object. Restaurant and customer are read model in  this context.
+This is a normalized data model, as it is easier and really for reservation there is one transaction on a simple object. Restaurant and customer are read models in  this context.
 
-Out side of authentication APIs, login, password... we need few api to do reservations.
+Outside of authentication APIs, login, password... we need few APIs to support the reservation:
 
 | Verb | APIs |
 | --- | --- |
@@ -353,7 +357,7 @@ Other APIs are needed to do CRUD for each business entities.
 
 The servers are scaled horizontally, rack and AZ allocated, and even geo-routed.
 
-![](./images/opentable.png){ width="900" }
+![](./diagrams/opentable.drawio.png){ width="800" }
 
 DB system may be no sql based, and can be highly available and support horizontal scaling too.
 
@@ -364,18 +368,18 @@ Need to update of existing page refs if they changed.
 
 HTML = text + ref to URL
 
-singleton web crawler will put links into a LIFO pile. If we consider the web crawling as a graph navigation. we want to do BFS, so we need a pile as data structure.
+Singleton web crawler will put links into a LIFO pile. If we consider the web crawling as a graph navigation, we want to do BFS, so we need a pile as data structure.
 
 As we need to run every week, we can in fact runs all the time with a single instance of the crawler.
-The solution is batch, and no end user per say. Except that we still need to provide metrics that display coverage: pile size, total number of page processed, link occurence.
+The solution is batch, and no end user use the system. Except that, we still need to provide metrics that display coverage: pile size, total number of page processed, link occurence.
 
 Need to avoid looping into pages, so need to keep the visited pages.
-If we need to run in parallel, then pile and visited pages tree will be shared and distributed.
+If we need to run in parallel, then pile and visited page tree will be shared and distributed.
 So we need a partition key, may be a hash of the url.
 
-The solution will look like
+The solution may look like
 
-![](./images/webcrawler.png){ width="900" }
+![](./diagrams/webcrawler.drawio.png){ width="800" }
 
 ## Top sellers in e-commerce
 
@@ -464,10 +468,10 @@ Elaborate an algorithm:
 
 Taking into source a BPEL flow like the one below, how do you migrate to a microservices, may be event-driven?
 
-![](./images/bpel-1.png)
+![](./diagrams/bpel-1.drawio.png)
 
 * Input can come from HTTP SOAP requests or messages in queue
-* Green components are SCA services
+* Green components are Service Component Architecture services
 * Customer validation, and persistence can be retried multiple times
 * With BPEL engine state transfer will be persisted to process server database.
 * The big white rectangle represents an orchestrator
@@ -477,9 +481,9 @@ Taking into source a BPEL flow like the one below, how do you migrate to a micro
 * Exception is about business exception so will be defined inside of any business service.
 * Exception management may trigger human activities to clean the data, gather more information
 * Compensation flow: if persistence fails, we want to roll back the exception message persistence and restarts from the point before the parallel processing. There are points in the process where we can restart a process, but they are points where the only solution is to cancel the full case.
-* 
 
-*There is no mention that the flow is part of an external transaction, so to avoid loosing message as soon as the flow gets http soap request or message from MQ, it needs to persist those messages and starts the process of customer validation, form validation... If this STP takes 5 seconds to run, it is possible to loose data.*
+
+*There is no mention that the flow is part of an external transaction, so to avoid loosing message as soon as the flow gets http soap request or message from queue, it needs to persist those messages and starts the process of customer validation, form validation... If this STP takes 5 seconds to run, it is possible to loose data.*
 
 HTTP response needs to be returned, so is this flow needs to be terminated before sending the response? If not it means the process will take more time, and so there is a need to be able to contact the person / submitter that something went wrong.
 
@@ -501,6 +505,8 @@ With [Camel SAGA](https://camel.apache.org/components/3.16.x/eips/saga-eip.html)
 
 There is another solution that it is purely on top of Kafka: [the Simple source is an open source project for event sourcing with Kafka](https://simplesource.io/simple_sourcing_docs_home.html) and Kafka Streams which can be used for SAGA. 
 
-Microprofile Long Running Action is the supported approach in Java to do SAGA. [This project](https://github.com/jbcodeforce/saga-lra-quarkus) presents how to use it in the context of kc-solution.
+Microprofile Long Running Action is the supported approach in Java to do SAGA. [This project](https://github.com/jbcodeforce/saga-lra-quarkus) presents how to use LRA in the context of refrigerator contrainer shipping solution.
+
+While [this project](https://jbcodeforce.github.io/saga-choreography-kafka) implements Saga choreography with Kafka.
 
 
