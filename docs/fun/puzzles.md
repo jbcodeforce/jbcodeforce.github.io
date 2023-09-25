@@ -4,6 +4,7 @@ Source of common software engineering problems to study and play with:
 
 * [geeks for geeks](https://www.geeksforgeeks.org)
 * [leet code](https://leetcode.com/)
+
 ## Big O notation
 
 * inserting element in an unordered array is constant time. It is not link to the number of element in the array. Time is = K a basic constant linked to compilor, microprocessor speed...

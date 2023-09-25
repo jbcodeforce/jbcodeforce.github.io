@@ -54,11 +54,12 @@ Any queue manager can be moved to a different Kubernetes Node, as long as it kee
 If the PVs are served via a SAN then there will be replications done at the SAN level too.
 
 * **Multi instance** active - standby topology with PV RWM settings.
+
 ### Clustering and distributed queuing
 
 Distributed queuing means sending messages from one queue manager to another. Clustering QM simplifies the communication configuration between QMs.
 
-![](./diagrams/mq-distributed-q.drawio.svg){ width="1000" }
+![](./diagrams/mq-distributed-q.drawio.svg){ width="1000"}
 
 Each queue manager has a definition for each of its queues (local or remote).
 
@@ -126,6 +127,7 @@ data:
     ALTER QMGR CHLAUTH (DISABLED)
     REFRESH SECURITY TYPE(CONNAUTH)
 ```
+
 ## AMQP
 
 [Advanced Message Queuing Protocol](https://www.amqp.org/) is a standard to integrate with messaging product. IBM MQ supports [AMQP 1.0](https://www.ibm.com/docs/en/ibm-mq/9.3?topic=applications-developing-amqp-client).
@@ -213,7 +215,7 @@ With links to supporting programming languages.
 
 ### MQ messaging coding challenge
 
-See [the MQ Challenges in java note](/java/mqChallenge) and the [Java-studies/mqChallenges](https://github.com/jbcodeforce/java-studies/tree/master/mqChallenges).
+See [the MQ Challenges in java note](../../java/mqChallenge.md) and the [Java-studies/mqChallenges](https://github.com/jbcodeforce/java-studies/tree/master/mqChallenges).
 
 Some comments:
 

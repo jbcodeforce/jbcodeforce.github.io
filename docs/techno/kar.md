@@ -52,7 +52,7 @@ KAR runtime process runs alongside each application component. It offers APIs to
 
 ### Vert.x
 
-Polyglot event driven, non-blocking programming library. See [study here](/java/vertx/). The event bus is an internal protocol, but could use Kafka too.
+Polyglot event driven, non-blocking programming library. See [study here](../java/vertx.md). The event bus is an internal protocol, but could use Kafka too.
 
 ## Getting started
 

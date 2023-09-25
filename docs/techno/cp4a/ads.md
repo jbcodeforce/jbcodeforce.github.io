@@ -45,7 +45,7 @@ IBM Cloud Pak for Business Automation comes with the IBM Cloud® platform automa
 * [Robotic Process Automation](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=foundation-robotic-process-automation)
 * [MongoDB]()
 * [Zen User Interface]()
-* [Biz Automation Insight](/techno/bai) Apicurio Registry, Kafka, Flink, Elastic Search is now part of 
+* [Biz Automation Insight](./bai.md) Apicurio Registry, Kafka, Flink, Elastic Search is now part of 
 Automation Foundation
 * Common services: IAM, certificate management, User Management Services, Admin UI, license operator
 
@@ -104,7 +104,7 @@ Data enters through input data nodes, and is processed by rules in decision node
 This is the `drs` service user and the password is used.
   
  
-See [this article with screen shots for a bigger example with predictive scoring](/blogs/09-30-21/)
+See [this article with screen shots for a bigger example with predictive scoring](../../blogs/09-30-21/index.md)
 
 ### Client app
 
