@@ -26,9 +26,9 @@ Workspace manages assets for a user:
 
 Data warehouse solutions were developed to address data silos done by using multiple, decentralized operational databases. The goal was to provide an architectural model for the flow of data from operational systems to decision support environments. Data warehouse has limitations to support big data, unstructured data, and to support ML use cases. Most of the time uses proprietary formats.
 
-Data lake, with Hadoop, was aiming to support big data processing, on parallel servers organized in cluster. Shortly after the introduction of Hadoop, **Apache Spark** was introduced. Spark was the first unified analytics engine that facilitated large scale data processing, SQL analytics, and ML.
+Data lake, with Hadoop, was aiming to support big data processing, on parallel servers organized in cluster. Shortly after the introduction of Hadoop, **Apache Spark** was introduced. Spark was the first unified analytics engine that facilitated large scale data processing, SQL analytics, and AI Model Learning.
 
-Data lakes are difficult to set up, do not support transactions, do not enforce data quality, very difficult to mix append and reads, batch and streaming jobs. We can add that modifying existing data is difficult, like a delete operation for GDPR compliance. With data lakes, it is difficult to manage large metadata, and data catalogs. A lot of data lake projects became data swamp.
+Data lakes are difficult to set up, do not support transactions, do not enforce data quality, very difficult to mix append and read operations, batch and streaming jobs. We can add that modifying existing data is difficult, like a delete operation for GDPR compliance. With data lakes, it is difficult to manage large metadata, and data catalogs. A lot of data lake projects became data swamp.
 
 A lakehouse is a new architecture that combines the best elements of data lakes and data warehouses. It enables users to do everything from BI, SQL analytics, data science, and ML on a single platform. It supports ACID transactions, large metadata, indexing, bloom filters, schema validation, governance to understand how data is used, direct access to source data, scalable. Data is saved in open data formats and supports structured and unstructured data.
 
@@ -70,7 +70,7 @@ Delta Lake is available with multiple AWS services, such as AWS Glue Spark jobs,
 
 * Control plane is managed by Databricks in their cloud account, and it includes backend services, webapp for workpaces, notebooks repository, job manager, cluster manager... It hosts everything except the Sparks Cluster.
 * Each customer has his own workspace, any command runs in workspace will exist inside the control plane.
-* Data plane is managed by customer's cloud account. Data is own, isolated and secured by each customer. Datasources can be inside the customer account or external services.
+* Data plane is managed within the customer's cloud account. Data is own, isolated and secured by each customer. Datasources can be inside the customer account or as external services.
 * There is a private network between the data and the control planes. A lot of control over how cloud accounts are integrated and secured.
 
 The Webapp is where customers access all the platform interfaces (APIs and UI):
@@ -79,18 +79,19 @@ The Webapp is where customers access all the platform interfaces (APIs and UI):
 
 (src: Databricks copyright)
 
-The database is RDS and stores all the information about customers metadata, workspace.
+The database is RDS and stores all the information about customers metadata, and workspace.
 
-Cluster manager is part of the control plane and helps admin to manage Spark Cluster. The Cluster manager is an extension of the Spark CM with nicer user interface. 
+Cluster manager is part of the control plane and helps admin to manage Spark Cluster. The Cluster manager is an extension of the Spark CM with nicer user interface.
 
 ![](./images/databricks-cluster-mgr.png){ width=700 }
 
 (src: Databricks copyright)
 
 There are two types of cluster: 1/ All-purpose to be used to support interactive notebooks execution, 2/ Job clusters to run automated jobs.
+
 Workspace is a group of folders and files which are mostly notebooks.
 
-An admin end user once connected to the platform can do at least:
+An admin end user once connected to the platform can do at least the following tasks:
 
 * Manage users, groups, entitlements, instance profiles (which is is associate to a IAM role pass through attached to the EC2 instances supporting the cluster) .
 * Create workspaces and defined access control.
@@ -102,7 +103,7 @@ An admin end user once connected to the platform can do at least:
 
 Two types of compute resource:
 
-* All purpose compute: shared cluster, ad-hoc work, multi tenant, more expensive
+* All purpose compute: shared cluster, ad-hoc work, multi tenant, more expensive.
 * Job compute: single user, ephemeral clusters created for a job. Great isolation. Lower cost.
 
 ## Unity Catalog
@@ -139,8 +140,7 @@ SQL warehouse supports 3 types:
 
 ![](./images/db-sql-warehouses.png)
 
-Creating a Warehouse helps to configure the cluster size, scaling characteristics (which lead to different pricing in DBU units), the type and 
-catalog:
+Creating a Warehouse helps to configure the cluster size and type, scaling characteristics (which lead to different pricing in DBU units), and the catalog:
 
 ![](./images/db-sql-warehouse.png)
 
@@ -152,7 +152,7 @@ Using query we can define Alert.
 
 ## Machine Learning
 
-The libraries used are TensorFlow, XGBoost, Scikit-learn.
+The libraries used are TensorFlow, XGBoost, Scikit-learn, pyTorch.
 
 The ML service uses MLFlow which includes the following components:
 
@@ -168,15 +168,15 @@ The ML service uses MLFlow which includes the following components:
 
 ## Serverless deployment
 
-The serverless deployment is running Databricks control plane as pods in EKS, and customers can run their Sparks job (SQL processing as of now), in nodes added dynamically inside EKS cluster. For security reason the Spark job manager runs in VM to provide better isolation. The VM hypervisor is [QEMU](https://www.qemu.org/), but it could be AWS [Firecracker](https://firecracker-microvm.github.io/). 
+The serverless deployment is running Databricks control plane as pods in EKS, and customers can run their Sparks job (SQL processing as of now), in nodes added dynamically inside EKS cluster. For security reason the Spark job manager runs in VM (k8s sandboxing pattern) to provide better isolation.
 
 ![](./diagrams/db-eks-ec2.drawio.png){ width=900 }
 
-The goal is to support different node types: spot instance, or microVM on EC2 baremetal. The performance goal is to be able to start VMs within a second, and be able to recycling them in less than 5 seconds. In the serverless world it possible to have thousand of VMs / nodes in kubernetes cluster and hundred of start/stop events per second.
+The goal is to support different node types: spot instance, or dedicated VM or even microVM on EC2 baremetal. In the serverless world it is possible to have thousand of VMs / nodes in kubernetes cluster and hundred of start/stop events per second.
 
-Each job processing is done on data that could come from S3 buckets within Databricks account, in the same region, or copied from customer's S3 buckets to EBS volumes attached to the EC2.
+Each job processing is done on data that will most likely come from S3 buckets within Databricks account, in the same region, or copied from customer's S3 buckets to EBS volumes attached to the EC2. There are still some use cases where data will stay in S3 bucket of a customer's AWS account, while compute run on EKS clusters of Databricks.
 
-For real-time processing, Spark streaming may be used and connected to Kafka, Kinesis, and any queueing systems. 
+For real-time processing, Spark streaming may be used, connected to Kafka, Kinesis, and any queueing systems.
 Java or Scala based processing will take longer time to start than SQL based deployment.
 
 ## Hands on enablement
