@@ -5,7 +5,7 @@
 
 .md-typeset pre>code {
   --md-hue: 232;
-  --md-code-hl-color: #33914f75;
+  --md-code-hl-color: #3cc66675;
 }
 
 code>* {
@@ -39,7 +39,7 @@ code>* {
 
 
 :root {
-  --md-default-bg-color: #f4f4f4;
+  --md-default-bg-color: #e2dede;
 }
 :root > * {
     --md-accent-fg-color: #030303;

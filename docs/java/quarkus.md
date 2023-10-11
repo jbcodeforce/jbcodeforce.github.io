@@ -4,7 +4,7 @@
 Best source of knowledge is [reading the guides](https://quarkus.io/guides/) and the [workshop](https://quarkus.io/quarkus-workshops/).
 
 !!! Info
-    Updated 08/23/2023 for version 3.3
+    Updated 08/23/2023
 
 ## Value Propositions
 
@@ -836,7 +836,7 @@ By default, when building a native executable, GraalVM will not include any of t
 
 ### Run quarkus test with external components started with docker compose
 
-The best approach is to avoid using docker-compose for development and use [TestContainer](/coding/testcontainer).
+The best approach is to avoid using docker-compose for development and use [TestContainer](../coding/testcontainer.md).
 
 ### Cheat-Sheet
 

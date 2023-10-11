@@ -182,7 +182,7 @@ shoulders tilted on average at 49d. Use the image of water dripping from right e
 
 ## Pitching
 
-From [Pete Cowen's article](https://golftoday.co.uk/proshop-features-2014-pitching-lesson-html/) core principles:
+From [Pete Cowen's article](https://golftoday.co.uk/proshop-features-2014-pitching-lesson-html/) core principles and [his video](https://youtu.be/Rl0HxN5YBwE):
 
 * Working down, up and around to the finish, the rotation of the left shoulder effectively governs the movement of the arms, hands and clubhead
 * The momentum of the pitch is controlled by the turning motion of the upper body
@@ -242,6 +242,7 @@ To control distance in the pitching arena; a ‘clockface’ principle that invo
 * [Pitch Practice 09/02-2022](https://youtu.be/CzdIs0qaArE)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CzdIs0qaArE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
 ## Putter
 

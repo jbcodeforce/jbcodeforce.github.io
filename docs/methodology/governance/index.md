@@ -1,7 +1,4 @@
----
-title: Event driven solution governance
-description: Event driven solution governance
----
+# Event driven solution governance
 
 Digital businesses are real-time, responsive, scalable and flexible while focussing on delivering
 outstanding customer experience. API and Microservices focus has achieved a lot in enabling
@@ -18,7 +15,7 @@ From the first successful project, it is important to consider adopting a more s
 * to select technologies
 * to apply common architecture and design patterns
 * to adopt data models governance and control data lineage
-* to apply common methodology to quickly onboard new business initiative, and be able to deploy new capability on top of the EDA in question of days or weeks. 
+* to apply common methodology to quickly onboard new business initiative, and be able to deploy new capability on top of the EDA in question of days or weeks.
 
 ## Fit for Purpose
 
