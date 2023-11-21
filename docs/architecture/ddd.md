@@ -1,7 +1,6 @@
-# Domain Driven Design notes
+# Domain-Driven Design notes
 
-Event storming description is in [EDA web site](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/event-storming/) 
-with a [summary of DDD](https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/).
+Event storming description is in my [EDA web site](https://jbcodeforce.github.io/eda-studies/event-storming/) with a [summary of Domain-Driven Design](https://jbcodeforce.github.io/eda-studies/ddd/).
 
 ## Analysis Practices to keep in mind
 
@@ -14,8 +13,7 @@ Questions to consider:
 * Does part of the software give the business a competitive edge?
 * What are the motivations behind a requirement? is it constrained by existing system?
 
-Large problem domains can be partitioned into subdomains to manage complexity. Subdomains are abstract concepts. 
-Subdomains are typically reflecting the business capabilities of the business organizational structure. 
+Large problem domains can be partitioned into subdomains to manage complexity. Subdomains are abstract concepts. Subdomains are typically reflecting the business capabilities of the business organizational structure. 
 Subdomains represent areas of capability, define business processes, and represent the functionality of a system.
 
 For core domain focus on the product rather than view it as a standalone project. Your product is an evolving succession of feature enhancements and tweaks.

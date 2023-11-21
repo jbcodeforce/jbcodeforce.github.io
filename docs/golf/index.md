@@ -4,19 +4,19 @@ See also [new Renaud Poupard training](./golf.md)
 
 ## Training session plan
 
-* 20 balls wedge warm up - line on the ground - goal is to make contact - 30, 50 and 70 yards. Work way up to full swing.
-* 30 balls: mechanicals: back to the feeling with 9 iron.
-* 25 balls: Skill work on ball fligh control. Games with a score. 
+* 20 balls: Wedge warm up - line on the ground - goal is to make contact - 30, 50 and 70 yards. Work way up to full swing.
+* 30 balls: Mechanicals: back to the feeling with 9 iron.
+* 25 balls: Skill: work on ball fligh control. Games with a score. 
 * 25 balls: Game like strikes: Driver, club, pitch.
 
-Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate target -> breeze -> line up -> view target - ball x2 -> swing
+Routine: Target -> Two swings -> Feels -> Visualize the shot -> Take immediate target -> Breeze -> Line up -> View target - ball x2 -> Swing.
 
 * Try to train a lot on: Wedges, Driver, Putter.
 
 ### Prepare before a 18 holes cource
 
-* Warm slowly but cover all game plays
-* Divide by segments
+* Warm slowly but cover all game plays.
+* Divide by segments.
 
 ![](./images/prep-segment.png)
 
@@ -26,20 +26,20 @@ Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate t
 * **Full Sing**: 20 balls - iron 7 or 6 - 2 clubs on the ground for alignment - use the routine.
 * **Alignment**: 10 balls - wood and driver - focus on rythm - finish with half swing on wedge.
 * **Chipping**: 15 minutes - 10 shots with different clubs: S, P, 8. -> put 9 balls in 3m circle. Think landing zone and adapt with club and swing height.
-* **Putting**: 5 minutes - sensation and speed. 
+* **Putting**: 5 minutes - sensation and speed.
 
 ## Full Swing
 
 ### 2021 8/11: Full swing analysis
 
-* need to get shoulder tilt at 8% right
-* hand too high at the beginning of back swing, hips do not start to turn.
-* swing started by hand not hip turn
-* Zach has the hand lower.
+* Need to get shoulder tilt at 8% right
+* Hands too high at the beginning of the back swing, hips do not start to turn.
+* Swing started by hands moving not by hip turn
+* Zach has the hands lower.
 
 ![](./images/0811-01.png)
 
-* He keeps them lower at the end of the back swing and not going that far.
+* He keeps them lower at the end of the back swing and not going too far.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2odG0NPBh_Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -66,9 +66,9 @@ Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate t
 
 ![](./images/0811-05.png)
 
- > we can see also the left part of the body did not move. It has to move forward to help turning the hips  
+ > We can see also the left part of the body did not move. It has to move forward to help turning the hips  
 
-* Head starts to move out of the position to the right. Avoid head movement.
+* Head starts to move out of the position to the right. Avoid head latteral movement.
 * Shoulders turn supposed to be at 77, here 72 is good, and tilt should be 35. 30 is still good.
 
 * Position 4: Zach starts hip sway on the left, going to the target. His head does not move at all.
@@ -89,7 +89,7 @@ Routine: Target -> Two swings -> Feels -> Visualize the shot -> take immediate t
 
 ![](./images/0811-08.png)
 
-But the hand are wrong as the right hand is going over the left (flipped) to compensate a pulling and turning effect. Right hand plam should be parallel to the club face.
+But the hand are wrong as the right hand is going over the left (flipped) to compensate a pulling and turning effect. Right hand palm should be parallel to the club face.
 
 * Finally extension of the arms and lower right shoulder.
 
