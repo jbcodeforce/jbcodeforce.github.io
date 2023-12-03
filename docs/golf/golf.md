@@ -1,5 +1,14 @@
 # Renaud Poupard "Inertia club" training
 
+## Training
+
+* Back to the fundamentals: static with grip, alignment, position, stance, balance
+* Dynamic: RRRE: relancher, rotation, Rythm, Equilibre
+* Work on feelings, when feeling is good then technics will be, not the opposite: light in hands, no tension, equilibre.
+* Avoid to work too much on technics, and no more than working on one technic per training
+* Not try to get the best shot each time. Not hit too much on the ball. 70% of power. Try to get it correct. Slower = more centred balls.
+* Golf score is about avoiding worse shots, but not best one.
+* Get a training plan. Do not work on what was done in pervious shot. Focus on one thing. Plan in advance.
 
 ## 1. Learn the swing momemtum
 
@@ -69,8 +78,10 @@ To avoid top or thin ball, use the under swing image, by dropping the club with 
 
 ### Module 5: Wood and driver
 
-* Use shallow swing
+* Be lightly on the left, left shoulder and right hip pointing higher in the sky.
+* Use shallow swing to arrive flat and from bottom to up
 * Keep club low when starting backswing
-* Double finishes swing to feel the inertia of the club
-* Start by doing short swing with driver, like it is an approach. 
-* Speed comes from the swing arc
+* To find the fluid transition and best inertia, without any pression in the hands: Double finishes swing to feel the inertia of the club: to improve rotation, let the gravity play.
+* Start by doing short swing with driver, like it is an approach. To learn to get lower.
+* Speed comes from the swing arc.
+* Work on finish in pure balance.
