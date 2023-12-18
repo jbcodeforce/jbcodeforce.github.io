@@ -1,5 +1,30 @@
 # Renaud Poupard "Inertia club" training
 
+The swing mechanics includes 5 dimensions:
+
+1. Dynamic oft of the club
+1. Club path
+1. Attack angle
+1. Contact spot
+1. Speed
+
+9 trajectories: start straight, right, left, then ball stays straight, go to the right or left.
+
+There is only one straight fly: a club path at 0 and club face at 90 degres. most of the balls goes on right and left, with different intensity, finishing at 1m of the target to 30 m. So we have only 2 types of trajectory.
+
+The problem is that if we try to search to get the ball straight, which does not realisticly exist, then we will not be able to make it and we will not control the ball fly. We could not play straight ball.
+
+The ball initiates its fly from the club face. Radar technologies demonstrated that the club square to the target did not brings the ball to the target.
+
+The natural trajectory is the one to keep. Make trajectory that comes to the target.
+
+- a slicer makes the ball flies to the right. a slice arriving to the target is a FADE.
+- a hooker makes the ball flying to the left. A hook arriving at the target is a DRAW.
+
+Club in the hands can help to make the ball flying where we want. Alignment too. Grip too.  Lie of the club face.
+
+A pro player approximates to the left or right. never straight. Theit path is constant
+
 ## Training
 
 * Back to the fundamentals: static with grip, alignment, position, stance, balance
@@ -39,9 +64,9 @@
 * The swing is with the hips. The rotation of the hips, the shoulders drag the club. Exercise to ship by pulling the club and the ball.
 * Look in front to the horizon, to set the body and squeleton in good position at address. Can even do dry swing while looking at the horizon.
 
-### Shipping 
+### Shipping
 
-* keep body straitht, club brossing the grass.
+* keep body straith, club brossing the grass.
 * use inertia and momemtum
 * target 3 meters after the green entrance, for the ball to land
 * adapt the golf club according to the distance of the roll on the green to the flag.
@@ -85,3 +110,9 @@ To avoid top or thin ball, use the under swing image, by dropping the club with 
 * Start by doing short swing with driver, like it is an approach. To learn to get lower.
 * Speed comes from the swing arc.
 * Work on finish in pure balance.
+
+## Course management
+
+Do not think the next shot will be your best, so add one or more club as most likley you will be shorter.
+Smooth take away is the most important (Leadbetter, Laura Davies,..) thing in the golf swing. Smooth means we start by moving the body, quick it means we move the hands and arms before. Routine to work on the trajectory with 8 iron and higher: one straight, one fade, one draw, one high (move ball forward in stance), one low (ball at the beginning of the stance, keep hands low after impact).
+Follow the feet direction for the take away.
