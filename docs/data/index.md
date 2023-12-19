@@ -56,7 +56,7 @@ The continual expansion has given rise to the phenomenon known as `data gravity`
     * **Automation**: Still a lot of manual steps when integrating data for analytics and AI: difficulty integrating data from multiple sources is the number one technical challenge.
     * Ethical and regulatory issues keep them from deploying AI models into production.
 
-#### Recommendations:
+#### Recommendations
 
 * Analytics and insights are best done where the data lies: Example is to implement real-time analytics in data streams.
 * Hybrid cloud initiatives require a data gravity strategy.

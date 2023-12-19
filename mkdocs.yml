@@ -74,8 +74,15 @@ nav:
       - Istio: istio/index.md
       - Openshift Studies: https://jbcodeforce.github.io/openshift-studies
     - AWS: https://jbcodeforce.github.io/aws-studies
+    - Methodology: 
+      - Design Thinking: methodology/design-thinking/index.md
+      - Data intensive: methodology/data-intensive/index.md
+      - Event Storming: https://jbcodeforce.github.io/eda-studies/event-storming/
+      - Domain driven design: https://jbcodeforce.github.io/eda-studies/ddd/
+      - ABRD: methodology/abrd/index.md
     - Data:
       - Introduction: data/index.md
+      - Iceberg & others: techno/data/index.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
       - Data topology: data/data-topology.md 
       - Data integration: data/data-integration.md
@@ -138,7 +145,6 @@ nav:
       - Red Panda: https://jbcodeforce.github.io/redpanda-studies/
       - Spark Studies: https://jbcodeforce.github.io/spark-studies/
       - VScode: java/java-vscode.md
-      - WO: techno/wo.md
     - Astronomy: astronomy/index.md
     - IBM:
         - IBM Cloud: architecture/ibmcloud.md

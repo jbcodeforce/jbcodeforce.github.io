@@ -2,7 +2,7 @@
 
 IBM Cloud Object Storage is a highly scalable cloud storage service, designed for high durability, resiliency and security. Store, manage and access your data via our self-service portal and RESTful APIs.
 
-Comparable to [AWS S3](/architecture/aws/#s3) service
+Comparable to [AWS S3](https://jbcodeforce.github.io/aws-studies/infra/storage/#s3-simple-storage-service) service
 
 ## Benefits
 

@@ -2,7 +2,9 @@
 
 studies/redpanda/pinot-ex/flights-data.json
 # compiled output
-
+**/notebooks/
+**/logs/
+**/warehouse/
 site/
 /tmp
 public/

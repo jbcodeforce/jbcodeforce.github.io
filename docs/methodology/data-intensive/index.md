@@ -1,8 +1,4 @@
----
-title: Develop Data Intensive Application Methodology
-description: Develop Data Intensive Application Methodology
----
-
+# Develop Data Intensive Application Methodology
 
 In this section we are introducing the different elements of the software life cycles, particular to the development of intelligent applications that leverage data, machine learning models, analytics and cloud native microservices.
 
@@ -44,7 +40,7 @@ The MITSloan did a review of the major differences between data scientists and b
 
 ### DevOps lifecycle
 
-The software/application development lifecycle (SDLC) is a well-known and supports both traditional and agile development. The SDLC iterates on incorporating business requirements, adopt test driven development, continuous deployment and continuous integration. The diagram below demonstrates the iteration over recurring developer tasks to build the business intelligent application (internal loop), and the release loop (external) to continuously deliver application features to production.    
+The software/application development lifecycle (SDLC) is a well-known and supports both traditional and agile development. The SDLC iterates on incorporating business requirements, adopt test driven development, continuous deployment and continuous integration. The diagram below demonstrates the iteration over recurring developer tasks to build the business intelligent application (internal loop), and the release loop (external) to continuously deliver application features to production.
 
 ![DevOps](./images/dev-ops.png)
 
@@ -52,11 +48,11 @@ Before enterring the development iteration cycles, there are tasks to scope the 
 
 The smaller loop represents development iteration, while the outer loop represents software release to production with continous feedback to monitor and assess features acceptance. This task list is not exhaustive, but represents a common ground for our discussion.
 
-**"Understanding business objectives"** is a common task in each lifecycle, but in the context of microservice solution, adoption [**event storming**](../event-storming/index.md) practice and [domain driven design](../domain-driven-design/) will help understanding the business process, the data aggregates, and the bounded contexts.
+**"Understanding business objectives"** is a common task in each lifecycle, but in the context of microservice solution, adoption [**event storming**](https://jbcodeforce.github.io/eda-studies/event-storming/) practice and [domain driven design](https://jbcodeforce.github.io/eda-studies/ddd/) will help understanding the business process, the data aggregates, and the bounded contexts.
 
-The solution will group a lot of out of the shelves components and a set of microservices supporting the implementation of the business logic and the intelligent application. A lot of things need to be considered while implementing each microservice from a data point of view. We recommend reading **[data pipeline for data intensive application](../../patterns/data-pipeline/)** to assess what needs to be done, and some best practices. 
+The solution will group a lot of out of the shelves components and a set of microservices supporting the implementation of the business logic and the intelligent application. A lot of things need to be considered while implementing each microservice from a data point of view. We recommend reading **[data pipeline for data intensive application](../../patterns/data-pipeline/)** to assess what needs to be done, and some best practices.
 
-Among the tasks described in these release and development iteration loops, we do not need to cover each of them, but may be highlight the **Integration service** task  which has a blue border to demonstrate integration activities between the different lifecycles, like ML model integration which is developed in the [MLops iteration](./#mlops-lifecycle).
+Among the tasks described in these release and development iteration loops, we do not need to cover each of them, but may be highlight the **Integration service** task  which has a blue border to demonstrate integration activities between the different lifecycles, like ML model integration which is developed in the [MLops iteration](#mlops-lifecycle).
 
 ### DataOps
 
@@ -125,6 +121,3 @@ requirements.
 * How to control resource allocation for Machine Learning job.
 * How to manage consistency between model, data and code: version management / data lineage
 * How to assess the features needed for the training sets.
-
-
-
