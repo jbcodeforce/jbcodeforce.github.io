@@ -73,7 +73,7 @@ nav:
       - Disaster recovery: architecture/DR.md
       - Istio: istio/index.md
       - Openshift Studies: https://jbcodeforce.github.io/openshift-studies
-    - AWS: https://jbcodeforce.github.io/aws-studies
+    - AWS: https://jbcodeforce.github.io/ska
     - Methodology: 
       - Design Thinking: methodology/design-thinking/index.md
       - Data intensive: methodology/data-intensive/index.md
@@ -101,7 +101,8 @@ nav:
         - Tekton: coding/tekton.md
         - ArgoCD: coding/argocd.md
         - Finch: coding/finch.md
-    - Programming:
+    - Coding:
+      - Docker based env: coding/myenv.md
       - Fun problems:
         - puzzles: fun/puzzles.md
       - Java: 

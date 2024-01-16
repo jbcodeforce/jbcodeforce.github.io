@@ -1,0 +1,13 @@
+FROM alpine
+RUN apk --no-cache add \
+    bash \
+    curl \
+    coreutils \
+    findutils \
+    gawk \
+    git \
+    python3 py3-pip 
+
+RUN  curl -sS https://webi.sh/gh | sh 
+
+RUN echo 'export PATH=~/.local/bin:$PATH' >> ~/.bashrc && echo 'export PATH=~/.local/bin:$PATH' >> ~/.ashrc 
