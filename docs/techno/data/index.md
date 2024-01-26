@@ -1,14 +1,20 @@
-# Technologies
-
+# Data related technologies
 
 ## [Apache Iceberg](https://iceberg.apache.org/docs/latest/)
 
 Apache Iceberg is an open table format for huge analytic datasets. 
 
-* adds tables to compute engines including Spark, Trino, PrestoDB, Flink, Hive and Impala 
+* adds tables to compute engines including Spark, Trino, PrestoDB, Flink, Hive and Impala.
 * works just like a SQL table
-* solve correctness problems in eventually-consistent cloud object stores.
-* Ten of petabytes of data
+* solves correctness problems in eventually-consistent cloud object stores.
+* supports ten of petabytes of data
+* supports schema changes: column add, drop, rename, update, reorder, and certain data types upgrades.
+* supports 'time travel' to go back to older version of the data.
+
+    ```sql
+    SELECT * FROM iceberg_taxi_parquet
+    FOR SYSTEM_TIME AS OF (current_timestamp — interval ‘1’ hour)
+    ```
 
 Iceberg has several catalog back-ends that can be used to track tables, like JDBC, Hive MetaStore and Amazon Glue.
 
@@ -28,6 +34,7 @@ There’re 3 layers for Iceberg:
 * [Getting started](https://iceberg.apache.org/docs/latest/getting-started/)
 * [Icebert and Spark quickstart with local docker compose](https://iceberg.apache.org/spark-quickstart/)
 * [PyIceberg](https://py.iceberg.apache.org/)
+* [Medium article to use Iceberg with AWS Glue, and Athena.](https://medium.com/snowflake/creating-and-managing-apache-iceberg-tables-using-serverless-features-and-without-coding-14d2198cf5b5)
 
 
 ## [MinIO](https://min.io/hybrid-multi-cloud-storage#overview)

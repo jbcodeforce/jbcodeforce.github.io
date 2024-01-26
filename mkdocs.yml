@@ -73,7 +73,7 @@ nav:
       - Disaster recovery: architecture/DR.md
       - Istio: istio/index.md
       - Openshift Studies: https://jbcodeforce.github.io/openshift-studies
-    - AWS: https://jbcodeforce.github.io/ska
+    - AWS: https://jbcodeforce.github.io/yarfba
     - Methodology: 
       - Design Thinking: methodology/design-thinking/index.md
       - Data intensive: methodology/data-intensive/index.md
