@@ -118,7 +118,7 @@ nav:
         - TestContainer: coding/testcontainer.md 
         - Vert.x: java/vertx.md
         - VScode: java/java-vscode.md
-      - podman: techno/podman.md
+      - Podman: techno/podman.md
       - Python: https://jbcodeforce.github.io/python-code
       - Knative: coding/knative.md
       - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
@@ -146,7 +146,9 @@ nav:
       - Red Panda: https://jbcodeforce.github.io/redpanda-studies/
       - Spark Studies: https://jbcodeforce.github.io/spark-studies/
       - VScode: java/java-vscode.md
-    - Astronomy: astronomy/index.md
+    - Astronomy: 
+      - Introduction: astronomy/index.md
+      - Physic - Newton: astronomy/physic.md
     - IBM:
         - IBM Cloud: architecture/ibmcloud.md
         - IBM Cloud Satellite: architecture/satellite.md

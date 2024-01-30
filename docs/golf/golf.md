@@ -37,14 +37,14 @@ A pro player approximates to the left or right. never straight. Theit path is co
 * Golf score is about avoiding worse shots, but not best one.
 * Get a training plan. Do not work on what was done in pervious shot. Focus on one thing. Plan in advance.
 
-### 1. Learn the swing momemtum
+### 1. Learn the swing momentum
 
-* The body weight helps to create momemtum. The swing of the club. Set the image to push a child in a swing.
+* The body weight helps to create momentum. The swing of the club. Set the image to push a child in a swing.
 * In this club swing, the hands finish vertical and the club face is vertical.
 
     ![](./images/poupard/club-face-vertical.png){ width=500 }
 
-* Clinic to work on momemtum: close to the green, do shipping, with just momemtum created by body rotation. No tension in arms, hands, feel the "balancier" and **inertia** after the ball stroke.
+* Clinic to work on momentum: close to the green, do shipping, with just momentum created by body rotation. No tension in arms, hands, feel the "balancier" and **inertia** after the ball stroke.
 * With a pitch, work on the counterweight to the club with the body. A party of the body, the left, go to the target, while the club is on the back swing: the body acts as a counterweight. Loose backswing.
 
     ![](./images/poupard/loose-back.png){ width=500 }
@@ -68,13 +68,13 @@ A pro player approximates to the left or right. never straight. Theit path is co
 
 #### Shipping
 
-* keep body straith, club brossing the grass.
-* use inertia and momemtum
+* keep body straight, club crossing the grass.
+* use inertia and momentum
 * target 3 meters after the green entrance, for the ball to land
 * adapt the golf club according to the distance of the roll on the green to the flag.
 * Also shipping by looking to the target is a good exercise for sensation and dosage
 
-![video 1:](https://www.youtube.com/watch?v=aCicXNhY13U)
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=aCicXNhY13U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 * Balance at the end of the swing, is very important (see the Relachement Rotation Rythm Equilibre principles from Leadbetter) and starts at the address.  
 * Grip not in life line, be more in diagonal in the palm of the hand
@@ -87,14 +87,14 @@ A pro player approximates to the left or right. never straight. Theit path is co
 * In case of socket, may be put the ball 2 cm farther. The club hits closer to the shaft. 
 * Use counterweight and 7 second in the finish.
 
-![video 2](https://youtu.be/nSWVi7koMrI)
+<iframe width="560" height="315" src="https://youtu.be/nSWVi7koMrI?si=YV_az4iupgfai2Nb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 * Top came because of holding the club at impact, do dry swing to feel the inertia.
 * The left arm is straight on back swing but not thighten, no tension, inertie brings the arm straight.  
 
 ### Module 3: Long iron and draw
 
-![]Video 3](https://www.youtube.com/watch?v=HuACA3Gjqrw)
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=HuACA3Gjqrw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Module 4
 
