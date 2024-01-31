@@ -110,157 +110,197 @@ it is the gravitational force applied to the object from the nearest large body.
 Normal force is perpendicular to the surface of the contact and is supporting the  load of  the weight applied to this surface. A **tension** is a force along the length of a medium, especially a force carried by a flexible medium, such as a rope or cable.
 
 ### Problem solving
-
-STOPPED HERE
 	
-- Draw a sketch of the problem. 
-- Identify known and unknown quantities, and identify the system of interest 
-- Write Newton’s second law in the horizontal and vertical directions and add the forces acting on the object. If the object does not accelerate in a particular direction (for example, the x -direction) then Fnet x = 0 . If the object does
-- accelerate in that direction, Fnet x = ma
-- Verify answer is reasonable
+- Draw a sketch of the problem.
+- Identify known and unknown quantities, and identify the system of interest.
+- Write Newton’s second law in the horizontal and vertical directions and add the forces acting on the object. If the object does not accelerate in a particular direction (for example, the x -direction) then Fnet x = 0 . If the object does accelerate in that direction, Fnet x = ma
+- Verify result is reasonable.
 
-- only four distinct forces account for all known phenomena :
-	- gravitational force, the electromagnetic force, the weak nuclear force, and the strong nuclear force 
+- Only four distinct forces account for all known phenomena: the gravitational force, the electromagnetic force, the weak nuclear force, and the strong nuclear force.
 
-- What is it that carries forces between objects? 
+* What is it that carries forces between objects? 
 
-	-  imagine that a force field surrounds whatever object creates the force. 
-	- The field itself is the “thing” that carries the force from one object to another. 
-	- These fields may be either scalar or vector fields. Gravity and electromagnetism are examples of vector fields 
-- Gravitational waves are created during the collision of massive stars, in black holes, or in supernova explosions—like shock wave. Waves move at the speed of light 
-	-  Laser Interferometer Gravitational-Wave Observatory (LIGO) is the instrument to try to catch gravitational waves
-	- use optical lasers to examine any slight shift in the relative positions of two masses due to the effect of gravity waves 
-	- Laser Interferometer Space Antenna will be the antenna in space. The system will measure the relative positions of each satellite to detect passing gravitational waves. Accuracy to within 10% of the size of an atom will be needed to detect any waves. 
+	- Imagine that a force field surrounds whatever object creates the force.
+	- The field itself is the “thing” that carries the force from one object to another.
+	- These fields may be either scalar or vector fields. Gravity and electromagnetism are examples of vector fields.
+
+- Gravitational waves are created during the collision of massive stars, in black holes, or in supernova explosions, like shock wave. Waves move at the speed of light.
+
+	- The Laser Interferometer Gravitational-Wave Observatory (LIGO) is the instrument to try to catch gravitational waves.
+	- It uses optical lasers to examine any slight shift in the relative positions of two masses due to the effect of gravity waves.
+	- Laser Interferometer Space Antenna will be the antenna in space. The system will measure the relative positions of each satellite to detect passing gravitational waves. Accuracy to within 10% of the size of an atom will be needed to detect any waves.
 
 ## Friction
 
-Friction is a force that opposes relative motion between systems in contact. 
-when objects move then the friction between them is called kinetic friction .
-If they do not move friction = static friction = fs
+Friction is a force that opposes relative motion between systems in contact. When objects move then the friction between them is called kinetic friction. If they do not move, friction = static friction = fs
 
-fs <= μs * N
+![](https://latex.codecogs.com/svg.image?Fs<=\mu.s.N)
 
-Static friction is a responsive force that increases to be equal and opposite to whatever force is exerted, up to its maximum limit. 
-Once the applied force exceeds fs(max) , the object will move. 
-Then the friction is fk = μkN, 
+Static friction is a responsive force that increases to be equal and opposite to whatever force is exerted, up to its maximum limit. Once the applied force exceeds fs(max), the object will move. 
 
-The motion of the skier and friction are parallel to the slope and so it is most convenient to project all forces onto a coordinate system where one axis is parallel to the slope and the other is perpendicular 
-N = mg cos (theta)
-Fk = μk . N = μk  mg cos (theta)
+Then the friction is:
 
-An object will slide down an inclined plane at a constant velocity if the net force on the object is zero 
+![](https://latex.codecogs.com/svg.image?Fk=\mu.k.N)
 
-## Rotation Angle and Angular Velocity 
+The motion of the skier and friction are parallel to the slope and so it is most convenient to project all forces onto a coordinate system where one axis is parallel to the slope and the other is perpendicular.
 
-rotation angle Δθ to be the ratio of the arc length to the radius of curvature: 
-Δθ = Δs/r 
+![](https://latex.codecogs.com/svg.image?N=m.g\cos(\theta))
 
-The arc length Δs is the distance traveled along a circular path .
+![](https://latex.codecogs.com/svg.image?Fk=\mu.k.N=\mu k m.g\cos(\theta))
 
-angular velocity ω as the rate of change of an angle. In symbols, this is ω = Δθ/ Δt . The greater the  rotation angle in a given amount of time, the greater the angular velocity. The units for angular velocity are radians per second (rad/s).  Angular velocity ω is analogous to linear velocity v . To get the precise relationship between angular and linear velocity: v = r .ω
+An object will slide down an inclined plane at a constant velocity if the net force on the object is zero.
+
+## Rotation Angle and Angular Velocity
+
+Rotation angle Δθ to be the ratio of the arc length to the radius of curvature: 
+
+![](https://latex.codecogs.com/svg.image?\Delta \theta=\Delta s/r)
+
+The arc length Δs is the distance traveled along a circular path.
+
+Angular velocity ω as the rate of change of an angle. In symbols, this is ω = Δθ/ Δt. The greater the  rotation angle in a given amount of time, the greater the angular velocity. The units for angular velocity are radians per second (rad/s).  Angular velocity ω is analogous to linear velocity v. To get the precise relationship between angular and linear velocity:
+
+![](https://latex.codecogs.com/svg.image?v=r.\omega)
 
 ## Centripetal Acceleration
 
-Centripetal Acceleration is the acceleration of an object moving in uniform circular motion. 
-Acceleration is in the direction of the change in velocity, which points directly toward the center of rotation. 
-The magnitude is a = V^2 / r = r ω ^ 2
+Centripetal acceleration is the acceleration of an object moving in uniform circular motion.
+Acceleration is in the direction of the change in velocity, which points directly toward the center of rotation.
+
+The magnitude is:
+
+![](https://latex.codecogs.com/svg.image?a=V^2/r=r\omega^2)
 
 Always convert in rad/s
 
 ## Centripetal Force 
 
-Any net force causing uniform circular motion is called a centripetal force. The direction of a centripetal force is toward the center of curvature, 
-F = mv2 or F = mrω2.
+Any net force causing uniform circular motion is called a centripetal force. The direction of a centripetal force is toward the center of curvature.
+
+![](https://latex.codecogs.com/svg.image?F=m.v^2/r=m.r\omega^2)
 
 ## Work and Kinetic Energy
 
-- We can loosely define energy as the ability to do work 
-- An important aspect of energy is that the total amount of energy in the universe is constant. Energy can change forms, but it cannot appear from nothing or disappear without a trace.
-- Energy may be transferred into or out of the system, and the change must be equal to the amount transferred  
-- Kinetic energy is introduced as an energy of motion that can be changed by the amount of work done by an external force
-- Potential energy can only exist when objects interact with each other via conservative forces according to classical physics 
-- Work for a constant force is : W= ∣F∣(cosθ)∣d∣    d represents the displacement of the system, the Force applied at angle θ 
-- work and energy are measured in newton-meters  or Joule
-- One calorie (1 cal) of heat is the amount required to warm 1 g of water by 1 C degree, and is equivalent to 4.184 J 
-- The net work on a system equals the change in the quantity 1/2mv^2 or kinetic energy  for transactional motion. 
+We can loosely define energy as the ability to do work. An important aspect of energy is that the total amount of energy in the universe is constant. Energy can change forms, but it cannot appear from nothing or disappear without a trace.
 
-	- W net = 1/2m.v^2 − 1/2m.v0^2
-	- W net = F net * d
-	- KE = 1/2m.v^2
+Energy may be transferred into or out of the system, and the change must be equal to the amount transferred. Kinetic energy is introduced as an energy of motion that can be changed by the amount of work done by an external force.
+
+Potential energy can only exist when objects interact with each other via conservative forces according to classical physics. It works for a constant force: 
+
+![](https://latex.codecogs.com/svg.image?W=|F|\cos(\theta).|d|)  
+
+d represents the displacement of the system, the Force applied at angle θ. Work and energy are measured in newton-meters  or Joule. One calorie (1 cal) of heat is the amount required to warm 1 g of water by 1 C degree, and is equivalent to 4.184 Joules.
+
+The net work on a system equals the change in the kinetic energy for transactional motion. 
+
+![](https://latex.codecogs.com/svg.image?W net=1/2.m(v^2-v_0^2))
+
+![](https://latex.codecogs.com/svg.image?W net=F net . d)
+
+![](https://latex.codecogs.com/svg.image?Ke=1/2.m.v^2)
 
 - What is the Work to accelerate a 30 kg package by pushing at constant force = 120 N through a distance of 0.8 m (friction force is 5 N):
 
-	-  The force of gravity and the normal force acting on the package are perpendicular to the displacement and do no work. 
-	- The net force arises solely from the horizontal applied force Fapp and the horizontal friction force f 
-	- Net force is // to the displacement so θ = 0o and cos θ = 1 
+	-  The force of gravity and the normal force acting on the package are perpendicular to the displacement and do no work.
+	- The net force arises solely from the horizontal applied force Fapp and the horizontal friction force Fc 
+	- Net force is // to the displacement so θ = 0o and cos(θ) = 1 
 	- Fnet = 120 - 5 = 115 N
 	- The effect of Fnet is to accelerate the package from V0 to V.
-	- The kinetic energy increase, the net work done on the system is positive
+	- The kinetic energy increases, the net work done on the system is positive
 	- Wnet = Fnet .d = m.a.d   (from newton 2nd law Fnet = m.a)  Wnet = 115 * 0.8 = 92
 	- V^2 = Vo^2 + 2.a.d  => a = (V^2  - Vo^2) / 2d
 	- Wnet = m/2 . (V^2  - Vo^2)
-	- By looking at the work only: W total = Wapp + Wgr + Wn + Wfr   => W total = 115 . cos 0 . 0.8 + 0 + 0 + 5 . cos 180 . 0.8 = 96 - 4 = 92
-	- 
+	- By looking at the work only: W total = Wapp + Wgr + Wn + Wfr   => W total = 115 . cos(0) . 0.8 + 0 + 0 + 5 . cos(180) . 0.8 = 96 - 4 = 92
+	
 
 ## gravitational potential energy
 
-- the gravitational potential energy (PEg)  = mgh
-- This energy is associated with the state of separation between two objects that attract each other by the gravitational force
-- Because gravitational potential energy depends on relative position, we need a reference level (earth surface) at which to set the potential energy equal to 0  
-- what is important is the difference in gravitational potential energy, because this difference is what relates to the work done. 
-- If we release the mass, gravitational force will do an amount of work equal to mgh on it, thereby increasing its kinetic energy by that same amount  
+The gravitational potential energy:
+
+![](https://latex.codecogs.com/svg.image?PEg=m.g.h)
+
+This energy is associated with the state of separation between two objects that attract each other by the gravitational force. Because gravitational potential energy depends on relative position, we need a reference level (earth surface) at which to set the potential energy equal to 0. What is important is the difference in gravitational potential energy, because this difference is what relates to the work done.
+
+If we release the mass, gravitational force will do an amount of work equal to `mgh` on it, thereby increasing its kinetic energy by that same amount:
+
 - ΔPEg = mgh applies for any path that has a change in height of h  
+
 - At the start of a roller coaster its PE is max and it will lose it as it goes downhill. The net work on the roller is the gravity one so:  
 
-	- −ΔPEg = ΔKE  
-	-  ΔKE = 12mv2 
-	- ΔPEg = −mg ∣ h ∣  so v = sqrt( 2g|h|)
+![](https://latex.codecogs.com/svg.image?-\Delta PEg=\Delta KE)
 
-- When friction is negligible, the speed of a falling body depends only on its initial speed and height, and not on its mass or the path taken 
+![](https://latex.codecogs.com/svg.image?-\Delta KE= 12mv^2)
+
+![](https://latex.codecogs.com/svg.image?-\Delta PEg=-mg.|h|)
+
+So 
+
+![](https://latex.codecogs.com/svg.image?v=\sqrt{2g.|h|})
+
+
+When friction is negligible, the speed of a falling body depends only on its initial speed and height, and not on its mass or the path taken.
 
 ## Conservative Forces and Potential Energy
 
-- Potential energy is the energy a system has due to position, shape, or configuration. It is stored energy that is completely recoverable 
-- We can define a potential energy (PE) for any conservative force. The work done against a conservative force to reach a final configuration depends on the configuration, not the path followed, and is the potential energy added 
-- Potential energy comes from the interaction between the bowling ball and the ground. 
-- For a spring the Hooke's law says F = k ΔL     (the amount of deformation produced by a force F ) k is the spring’s force constant. The average force is k ΔL / 2
-- From the  Kinetic Energy and the Work-Energy Theorem we note the area under a graph of F vs. ΔL is the work done by the force so
+The potential energy is the energy a system has due to position, shape, or configuration. It is stored energy that is completely recoverable. We can define a potential energy (PE) for any conservative force. The work done against a conservative force to reach a final configuration depends on the configuration, not the path followed, and is the potential energy added. Potential energy comes from the interaction between the bowling ball and the ground.
 
-	- PEs = 1/2 . k x^ 2         (x is ΔL =  distance that the spring is stretched )
+- For a spring the Hooke's law says:
 
-- conservation of mechanical energy :  KEi + PEi = KEf + PEf   for conservative force only.
+![](https://latex.codecogs.com/svg.image?F=k\Delta{L})
+
+ the amount of deformation produced by a force F , k is the spring’s force constant. 
+ 
+The average force is:
+
+![](https://latex.codecogs.com/svg.image?k\Delta{L}/2)
+
+From the  Kinetic Energy and the Work-Energy Theorem, we note the area under a graph of F vs. ΔL is the work done by the force so:
+
+![](https://latex.codecogs.com/svg.image?PEs=1/2.k.x^2)
+
+x is ΔL =  distance that the spring is stretched.
+
+The conservation of mechanical energy :  KE_initial + PE_initial = KE_final + PE_final   for conservative force only.
 
 ## Non conservative forces
 
-- A nonconservative force is one for which work depends on the path taken 
--  the work done by a nonconservative force adds or removes mechanical energy from a system. 
-- Friction creates Thermal energy
-- The net work is the sum of the work by nonconservative forces plus the work by conservative forces
-- the work - energy theorem works as: KEi +PEi + Wnc = KEf + PEf 
--  the amount of nonconservative work equals the change in mechanical energy .
+A non-conservative force is one for which work depends on the path taken. The work done by a non-conservative force adds or removes mechanical energy from a system. Friction creates Thermal energy.
+
+The net work is the sum of the work by non-conservative forces plus the work by conservative forces.
+
+The work and energy theorem works as:
+
+KE_initial + PE_initial + Wnc = KE_final + PE_final 
+
+the amount of non-conservative work equals the change in mechanical energy.
 
 ## Conservation of Energy
 
-- Total energy is constant in any process. It may change in form or be transferred from one system to another, but the total  remains the same. 
-- KEi + PEi + Wnc + OEi = KEf + PEf + OEf.    OE is for other energies
-- Electrical energy is a common form that is converted to many other forms 
-- Fuels, such as gasoline and food, carry chemical energy that can be transferred to a system through oxidation 
-- Chemical fuel can also produce electrical energy, such as in batteries. Batteries can in turn produce light, which is a very pure form of energy. 
-- Nuclear energy comes from processes that convert measurable amounts of mass into energy. Nuclear energy is transformed into the energy of sunlight, into electrical energy in power plants, and into the energy of the heat transfer and blast in weapons. 
-- Atoms and molecules inside all objects are in random motion. This internal mechanical energy from the random motions is called thermal energy, because it is related to the temperature of the object. These and all other forms of energy can be converted into one another and can do work. 
-- A car is not a closed system. You add energy in the form of more gas in the tank (or charging the batteries), and energy is lost due to air resistance and friction. 
+The total energy is constant in any process. It may change in form or be transferred from one system to another, but the total  remains the same. 
+
+**KEi + PEi + Wnc + OEi = KEf + PEf + OEf**
+
+OE is for other energies.
+
+- Electrical energy is a common form that is converted to many other forms.
+- Fuels, such as gasoline and food, carry chemical energy that can be transferred to a system through oxidation.
+- Chemical fuel can also produce electrical energy, such as in batteries. Batteries can in turn produce light, which is a very pure form of energy.
+- Nuclear energy comes from processes that convert measurable amounts of mass into energy. Nuclear energy is transformed into the energy of sunlight, into electrical energy in power plants, and into the energy of the heat transfer and blast in weapons.
+- Atoms and molecules inside all objects are in random motion. This internal mechanical energy from the random motions is called thermal energy, because it is related to the temperature of the object. These and all other forms of energy can be converted into one another and can do work.
+- A car is not a closed system. You add energy in the form of more gas in the tank (or charging the batteries), and energy is lost due to air resistance and friction.
 -  The efficiency Eff of an energy conversion process is defined as work output / total energy input
 
 ## Power
 
-- P = W / t   1 Watt = 1 Joule / s
+- **P = W / t**   1 Watt = 1 Joule / s
 - Because work is energy transfer, power is also the rate at which energy is expended. 
 - Sunlight reaching Earth’s surface carries a maximum power of about 1.3 kilowatts per square meter  
 - Energy consumed E = P . t
 
-## Energy Conversion in Humans 
+## Energy Conversion in Human
 
-Our own bodies, like all living organisms, are energy conversion machines. Conservation of energy implies that the chemical energy stored in food is converted into work, thermal energy, and/or stored as chemical energy in fatty tissue 
-The rate at which the body uses food energy to sustain life and to do different activities is called the metabolic rate. 
-Energy consumption is directly proportional to oxygen consumption because the digestive process is basically one of oxidizing food. 
-Approximately 20 kJ of energy are produced for each liter of oxygen consumed 
+Our own bodies, like all living organisms, are energy conversion machines. Conservation of energy implies that the chemical energy stored in food is converted into work, thermal energy, and/or stored as chemical energy in fatty tissue. The rate at which the body uses food energy to sustain life and to do different activities is called the metabolic rate.
+
+Energy consumption is directly proportional to oxygen consumption because the digestive process is basically one of oxidizing food.
+
+Approximately 20 kJ of energy are produced for each liter of oxygen consumed.

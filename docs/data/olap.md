@@ -21,4 +21,4 @@
 ## Resources
 
 * [IBM article on OLAP](https://www.ibm.com/cloud/learn/olap)
-* [IBM Cloud Cubing services](https://www.ibm.com/docs/en/db2/10.5?topic=cubing-services-overview)
+
