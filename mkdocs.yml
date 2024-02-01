@@ -93,7 +93,8 @@ nav:
       - OLAP: data/olap.md
       - Cassandra: data/cassandra.md
     - AI:
-      - Machine learning: https://jbcodeforce.github.io/ML-studies/
+      - Machine learning: https://jbcodeforce.github.io/ML-studies/#machine-learning
+      - Deep learning: https://jbcodeforce.github.io/ML-studies/ml/deep-learning/
     - Dev & Ops:
         - Agile: coding/agile.md
         - Git summary: coding/git.md
