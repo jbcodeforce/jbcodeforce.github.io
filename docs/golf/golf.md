@@ -129,6 +129,8 @@ Follow the feet direction for the take away.
 
 ### The training
 
+Start by contact only drill, no focus on direction.
+
 The most common training is taking a bucket of 40 balls, hit around 30 with 7 iron, few with driver and then 3 with wedge. So 3 shots on 4 balls. The structural training is focusing on the shot type. Use 36 balls around, 6 balls for 6 exercises, focusing on trajectory. The goal is to work on all part of the game. Privilege the ball contact.
 
 Warm by relaxing the back spine, the back and arms, using breath.

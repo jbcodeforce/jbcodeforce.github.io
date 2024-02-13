@@ -58,7 +58,7 @@ markdown_extensions:
 nav:
   - Blogs: blogs/index.md
   - About: about.md
-  - Skill: skill.md
+  - Skills: skill.md
   - List of contributions: assets.md
   - Knowledge base: 
     - The SA job: blogs/consultant-job.md

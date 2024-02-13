@@ -1,4 +1,4 @@
-# Skill
+# Skills
 
 This section presents my working content for skill set, certification...
 
