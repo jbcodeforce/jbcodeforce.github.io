@@ -80,6 +80,7 @@ nav:
       - Event Storming: https://jbcodeforce.github.io/eda-studies/event-storming/
       - Domain driven design: https://jbcodeforce.github.io/eda-studies/ddd/
       - ABRD: methodology/abrd/index.md
+      - Narratives: methodology/narrative.md
     - Data:
       - Introduction: data/index.md
       - Iceberg & others: techno/data/index.md

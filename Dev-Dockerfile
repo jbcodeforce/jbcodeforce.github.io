@@ -16,4 +16,6 @@ RUN pip install --upgrade pip --break-system-packages && pip install mkdocs mkdo
 
 RUN  curl -sS https://webi.sh/gh | sh 
 
-RUN echo 'export PATH=~/.local/bin:$PATH' >> ~/.bashrc && echo 'export PATH=~/.local/bin:$PATH' >> ~/.ashrc 
+RUN echo 'export PATH=~/.local/bin:$PATH' >> ~/.bashrc && echo 'export PATH=~/.local/bin:$PATH' >> ~/.ashrc
+RUN  git config --global user.email "jerome.boyer@gmail.com" && git config --global user.name jbcodeforce 
+WORKDIR /home/git

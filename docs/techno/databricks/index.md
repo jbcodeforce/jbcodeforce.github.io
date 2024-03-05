@@ -9,7 +9,6 @@ Databricks helps organizations make their data ready for analytics, empowering d
 * Cross account IAM roles used to launch and manage the clusters
 * Clusters are used to connect to different data stores like Databases, streaming, on-prem, private hosted Github/code repos...
 
-
 Based on Apache Sparks, Delta Lake, and [MLflow](https://mlflow.org/), HDFS, and AWS resources like EC2, EKS, S3, IAM.
 
 Workspace manages assets for a user:
