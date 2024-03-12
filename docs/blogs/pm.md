@@ -10,3 +10,9 @@ Their main work:
 1. Address what needs to be built, why and when it will be delivered.
 1. Cost / business case - justification. Define success criterias. Define metrics of product usage.
 1. Story teller.
+
+
+
+## Sources
+
+* [YouTube enablement]()
