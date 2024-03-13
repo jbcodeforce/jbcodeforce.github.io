@@ -79,6 +79,8 @@ nav:
       - Data intensive: methodology/data-intensive/index.md
       - Event Storming: https://jbcodeforce.github.io/eda-studies/event-storming/
       - Domain driven design: https://jbcodeforce.github.io/eda-studies/ddd/
+      - Lean startup: methodology/lean-startup.md
+      - Product manager: methodology/pm.md
       - ABRD: methodology/abrd/index.md
       - Narratives: methodology/narrative.md
     - Data:

@@ -4,22 +4,23 @@ Databricks helps organizations make their data ready for analytics, empowering d
 
 * Multi-tenant control plane ( 1 or more per region)
 * Single-tenant data plane in Customers account
+* Databricks workspace provides an interactive environment where users can collaborate, develop, and deploy data-driven applications. It offers a unified interface, supports multiple programming languages, and provides built-in libraries and frameworks. With features like version control, job scheduling, and integration with other tools and services.
 * Each workspace maps to one VPC (one region)
 * Multiple workspace maps to one VPC
 * Cross account IAM roles used to launch and manage the clusters
 * Clusters are used to connect to different data stores like Databases, streaming, on-prem, private hosted Github/code repos...
 
-Based on Apache Sparks, Delta Lake, and [MLflow](https://mlflow.org/), with HDFS,. Once deployed on   and AWS resources like EC2, EKS, S3, IAM.
+Based on Apache Sparks, Delta Lake, and [MLflow](https://mlflow.org/), with HDFS,. Once deployed on AWS, it uses resources like EC2, EKS, S3, IAM, EBS volumes...
 
 Workspace manages assets for a user:
 
 ![](./images/db-assets.png)
 
-* **Repos** is to support integration with Git compatible repositories and clone locally in the workspace
-* **Clusters** to define different cluster run time to run notebnooks or jobs
-* **Secrets** to keep keys and other sensitive information
+* **Repos** is to support integration with Git compatible repositories and clone locally in the workspace.
+* **Clusters** to define different cluster run time to run notebooks or jobs.
+* **Secrets** to keep keys and other sensitive information.
 * **Pipelines** for data processing pipelines.
-* **Pools** keeps idle VMs
+* **Pools** keeps idle VMs.
 
 ## Value propositions
 
@@ -27,7 +28,7 @@ Data warehouse solutions were developed to address data silos done by using mult
 
 Data lake, with Hadoop, was aiming to support big data processing, on parallel servers organized in cluster. Shortly after the introduction of Hadoop, **Apache Spark** was introduced. Spark was the first unified analytics engine that facilitated large scale data processing, SQL analytics, and AI Model Learning.
 
-Data lakes are difficult to set up, do not support transactions, do not enforce data quality, very difficult to mix append and read operations, batch and streaming jobs. We can add that modifying existing data is difficult, like a delete operation for GDPR compliance. With data lakes, it is difficult to manage large metadata, and data catalogs. A lot of data lake projects became data swamp.
+Data lakes are difficult to set up, do not support transactions, do not enforce data quality, very difficult to mix append and read operations, batch and streaming jobs. We can add that modifying existing data is difficult, like a delete operation in the context of GDPR compliance. With data lakes, it is difficult to manage large metadata, and data catalogs. A lot of data lake projects became data swamp.
 
 A lakehouse is a new architecture that combines the best elements of data lakes and data warehouses. It enables users to do everything from BI, SQL analytics, data science, and ML on a single platform. It supports ACID transactions, large metadata, indexing, bloom filters, schema validation, governance to understand how data is used, direct access to source data, scalable. Data is saved in open data formats and supports structured and unstructured data.
 
@@ -35,22 +36,22 @@ A lakehouse is a new architecture that combines the best elements of data lakes 
 
 **Figure 1: Data lake - data pipeline**
 
-The [lakehouse](https://delta.io/) approach to data pipelines offers modern data engineering best practices for improved productivity, system stability, and data reliability, including streaming data to enable reliable real-time analytics.
+The [lakehouse, with Delta Lake,](https://delta.io/) approach to data pipelines offers modern data engineering best practices for improved productivity, system stability, and data reliability, including streaming data to enable reliable real-time analytics.
 
-Big data and AI complexity slows innovation: managing big data infrastructure, define data pipelines to produce stale data with poor performance, and isolated, no collaboration for data scientists and data engineers. 
+Big data and AI complexity slows innovation: managing big data infrastructure, define data pipelines to produce stale data with poor performance, isolated, without any collaboration between data scientists and data engineers. 
 
 ### [Delta lake](https://delta.io)
 
-Delta lake is an open approach to bring data management and governance on top of data lakes. It is a storage layer to bring the following:
+Delta lake is an open approach to bring data management and governance on top of data lakes. It is a storage layer which offers the following characteristics:
 
-* reliability via ACID transaction
-* performance via indexing to maximize the efficiency of the query
-* governance using Unity Catalog to enforce access control list on table
-* quality to support different busines needs.
+* reliability via ACID transaction.
+* performance via indexing to maximize the efficiency of the query.
+* governance using Unity Catalog to enforce access control list on table.
+* quality to support different business needs.
 
 Data Scientists can define flows and pipelines to process data from raw to filtered-cleaned-augmented, as a source of truth to business level aggregates.
 
-The persistence format of data on cloud object stores is parquet. Delta lake persists transaction logs in the same folder as data, and it is easy, with Delta API, to get the state of the data inside parquet, for merge-on-read operation. The protocol supports addressing data in file.
+The persistence format of data on cloud object stores is [Apache Parquet](https://parquet.apache.org/). Delta Lake persists transaction logs in the same folder as data, and it is easy, with Delta API, to get the state of the data inside parquet, for merge-on-read operation. The protocol supports addressing data in file.
  
 Delta Lake is available with multiple AWS services, such as AWS Glue Spark jobs, Amazon EMR, Amazon Athena, and Amazon Redshift Spectrum.
 
@@ -67,9 +68,9 @@ Delta Lake is available with multiple AWS services, such as AWS Glue Spark jobs,
 
 (src: Databricks)
 
-* Control plane is managed by Databricks in their cloud account, and it includes backend services, webapp for workpaces, notebooks repository, job manager, cluster manager... It hosts everything except the Sparks Cluster.
+* Control plane is managed by Databricks in their cloud account, and it includes backend services, webapp for workspaces, notebooks repository, job manager, cluster manager... It hosts everything except the Sparks Cluster.
 * Each customer has his own workspace, any command runs in workspace will exist inside the control plane.
-* Data plane is managed within the customer's cloud account. Data is own, isolated and secured by each customer. Datasources can be inside the customer account or as external services.
+* Data plane is managed within the customer's cloud account. Data is own, isolated and secured by each customer. Data sources can be inside the customer account or as external services.
 * There is a private network between the data and the control planes. A lot of control over how cloud accounts are integrated and secured.
 
 The Webapp is where customers access all the platform interfaces (APIs and UI):
@@ -78,7 +79,7 @@ The Webapp is where customers access all the platform interfaces (APIs and UI):
 
 (src: Databricks copyright)
 
-The database is RDS and stores all the information about customers metadata, and workspace.
+On AWS, the database is RDS and stores all the information about customers metadata, and workspace.
 
 Cluster manager is part of the control plane and helps admin to manage Spark Cluster. The Cluster manager is an extension of the Spark CM with nicer user interface.
 
@@ -107,11 +108,11 @@ Two types of compute resource:
 
 ## Unity Catalog
 
-The Unity Catalog offers a fine-grained governance for data lakes across cloud and is based on ANSI SQL. It provides a centrally shared (via delta sharing protocol), auditable (what is used, who used, data lineage), secured, management capability for all data types (tables, files, columns and ML models ). It integrates with existing data catalogs and storages.
+The Unity Catalog offers a fine-grained governance for data lakes across cloud providers and is based on ANSI SQL. It provides a centrally shared (via delta sharing protocol), auditable (what is used, who used, data lineage), secured, management capability for all data types (tables, files, columns and ML models ). It integrates with existing data catalogs and storages.
 
 ## Databricks SQL
 
-Run SQL queries through SQL optimized clusters, powered by Photon, that directly query Delta Lake tables. 
+Run SQL queries through SQL optimized clusters, powered by Photon, that directly queries Delta Lake tables. 
 
 ![](./images/db-sql-query.png)
 
@@ -122,9 +123,10 @@ The query editor is also integrated with visualization to present the data with 
 
 ![](./images/db-taxi-dashboard.png)
 
-The SQL can be integrated with existing BI tools like Qlik, Tableau, dbt, Fivetran...
+The SQL can be integrated with existing BI tools like Qlik, Tableau, DBT, Fivetran...
 
 To be able to execute SQL, workspace admin user needs to define an endpoint, a Catalog and a database. Serverless endpoints are managed by Databricks, or classical with remote access to data plane to customer's account.
+
 Catalog (`samples`) is needed to access Databases (`nyctaxi`):
 
 ![](./images/db-cata-db.png)
@@ -159,6 +161,31 @@ The ML service uses MLFlow which includes the following components:
 * Projects: package ML code in a reusable, reproductible form to share.
 * Model registry
 * Model serving
+* Feature serving, serves pre-computed features as well as compute on-demand features using a single REST API in real time (within milliseconds latency) for any AI applications.
+
+### [Feature Serving](https://www.databricks.com/blog/announcing-general-availability-databricks-feature-serving)
+
+Serverless capability to serve pre-computed features as well as compute on-demand features using a single REST API.
+
+As ML usage increases across industries, the sophistication of ML pipelines is also increasing, with many customers moving from batch to real-time predictions. For real-time models to have the greatest business value, they need to be sensitive to the latest actions of the user. Feature engineering is at the core of modeling complex systems, with features being data signals used as inputs to ML models.
+
+When computing features from raw data, tradeoffs must be made regarding complexity, data size, freshness requirements, latency, cost and importance to predictions.
+
+Data freshness measures the time from a new event to the feature value being updated or available for inference.
+
+Architectures for computing features can be batch, streaming, or on-demand, with varying complexity and costs.
+
+1. **Batch computation** frameworks like Spark are efficient for slowly changing features (hours to days) or those requiring complex calculations on large data volumes. With batch, pipelines pre-compute features and materialize them in offline tables for low latency access by real-time models.
+1. **On-demand computation** computes features from latest signals at scoring time, suitable for simpler calculations on smaller data. On-demand is also suitable when features change value more frequently than being used in scoring. Examples of features best computed on-demand include user product viewing history and percentage of discounted items in a session.
+1. **Streaming** continuously pre-computes feature values on data (for data where data freshness is within minutes) streams asynchronously, for features requiring larger computation or higher data throughput than on-demand.
+
+???- question "How to choose the best architecture?"
+    The starting point for selecting a computation architecture is the data freshness and latency requirements. For less strict requirements, batch or streaming are first choices as they are simpler and can accommodate large computations and deliver predictable latency. For models that need to react quickly to user behavior or events, data freshness requirements are stricter and on-demand architecture is more appropriate. 
+    Use spark structured streaming to stream the computation to offline store and online store. Use on-demand computation with MLflow pyfunc. Use Databricks Serverless realtime inference to perform low-latency predictions on your model.
+
+To avoid skew between online and offline computation of on-demand features, it is recommended to yse MLflow pyfunc to wrap model training/prediction with custom preprocessing logic, which helps reusing the same featurization code for both model training and prediction. Features are generated the same way both offline and online.
+
+[Travel recommendation example notebook on AWS](https://docs.databricks.com/en/_extras/notebooks/source/machine-learning/feature-store-travel-recommendation-dynamodb.html).
 
 ## Sources
 
@@ -180,7 +207,7 @@ Java or Scala based processing will take longer time to start than SQL based dep
 
 ## Hands on enablement
 
-See [my Apache Sparks study](https://jbcodeforce.github.io/spark-studies/) and [ML study]().
+See [my Apache Sparks study](https://jbcodeforce.github.io/spark-studies/) and [ML study](https://jbcodeforce.github.io/ML-studies/).
 
 * Example of python to read csv file and save it in Delta Lake format
 

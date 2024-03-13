@@ -33,30 +33,3 @@ I lead the following major open source contributions with all related sub-reposi
 * [Hybrid Cloud Integration Reference Architecture](https://github.com/ibm-cloud-architecture/refarch-integration) describes an approach to connect components which are split across cloud and on-premises environments, or across public and private clouds -- even across different cloud providers.
 * [Cognitive Reference Architecture solution implementation](https://github.com/ibm-cloud-architecture/refarch-cognitive) build and run cloud based cognitive application using micro service architecture, Watson Cloud development APIs.
 
-### Publications
-
-Books:
-
-* Co Author: **Sustainable IT Architecture** Wisley
-* Co Author: **[Agile Business Rule Development](http://www.springer.com/business+%26+management/business+information+systems/book/978-3-642-19040-7)** Springer.
-
-
-Multiple articles on IBM developers site, and BPM journal.
-
-* [http://www.ibm.com/developerworks/bpm/bpmjournal/1302_boyer/1302_boyer.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1302_boyer/1302_boyer.html)
-* [http://www.ibm.com/developerworks/bpm/bpmjournal/1404_boyer/1404_boyer.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1404_boyer/1404_boyer.html)
-* [http://www.ibm.com/developerworks/bpm/bpmjournal/1206_boyer/1206_boyer.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1206_boyer/1206_boyer.html)
-* [http://www.ibm.com/developerworks/bpm/bpmjournal/1212_boyer2/1212_boyer2.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1212_boyer2/1212_boyer2.html)
-* [http://www.ibm.com/developerworks/bpm/bpmjournal/1404_fu/1404_fu.html](http://www.ibm.com/developerworks/bpm/bpmjournal/1404_fu/1404_fu.html)
-* [http://www.ibm.com/developerworks/library/ws-policyandrulespart2](http://www.ibm.com/developerworks/library/ws-policyandrulespart2)
-* [http://www.ibm.com/developerworks/webservices/library/ws-policyandrules/index.html](http://www.ibm.com/developerworks/webservices/library/ws-policyandrules/index.html)
-
-## What is in this site
-
-The goal of this site is to keep references and notes from my different studies and may be define some best practices I have used to implement customer's solutions. It addresses some of the common problems I encountered while trying new technologies.
-
-All views expressed on this site are mine only, and do not represent the views of my current and past employers and customers.
-
-## Study Repositories
-
-[Repository list](https://github.com/jbcodeforce?tab=repositories)
