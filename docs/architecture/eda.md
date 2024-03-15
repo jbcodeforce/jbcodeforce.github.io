@@ -23,7 +23,7 @@
 
 ## demos
 
-* Real-time invetory with flink, elasticsearch, kafka, cloud object storage
+* Real-time inventory with flink, elasticsearch, kafka, cloud object storage
 
 | App   | Type  | Build | Registry | Git workflow | Local | OCP |
 | ----- | ----- | ----- | -------- | ------------ | ----- | --- |

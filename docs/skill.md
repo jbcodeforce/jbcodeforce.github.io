@@ -2,16 +2,28 @@
 
 This section presents my working content for skill set, certification...
 
-1/2024 Skill Map
+* **3/2024 Skill Map**
+
+The following figure illustrates the two main pillars for my knowledge base: software architecture and AI, with sub-pillars, I am continuously working on over time:
 
 ![](./diagrams/skill-map.drawio.png)
+
+I will try to assess the skill level using the following definitions:
+
+| Level | Description |
+| --- | --- |
+| **100	Foundational** |	I can present the feature overview, address value proposition, pro-cons, fit for purpose |
+| **200	Intermediate** |	Being able to articulate best practices, demonstrate the product feature, code using the product |
+| **300	Advanced**	| Bbe able to deep dive into a topic, a feature, an integration, and support deeper architecture discussions |
+| **400	Expert** |  Product dev experience. Good knowledge on how a product works. Understand parameters. Code around the product deployment. Support long term consulting engagement. |
+
 
 ## Architecture
 
 ### EDA
 
 * [My book on Event Driven Architecture and solutions.](https://jbcodeforce.github.io/eda-studies/)
-* **Event processing**: [Kafka Stream](), [Flink study](https://jbcodeforce.github.io/flink-studies/), [AWS Managed Service for Flink](https://jbcodeforce.github.io/yarfba/kinesis/#managed-service-for-apache-flink); [Spark Streaming]()
+* **Event processing**: [Kafka Stream](https://jbcodeforce.github.io/eda-studies/techno/kstreams/), [Flink study](https://jbcodeforce.github.io/flink-studies/), [AWS Managed Service for Flink](https://jbcodeforce.github.io/yarfba/kinesis/#managed-service-for-apache-flink); [Spark Streaming](https://jbcodeforce.github.io//spark-studies/dev/streaming/).
 
 * **Messaging studies**: [ActiveMQ open source](https://jbcodeforce.github.io/aws-messaging-study/activemq/), [Amazon MQ](https://jbcodeforce.github.io/aws-messaging-study/amazonmq/), [IBM MQ](https://jbcodeforce.github.io/eda-studies/techno/ibm-mq/), [Kafka](https://jbcodeforce.github.io/kafka-studies/), [Amazon SQS](https://jbcodeforce.github.io/aws-messaging-study/sqs/)
 * Distributed systems, Reactive Systems

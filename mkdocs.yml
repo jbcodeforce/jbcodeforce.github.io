@@ -9,7 +9,7 @@ theme:
   logo: images/cloud.png
   palette:
     scheme: default
-    primary: blue
+    # primary: blue
   language: en
   features:
       - content.code.annotate
@@ -32,7 +32,7 @@ plugins:
       lang: en
   - minify:
       minify_html: true
-      
+  - mermaid2
 markdown_extensions:
   - abbr
   - attr_list
@@ -41,7 +41,11 @@ markdown_extensions:
   - codehilite
   - footnotes
   - pymdownx.smartsymbols
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
   - toc:
       permalink: true
       toc_depth: 3
@@ -69,7 +73,7 @@ nav:
       - Flow architectures: architecture/flow-architectures.md
       - Streaming processing: architecture/streaming.md
       - Architecture decision: architecture/architectural-decisions.md
-      - DDD : https://jbcodeforce.github.io/eda-studies/ddd
+      - DDD : https://jbcodef orce.github.io/eda-studies/ddd
       - Disaster recovery: architecture/DR.md
       - Istio: istio/index.md
       - Openshift Studies: https://jbcodeforce.github.io/openshift-studies

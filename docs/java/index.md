@@ -443,7 +443,7 @@ See also the eda-quickstart project for tool and project template.
 
 ## Reactive messaging
 
-See the extensive doc from [SmallRye](https://smallrye.io/smallrye-reactive-messaging/) and my note [quarkus](/java/quarkus.md)
+See the extensive doc from [SmallRye](https://smallrye.io/smallrye-reactive-messaging/) and my note [quarkus](./quarkus.md)
 
 ## MQ
 
@@ -458,7 +458,7 @@ Code to subscribe to topic, and put, get from Queue. It includes a Docker image 
 
 Projects where I used it: 
 
-* [JMSMQClient](./mqChallenge/JMSMQClient)
+* [JMSMQClient](https://github.com/jbcodeforce/java-studies/tree/master/mqChallenges)
 * [Person manager with couchdb](https://github.com/jbcodeforce/person-manager)
 
 ```java

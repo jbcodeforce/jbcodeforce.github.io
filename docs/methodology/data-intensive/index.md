@@ -6,9 +6,9 @@ The method supports lightweight development practices, to start the implementati
 
 ## Integrating data - devops and AI-Analytics development practices
 
-Most organizations need to manage software lifecycles. The key tenets listed above imply the need for a separate lifecycle for data, because the outcome or deliverable for any of the key tenets should not be considered static and immutable. Like data, you can think of analytics as having its own lifecycle independent from the software lifecycle and the data lifecycle, although they are all complementary.
+Most organizations need to manage software life cycles. The key tenets listed above imply the need for a separate lifecycle for data, because the outcome or deliverable for any of the key tenets should not be considered static and immutable. Like data, you can think of analytics as having its own lifecycle independent from the software lifecycle and the data lifecycle, although they are all complementary.
 
-To help achieve digital transformation, your organization should integrate three development lifecycles:
+To help achieve digital transformation, your organization should integrate three development life cycles:
 
 * Software/Application
 * AI-Analytics
@@ -50,9 +50,9 @@ The smaller loop represents development iteration, while the outer loop represen
 
 **"Understanding business objectives"** is a common task in each lifecycle, but in the context of microservice solution, adoption [**event storming**](https://jbcodeforce.github.io/eda-studies/event-storming/) practice and [domain driven design](https://jbcodeforce.github.io/eda-studies/ddd/) will help understanding the business process, the data aggregates, and the bounded contexts.
 
-The solution will group a lot of out of the shelves components and a set of microservices supporting the implementation of the business logic and the intelligent application. A lot of things need to be considered while implementing each microservice from a data point of view. We recommend reading **[data pipeline for data intensive application](../../patterns/data-pipeline/)** to assess what needs to be done, and some best practices.
+The solution will group a lot of out of the shelves components and a set of microservices supporting the implementation of the business logic and the intelligent application. A lot of things need to be considered while implementing each microservice from a data point of view. 
 
-Among the tasks described in these release and development iteration loops, we do not need to cover each of them, but may be highlight the **Integration service** task  which has a blue border to demonstrate integration activities between the different lifecycles, like ML model integration which is developed in the [MLops iteration](#mlops-lifecycle).
+Among the tasks described in these release and development iteration loops, we do not need to cover each of them, but may be highlight the **Integration service** task  which has a blue border to demonstrate integration activities between the different life cycles, like ML model integration which is developed in the [MLops iteration](#mlops-lifecycle).
 
 ### DataOps
 
@@ -66,7 +66,7 @@ As you can see activities are addressing data preparation and understanding, so 
 
 As part of the **gather data requirements**, it is important to review the dimensions of value as introduced in the ["valuation of data" article](https://www.ibm.com/garage/method/practices/culture/valuation-of-data/), then formalize the [value chain of the data](https://www.ibm.com/garage/method/practices/discover/recognize-value-of-data)  in the scope of the project, and finally address if the data contains the correct information to answer the business challenges and support the business process.
 
-*`Transform data for AI` and `Deploy data integration flow` tasks have different border colors to demonstrate integration activities between the different lifecycles.*
+*`Transform data for AI` and `Deploy data integration flow` tasks have different border colors to demonstrate integration activities between the different life cycles.*
 
 ### MLOps lifecycle
 
@@ -84,17 +84,17 @@ The developed AI or Analytics model is deployed as one to many services that are
 
 ### Integrating the cycles
 
-Although the three lifecycles are independents, you can use them together and establish dependencies to help drive business outcomes. Each lifecycle should be agile and should be incorporated into a DevOps process for development and deployment.
+Although the three life cycles are independents, you can use them together and establish dependencies to help drive business outcomes. Each lifecycle should be agile and should be incorporated into a DevOps process for development and deployment.
 
 ![Circles](./images/circles.png)
 
-The intersection of the three lifecycles highlights the need for unified governance. The intersection between software/app and data, highlights integration and access paths to information. The intersection between data and analytics, highlights integration with the underlying data stores. The intersection between analytics and software/app highlights integration and the use of APIs or other data exchange techniques to assist in resolving complex algorithms or access requirements.
+The intersection of the three life cycles highlights the need for unified governance. The intersection between software/app and data, highlights integration and access paths to information. The intersection between data and analytics, highlights integration with the underlying data stores. The intersection between analytics and software/app highlights integration and the use of APIs or other data exchange techniques to assist in resolving complex algorithms or access requirements.
 
 An other interesting view, is to consider the high level artifacts built in those overlapping areas, as they are very important elements to project managed efficiently to avoid teams waiting for others. 
 
 ![Artifacts](./images/artifacts.png)
 
-Interface definitions and data schema are important elements to address as early as possible in the SDLC. Data access integration includes dedicated microservices managing the full lifecycles and business operations for each major business entities of the solution. The integration can be event-based and adopt an event-driven architecture.
+Interface definitions and data schema are important elements to address as early as possible in the SDLC. Data access integration includes dedicated microservices managing the full life cycles and business operations for each major business entities of the solution. The integration can be event-based and adopt an event-driven architecture.
 
 The `data store integration` addresses storage of high volume data, but also access control, any transformation logic, and event data schema to be consumable by AI workbench.
 

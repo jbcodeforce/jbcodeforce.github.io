@@ -1,17 +1,14 @@
----
-title: Data lineage
-description: Data lineage in the context of event-driven solution
----
+# Data lineage
 
-From a stream data platform adoption point of view, we have multiple components working on data, with online and offline processing. The following figure illustrates the concepts and components we may need to consider as part of the data lineage discussion:
+From a streaming data platform adoption point of view, we have multiple components working on data, with online and offline processing. The following figure illustrates the concepts and components we may need to consider as part of the data lineage discussion:
 
 ![](./images/data-lineage-ctx.png)
 
 * Mobile, web single page application, IoT, microservice app, change data capture (not presented here) and SaaS offering applications are source of events. Event backbone persists those events in append log with long retention time (days). 
-* Stream applications are running statefule operations to compute real time analytics or doing complex event processing. Kafka Streams and Apache Flinks are the technology of choices. 
+* Stream applications are running stateful operations to compute real time analytics or doing complex event processing. Kafka Streams and Apache Flinks are the technology of choices. 
 * On the right side, consumer can trigger what will be the next best action to perform on a specific event. Those action can be a business process, a product recommendations, an alert...
 * Often data can be persisted on a longer retention storage, with full cloud availability like S3 buckets (Cloud Object storage on IBM Cloud or on Premise).
-* Big data processing plaform like Sparks can run batch processing, map reduce type, on data at rest, that comes from the data ingestion layer supported but the event backbone.
+* Big data processing platform like Sparks can run batch processing, map reduce type, on data at rest, that comes from the data ingestion layer supported but the event backbone.
 * Finally business dashboard can integrate queries on data at rest and in motion via interactive / streaming queries.
 
 With those simple component view we can already see data lineage will be complex, so we need practices and tools to support it.

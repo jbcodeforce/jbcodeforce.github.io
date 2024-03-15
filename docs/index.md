@@ -6,8 +6,9 @@ This web site includes a set of summary and links to my different studies. Use t
 
 ## About me
 
-I am currently Principal Solution Architect at AWS supporting customer to adopt the cloud computing capabilities.
-Before that I was a Distinguished Engineer at IBM, like a CTO for Event-driven architecture and solutions, which includes modern data pipeline, reactive microservices and real-time analytics on top of OpenShift / Kubernetes.
+For the last ten years as AWS principal solution architect and an IBM distinguished engineer, I help customers adopt the cloud, designing complex solutions using  Event-driven architecture, messaging middleware, data streaming, data lake, and AI/ML model development and Serverless or container (OpenShift) deployment. For the last twelve months, as Solution Architect, I have helped customers adopt Generative AI technology for model fine tuning, RAG, knowledge graph and knowledge management.
+
+[ See more about me >>>](./about.md)
 
 ## Skills I work on
 

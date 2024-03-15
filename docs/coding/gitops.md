@@ -45,7 +45,7 @@ by the tool from the Gitops repositories.
 ## Supporting tools
 
 * [KAM CLI from the Red Hat gitops team ](https://github.com/redhat-developer/kam)
-* [Tekton](/coding/tekton) for continuous integration and even deployment
+* [Tekton](./tekton.md) for continuous integration and even deployment
 * [ArgoCD | Openshift Gitops](#openshift-gitops) for continuous deployment
 * [Kustomize.io](https://kustomize.io/) to templatize the deployment and support overlay mechanisms.
 * [git Action](#git-action) for continuous execution of development workflows right in your repository
@@ -57,7 +57,7 @@ by the tool from the Gitops repositories.
 Configure github SECRETS for each project:
 
 * DOCKER_REGISTRY  quay.io
-* DOCKER_REPOSITORY ibmcase or jbcodeforce
+* DOCKER_REPOSITORY jbcodeforce
 * DOCKER_USERNAME  jbcodeforce
 * DOCKER_PASSWORD
 * DOCKER_IMAGE_NAME  the name of the application
@@ -111,7 +111,7 @@ Now the different deployment environments can be using different k8s clusters or
 
 With the adoption of ArgoCD we can have one bootstrap app that starts other apps and monitor each of those layers.
 
-See detail in [this separate note](/coding/argocd/).
+See detail in [this separate note](./argocd.md).
 
 ### OpenShift Projects
 
@@ -209,7 +209,7 @@ corner and then select Command Line Tools:
 
 ![CLI tools](./images/clitools.jpg)
 
-See more detail in this [Tekton summary](/coding/tekton)
+See more detail in this [Tekton summary](tekton.md)
 
 ## Kustomize and gitops
 
@@ -267,7 +267,7 @@ such as `overlay/dev`. These resource configuration files can contain small chan
  to the base configuration files of the same name as a patch.
 
 In GitOps, the pipeline does not finish with something like `oc apply..`. but it’s an external tool 
-([Argo CD](/coding/argocd) or Flux) that detects the drift in the Git repository and will run these commands.
+([Argo CD](argocd.md) or Flux) that detects the drift in the Git repository and will run these commands.
 
 ### Future readings
 

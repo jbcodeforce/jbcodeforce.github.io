@@ -4,7 +4,7 @@
 
 As a current Principal Solution Architect at Amazon Web Services, I help customers adopt AWS cloud by designing complex solutions around data management for AI/ML constructs and application modernization using microservices, serverless and event-driven architecture.
 
-I am an ex IBM Distinguished Engineer, focusing on event-driven, cloud-native solutions, real time analytics and complex event processing. 
+I am a former IBM Distinguished Engineer, focusing on event-driven, cloud-native solutions, real time analytics and complex event processing. 
 
 My main roles are:
 
@@ -18,7 +18,7 @@ My main roles are:
 
 As a [technical expert](./skill.md), I sell, create, and lead First of a Kind cloud projects and resolve customers’ critical issues. I harvest architecture, best practices, and lessons learned from customer's experiences.
 
-I try to commit myself to be a trusted advisor, so I focus to continuously deeply learn new technology, programming habits, and agile practices. I try to code and play with new things on a daily basis. The goal is to help customers to innovate and bring business values with new technologies.
+I try to commit myself to be a trusted advisor, so I focus to continuously deeply learn new technologies, programming habits, and agile practices. I try to code and play with new things on a daily basis. The goal is to help customers to innovate and bring business values with new technologies.
 
 ## Publications
 
@@ -29,6 +29,11 @@ I try to commit myself to be a trusted advisor, so I focus to continuously deepl
 * [Event-driven solutions virtual book](https://jbcodeforce.github.io/eda-studies/)
 * [AWS Studies for Solution Architect Professional Certification](https://jbcodeforce.github.io/yarfba/)
 * [Machine Learning studies](https://jbcodeforce.github.io/ML-studies/)
+
+### Assets
+
+* [Messaging in AWS, Active MQ](https://jbcodeforce.github.io/aws-messaging-study)
+* [AWS Serverless - Lambda studies ](https://jbcodeforce.github.io/autonomous-car-mgr/)
 
 ### Blogs
 
