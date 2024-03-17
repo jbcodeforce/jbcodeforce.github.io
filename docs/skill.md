@@ -38,6 +38,7 @@ I will try to assess the skill level using the following definitions:
 * Container (docker) and Kubernetes / [OpenShift](https://jbcodeforce.github.io/openshift-studies/)
 * Infrastructure as code: [CDK](https://jbcodeforce.github.io/yarfba/coding/cdk/), [SAM](https://jbcodeforce.github.io/yarfba/coding/sam/)
 * [DevOps](https://jbcodeforce.github.io/coding/agile/) - [GitOps](https://jbcodeforce.github.io/coding/gitops) - [ArgoCD](https://jbcodeforce.github.io/coding/argocd)
+
 * [Java](https://jbcodeforce.github.io/java/), JEE, Java Microprofile, Quarkus, Spring boot
 
 ### Data
