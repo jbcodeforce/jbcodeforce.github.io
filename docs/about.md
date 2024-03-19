@@ -2,9 +2,9 @@
 
 ## About me
 
-As a current Principal Solution Architect at Amazon Web Services, I help customers adopt AWS cloud by designing complex solutions around data management for AI/ML constructs and application modernization using microservices, serverless and event-driven architecture.
+I am an accomplished technology professional with a diverse background in event-driven architecture (EDA), hybrid cloud solutions (kubernetes and AWS services), business process and business rule implementation. With a strong track record as a former IBM Distinguished Engineer and my current role as a Principal Solution Architect at AWS, my expertise lies in guiding customers through their hybrid cloud journey, including messaging, data pipeline and AI model development and integration.
 
-I am a former IBM Distinguished Engineer, focusing on event-driven, cloud-native solutions, real time analytics and complex event processing. 
+In my career, I have had the pleasure of assisting customers in a consultative manner, helping them adopt decision management, business process automation, data streaming, and complex event processing. I have a deep understanding of lean and agile methodologies, having authored books and blogs on agile business rule solution development, and being part of IBM Garage from the creation. Additionally, I have engaged with customers to facilitate the adoption of asynchronous and reactive systems based on IBM middleware, AWS serverless services, containers, and Kubernetes deployments. Furthermore, I have contributed to the definition of the next generation of several middleware products, showcasing my ability to drive innovation. I have led the development of IBM reference architectures for event-driven solution, Cognitive, and Data and AI. 
 
 My main roles are:
 
@@ -16,9 +16,13 @@ My main roles are:
 * Authoring, presenting and contributing to customer-facing publications for conferences.
 * Acting as a technical liaison between customers and services teams to help evolve the different company products.
 
-As a [technical expert](./skill.md), I sell, create, and lead First of a Kind cloud projects and resolve customers’ critical issues. I harvest architecture, best practices, and lessons learned from customer's experiences.
+As a [technical expert](./skills.md), I sell, create, and lead First of a Kind cloud projects and resolve customers’ critical issues. I harvest architecture, best practices, and lessons learned from customer's experiences.
 
 I try to commit myself to be a trusted advisor, so I focus to continuously deeply learn new technologies, programming habits, and agile practices. I try to code and play with new things on a daily basis. The goal is to help customers to innovate and bring business values with new technologies.
+
+Outside of work, I am a devoted parent to three children, with my youngest daughter at WashU in St Louis studying environmental engineering, my sone currently pursuing a master in aerospace engineering at Cornell University, and my oldest daughter working as a software engineer in France. In my leisure time, I enjoy skiing, golfing, sailing, hiking, and engaging in family board games. 
+
+Thank you for taking the time to read my bio. I look forward to the opportunity to contribute my skills and experience to new and exciting projects. 
 
 ## Publications
 
@@ -26,9 +30,9 @@ I try to commit myself to be a trusted advisor, so I focus to continuously deepl
 
 * Co Author: **Sustainable IT Architecture** Wisley
 * Co Author: **[Agile Business Rule Development](http://www.springer.com/business+%26+management/business+information+systems/book/978-3-642-19040-7)** Springer.
-* [Event-driven solutions virtual book](https://jbcodeforce.github.io/eda-studies/)
+* [Event-driven solutions virtual book](https://jbcodeforce.github.io/eda-studies/), I think a more flexible way to develop a book, and more agile to change content.
 * [AWS Studies for Solution Architect Professional Certification](https://jbcodeforce.github.io/yarfba/)
-* [Machine Learning studies](https://jbcodeforce.github.io/ML-studies/)
+* [Machine Learning studies](https://jbcodeforce.github.io/ML-studies/), same approach, it may become a book.
 
 ### Assets
 

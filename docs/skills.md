@@ -1,6 +1,8 @@
 # Skills
 
-This section presents my working content for skill set, certification...
+As a seasoned senior consultant, I have had the privilege of immersing myself in a wide range of technologies throughout my career. My insatiable passion for learning continually drives me to explore new concepts and expand my knowledge base. In this section, I would like to provide you with a high-level overview of the breadth and depth of my expertise in certain subjects.
+
+My Git repositories showcase my commitment to delving deeper into specific solutions, as I consistently develop and refine assets that contribute to these areas.
 
 * **3/2024 Skill Map**
 
@@ -43,7 +45,7 @@ I will try to assess the skill level using the following definitions:
 
 ### Data
 
-* [Main content in this repository.](./data/index.md)
+* [Main content is in this repository.](./data/index.md)
 
 ### Analytics
 

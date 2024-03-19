@@ -250,4 +250,3 @@ project git repository under `src/main/apis` folder.
 ## Related product documentation
 
 * [Cloud Native PostgreSQL Operator](https://docs.enterprisedb.io/cloud-native-postgresql/1.8.0/)
-* [Step by step quarkus app dev with pipeline and gitops](/blogs/08-27-21/steps-to-dev-ms/)

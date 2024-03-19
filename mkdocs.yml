@@ -60,10 +60,10 @@ markdown_extensions:
       custom_checkbox: true
 
 nav:
-  - Blogs: blogs/index.md
   - About: about.md
-  - Skills: skill.md
+  - Skills: skills.md
   - List of contributions: assets.md
+  - Blogs: blogs/index.md
   - Knowledge base: 
     - The SA job: blogs/consultant-job.md
     - Architecture:

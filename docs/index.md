@@ -12,4 +12,4 @@ For the last ten years as AWS principal solution architect and an IBM distinguis
 
 ## Skills I work on
 
-[Skills map that represents what I like to learn and do, and should be good at...](./skill.md)
+[Skills map that represents what I like to learn and do, and should be good at...](./skills.md)

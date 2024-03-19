@@ -6,7 +6,7 @@ Capabilities:
 * manage entities life cycle
 * uses persistence context as a "cache" for entities read or saved to a database
 * session is a logical transaction, defined at the method level with @Transaction or using entity Manager
-* Entities are in one of `transient, persitent, detached` states
+* Entities are in one of `transient, persistent, detached` states
 
 Practices:
 
