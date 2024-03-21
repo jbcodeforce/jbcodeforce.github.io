@@ -2,13 +2,18 @@
 
 ## About me
 
-I am an accomplished technology professional with a diverse background in event-driven architecture (EDA), hybrid cloud solutions (kubernetes and AWS services), business process and business rule implementation. With a strong track record as a former IBM Distinguished Engineer and my current role as a Principal Solution Architect at AWS, my expertise lies in guiding customers through their hybrid cloud journey, including messaging, data pipeline and AI model development and integration.
+I am an accomplished technology professional with a diverse background in event-driven architecture (EDA), hybrid cloud solutions (kubernetes and AWS services), business process and business rule implementation. With a strong track record as a former IBM Distinguished Engineer and my current role as a Principal Solution Architect at AWS, my expertise lies in guiding customers through their hybrid cloud journey, including messaging, data pipeline, decision systems and AI model development and integration.
 
-In my career, I have had the pleasure of assisting customers in a consultative manner, helping them adopt decision management, business process automation, data streaming, and complex event processing. I have a deep understanding of lean and agile methodologies, having authored books and blogs on agile business rule solution development, and being part of IBM Garage from the creation. Additionally, I have engaged with customers to facilitate the adoption of asynchronous and reactive systems based on IBM middleware, AWS serverless services, containers, and Kubernetes deployments. Furthermore, I have contributed to the definition of the next generation of several middleware products, showcasing my ability to drive innovation. I have led the development of IBM reference architectures for event-driven solution, Cognitive, and Data and AI. 
+In my career, I have had the pleasure of assisting customers in a consultative manner, helping them adopt decision management, business process automation, data streaming, and complex event processing. I have a deep understanding of lean and agile methodologies, having authored books and blogs on agile business rule solution development, and being part of IBM Garage from the creation. Additionally, I have engaged with customers to facilitate the adoption of asynchronous and reactive systems based on IBM middleware, AWS serverless services, containers, and Kubernetes deployments.
+
+I led a lot of event-storming, and domain-driven design workshops with customers willing to innovate and break their monolithic applications. I also created an agile methodology for developing intelligent automation solutions, and used by IBM automation product consultants for years.
+
+Furthermore, I have contributed to the definition of the next generation of several middleware products, showcasing my ability to drive innovation. I have led the development of IBM reference architectures for event-driven solution, Cognitive, and Data and AI. 
 
 My main roles are:
 
-* Helping strategic customers to adopt the cloud and deploy their own software as a service.
+* Leading customers to develop intelligent automation solutions using Machine Learning, LLM, symbolic AI, deployable on hybrid cloud.
+*  Helping strategic customers to adopt the cloud and deploy their own software as a service.
 * Leading incremental architecture workshops and prototyping solution based on business requirements to proof the business value in the form of minimum viable products.
 * Supporting customers in long term, deep, technical relationships with senior technical architects.
 * Mentoring developers, consultants and technical sellers.

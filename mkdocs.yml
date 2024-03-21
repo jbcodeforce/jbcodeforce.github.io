@@ -139,6 +139,7 @@ nav:
       - Atlas: techno/atlas.md
       - Databricks: techno/databricks/index.md
       - Docker: techno/docker.md
+      - Drools: techno/decisions/drools.md
       - Podman: techno/podman.md
       - Microcks: techno/microcks.md
       - Minikube: techno/minikube.md

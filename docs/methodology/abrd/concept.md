@@ -1,25 +1,25 @@
-# Decision Service Development with Agile Methodology
+---
+title: Agile Business Rules Development Methodology
+description: Agile Business Rules Development Methodology
+---
 
 
 ## Introduction
 
-The Decision Service Development with Agile Methodology which was developed in 2004 at ILOG, has been widely utilized on numerous projects worldwide to incorporate decision management into business applications. This methodology is based on the book written by [Hafedh Mili and Jerome Boyer's book](http://www.springer.com/business+%26+management/business+information+systems/book/978-3-642-19040-7). The content discussed in the book is not specific to any particular product and supports an incremental and iterative approach to developing decision services. The methodology begins with the identification of a business operation improvement idea, which is then evaluated against a set of criteria to determine the suitability of utilizing a Decision Management System. Subsequently, it addresses all the necessary project implementation tasks.
+The Agile Business Rule Methodology was developed in 2004 at ILOG and then used on hundred of projects worldwide when projects need to integrate decision management into the business application. It is based from [Hafedh Mili and Jerome Boyer's book](http://www.springer.com/business+%26+management/business+information+systems/book/978-3-642-19040-7). The content is product agnostic and support incremental and iterative development for decision services. It starts from a business operation improvement idea that is assessed versus of set of criteria to validate the fit to use a Business Rule Management System, and then addresses all the project implementation tasks.
 
 ## Goals
 
-The goals of the Decision Service Development (DSD) methodology can be summarized as follows:
+ABRD applies the agile manifesto to efficiently implement business policies as executable rules. The goal is not having a team spending month to document thousand of rules, where those rules can be implemented, executed, tested in less time, even as early as the first day of your analysis. The goals can be summarized as:
 
-1. Separate rules as a manageable artifact: The method aims to break down business rules into manageable components through activities such as discovery, analysis, and authoring. This allows for better organization and understanding of the rules.
-1. Traceability throughout the rule lifecycle: DSD emphasizes the need to trace rules from their initial requirements all the way to deployment and maintenance. This ensures transparency and accountability in rule management.
-1. Linking rules to business context and motivation: DSD focuses on establishing a clear connection between rules and the broader business context and motivation behind them. This helps stakeholders understand the purpose and rationale behind each rule.
-1. Rule description using business terms and high-level rule language: DSD promotes the use of business terms and a high-level rule language to describe rules. This facilitates communication between business stakeholders and technical teams, making it easier to capture and implement rules accurately.
-1. Preparation of the fact model: DSD emphasizes the importance of preparing a fact model, which represents the relevant business entities and their relationships. This ensures that the rule implementation aligns with the underlying business structure.
-1. Implementation and deployment of rule sets: DSD supports the implementation and deployment of rule sets as decision services within a Service-Oriented Architecture (SOA) or as Micro Services executed by a rule engine. This enables efficient execution and management of the rules.
-1. Articulation of rule governance processes: DSD recognizes the need for rule governance processes to ensure consistent management, maintenance, and monitoring of rules. This includes defining roles, responsibilities, and procedures for rule governance.
+* Separate rules as a manageable artifact using discovery, analysis and authoring activities and work products
+* Trace rules during their full life cycle from requirement to deployment and maintenance
+* Link rules to business context and motivation
+* Develop the rule description using business terms and high level rule language
+* Prepare the fact model for the rule implementation
+* Prepare the rule set implementation and deployment as decision services in a Service Oriented Architecture or as Micro Services executed by a rule engine
+* Articulate the rule governance processes
 
-By aligning with these goals, the methodology aims to streamline the development and implementation of business policies as executable rules, enabling faster and more efficient rule execution and maintenance.
-
-----
 
 ## Concepts
 
