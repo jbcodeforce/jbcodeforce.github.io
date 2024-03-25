@@ -1,6 +1,7 @@
 site_name: Jerome Boyer's Personal Site
 site_description: Knowledge acquisition personal's notes, blog drafts
 repo_url: https://github.com/jbcodeforce/jbcodeforce.github.io/
+site_url: https://jeromeboyer.net
 docs_dir: docs
 site_dir: public
 edit_uri: edit/master/docs
@@ -16,9 +17,9 @@ theme:
       - content.tooltips
       - navigation.tabs
       - navigation.instant
-      #- navigation.tracking
-      # - navigation.sections
-      # - navigation.expand
+      - navigation.tracking
+      - navigation.sections
+      - navigation.expand
       - navigation.tabs.sticky
       - navigation.top
   social:

@@ -4,8 +4,8 @@ There is perhaps nothing more valuable to an organization than its data. In the 
 
 ## Business cases
 
-* Data as an organizational asset: no more kept in silos or as the property of individual departments
-* Data is accessible: access to one who needs it.
+* Consider Data as an organizational asset: no more kept in silos or as the property of individual departments
+* Access Data to the ones who need it.
 * Data is put to work: used in analytics and ML to make better decisions, create efficiencies and drive new innovations.
 * A data strategy focused in data lakes addresses scaling the data ingestion, persistence and consumption at the best price-performance ratio, and should address:
 
