@@ -1,9 +1,9 @@
-# The job of solution architect
+# The job of Solution Architect
 
 Solution Architects are consultants. The IT Consultant is defined as "knowledgeable professional who helps businesses develop, integrate, and maximize the value of IT systems". I do not want to re-invent all the extended information about IT consultant job, but for me there are two main group of activities:
 
-1. Manage day to day **tasks** like any other white colar workers do: meetings with customer, issues management, project management, dependencies management, management reporting, internal administration tasks.
-1. **Knowledge** management: As Stephen Covey in "the 7 habits of highly effective people" wrote: we need to sharpen the saw, to be a better person. This is where the value of a consultant resides. SAs share his knowledge to get customer’s trust, so customers feel comfortable to invest in your technology andin your company because they feel the company's technical human resources will help them to remove roadblocks.
+1. Manage day to day **tasks** like any other white collar workers do: meetings with customer, issues management, project management, dependencies management, management reporting, internal administration tasks.
+1. **Knowledge** management: As Stephen Covey in "the 7 habits of highly effective people" wrote: we need to sharpen the saw, to be a better person. This is where the value of a consultant resides. SAs share his knowledge to get customer’s trust, so customers feel comfortable to invest in your technology and in your company because they feel the company's technical human resources will help them to remove roadblocks.
 Therefore Solution Architect needs to continuously work on his skill set for IT, Cloud and different technology to support customer's requests and build trust.I think as of now a SA should spend around from 40% to 60% on knowledge acquisition and maintenance.
 
 In 2023 I think the role of SA needs to change dramatically bad adding generative AI as part of the job.

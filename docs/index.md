@@ -13,3 +13,7 @@ For the last ten years as AWS principal solution architect and an IBM distinguis
 ## Skills I work on
 
 [Skills map that represents what I like to learn and do, and should be good at...](./skills.md)
+
+## Sharing knowledge
+
+Over the years, I have explored various technologies and practices, summarizing them at different levels of study. I believe this compilation can serve as a valuable [body of knowledge.](./blogs/consultant-job.md)

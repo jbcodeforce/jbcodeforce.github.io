@@ -20,8 +20,8 @@ theme:
       - navigation.instant
       - navigation.tabs.sticky
       - navigation.tracking
-      - navigation.sections
-      - navigation.expand
+      # - navigation.sections
+      # - navigation.expand
       - navigation.footer
       - navigation.tabs.sticky
       - navigation.top
@@ -69,7 +69,6 @@ markdown_extensions:
 nav:
   - About: about.md
   - Skills: skills.md
-  - List of contributions: assets.md
   - Blogs: blogs/index.md
   - Knowledge base: 
     - The SA job: blogs/consultant-job.md
@@ -84,7 +83,6 @@ nav:
       - Disaster recovery: architecture/DR.md
       - Istio: istio/index.md
       - Openshift Studies: https://jbcodeforce.github.io/openshift-studies
-    - AWS: https://jbcodeforce.github.io/yarfba
     - Methodology: 
       - Design Thinking: methodology/design-thinking/index.md
       - Data intensive: methodology/data-intensive/index.md
@@ -144,6 +142,7 @@ nav:
     - Techno:
       - Apicurio: techno/apicurio.md
       - Atlas: techno/atlas.md
+      - AWS body of knowledge: https://jbcodeforce.github.io/yarfba
       - Databricks: techno/databricks/index.md
       - Docker: techno/docker.md
       - Drools: techno/decisions/drools.md
@@ -162,10 +161,7 @@ nav:
       - Red Panda: https://jbcodeforce.github.io/redpanda-studies/
       - Spark Studies: https://jbcodeforce.github.io/spark-studies/
       - VScode: java/java-vscode.md
-    - Astronomy: 
-      - Introduction: astronomy/index.md
-      - Physic - Newton: astronomy/physic.md
-    - IBM:
+      - IBM:
         - IBM Cloud: architecture/ibmcloud.md
         - IBM Cloud Satellite: architecture/satellite.md
         - Cloud object storage: techno/cos.md
@@ -182,3 +178,8 @@ nav:
           - MQ: 
             - Overview: techno/integration/mq.md
             - MQ challenge: java/mqChallenge.md
+
+    - Astronomy: 
+      - Introduction: astronomy/index.md
+      - Physic - Newton: astronomy/physic.md
+    

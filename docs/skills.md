@@ -79,10 +79,6 @@ I will try to assess the skill level using the following definitions:
 * Agile business rules development (Creator)
 * DevOps, [Gitops](https://jbcodeforce.github.io/coding/gitops)
 
-## Solution selling
+## List of contributions
 
-Studied:
-
-* Solution selling
-* Customer success
-* Product life cycle
+[See the assets list](./assets.md)
