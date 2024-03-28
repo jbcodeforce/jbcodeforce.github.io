@@ -2,10 +2,10 @@
 
 Being able to understand and manage data becomes an essential foundation, for any organization that wants to be successful with analytics and AI,
 
-A *data topology* is an approach for classifying and managing real-world data scenarios. The data scenarios may cover any aspect of the business
+A **data topology** is an approach for classifying and managing real-world data scenarios. The data scenarios may cover any aspect of the business
  from  operations, accounting, regulatory and compliance, reporting, to advanced analytics, etc.
 
-A properly designed *data topology* is sustainable over time, and highly resilient to future needs, new technologies, and the continuous changes
+A properly designed **data topology** is sustainable over time, and highly resilient to future needs, new technologies, and the continuous changes
  associated with data characteristics including volume, variety, velocity, veracity, and perception of the data’s value.
 
 A properly designed *data topology* will provide the foundation for any enterprise to be successful with any type of analytics.
@@ -14,17 +14,17 @@ A properly designed *data topology* will provide the foundation for any enterpri
 
 There are three Core elements of a data topology:
 
-- Zone Map
-- Data Flow
-- Data Layer
+- **Zone Map**
+- **Data Flow**
+- **Data Layer**
 
 ### Zones and Zone Maps
 
-*Zones* represent something which can be used to group/cluster data or with an instantiation/deployment of data.
+**Zones** represent something which can be used to group/cluster data or with an instantiation/deployment of data.
 
 *Zones* are inherently abstract and conceptual in nature as a zone is not a deployed object.
 
-A *Zone Map* identifies and names each zone.
+A **Zone Map** identifies and names each zone.
 
 Figure 1 shows the primitive zones that are used in a zone map.
 
@@ -37,7 +37,7 @@ reflect groups for data virtualization or data federation.
 
 ### Data Flow
 
-The data flow shows the *flow of Data* and helps
+The data flow shows the **flow of Data** and helps
 to illustrate the points of integration or interoperability between the zones.  
 
 This can also help to detect circular data flows occurring across zones, to be flagged for 
@@ -45,7 +45,7 @@ investigation as data integrity may potentially be compromised if not well manag
 
 ### Data Layer
 
-The *data layer* is reflective of where data may be persisted. In a modern enterprise we should consider the full landscape of possibilities which could include:
+The **data layer** is reflective of where data may be persisted. In a modern enterprise we should consider the full landscape of possibilities which could include:
 
 - Public cloud
 - On premise private cloud
@@ -65,23 +65,23 @@ For example, mixed deployment data layers include:
 
 Designing a data topology is an iterative process
 
-1. Group users (or end-points) into communities of interest to determine shared needs
-1. Classify and cluster data into zones with shared qualitative characteristics (use, purpose, need) unconstrained by particular technologies or quantitative characteristics
-1. Map and align communities of interest to data zones
-1. Add constraints to further develop the zone map and align with functional and non-functional requirements and capabilities
-1. Work backwards in the data pipeline to identify areas of synergy and re-use
-1. Define the flow of data (movement, dependencies) across and within zones in support of the defined constraints
+1. Group **users** (or end-points) into communities of interest to determine shared needs.
+1. Classify and cluster **data** into zones with shared qualitative characteristics (use, purpose, need) unconstrained by particular technologies or quantitative characteristics.
+1. **Map** and align communities of interest to data zones.
+1. Add **constraints** to further develop the zone map and align with functional and non-functional requirements and capabilities.
+1. Work backwards in the data pipeline to identify areas of synergy and re-use.
+1. Define the **flow of data** (movement, dependencies) across and within zones in support of the defined constraints.
 
 ### Keeping an organic data topology
 
-A data topology is intended to be organic in nature. Although a static topology is a choice, an organic data topology promotes the development 
-of disciplines for addressing an enterprise with changing needs and priorities over time
+A data topology is intended to be organic, alive, in nature. Although a static topology is a choice, an organic data topology promotes the development 
+of **disciplines** for addressing an enterprise with changing needs and priorities over time.
 
-* Zones can be regarded as being ephemeral or temporal
-* New zones can be added as required
-* A new zone can be added as a diagrammatic placeholder without instantiation
-* Old zones can be removed or deprecated
-* Covers zones that have been expired, sunsetted, retired, archived
+* Zones can be regarded as being ephemeral or temporal.
+* New zones can be added as required.
+* A new zone can be added as a diagrammatic placeholder without instantiation.
+* Old zones can be removed or deprecated.
+* Covers zones that have been expired, sunsetted, retired, archived.
 * Leaf zones are intended to have independent aging policies, For example:
 
   * data can be removed after a given period of time (such as removing data from a raw zone after 7 business days)
@@ -89,20 +89,20 @@ of disciplines for addressing an enterprise with changing needs and priorities o
 
 ### Leaf zone guides
 
-A leaf zone is the zone that reflects the instantiation of data.
+A **leaf zone** is the zone that reflects the instantiation of data.
 
 In that regard, the leaf zone is the least abstract or conceptual of all zone types.
 
-For simplicity purposes, general recommendations to consider when establishing a leaf zone are to:
+For simplicity purposes, general recommendations to consider when establishing a leaf zone are:
 
-* limit the database technology to a single type.
+* to limit the database technology to a single type.
 * the location (virtual or physical) should be singular.
 
 A conceptual non-leaf zone can be added, that is a grouping of multi-leaf zones together in order to address multiple technologies or multiple locations.
 
 ### Simplifying security with leaf zones
 
-A leaf zone can also be used to help simplify certain complex security profiles.
+A leaf zone can also be used to help simplify certain complex **security profiles**.
 
 There can be situations where a shared data resource requires numerous security policies to address each user group type.
 For example, some users may have read/write access while other users may only have access to data with obfuscated values.
@@ -115,7 +115,7 @@ By having two or more independent leaf zones with the same information, simplifi
 
 ### Enterprises and Organizations
 
-When designing the data topology, it is useful to consider the characteristics and differences between *organizations* within an enterprise and the *enterprise*.
+When designing the data topology, it is useful to consider the characteristics and differences between **organizations** within an enterprise and the **enterprise** itself. 
 
 An *organization* is often inwardly looking – even when taking into account customers; while an *enterprise* is outward looking recognizing the place of the *organization* in a complete ecosystem.
 
