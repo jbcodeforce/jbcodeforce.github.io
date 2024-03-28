@@ -1,13 +1,21 @@
-# Data studies
+# Data Management Studies
 
-There is perhaps nothing more valuable to an organization than its data. In the age of digital transformation and the empowered customers, organizations must be able to generate real-time insights based on accurate and high-quality data.
+There is perhaps nothing more valuable to an organization than its data. 
+In the ever-evolving landscape of digital transformation and customer empowerment, data serves for informed decision-making and propels businesses towards success.
+
+Organizations must be able to generate real-time insights based on accurate and high-quality data.
+
+
+In this chapter, we delve into the fundamental importance of leveraging data as a strategic asset. 
 
 ## Business cases
 
-* Consider Data as an organizational asset: no more kept in silos or as the property of individual departments
-* Access Data to the ones who need it.
-* Data is put to work: used in analytics and ML to make better decisions, create efficiencies and drive new innovations.
-* A data strategy focused in data lakes addresses scaling the data ingestion, persistence and consumption at the best price-performance ratio, and should address:
+In today's data-driven world, organizations must address the following key objectives:
+
+* Ensure that data is accessible to the individuals and teams who need it, empowering them to make informed decisions and drive innovation. Consider Data as an organizational asset.
+* Leverage advanced analytics and machine learning techniques to extract meaningful insights from data, to improve operational efficiencies and to discover new business opportunities.
+
+* Implementing a data strategy centered around data lakes provides a scalable solution for ingesting, persisting, and consuming data, achieving an optimal price-performance ratio. It encompasses various components, including:
 
     * Non-relational databases
     * Big Data Analytics
@@ -19,107 +27,135 @@ There is perhaps nothing more valuable to an organization than its data. In the 
 
     ![](./diagrams/data-strategy.drawio.png)
 
-* [AWS presentation: Put your data to work with data lake](https://pages.awscloud.com/Put-Your-Data-to-Work-with-the-Best-of-Both-Data-Lakes-and-Purpose-Built-Data-Stores_2021_0925-ABD_OD.html)
+* To gain a deeper understanding of how to put your data to work effectively. read the [AWS presentation: Put your data to work with data lake.](https://pages.awscloud.com/Put-Your-Data-to-Work-with-the-Best-of-Both-Data-Lakes-and-Purpose-Built-Data-Stores_2021_0925-ABD_OD.html)
 
 ## Important concepts
 
-when we talk about **Big Data**, we want to address Data that is stored rapidly from various sources, at massive in size, and is complicated for organizations to secure, analyze, and gain valuable insight from. Big data challenges cannot be solved with traditional database and processing solutions. The big data characteristics: volume, variety, velocity, veracity, and value = **The 5 V**.
+### Big Data and the 5 V's
 
-The size of data stored by an organization can be from terabytes to petabytes to sometimes even exabytes. Global data creation to grow to 180 zettabytes by 2025.
+When discussing **Big Data**, it refers to data that is rapidly generated from diverse sources, characterized by its massive volume, complexity, and the challenges organizations face in securing, analyzing, and extracting valuable insights from it.
 
-* Veracity deals with the trustworthiness of the data, and integrity is one of the key factors influencing that trustworthiness. Data integrity is applied in different ways in each phase of the data lifecycle. The data lifecycle includes creation, aggregation, storage, access, sharing, and archiving.
+Traditional database and processing solutions are inadequate for addressing Big Data challenges. The concept of the **"5 V's"** encapsulates the key characteristics of Big Data:
+
+1. **Volume:** Big Data involves extremely large amounts of data, ranging from terabytes to petabytes, and even exabytes. The size of data stored by organizations continues to grow exponentially, with global data creation projected to reach 180 zettabytes by 2025.
+
+1. **Variety:** Big Data encompasses a wide range of data types and formats, including structured, semi-structured, and unstructured data. It includes text, images, videos, sensor data, social media posts, and more.
+
+1. **Velocity:** Big Data is generated at a high velocity, often in real-time or near real-time. The speed at which data is produced and needs to be processed poses significant challenges for organizations.
+
+1. **Veracity:** Veracity refers to the trustworthiness and reliability of the data. Data integrity plays a crucial role in establishing the veracity of data. Ensuring data integrity is essential at every stage of the data lifecycle, including data creation, aggregation, storage, access, sharing, and archiving.
+
+1. **Value:** The ultimate goal of dealing with Big Data is to extract value and gain meaningful insights from it. By effectively analyzing and interpreting Big Data, organizations can derive valuable insights that lead to informed decision-making, innovation, and competitive advantage.
+
 
 ### Data Lake
 
-It is a vehicle for making big data available to AI and analytics. In the 90s, it was implemented using enterprise data warehouses, then mid 2000s Hadoop and ELK stacks was used more as an open data formats and horizontal scaling,
-Now in the 2020s  it is supported as cloud based data lake, pay per job, elastic scaling, data in object store, supporting real-time queries.
+A data lake serves as a powerful platform for unlocking the potential of big data and enabling AI and analytics capabilities.
+
+In the 1990s, enterprise data warehouses were commonly used as a means to support analytics and business intelligence. However, they often required significant upfront investments and were limited in their ability to handle the scale and variety of modern big data.
+
+In the mid-2000s, the emergence of technologies like Hadoop and ELK stacks revolutionized the concept of data lakes. These open-source frameworks embraced the use of open data formats and horizontal scaling, enabling organizations to ingest, process, and analyze massive amounts of data in a cost-effective manner.
+
+In the 2020s, data lakes have further evolved with the advent of cloud computing. Cloud-based data lakes offer numerous advantages, including pay-per-job pricing models, elastic scaling, and the ability to store data in object stores like Amazon S3 or Azure Blob Storage. 
+
+Organizations are now leveraging streaming technologies and real-time data processing frameworks like Apache Kafka or Apache Flink to ingest and process data in near real-time before moving it to data lake.
 
 ### Data topology
 
-A *data topology* is an approach for classifying and managing real-world data scenarios. See [separate note](data-topology.md).
+A *data topology* is an approach to classify, structure and manage real-world data scenarios. Data topology is an important consideration in designing and managing data architectures and systems. See [separate note](data-topology.md).
 
 ### Data gravity
 
-The continual expansion has given rise to the phenomenon known as `data gravity`: the ability of bodies of data to attract applications, services, and other data. **Leverage data where it is**.
+**Data gravity** refers to the concept that as data accumulates and grows in size, it becomes increasingly difficult and costly to move that data to other locations or platforms.  The larger the volume of data and the more interconnected it becomes with applications and services, the more difficult it is to move data from its current location.
 
-#### Requirements and context
+Organizations can minimize the latency, costs, and complexities associated with data movement. **Leverage data where it is**. Organizations are encouraged to consider the location and distribution of their data when designing systems and workflows. They should consider edge processing and distributed processing.
 
-* Get data more accessible: data is distributed between apps, data repositories, data centers, in the cloud, at the edges.
-* Hybrid cloud deployment introduces complexities, where analytics workload is in dedicated environment instead to close to the data.
-* Extensive copying and transfer of data creates the potential challenges for performance, security, governance, quality issues, and operational cost.
-* Data lake is a gravity force, it attracts because of the diversity of the data and the size of data set.
-* IT spends too much time and effort readying their data for analytics and AI work. Moving massive datasets into analytics clusters is ineffective, expensive, and sometime complex.
-* Cloud technology has allowed for massive expansion of data bodies, which has served to increase data gravity rather than diffuses it. New cloud adoption allows scalable processing close to the data.
-* Data should be the first job to digital business transformation.
-* Product strategies are based on developing new and improved products and services based on data and analytics.
-* Organizations have big plans for data, analytics, and AI, and real-time insights: input data is processed within milliseconds so that it is available virtually immediately for use in business and operational processes.
-* Preparing data for analytics and AI is challenging:
+#### Data Management Requirements and Context
 
-    * **Latency** (time from which a transaction occurs to the time when the data is available for query) is a major challenge: getting insights where and when they are needed.
-    * **Preparation**: Keeping data secure and of high quality: concerns around data transfer and data governance.
-    * **Automation**: Still a lot of manual steps when integrating data for analytics and AI: difficulty integrating data from multiple sources is the number one technical challenge.
-    * Ethical and regulatory issues keep them from deploying AI models into production.
+The requirements and context surrounding data management are influenced by various factors, including the distributed nature of data, the challenges introduced by hybrid cloud deployments, the impact of data gravity, and the need for efficient data preparation for analytics and AI.
+
+Let's explore these requirements and the broader context in more detail:
+
+1. **Accessibility of Data:** Data is distributed across various sources such as applications, data repositories, data centers, and the cloud. Ensuring easy access to data regardless of its location is crucial for effective data management.
+
+1. **Complexity of Hybrid Cloud Deployments:** With hybrid cloud architectures, where analytics workloads may be in a dedicated environment separate from the data, complexities arise in integrating and managing data across different environments.
+
+1. **Challenges of Data Transfer and Copying:** Extensive copying and transferring of data can lead to performance issues, security vulnerabilities, governance concerns, data quality problems, and increased operational costs.
+
+1. **Data Lake as a Gravity Force:** Data lakes, due to their ability to store diverse and large datasets, act as a gravitational force that attracts data and applications. Leveraging the data within a data lake is an essential aspect of data management.
+
+1. **Inefficiency of Moving Massive Datasets:** Moving massive datasets into analytics clusters can be inefficient, expensive, and complex. Cloud technology provides scalable processing capabilities closer to the data, addressing some of those challenges.
+
+1. **Data as the Foundation of Digital Business Transformation:** Data plays a crucial role in digital business transformation initiatives, for developing new products, improving services, and driving innovation.
+
+1. **Real-Time Insights and Operational Processes:** Organizations aim to derive real-time insights from data to enable immediate use in business and operational processes. Low-latency data processing is a key requirement to achieve this objective.
+
+1. **Data Preparation Challenges:** Data preparation for analytics and AI poses several challenges. These include managing latency (time from which a transaction occurs to the time when the data is available for query) to ensure insights are available when needed, ensuring data security and quality, addressing data integration complexities, and automating manual data integration processes.
+
+1. **Ethical and Regulatory Considerations:** Organizations face ethical and regulatory challenges related to deploying AI models into production. Compliance with data governance, privacy regulations, and ethical considerations surrounding AI usage are significant concerns.
 
 #### Recommendations
 
-* Analytics and insights are best done where the data lies: Example is to implement real-time analytics in data streams.
-* Hybrid cloud initiatives require a data gravity strategy.
-* With data gravity strategy, you minimize data movement and remote processing, so reducing the security risk.
-* Data gravity has to be taken into account any time the data needs to be migrated.
-* Consider data virtualization technology.
-* Push AI/ML scoring to the transactional processing platform. Leveraging ML algorithms and models at source systems can help with aggregation, summarization, integration, and transformation for data to support quicker analysis.
+Based on the requirements and context outlined, here are some recommendations for effective data management:
 
-Data topology is a good methodology to identify data sources and semantics, consumers and producers of the data. It does not directly enforces Data Gravity.
+* Implement real-time analytics capabilities that process and derive insights from data streams at the source. This approach reduces the need for data movement and enables faster and more immediate decision-making.
+* When adopting hybrid cloud deployments, consider the data gravity concept. Design a strategy that minimizes data movement and remote processing to reduce security risks and optimize performance.
+* Whenever data needs to be migrated, assess the impact on data movement, performance, and associated costs.
+* Consider implementing data virtualization technologies that allow for unified access to data across distributed sources. Data virtualization can help minimize data movement and simplify data integration processes.
+
+???- info "Data Virtualization"
+    Data Virtualization provides a unified and integrated view of data, regardless of its physical location or underlying data storage systems. Data sources may include databases, data warehouses, cloud storage, APIs, web services.  The data virtualization platform catalogs and indexes the metadata of the available data sources. Metadata includes information about the data structures, schemas, relationships, and access methods of the underlying data. This is an abstraction layer to hide the complexities of the physical data storage. The platform intelligently distributes the **query processing** across the relevant data sources, executing portions of the query **where the data resides**. The query result is presenting the data as if it were coming from a single data source. It allows real-time access to data, providing users with up-to-date information from the underlying sources. The platform ensures data confidentiality, integrity, and access control. Some open source projects that may help building a Data Virtualization platform: [Apache Drill](https://drill.apache.org/) to query NoSQL DB, [Apache Calcite](https://calcite.apache.org/) to address SQL query optimization on any dat, anywhere. [Apache Kafka]() is also considered as a virtualization platform. 
+
+* Leverage machine learning algorithms and models at the transactional processing platform. This approach can assist with data aggregation, summarization, integration, and transformation, enabling faster analysis and reducing the need for extensive data transfers.
+* Leverage data topology methodologies to identify data sources, understand data semantics, and establish relationships between data producers and consumers. This helps in comprehending data flow and optimizing data management strategies.
+
+By implementing these recommendations, organizations can enhance their data management practices, reduce data movement complexities, optimize performance, improve security, and unlock the full potential of their data assets for analytics and AI initiatives.
 
 #### Sources
 
 * [Forester paper on data gravity](https://www.ibm.com/downloads/cas/ZEOENRB1)
 * [Talend: Data Gravity: What it Means for Your Data](https://www.talend.com/resources/what-is-data-gravity/)
 
-### Data Mesh
+## Data Mesh
 
-Data mesh is an architecture style based on 4 principles:
+Data mesh is an architecture style that revolves around four key principles::
 
-* Domain-oriented **decentralization of data ownership** and architecture.
-* Domain-oriented **data served as a product**.
-* Self-serve data infrastructure as a platform to enable autonomous, domain-oriented data teams.
-* Federated governance to enable ecosystems and interoperability.
+* Domain-oriented **Decentralization of Data Ownership** and architecture: Distribute data ownership to individual domains within an organization. Each domain takes ownership of its data and treats it as a valuable product.
+* Domain-oriented **Data served as a Product**: teams are responsible for the quality, availability, and usability of their data products.
+* **Self-serve data infrastructure** as a platform: to enable autonomous, domain-oriented data teams, to independently manage their data products.
+* **Federated governance** to enable ecosystems and interoperability: enables collaboration and interoperability across domains. Data products are discoverable, addressable, and adhere to common standards and harmonization rules.
 
-The implementation of this architecture style is using tools but also demands organizational restructure, by adding a data product role for each domain with the goal to own and share their analytical data as products.
+Implementing a data mesh architecture requires not only the use of suitable tools but also organizational restructuring. One important aspect is introducing a data product role within each domain. Domains own and share their analytical data as products.
 
-This is a paradigm shift from data lake, data warehouse with BI. The 3nd generation of data platforms is based on the Kappa architecture pattern, using real-time data processing, leveraging cloud based storage like S3 or COS. For enterprise with rich domains, a lot of sources and consumers, centralized data platform leads to adoption and usage failures.
+Data mesh represents a paradigm shift from traditional approaches like data lakes, data warehouses, and business intelligence. It aligns with the third generation of data platforms, which are built on the Kappa architecture pattern, leverage real-time data processing, and utilize cloud-based object storage.
 
-So consider how big is the domain, and how is the growth of data sources within the bounded context. Ingest and store data in one place, inhibit easy addition of new data source.
-Big data platform inhibits the test and learn innovation cycle. But siloed domain oriented data is not the solution neither. With the `ingest-process-serve` way of organizing data pipeline some architectures are based on team capacity and skill.
+In complex enterprise environments with diverse domains, numerous data sources, and multiple consumers, a centralized data platform often leads to adoption and usage challenges.
 
-The data team has no business knowledge of the source team and the consumers team. They process feature requests after requests.
+When considering data mesh, it's essential to evaluate the size of the domain and the growth of data sources within its bounded context. Ingesting and storing data in a single place may hinder the easy addition of new data sources. 
 
-Data mesh proposes to address those issues by converging the four principles started in the DDD. 
+A big data platform can inhibit the test and learn innovation cycle. On the other hand, siloed domain-oriented data is not a viable solution either. Some architectures organize data pipelines based on team capacity and skill, leading to processing feature requests without sufficient business knowledge of the source team and the consumers team.
 
-As of now the closest application of DDD in data platform architecture is for source operational systems to emit their 'business domain events' and for monolithic data platform to ingest them.
+It is recommended to adopt the following practices within a data mesh architecture:
 
-In fact we should do better and adopt the following:
-
-* Domains need to host and serve their domain datasets in an easily consumable way. Content and Ownership stays within the domain generating them. This implies that we may duplicate data in different domains as we transform them into a shape that is suitable for that particular domain.
-* Shift from ETL push and ingest model to `event streams` of serving and pull model.
-* The architecture quantum is the domain and not the pipeline stage.
-* The source domain datasets represent the facts and reality of the business: "account Opened", "user click streams" are facts, which are considered as `truths of the business domains`.
-* Domain events are stored and served in append logs with time-stamped immutable records.
-* Source data domains should also provides business aggregates, easy to consume: "account opened per month" for example is in the account domain.
-* New data domains can be created by joining and correlating data from other domains.
-* Physical system datasets are different and separated from the domain datasets. Domain datasets are larger in volume, records are timed, and change less frequently than source system.
-* Some domains align closely with the consumption. They have different nature than the source ones: they transform the source domain events to aggregate views and structures that fit a particular access model.
-* Data pipeline, cleansing, preparing, aggregating and serving data remains needed, but they stay within the domain.
-* To address accessibility, usability and harmonization of the distributed dataset, a `product thinking` approach is important, (same approach as API product). The data assets is a product and the data scientists and data engineers are the customers.
+* Domains should host and serve their domain datasets in an easily consumable manner. Ownership and content of the data remain within the domain that generates them. This may involve duplicating data across different domains as it is transformed into a shape suitable for each specific domain.
+* Shift from an ETL push and ingest model to a "pull model" that leverages event streams for serving data. This promotes real-time data access and agility.
+* Consider the domain as the architecture quantum instead of focusing on specific pipeline stages. This ensures that data management aligns with the domain boundaries and requirements.
+* Source domain datasets should represent the facts and reality of the business. These facts, often referred to as "truths of the business domains," can be stored and served as append logs with immutable, time-stamped records.
+* Domains should provide business aggregates that are easy to consume. For example, the "account opened per month" aggregate can be available within the account domain.
+* New data domains can be created by joining and correlating data from existing domains. This enables the creation of richer and more comprehensive datasets.
+* Distinguish between physical system datasets and domain datasets. Physical system datasets are specific to the underlying systems and differ from domain datasets, which are larger in volume, have timed records, and change less frequently.
+* Some domains align closely with specific consumption patterns and have different characteristics compared to source domains. They transform source domain events into aggregate views and structures that fit a particular access model.
+* Data pipeline activities such as cleansing, preparation, aggregation, and data serving remain important but should stay within the domain boundaries.
+* Adopt a product thinking approach for data assets, treating them as products and considering data scientists and data engineers as the customers of these products.
 
 ![](./images/data-product.png)
 
-* To be discoverable we need a data catalog with metadata such as ownership, source of origin, structure, samples,... so each data product needs to register to the catalog.
-* Addressable with a unique address per storage formats.
-* Provides a service level objective around data truthfulness. Providing data provenance and data lineage as the metadata associated with each data product helps consumers gain further confidence in the data product.
-* Inter-operable: The key for an effective correlation of data across domains is following certain standards and harmonization rules.
-* Secure access to datasets is applied at the time of access to each data product
-* Common data infrastructure as a self serving platform is needed combined with global governance to ensure interoperability.
+* Establish a data catalog that provides metadata such as ownership, source of origin, structure, and samples for each data product. Each data product should register with the catalog to ensure discoverability.
+* Ensure each data product has a unique address per storage format, making it easily accessible and addressable.
+* Provide service level objectives (SLOs) that ensure data truthfulness. Data provenance and data lineage associated with each data product enhance consumer confidence.
+* Foster interoperability by following standards and harmonization rules when correlating data across domains.
+* Apply secure access controls to datasets at the time of access for each data product.
+* Implement a common data infrastructure as a self-serving platform combined with global governance to ensure interoperability and consistency across the data mesh ecosystem.
 
 #### Sources
 

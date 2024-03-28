@@ -10,16 +10,23 @@ I led a lot of event-storming, and domain-driven design workshops with customers
 
 Furthermore, I have contributed to the definition of the next generation of several middleware products, showcasing my ability to drive innovation. I have led the development of IBM reference architectures for event-driven solution, Cognitive, and Data and AI. 
 
-My main roles are:
+### How I can help
 
-* Leading customers to develop intelligent automation solutions using Machine Learning, LLM, symbolic AI, deployable on hybrid cloud.
-*  Helping strategic customers to adopt the cloud and deploy their own software as a service.
-* Leading incremental architecture workshops and prototyping solution based on business requirements to proof the business value in the form of minimum viable products.
-* Supporting customers in long term, deep, technical relationships with senior technical architects.
-* Mentoring developers, consultants and technical sellers.
-* Capturing and sharing best-practices and tribal knowledge, so team members can learn quickly and be more productive.
-* Authoring, presenting and contributing to customer-facing publications for conferences.
-* Acting as a technical liaison between customers and services teams to help evolve the different company products.
+Here is a summary of how I can help your organization:
+
+* **Leading Intelligent Automation Solutions**: I specialize in guiding customers towards developing cutting-edge automation solutions by leveraging machine learning, LLM, expert systems, and agents. My expertise lies in creating deployable solutions in hybrid cloud environments (AWS and on-premises or kubernetes deployment).
+
+* **Enabling Cloud Adoption**: I have a proven track record of assisting strategic customers in embracing cloud technologies and deploying their own software as a service (SaaS) solutions. I can provide valuable insights and guidance to help organization leverage the power of the cloud effectively.
+
+* **Architectural Workshops and Prototyping:** By leading architecture workshops, I ensure that solutions are aligned with business requirements and demonstrate their business value through the creation of minimum viable products (MVPs). This approach allows for rapid validation and helps in making informed project decisions.
+
+* **Event Storming and Domain-Driven Design**: I excel in facilitating workshops focused on event storming and domain-driven design, which enable the identification of key business domains, bounded context and microservices. These workshops foster collaboration and innovation within teams.
+
+* **Technical Relationships and Mentoring:** I have extensive experience in building and nurturing long-term, deep technical relationships with C level audience. Furthermore, I enjoy mentoring developers, consultants, and technical sellers, empowering them to enhance their skills and excel in their roles.
+
+* **Knowledge Sharing and Best Practices:** I strongly believe in capturing and sharing best practices and tribal knowledge within teams. By doing so, I actively contribute to the accelerated learning and increased productivity of team members.
+
+* **Customer-Facing Publications:** I have a passion for authoring, presenting, and contributing to customer-facing publications, particularly for conferences. This allows me to share insights, experiences, and innovative solutions with a broader audience.
 
 As a [technical expert](./skills.md), I sell, create, and lead First of a Kind cloud projects and resolve customers’ critical issues. I harvest architecture, best practices, and lessons learned from customer's experiences.
 
