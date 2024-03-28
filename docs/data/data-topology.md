@@ -28,7 +28,7 @@ A **Zone Map** identifies and names each zone.
 
 Figure 1 shows the primitive zones that are used in a zone map.
 
-![Data topology zone](./images/dtzones.png)
+![Data topology zone](./diagrams/dtzones.drawio.png)
 
 It is only a leaf zone that is associated with the instantiation of data.
 
@@ -38,7 +38,7 @@ reflect groups for data virtualization or data federation.
 ### Data Flow
 
 The data flow shows the **flow of Data** and helps
-to illustrate the points of integration or interoperability between the zones.  
+to illustrate the points of integration or interoperability between the leaf zones.  
 
 This can also help to detect circular data flows occurring across zones, to be flagged for 
 investigation as data integrity may potentially be compromised if not well managed (designed and governed).

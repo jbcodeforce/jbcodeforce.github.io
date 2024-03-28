@@ -5,6 +5,7 @@ site_url: https://jeromeboyer.net
 docs_dir: docs
 site_dir: public
 edit_uri: edit/master/docs
+copyright: Copyright &copy; 2018 - 2024 Jerome Boyer
 theme: 
   name: material
   logo: images/cloud.png
@@ -17,16 +18,21 @@ theme:
       - content.tooltips
       - navigation.tabs
       - navigation.instant
+      - navigation.tabs.sticky
       - navigation.tracking
       - navigation.sections
       - navigation.expand
+      - navigation.footer
       - navigation.tabs.sticky
       - navigation.top
+extra:
   social:
-    - type: 'github'
+    - icon: fontawesome/brands/github
       link: 'https://github.com/jbcodeforce'
-    - type: 'linkedin'
+    - icon: fontawesome/brands/linkedin
       link: 'https://linkedin.com/in/jeromeboyer'
+    - icon: fontawesome/solid/paper-plane
+      mailto: jerome@intelligent-automations.com
 extra_css: ["extra.css"]
 plugins:
   - search:

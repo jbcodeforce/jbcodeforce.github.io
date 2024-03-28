@@ -2,13 +2,14 @@
 
 ## About me
 
-I am an accomplished technology professional with a diverse background in event-driven architecture (EDA), hybrid cloud solutions (kubernetes and AWS services), business process and business rule implementation. With a strong track record as a former IBM Distinguished Engineer and my current role as a Principal Solution Architect at AWS, my expertise lies in guiding customers through their hybrid cloud journey, including messaging, data pipeline, decision systems and AI model development and integration.
+![pers](./images/jb.jpeg){ align=left width=200 } I am an accomplished technology professional with a diverse background in event-driven architecture (EDA), hybrid cloud solutions (kubernetes and AWS services), business process and business rule implementation. With a strong track record as a former IBM Distinguished Engineer and my current role as a Principal Solution Architect at AWS, my expertise lies in guiding customers through their hybrid cloud journey, including messaging, data pipeline, decision systems and AI model development and integration.
 
 In my career, I have had the pleasure of assisting customers in a consultative manner, helping them adopt decision management, business process automation, data streaming, and complex event processing. I have a deep understanding of lean and agile methodologies, having authored books and blogs on agile business rule solution development, and being part of IBM Garage from the creation. Additionally, I have engaged with customers to facilitate the adoption of asynchronous and reactive systems based on IBM middleware, AWS serverless services, containers, and Kubernetes deployments.
 
 I led a lot of event-storming, and domain-driven design workshops with customers willing to innovate and break their monolithic applications. I also created an agile methodology for developing intelligent automation solutions, and used by IBM automation product consultants for years.
 
 Furthermore, I have contributed to the definition of the next generation of several middleware products, showcasing my ability to drive innovation. I have led the development of IBM reference architectures for event-driven solution, Cognitive, and Data and AI. 
+
 
 ### How I can help
 
@@ -42,7 +43,13 @@ Thank you for taking the time to read my bio. I look forward to the opportunity 
 
 * Co Author: **Sustainable IT Architecture** Wisley
 * Co Author: **[Agile Business Rule Development](http://www.springer.com/business+%26+management/business+information+systems/book/978-3-642-19040-7)** Springer.
+    
+    ![](./images/abrd_book.jpg)
+
 * [Event-driven solutions virtual book](https://jbcodeforce.github.io/eda-studies/), I think a more flexible way to develop a book, and more agile to change content.
+
+    ![](./diagrams/eda_book_cover.drawio.png)
+    
 * [AWS Studies for Solution Architect Professional Certification](https://jbcodeforce.github.io/yarfba/)
 * [Machine Learning studies](https://jbcodeforce.github.io/ML-studies/), same approach, it may become a book.
 
