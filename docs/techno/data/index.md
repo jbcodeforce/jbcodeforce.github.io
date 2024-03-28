@@ -4,12 +4,11 @@
 
 Apache Iceberg is an open table format for huge analytic datasets. 
 
-* adds tables to compute engines including Spark, Trino, PrestoDB, Flink, Hive and Impala.
-* works just like a SQL table
-* solves correctness problems in eventually-consistent cloud object stores.
-* supports ten of petabytes of data
-* supports schema changes: column add, drop, rename, update, reorder, and certain data types upgrades.
-* supports 'time travel' to go back to older version of the data.
+* It adds tables to compute engines such as Spark, Trino, PrestoDB, Flink, Hive and Impala.
+* It works just like a SQL table on cloud object storage.
+* Iceberg solves correctness problems in eventually-consistent cloud object stores.
+* It supports ten of petabytes of data, with potentials schema changes: column add, drop, rename, update, reorder, and certain data types upgrades.
+* It supports 'time travel' to go back to older version of the data.
 
     ```sql
     SELECT * FROM iceberg_taxi_parquet
@@ -24,10 +23,13 @@ There’re 3 layers for Iceberg:
 1. **Metadata** layer: Each CRUD operation will generate a new metadata file which contains all the metadata info of table, including the schema of table, all the historical snapshots until now. Each version of snapshot has one manifest list file. Manifest file can be shared cross snapshot files and contains a collection of data files which store the table data.
 1. **Data** Layer: parquet files which contain all the historical data, including newly added records, updated record and deleted records.
 
-* When a table is created, Iceberg creates a directory with the name of the table, and then it creates a metadata folder which contains all the metadata info. 
-* When records are added to the table, Iceberg creates one parquet file for each record. A new version of metadata file is created with information about a manifest list file (in avro format), which itself points to one manifest file which points to the parquet files.
-* Updating record, Iceberg creates snapshot to keep information of the new manifest file created for the update. The previous record is mark as deleted.
-* We can query the history table of the database main table to see the different snapshots.
+   
+When a table is created, Iceberg creates a directory with the name of the table, and then it creates a metadata folder which contains all the metadata info. 
+
+When records are added to the table, Iceberg creates one parquet file for each record. A new version of metadata file is created with information about a manifest list file (in avro format), which itself points to one manifest file which points to the parquet files
+
+When updating record, Iceberg creates snapshot to keep information of the new manifest file created for the update. The previous record is marked as deleted.
+Developers may query the history table of the database main table to see the different snapshots.
 
 ### Interresting content
 
