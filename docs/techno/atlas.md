@@ -2,40 +2,40 @@
 
 [Apache Atlas](https://atlas.apache.org/index.html#/) is a data governance tool which facilitates gathering, processing, and maintaining metadata.
 
-The architecture illustrates that Atlas expose APIs to add and query elements of the repository, but also is integrated with Kafka for asynchronous communication.
+The architecture illustrates that Atlas exposes APIs to add and query elements of the repository, but also is integrated with Kafka for asynchronous communication.
 
  ![](https://atlas.apache.org/public/images/twiki/architecture.png)
 
 The Core framework includes a graph database based on [JanusGraph](https://janusgraph.org/).
 
-The Kafka integration can also being used to consume metadata change events from Atlas.
+The Kafka integration may be used to consume metadata change events from Atlas.
 
 ## Key features
 
-* Centralized metadata management platform
-* Data classification based on rules and regex. Identify the incoming data and filter them out based on those classifications.
-* Data lineage: shows the origin, movement, transformation and destination of data.
+* **Centralized** metadata management platform.
+* **Data classification** based on rules and regex. Identify the incoming data and filter them out based on those classifications.
+* **Data lineage**: shows the origin, movement, transformation and destination of data.
 
 ## Concepts
 
 Some important concepts to know:
 
-* a `Type` in Atlas is a definition of how particular types of metadata objects are stored and accessed. 
+* a **Type** in Atlas is a definition of how particular types of metadata objects are stored and accessed. 
 A type represents one or a collection of attributes that define the properties for the metadata object.
-* An `Entity` is an instance of a Type
+* An **`Entity`** is an instance of a Type.
 * A type has a metatype. Atlas has the following metatypes:
 
-    * Primitive metatypes: boolean, byte, short, int, long, float, double, biginteger, bigdecimal, string, date
-    * Enum metatypes
-    * Collection metatypes: array, map
-    * Composite metatypes: Entity, Struct, Classification, Relationship
+    * **Primitive** metatypes: boolean, byte, short, int, long, float, double, biginteger, bigdecimal, string, date
+    * **Enum** metatypes
+    * **Collection** metatypes: array, map
+    * **Composite** metatypes: Entity, Struct, Classification, Relationship
 * Atlas comes with a few pre-defined system types: Referenceable, Asset, Infrastructure, DataSet, Process. The ones very interesting are:
 
     * **Infrastructure** extends Asset and may be used for cluster, host,...
-    * **DataSet** extends Referenceable, represents an type that stores data. Expected to have a Schema to define attributes
+    * **DataSet** extends Referenceable, represents a type that stores data. Expected to have a Schema to define attributes.
     * **Process** extends Asset represents any data transformation operation.
 * **Relationships** to describe connections between entities.
-* We can define `Classification` can be associated to entities but are not attributes: 
+* We can define `Classification` which can be associated to entities but are not attributes: 
 
 ```json
  {
@@ -48,7 +48,7 @@ A type represents one or a collection of attributes that define the properties f
 }
 ```
 
-* A type can extend another type: A `kafka_topic_schema` is an array of `kafka_message_schema`:
+* A type can **extend** another type: A `kafka_topic_schema` is an array of `kafka_message_schema`:
 
 ```json
 {
@@ -109,7 +109,7 @@ services:
 
 * Define new types See project [eda-governance](https://github.com/jbcodeforce/eda-governance): 
 
-example define a Kafka_Cluster type to be an Infrastructure
+Her is an example defining a Kafka_Cluster type to be an Infrastructure
 
 ```json
 "entityDefs": [
@@ -119,7 +119,7 @@ example define a Kafka_Cluster type to be an Infrastructure
       ],
       "category": "ENTITY",
       "name": "eda_kafka_cluster",
-      "description": "a Kafka Cluster groups multiple Kafka Brokers and manage topics",
+      "description": "a Kafka Cluster groups multiple Kafka Brokers and references topics",
       "typeVersion": "1.0",
       "attributeDefs": [
         {
@@ -203,7 +203,7 @@ Then the entity will use the following setting in the cluster name:
 }
 ```
 
-We can also define the composition, like a broker is includes in the cluster and will not live outside of a cluster:
+We can also define the composition, like a broker is included in the cluster and will not live outside of a cluster:
 
 ```json
  {
@@ -220,7 +220,7 @@ We can also define the composition, like a broker is includes in the cluster and
     "isOptional": true,
     "cardinality": "SET",
     "valuesMinCount": 1,
-    "valuesMaxCount": 1000,
+    "valuesMaxCount": 3000,
     "isUnique": false,
     "isComposite": true,
     "isIndexable": false,
@@ -247,9 +247,9 @@ a data land.
 
 Apache Atlas requires 3 applications to be installed
 
-* Solr: This is used to index the Atlas Data so that we can search the data in Atlas UI.
-* Cassandra: It acts as a backend and stores the data ingested by Apache Atlas, which is nothing but the Metadata.
-* Zookeeper: for cluster management.
+* **Solr**: This is used to index the Atlas Data so that we can search the data in Atlas UI.
+* **Cassandra:** acts as a backend and stores the data ingested by Apache Atlas, which is nothing but the Metadata.
+* **Zookeeper:** for cluster management.
 
 ## Source of readings
 
