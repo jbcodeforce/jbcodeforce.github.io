@@ -25,7 +25,7 @@ GitOps is a natural evolution of DevOps and Infrastructure-as-Code.
 
 * Git is the source of truth for both application code, application configuration, dependant service/product deployments, infrastructure config and deployment.
 * Separate application source code (Java/Go) from deployment manifests i.e the application source code and the GitOps configuration reside in separate git repositories.
-* Deployment manifests are standard Kubernetes (k8s) manifests i.e Kubernetes manifests in the GitOps repository can be simply applied with nothing more than a `oc apply`.
+* Deployment manifests are standard Kubernetes (k8s) manifests i.e Kubernetes manifests in the GitOps repository can be simply applied with nothing more than a `oc apply` or `kubectl apply`.
 * [Kustomize.io](https://kustomize.io/) is used as template engine for defining the differences between environments i.e reusable parameters with extra resources described using `kustomization.yaml`.
 * Minimize yaml duplication - no copy/paste
 * Support two axis of configuration: clusters and environments: prod, test, dev. (Accept separating production repo if organization is willing to do so).
@@ -62,7 +62,7 @@ Configure github SECRETS for each project:
 * DOCKER_PASSWORD
 * DOCKER_IMAGE_NAME  the name of the application
 
-Define a .github/workflow/dockerbuild.yaml to declare how to build the app.
+Define a `.github/workflow/dockerbuild.yaml` to declare how to build the app.
 
 ## OpenShift GitOps
 
@@ -92,12 +92,11 @@ oc describe operator openshift-gitops-operator
 ### Proposed git repository structure
 
 There are different ways to organize projects: The [KAM tool](#kam-gitops-application-manager-cli) proposes to
-create one gitops repository to control the configuration and
- deployment of each services and apps of the solution.
+create one gitops repository to control the configuration and deployment of each services and apps of the solution.
 
 Another solution is to use a three repositories structure, that will match team structure and persona: dev, SRE.
 
-* **application**: deployment.yaml, config map... for each application. Developers lead this one
+* **application**: deployment.yaml, config map... for each application. Developers lead this repository.
 * shared, reusable **services** like Kafka, Database, LDAP,... as reusable services between environments: Dev and operations ownership
 * Cluster and **infrastructure**: network, cluster, storage, policies... owned by operation
 
@@ -109,7 +108,7 @@ With this three level structure, each "solution" will have 3 separate repositori
 
 Now the different deployment environments can be using different k8s clusters or the same cluster with different namespaces.
 
-With the adoption of ArgoCD we can have one bootstrap app that starts other apps and monitor each of those layers.
+With the adoption of ArgoCD, developer can have one bootstrap app that starts other apps and monitor each of those layers.
 
 See detail in [this separate note](./argocd.md).
 
