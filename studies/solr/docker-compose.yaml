@@ -1,0 +1,23 @@
+services:
+  solr1:
+    image: solr:9-slim
+    container_name: solr1
+    hostname: solr1
+    ports:
+     - "8983:8983"
+    networks: [search]
+    volumes:
+      - $PWD/solr-data:/var/solr
+    environment:
+      ZK_HOST: "zoo:2181"
+    depends_on: [zoo]
+  zoo:
+    image: zookeeper:3.9
+    hostname: zoo
+    networks: [search]
+    environment:
+      ZOO_4LW_COMMANDS_WHITELIST: "mntr,conf,ruok"
+
+networks:
+  search:
+    driver: bridge

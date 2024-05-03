@@ -106,7 +106,7 @@ The files are in this project: `studies/elasticsearch/ml-latest-small` folder.
   curl -X GET localhost:9200/movies/_mapping
   ```
 
-* Some other commong mappings: 
+* Some other common mappings: 
 
     * Not analyzing a field for search
 
