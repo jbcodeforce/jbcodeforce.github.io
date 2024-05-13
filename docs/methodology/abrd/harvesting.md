@@ -178,3 +178,111 @@ The selection of the type of roadmap is linked to the rule source.
     * Variable names were often limited to 8 characters in a flat data model. There is no need to keep it that way. You may want to think about designing an efficient object oriented model.
     * Most of the time, automatic translation of badly coded business rules will generate bad business rules in the new environment.
     * Business rules implemented for a business rule engine have a different structure than procedural code. They should be more atomic and isolated, and the rule writer may leverage the inference capacity of the engine. Therefore the automatic translation will produce poor results.
+
+The following table summarizes the different techniques classified per type of source:
+
+| Source | Static analysis | Interactive | Automated |
+| **Documentation** | Very good fit | As a complement of static analysis | Potential with Generative AI |
+| **Know-how** | Not applicable | Unique solution | AI Agent may help defining discovery question to SMEs |
+| **Code** | Efficient | As a complement of the other processes | Good result, improved with Gen AI |
+
+When the source of the business rules is people, individual interviews are required to get the core of the knowledge and then followed up with workshops to resolve outstanding issues and process exception paths with the team.
+
+Rule elicitation is an ongoing activity you perform throughout the project. Collaboration with your stakeholders is critical. They will change their minds as the project proceeds and that’s perfectly fine. Remember that there are different types of languages for expressing business rules. 
+
+* Natural language
+* Restricted Language
+* Formal expression using a specific grammar
+The natural language is initially used during business conversations to describe the rules, informally, without trying to impose any structure, for example with people sitting around a table. At this stage, we don't have any templates or guidelines for structure that we need to abide to. Using this language we may have redundancy and inconstancy in the rule expressions and in the business terms used. 
+
+A second evolution is using a restricted language, still consumable by both analysts and developers, but where we have imposed some structure and grammar to the language so we can express rule statements with proper form. SBVR is proposing the restricted English to support this. The statement may not be correct semantically (redundancy, consistency, etc.) but we can formalize the business term and glossary of terms.
+
+The third type of language is precise and there are no ambiguities: the rule refers exactly to information system objects. This language is parse-able and non-ambiguous, and can be executed by a computer.
+
+An example of rule template:
+
+| Business Activity: | | |
+| --- | --- | --- |
+| **Decision Name:** | | | 
+| **Policies reference:** | | |
+| **Ownership:** | | |
+| **Rule Name** | **Rule Statement**  | **Notes** |
+| Accident Prone Customer | Use the raw natural language of the business conversation. Later we may need to use a more strict language like the restricted English of SBVR.  A customer who had an accident report in the past is marked as accident prone | Use comment for example to describe the type of rule, inference | 
+| | |
+
+???- info "Rule Language"
+    A formal language features sentences which have a clear and unambiguous interpretation. There are different kinds of formal languages:
+
+    * Predicate logic using syntax like: (" X,Y) [Claim(X) L MedicalInvoice(Y) L Relation(X,Y) => (claimRefNumber(Y) = claimNumber(X))]
+    * Object Constraint Language (OCL) : is an addition to UML to express constraints between objects that must be satisfied
+    * Truth tables or decision table which present rule as row and columns representing conditions and actions
+    * Semantics of Business Vocabulary and Business Rules or SBVR which defines structural and operational rules as well a vocabulary to define business concepts.
+    * JRules Technical Rule Language executable by a rule engine
+    * JRules Business Action Language, high level language close to English which is formal as it is using a unique interpretation and unique translation. Rule writers pick among a set of predefined sentences
+
+### Discovering rules from SMEs
+
+Interviews and analysis workshops are the two types of interaction used with subject matter expert. For interviews, the typical number of people in the same room is around two or three and for workshops six to ten people are involved. Workshops can last several days. Interviews are used at the beginning of the discovery phase and will most likely address one area of the business process. The analysis workshop is perhaps the most powerful technique for eliciting a lot of requirements. It gathers all key stakeholders together for a short but intensely focused period. The use of a facilitator experienced in requirements management can ensure the success of the workshop. Brainstorming is the most efficient technique used during the sessions. 
+ Brainstorming involves both idea generation and idea reduction. The most creative, innovative ideas often result from combining, seemingly unrelated ideas. Various voting techniques may be used to prioritize the ideas created. Allow for human behavior but control the following points:
+
+* Do not “attack” other members
+* Do not come back late from a break, even if Key shareholders may be late returning because they have other things to do. The sessions are short so they should be able to do other activities during the day.
+* Avoid domineering position
+
+Some suggestions to improve the process:
+
+* Facilitator keeps a timer for all breaks and fines anyone that is late, everyone gets one free pass
+* Facilitator encourages everyone to use 5-minute position statement
+* In case of long discussion without reaching firm conclusion or agreement it is good to use the business concerns to drive the elicitation
+* If the rule is not clear this is good practice to prototype it.
+* Use concrete scenarios to illustrate some rules. These scenarios can later be leveraged for tests.
+
+The following table lists the standard questions the analyst team may ask during the workshop depending of the source: 
+
+| Type of input document | Questions | Type of artifacts impacted |
+| --- | --- | --- |
+|Use case or Business Process map | In this activity, what kind of control  the worker responsible to perform the task ? What kind of decisions? On this use case step, the person assess the application, what kind of assessment is he doing? Is there a standard check list? | Use case or BPM, Rule description document |
+| Rule description, Conceptual  data model | What do you mean by …. (a business term to clearly define).  How does it relate to …. (other business term) | Conceptual  data model |
+| Rule statement | What about the other ranges of possible values for this condition? How often does this condition change? Do you have some other cases? | Business Entities Diagram, Rule description document |
+
+
+Between sessions, verify that business terms are well defined and the rules make sense and do not have logical conflicts. Log all the questions related to this analysis in an issue tracking document (Open Points).
+
+### Discovering rules from documents
+
+This approach is used when Governmental Administration or policy group issues legal documents. We did observe this work requires courage and rigor. When using electronic documents, we used the following practices:
+
+    * Annotate the document on anything that needs some future discussion
+    * Copy and paste the business policy declared in the document to the rule template to clearly isolate it for future analysis. 
+    * Work in a consistent/systematic way to ensure a good coverage. 
+    * Check for agreement with the current business model as you go along. 
+    * Investigate discrepancies and log them. 
+    * Focus on stakeholder understanding (communication is key), and insist to clarify how a legal rule is interpreted by the line of business.
+
+One risk with this approach is that the reader is making his own interpretation of the context, and the document may not include all the cases and criteria leading to interpretations. It is sometimes difficult to get the business motivation behind a written policy. We recommend applying a rigorous method to be able to achieve the following goals: 
+
+    * Get an exhaustive list of the business events under scope: log them in a table 
+    * Get the activities, tasks, processes that support the processing of those business events 
+    * Identify where the business rules could be enforced in the process
+    * Get the business motivation behind the rules 
+    * Get explanation on rules if they are unclear, ambiguous. 
+    * Try to extract the object model under scope, domain values by looking at the terms used by the rules…. 
+
+We should still apply agile modeling by involving the SMEs to get feedbacks on the findings, assumptions and issues. Use simple diagrams to communicate with the project stakeholders.
+
+### Discovering rules from code
+
+Discovering rules from application code is time consuming and does not lead to great results. The analyst needs to study a lot of lines of code, and procedures to find the conditional operators which are linked to business decisions. Depending on the design and code structure of the application this work can be very time consuming. It is important to remember the context of execution when the “if statement” is executed, some variables may change the context of this “business rules”. With some languages using limited length to define variable names it is more difficult to relate such variables to business entities. A variable in one procedure can have a different name but the same meaning. Code mining tools exist on the market and help to extract business rules and the variables meanings. It is important to keep in mind that rules written in the past may not be relevant any more. Lastly, as stated previously, most of the rules implemented as procedural function, need a deep refactoring before deployment to a rule engine. 
+
+Code mining is commonly requested by people as it reassures the business team that the rule harvesting starts by the existing behavior of the legacy code. Code mining is usually better used to confirm behavior of some litigious points identified from using other techniques than to try to extract all of the rules as a whole. Rule discovery with SME, using workshop sessions, may conduct to ambiguities or misconceptions. Trying to understand how the rules are implemented in the current system helps to resolve such situations.  
+
+### Documenting the business rules
+
+To document the rule, try to use the language of the business ("problem domain") rather than the language of the technology ("solution domain"). The following rule is as stated by a business user in a car rental industry:
+`A driver authorized to drive a car of group K must be over 29`
+
+A rule developer may think to document the rule as:
+
+`If the age of the driver is less than 29 and the requested group of the reservation is K, modify the authorized attribute of the driver accordingly.`
+
+As stated above it is important to identify the different languages used to document the rule. The rule statements may evolve with time. We use different templates for documenting rules, depending of the type of discovery roadmap. 
