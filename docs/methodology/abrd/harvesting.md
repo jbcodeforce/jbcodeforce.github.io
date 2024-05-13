@@ -182,9 +182,11 @@ The selection of the type of roadmap is linked to the rule source.
 The following table summarizes the different techniques classified per type of source:
 
 | Source | Static analysis | Interactive | Automated |
+| --- | --- | --- |--- |
 | **Documentation** | Very good fit | As a complement of static analysis | Potential with Generative AI |
 | **Know-how** | Not applicable | Unique solution | AI Agent may help defining discovery question to SMEs |
 | **Code** | Efficient | As a complement of the other processes | Good result, improved with Gen AI |
+
 
 When the source of the business rules is people, individual interviews are required to get the core of the knowledge and then followed up with workshops to resolve outstanding issues and process exception paths with the team.
 
@@ -252,21 +254,21 @@ Between sessions, verify that business terms are well defined and the rules make
 
 This approach is used when Governmental Administration or policy group issues legal documents. We did observe this work requires courage and rigor. When using electronic documents, we used the following practices:
 
-    * Annotate the document on anything that needs some future discussion
-    * Copy and paste the business policy declared in the document to the rule template to clearly isolate it for future analysis. 
-    * Work in a consistent/systematic way to ensure a good coverage. 
-    * Check for agreement with the current business model as you go along. 
-    * Investigate discrepancies and log them. 
-    * Focus on stakeholder understanding (communication is key), and insist to clarify how a legal rule is interpreted by the line of business.
+* Annotate the document on anything that needs some future discussion
+* Copy and paste the business policy declared in the document to the rule template to clearly isolate it for future analysis. 
+* Work in a consistent/systematic way to ensure a good coverage. 
+* Check for agreement with the current business model as you go along. 
+* Investigate discrepancies and log them. 
+* Focus on stakeholder understanding (communication is key), and insist to clarify how a legal rule is interpreted by the line of business.
 
 One risk with this approach is that the reader is making his own interpretation of the context, and the document may not include all the cases and criteria leading to interpretations. It is sometimes difficult to get the business motivation behind a written policy. We recommend applying a rigorous method to be able to achieve the following goals: 
 
-    * Get an exhaustive list of the business events under scope: log them in a table 
-    * Get the activities, tasks, processes that support the processing of those business events 
-    * Identify where the business rules could be enforced in the process
-    * Get the business motivation behind the rules 
-    * Get explanation on rules if they are unclear, ambiguous. 
-    * Try to extract the object model under scope, domain values by looking at the terms used by the rules…. 
+* Get an exhaustive list of the business events under scope: log them in a table 
+* Get the activities, tasks, processes that support the processing of those business events 
+* Identify where the business rules could be enforced in the process
+* Get the business motivation behind the rules 
+* Get explanation on rules if they are unclear, ambiguous. 
+* Try to extract the object model under scope, domain values by looking at the terms used by the rules…. 
 
 We should still apply agile modeling by involving the SMEs to get feedbacks on the findings, assumptions and issues. Use simple diagrams to communicate with the project stakeholders.
 
