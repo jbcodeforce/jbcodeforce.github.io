@@ -5,6 +5,14 @@ Source of common software engineering problems to study and play with:
 * [geeks for geeks](https://www.geeksforgeeks.org)
 * [leet code](https://leetcode.com/)
 
+## Practices
+
+1. Ask questions about the problem to be sure to get a good understanding
+1. Continuously explain the reasoning
+1. Present the code, assess complexity
+1. Always test the solution
+1. Try optimizing after
+
 ## Big O notation
 
 * inserting element in an unordered array is constant time. It is not link to the number of element in the array. Time is = K a basic constant linked to compilor, microprocessor speed...
@@ -43,7 +51,7 @@ The time complexity of heap sort is O(nlog(n)). See code [HeapSort class](https:
 * Merge two sorted lists, [see example using iteration or recursion](https://github.com/jbcodeforce/java-studies/blob/master/data-structure-play/otherpuzzles/src/main/java/jbcodeforce/fun/sorting/MergeTwoSortedList.java).
 
 
-## Basic problems from leetcode
+## Basic problems from [leetcode](https://leetcode.com/)
 
 ### roman to integer
 

@@ -2,6 +2,13 @@
 
 Git can convert any local system folder into a Git repository. Each machine or location is called a remote, in Git's terminology, each remote may have one or more branches.
 
+```sh
+# git authentication specify user and email: jbcodeforce or I22Scode
+git config --global user.name "Your Name Here"
+# change email address
+git config --global user.email "MY_NAME@example.com"
+```
+
 When you clone a project, a complete copy of the original remote repository is created locally on your system. Your local copy of the repository contains the entire history of the project files, not just the latest version of project files.
 
 Files in your working directory can be in one of two states: **tracked** or **untracked**. Tracked files are files that were in the last snapshot; they can be unmodified, modified, or staged. Untracked files are everything else.
@@ -18,7 +25,7 @@ All Git repositories have a base branch named **main**.
 
 By convention, the master branch in a Git repository contains the latest, stable version of the application source code. To implement a new feature or functionality, create a new branch from the master branch. This new branch, called a feature branch, contains commits corresponding to code changes for the new feature. 
 
-When you use a branch for feature development, you can commit and share your code frequently without impacting the stability of code in the master branch. After ensuring the code in the feature branch is complete, tested, and reviewed, you are ready to merge the branch into another branch, such as the master branch. Merging is the process of combining the commit histories from two separate branches into a single branch.
+When you use a branch for feature development, you can commit and share your code frequently without impacting the stability of code in the master branch. After ensuring the code in the feature branch is completed, tested, and reviewed, you are ready to merge the branch into another branch, such as the master branch. Merging is the process of combining the commit histories from two separate branches into a single branch.
 
 ## Different workflows
 
@@ -40,12 +47,12 @@ In case the upstream get other Pull Requests, you can rebase to the latest upstr
 Merge the changes from upstream/master into your local master branch. This brings your fork's master branch into sync with the upstream repository, without losing your local changes.
 
 ```shell
-# Be sure to be on your own master branch
+# Be sure to be on your own main branch
 git branch
-# if needed checkout your master 
-git checkout master
+# if needed checkout your main 
+git checkout main
 # merge the changes
-git merge upstream/master
+git merge upstream/main
 # 
 ```
 

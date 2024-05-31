@@ -34,7 +34,7 @@
     * Try to express in SLA language: 100ms at 3-nines - 99.9% of availability is around 9h down per year. 5 nines is 5 minutes down.
 
 ???+ note "Information"
-    * AWS offers TCP connections up to the edge and then use AWS private backbone (global accelerator), which improves performane by 60% 
+    * AWS offers TCP connections up to the edge and then use AWS private backbone (global accelerator), which improves performance by 60% 
     * Try to use Real User Monitoring tool to measure network performance
     * Try to measure: 
     
@@ -44,7 +44,7 @@
         * **Packet loss**. Get 1,000 samples every hour for a day.
     
     * [Apache Bench](https://www.tutorialspoint.com/apache_bench/apache_bench_quick_guide.htm) helps to test throughput and latency of HTTP servers
-    * round-trip time (RTT) is the total time that it takes a data packet to travel from one point to another on the network and for a response to be sent back to the source. It is a key perf metric for latency. Ping measure ICMP RTT.
+    * Round-Trip Time (RTT) is the total time that it takes a data packet to travel from one point to another on the network and for a response to be sent back to the source. It is a key perf metric for latency. Ping measure ICMP RTT.
 
 * From high level to drill down
 
@@ -153,11 +153,11 @@ NoSQL really means sharded database, as some DB can support most of SQL operatio
 
 **Need to address how to partition the raw data for best performance**. For example organize the bucket or folder structure to simplify future queries: organize them by date, or entity key...
 
-### Denormalizing
+### De-normalizing
 
 We normalize the data to use less storage and updates in one place. But need more lookups.
 
-Denormalize duplicates data, use more storage, but uses one lookup to get the data, which leads to have  harder update.
+De-normalize duplicates data, use more storage, but uses one lookup to get the data, which leads to have  harder update.
 
 To assess what is a better fit, start with normalize, as we need to think about the customer experience, and consider different types of query.
 
@@ -411,7 +411,7 @@ To support scaling and low latency at the web page level, we need distributed ca
 
 Some thing like youtube.
 
-* anybody in the workd can upload video, and anybody can view it
+* anybody in the work can upload video, and anybody can view it
 * massive scale
 * Users and videos in billions 
 * Video upload and playing back those videos
@@ -422,7 +422,7 @@ Customer centric design:
 
 * Watching user: video search, video metadata and video player 
 
-    * Need a web server returning video URL and metadata: name, url, length, author, thumbmail picture,
+    * Need a web server returning video URL and metadata: name, url, length, author, thumbnail picture,
     * Big table to keep metadata. Key value pair. Easy to replicate and cache in different geographies
     * Video needs to be closed to user, like a CDN, with transcoded videos. Need distributed storage, and able to scale at billions of file. File between 50 Mb to 4 Gb may be.
     * Object Store can be used for the video persistence. The key for each video may include compression type, resolution...
@@ -448,7 +448,7 @@ To reduce the cost of this system as CDN and object storage are not cheap.
 
 * Need to avoid people adding thousand of the same keyword in a unique page to get the hit.
 * Accurate result means the search will return a list of most likely what the user's expects. So need to get metrics on page accuracy. 
-* we can compute how many times a user reperform a search after page results were displayed within a specific time window.
+* we can compute how many times a user perform a search after page results were displayed within a specific time window.
 
 Elaborate an algorithm:
 
@@ -459,7 +459,7 @@ Elaborate an algorithm:
 
 * Starting for the repository of web pages
 * Need to build a forward indexing to extract word count in document, then reverse it to build for word -> documents list
-* Then compute backlinks: the link reaching a given page
+* Then compute back links: the link reaching a given page
 
 ![](./images/search.png)
 
