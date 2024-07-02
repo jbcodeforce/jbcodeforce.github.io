@@ -1,0 +1,39 @@
+ersion: '3'  
+
+services:
+  cassandra_1:
+    image: cassandra:latest
+    container_name: cassandra_1
+    hostname: cassandra_1
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_START_RPC=true
+      - CASSANDRA_USER=admin
+      - CASSANDRA_PASSWORD=admin
+      - CASSANDRA_CLUSTER_NAME=MyCluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=datacenter1
+
+    volumes:
+      - ./cassandra-data:/var/lib/cassandra
+  cassandra_2:
+    image: cassandra:latest
+    container_name: cassandra_2
+    hostname: cassandra_2
+    ports:
+      - "9043:9042"
+    command: bash -c 'sleep 60;  /docker-entrypoint.sh cassandra -f'
+    environment:
+      - CASSANDRA_SEEDS=cassandra_1
+      - CASSANDRA_START_RPC=true
+      - CASSANDRA_USER=admin
+      - CASSANDRA_PASSWORD=admin
+      - CASSANDRA_CLUSTER_NAME=MyCluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=datacenter1
+    depends_on:
+      - cassandra_1
+    volumes:
+      - ./cassandra-data:/var/lib/cassandra
+
