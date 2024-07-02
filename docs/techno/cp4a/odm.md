@@ -1,5 +1,11 @@
 # Operational decision management
 
+Install [Rule Designer from the Eclipse Marketplace](https://marketplace.eclipse.org/content/ibm-operational-decision-manager-developers-v-8105-rule-designer): first install the compatible [Eclipse 2020-06](https://www.eclipse.org/downloads/packages/release/2022-06/r), then add the marketplace links to the repository to access ODM (Help > Install New Software > ).
+
+## Getting Started
+
+[Git repo for getting started guide.](https://github.com/DecisionsDev/odm-for-container-getting-started/blob/master/README.md)
+
 
 ## Deployment to OpenShift
 
@@ -41,4 +47,6 @@ The CR has the following declarations to review
 
 And more to update for LDAP and Postgresql DB
 
-* Install [Rule Designer from the Eclipse Marketplace](https://marketplace.eclipse.org/content/ibm-operational-decision-manager-developers-v-8105-rule-designer).
+### Other Deployments
+
+* [Deploy on AWS ECS](https://github.com/DecisionsDev/odm-docker-kubernetes/tree/ecs/platform/ecs) with RDS Postgres and secret management. 

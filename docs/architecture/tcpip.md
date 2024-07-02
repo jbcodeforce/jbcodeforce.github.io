@@ -62,23 +62,25 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 - serves as an access point to another network
 - is a node that routes the traffic from a workstation to another network segment. 
 - it commonly connects the internal networks and the outside network (Internet).
-- The gateway is also associated with both a router, which uses headers and forwarding tables to determine where packets are sent, and a switch, which provides the actual path for the packet in and out of the gateway.
+- the gateway is also associated with both a router, which uses headers and forwarding tables to determine where packets are sent, and a switch, which provides the actual path for the packet in and out of the gateway.
 
 ### What is the difference between broadcast and multicast?
 
-**multicast** is the delivery of a message or information to a group of destination computers simultaneously in a single transmission from the source. source sends a packet only once, nodes in the network take care of replicating the packet to reach multiple receivers
+With **Broadcast** a message is sent to all devices on a network segment or subnet. It is used for tasks like network discovery, address resolution, and distributing network-wide information.
+
+**multicast** is the delivery of a message or information to a group of destination computers simultaneously in a single transmission from the source. Source sends a packet only once, nodes in the network take care of replicating the packet to reach multiple receivers. It is used in video streaming, audio conferencing, and real-time data distribution.
 
 ### How does ping work?
 
 used to test if a host can reach an ip address on the network. It sends ICMP, an echo request packet, to the target.  It measures the time from transmission to reception (round-trip time) and records any packet loss. 
 
 
-IPV4 use a 32 bits addressing schema
+IPV4 uses a 32 bits addressing schema. 
 IPV6 uses 128 bits
 
 ### What is NAT? Where would you use it? How does it work? What are some limitations?
 
-Network address translation (NAT) is a methodology of modifying network address information in Internet Protocol (IP) datagram packet headers while they are in transit across a traffic routing device for the purpose of remapping one IP address space into another.
+Network address translation (NAT) is a methodology of modifying network address information in Internet Protocol (IP) datagram packet headers while they are in transit across a traffic routing device for the purpose of remapping one IP address space into another. It is used to hide private hosts from one network to another. 
 
 ### What is DHCP?
 

@@ -23,15 +23,15 @@ When doing a `git status`, git compares with the stage: files staged are under t
 
 All Git repositories have a base branch named **main**.
 
-By convention, the master branch in a Git repository contains the latest, stable version of the application source code. To implement a new feature or functionality, create a new branch from the master branch. This new branch, called a feature branch, contains commits corresponding to code changes for the new feature. 
+By convention, the main branch in a Git repository contains the latest, stable version of the application source code. To implement a new feature or functionality, create a new branch from the main branch. This new branch, called a feature branch, contains commits corresponding to code changes for the new feature. 
 
-When you use a branch for feature development, you can commit and share your code frequently without impacting the stability of code in the master branch. After ensuring the code in the feature branch is completed, tested, and reviewed, you are ready to merge the branch into another branch, such as the master branch. Merging is the process of combining the commit histories from two separate branches into a single branch.
+When you use a branch for feature development, you can commit and share your code frequently without impacting the stability of code in the main branch. After ensuring the code in the feature branch is completed, tested, and reviewed, you are ready to merge the branch into another branch, such as the main branch. Merging is the process of combining the commit histories from two separate branches into a single branch.
 
 ## Different workflows
 
-A **centralized Git** workflow uses a central Git repository as the single source of record for application code. Developers push code changes directly to the master branch, and do not push commits in other branches to the central repository. Because the workflow results in commits to a single branch only, team members are prone to merge conflicts. It open doors to commit partial or incomplete code changes.
+A **centralized Git** workflow uses a central Git repository as the single source of record for application code. Developers push code changes directly to the main branch, and do not push commits in other branches to the central repository. Because the workflow results in commits to a single branch only, team members are prone to merge conflicts. It open doors to commit partial or incomplete code changes.
 
-A **feature branch** workflow implements safety mechanisms to protect the stability of code on the master branch. The aim of this workflow is to always have deployable and stable code for every commit on the master branch, but still allow team members to develop and contribute new features to the project.
+A **feature branch** workflow implements safety mechanisms to protect the stability of code on the main branch. The aim of this workflow is to always have deployable and stable code for every commit on the main branch, but still allow team members to develop and contribute new features to the project.
 
 In a feature branch workflow, each new feature is implemented in a dedicated branch.
 
@@ -40,11 +40,11 @@ The **Forked** repository workflow is often used with large open source projects
 ```shell
 git fetch upstream
 or
-git merge upstream/master
+git merge upstream/main
 ```
 
-In case the upstream get other Pull Requests, you can rebase to the latest upstream changes, resolving any conflicts. Commits to master will be stored in a local branch, upstream/master.
-Merge the changes from upstream/master into your local master branch. This brings your fork's master branch into sync with the upstream repository, without losing your local changes.
+In case the upstream get other Pull Requests, you can rebase to the latest upstream changes, resolving any conflicts. Commits to `main` will be stored in a local branch, `upstream/main`.
+Merge the changes from `upstream/main` into your local main branch. This brings your fork's main branch into sync with the upstream repository, without losing your local changes.
 
 ```shell
 # Be sure to be on your own main branch
@@ -81,7 +81,8 @@ git commit -m 'initial commit'
 git add forgotten_file
 git commit --amend
 ```
-This command takes your staging area and uses it for the commit. If you’ve made no changes since your last commit (for instance, you run this command immediately after your previous commit), then your snapshot will look exactly the same, and all you’ll change is your commit message.
+
+This command takes your staging area and uses it for the commit. If you’ve made no changes since your last commit (for instance, you run this command immediately after your previous commit), then your snapshot will look exactly the same, and all you’ll change is your commit message. 
 
 * **git branch**: Working with multiple collaborators and want to make changes on your own? This command will let you build a new branch, or timeline of commits, of changes and file additions that are completely your own.
 
@@ -98,11 +99,35 @@ git branch --track hello-kitty origin/hello-kitty
 git branch -rd origin/registration
 ```
 
-* **git checkout**: Literally allows you to “check out” a repository that you are not currently inside. This is a navigational command that lets you move to the repository you want to check. You can use this command as git checkout master to look at the master branch. Un-modify a modified file by doing `git checkout -- <filename>`
-* **git merge**: When you’re done working on a branch, you can merge your changes back to the master branch, which is visible to all collaborators.
+Commit is done on the current checked out branch. If by any bad chance you have committed changes to the wrong branch, create the new branch, reset the master branch back to before these commits, then switch to the new branch and then commit:
+
+```sh
+git reset abc5b0de1 --hard
+```
+
+```
+MA --- MB --- MC --- FA --- FB --- FC <- main
+
+git checkout -b feature
+
+MA --- MB --- MC --- FA --- FB --- FC <- feature
+                                    ^
+                                    |
+                                  main
+
+git branch -f master MC
+
+MA --- MB --- MC --- FA --- FB --- FC <- feature
+               ^
+               |
+             main
+```
+
+* **git checkout**: Literally allows you to “check out” a repository that you are not currently inside. This is a navigational command that lets you move to the repository you want to check. You can use this command as git checkout main to look at the main branch. Un-modify a modified file by doing `git checkout -- <filename>`
+* **git merge**: When you’re done working on a branch, you can merge your changes back to the main branch, which is visible to all collaborators.
 * **git diff** to compare what is in your working directory with what is in your staging area
 * **git push**: `git push  [remote-name] [branch-name]`  If you’re working on your local host, and want your commits to be visible online on GitHub as well, you “push” the changes up to GitHub with this command.
-`git push -u origin master`
+`git push -u origin main`
 If you and someone else clone at the same time and they push upstream and then you push up- stream, your push will rightly be rejected. You’ll have to fetch their work first and incorporate it into yours before you’ll be allowed to push.
 * **git pull**: If you’re working on your local computer and want the most up-to-date version of your repository to work with, you “pull” the changes down from GitHub with this command
 it is a shorthand for git fetch followed by git merge FETCH_HEAD.
@@ -115,7 +140,7 @@ it is a shorthand for git fetch followed by git merge FETCH_HEAD.
 git remote set-url origin <url>
 ```
 
-* `git log -10 --stat`: To see the last 10 commits done on master
+* `git log -10 --stat`: To see the last 10 commits done on main
 * disable using ssl: `git config --global http.sslverify false`
 * In case the push did not return and hangs, it may be a problem of buffer size, then use `git config http.postBuffer 524288000`.
 
@@ -155,7 +180,7 @@ It’s important to note that when you switch branches in Git, files in your wor
 
 Because a branch in Git is in actuality a simple file that contains the 40 character SHA-1 checksum of the commit it points to, branches are cheap to create and destroy.
 
-If you need to apply fix to existing master branch, do a `git checkout master` and the local working directory is exactly the way it was before you started working on the branch. Then add a new branch as hotfix, work on the code, and proceed to merge it back to the main branch using git merge.
+If you need to apply fix to existing main branch, do a `git checkout main` and the local working directory is exactly the way it was before you started working on the branch. Then add a new branch as hotfix, work on the code, and proceed to merge it back to the main branch using git merge.
 
 When you try to merge one commit with a commit that can be reached by following the first commit’s history, Git simplifies things by moving the pointer forward because there is no divergent work to merge together — this is called a "fast forward".
 
@@ -164,7 +189,7 @@ When the main branch and the fix branch are at the same level, you should delete
 Once the work on the branch is done, checkout to the target main branch:
 
 ```shell
-git checkout master
+git checkout main
 git merge issue2
 git push
 ```
@@ -246,11 +271,11 @@ Can also remove all the commit history using:
 git checkout --orphan TEMP_BRANCH
 git add -A
 git  commit -am "New initial commit"
-# delete master
-git branch -D master
-# rename temp branch to master
-git branch -m master
-git push -f origin master
+# delete main
+git branch -D main
+# rename temp branch to main
+git branch -m main
+git push -f origin main
 ```
 
 ## More reading

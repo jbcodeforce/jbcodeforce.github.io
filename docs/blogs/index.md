@@ -14,7 +14,6 @@ Multiple articles on IBM developers site, and BPM journal.
 * [Medium - Developer’s experience with an event-driven solution implementation - 03/2022](https://medium.com/@jerome.boyer/developers-experience-with-an-event-driven-solution-implementation-7f6a94fcd162)
 
 
-
 ## Dev 2021 
 
 A developer journey to develop an event-driven microservice from DDD to devops.
