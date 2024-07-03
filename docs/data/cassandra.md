@@ -329,7 +329,7 @@ It is possible also to create keyspace and tables by API if they do not exist by
 ## Future Readings
 
 * [Getting Started documentation](https://cassandra.apache.org/_/quickstart.html)
-
+* [Getting started article on Cassandra and Python](https://towardsdatascience.com/getting-started-with-apache-cassandra-and-python-81e00ccf17c9)
 * [10 steps to set up a multi-data center Cassandra cluster on a Kubernetes platform](https://www.ibm.com/developerworks/library/ba-multi-data-center-cassandra-cluster-kubernetes-platform/index.html)
 * [IBM Article: Scalable multi-node Cassandra deployment on Kubernetes Cluster](https://github.com/IBM/Scalable-Cassandra-deployment-on-Kubernetes)
 * [Running Cassandra on Kubernetes](https://blog.deimos.fr/2018/06/24/running-cassandra-on-kubernetes/)
