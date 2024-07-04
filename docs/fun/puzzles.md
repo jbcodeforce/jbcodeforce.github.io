@@ -15,11 +15,14 @@ Source of common software engineering problems to study and play with:
 
 ## Big O notation
 
-* inserting element in an unordered array is constant time. It is not link to the number of element in the array. Time is = K a basic constant linked to compilor, microprocessor speed...
-* linear search is proportional to N. The search time T = K * N/2 on average
-* binary search is log(N): T = log base 2(N) but as any log  is related to any other by a constant (3.322 to go from base 2 to base 10), we can say T = log(N). doubling the N will add only one step of processing. Time follows a log.
+O is to specify the "Order of" for an algorithm complexity according to the number of elements
+
+* Inserting element in an unordered array is constant time. It is not linked to the number of elements in the array. Time is = K a basic constant linked to compilor, microprocessor speed...
+* Linear search is proportional to N. The search time T = K * N/2 on average
+* Binary search is log(N): T = log base 2(N) but as any log  is related to any other by a constant (3.322 to go from base 2 to base 10), we can say T = log(N). Doubling the N will add only one step of processing. Time follows a log.
 * The quasilinear time of O(n.log n) is worse than O(n) but better than O(N^2)
-O(N) is the same as T = K .N   O for "Order of"
+
+O(N) is the same as T = K .N   
 
 [Big O - good article from HappyCoder](https://www.happycoders.eu/algorithms/big-o-notation-time-complexity/).
 
