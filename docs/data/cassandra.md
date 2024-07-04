@@ -1,38 +1,118 @@
 # Cassandra Summary
 
-In this article is a quick set of nodes on [Cassandra](http://cassandra.apache.org/).
+This article is summary of [Apache Cassandra](http://cassandra.apache.org/) which is a NoSQL, row-oriented, highly scalable and highly available database. It was created by Facebook team and given as an open-source to Apache Foundation.
 
 Cassandra addresses linear scalability and high availability to persist a huge <key,value> data set. It uses replication to multiple nodes, managed in cluster, even deployed cross data centers.
 
 The Apache Cassandra database is the right choice when you need scalability and high availability without compromising performance. Linear scalability and proven fault-tolerance on commodity hardware or cloud infrastructure make it the perfect platform for mission-critical data.
 
+## Key value propositions
+
+* Handle **massive datasets** distributed across multiple nodes, allowing for high read and write performance
+* **High availability and fault tolerance** even between data centers. It supports always-on availability with zero downtime. It uses a peer-to-peer architecture and automatic replication to ensure that data is never lost.
+* **Distributed and Decentralized Architecture**: Cassandra's decentralized architecture eliminates single points of failure and provides fault tolerance.
+* **Linear Scalability**: even as more nodes are added to the cluster
+* **Flexible Data Model**: Cassandra's data model is based on a wide column store, which allows for flexible schema design. It supports dynamic column addition and removal, making it suitable for applications with evolving data requirements.
+* **Fast writes**: Cassandra is optimized for high-speed writes, making it well-suited for applications that need to capture large volumes of data in real-time, such as IoT, sensor data, and logging
+* **Query flexibility**: Cassandra supports a variety of query methods, including lightweight transactions, batches, and secondary indexes, to provide flexible data access.
+
 ## Concepts
 
-Cassandra uses a ring based Distributed Hash Table servers but without finder or routing tables. Keys are stored as in DHT to the next server with key > key id, and replicated on the 2 next servers.  There is one ring per data center.  The coordinator forward the query to a subset of replicas for a particular key. Every server that could be a coordinator needs to know the 'key to server' assignment.  
+Cassandra uses a **ring based Distributed Hash Table** servers but without finder or routing tables. Keys are stored in DHT to one server and replicated on the 2 next neighbor servers.  There is one ring per data center.  The coordinator forwards the query to a subset of replicas for a particular key. Every server that could be a coordinator needs to know the 'key to server' assignment.  
+
 Two data placement strategies:
 
 * simple strategy: use two kinds of partitioners:
 
-  * random, which does operations like hashing
+  * random, which does operation like hashing
   * byte ordered, which assigns range of keys to servers: easier for range queries
 
 * network topology strategy: used for multiple data centers. It supports different configuration, like 2 replicas of each key per data center.
 
-First  replica is placed according to the Partitioner logic, and make sure to store the other replica to different rack, to avoid a rack failure will make all copies of key not available.  Go around the ring clockwise until encountering a server in a different rack.
+First  replica is placed according to the Partitioner logic: it makes sure to store the other replica to different rack, to avoid a rack failure which may make all key copies not available.  Go around the ring clockwise until encountering a server in a different rack.
 
 *Snitches: is a mechanism to map ip addresses to racks in DC. Cassandra supports such configuration.*
 
-Client sends writes to one coordinator node in Cassandra cluster. Coordinator may be per key or per client or per query. It uses partitioner to send query to all replica nodes responsible for key. The process to write should be fast and not involving lock on resource. It should not involve read and disk seeks.
-Write operations are always successful, even in case of failure: the coordinator uses the Hinted Handoff mechanism (it assumes ownership of the key until being sure it is supported by the replica), as it writes to other replicas and keeps the write locally until the down replica comes back up. If all the replicas are done, the Coordinator buffers writes for few hours.
+Client sends writes to one coordinator node in Cassandra cluster. Every write operation is first stored in the commit log. It is used for crash recovery. Coordinator may be per key or per client or per query. 
+
+Write operations are always successful, even in case of failure: the coordinator uses the Hinted Handoff mechanism (it assumes ownership of the key until being sure it is supported by the replica), as it writes to other replicas and keeps the write locally until the down replica comes back up. If all the replicas are done, the Coordinator buffers writes for few hours. 
+
+After data is written to the commit log it then is stored in Mem-Table(Memory Table) which remains there till it reaches to the threshold. 
+
+Finally, Sorted-String Table or SSTable is a disk file which stores data from MemTable once it reaches to the threshold. SSTables are stored on disk sequentially and maintained for each database table.
+
+There are three types of read operations: 1/ **Direct-request** where coordinator send read query to one of the replicas and a digest request to other replicas to ensure returned data are up-to-date. 2/ **Digest-request**: returned rows from each replica are compared in memory for consistency 3/ **Read-repair**: in case of data is not consistent across the node, a background read repair request is initiated that makes sure that the most recent data is available across the nodes.
+
+It uses partitioner to send query to all replica nodes responsible for a partition key. The process to write should be fast and not involving lock on resource. It should not involve read and disk seeks.
 
 Here are some key concepts of Cassandra to keep in mind:
 
-* **Cluster**:  the set of nodes potentially deployed cross data centers, organized as a 'ring'.
+* **Cluster**:  the set of nodes potentially deployed across data centers, organized as a 'ring'.
 * **Keyspace**: like a schema in SQL DB. It is the higher abstraction object to contain data. The important keyspace attributes are the Replication Factor, the Replica Placement Strategy and the Column Families.
-* **Column Family**: they are like tables in Relational Databases. Each Column Family contains a collection of rows which are represented by a Map<RowKey, SortedMap<ColumnKey, ColumnValue>>. The key gives the ability to access related data together
+* **Column Family**: they are like tables in Relational Databases. Each Column Family contains a collection of rows which are represented by a Map<RowKey, SortedMap<ColumnKey, ColumnValue>>. The key gives the ability to access related data all together
 * **Column** – A column is a data structure which contains a column name, a value and a timestamp. The columns and the number of columns in each row may vary in contrast with a relational database where data are well structured.
 
+## Define Assets Table Structure with CQL
+
+Cassandra Query Language (CQL) is very similar to SQL but suited for the JOINless structure of Cassandra.
+
+Using the csql tool we can create space and table. To use `cqlsh` connect to cassandra container:
+
+```sh
+docker exec -ti cassandra_1 cqlsh
+# k8s
+$ kubectl exec -tin greencompute cassandra_1 cqlsh
+```
+
+You are now in cqlsh shell and you can define assets table under keyspace 
+`assetmonitoring`:
+
+```
+sqlsh>  create keyspace assetmonitoring with replication={'class':'SimpleStrategy', 'replication_factor':1};
+sqlsh> use assetmonitoring;
+sqlsh:assetmonitoring> create TABLE assets(id text PRIMARY KEY, os text, type text, ipaddress text, version text, antivirus text, current double, rotation int, pressure int, temperature int, latitude double, longitude double);
+
+```
+
+Add an index on the asset operating system field and one on type.
+
+```
+CREATE INDEX ON assetmonitoring.assets (os);
+CREATE INDEX ON assetmonitoring.assets (type);
+```
+
+If you reconnect to the pod using cqlsh you can assess the table using
+
+```
+describe tables
+
+describe assets
+```
+
+### Some useful CQL commands
+
+```
+# See the table schema
+cqlsh> describe table assets;
+
+# modify a table structure adding a column
+cqlsh> alter table assets add flowRate bigint;
+
+# change column type. example the name column:
+cqlsh> alter table assets alter name type text;
+
+# list content of a table  
+cqlsh> select id,ipaddress,latitude,longitude from assets;
+
+# delete a table
+cqlsh> drop table if exists assets;
+```
+
 ## Cassandra deployment
+
+Running locally with docker compose on a two nodes topology. [See docker compose file](https://github.com/jbcodeforce/jbcodeforce.github.io/tree/code/studies/cassandra/docker-compose.yaml)
+
+Looking to hosted managed service like [AWS Keyspaces](https://aws.amazon.com/keyspaces/) , [DataStax enterprise](https://www.datastax.com/products/datastax-enterprise)
 
 ### Deployment on OpenShift
 
@@ -55,32 +135,32 @@ The resource requirements for higher performance c7a node are:
 * 4-8 GB JVM heap, recommend trying to keep heaps limited to 4 GB to minimize garbage collection pauses caused by large heaps.
 * Cassandra needs local storage to get best performance. Avoid to use distributed storage, and prefer hostPath or localstorage. With distributed storage like a Glusterfs cluster you may have 9 replicas (3x Cassandra replica factor which is usually 3)
 
-Cassandra  nodes tend  to be IO bound  rather than CPU bound:
+Cassandra nodes tend to be IO bound rather than CPU bound:
 
 * Upper limit of data per node <= 1.5 TB for spinning disk and <= 4 TB for SSD
 * Increase the number of nodes to keep the data per node at or below the recommended capacity
 * Actual data per node determined by data throughput, for high throughput need to limit the data per node.
 
-The use of Vnodes is generally  considered  to be a good practice as they eliminate the need to perform manual token assignment, distribute workload across all nodes in a cluster when nodes are added or removed. It helps rebuilding dead nodes faster.
+The use of Vnodes is generally considered  to be a good practice as they eliminate the need to perform manual token assignment, distribute workload across all nodes in a cluster when nodes are added or removed. It helps rebuilding dead nodes faster.
 Vnode reduces the size of SSTables which can improve read performance. Cassandra best practices set the number of tokens per Cassandra node to 256.
 
 Avoid getting multiple node instances on the same physical host, so use `podAntiAffinity` in the StatefulSet spec.
 
 ```yaml
 spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            topologyKey: "kubernetes.io/hostname"
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        topologyKey: "kubernetes.io/hostname"
 ```
 
-#### Using our yaml configurations
+#### Using  yaml configurations
 
 You can reuse the yaml config files under `deployment/cassandra` folder to configure a Service to expose Cassandra externally, create static persistence volumes, and use the StatefulSet to deploy Cassandra image.
 
-The steps to deploy to ICP are:
+The steps to deploy to K8S are:
 
-1. Connect to ICP. You may want to get the admin security token using the Admin console and the script: `scripts/connectToCluster.sh`.  
+1. Connect to your k8s. You may want to get the admin security token using the Admin console and the script: `scripts/connectToCluster.sh`.  
 
     *We are using one namespace called 'greencompute'.*
 
@@ -182,9 +262,6 @@ For the number of replicas, it is recommended to use 3 per datacenter.
 
 The `spec.env` parameters in the statefulset defines the datacenter name and rack name too.
 
-## Code
-
-We have done two implementations for persisting `asset` data into Cassandra, one using Cassandra client API and one with SpringBoot cassandra repository API.
 
 ## Cassandra client API
 
@@ -210,57 +287,8 @@ The trick is in the endpoints name. We externalize this setting in a configurati
 
 It is possible also to create keyspace and tables by API if they do not exist by building CQL query string and use the session.execute(aquery) method. See [this section below](#use-cassandra-java-api-to-create-objects)
 
-## Define Assets Table Structure with CQL
 
-Using the csql tool we can create space and table. To use `cqlsh` connect to cassandra pod:
-
-```
-$ kubectl exec -tin greencompute cassandra-0 cqlsh
-```
-
-You are now in cqlsh shell and you can define assets table under keyspace 
-`assetmonitoring`:
-
-```
-sqlsh>  create keyspace assetmonitoring with replication={'class':'SimpleStrategy', 'replication_factor':1};
-sqlsh> use assetmonitoring;
-sqlsh:assetmonitoring> create TABLE assets(id text PRIMARY KEY, os text, type text, ipaddress text, version text, antivirus text, current double, rotation int, pressure int, temperature int, latitude double, longitude double);
-
-```
-
-Add an index on the asset operating system field and one on type.
-
-```
-CREATE INDEX ON assetmonitoring.assets (os);
-CREATE INDEX ON assetmonitoring.assets (type);
-```
-
-If you reconnect to the pod using cqlsh you can assess the table using
-
-```
-describe tables
-
-describe assets
-```
-
-### Some useful CQL commands
-
-```
-# See the table schema
-cqlsh> describe table assets;
-
-# modify a table structure adding a column
-cqlsh> alter table assets add flowRate bigint;
-
-# change column type. example the name column:
-cqlsh> alter table assets alter name type text;
-
-# list content of a table  
-cqlsh> select id,ipaddress,latitude,longitude from assets;
-
-# delete a table
-cqlsh> drop table if exists assets;
-```
+## Coding
 
 ### Use Cassandra Java API to create objects
 
@@ -300,6 +328,8 @@ cqlsh> drop table if exists assets;
 
 ## Future Readings
 
+* [Getting Started documentation](https://cassandra.apache.org/_/quickstart.html)
+* [Getting started article on Cassandra and Python](https://towardsdatascience.com/getting-started-with-apache-cassandra-and-python-81e00ccf17c9)
 * [10 steps to set up a multi-data center Cassandra cluster on a Kubernetes platform](https://www.ibm.com/developerworks/library/ba-multi-data-center-cassandra-cluster-kubernetes-platform/index.html)
 * [IBM Article: Scalable multi-node Cassandra deployment on Kubernetes Cluster](https://github.com/IBM/Scalable-Cassandra-deployment-on-Kubernetes)
 * [Running Cassandra on Kubernetes](https://blog.deimos.fr/2018/06/24/running-cassandra-on-kubernetes/)

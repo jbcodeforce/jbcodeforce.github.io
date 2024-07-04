@@ -2,19 +2,27 @@
 
 ## Introduction
 
-[Open Source - https://www.drools.org/](https://www.drools.org/) under Apache license. The commercial version is RedHat Decision Manager. It is essentially a forward-chaining and backward-chaining inference-based rule engine, DMN decisions engine.
+[Open Source - https://www.drools.org/](https://www.drools.org/) under Apache license. The commercial version is RedHat Decision Manager. It is essentially a forward-chaining and backward-chaining inference-based rule engine, which supports Decision Management Notation decisions engine.
 
-[Last KIE Docker image from quay.io](https://quay.io/repository/kiegroup/business-central-workbench).
+The [last KIE (Knowledge Is Everything) Docker image is from quay.io](https://quay.io/repository/kiegroup/business-central-workbench).
 
-```sh
-docker run -p 8080:8080 -p 8001:8001 -d --name business-central-workbench quay.io/kiegroup/business-central-workbench:latest
-```
+    ```sh
+    docker run -p 8080:8080 -p 8001:8001 -d --name business-central-workbench quay.io/kiegroup/business-central-workbench:latest
+    ```
 
-See the  KIE (Knowledge Is Everything) Business-Central Workbench at [http://localhost:8080/business-central](http://localhost:8080/business-central). Business Central is the graphical user interface where you create and manage business rules. You can install it in JBoss EAP instance or on OpenShift. KIE Server is the server where rules and other artifacts are executed. A KIE container is a specific version of a project. Git repositories are used internally within Business Central to store all processes, rules, and other artifacts that are created in the authoring environment.
+See the  KIE Business-Central Workbench at [http://localhost:8080/business-central](http://localhost:8080/business-central). Business Central is the graphical user interface where you create and manage business rules. You can install it in JBoss EAP instance or on OpenShift. 
 
-KIE includes multiple projects: [Kogito](https://docs.jboss.org/kogito/release/latest/html_single/) (for cloud native deployment (Quarkus - springboot)), OptaPlanner, jBPM. See the examples in [Kogito Central git repository](https://github.com/kiegroup/kogito-examples). Kogito originates from KIE.
+**KIE Server** is the server where rules and other artifacts are executed. A KIE container is a specific version of a project. Git repositories are used internally within Business Central to store all processes, rules, and other artifacts that are created in the authoring environment.
+
+KIE includes multiple projects: [Kogito](https://docs.jboss.org/kogito/release/latest/html_single/) (for cloud native deployment (Quarkus - Springboot)), OptaPlanner, jBPM. See the examples in [Kogito Central git repository](https://github.com/kiegroup/kogito-examples). Kogito originates from KIE.
 
 For older Drools version see this [blog](https://vishnu-chalil.medium.com/how-to-setup-drools-workbench-in-local-machine-with-docker-image-c846ca37eab2).
+
+### Getting started
+
+[Getting started version 8.44](https://docs.drools.org/8.44.0.Final/drools-docs/drools/getting-started/index.html)
+
+Some Samples from [Kogito Samples](https://github.com/kiegroup/kogito-examples).
 
 ### DMN support
 
