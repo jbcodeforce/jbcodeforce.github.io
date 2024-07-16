@@ -22,7 +22,7 @@ For older Drools version see this [blog](https://vishnu-chalil.medium.com/how-to
 
 [Getting started version 8.44](https://docs.drools.org/8.44.0.Final/drools-docs/drools/getting-started/index.html)
 
-Some Samples from [Kogito Samples](https://github.com/kiegroup/kogito-examples).
+There are different examples in the [Kogito git repo](https://github.com/kiegroup/kogito-examples) for quarkus or springboot.
 
 ### DMN support
 
@@ -57,7 +57,11 @@ With stateful KIE session, the engine relies on the `modify` statement in rules 
 * **RuleUnitInstance**
 * **RuleUnitProvider** 
 
-## Kogito
+## Getting started Kogito Quarkus
+
+[See documentation from kogito kie](https://docs.kogito.kie.org/latest/html_single/#chap-kogito-creating-running)
+
+1. Create quarkus project
 
 ## Sources
 

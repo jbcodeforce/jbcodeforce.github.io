@@ -1,13 +1,13 @@
 # Conduct system design
 
-## Approach
+## Methodology
 
 * Verify the goals
 
-    * Why we are doing this application / solution
-    * Who is the end user
-    * How they will use the system and for what
-    * What are the expected outcome and inputs
+    * Why we are doing this application / solution?
+    * Who is the end user?
+    * How they will use the system and for what purpose?
+    * What are the expected outcomes and what are the inputs?
     * How to measure success?
 
 * Think about end user's experience - working backward
@@ -288,10 +288,10 @@ Scalable streaming platform for inbound and outbound data. See [dedicated study]
 
 ### URL shortening service
 
-* talking about bit.ly: a service where anyone can shorten an existing URL and then the service is managing redirecting the traffic.
+* Talking about bit.ly: a service where anyone can shorten an existing URL and then the service is managing redirecting the traffic.
 * what sort of scale? 
 * Any restriction on chars to be used?
-* Are short is short?
+* How short is short?
 
 The approach is to design the potential API, then the components, present a data model for persistence and then address the redirect.
 
@@ -306,19 +306,19 @@ The approach is to design the potential API, then the components, present a data
 
 ![](./images/short-url-comps.png)
 
-To redirect the HTTP response status may be 301 or 302. 301 is a permanent redirect, so intermediate components will keep the mapping. But if you want to keep analytics (search engine) on your web site traffic you want to know how many redirects are done per day, so 302 is a better choice. This is a temporary redirect.
+To perform redirect, the HTTP response status may be 301 or 302. 301 is a permanent redirect, so intermediate components will keep the mapping. But if you want to keep analytics (search engine) on your web site traffic, you want to know how many redirects are done per day, therefore 302 is a better choice. This is a temporary redirect.
 
 ### A restaurant system like OpenTable
 
-A customer / diner I want to:
+As customer I want to:
 
-* specify the number of members for the dining party
-* select a time slot and specify a location
-* select a restaurant by name 
-* select a type of food
-* book the table for the selected timeslot, by specifying phone number and email address.
-* specify how to be contacted when closer to the time (sms)
-* register as a recurring user to get royalty points
+* specify the number of members for the dining party.
+* select a time slot and specify a location.
+* select a restaurant by name.
+* select a type of food.
+* book the table for the selected time slot, by specifying phone number and email address.
+* specify how to be contacted when closer to the time (sms).
+* register as a recurring user to get royalty points.
 
 Other customers of this application will be restaurant owners, who want to see their booking, but also get more information about the customers, the forecast, and the number of search not leading to their restaurant. May be expose their menu. Get statistic on customer navigation into menu items.
 
@@ -328,24 +328,24 @@ Need to scale and be reliable. Cost is not an issue.
 
 Data model: 
 
-- search: location, time - date, party size, type of food
-- list of restaurants
-- list of time slots
-- reservation: restaurant, party size, time slot, email, phone number, type of contact
-- return booking status with reservation ID to be able to cancel
+- search: location, time - date, party size, type of food.
+- list of restaurants.
+- list of time slots.
+- reservation: restaurant, party size, time slot, email, phone number, type of contact.
+- return booking status with reservation ID to be able to cancel it in the future.
 
 So we need: 
 
 * Restaurant to describe physical location, # tables.., how they can group tables for bigger party.
-* Customer representing physical contact, 
-* A schedule per 15 mn time slots, table list per restaurant
+* Customer representing physical contact.
+* A schedule per 15 mn time slots, table list per restaurant.
 * Reservation to link customer to restaurant by using their primary keys.
-* A Search: time slot, party, location
+* A Search: time slot, party, location.
 * The reservation function need to take into account capability of the restaurant on how to organize tables.
 
-This is a normalized data model, as it is easier and really for reservation there is one transaction on a simple object. Restaurant and customer are read models in  this context.
+This is a normalized data model, as it is easier and really for reservation, there is one transaction on a simple object. Restaurant and customer are read models in  this context.
 
-Outside of authentication APIs, login, password... we need few APIs to support the reservation:
+Outside of the authentication, lost password APIs... we need few APIs to support the reservation:
 
 | Verb | APIs |
 | --- | --- |
@@ -353,7 +353,7 @@ Outside of authentication APIs, login, password... we need few APIs to support t
 | POST | reservation |
 | DELETE | reservation | 
 
-Other APIs are needed to do CRUD for each business entities.
+Other APIs may be needed to do CRUD for each business entities: restaurants
 
 The servers are scaled horizontally, rack and AZ allocated, and even geo-routed.
 
@@ -361,98 +361,106 @@ The servers are scaled horizontally, rack and AZ allocated, and even geo-routed.
 
 DB system may be no sql based, and can be highly available and support horizontal scaling too.
 
-## Web Crawler for a search
+### Web Crawler for a search
+
+Problem: build a web crawler tool to prepare data for semantic search:
 
 Need to parse html, keep text only, may be pictures in the future, billions of web pages, and run every week.
 Need to update of existing page refs if they changed. 
 
 HTML = text + ref to URL
 
-Singleton web crawler will put links into a LIFO pile. If we consider the web crawling as a graph navigation, we want to do BFS, so we need a pile as data structure.
+Singleton web crawler will put links into a LIFO pile. If we consider the web crawling as a graph navigation, we want to [do BFS](https://github.com/jbcodeforce/python-code/blob/master/algorithms/Graph.py), so we need a pile as data structure.
 
-As we need to run every week, we can in fact runs all the time with a single instance of the crawler.
-The solution is batch, and no end user use the system. Except that, we still need to provide metrics that display coverage: pile size, total number of page processed, link occurence.
+As we need to update crawled content every week, we can, in fact, run all the time with a single instance of the crawler.
+The solution uses batch, as no end-user uses the system. Except that, we still need to provide metrics to display coverage: pile size, total number of page processed, link occurrence...
 
-Need to avoid looping into pages, so need to keep the visited pages.
+Need to avoid looping into pages, so need to keep the visited pages as well.
 If we need to run in parallel, then pile and visited page tree will be shared and distributed.
 So we need a partition key, may be a hash of the url.
 
-The solution may look like
+The solution may look like in the figure below:
 
 ![](./diagrams/webcrawler.drawio.png){ width="800" }
 
-## Top sellers in e-commerce
+* Web Crawler using HTML parser and text extraction
+* Save in a distributed cloud storage the source page, and pictures
+* Extract the URLs and put them in a Pile data structure. Hash the URL. Filter out URLs already processed. Add the new URLs in the Queue
 
-Present the top sellers per category / sub-category. We can hace thousand of requests per second.
+### Top sellers in e-commerce
 
-top seller means trending: so # of sell over a time period.
-time period is variable for low sell item, so item sold few time per year, needs to be visible for a category. We can also use a weight algorithm to put less impact on older sells.
+Present the top sellers per category / sub-category. We can have thousand of request per second.
+
+* top seller means trending: so # of sell over a time period.
+* time period is variable for low sell item, so item sold few time per year, needs to be visible for a category. We can also use a weight algorithm to put less impact on older sells.
 
 
-<img src="https://latex.codecogs.com/svg.image?w&space;=&space;e^{-\lambda&space;t}"/>
+<img src="https://latex.codecogs.com/svg.image?w&space;=&space;e^{-\lambda&space;t}" width=200px/>
 
 The update can be done few time a day for most active category.
 
-customer experience, when searching and looking at a category of items, a list of top seller is proposed under the product description.
+The new customer experience includes: after searching and looking at a category of items, the system returns a list of top seller under the product description.
 
-Sell is product ID, category, date of sell
-batch processing compute top seller per category, save for distributed cache. 
+Sell Object is a product ID, category, date of sell.
 
-The amount of data is massive so querying per category and sort by date of sell will put stress to SQL database. We can replicate the DB and work on the datawarehouse, or adopt s3 bucket with category being the bucket. For the job processing we could use Flink or Spark to compute the top-sell product. 
+Batch processing computes the top sellers per category, and saves it in distributed cache. 
+
+The amount of data is massive so querying per category and sort by date of sell will put stress to any SQL database. We can replicate the DB and work on the data warehouse, or adopt cloud object storage bucket with category being the bucket. For the job processing, we could use Flink or Spark, to compute the top-sell product. 
+
 Job will run in parallel and flink will distribute data. It will compute for each product a score based in (t - purchase time) time, decaying older sells. We sort by this score.
 
-The top-seller data store does not need to support a big amount of data, may be keep the top 20 or 50 items per category, and may be hundred of thousand of category. DynamoDB can be used.
+The top-seller data store does not need to support a big amount of data, may be keep the top 20 or 50 items per category, and may be hundred of thousand of category. Distributed document oriented Database can be used.
 
-To support scaling and low latency at the web page level, we need distributed caching, and scale web server horizontally. 
+To support scaling and low latency at the web page level, we need distributed caching, and scale web server horizontally. Here is a component view:
 
-![](./images/topseller.png)
+![](./images/topseller.png){ width=600 }
 
-## Video sharing service
+### Video sharing service
 
 Some thing like youtube.
 
-* anybody in the work can upload video, and anybody can view it
-* massive scale
-* Users and videos in billions 
-* Video upload and playing back those videos
+* anybody in the work can upload video, and anybody can view it.
+* massive scale.
+* Users and videos in billions .
+* Video upload and playing back those videos.
 
 Feel free to use existing services.
 
 Customer centric design:
 
-* Watching user: video search, video metadata and video player 
+* **Watching user**: video search, video metadata and video player 
 
     * Need a web server returning video URL and metadata: name, url, length, author, thumbnail picture,
     * Big table to keep metadata. Key value pair. Easy to replicate and cache in different geographies
-    * Video needs to be closed to user, like a CDN, with transcoded videos. Need distributed storage, and able to scale at billions of file. File between 50 Mb to 4 Gb may be.
+    * Video needs to be close to user, like a CDN, with transcoded videos. Need distributed storage, and able to scale at billion of file. File between 50 Mb to 4 Gb may be.
     * Object Store can be used for the video persistence. The key for each video may include compression type, resolution...
-    * The video play will be able to switch between resolution, or advance in the video time.  
+    * The video player will be able to switch between resolution, or advance in the video time.  
 
-To reduce the cost of this system as CDN and object storage are not cheap. 
+* To reduce the cost of this system as CDN and object storage are not cheap. 
 
-    * can classify videos that will be in CDN versus one staying on own servers.
+    * can classify videos that will be in CDN versus one staying on the servers.
     * Long tail meaning faming - popularity - 
     * predict a likelihood to get a video watch today so it can be pushed to the CDN
     * CDN per region per language.
 
-* for uploading video, user create metadata, and then the upload the raw video in a distributed storage, then it needs to be transcoded to the different format. We can apply queueing to let the transcoders always feeded and also being able to run in parallel.
+* for uploading video, users create metadata, and then upload the raw video in a distributed storage, then the video needs to be transcoded to the different format. We can use queueing approach to get the transcoders always feeded and also being able to run in parallel.
 * Metadata needs to keep the state of if the video transcoding is complete or not, to avoid publishing reference to video not yet transcoded.
 
 ![](./images/youtube.png)
 
-## Designing search engine
+### Designing search engine
 
-* Like google, billions of people and billions of page
-* The problem is really how to get accurate results for a query.
+* Like google, billions of people and billion of pages
+* The problem is really how to get accurate results for a given query.
 * Start from a reporting database with URL of pages 
 
 * Need to avoid people adding thousand of the same keyword in a unique page to get the hit.
-* Accurate result means the search will return a list of most likely what the user's expects. So need to get metrics on page accuracy. 
+* Accurate result means the search will return a list of the most likely page what the user's expects. So need to get metrics on page accuracy. 
 * we can compute how many times a user perform a search after page results were displayed within a specific time window.
 
-Elaborate an algorithm:
+**Elaborate an algorithm:**
 
-* TF/IDF : term frequency / document frequency to assess how a term is relevant cross document.  is ok for a small document base. With internet scale the denominator is mostly impossible to compute.
+* TF/IDF : term frequency / document frequency to assess how a term is relevant across documents.  It works fine for a small document base. With internet scale the denominator is mostly impossible to compute.
 * To address a better solution we need to thing about what to present to the user: a list of top 10 hits. So we need an inverted index: searched keyword -> list of pages sorted by relevance.
 * Page rank was developed for Google to assign a rank based on number of link to the page.
 * How to evaluate relevance of a term within a doc: terms in the documentation, the position, the title, the font size, heading, formatting, metadata attached to the document.
@@ -464,22 +472,22 @@ Elaborate an algorithm:
 ![](./images/search.png)
 
 
-## BPEL to microservices
+### BPEL to microservices
 
-Taking into source a BPEL flow like the one below, how do you migrate to a microservices, may be event-driven?
+Taking into source a BPEL flow like the one below, how do you migrate this application logic to a microservice architecture, may be event-driven?
 
 ![](./diagrams/bpel-1.drawio.png)
 
 * Input can come from HTTP SOAP requests or messages in queue
 * Green components are Service Component Architecture services
-* Customer validation, and persistence can be retried multiple times
-* With BPEL engine state transfer will be persisted to process server database.
+* Customers validation, and persistence can be retried multiple times
+* With BPEL engine state transfer will be persisted to the process server database.
 * The big white rectangle represents an orchestrator
-* Acknowledgement service is to send the customer a message, so we do not want to send duplicate message
+* Acknowledgement service is to send the customer a message, so we do not want to send duplicate messages
 * B2B call is idempotent
 * Generate a unique id as part of the response: tx_id
 * Exception is about business exception so will be defined inside of any business service.
-* Exception management may trigger human activities to clean the data, gather more information
+* Exception management may trigger human activities to clean the data, gather more information.
 * Compensation flow: if persistence fails, we want to roll back the exception message persistence and restarts from the point before the parallel processing. There are points in the process where we can restart a process, but they are points where the only solution is to cancel the full case.
 
 
@@ -509,4 +517,36 @@ Microprofile Long Running Action is the supported approach in Java to do SAGA. [
 
 While [this project](https://jbcodeforce.github.io/saga-choreography-kafka) implements Saga choreography with Kafka.
 
+### Music tracking
+
+**Problem:** given an API to track a certain user listened to a certain song, build a system to track the top 10 most listened to songs and albums in the last week (hours, day, week, month, years aggregations are needed).
+
+Use cases:
+- user plays song. This API tracks the song played at a certain time by a certain users.
+- playing a song creates an event of start time and song played by who
+- The list of top 10 songs needs to be updated every hour
+
+Scale:
+- 400 registered users
+- 40% are active users
+- Average 2 hours listening every day. Will depend of the population age.
+- 70 millions of songs. 60 songs added every day
+- traffic around 200 query per second can grow to 1000qps
+
+1. **Components:** Add queueing, pub/sub after the API gateway to push song start record with other information of the user. The goal is to decouple the downstream processing from the write API.
+
+    ![](./diagrams/song-tracker.drawio.png)
+
+    The 'start-song -event' includes user_id, song_id, timestamps, device_reference. There will be a stop-song-event, with the same data. Stop event may not be relevant for this use cases.
+
+    The aggregation will be: count the number of event with the same song_id over 60 minutes time window, report this aggregation to a persisted row: date-hours - song_id - count table in Lake House. 
+
+1. **Application Flow:** event to kafka partition can be allocated on the song_id. So all events avout a sond will be in the same partition. We can have hundred of partitions so scale the number of streaming processing. Once event arrived in kafka partition it has also a timestamp. We can add stateful processing to compute the aggregate per minutes or hours. As we also needs to compute larger time windows, we can do some push the aggregation to lake house persistence. Lake House hasa protocol to query data at rest, in cloud object storage format, parquet format. 
+1. **Scaling:** adopting a messaging system will help scaling streaming processing. The cloud object storage will help to scale the number of object to persist. The current estimated size it quite low:
+
+    ```sh
+    
+    ```
+
+1. **Resiliency:** multi-region deployment, load balancers, active-active capacity on both regions to support failing
 
