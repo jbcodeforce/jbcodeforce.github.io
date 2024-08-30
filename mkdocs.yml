@@ -8,7 +8,8 @@ edit_uri: edit/master/docs
 copyright: Copyright &copy; 2018 - 2024 Jerome Boyer
 theme: 
   name: material
-  logo: images/cloud.png
+  logo: images/logo.drawio.png
+  favicon: images/logo-blue.drawio.png
   palette:
     scheme: default
     # primary: blue
@@ -17,6 +18,9 @@ theme:
       - content.code.annotate
       - content.code.copy
       - content.tooltips
+      - search.highlight
+      - navigation.instant
+      - navigation.instant.progress
       - navigation.tabs
       - navigation.instant
       - navigation.tabs.sticky
@@ -48,6 +52,7 @@ markdown_extensions:
   - admonition
   - codehilite
   - footnotes
+  - tables
   - pymdownx.smartsymbols
   - pymdownx.superfences:
       custom_fences:
@@ -57,15 +62,20 @@ markdown_extensions:
   - toc:
       permalink: true
       toc_depth: 3
+  - pymdownx.tabbed
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
+  - pymdownx.superfences
   - pymdownx.snippets
   - pymdownx.details
 
   - pymdownx.tabbed
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 nav:
   - About: about.md
