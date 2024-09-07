@@ -162,6 +162,7 @@ nav:
       - Podman: techno/podman.md
       - Microcks: techno/microcks.md
       - Minikube: techno/minikube.md
+      - WSL2-Ubuntu: techno/wsl2.md
       - Rancher Desktop: techno/rancherdesktop.md
       - Code Engine: techno/code-engine.md 
       - Egeria: techno/egeria.md

@@ -36,7 +36,8 @@ testem.log
 /typings
 
 # System Files
-.DS_Store
+**/.DS_Store
 Thumbs.db
+**/node_modules/
 
 docs/data/analytics.md

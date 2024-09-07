@@ -1,5 +1,7 @@
 # Minikube how to
 
+Minikube is officially backed by the Kubernetes project. It supports different backend drivers like KVM, Docker, Podman.
+
 [Official getting started](https://minikube.sigs.k8s.io/docs/start/)
 
 ```sh
@@ -9,7 +11,9 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin
 sudo install minikube-darwin-amd64 /usr/local/bin/minikube
 ```
 
-Personal script is `~/bin/ministart`, amy take some time if it downloads new VM image.
+Personal script is `~/bin/ministart`, may take some time as it may download new VM image.
+
+[For minikube on Fedora see this note.](../coding/playground.md#install-minikube-on-fedora)
 
 * Retrieve all Kubernetes context (they are saved in `~/bin/.kube/config`)
 
@@ -21,7 +25,7 @@ kubectl config get-contexts
 
 ```sh
 kubectl config use-context minikube
-kubectl config use-context default/c117-e-us-south-containers-cloud-ibm-com:31580/IAM#boyerje@us.ibm.com
+kubectl config use-context default/c1....com:31580/IAM#<email>
 # same with
 kubectx minikube
 ```
@@ -30,6 +34,17 @@ kubectx minikube
 
 ```sh
 kubectl get nodes
+```
+
+* List existing addons
+
+Addons are built-in list of applications and services
+
+```sh
+minikube addons list
+
+# enabling
+minikube addons enable <name>
 ```
 
 * Add the metric server to the minikube cluster

@@ -21,10 +21,6 @@ ABRD applies the agile manifesto to efficiently implement business policies as e
 * Articulate the rule governance processes
 
 
-## Concepts
-
-To get a good understanding of business rules, rule engines and other terms used in this content, see [this note](/methodology/abrd/concepts#business_rule)
-
 
 ## How to Adopt ABRD
 
@@ -67,7 +63,7 @@ Within those phases we can find project activities that are executed multiple ti
 
 Like all agile methodologies, ABRD prescribes an incremental development using time boxed iterations. However, in ABRD, the entire process lifecycle may not be followed for each iteration. Instead, a number of very short cycles between phases may occur, with the entire ruleset gradually evolving.
 
-Using a business rule management platform enables managing business rule as a standalone artifact, owned by the business user, and maintainable by them directly  time into production system. The implementation of a business rule application follows some activities and tasks that are slightly different than traditional software development life cycle. The strong involvement of one or more [business rule analysts](assets/concepts/rule-analyst.md) as part of the development team is recommended to harvest the rule while they are implemented. Technology is one side of the coin, methodology and best practices is the other.
+Using a business rule management platform enables managing business rule as a standalone artifact, owned by the business user, and maintainable by them directly  time into production system. The implementation of a business rule application follows some activities and tasks that are slightly different than traditional software development life cycle. The strong involvement of one or more business rule analysts as part of the development team is recommended to harvest the rule while they are implemented. Technology is one side of the coin, methodology and best practices is the other.
 Executing a project to implement a solution using rule engine and a BRMS follows the following progression as illustrated
 
 ![2](./images/ABRD-phase-tools.png)
