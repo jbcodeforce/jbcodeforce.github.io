@@ -128,7 +128,7 @@ nav:
         - ArgoCD: coding/argocd.md
         - Finch: coding/finch.md
     - Coding:
-      - Docker based env: coding/myenv.md
+      - Playground: coding/playground.md
       - Fun problems:
         - puzzles: fun/puzzles.md
       - Java: 
