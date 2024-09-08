@@ -11,9 +11,24 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin
 sudo install minikube-darwin-amd64 /usr/local/bin/minikube
 ```
 
+To be able to run minikube with podman driver, the user needs to be a sudoers [see this note](../coding/playground.md#install-minikube-on-ubuntu):
+
+```sh
+minikube start --driver=podman
+```
+
 Personal script is `~/bin/ministart`, may take some time as it may download new VM image.
 
+[For minikube on Ubuntu see this note.](../coding/playground.md#install-minikube-on-ubuntu)
+
 [For minikube on Fedora see this note.](../coding/playground.md#install-minikube-on-fedora)
+
+* If kubectl is not install on the host, we can alias to the minikube one
+
+```sh
+alias k="minikube kubectl"
+alias kubectl="minikube kubectl"
+```
 
 * Retrieve all Kubernetes context (they are saved in `~/bin/.kube/config`)
 

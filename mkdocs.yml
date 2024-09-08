@@ -78,9 +78,46 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 nav:
-  - About: about.md
-  - Skills: skills.md
-  - Blogs: blogs/index.md
+  - Home: 
+    - About: about.md
+    - Skills: skills.md
+    - Blogs: blogs/index.md
+    - Leasure: 
+      - Astronomy: astronomy/index.md
+      - Physic - Newton: astronomy/physic.md
+  - Coding:
+      - Playground: coding/playground.md
+      - Dev & Ops:
+        - Agile: coding/agile.md
+        - Git summary: coding/git.md
+        - GitOps: coding/gitops.md
+        - Tekton: coding/tekton.md
+        - ArgoCD: coding/argocd.md
+        - Finch: coding/finch.md
+      - Fun problems:
+        - puzzles: fun/puzzles.md
+      - Java: 
+        - Introduction: java/index.md
+        - Java FAQ: java/FAQ.md
+        - Concurrency: java/concurrent.md
+        - Funqy: java/funqy.md
+        - Microprofile 3.x: java/microprofile.md
+        - Open Liberty: java/openliberty.md
+        - Quarkus: java/quarkus.md
+        - Rest assured: java/restassured.md
+        - SpringCloud: java/springcloud.md 
+        - TestContainer: coding/testcontainer.md 
+        - Vert.x: java/vertx.md
+        - VScode: java/java-vscode.md
+      - Podman: techno/podman.md
+      - React.js & next.js: coding/reactjs/index.md
+      - istio: coding/istio/index.md
+      - Python: https://jbcodeforce.github.io/python-code
+      - Knative: coding/knative.md
+      - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
+      - Cloud native content IBM: https://cloudnative101.dev/ 
+      - Angular: https://jbcodeforce.github.io/angular-sandbox/
+      - My code templates: code-template.md
   - Knowledge base: 
     - The SA job: blogs/consultant-job.md
     - Architecture:
@@ -120,80 +157,47 @@ nav:
     - AI:
       - Machine learning: https://jbcodeforce.github.io/ML-studies/#machine-learning
       - Deep learning: https://jbcodeforce.github.io/ML-studies/ml/deep-learning/
-    - Dev & Ops:
-        - Agile: coding/agile.md
-        - Git summary: coding/git.md
-        - GitOps: coding/gitops.md
-        - Tekton: coding/tekton.md
-        - ArgoCD: coding/argocd.md
-        - Finch: coding/finch.md
-    - Coding:
-      - Playground: coding/playground.md
-      - Fun problems:
-        - puzzles: fun/puzzles.md
-      - Java: 
-        - Introduction: java/index.md
-        - Java FAQ: java/FAQ.md
-        - Concurrency: java/concurrent.md
-        - Funqy: java/funqy.md
-        - Microprofile 3.x: java/microprofile.md
-        - Open Liberty: java/openliberty.md
-        - Quarkus: java/quarkus.md
-        - Rest assured: java/restassured.md
-        - SpringCloud: java/springcloud.md 
-        - TestContainer: coding/testcontainer.md 
-        - Vert.x: java/vertx.md
-        - VScode: java/java-vscode.md
-      - Podman: techno/podman.md
-      - Python: https://jbcodeforce.github.io/python-code
-      - Knative: coding/knative.md
-      - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
-      - Cloud native content IBM: https://cloudnative101.dev/ 
-      - Openshift Playground: coding/playground.md
-      - Angular: https://jbcodeforce.github.io/angular-sandbox/
-      - My code templates: code-template.md
-    - Techno:
-      - Apicurio: techno/apicurio.md
-      - Atlas: techno/atlas.md
-      - AWS body of knowledge: https://jbcodeforce.github.io/yarfba
-      - Databricks: techno/databricks/index.md
-      - Docker: techno/docker.md
-      - Drools: techno/decisions/drools.md
-      - Podman: techno/podman.md
-      - Microcks: techno/microcks.md
-      - Minikube: techno/minikube.md
-      - WSL2-Ubuntu: techno/wsl2.md
-      - Rancher Desktop: techno/rancherdesktop.md
-      - Code Engine: techno/code-engine.md 
-      - Egeria: techno/egeria.md
-      - Prometheus: techno/prometheus.md
-      - Flink Studies: https://jbcodeforce.github.io/flink-studies/
-      - Elastic Search: techno/elasticsrch.md
-      - Kafka Studies: https://jbcodeforce.github.io/kafka-studies
-      - KAR: techno/kar.md
-      - Redis: techno/redis.md 
-      - Red Panda: https://jbcodeforce.github.io/redpanda-studies/
-      - Spark Studies: https://jbcodeforce.github.io/spark-studies/
-      - VScode: java/java-vscode.md
-      - IBM:
-        - IBM Cloud: architecture/ibmcloud.md
-        - IBM Cloud Satellite: architecture/satellite.md
-        - Cloud object storage: techno/cos.md
-        - Cloud Pak Automation: 
-          - Overview: techno/cp4a/index.md
-          - BAI: techno/cp4a/bai.md
-          - ODM: techno/cp4a/odm.md
-          - Automation Decision Service: techno/cp4a/ads.md
-          - Process mining: techno/cp4a/process-mining.md
-        - Cloud Pak integration: 
-          - Overview: techno/integration/cp4i.md
-          - APIC: techno/integration/apic.md
-          - EEPM: techno/integration/eepm.md
-          - MQ: 
-            - Overview: techno/integration/mq.md
-            - MQ challenge: java/mqChallenge.md
+    
+  - Techno:
+    - Apicurio: techno/apicurio.md
+    - Atlas: techno/atlas.md
+    - AWS body of knowledge: https://jbcodeforce.github.io/yarfba
+    - Databricks: techno/databricks/index.md
+    - Docker: techno/docker.md
+    - Drools: techno/decisions/drools.md
+    - Podman: techno/podman.md
+    - Microcks: techno/microcks.md
+    - Minikube: techno/minikube.md
+    - WSL2-Ubuntu: techno/wsl2.md
+    - Rancher Desktop: techno/rancherdesktop.md
+    - Code Engine: techno/code-engine.md 
+    - Egeria: techno/egeria.md
+    - Prometheus: techno/prometheus.md
+    - Flink Studies: https://jbcodeforce.github.io/flink-studies/
+    - Elastic Search: techno/elasticsrch.md
+    - Kafka Studies: https://jbcodeforce.github.io/kafka-studies
+    - KAR: techno/kar.md
+    - Redis: techno/redis.md 
+    - Red Panda: https://jbcodeforce.github.io/redpanda-studies/
+    - Spark Studies: https://jbcodeforce.github.io/spark-studies/
+    - VScode: java/java-vscode.md
+    - IBM:
+      - IBM Cloud: architecture/ibmcloud.md
+      - IBM Cloud Satellite: architecture/satellite.md
+      - Cloud object storage: techno/cos.md
+      - Cloud Pak Automation: 
+        - Overview: techno/cp4a/index.md
+        - BAI: techno/cp4a/bai.md
+        - ODM: techno/cp4a/odm.md
+        - Automation Decision Service: techno/cp4a/ads.md
+        - Process mining: techno/cp4a/process-mining.md
+      - Cloud Pak integration: 
+        - Overview: techno/integration/cp4i.md
+        - APIC: techno/integration/apic.md
+        - EEPM: techno/integration/eepm.md
+        - MQ: 
+          - Overview: techno/integration/mq.md
+          - MQ challenge: java/mqChallenge.md
 
-    - Astronomy: 
-      - Introduction: astronomy/index.md
-      - Physic - Newton: astronomy/physic.md
+
     

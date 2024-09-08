@@ -38,6 +38,18 @@ Settings are at user level, so for all workspace and windows, or at workspace le
 
 Assess heme like atom light and icon theme like material icon.
 
+## Networking
+
+To access a web app running in WSL2 from an external computer, you can port forward the desired ports in WSL 2 NAT. This is because WSL 2 creates a virtualized Ethernet adapter with its own IP address, which creates a NAT between the WSL instance and the Windows host computer.
+
+```sh
+# get ip address of WSL@ machine
+ip a
+# configura windows to have a port proxy
+netsh interface portproxy add v4tov4 listenport=3000 listenaddress=0.0.0.0 connectport=3000 connectaddress=192.168.85.149
+# Add a rule in he Windows firewall to authorize access to port 3000
+```
+
 ## Important linux command
 
 ```sh
@@ -76,6 +88,14 @@ minikube service nginx-service
 
 kubectl port-forward service/nginx-service 8083:80
 ```
+### Remote access to Ubuntu computer on local LAN
+
+* Start ssh server:
+
+```sh
+sudo apt install openssh-server
+ip a
+```
 
 ### Remote access to Fedora computer on local LAN
 
@@ -109,7 +129,65 @@ sudo -u gdm dbus-run-session gsettings set org.gnome.settings-daemon.plugins.pow
 ssh jeromeboyer@10.0.0.192
 ```
 
-### Install minikube on fedora
+### Install minikube on Ubuntu
+
+* Install docker podman
+
+```sh
+sudo apt install podman
+```
+
+* modify /etc/sudoers by adding `jerome ALL=(ALL) NOPASSWD: /usr/bin/podman`
+
+```sh
+sudo vi /etc/sudoers
+```
+
+* verify user can see the podman version
+
+```sh
+sudo -n -k prodman version
+```
+
+* Installation minikube
+
+```sh
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+```
+
+* Start minikube
+
+```sh
+minikube start --driver=podman
+```
+
+* Add any needed addons
+
+```sh
+minikube addons enable metrics-server
+```
+* Start a  kubernetes proxy so the Kubernetes APIs are served through port 8001
+
+```sh
+kubectl proxy 
+```
+
+* Start the Dashboard
+
+```sh
+minikube dashboard
+```
+
+* To access it remotely, using  SSH to your server, using -L option. (ubuntu1 was added to local `/etc/hosts`)
+
+```sh
+ssh -L 12345:localhost:8001 jerome@ubuntu1
+```
+
+Now the Kubernetes Dashboard is accessible remotly at [http://localhost:12345/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy](http://localhost:12345/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy)
+
+### Install minikube on Fedora
 
 * Install docker podman
 
@@ -133,3 +211,67 @@ minikube start --cpus=2 --memory=4096
 ```
 
 * In case of problem delete the vm with `minikube delete`
+
+## Using [Helm](https://helm.sh/docs/intro/using_helm/)
+
+* Install Helm 
+
+```sh
+curl https://get.helm.sh/helm-v3.16.0-rc.1-linux-amd64.tar.gz -o helm-v3.16.0-rc.1-linux-amd64.tar.gz
+tar -xzvf helm-v3.16.0-rc.1-linux-amd64.tar.gz
+mv linux-amd64/helm bin
+rm helm-v3.16.0-rc.1-linux-amd64.tar.gz
+```
+
+* Main concepts
+
+    * A **Chart** is a Helm package. It contains all of the resource definitions necessary to run an application, tool, or service inside of a Kubernetes cluster.
+    * A **Repository** is the place where charts can be collected and shared. Bitnami is a very useful repository.
+    * A **Release** is an instance of a chart running in a Kubernetes cluster
+
+* Useful commands
+
+```sh
+helm search hub
+# 
+helm repo add bitnami https://charts.bitnami.com/bitnami
+# install an image (kafka with kraft)
+helm install my-kafka bitnami/kafka 
+# list release
+helm list
+# install a release
+helm uninstall kafka-1725727453
+# To see what options are configurable on a chart
+helm show values bitnami/kafka
+# You can then override any of these settings in a YAML formatted file,
+helm install -f values.yaml my-kafka bitnami/kafka 
+# Upgrade an existing release
+helm upgrade -f new-value.yaml my-kafka bitnami/kafka 
+#  roll back to a previous release 
+helm rollback my-kafka 1
+```
+
+The IBM help repository:
+
+```sh
+helm repo add ibmcharts https://raw.githubusercontent.com/IBM/charts/master/repo/ibm-helm
+helm repo update
+```
+
+### Developing our [charts](https://helm.sh/docs/topics/charts/)
+
+[See the summary of the commands](https://helm.sh/docs/intro/cheatsheet/#chart-management)
+
+```sh
+helm create <chart_name>
+```
+
+* Update charts.yaml, values.yaml and may be some templates.
+* package and validation
+
+```sh
+helm package <chart_name>
+helm lint <chart_name>
+```
+
+* Tar file could be updloaded to s3, and the s3 bucket exposed as HTTP web server to be used as repository 

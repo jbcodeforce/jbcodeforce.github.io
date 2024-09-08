@@ -9,7 +9,21 @@ Next.js is a flexible React framework that gives developers building blocks to c
 * Next.js uses file-system routing: instead of using code to define the routes of the application, you can use folders and files
 * Next.js uses React Server Components, a new feature that allows React to render on the server. By moving rendering and data fetching to the server, you can reduce the amount of code sent to the client, which can improve your application's performance
 
-## Reactjs Getting started
+### Create a nextjs project
+
+Better use pnpm for package manager. The following command is based on the dashboard app creation tutorial:
+
+```sh
+npx create-next-app@latest nextjs-dashboard --example "https://github.com/vercel/next-learn/tree/main/dashboard/starter-example" --use-pnpm
+```
+
+## React.js
+
+### Key concepts
+
+React components are JavaScript functions that return markup. React component names must always start with a capital letter, while HTML tags must be lowercase.
+
+### Getting started
 
 React is a JavaScript library for building interactive user interfaces. To use it ina html page, load two scripts:
 
@@ -37,6 +51,4 @@ In React, data flows down the component tree. This is referred to as one-way dat
 
 * [This tutorial from product documentation.](https://react.dev/learn)
 
-## Key concepts
 
-React components are JavaScript functions that return markup. React component names must always start with a capital letter, while HTML tags must be lowercase.
