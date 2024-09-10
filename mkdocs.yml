@@ -129,7 +129,7 @@ nav:
       - Architecture decision: architecture/architectural-decisions.md
       - DDD : https://jbcodef orce.github.io/eda-studies/ddd
       - Disaster recovery: architecture/DR.md
-      - Istio: istio/index.md
+      - Istio: coding/istio/index.md
       - Openshift Studies: https://jbcodeforce.github.io/openshift-studies
     - Methodology: 
       - Design Thinking: methodology/design-thinking/index.md
@@ -140,6 +140,7 @@ nav:
       - Product manager: methodology/pm.md
       - ABRD:
         - Introduction: methodology/abrd/index.md
+        - Concepts: methodology/abrd/concept.md
         - Rule Harvesting: methodology/abrd/harvesting.md
       - Narratives: methodology/narrative.md
     - Data:
@@ -162,25 +163,13 @@ nav:
     - Apicurio: techno/apicurio.md
     - Atlas: techno/atlas.md
     - AWS body of knowledge: https://jbcodeforce.github.io/yarfba
+    - Code Engine: techno/code-engine.md 
     - Databricks: techno/databricks/index.md
     - Docker: techno/docker.md
     - Drools: techno/decisions/drools.md
-    - Podman: techno/podman.md
-    - Microcks: techno/microcks.md
-    - Minikube: techno/minikube.md
-    - WSL2-Ubuntu: techno/wsl2.md
-    - Rancher Desktop: techno/rancherdesktop.md
-    - Code Engine: techno/code-engine.md 
     - Egeria: techno/egeria.md
-    - Prometheus: techno/prometheus.md
-    - Flink Studies: https://jbcodeforce.github.io/flink-studies/
     - Elastic Search: techno/elasticsrch.md
-    - Kafka Studies: https://jbcodeforce.github.io/kafka-studies
-    - KAR: techno/kar.md
-    - Redis: techno/redis.md 
-    - Red Panda: https://jbcodeforce.github.io/redpanda-studies/
-    - Spark Studies: https://jbcodeforce.github.io/spark-studies/
-    - VScode: java/java-vscode.md
+    - Flink Studies: https://jbcodeforce.github.io/flink-studies/
     - IBM:
       - IBM Cloud: architecture/ibmcloud.md
       - IBM Cloud Satellite: architecture/satellite.md
@@ -198,6 +187,21 @@ nav:
         - MQ: 
           - Overview: techno/integration/mq.md
           - MQ challenge: java/mqChallenge.md
+    - Kafka Studies: https://jbcodeforce.github.io/kafka-studies
+    - KAR: techno/kar.md
+    - Microcks: techno/microcks.md
+    - Minikube: techno/minikube.md
+    - Podman: techno/podman.md    
+    - Prometheus: techno/prometheus.md
+    - Rancher Desktop: techno/rancherdesktop.md
+    - Redis: techno/redis.md 
+    - Red Panda: https://jbcodeforce.github.io/redpanda-studies/
+    - Scaleway: techno/scaleway/index.md
+    - Solr: techno/solr.md
+    - Spark Studies: https://jbcodeforce.github.io/spark-studies/
+    - VScode: java/java-vscode.md
+    - WSL2-Ubuntu: techno/wsl2.md
+    
 
 
     

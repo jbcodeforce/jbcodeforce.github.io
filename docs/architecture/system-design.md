@@ -53,7 +53,7 @@
     * Go when necessary to detail of an API, data stores,..
     * Look at potential performance bottle neck
 
-* Review [data structure and algorithms](../../fun/puzzles/) to support distributed system and scaling
+* Review [data structure and algorithms](../fun/puzzles.md) to support distributed system and scaling
 
 * Be able to argument around
 

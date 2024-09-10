@@ -115,7 +115,7 @@ bank customer.
 
 Selecting Run will help us to test the model. Running with no data will return a `null` output.
 
-  ![](./images/run-)
+  ![](./images/run-0.png)
 
 ```json
 {

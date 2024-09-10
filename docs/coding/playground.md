@@ -251,7 +251,7 @@ helm upgrade -f new-value.yaml my-kafka bitnami/kafka
 helm rollback my-kafka 1
 ```
 
-The IBM help repository:
+The IBM helm repository:
 
 ```sh
 helm repo add ibmcharts https://raw.githubusercontent.com/IBM/charts/master/repo/ibm-helm
@@ -266,12 +266,20 @@ helm repo update
 helm create <chart_name>
 ```
 
-* Update charts.yaml, values.yaml and may be some templates.
-* package and validation
+* Update charts.yaml, values.yaml and may be some other templates.
+
+???+ info "From docker-compose to kubernetes"
+    The Kompose.io tool can hel creating k8s manifests from a docker compose. Once done deployment and service can be added to the values and template of helm.
+
+    ```sh
+    docker run --rm -it -v $PWD:/opt kompose sh -c "cd /opt && kompose convert"
+    ```
+
+* Package and validation
 
 ```sh
 helm package <chart_name>
 helm lint <chart_name>
 ```
 
-* Tar file could be updloaded to s3, and the s3 bucket exposed as HTTP web server to be used as repository 
+* Tar file could be updloaded to s3, and the s3 bucket exposed as HTTP web server to be used as repository. 

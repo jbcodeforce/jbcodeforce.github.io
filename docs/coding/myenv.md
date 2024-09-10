@@ -1,3 +1,0 @@
-# Docker based environments
-
-
