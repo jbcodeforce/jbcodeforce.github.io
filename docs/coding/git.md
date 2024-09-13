@@ -29,11 +29,11 @@ When you use a branch for feature development, you can commit and share your cod
 
 ## Different workflows
 
-A **centralized Git** workflow uses a central Git repository as the single source of record for application code. Developers push code changes directly to the main branch, and do not push commits in other branches to the central repository. Because the workflow results in commits to a single branch only, team members are prone to merge conflicts. It open doors to commit partial or incomplete code changes.
+A **centralized Git** workflow uses a central Git repository as the single source of record for application code. Developers push code changes directly to the main branch, and do not push commits in other branches to the central repository. Because the workflow results in commits to a single branch only, team members are prone to merge conflicts. It open doors to commit partial or incomplete code changes. Code is always on the most updated features so may be unstable.
 
-A **feature branch** workflow implements safety mechanisms to protect the stability of code on the main branch. The aim of this workflow is to always have deployable and stable code for every commit on the main branch, but still allow team members to develop and contribute new features to the project.
+A **feature branch** workflow implements safety mechanisms to protect the stability of code on the main branch. The aim of this workflow is to always have deployable and stable code for every commit on the main branch, but still allow team members to develop and contribute new features to the project. We can add a second main trunk, `development` or `dev` to support coding for the next software release. And feature branches can be done from this development branch. 
 
-In a feature branch workflow, each new feature is implemented in a dedicated branch.
+In a feature branch workflow, each new feature is implemented in a dedicated branch. 
 
 The **Forked** repository workflow is often used with large open source projects. With a large number of contributors, managing feature branches in a central repository is difficult. Additionally, the project owner may not want to allow contributors to create branches in the code repository. In this scenario, branch creation on the central repository is limited to a small number of team members. Once forked, clone your repo and add the upstream repository (the one you forked from).  `git remote add upstream <url of the git repository source of your fork>`. It's good practice to regularly sync your work with the upstream repository. To do this, you'll need to use Git on the command line:
 
@@ -49,6 +49,7 @@ Merge the changes from `upstream/main` into your local main branch. This brings 
 ```shell
 # Be sure to be on your own main branch
 git branch
+git branch --all
 # if needed checkout your main 
 git checkout main
 # merge the changes
@@ -99,7 +100,7 @@ git branch --track hello-kitty origin/hello-kitty
 git branch -rd origin/registration
 ```
 
-Commit is done on the current checked out branch. If by any bad chance you have committed changes to the wrong branch, create the new branch, reset the master branch back to before these commits, then switch to the new branch and then commit:
+Commits are done on the current checked out branch. If by any bad chance you have committed changes to the wrong branch, create the new branch, reset the master branch back to before these commits, then switch to the new branch and then commit:
 
 ```sh
 git reset abc5b0de1 --hard
@@ -123,16 +124,13 @@ MA --- MB --- MC --- FA --- FB --- FC <- feature
              main
 ```
 
-* **git checkout**: Literally allows you to “check out” a repository that you are not currently inside. This is a navigational command that lets you move to the repository you want to check. You can use this command as git checkout main to look at the main branch. Un-modify a modified file by doing `git checkout -- <filename>`
+* **git checkout**: Literally allows you to “check out” a repository that you are not currently inside. This is a navigational command that lets you move to the repository you want to check. You can use this command as `git checkout main` to look at the main branch. Un-modify a modified file by doing `git checkout -- <filename>`
 * **git merge**: When you’re done working on a branch, you can merge your changes back to the main branch, which is visible to all collaborators.
 * **git diff** to compare what is in your working directory with what is in your staging area
-* **git push**: `git push  [remote-name] [branch-name]`  If you’re working on your local host, and want your commits to be visible online on GitHub as well, you “push” the changes up to GitHub with this command.
-`git push -u origin main`
-If you and someone else clone at the same time and they push upstream and then you push up- stream, your push will rightly be rejected. You’ll have to fetch their work first and incorporate it into yours before you’ll be allowed to push.
-* **git pull**: If you’re working on your local computer and want the most up-to-date version of your repository to work with, you “pull” the changes down from GitHub with this command
-it is a shorthand for git fetch followed by git merge FETCH_HEAD.
+* **git push**: `git push  [remote-name] [branch-name]`  If you’re working on your local host, and want your commits to be visible online on GitHub as well, you “push” the changes up to GitHub with this command. `git push -u origin main`. If you and someone else clone at the same time and they push upstream and then you push up- stream, your push will rightly be rejected. You’ll have to fetch their work first and incorporate it into yours before you’ll be allowed to push.
+* **git pull**: If you’re working on your local computer and want the most up-to-date version of your repository to work with, you “pull” the changes down from GitHub with this command. It is a shorthand for `git fetch ` followed by `git merge FETCH_HEAD`.
 
-* **git fetch** : `git fetch origin`, get update from a remote server branch and download to local repository. Not doing a merge. This will fetch any work that has been pushed, and download it to local repository without merging with local work
+* **git fetch** : `git fetch origin`, get update from a remote server branch and download to local repository. Not doing a merge. This will fetch any work that has been pushed, and download it to local repository without merging with your local work.
 * **git remote**: to work on the repositories: `git remote -v`: to get the list of remote repository/server part of the configuration. `get remote show origin` to get detail of the origin repo URL.
 
 ```shell

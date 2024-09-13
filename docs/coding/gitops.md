@@ -2,12 +2,10 @@
 
 [Gitops](https://www.gitops.tech/) is a way of implementing Continuous Deployment for containerized applications.
 
-The core idea of GitOps is having a Git repository that always contains declarative descriptions 
-of the infrastructure currently desired in the production environment and an automated process 
-to make the production environment matches the described state in the repository.
+The core concept of GitOps is to maintain a single Git repository that consistently holds declarative descriptions of the desired infrastructure in the production environment. An automated process ensures that the production environment aligns with the state described in the repository.
 
-From the infrastructure point of view, we want to control the governance of the infrastructure and be 
-sure that what is expected, is what happened.
+From an infrastructure perspective, we aim to govern the infrastructure effectively and ensure that what is expected aligns with what actually occurs.
+
 
 ## Requirements
 
@@ -24,6 +22,7 @@ GitOps is a natural evolution of DevOps and Infrastructure-as-Code.
 ## Core principles
 
 * Git is the source of truth for both application code, application configuration, dependant service/product deployments, infrastructure config and deployment.
+* The management operations are splitted into Day 1 and Day 2 operations. Day 1 to install GipOps pipeline, Day2 to add more applications.
 * Separate application source code (Java/Go) from deployment manifests i.e the application source code and the GitOps configuration reside in separate git repositories.
 * Deployment manifests are standard Kubernetes (k8s) manifests i.e Kubernetes manifests in the GitOps repository can be simply applied with nothing more than a `oc apply` or `kubectl apply`.
 * [Kustomize.io](https://kustomize.io/) is used as template engine for defining the differences between environments i.e reusable parameters with extra resources described using `kustomization.yaml`.
