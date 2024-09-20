@@ -26,3 +26,6 @@ On the windows host we need to enable port proxy. Using a powershell terminal
 ```sh
 netsh interface portproxy add v4tov4 listenport=3389  listenaddress=0.0.0.0 connectport=3389 connectaddress=192.168.85.149
 ```
+
+
+## Be able to use docker 

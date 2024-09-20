@@ -46,7 +46,7 @@ sudo vi /etc/sudoers
 * verify user can see the podman version
 
 ```sh
-sudo -n -k prodman version
+sudo -n -k podman version
 ```
 
 * Installation minikube
@@ -281,3 +281,27 @@ kubectl port-forward service/nginx-service 8083:80
 
 ```
 ```
+
+# Troubleshooting
+
+
+* Clean all at the docker engine level
+
+```sh
+docker system prune -a --volume -f
+```
+
+* Error starting minikube: Error validating CNI config file /etc/cni/net.d/minikube.conflist
+
+```
+Removing the failed install of minikube cant hurt: `minikube delete --all`
+Check your package version of containernetworking-plugins:`apt show containernetworking-plugins`
+
+Go to http://archive.ubuntu.com/ubuntu/pool/universe/g/golang-github-containernetworking-plugins/ and download an up to date version
+
+Install: `sudo dpkg -i containernetworking-plugins_1.1.1+ds1-3_amd64.deb`
+
+`minikube start`
+```
+
+* 

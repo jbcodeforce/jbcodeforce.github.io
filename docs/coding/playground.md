@@ -56,6 +56,90 @@ netsh interface portproxy add v4tov4 listenport=3000 listenaddress=0.0.0.0 conne
 uname -a
 ```
 
+## Local Image Registry
+
+Under the `tools/local-registry` there is a docker compose to start a local registry to be able to test helm on k8s.
+
+The URL is [http://localhost:5002/v2/_catalog](http://localhost:5002/v2/_catalog).
+
+An example of using this registry (docker compose in athena-owl-core/deployment/local):
+
+```yaml
+services:
+  owl-backend:
+    hostname: owl-backend
+    image: localhost:5002/athena-owl-backend:1.0.0
+    container_name: owl-backend
+    build:
+      context: ../../owl-agent-backend/src
+```
+
+```sh
+docker compose build
+docker compose push
+```
+
+## Getting deployment.yaml from docker compose with Kompose
+
+```sh
+# Build image
+docker build -t kompose https://github.com/kubernetes/kompose.git\#main
+# run within a folder with a docker compose file
+docker run --rm -it -v $PWD:/opt kompose sh -c "cd /opt && kompose convert"
+```
+## Docker Desktop with kubernetes
+
+See interesting [Blog on How Kubernetes works under the hood with Docker Desktop.](https://www.docker.com/blog/how-kubernetes-works-under-the-hood-with-docker-desktop/), which we get the following important concepts:
+
+* Docker Desktop automatically generates server and client certificates for key internal services, including kubelet (node manager), service account management, frontproxy, API server, and etcd components.
+* The global endpoint of the cluster is using the DNS name [https://kubernetes.docker.internal:6443](https://kubernetes.docker.internal:6443).
+* For bootup, the life cycle runs `kubeadm init` to initialize the cluster and then start the kubelet process
+* Services of type LoadBalancer are exposed outside the Kubernetes cluster.
+* **Vpnkit-controller** is a port forwarding service which opens ports on the host and forwards connections to the pods inside the VM.
+* Docker Desktop uses  [dockershim](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-removal-affects-you/#role-of-dockershim) to share the image cache between the Docker engine and Kubernetes. Kubernetes can create containers from images stored in the Docker Engine image cache. Be sure to have a policy to ****IfNotPresent**
+* The tutorial yaml is in tools folder.
+
+
+Important commands to verify major control plane components:
+
+```sh
+kubectl get svc
+kubectl get pods -n kube-system
+```
+
+See later section to install helm. Once installed test by deploying nginx as an ingress controller:
+
+```sh
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install my-ingress-nginx ingress-nginx/ingress-nginx
+kubectl get service --namespace default my-ingress-nginx-controller --output wide --watch
+kubectl get svc -n default
+```
+
+And use this kind of ingress declaration
+
+```
+apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: example
+    namespace: foo
+  spec:
+    ingressClassName: nginx
+    rules:
+      - host: www.example.com
+        http:
+          paths:
+            - pathType: Prefix
+              backend:
+                service:
+                  name: exampleService
+                  port:
+                    number: 80
+              path: /
+              ``
+
 ## Minkube as a local k8s
 
 [See minikube dedicated notes](../techno/minikube.md)
