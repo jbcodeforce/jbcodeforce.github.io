@@ -217,11 +217,6 @@ To debug the ssh authentication
 ssh -vvvv git@ssh.gitlab.aws.dev
 ```
 
-### Access to CodeCommit from AWS
-
-See [this note](https://jbcodeforce.github.io/aws-studies/coding/#codecommit) and [AWS doc to setup ssh](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-ssh-unixes.html).
-
-
 ## Webhook
 
 Webhooks help to get applications to subscribe to events on GitHub. When one of those events is triggered, github'll send a HTTP POST payload 
@@ -242,6 +237,8 @@ VS Code handles the pull and push Git operations when you synchronize your local
 The Source Control view compares your local repository with the corresponding remote repository. If there are commits to download from the remote repository, then the number of commits displays with a download arrow icon
 
 ## Tags
+
+If we want to mark a specific point in our history as a particular version, that’s what tags are for.
 
 Tag helps to create code release. In the github pages, tags are visible in the release folder.
 

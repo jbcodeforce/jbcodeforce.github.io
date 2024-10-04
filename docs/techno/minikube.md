@@ -58,7 +58,7 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-a
 
 #### Remote access to Ubuntu computer on local LAN
 
-* Start ssh server:
+* Start ssh server within the ubuntu host:
 
 ```sh
 sudo apt install openssh-server
@@ -137,7 +137,7 @@ eval $(minikube -p <profile> docker-env)
 
 ### With podman driver
 
-To be able to run minikube with podman driver, the user needs to be a sudoers [see this note](../coding/playground.md#install-minikube-on-ubuntu):
+To be able to run minikube with a `podman` driver, the user needs to be a sudoers [see this note](../coding/playground.md#install-minikube-on-ubuntu):
 
 ```sh
 minikube start --driver=podman
@@ -214,7 +214,7 @@ Then click to the URL constructed using the proxy, to access from the minikube h
 kubectl proxy 
 ```
 
-* So the dashbard is accessible remotely, using  SSH to the server, using -L option. (ubuntu1 was added to local `/etc/hosts`)
+* So the dashboard is accessible remotely, using  SSH to the server, using -L option. (ubuntu1 was added to local `/etc/hosts`)
 
 ```sh
 ssh -L 12345:localhost:8001 jerome@ubuntu1

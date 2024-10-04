@@ -1,11 +1,15 @@
 # Playground
 
-## Different development CLI
+This is section is notes on my different environments.
+
+## Isolated development using a container
+
+Using the Dev-Dockerfile to build a container to do isolated development activities. 
 
 * Build a dev image
 
 ```sh
- docker build -f Dev-Dockerfile -t j9r/dev-env .
+docker build -f Dev-Dockerfile -t j9r/dev-env .
 ```
 
 * Run it to access to git client
@@ -38,22 +42,69 @@ Settings are at user level, so for all workspace and windows, or at workspace le
 
 Assess heme like atom light and icon theme like material icon.
 
-## Networking
-
-To access a web app running in WSL2 from an external computer, you can port forward the desired ports in WSL 2 NAT. This is because WSL 2 creates a virtualized Ethernet adapter with its own IP address, which creates a NAT between the WSL instance and the Windows host computer.
-
-```sh
-# get ip address of WSL@ machine
-ip a
-# configura windows to have a port proxy
-netsh interface portproxy add v4tov4 listenport=3000 listenaddress=0.0.0.0 connectport=3000 connectaddress=192.168.85.149
-# Add a rule in he Windows firewall to authorize access to port 3000
-```
 
 ## Important linux command
 
 ```sh
 uname -a
+# 
+hostname
+ip addr
+nslookup
+```
+
+## Ubuntu machine
+
+
+```sh
+ssh jerome@ubuntu1
+# assess if minikube runs
+sudo systemctl status minikube
+minikube status
+minikube version
+# to start with podman driver
+minikube start
+# Deploy the k8s dashboard
+minikube dashboard --url
+```
+
+See [this note](../techno/minikube.md) to access Dashboard from remote host.
+
+### Kubectl basic
+
+```sh
+minikube kubectl cluster-info
+```
+
+To make it simple: `alias k="minikube kubectl"`
+
+```sh
+k describe node
+```
+
+### Catalog of what could be installed
+
+| Image | Command |
+| --- | --- |
+| Kafka | helm install bitmani/kafka | 
+| Strimzi | helm repo add strimzi https://strimzi.io/charts/  && helm install strimzi-kafka strimzi/strimzi-kafka-operator  | 
+
+## Minkube as a local k8s
+
+[See minikube dedicated notes](../techno/minikube.md)
+
+## WSL2 tricks
+
+### Networking
+
+To access a web app running in WSL2 from an external computer, we can port forward the desired ports in WSL 2 NAT. This is because WSL 2 creates a virtualized Ethernet adapter with its own IP address, which creates a NAT between the WSL instance and the Windows host computer.
+
+```sh
+# get ip address of WSL@ machine
+ip a
+# configure windows to have a port proxy
+netsh interface portproxy add v4tov4 listenport=3000 listenaddress=0.0.0.0 connectport=3000 connectaddress=192.168.85.149
+# Add a rule in he Windows firewall to authorize access to port 3000
 ```
 
 ## Local Image Registry
@@ -79,7 +130,7 @@ docker compose build
 docker compose push
 ```
 
-## Getting deployment.yaml from docker compose with Kompose
+## Getting a k8s deployment.yaml from docker compose using Kompose
 
 ```sh
 # Build image
@@ -87,6 +138,7 @@ docker build -t kompose https://github.com/kubernetes/kompose.git\#main
 # run within a folder with a docker compose file
 docker run --rm -it -v $PWD:/opt kompose sh -c "cd /opt && kompose convert"
 ```
+
 ## Docker Desktop with kubernetes
 
 See interesting [Blog on How Kubernetes works under the hood with Docker Desktop.](https://www.docker.com/blog/how-kubernetes-works-under-the-hood-with-docker-desktop/), which we get the following important concepts:
@@ -103,6 +155,9 @@ See interesting [Blog on How Kubernetes works under the hood with Docker Desktop
 Important commands to verify major control plane components:
 
 ```sh
+# Set a context to a cluster
+kubectl config  --kubeconfig=/home/jbcodeforce/.kube/config  use-context athena-demo
+# Get exposed services
 kubectl get svc
 kubectl get pods -n kube-system
 ```
@@ -115,6 +170,7 @@ helm repo update
 helm install my-ingress-nginx ingress-nginx/ingress-nginx
 kubectl get service --namespace default my-ingress-nginx-controller --output wide --watch
 kubectl get svc -n default
+
 ```
 
 And use this kind of ingress declaration
@@ -139,10 +195,9 @@ apiVersion: networking.k8s.io/v1
                     number: 80
               path: /
               ``
+```
 
-## Minkube as a local k8s
 
-[See minikube dedicated notes](../techno/minikube.md)
 
 ## Using [Helm](https://helm.sh/docs/intro/using_helm/)
 
@@ -179,6 +234,9 @@ helm show values bitnami/kafka
 helm install -f values.yaml my-kafka bitnami/kafka 
 # Upgrade an existing release
 helm upgrade -f new-value.yaml my-kafka bitnami/kafka 
+# Upgrade an existing release, and in a specific context
+helm upgrade  owl-backend owl-backend
+helm upgrade  --kube-context athena-demo owl-backend owl-backend
 #  roll back to a previous release 
 helm rollback my-kafka 1
 ```
@@ -212,6 +270,27 @@ helm create <chart_name>
 ```sh
 helm package <chart_name>
 helm lint <chart_name>
+helm install owl-backend --dry-run owl-backend
 ```
 
 * Tar file could be updloaded to s3, and the s3 bucket exposed as HTTP web server to be used as repository. 
+
+???- question "Configure volumes"
+    1. Create a config map from a yaml file
+
+      ```sh
+      kubectl create configmap --dry-run=client somename --from-file=./src/athena/config/config.yaml --output yaml
+      ```
+
+    2. Add in the Values.yaml of the chart the volume and volume mount
+
+      ```yaml
+      volumes: 
+       - name: app-config-vol
+         configMap:
+          name: app-config-cm
+
+      volumeMounts:
+        - name: app-config-vol
+          mountPath: /app/config
+      ``` 

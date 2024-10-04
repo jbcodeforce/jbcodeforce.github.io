@@ -120,6 +120,8 @@ nav:
       - My code templates: code-template.md
   - Knowledge base: 
     - The SA job: blogs/consultant-job.md
+    - Leadership:
+      - 90 Days: leadership/first-90-days.md
     - Architecture:
       - Conduct System Design: architecture/system-design.md
       - Event Driven Architecture: https://jbcodeforce.github.io/eda-studies

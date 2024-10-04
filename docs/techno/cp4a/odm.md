@@ -1,6 +1,6 @@
 # Operational decision management
 
-Install [Rule Designer from the Eclipse Marketplace](https://marketplace.eclipse.org/content/ibm-operational-decision-manager-developers-v-8105-rule-designer): first install the compatible [Eclipse 2020-06](https://www.eclipse.org/downloads/packages/release/2022-06/r), then add the marketplace links to the repository to access ODM (Help > Install New Software > ).
+Install [Rule Designer from the Eclipse Marketplace](https://marketplace.eclipse.org/content/ibm-operational-decision-manager-developers-v-8105-rule-designer): first install the compatible [Eclipse 2022-06](https://www.eclipse.org/downloads/packages/release/2022-06/r), then add the marketplace links to the repository to access ODM (Help > Install New Software >  search for decision).
 
 ## Getting Started
 
