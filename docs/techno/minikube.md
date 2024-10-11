@@ -9,7 +9,7 @@ Minikube is officially backed by the Kubernetes project. It supports different b
 
 ## Getting started
 
-[Official getting started](https://minikube.sigs.k8s.io/docs/start/)
+[Official getting started](https://minikube.sigs.k8s.io/docs/start/), and interesting article [Using minikube as Docker Desktop Replacement](https://minikube.sigs.k8s.io/docs/tutorials/docker_desktop_replacement/)
 
 ### Minikube on local home network
 
@@ -99,10 +99,20 @@ ssh jeromeboyer@10.0.0.192
 
 ### Install on Mac
 
-```
+* Intel Mac
+
+```sh
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
 sudo install minikube-darwin-amd64 /usr/local/bin/minikube
 rm minikube-darwin-amd64
+```
+
+* Apple Silicon Mac (arm64 archittecture)
+
+```sh
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-arm64
+sudo install minikube-darwin-armd64 /usr/local/bin/minikube
+rm minikube-darwin-arm64
 ```
 
 ### Update existing Minikube 
@@ -153,6 +163,7 @@ Personal script is `~/bin/ministart`, may take some time as it may download new 
 minikube addons list
 minikube addons enable metrics-server
 minikube addons enable ingress
+minikube addons enable registry
 ```
 
 
@@ -162,8 +173,8 @@ minikube addons enable ingress
 * If kubectl is not install on the host, we can alias it to the minikube:
 
 ```sh
-alias k="minikube kubectl"
-alias kubectl="minikube kubectl"
+alias k="minikube kubectl -- "
+alias kubectl="minikube kubectl -- "
 ```
 
 * Retrieve all Kubernetes context (they are saved in `~/bin/.kube/config`)
@@ -185,17 +196,6 @@ kubectx minikube
 
 ```sh
 kubectl get nodes
-```
-
-* List existing addons
-
-Addons are built-in list of applications and services
-
-```sh
-minikube addons list
-
-# enabling
-minikube addons enable <name>
 ```
 
 ## User interface and networking
@@ -225,9 +225,26 @@ Now the Kubernetes Dashboard is accessible remotly at [http://localhost:12345/ap
 
 ## Use docker CLI to build image
 
+Be sure to have enabled registry addon. [Product doc](https://minikube.sigs.k8s.io/docs/commands/image/) which can be summarized as:
+
+```sh
+minikube image build -t localhost:5000/jbcodeforce/something .
+# or
+minikube image build -f path/dockerfile -t jbcodeforce/something path
+# if docker cli is installed and connected to docker daemon of minikube
+docker images
+# works and return the same results as
+minikube image list
+```
+
+???- issue "Image eviction"
+    It is possible that once the image is built, it is visible in the list of images for a very short time. It because of kubelet evicting not used images. These eviction thresholds are fully managed by Kubelet k8s node agent, cleaning uncertain images and containers according to the parameters(flags) propagated in kubelet [configuration file](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/).
+
+Otherwise there is this method too:
+
 * Install docker CLI
 
-```
+```sh
 brew install docker
 ```
 
