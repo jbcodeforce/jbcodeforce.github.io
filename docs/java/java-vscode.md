@@ -1,10 +1,17 @@
 # Java programming with VScode
 
+Not super experience for sure [VS Java getting started](https://code.visualstudio.com/docs/java/java-tutorial). The happy path is:
+
+* Better to have somewhere $JAVA_HOME defined before starting VScode. Use [sdkman](http://sdkman.io) to manage SDks or jbang.
+* Create a Java project using the Java: Create Java Project. See [Java editing](https://code.visualstudio.com/docs/java/java-editing). The better solution is to generate a Maven project from Archetype.
+* Using the Java project view is not intuitive.
+* Map the different JDKs to your local installation paths via the setting: `java.configuration.runtimes`
+* With RedHat for Java there is the Maven extension integrated. The view helps to scan `pom.xml` files.
+
 ## Some Editor tricks
 
 The access to the command palette shift -> cmd -> P
 
-palette and access to preview a file like a csv.
 
 ### Autocompletion
 
@@ -52,10 +59,10 @@ Create a configuration with the name of the class and arguments. See [example he
 select Debug > Open Configurations then you should see a set of launch configurations for debugging your code. You can then add to it an env property with a dictionary of string:string.
 
 ```
-            "env": {
-                "BOOTSTRAP_SERVERS": "localhost:9092",
-                "TOPIC_NAME": "orders"
-            }
+    "env": {
+        "BOOTSTRAP_SERVERS": "localhost:9092",
+        "TOPIC_NAME": "orders"
+    }
 ```
 
 ## Error

@@ -13,7 +13,7 @@ Minikube is officially backed by the Kubernetes project. It supports different b
 
 ### Minikube on local home network
 
-We have ultiple choices: 
+We have multiple choices: 
 
 1. A remote dedicated Ubuntu workstation, install minikube, podman and then remote ssh to the Ubuntu machine.
 2. Use WSL2 on Windows or directly install on MacOS
@@ -58,7 +58,7 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-a
 
 #### Remote access to Ubuntu computer on local LAN
 
-* Start ssh server within the ubuntu host:
+* Start ssh server within the ubuntu host, get the ip address and use ssh client
 
 ```sh
 sudo apt install openssh-server
@@ -107,12 +107,52 @@ sudo install minikube-darwin-amd64 /usr/local/bin/minikube
 rm minikube-darwin-amd64
 ```
 
-* Apple Silicon Mac (arm64 archittecture)
+* Apple Silicon Mac (arm64 architecture)
 
 ```sh
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-arm64
 sudo install minikube-darwin-armd64 /usr/local/bin/minikube
 rm minikube-darwin-arm64
+```
+### WSL2 and minikube
+
+* Update Ubuntu
+
+```sh
+sudo apt update && sudo apt upgrade -y
+# and install important tools
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+```
+
+* Add repository to access docker engine
+
+```sh
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# 
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update -y
+```
+
+* Install docker engine
+
+```sh
+sudo apt-get install -y docker-ce
+# Update user to be a docker group member
+sudo usermod -aG docker $USER && newgrp docker
+```
+
+* Configure minikube uses docker engine
+
+```
+minikube config set driver docker
+minikube start
 ```
 
 ### Update existing Minikube 
@@ -125,8 +165,7 @@ minikube update-check
 
 ### With docker driver
 
-In WSL2 on Windows and Docker Desktop installed on Windows it is possible to share the docker driver with WSL2.
-
+In WSL2 on Windows and Docker Desktop installed on Windows, it is possible to share the docker driver with WSL2.
 
 ```sh
 minikube start
@@ -155,7 +194,7 @@ minikube start --driver=podman
 
 Personal script is `~/bin/ministart`, may take some time as it may download new VM image.
 
-* In case of problem delete the vm with `minikube delete`
+In case of problem delete the vm with `minikube delete`
 
 ## Add any needed addons
 
@@ -165,7 +204,6 @@ minikube addons enable metrics-server
 minikube addons enable ingress
 minikube addons enable registry
 ```
-
 
 ## Kubectl
 
@@ -248,16 +286,29 @@ Otherwise there is this method too:
 brew install docker
 ```
 
-* Expose the Docker daemon from minikube to the local terminal environment.
+* Expose the Docker daemon from minikube to the local terminal environment. (A typical issue is 'Canot connecto to docker daemon at unix ...')
 
 ```sh
 eval $(minikube docker-env)
 ```
 
-* Enable docker local daemon to push images to minikube registry
+* Enable docker local daemon to push images to minikube registry to simplify the image management within the minikube cluster. First enable the registry service:
 
 ```sh
 minikube addons enable registry
+```
+
+* When the registry is enable the image management  is done with minikube mostly the same way as with docker
+
+```sh
+# to get an image from docker hub to be loaded to internal registry so deployment can find image
+minikube image load <dockerhub>imagename  
+```
+
+*The `imagePullPolicy` and image `tag` (:latest or :1.0.0) affect when Minikube attempts to pull the specified image. `imagePullPolicy` is automatically set to `Always`. The control can be done via parameter
+
+```sh
+ kubectl run acontainer --image=stheimage --image-pull-policy=Never --restart=Never
 ```
 
 * Build a quarkus app and deploy it to minikube
@@ -294,11 +345,6 @@ minikube service nginx-service
 kubectl port-forward service/nginx-service 8083:80
 ```
 
-* Build docker image
-
-```
-```
-
 # Troubleshooting
 
 
@@ -321,4 +367,4 @@ Install: `sudo dpkg -i containernetworking-plugins_1.1.1+ds1-3_amd64.deb`
 `minikube start`
 ```
 
-* 
+* [Using a Local Registry running on Host with Minikube](https://gist.github.com/trisberg/37c97b6cc53def9a3e38be6143786589): the registry runs on host development machine at registry.dev.svc.cluster.local:5000 and images are shared between host an any pods running inside Minikube.
