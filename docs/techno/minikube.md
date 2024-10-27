@@ -1,7 +1,7 @@
 # Minikube how to
 
 ???- warning "Update"
-    Created 2023 - Update 9/2024 consolidate notes
+    Created 2023 - Update 10/2024 consolidate notes
 
     **Under construction**
 
@@ -99,6 +99,8 @@ ssh jeromeboyer@10.0.0.192
 
 ### Install on Mac
 
+There are different passes. The podman desktop or the cli:
+
 * Intel Mac
 
 ```sh
@@ -114,6 +116,10 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin
 sudo install minikube-darwin-armd64 /usr/local/bin/minikube
 rm minikube-darwin-arm64
 ```
+
+
+* For Podman Desktop see [this documentation for installation](https://podman-desktop.io/) then this one [for minikube](https://podman-desktop.io/docs/minikube). It is possible to start minikube with the cli and the Podman Desktop will see it, and its resources.
+
 ### WSL2 and minikube
 
 * Update Ubuntu
@@ -151,15 +157,27 @@ sudo usermod -aG docker $USER && newgrp docker
 * Configure minikube uses docker engine
 
 ```
-minikube config set driver docker
+minikube config set driver podman
 minikube start
+# get information about 
+minikube profile list
 ```
 
-### Update existing Minikube 
+### Update existing Minikube version
 
 ```sh
 minikube update-check
 ```
+
+### Add any needed addons
+
+```sh
+minikube addons list
+minikube addons enable metrics-server
+minikube addons enable ingress
+minikube addons enable registry
+```
+
 
 ## Run a cluster
 
@@ -189,23 +207,15 @@ eval $(minikube -p <profile> docker-env)
 To be able to run minikube with a `podman` driver, the user needs to be a sudoers [see this note](../coding/playground.md#install-minikube-on-ubuntu):
 
 ```sh
-minikube start --driver=podman
+minikube start --cpus 6 --memory 18g  --driver=podman
 ```
 
 Personal script is `~/bin/ministart`, may take some time as it may download new VM image.
 
 In case of problem delete the vm with `minikube delete`
 
-## Add any needed addons
 
-```sh
-minikube addons list
-minikube addons enable metrics-server
-minikube addons enable ingress
-minikube addons enable registry
-```
-
-## Kubectl
+### Kubectl: some commands
 
 
 * If kubectl is not install on the host, we can alias it to the minikube:
@@ -236,7 +246,7 @@ kubectx minikube
 kubectl get nodes
 ```
 
-## User interface and networking
+### User interface and networking
 
 * Dashboard UI
 
@@ -260,31 +270,27 @@ ssh -L 12345:localhost:8001 jerome@ubuntu1
 
 Now the Kubernetes Dashboard is accessible remotly at [http://localhost:12345/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy](http://localhost:12345/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy)
 
+## Application deployments
 
-## Use docker CLI to build image
+### Use docker CLI to build image
+
+! Not sure we need a private registry.
 
 Be sure to have enabled registry addon. [Product doc](https://minikube.sigs.k8s.io/docs/commands/image/) which can be summarized as:
 
 ```sh
+# with a local Dockerfile and local context
 minikube image build -t localhost:5000/jbcodeforce/something .
 # or
-minikube image build -f path/dockerfile -t jbcodeforce/something path
+minikube image build -f path/dockerfile -t jbcodeforce/something context_path
 # if docker cli is installed and connected to docker daemon of minikube
 docker images
-# works and return the same results as
+# works and returns the same results as
 minikube image list
 ```
 
 ???- issue "Image eviction"
     It is possible that once the image is built, it is visible in the list of images for a very short time. It because of kubelet evicting not used images. These eviction thresholds are fully managed by Kubelet k8s node agent, cleaning uncertain images and containers according to the parameters(flags) propagated in kubelet [configuration file](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/).
-
-Otherwise there is this method too:
-
-* Install docker CLI
-
-```sh
-brew install docker
-```
 
 * Expose the Docker daemon from minikube to the local terminal environment. (A typical issue is 'Canot connecto to docker daemon at unix ...')
 
@@ -305,13 +311,13 @@ minikube addons enable registry
 minikube image load <dockerhub>imagename  
 ```
 
-*The `imagePullPolicy` and image `tag` (:latest or :1.0.0) affect when Minikube attempts to pull the specified image. `imagePullPolicy` is automatically set to `Always`. The control can be done via parameter
+* The `imagePullPolicy` and image `tag` (:latest or :1.0.0) affect when Minikube attempts to pull the specified image. `imagePullPolicy` is automatically set to `Always`. The control can be done via parameter
 
 ```sh
- kubectl run acontainer --image=stheimage --image-pull-policy=Never --restart=Never
+kubectl run acontainer --image=theimage --image-pull-policy=Never --restart=Never
 ```
 
-* Build a quarkus app and deploy it to minikube
+### Build a quarkus app and deploy it to minikube
 
 ```sh
 mvn verify -Dquarkus.kubernetes.deploy=true
@@ -332,7 +338,7 @@ kubectl expose deployment hello-minikube --type=NodePort --port=8080
 ```
 
 
-* Deploy nginx from studies/minikube
+### Deploy nginx from studies/minikube
 
 ```sh
 k create -f nginx-svc.yaml
@@ -345,7 +351,54 @@ minikube service nginx-service
 kubectl port-forward service/nginx-service 8083:80
 ```
 
-# Troubleshooting
+### Deploy postgres
+
+As postgres needs to persist data to file system, we need to define PV and PVC.
+
+1. Create a local directory on the host machine to keep data, depending of the context of the application or tests
+1. Create persistence volue to use manual storage class and using hostPath. (use absolute path to the created folder). Apply the configuration to the cluster.
+
+    ```yaml
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+        name: postgres-pv
+        labels:
+            type: local
+    spec:
+        storageClassName: manual
+        capacity:
+            storage: 2Gi
+        accessModes:
+            - ReadWriteOnce
+        hostPath:
+            path: "/mnt/data/postgres-dbs"
+    ```
+
+1. Create a PVC for postgres
+
+    ```yaml
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+        name: postgres-pvc
+    spec:
+        storageClassName: manual
+        accessModes:
+            - ReadWriteOnce
+        resources:
+            requests:
+            storage: 2Gi
+      ```
+
+1. Download the Helm chart, for example the bitmani one
+
+    ```sh
+    helm pull bitnami/postgresql
+    tar -xvf postgresql-{version}.tgz
+    ```
+    
+## Troubleshooting
 
 
 * Clean all at the docker engine level

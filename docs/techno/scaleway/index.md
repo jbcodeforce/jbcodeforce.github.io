@@ -1,15 +1,15 @@
 # Summary of [Scaleway cloud](https://www.scaleway.com/en/)
 
-Cloud provider in Europe
+Scaleway is a cloud provider in Europe.
 
 ## Compute
 
 VM or Bare metal, see [offerings](https://www.scaleway.com/en/docs/compute/instances/reference-content/choosing-instance-type/), with [pricing information.](https://www.scaleway.com/en/pricing/)
 
-There is a [scaleway CLI](https://github.com/scaleway/scaleway-cli) which can run in a docker image
+There is a [scaleway CLI](https://github.com/scaleway/scaleway-cli) which can run in a docker image:
 
 ```sh
-docker run -i --rm scaleway/cli:latest
+docker run -i --rm scaleway/cli:latest bash
 ```
 
 ## Container
@@ -32,4 +32,7 @@ docker push rg.fr-par.scw.cloud/mynamespace/my_new_image:latest
 [Documentation](https://www.scaleway.com/en/docs/serverless/containers/quickstart/).
 
 ### Kubernetes
-For K8s the service to manage clusters is Kapsule. See [Kubernetes doc](https://www.scaleway.com/en/docs/containers/kubernetes/). But to create clusters including Instances from external cloud providers, the product is Kubernetes Kosmos.
+
+For K8s, the service to manage clusters is Kapsule. See [Kubernetes doc](https://www.scaleway.com/en/docs/containers/kubernetes/). But to create clusters including instances from external cloud providers, the product is Kubernetes Kosmos.
+
+To acess to a kubernetes cluster we need a config to set kubectl context.

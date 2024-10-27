@@ -88,7 +88,7 @@ k describe node
 | Kafka | helm install bitmani/kafka | 
 | Strimzi | helm repo add strimzi https://strimzi.io/charts/  && helm install strimzi-kafka strimzi/strimzi-kafka-operator  | 
 
-## Minkube as a local k8s
+## Minikube as a local k8s
 
 [See minikube dedicated notes](../techno/minikube.md)
 
