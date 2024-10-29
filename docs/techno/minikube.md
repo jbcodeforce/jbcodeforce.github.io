@@ -391,13 +391,15 @@ As postgres needs to persist data to file system, we need to define PV and PVC.
             storage: 2Gi
       ```
 
-1. Download the Helm chart, for example the bitmani one
+1. Download the Helm chart, for example the bitmani one; and modify any parameters in the values.yaml file.
 
     ```sh
     helm pull bitnami/postgresql
     tar -xvf postgresql-{version}.tgz
     ```
-    
+
+[See this article](https://facelessnomad.medium.com/deploying-your-app-and-database-with-helm-on-kubernetes-8ba20733eea9) for postgresql and a python app deployments with helm.
+
 ## Troubleshooting
 
 

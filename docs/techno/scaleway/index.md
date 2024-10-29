@@ -36,3 +36,52 @@ docker push rg.fr-par.scw.cloud/mynamespace/my_new_image:latest
 For K8s, the service to manage clusters is Kapsule. See [Kubernetes doc](https://www.scaleway.com/en/docs/containers/kubernetes/). But to create clusters including instances from external cloud providers, the product is Kubernetes Kosmos.
 
 To acess to a kubernetes cluster we need a config to set kubectl context.
+
+#### Deploy Athena demo on kubernetes
+ 
+ Once the kubernetes cluster is provisioned and helm is installed, set the context in the /kube/config or a separate file that define the config:
+
+```yaml
+apiVersion: v1
+kind: Config
+preferences: {}
+
+# Define the cluster
+clusters:
+- name: athena-demo
+  cluster:
+    certificate-authority-data: LS0...=
+    server: https://....4.api.k8s.fr-par.scw.cloud:6443
+users:
+- name: admin-user
+  user:
+    token: ey....Ag
+
+# Define the context: linking a user to a cluster
+contexts:
+- context:
+    cluster: athena-demo
+    namespace: ibu
+    user: admin-user
+  name: admin-user@athena-demo
+
+# Define current context
+current-context: admin-user@athena-demo
+```
+
+
+if we need to push images to private Scaleway registry use docker login with  a given access key
+
+```
+ $ docker login rg.fr-par.scw.cloud/athena-demo -u nologin --password ...
+Login Succeeded
+
+$docker push rg.fr-par.scw.cloud/athena-demo/owl-backend:latest
+ ```
+
+
+ * Deinstallation
+
+ ```
+ helm uninstall releasename
+ ```
