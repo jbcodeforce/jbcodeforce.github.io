@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pg-cluster
+spec:
+  instances: 1
+  #imageName: ghcr.io/cloudnative-pg/postgresql:13.16
+  storage:
+    size: 1Gi
+  monitoring:
+    enablePodMonitor: true

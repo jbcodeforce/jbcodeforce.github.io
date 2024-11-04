@@ -1,11 +1,28 @@
 # Minikube how to
 
 ???- warning "Update"
-    Created 2023 - Update 10/2024 consolidate notes
+    Created 2023 - Update 11/2024 consolidate notes
 
     **Under construction**
 
 Minikube is officially backed by the Kubernetes project. It supports different backend drivers like KVM, Docker, Podman.
+
+## Concepts
+
+### Profile 
+
+Minikube can be used with profile. Profile is a way to manage multiple Minikube clusters with different configurations (driver, k8s version, memory, cpu, addson, ...) on the same machine. Think of it like having separate, isolated Kubernetes environments.
+Profile may be used for isolating development environments for different projects or for testing multi-node setups.
+
+```sh
+minikube profile list
+```
+
+### Tunnel
+
+Minikube tunnel creates a network route between your host machine and the Minikube cluster, specifically to enable LoadBalancer services to work as expected. `minikube tunnel` runs as a process on your host machine, which creates a network tunnel using your host as a network gateway, then it assigns real external IPs to LoadBalancer services to handle routing traffic from your host to these services.
+
+Must keep running in a separate terminal while you need LoadBalancer access.
 
 ## Getting started
 
@@ -15,8 +32,8 @@ Minikube is officially backed by the Kubernetes project. It supports different b
 
 We have multiple choices: 
 
-1. A remote dedicated Ubuntu workstation, install minikube, podman and then remote ssh to the Ubuntu machine.
-2. Use WSL2 on Windows or directly install on MacOS
+1. A remote dedicated Ubuntu workstation, with  minikube installed, podman and then remote ssh to the Ubuntu machine.
+2. Use WSL2 on Windows or directly installed on MacOS
 
 [Consult minikube FAQ](https://minikube.sigs.k8s.io/docs/faq/)
 
@@ -154,10 +171,10 @@ sudo apt-get install -y docker-ce
 sudo usermod -aG docker $USER && newgrp docker
 ```
 
-* Configure minikube uses docker engine
+* Configure minikube to use docker engine
 
 ```
-minikube config set driver podman
+minikube config set driver docker
 minikube start
 # get information about 
 minikube profile list
@@ -181,11 +198,14 @@ minikube addons enable registry
 
 ## Run a cluster
 
+
+
 ### With docker driver
 
 In WSL2 on Windows and Docker Desktop installed on Windows, it is possible to share the docker driver with WSL2.
 
 ```sh
+# use default profile called minikube
 minikube start
 # ip address
 minikube ip
@@ -196,11 +216,13 @@ minikube start --cpus 3 --memory 3072
 minikube status
 ```
 
-To point the docker CLI to minikube docker environment: 
+To point the docker CLI to minikube docker environment: When we run Docker commands on our local machine, by default they interact with our local Docker daemon. However, Minikube runs its own Docker daemon inside its VM/container environment. Therefore images we build locally aren't automatically available to Minikube's Kubernetes cluster. When you define Kubernetes resources that reference Docker images, Minikube will look for them in its own Docker registry.
 
 ```sh
 eval $(minikube -p <profile> docker-env)
 ```
+
+Switch the Docker CLI to communicate with Minikube's Docker daemon instead of the local one. This avoids having to push images to an external registry just to test them in Minikube.
 
 ### With podman driver
 
@@ -274,35 +296,40 @@ Now the Kubernetes Dashboard is accessible remotly at [http://localhost:12345/ap
 
 ### Use docker CLI to build image
 
-! Not sure we need a private registry.
+Be sure to have enabled registry addon. 
 
-Be sure to have enabled registry addon. [Product doc](https://minikube.sigs.k8s.io/docs/commands/image/) which can be summarized as:
+???- question "How to enable docker local daemon to push images to minikube registry?"
+    Enable docker local daemon to push images to minikube registry to simplify the image management within the minikube cluster. First enable the registry service:
+
+    ```sh
+    minikube addons enable registry
+    ```
+
+[Product doc](https://minikube.sigs.k8s.io/docs/commands/image/) which can be summarized as:
 
 ```sh
 # with a local Dockerfile and local context
 minikube image build -t localhost:5000/jbcodeforce/something .
 # or
 minikube image build -f path/dockerfile -t jbcodeforce/something context_path
-# if docker cli is installed and connected to docker daemon of minikube
+# if docker cli is installed and connected to docker daemon of minikube via the eval $(minikube -p <profile> docker-env)
 docker images
 # works and returns the same results as
 minikube image list
+# So docker build, creates image inside minikube registry
 ```
 
 ???- issue "Image eviction"
     It is possible that once the image is built, it is visible in the list of images for a very short time. It because of kubelet evicting not used images. These eviction thresholds are fully managed by Kubelet k8s node agent, cleaning uncertain images and containers according to the parameters(flags) propagated in kubelet [configuration file](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/).
 
-* Expose the Docker daemon from minikube to the local terminal environment. (A typical issue is 'Canot connecto to docker daemon at unix ...')
+???- question "Cannot connect to docker daemon"
+    Expose the Docker daemon from minikube to the local terminal environment. (A typical issue is 'Cannot connect to docker daemon at unix ...')
 
-```sh
-eval $(minikube docker-env)
-```
+    ```sh
+    eval $(minikube docker-env)
+    ```
 
-* Enable docker local daemon to push images to minikube registry to simplify the image management within the minikube cluster. First enable the registry service:
 
-```sh
-minikube addons enable registry
-```
 
 * When the registry is enable the image management  is done with minikube mostly the same way as with docker
 
@@ -338,7 +365,9 @@ kubectl expose deployment hello-minikube --type=NodePort --port=8080
 ```
 
 
-### Deploy nginx from studies/minikube
+### Deploy nginx from the studies/minikube folder
+
+The Service is of type loadbalancer.
 
 ```sh
 k create -f nginx-svc.yaml
@@ -351,12 +380,38 @@ minikube service nginx-service
 kubectl port-forward service/nginx-service 8083:80
 ```
 
+### Install Prometheus
+
+Install the Kube Prometheus stack
+
+```sh
+helm repo add prometheus-community \
+  https://prometheus-community.github.io/helm-charts
+
+helm upgrade --install \
+  -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/kube-stack-config.yaml \
+  prometheus-community \
+  prometheus-community/kube-prometheus-stack
+```
+
+After completion, you will have Prometheus, Grafana and Alert Manager installed with values from the kube-stack-config.yaml file. From the Prometheus installation, you will have the Prometheus Operator watching for any PodMonitor. The Grafana installation will be watching for a Grafana dashboard ConfigMap.
+
+To access Prometheus, port-forward the Prometheus service:
+
+```sh
+kubectl port-forward svc/prometheus-community-kube-prometheus 9090
+```
+
 ### Deploy postgres
+
+Two options to deploy Postgresql one with helm images and one with Postgresql Operator
+
+#### Helm deployment
 
 As postgres needs to persist data to file system, we need to define PV and PVC.
 
-1. Create a local directory on the host machine to keep data, depending of the context of the application or tests
-1. Create persistence volue to use manual storage class and using hostPath. (use absolute path to the created folder). Apply the configuration to the cluster.
+1. Create a local directory on the host machine to keep data (e.g. /etc/data/postgres-dbs), depending of the context of the application or tests
+1. Create persistence volume to use manual storage class and using hostPath. (use absolute path to the created folder). Apply the configuration to the cluster.
 
     ```yaml
     apiVersion: v1
@@ -372,7 +427,7 @@ As postgres needs to persist data to file system, we need to define PV and PVC.
         accessModes:
             - ReadWriteOnce
         hostPath:
-            path: "/mnt/data/postgres-dbs"
+            path: "/etc/data/postgres-dbs"
     ```
 
 1. Create a PVC for postgres
@@ -391,7 +446,7 @@ As postgres needs to persist data to file system, we need to define PV and PVC.
             storage: 2Gi
       ```
 
-1. Download the Helm chart, for example the bitmani one; and modify any parameters in the values.yaml file.
+1. Download the Helm chart, for example the bitmani one, and modify any parameters in the values.yaml file.
 
     ```sh
     helm pull bitnami/postgresql
@@ -399,6 +454,49 @@ As postgres needs to persist data to file system, we need to define PV and PVC.
     ```
 
 [See this article](https://facelessnomad.medium.com/deploying-your-app-and-database-with-helm-on-kubernetes-8ba20733eea9) for postgresql and a python app deployments with helm.
+
+
+#### Operator deployment
+
+Use [CloudNative Postgres Operator](https://github.com/cloudnative-pg/cloudnative-pg) and [installation instructions](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/docs/src/installation_upgrade.md).
+
+```sh
+kubectl apply --server-side -f \
+  https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.24/releases/cnpg-1.24.1.yaml
+# Verify operator
+kubectl get deployment -n cnpg-system cnpg-controller-manager
+```
+
+Then deploy a DB cluster. See [the CRD definition](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/docs/src/cloudnative-pg.v1.md).
+
+```yaml
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pg-cluster
+spec:
+  instances: 1
+
+  storage:
+    size: 1Gi
+```
+
+Define Prometheus rules to 
+
+```
+kubectl apply -f \
+  https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/prometheusrule.yaml
+```
+
+* Define a Grafana Dashboard to monitor PostgresSQL, by uploading the `studies/minikube/pg-grafana-dashboard.yaml`
+
+* To define table, open a session as the postgres superuser. By default, CloudNativePG creates a user called `app`, and a database owned by it, also called `app`.
+
+```sh
+kubectl exec -ti cluster-example-1 -- psql app
+```
+
+[See psql commands](https://www.postgresql.org/docs/current/app-psql.html) and [postgresql study notes.](https://jbcodeforce.github.io/db-play/postgres/)
 
 ## Troubleshooting
 
