@@ -4,7 +4,7 @@ Scaleway is a cloud provider in Europe.
 
 ## Compute
 
-VM or Bare metal, see [offerings](https://www.scaleway.com/en/docs/compute/instances/reference-content/choosing-instance-type/), with [pricing information.](https://www.scaleway.com/en/pricing/)
+It supports VM or Bare metal machines, see [offerings](https://www.scaleway.com/en/docs/compute/instances/reference-content/choosing-instance-type/), with [pricing information.](https://www.scaleway.com/en/pricing/)
 
 There is a [scaleway CLI](https://github.com/scaleway/scaleway-cli) which can run in a docker image:
 
@@ -16,7 +16,7 @@ docker run -i --rm scaleway/cli:latest bash
 
 ### Container Registry
 
-A fully-managed mutualized container registry. It uses the concept of namespace for isolation per region. A namespace can either be public or private. Anyone will be able to pull container images from a public namespace. Privacy policies may be set at image level.
+A fully-managed mutualize container registry. It uses the concept of namespace for isolation per region. A namespace can either be public or private. Anyone will be able to pull container images from a public namespace. Privacy policies may be set at image level.
 
 The command to push image from local computer.
 
@@ -33,13 +33,13 @@ docker push rg.fr-par.scw.cloud/mynamespace/my_new_image:latest
 
 ### Kubernetes
 
-For K8s, the service to manage clusters is Kapsule. See [Kubernetes doc](https://www.scaleway.com/en/docs/containers/kubernetes/). But to create clusters including instances from external cloud providers, the product is Kubernetes Kosmos.
+For K8s, the service to manage clusters is called **Kapsule**. See [Kubernetes doc](https://www.scaleway.com/en/docs/containers/kubernetes/). But to create clusters including instances from external cloud providers, the product is Kubernetes Kosmos.
 
-To acess to a kubernetes cluster we need a config to set kubectl context.
+To access to a kubernetes cluster we need a config to set `kubectl` context.
 
-#### Deploy Athena demo on kubernetes
+#### Setting specific kubectl context
  
- Once the kubernetes cluster is provisioned and helm is installed, set the context in the /kube/config or a separate file that define the config:
+Once the kubernetes cluster is provisioned and helm is installed, set the kubectl context in the /kube/config or in a separate file that define the config. The cluster has a name, the kubelet API endpoint,  and the TLS public certificate.
 
 ```yaml
 apiVersion: v1
@@ -48,7 +48,7 @@ preferences: {}
 
 # Define the cluster
 clusters:
-- name: athena-demo
+- name: athena-demo-cluster
   cluster:
     certificate-authority-data: LS0...=
     server: https://....4.api.k8s.fr-par.scw.cloud:6443
@@ -60,28 +60,23 @@ users:
 # Define the context: linking a user to a cluster
 contexts:
 - context:
-    cluster: athena-demo
+    cluster: athena-demo-cluster
     namespace: ibu
     user: admin-user
-  name: admin-user@athena-demo
+  name: athena-demo
 
 # Define current context
-current-context: admin-user@athena-demo
+current-context: athena-demo
 ```
 
 
-if we need to push images to private Scaleway registry use docker login with  a given access key
+if we need to push images to private Scaleway registry, we need to `docker login` with  a given access key
 
 ```
  $ docker login rg.fr-par.scw.cloud/athena-demo -u nologin --password ...
 Login Succeeded
 
 $docker push rg.fr-par.scw.cloud/athena-demo/owl-backend:latest
- ```
+```
 
-
- * Deinstallation
-
- ```
- helm uninstall releasename
- ```
+To be continued...

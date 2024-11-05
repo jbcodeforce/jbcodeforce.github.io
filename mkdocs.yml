@@ -91,6 +91,7 @@ nav:
         - Agile: coding/agile.md
         - Git summary: coding/git.md
         - GitOps: coding/gitops.md
+        - Helm: coding/helm.md
         - Tekton: coding/tekton.md
         - ArgoCD: coding/argocd.md
         - Finch: coding/finch.md
