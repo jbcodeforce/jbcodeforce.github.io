@@ -26,7 +26,7 @@ deploy_postgres_operator:
 
 
 deploy_postgresql:
-	@kubectl apply -f postgresql/pg-cluster.yaml  -n $(DEV_NS)
+	@kubectl apply -f pg-k8s/pg-cluster.yaml  -n $(DEV_NS)
 
 get_postgresql_pwd:
 	@kubectl get secret --namespace  $(DEV_NS) $(DBNAME) -o jsonpath="{.data.password}" | base64 -d 
@@ -40,9 +40,25 @@ get_postgresql_user:
 set_k8s_context:
 	@kubectl config  --kubeconfig=$HOME/.kube/config  use-context athena-demo
 
+# ------ install prometheus and grafana
+deploy_prometheus:
+	@helm upgrade --install \
+  -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/kube-stack-config.yaml \
+  prometheus-community prometheus-community/kube-prometheus-stack
+  	@kubectl apply -f \
+  https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/prometheusrule.yaml
+
 # ------------- PG admin webapp -----------------------------------
-deploy_pgadmin:
-	@kubectl apply -f postgresql/pgadmin-secrets.yaml  -n $(DEV_NS); \
-	@kubectl apply -f postgresql/pgadmin-cm.yaml -n $(DEV_NS); \
-	@kubectl apply -f postgresql/pgadmin-svc.yaml -n $(DEV_NS); \
-	@kubectl apply -f postgresql/pgadmin-sfs.yaml -n $(DEV_NS); \
+deploy_pgadmin: set_pgadmin_secrets set_pgadmin_cm set_pgadmin_svc set_pgadmin_statefulset
+
+set_pgadmin_secrets:
+    @kubectl apply -f pg-k8s/pgadmin-secrets.yaml  -n $(DEV_NS)
+
+set_pgadmin_cm:
+    @kubectl apply -f pg-k8s/pgadmin-cm.yaml -n $(DEV_NS)
+
+set_pgadmin_svc:
+    @kubectl apply -f pg-k8s/pgadmin-svc.yaml -n $(DEV_NS)
+
+set_pgadmin_statefulset:
+    @kubectl apply -f pg-k8s/pgadmin-sfs.yaml -n $(DEV_NS)

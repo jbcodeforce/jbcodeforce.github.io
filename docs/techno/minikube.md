@@ -488,7 +488,7 @@ kubectl apply -f \
   https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/prometheusrule.yaml
 ```
 
-* Define a Grafana Dashboard to monitor PostgresSQL, by uploading the `studies/minikube/pg-grafana-dashboard.yaml`
+* Define a Grafana Dashboard to monitor PostgresSQL, by uploading the `studies/minikube/postgresql/pg-grafana-dashboard.yaml`
 
 * To define table, open a session as the postgres superuser. By default, CloudNativePG creates a user called `app`, and a database owned by it, also called `app`.
 
@@ -509,15 +509,16 @@ docker system prune -a --volume -f
 
 * Error starting minikube: Error validating CNI config file /etc/cni/net.d/minikube.conflist
 
-```
-Removing the failed install of minikube cant hurt: `minikube delete --all`
-Check your package version of containernetworking-plugins:`apt show containernetworking-plugins`
+
+* Removing the failed install of minikube cant hurt: `minikube delete --all`
+* Check your package version of containernetworking-plugins:`apt show containernetworking-plugins`
 
 Go to http://archive.ubuntu.com/ubuntu/pool/universe/g/golang-github-containernetworking-plugins/ and download an up to date version
 
 Install: `sudo dpkg -i containernetworking-plugins_1.1.1+ds1-3_amd64.deb`
 
-`minikube start`
+```
+minikube start
 ```
 
 * [Using a Local Registry running on Host with Minikube](https://gist.github.com/trisberg/37c97b6cc53def9a3e38be6143786589): the registry runs on host development machine at registry.dev.svc.cluster.local:5000 and images are shared between host an any pods running inside Minikube.
