@@ -148,6 +148,7 @@ nav:
       - Narratives: methodology/narrative.md
     - Data:
       - Introduction: data/index.md
+      - dbt: data/dbt.md
       - Iceberg & others: techno/data/index.md
       - Database play:  https://jbcodeforce.github.io/db-play/  
       - Data topology: data/data-topology.md 
