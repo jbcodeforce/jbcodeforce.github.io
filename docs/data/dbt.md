@@ -1,4 +1,4 @@
-# Data build tool or Dbt
+# Data Build Tool or Dbt
 
 [Dbt](https://github.com/dbt-labs/dbt-core) is part of the Transformation in ELT or ETL, to transform data in data warehouse or lake house. 
 
@@ -9,6 +9,22 @@
 * Supported by the big players of lake house like Snowflake, Databricks
 * Built in features like version control, automated testing, document generation, and data lineage visualization
 * Integrated platform for developers and data engineers
+
+## Import concepts
+
+dbt uses a template mechanism, functions and a set of features to organize SQL and cross reference them.
+
+* Two standard constructs that can be created by dbt: Views and Tables. The table lists when to use them:
+
+|  | View | Table|
+| --- | --- | --- |
+| **Purpose** | Use for minor transformation | For intensive transformation |
+| **Execution** | At runtime and when referenced | Pre-executed, with the results saved in tables |
+| **Storage** | None | Need Storage space for materialized tables |
+| **Performance** | Lot of steps leads to slower performance | Chained processes get improved perf. | 
+
+Always need to assess the balance between storage and performance.
+
 
 ## Installation
 
@@ -48,6 +64,7 @@
     select * from "default".customerorders;
     ```
 
+
 ## Sources
 
-* [Youtube tutorial]()
+* [Youtube tutorial](https://www.youtube.com/watch?v=cW7KFaos2cw)
