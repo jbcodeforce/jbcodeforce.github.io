@@ -9,9 +9,15 @@ git config --global user.name "Your Name Here"
 git config --global user.email "MY_NAME@example.com"
 ```
 
-When you clone a project, a complete copy of the original remote repository is created locally on your system. Your local copy of the repository contains the entire history of the project files, not just the latest version of project files.
+This information is persisted in $HOME/.gitconfig. It is possible to use different .gitconfig and reference it with the environment variable:
 
-Files in your working directory can be in one of two states: **tracked** or **untracked**. Tracked files are files that were in the last snapshot; they can be unmodified, modified, or staged. Untracked files are everything else.
+```sh
+export  GIT_CONFIG_GLOBAL=~/.mygitconfig
+```
+
+When you clone a project, the local copy of the repository contains the entire history of the project files, not just the latest version of project files.
+
+Files in the working directory can be in one of two states: **tracked** or **untracked**. Tracked files are files that were in the last snapshot; they can be unmodified, modified, or staged. Untracked files are everything else.
 
 In order to begin tracking a new file, you use the command `git add <filename>`. If you want to remove a file: `git rm <filename>`
 
@@ -27,7 +33,7 @@ By convention, the main branch in a Git repository contains the latest, stable v
 
 When you use a branch for feature development, you can commit and share your code frequently without impacting the stability of code in the main branch. After ensuring the code in the feature branch is completed, tested, and reviewed, you are ready to merge the branch into another branch, such as the main branch. Merging is the process of combining the commit histories from two separate branches into a single branch.
 
-## Different workflows
+## Different development workflows
 
 A **centralized Git** workflow uses a central Git repository as the single source of record for application code. Developers push code changes directly to the main branch, and do not push commits in other branches to the central repository. Because the workflow results in commits to a single branch only, team members are prone to merge conflicts. It open doors to commit partial or incomplete code changes. Code is always on the most updated features so may be unstable.
 
@@ -142,6 +148,16 @@ git remote set-url origin <url>
 * disable using ssl: `git config --global http.sslverify false`
 * In case the push did not return and hangs, it may be a problem of buffer size, then use `git config http.postBuffer 524288000`.
 
+### Signing commits
+
+[See product documentation](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits) with [define signing key with git](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key) and to be summarized as:
+
+```sh
+git config commit.gpgsign true
+# use gnupg suite to keep key paraphrase
+
+```
+
 ## Practices
 
 * Link a commit to an issue to close it. The commit message need to just include one of the following:
@@ -203,18 +219,31 @@ Stashing takes the dirty state of your working directory — that is, your modif
 
 ## Get SSH key for github account
 
-Use OpenSSH client, which comes pre-installed on GNU/Linux, macOS, and Windows 10 to define public key. Existing ssh keys are under `.ssh/` folder. The file `id_rsa.pub` is the public key for RSA encrypted key.
+Use OpenSSH client, which comes pre-installed on GNU/Linux, MacOS, and Windows 10 to define public key. Existing ssh keys are under `.ssh/` folder. The file `id_rsa.pub` is the public key for RSA encrypted key.
 
-If needed generate key with:
+If needed, generate key with:
 
 ```sh
-ssh-keygen -t rsa -b 2048 -C "<comment>"
+ssh-keygen -t rsa -b 2048 -C "email@address.here"
 ```
 
 To debug the ssh authentication
 
 ```sh
 ssh -vvvv git@ssh.gitlab.aws.dev
+```
+
+It may be necessary to update the ssh agent with:
+
+```sh
+eval "$(ssh-agent -s)"
+```
+
+Also to use the private key to any git command do something like:
+
+```sh
+GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes' git clone git@github.com:...
+GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes' git push git@github.com
 ```
 
 ## Webhook
