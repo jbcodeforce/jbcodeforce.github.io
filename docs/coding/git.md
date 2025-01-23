@@ -133,7 +133,7 @@ MA --- MB --- MC --- FA --- FB --- FC <- feature
 * **git checkout**: Literally allows you to “check out” a repository that you are not currently inside. This is a navigational command that lets you move to the repository you want to check. You can use this command as `git checkout main` to look at the main branch. Un-modify a modified file by doing `git checkout -- <filename>`
 * **git merge**: When you’re done working on a branch, you can merge your changes back to the main branch, which is visible to all collaborators.
 * **git diff** to compare what is in your working directory with what is in your staging area
-* **git push**: `git push  [remote-name] [branch-name]`  If you’re working on your local host, and want your commits to be visible online on GitHub as well, you “push” the changes up to GitHub with this command. `git push -u origin main`. If you and someone else clone at the same time and they push upstream and then you push up- stream, your push will rightly be rejected. You’ll have to fetch their work first and incorporate it into yours before you’ll be allowed to push.
+* **git push**: `git push  [remote-name] [branch-name]`  If you’re working on your local host, and want your commits to be visible online on GitHub as well, you “push” the changes up to GitHub with this command. `git push -u origin main`. If you and someone else clone at the same time and they push upstream then any push up-stream, will rightly be rejected. You’ll have to fetch their work first and incorporate it into yours before you’ll be allowed to push.
 * **git pull**: If you’re working on your local computer and want the most up-to-date version of your repository to work with, you “pull” the changes down from GitHub with this command. It is a shorthand for `git fetch ` followed by `git merge FETCH_HEAD`.
 
 * **git fetch** : `git fetch origin`, get update from a remote server branch and download to local repository. Not doing a merge. This will fetch any work that has been pushed, and download it to local repository without merging with your local work.
@@ -154,8 +154,9 @@ git remote set-url origin <url>
 
 ```sh
 git config commit.gpgsign true
-# use gnupg suite to keep key paraphrase
-
+# define a key with gpg
+# sign a commit with -S
+git commit -S -am "a message"
 ```
 
 ## Practices
@@ -192,30 +193,31 @@ git checkout -b issue2
 Any new commit will move the branch forward, because you have it checked out (that is, your HEAD is pointing to it).
 It’s important to note that when you switch branches in Git, files in your working directory will change. If you switch to an older branch, your working directory will be reverted to look like it did the last time you committed on that branch. If Git cannot do it cleanly, it will not let you switch at all.
 
-Because a branch in Git is in actuality a simple file that contains the 40 character SHA-1 checksum of the commit it points to, branches are cheap to create and destroy.
+Because a branch in Git is in actualy a simple file that contains the 40 character SHA-1 checksum of the commit it points to, branches are cheap to create and destroy.
 
-If you need to apply fix to existing main branch, do a `git checkout main` and the local working directory is exactly the way it was before you started working on the branch. Then add a new branch as hotfix, work on the code, and proceed to merge it back to the main branch using git merge.
-
-When you try to merge one commit with a commit that can be reached by following the first commit’s history, Git simplifies things by moving the pointer forward because there is no divergent work to merge together — this is called a "fast forward".
-
-When the main branch and the fix branch are at the same level, you should delete the fix branch: `git branch -d hotfix`
-
-Once the work on the branch is done, checkout to the target main branch:
+If you need to apply fix to existing main branch, do a `git checkout main` and the local working directory is exactly the way it was before you started working on the branch. Then add a new branch as hotfix, work on the code, commit changes, and proceed to merge it back to the main branch using git merge.
 
 ```shell
+git checkout -b issue2
+git commit -am "fix issue ..."
 git checkout main
 git merge issue2
 git push
 ```
 
+When you try to merge one commit with a commit that can be reached by following the first commit’s history, Git simplifies things by moving the pointer forward because there is no divergent work to merge together — this is called a "fast forward".
+
+When the main branch and the fix branch are at the same level, you should delete the fix branch: `git branch -d hotfix`
+
 When development history has diverged from some older point. Because the commit on the branch you’re on isn’t a direct ancestor of the branch you’re merging in, Git has to do some work. In this case, Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two.
+
 Git creates a new snapshot that results from this three-way merge and automatically creates a new commit that points to it: this is a merge-commit and it has two parents. Git determines the best common ancestor to use for its merge base.
 
 When code change applies to the same source code, conflict may happen and the merge will not be automatic. `git status` helps to assess where the merge-commit stopped. Anything that has merge conflicts and hasn’t been resolved is listed as `unmerged`.
 
-After you’ve resolved each of these sections in each conflicted file, run git add on each file to mark it as resolved
+After you’ve resolved each of these sections in each conflicted file, run `git add` on each file to mark it as resolved.
 
-Stashing takes the dirty state of your working directory — that is, your modified tracked files and staged changes — and saves it on a stack of unfinished changes that you can reapply at any time.
+Stashing takes the dirty state of your working directory — that is, your modified tracked files and staged changes — and saves it on a stack of unfinished changes that you may reapply at any time.
 
 ## Get SSH key for github account
 
