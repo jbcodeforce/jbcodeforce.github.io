@@ -82,7 +82,7 @@ nav:
     - About: about.md
     - Skills: skills.md
     - Blogs: blogs/index.md
-    - Leasure: 
+    - Leisure: 
       - Astronomy: astronomy/index.md
       - Physic - Newton: astronomy/physic.md
   - Coding:
@@ -123,6 +123,7 @@ nav:
     - The SA job: blogs/consultant-job.md
     - Leadership:
       - 90 Days: leadership/first-90-days.md
+      - 7 Habits: leadership/7_habits.md
     - Architecture:
       - Conduct System Design: architecture/system-design.md
       - Event Driven Architecture: https://jbcodeforce.github.io/eda-studies
