@@ -167,6 +167,9 @@ nav:
     - AI:
       - Machine learning: https://jbcodeforce.github.io/ML-studies/#machine-learning
       - Deep learning: https://jbcodeforce.github.io/ML-studies/ml/deep-learning/
+    - Leisure:
+      - Physics: leisure/physics.md
+      - Astronomy: leisure/astronomy/index.md
     
   - Techno:
     - Apicurio: techno/apicurio.md

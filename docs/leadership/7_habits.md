@@ -357,3 +357,117 @@ Write it and visualize it. Spend a few minutes each day and totally relax my min
 Almost all of the world-class athletes and other peak performers are visualizers. They see it; they feel it; they experience it before they actually do it. They begin with the end in mind.
 
 You may find that your mission statement will be much more balanced, much easier to work with, if you break it down into the specific role areas of your life and the goals you want to accomplish in each area.
+
+## Habit 3: Putting first thing first
+
+**What one thing could you do (something you aren’t doing now) that, if you did it on a regular basis, would make a tremendous positive difference in your personal life?**
+
+What one thing in your business or professional life would bring similar results?
+
+You can become principle-centered, day-in and day-out, by practicing effective self-management. Habit 3 is about putting relationship in priority over schedule. Focus on effectiveness, the first things in our lives are always relationships. The essence of effectiveness deals with people and relationships which are governed by a moral sense of principles of what is right and what is wrong and integrity around those. 
+
+The new paradigm is to place priority on relationship over schedule, principles over values, leadership first then management, compass then clock.
+
+Empowerment comes from learning how to use 'independent will' (keep the promises we made to ourselves and others) endowment in the decisions we make every day. The degree to which we have developed our independent will in our everyday lives is measured by our personal integrity. Integrity is, fundamentally, the value we place on ourselves.
+
+**Effective management is putting first things first.** While leadership decides what “first things” are. “time management” includes todo list (1st generation); schedules and planners (2nd), a prioritization according to values (3rd). The challenge is not to manage time, but to manage ourselves. Satisfaction is a function of expectation as well as realization. And expectation (and satisfaction) lies in our Circle of Influence.
+
+### 4nd Generation of Time management
+
+Rather than focusing on things and time, the fourth generation of time management expectations focus on preserving and enhancing relationships and on accomplishing results. It can be presented in a four quadrant matrix. 
+
+![](./images/h7_h3_pic1.png)
+
+* Urgent means it requires immediate attention.
+* Importance, on the other hand, has to do with results. If something is important, it contributes to your mission, your values, your high priority goals.
+
+We react to urgent matters. Important matters that are not urgent require more initiative, more proactivity. We must act to seize opportunity, to make things happen.
+
+People who manage their lives by crisis live spend 90% in quadrant I and 10% in IV.
+
+In quadrant III and IV lead to irresponsible life, easy target for firing, dependent on others for basics. III is short term focus, crisis management, reputation - chameleon character, see goals and plans as worthless, feel victimized and out of control, shallow or broken relationship. They spend most of their time reacting to things that are urgent, assuming they are also important.
+ 
+**Quadrant II is the heart of effective personal management**. It deals with things that are not urgent, but are important. It deals with things like building relationships, writing a personal mission statement, long-range planning, exercising, preventive maintenance, preparation—all those things we know we need to do, but somehow seldom get around to doing. The results: vision, perspective, balance, discipline, control, few crises. 
+
+### Better planning: 
+
+- Initial time for Quadrant II has to come out of III and IV.
+- Quadrant II organizer will need to meet six important criteria. 
+
+	- **COHERENCE**. there is harmony, unity, and integrity between your vision and mission, your roles and goals, your priorities and plans, and your desires and discipline.
+	- **BALANCE:** keep balance in your life, to identify your various roles and keep them right in front of you, so that you don’t neglect important areas such as your health, your family, professional preparation, or personal development.
+	- **Organize** based on 7 days week to keep balance and context.
+	- The key is not to prioritize what’s on your schedule, but to schedule your priorities.
+	- **PEOPLE DIMENSION:** a principle-centered person thinks in terms of effectiveness in dealing with people. It requires subordination of schedules to people.
+	- **FLEXIBILITY.** Your planning tool should be your servant, tailored to your style and needs. 
+
+- Think of one or two important results you feel you should accomplish in each of your role during the next seven days. These would be recorded as goals. 
+- Now you can look at the week ahead with your goals in mind and schedule time to achieve them. 
+- Having identified roles and set goals, you can translate each goal to a specific day of the week, either as a priority item or, even better, as a specific appointment. 
+- Taking a few minutes each morning to review your schedule can put you in touch with the **value-based decisions** you made as you organized the week as well as unanticipated factors that may have come up.
+ 
+**Live it!**: as it is primarily a function of our independent will, our self-discipline, our integrity, and commitment
+
+The values of this time management habit:
+
+- it’s principle-centered. It empowers you to see your time in the context of what is really important and effective.
+- it’s conscience-directed. It gives you the opportunity to organize your life to the best of your ability in harmony with your deepest values. But it also gives you the freedom to peacefully subordinate your schedule to higher values. 
+- it defines your unique mission, including values and long-term goals. it gives direction and purpose to the way you spend each day. 
+- It helps you balance your life by identifying roles, and by setting goals and scheduling activities in each key role every week.
+- it gives greater context through weekly organizing (with daily adaptation as needed), rising above the limiting perspective of a single day and putting you in touch with your deepest values through review of your key roles.
+
+### Delegation increase P and PC
+
+If we delegate to time, we think **efficiency**. If we delegate to other people, we think **effectiveness**.
+There are basically two kinds of delegation: “gofer delegation” and “stewardship delegation.”
+
+### Stewardship delegation
+
+Transferring responsibility to other skilled and trained people enables you to give your energies to other high-leverage activities. Delegation means growth, both for individuals and for organizations. 
+
+Stewardship delegation is focused on results instead of methods. It gives people a choice of method and makes them responsible for results.
+Point out the potential failure paths, what not to do, but don’t tell them what to do. Keep the responsibility for results with them.
+Involve clear, up-front mutual understanding and commitment regarding expectations in five areas:
+
+1. Desired results
+1. GUIDELINES. Identify the parameters within which the individual should operate. Tells what not to do.
+1. RESOURCES. Identify the human, financial, technical, or organizational resources the person can draw on to accomplish the desired results.
+1. ACCOUNTABILITY. Set up the standards of performance that will be used in evaluating the results and the specific times when reporting and evaluation will take place.
+1.CONSEQUENCES. Specify what will happen, both good and bad, as a result of the evaluation. 
+
+**Trust** is the highest form of human motivation. It brings out the very best in people. But it takes time and patience, and it doesn’t preclude the necessity to train and develop people so that their competency can rise to the level of that trust.
+
+### Paradigm of interdependence
+
+You can’t be successful with other people if you haven’t paid the price of success with yourself.
+Self-mastery and self-discipline are the foundation of good relationships with others. Independence is an achievement. Interdependence is a choice only independent people can make. Unless we are willing to achieve real independence, it’s foolish to try to develop human relationship skills. When the difficult times come—and they will—we won’t have the foundation to keep things together.
+
+So the place to begin building any relationship is inside ourselves, inside our Circle of Influence, our own character. As we become independent—proactive, centered in correct principles, value driven and able to organize and execute around the priorities in our life with integrity, We then can choose to become interdependent, capable of building rich, enduring, highly productive relationships with other people.
+
+An **Emotional Bank Account** is a metaphor that describes the amount of trust that’s been built up in a relationship. It’s the feeling of safeness you have with another human being. 
+If I make deposits into an Emotional Bank Account with you through courtesy, kindness, honesty, and keeping my commitments to you, I build up a reserve. 
+
+If a large reserve of trust is not sustained by continuing deposits, a marriage will deteriorate. Instead of rich, spontaneous understanding and communication, the situation becomes one of accommodation, where two people simply attempt to live independent life-styles in a fairly respectful and tolerant way. The relationship may further deteriorate to one of hostility and defensiveness. The “fight or flight” response creates verbal battles, slammed doors, refusal to talk, emotional withdrawal and self-pity. It may end up in a cold war at home, sustained only by children, sex, social pressure, or image protection.
+
+Our most constant relationships, like marriage, require our most constant deposits. With continuing expectations, old deposits evaporate.
+Building and repairing relationships takes time. If you become impatient with his apparent lack of response or his seeming ingratitude, you may make huge withdrawals and undo all the good you’ve done.
+
+### 6 major deposits
+
+1. **Understanding the Individuals:** Really seeking to understand another person is probably one of the most important deposits you can make, and it is the key to every other deposit. To make a deposit, what is important to another person must be as important to you as the other person is to you. 
+Understand them deeply as individuals, the way you would want to be understood, and then to treat them in terms of that understanding.
+- **Attending to the Little Things**: The little kindnesses and courtesies are so important. Small discourtesies, little un-kindnesses, little forms of disrespect make large withdrawals. In relationships, the little things are the big things.
+1. **Keeping Commitments:** Keeping a commitment or a promise is a major deposit; breaking one is a major withdrawal.
+1. **Clarifying expectations:** Unclear expectations in the area of goals also undermine communication and trust. it’s so important whenever you come into a new situation to get all the expectations out on the table. People will begin to judge each other through those expectations. And if they feel like their basic expectations have been violated, the reserve of trust is diminished. 
+1. **Showing Personal Integrity:** Personal Integrity generates trust. Integrity includes but goes beyond honesty. Honesty is telling the truth— conforming our words to reality. **Integrity is conforming reality to our words** — keeping promises and fulfilling expectations.
+
+One of the most important ways to manifest integrity is to be loyal to those who are not present. In doing so, we build the trust of those who are present. When you defend those who are absent, you retain the trust of those present. 
+Integrity in an interdependent reality is simply this: you treat everyone by the same set of principles. Integrity also means avoiding any communication that is deceptive, full of guile, or beneath the dignity of people.
+
+- Apologizing Sincerely When You Make a Withdrawal
+It is one thing to make a mistake, and quite another thing not to admit it.
+- Laws of love and laws of life 
+when we truly love others without condition, without strings, we help them feel secure and safe and validated and affirmed in their essential worth, identity, and integrity. We make it easier for them to live the laws of life—cooperation, contribution, self-discipline, integrity—and to discover and live true to the highest and best within them.
+
+In an interdependent situation, every P problem is a PC opportunity—a chance to build the Emotional Bank Accounts that significantly affect interdependent production.
+When parents see their children’s problems as opportunities to build the relationship instead of as negative, burdensome irritations, it totally changes the nature of parent-child interaction.
