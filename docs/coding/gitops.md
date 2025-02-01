@@ -49,7 +49,7 @@ by the tool from the Gitops repositories.
 * [Kustomize.io](https://kustomize.io/) to templatize the deployment and support overlay mechanisms.
 * [git Action](#git-action) for continuous execution of development workflows right in your repository
 
-## Git Action
+## Git Actions
 
 [Git Action](https://docs.github.com/en/actions)
 

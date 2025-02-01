@@ -65,6 +65,54 @@ git merge upstream/main
 
 Create pull request against the integration branch of the upstream repository.
 
+### Gitflow workflow
+
+Some major concepts of gitflow:
+
+* uses of feature branches and multiple primary branches. It uses two branches to record the history of the project: main and develop for example.
+* The **main** branch stores the official release history, and the **develop** branch serves as an integration branch for features
+* has numerous, longer-lived branches and larger commits
+* Create a feature branch from the develop branch
+
+  ```sh
+  git checkout develop
+  git checkout -b feature_branch
+  ```
+
+* merge happens when feature is complete to the develop branch.
+
+  ```sh
+  git checkout develop
+  git merge feature_branch
+  ```
+
+* can introduce  conflicting updates.
+* tag all commits in the main branch with a version number.
+* Once develop has acquired enough features for a release, fork a **release** branch off of `develop`. Once Release is ready to ship, the `release` branch gets merged into `main` and tagged with a version number. It has to be merged back into develop, which may have progressed since the release was initiated. 
+
+  ```sh
+  git checkout main
+  git merge release/0.1.0
+  ```
+
+* Release branch is deleted once merged in `main`.
+* Maintenance or “hotfix” branches are used to quickly patch production releases. Hotfix branches are a lot like release branches and feature branches except they're based on main instead of develop.
+
+  ```sh
+  git checkout main
+  git checkout -b hotfix_branch
+  ```
+
+ * Once finished, a hotfix branch gets merged into both main and develop
+
+  ```sh
+  git checkout main
+  git merge hotfix_branch
+  git checkout develop
+  git merge hotfix_branch
+  git branch -D hotfix_branch
+  ``` 
+
 ## Commands summary
 
 * **git config**: Short for “configure,” this is most useful when you’re setting up Git for the first time
@@ -310,3 +358,4 @@ git push -f origin main
 * [Git Branching Rebasing](https://git-scm.com/book/en/v2/Git-Branching-Rebasing)
 * [Gitlab](http://www.gitlab.com)
 * [Eclipse EGit](http://wiki.eclipse.org/EGit)
+* [Gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
