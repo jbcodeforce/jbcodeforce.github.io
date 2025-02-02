@@ -128,6 +128,7 @@ nav:
     - Leadership:
       - 90 Days: leadership/first-90-days.md
       - 7 Habits: leadership/7_habits.md
+      - Mindfulness: leadership/mindfulness.md
     - Architecture:
       - Conduct System Design: architecture/system-design.md
       - Event Driven Architecture: https://jbcodeforce.github.io/eda-studies
@@ -167,10 +168,6 @@ nav:
     - AI:
       - Machine learning: https://jbcodeforce.github.io/ML-studies/#machine-learning
       - Deep learning: https://jbcodeforce.github.io/ML-studies/ml/deep-learning/
-    - Leisure:
-      - Physics: leisure/physics.md
-      - Astronomy: leisure/astronomy/index.md
-    
   - Techno:
     - Apicurio: techno/apicurio.md
     - Atlas: techno/atlas.md

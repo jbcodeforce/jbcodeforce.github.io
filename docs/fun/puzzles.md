@@ -7,24 +7,44 @@ Source of common software engineering problems to study and play with:
 
 ## Practices
 
-1. Ask questions about the problem to be sure to get a good understanding
+1. Be sure to listen the problem well. Ask questions about the problem to be sure to get a good understanding
 1. Continuously explain the reasoning
 1. Present the code, assess complexity
 1. Always test the solution
-1. Try optimizing after
+1. Try optimizing after: Assess the algorithm complexity:
+
+	* O(2) = n * (n-1)
+	* n.log n
 
 ## Big O notation
 
-O is to specify the "Order of" for an algorithm complexity according to the number of elements
+Assess complexity by giving how time scales with respect to some input variable.
 
-* Inserting element in an unordered array is constant time. It is not linked to the number of elements in the array. Time is = K a basic constant linked to compilor, microprocessor speed...
+O is to specify the "Order of" for an algorithm complexity according to the number of elements. `n` is the number of stuff to assess, can be the surface of a square or the square length
+
+* Inserting element in an unordered array is constant time. It is not linked to the number of elements in the array. Time is = K a basic constant linked to compiler, microprocessor speed...
 * Linear search is proportional to N. The search time T = K * N/2 on average
 * Binary search is log(N): T = log base 2(N) but as any log  is related to any other by a constant (3.322 to go from base 2 to base 10), we can say T = log(N). Doubling the N will add only one step of processing. Time follows a log.
-* The quasilinear time of O(n.log n) is worse than O(n) but better than O(N^2)
+* The quasi-linear time of O(n.log n) is worse than O(n) but better than O(N^2)
+* The pigeon transferring data between two data centers is constant speed O(1)
+* Transferring the data over the internet is O(n)
+* two sequential loops O (a + b)
+* Included loops O(a.b) and not use O(n^2) use a and b for the size of the two lists or arrays
+* When there is a constant simplify to n: O(2 n ) -> O(n)
+* drop non dominant terms
 
 O(N) is the same as T = K .N   
 
 [Big O - good article from HappyCoder](https://www.happycoders.eu/algorithms/big-o-notation-time-complexity/).
+
+???- info "3 strategies"
+    1. BUD: bottleneck, Unnecessary, duplicate
+	    - Take your brute force or best algo and walk it and look for bottleneck, unnecessary steps and duplicate work
+	    - bottleneck O(n2). use a hash map transform to O(2n) 
+    2. Space / Time tradeoff
+	    - think to hash table
+    3. DIY
+	    - use  a large example, and use your brain to find the solution. how to brain did it, is a good source of algorithm
 
 ## Review Sorting
 

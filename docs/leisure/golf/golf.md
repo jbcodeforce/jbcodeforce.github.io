@@ -12,9 +12,9 @@ The swing mechanics includes 5 dimensions:
 
 9 trajectories: start straight, right, left, then ball stays straight, go to the right or left.
 
-There is only one straight fly: a club path at 0 and club face at 90 degres. most of the balls goes on right and left, with different intensity, finishing at 1m of the target to 30 m. So we have only 2 types of trajectory.
+There is only one straight fly: a club path at 0 and club face at 90 degrees. most of the balls goes on right and left, with different intensity, finishing at 1m of the target to 30 m. So we have only 2 types of trajectory.
 
-The problem is that if we try to search to get the ball straight, which does not realisticly exist, then we will not be able to make it and we will not control the ball fly. We could not play straight ball.
+The problem is that if we try to search to get the ball straight, which does not realistically exist, then we will not be able to make it and we will not control the ball fly. We could not play straight ball.
 
 The ball initiates its fly from the club face. Radar technologies demonstrated that the club square to the target did not brings the ball to the target.
 
@@ -25,12 +25,12 @@ The natural trajectory is the one to keep. Make trajectory that comes to the tar
 
 Club in the hands can help to make the ball flying where we want. Alignment too. Grip too.  Lie of the club face.
 
-A pro player approximates to the left or right. never straight. Theit path is constant
+A pro player approximates to the left or right. never straight. The path is constant
 
 ### Training
 
 * Back to the fundamentals: static with grip, alignment, position, stance, balance
-* Dynamic: RRRE: relancher, rotation, Rythm, Equilibre
+* Dynamic: RRRE: relancer, rotation, rythme, equilibre
 * Work on feelings, when feeling is good then technics will be, not the opposite: light in hands, no tension, equilibre.
 * Avoid to work too much on technics, and no more than working on one technic per training
 * Not try to get the best shot each time. Not hit too much on the ball. 70% of power. Try to get it correct. Slower = more centred balls.
@@ -61,7 +61,7 @@ A pro player approximates to the left or right. never straight. Theit path is co
 
 ### Module 1
 
-* intertia / "balancier": counterweight with the body at backswing and then on finish.
+* Inertia / "balance": counterweight with the body at backswing and then on finish.
 * finish in auto-pilot: in balance, club face vertical. shoulder face to target. 
 * The swing is with the hips. The rotation of the hips, the shoulders drag the club. Exercise to ship by pulling the club and the ball.
 * Look in front to the horizon, to set the body and squeleton in good position at address. Can even do dry swing while looking at the horizon.
@@ -74,9 +74,9 @@ A pro player approximates to the left or right. never straight. Theit path is co
 * adapt the golf club according to the distance of the roll on the green to the flag.
 * Also shipping by looking to the target is a good exercise for sensation and dosage
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=aCicXNhY13U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[My video 051522](https://www.youtube.com/watch?v=aCicXNhY13U)
 
-* Balance at the end of the swing, is very important (see the Relachement Rotation Rythm Equilibre principles from Leadbetter) and starts at the address.  
+* Balance at the end of the swing, is very important (see the Relachement Rotation Rythme Equilibre principles from Leadbetter) and starts at the address.  
 * Grip not in life line, be more in diagonal in the palm of the hand
 
 
@@ -87,14 +87,14 @@ A pro player approximates to the left or right. never straight. Theit path is co
 * In case of socket, may be put the ball 2 cm farther. The club hits closer to the shaft. 
 * Use counterweight and 7 second in the finish.
 
-<iframe width="560" height="315" src="https://youtu.be/nSWVi7koMrI?si=YV_az4iupgfai2Nb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[05/22/23 pitching](https://youtu.be/nSWVi7koMrI?si=YV_az4iupgfai2Nb)
 
 * Top came because of holding the club at impact, do dry swing to feel the inertia.
 * The left arm is straight on back swing but not thighten, no tension, inertie brings the arm straight.  
 
 ### Module 3: Long iron and draw
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=HuACA3Gjqrw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Long iron work](https://www.youtube.com/watch?v=HuACA3Gjqrw)
 
 ### Module 4
 

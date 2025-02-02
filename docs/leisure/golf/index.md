@@ -1,19 +1,39 @@
 # Lessons analysis
 
-See also [new Renaud Poupard training](./golf.md)
+See also [new Renaud Poupard training](golf.md)
 
 ## Training session plan
 
 * 20 balls: Wedge warm up - line on the ground - goal is to make contact - 30, 50 and 70 yards. Work way up to full swing.
-* 30 balls: Mechanicals: back to the feeling with 9 iron.
-* 25 balls: Skill: work on ball fligh control. Games with a score. 
+* 30 balls: Mechanical: back to the feeling with 9 iron.
+* 25 balls: Skill: work on ball flight control. Games with a score. 
 * 25 balls: Game like strikes: Driver, club, pitch.
 
 Routine: Target -> Two swings -> Feels -> Visualize the shot -> Take immediate target -> Breeze -> Line up -> View target - ball x2 -> Swing.
 
-* Try to train a lot on: Wedges, Driver, Putter.
+Try to train a lot on: Wedges, Driver, Putter.
 
-### Prepare before a 18 holes cource
+**Pitch**
+
+- Hola hoop ladder: 40, 50 and 60 feet, start at 40... Use each wedge of the bag
+- Backspin and height are the most important for pitch. Ball on right foot. Set a tee in front of the ball and weight on left, do ball-tee shot.
+
+**Shipping**
+
+- Let gravity fall the club to impact. Do not slow down at impact 
+- Practice with one hand
+- Practice with right heel up. Out weight on the left
+- Distance with three targets, 5;7;9 irons, back swing at 4 to 6 inches right of back foot, up to one foot distance.
+
+**Putting**
+
+- 10  out 10 at 3 feet different positions
+- 8 out 10 at 5 feet
+- 5 out 10 at 8 feet
+- 18 holes at long distance: no 3 putts
+- 100 feet challenges: 5, 10, 15, 20 twice
+
+### Prepare before a 18 holes course
 
 * Warm slowly but cover all game plays.
 * Divide by segments.
@@ -30,9 +50,36 @@ Routine: Target -> Two swings -> Feels -> Visualize the shot -> Take immediate t
 
 ## Full Swing
 
+* At the stance, get the hands lightly forward of the club face
+* 80% of the weight on the left foot
+* Open the hip on the right. A simple trick: Move left knee above the left foot to hide it, to avoid the knee to go on the back to stay in place over the ball.
+* Keep a flat swing, use the hula hoop tracing arc
+* Head stay stable above the ball
+* Keep back swing short and in plan: A line starting from the end of the club should reach right heel. 
+
+### Back swing work
+
+* Shoulder tilt be above 36d.Shoulder tilt measures shoulder pointing to the ground forward. Here are good numbers:
+
+![](./images/image.png)
+
+* Keep weight on left side
+* Avoid pulling the arms too high: drill with a towel or ball under each arm. here is with one. Practice this drill daily 100-150 times.
+
+![](./images/0824-02.png)
+
+Compare to Zach Johnson
+
+![](./images/0824-03.png)
+
 ### 2021 8/11: Full swing analysis
 
-* Need to get shoulder tilt at 8% right
+* Need to get shoulder tilt at 8% right. [Shoulders bent video](https://gt.golf/J47kBY)
+* Keep the head not moving to the right. Keep the shin higher
+* AS you take the club back keep your head still through the swing allow the hands to take the clubs behind you
+
+![](./images/0831-01.png)
+
 * Hands too high at the beginning of the back swing, hips do not start to turn.
 * Swing started by hands moving not by hip turn
 * Zach has the hands lower.
@@ -43,8 +90,7 @@ Routine: Target -> Two swings -> Feels -> Visualize the shot -> Take immediate t
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2odG0NPBh_Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-
-<iframe width="884" height="499" src="https://www.youtube.com/embed/2bJMJeH6hN4?t=33" title="SwingVision: Zach Johnson's Round 3 Tee-Shot" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="884" height="499" src="https://www.youtube.com/watch?v=2bJMJeH6hN4" title="SwingVision: Zach Johnson's Round 3 Tee-Shot" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 * I go way too far on back swing
 
@@ -97,7 +143,7 @@ But the hand are wrong as the right hand is going over the left (flipped) to com
 
 #### Actions to improve
 
-* Fligh pattern observed: push slices.
+* Flight pattern observed: push slices.
 * Resolution: keep weight on the left side
 * Left quad pushes left knee over the left foot, at the same time the left shoulder should go down to the ground as well. Feel the hands go behind you as you take the club back.
 
@@ -143,7 +189,10 @@ arms compact and not moving hands too high.
 #### Drills: 
 
 To avoid moving the arms too high, place tees or towels under both arm pits and swing
+
 > left knee over left foot. left shoulder goes down to the ground. feel you hands go behind you as you take the club back.
+
+![](./images/Screen%20Shot%202021-10-21%20at%202.11.56%20PM.png)
 
 ### 2021 12/14
 
@@ -168,7 +217,12 @@ To avoid moving the arms too high, place tees or towels under both arm pits and 
 * Shoulder tilt exercise: tilt to the right on the followthrough. Pros have their
 shoulders tilted on average at 49d. Use the image of water dripping from right ear.
 
-> On followthrough the right shoulder should go down to the ground. Then swing more from the inside and swing out rightward.
+> On follow through the right shoulder should go down to the ground. Then swing more from the inside and swing out rightward.
+
+![](./images/0914-1.png)
+
+
+![](./images/)
 
 ### Other full swing videos from practices
 
@@ -263,3 +317,11 @@ To control distance in the pitching arena; a ‘clockface’ principle that invo
 * Take 10 steps: Let yourself get mad about the shot you’ve just hit for 10 steps. When you take that 11th step, move on. 
 * Breathe in for five seconds, hold that breath for five seconds and breathe out for five seconds.
 * Yaking things “one shot at a time” 
+
+## Videos
+
+* Bowling: [https://gt.golf/F9s6zW](https://gt.golf/F9s6zW)
+* Knee and leg extensions: [https://gt.golf/QIQ3lt](https://gt.golf/QIQ3lt)
+* Shoulder bend [https://gt.golf/Z450Dz](https://gt.golf/Z450Dz)
+* Hip sway: [https://gt.golf/C5sFQN](https://gt.golf/C5sFQN) at the down
+* Feet position: [https://gt.golf/SwCxLT](https://gt.golf/SwCxLT)

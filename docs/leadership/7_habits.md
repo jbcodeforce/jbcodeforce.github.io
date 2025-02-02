@@ -94,11 +94,10 @@ Humility is the mother of all virtues. Humility says we are not in control, prin
 
 When relationships are strained and the air charged with emotion, an attempt to teach is often perceived as a form of judgment and rejection.
 
-THE WAY WE SEE THE PROBLEM IS THE PROBLEM
+**The way we see the problem is the problem**
 
 Could there be something —some paradigm within myself that affects the way I see my time, my life, and my own nature?
 
-Do I have some basic paradigm about my spouse, about marriage, about what love really is, that is feeding the problem?
 Can you see how fundamentally the paradigms of the Personality Ethic affect the very way we see our problems as well as the way we attempt to solve them?
 
 ### A New level of thinking
@@ -159,7 +158,7 @@ Habit is at the intersection of knowledge, skill, and desire.
 - Skill: how to do
 - Desire: want to do
 
-![](./images/7h_habit.png)
+![](./images/7h_habit.png){ width=400 }
 
 Creating a habit requires work in all three dimensions. 
 
@@ -227,11 +226,11 @@ In the great literature of all progressive societies, love is a verb.  So love h
 
 Proactive people make love a verb. Love is something you do: the sacrifices you make, the giving of self. 
 
-### CIRCLE OF CONCERN/CIRCLE OF INFLUENCE
+### Circle of Concern / Circle of Influence
 
 Another excellent way to become more self-aware regarding our own degree of proactivity is to look at where we focus our time and energy. 
 
-![](./images/7h_circles.png)
+![](./images/7h_circles.png){ width=400 }
 
 Proactive people focus their efforts in the Circle of Influence. They work on the things they can do something about. The nature of their energy is positive, enlarging and magnifying, causing their **Circle of Influence** to increase.
 
@@ -261,7 +260,7 @@ It is not what others do or even our own mistakes that hurt us the most; it is o
 Making and keeping commitments
 At the very heart of our Circle of Influence is our ability to make and keep commitments and promises. The commitments we make to ourselves and to others, and our integrity to those commitments, is the essence and clearest manifestation of our proactivity.
 
-30 days exercise: proactive application
+### 30 days exercise: proactive application
 
 1.  For a full day, listen to your language and to the language of the people around you. How often do you use and hear reactive phrases such as “If only,” “I can’t,” or “I have to”?
 2. Identify an experience you might encounter in the near future where, based on past experience, you would probably behave reactively. Review the situation in the context of your Circle of Influence. How could you respond proactively? Take several moments and create the experience vividly in your mind, picturing yourself responding in a proactive manner. Remind yourself of the gap between stimulus and response. Make a commitment to yourself to exercise your freedom to choose.
@@ -316,7 +315,7 @@ Develop a personal mission statement or philosophy that focuses on what you want
 
 In order to write a personal mission statement, we must begin at the very center of our Circle of Influence:
 
-![](./images/h7_h2_pic1.png){ width=600 }
+![](./images/h7_h2_pic1.png){ width=400 }
 
 Whatever is at the center of our life will be the source of our security, guidance, wisdom, and power.
 
@@ -327,7 +326,7 @@ Whatever is at the center of our life will be the source of our security, guidan
 
 When these four factors are present together, harmonized and enlivened by each other, they create a great force.
 
-### Examples of alternative centers:
+### Examples of alternative centers
 
 - ^^Spouse centered^^ : as it is a major part of our life, it may make sense, but there is a high thread of strong emotional dependence. We become vulnerable to the moods and feelings, the behavior and treatment of our spouse. When we are dependent on the person with whom we are in conflict, both needs and conflicts are compounded. Love-hate over-reactions, fight-for-flight tendencies, withdrawal, aggressiveness, bitterness, resentment, and cold competition are some of the usual results. When these occur, we tend to fall even further back on background tendencies and habits in an effort to justify and defend our own behavior and we attack our spouse’s. Each partner tends to wait on the initiative of the other for love, only to be disappointed but also confirmed as to the rightness of the accusations made. There is only phantom security in such a relationship when all appears to be going well. Guidance is based on the emotion of the moment. Wisdom and power are lost in the counter dependent negative interactions.
 - ^^Family centered:^^ People who are family-centered get their sense of security or personal worth from the family tradition and culture. Family-centered parents do not have the emotional freedom, the power, to raise their children with their ultimate welfare truly in mind. Any behavior that they consider improper threatens their security. They become upset, guided by the emotions of the moment, spontaneously reacting to the immediate concern rather than the long-term growth and development of the child.
@@ -464,10 +463,215 @@ Understand them deeply as individuals, the way you would want to be understood, 
 One of the most important ways to manifest integrity is to be loyal to those who are not present. In doing so, we build the trust of those who are present. When you defend those who are absent, you retain the trust of those present. 
 Integrity in an interdependent reality is simply this: you treat everyone by the same set of principles. Integrity also means avoiding any communication that is deceptive, full of guile, or beneath the dignity of people.
 
-- Apologizing Sincerely When You Make a Withdrawal
-It is one thing to make a mistake, and quite another thing not to admit it.
-- Laws of love and laws of life 
-when we truly love others without condition, without strings, we help them feel secure and safe and validated and affirmed in their essential worth, identity, and integrity. We make it easier for them to live the laws of life—cooperation, contribution, self-discipline, integrity—and to discover and live true to the highest and best within them.
+- Apologizing Sincerely When You Make a Withdrawal: It is one thing to make a mistake, and quite another thing not to admit it.
+- Laws of love and laws of life: when we truly love others without condition, without strings, we help them feel secure and safe and validated and affirmed in their essential worth, identity, and integrity. We make it easier for them to live the laws of life—cooperation, contribution, self-discipline, integrity—and to discover and live true to the highest and best within them.
 
 In an interdependent situation, every P problem is a PC opportunity—a chance to build the Emotional Bank Accounts that significantly affect interdependent production.
 When parents see their children’s problems as opportunities to build the relationship instead of as negative, burdensome irritations, it totally changes the nature of parent-child interaction.
+
+## Habit 4: Think Win Win
+
+As with many, many problems between people in business, family, and other relationships, the problem is the result of a flawed paradigm: people are trying to get the fruits of cooperation from a paradigm of competition.
+
+### Principles of interpersonal leadership
+
+There are six paradigms of human interaction:
+
+* Win/Win is not a technique; it’s a total philosophy of human interaction. **The goal is to constantly seeks mutual benefit in all human interactions**. One person’s success is not achieved at the expense or exclusion of the success of others.
+
+In leadership style, Win/ Lose is the authoritarian approach: “I get my way; you don’t get yours.”
+
+Most people have been deeply scripted in the Win/ Lose mentality since birth. When one child is compared with another, when patience, understanding or love is given or withdrawn on the basis of such comparisons— people are into Win/ Lose thinking.
+
+But people are not graded against their potential or against the full use of their present capacity. They are graded in relation to other people.
+People who think Lose/ Win are usually quick to please or appease. They seek strength from popularity or acceptance. They have little courage to express their own feelings and convictions and are easily intimidated. They bury a lot of feelings. buried alive and come forth later in uglier ways. Disproportionate rage or anger, overreaction to minor provocation, and cynicism are other embodiments of suppressed emotion.
+
+When two Win/ Lose people get together— that is, when two determined, stubborn, ego-invested individuals interact— the result will be Lose/ Lose. Some people become so centered on an enemy, so totally obsessed with the behavior of another person that they become blind to everything except their desire for that person to lose, even if it means losing themselves.
+
+Another common alternative is simply to think Win. What matters is that they get what they want. A person with the Win mentality thinks in terms of securing his own ends— and leaving it to others to secure theirs.
+
+If you value a relationship and the issue isn’t really that important, you may want to go for Lose/ Win in some circumstances to genuinely affirm the other person. “What I want isn’t as important to me as my relationship with you. Let’s do it your way this time.”
+
+The best choice, then, depends on reality. The challenge is to read that reality accurately and not to translate Win/ Lose or other scripting into every situation.
+
+if I focus on my own Win and don’t even consider your point of view, there’s no basis for any kind of productive relationship. In the long run, if it isn’t a win for both of us, we both lose. That’s why Win/Win is the only real alternative in interdependent realities.
+There is an even higher expression of Win/Win—Win/Win or No Deal.
+No Deal basically means that if we can’t find a solution that would benefit us both, we agree to disagree. When you have No Deal as an option in your mind, you feel liberated because you have no need to manipulate people, to push your own agenda, to drive for what you want. You can be open. You can really try to understand the deeper issues underlying the positions. 
+
+FIVE DIMENSIONS OF WIN/WIN
+ Think Win/Win is the habit of interpersonal leadership. It involves mutual learning, mutual influence, & mutual benefits. Effective interpersonal leadership requires the vision, the proactive initiative and the security, guidance, wisdom, and power that come from principle-centered personal leadership.
+
+Win/Win puts the responsibility on the individual for accomplishing specified results within clear guidelines and available resources. It makes a person accountable to perform and evaluate the results and provides consequences as a natural result of performance.
+
+The principle of win/win embraces five interdependent dimensions of life:
+
+Character is the foundation of Win/ Win, and everything else builds on that foundation.
+
+1-Character: There are three character traits essential to the Win/Win paradigm:
+- Integrity: if we can’t make and keep commitments to ourselves as well as to others, our commitments become meaningless. We know it; others know it. They sense duplicity and become guarded.
+- Maturity: is the balance between courage and consideration. Courage focuses on golden eggs, the P, consideration deals with the long-term welfare of the other stakeholders, PC. To go for Win/ Win, you not only have to be nice, you have to be courageous. You not only have to be empathic, you have to be confident. You not only have to be considerate and sensitive, you have to be brave.
+- Abundance Mentality, is the paradigm that there is plenty out there and enough to spare for everybody. It flows  out of a deep inner sense of personal worth and security.
+
+Public Victory does not mean victory over other people. It means success in effective interaction that brings mutually beneficial results to everyone involved. Public Victory means working together, communicating together, making things happen together that even the same people couldn’t make happen by working independently
+
+2- Relationships: From the foundation of character, we build and maintain Win/Win relationships. The trust, the Emotional Bank Account, is the essence of Win/Win. Without trust, the best we can do is compromise; without trust, we lack the credibility for open, mutual learning and communication and real creativity.
+ Dealing with Win/Lose is the real test of Win/Win. The place to focus is on your Circle of Influence: You make deposits into the Emotional Bank Account through genuine courtesy, respect, and appreciation for that person and for the other point of view. You stay longer in the communication process. You listen more, you listen in greater depth. You express yourself with greater courage. You aren’t reactive. Until the other person begins to realize that you genuinely want the resolution to be a real win for both of you. That very process is a tremendous deposit in the Emotional Bank Account. 
+Traditional authoritarian supervision is a Win/Lose paradigm. It’s also the result of an overdrawn Emotional Bank Account.
+It is much more ennobling to the human spirit to let people judge themselves than to judge them.
+
+3-Agreements: From relationships flow the agreements give definition and direction to Win/Win. They are sometimes called performance agreements or partnership agreements.
+In the Win/Win agreement, the following five elements are made very explicit:
+-  Desired results (not methods) identify what is to be done and when. 
+- Guidelines specify the parameters (principles, policies, etc.) within which results are to be accomplished. 
+- Resources identify the human, financial, technical, or organizational support available to help accomplish the results.
+-  Accountability sets up the standards of performance and the time of evaluation. 
+- Consequences specify—good and bad, natural and logical—what does and will happen as a result
+In performance agreements the following consequences may be stated upfront:
+- Financial
+- Psychics like recognition, respect, credibility
+- 
+- Opportunity includes training, development, perks, and other benefits. 
+- Responsibility has to do with scope and authority,
+
+To maintain win/win agreements you need personal integrity and a relationship of trust.
+
+4-system  you need to align the reward system with the goals and values set in mission and agreements. A system that supports growing the P and PC. If you put good people in bad systems, you get bad results. You have to water the flowers you want to grow
+
+It begins with character and moves toward relationships, out of which flow agreements. It is nurtured in an environment where structure and systems are based on Win/Win. And it involves process.
+
+Win/Win puts the responsibility on the individual for accomplishing specified results within clear guidelines and available resources. It makes a person accountable to perform and evaluate the results and provides consequences as a natural result of performance.
+
+5-Process
+The essence of principled negotiation is to separate the person from the problem, to focus on interests and not on positions, to invent options for mutual gain, and to insist on objective criteria—some external standard or principle that both parties can buy into.
+Searching for a win-win solution involves performing a Four-step process: 
+- First, see the problem from the other point of view. Really seek to understand and to give expression to the needs and concerns of the other party as well as or better than they can themselves. write down explicitly how you think that person sees the solution.
+-  Second, identify the key issues and concerns (not positions) involved.
+-  Third, determine what results would constitute a fully acceptable solution. start by listing, from your own perspective, what results would constitute a Win for you.
+- Fourth, identify possible new options to achieve those results.
+
+APPLICATION SUGGESTIONS: 
+1. Think  about an upcoming interaction wherein you will be attempting to reach an agreement or negotiate a solution. Commit to maintain a balance between courage and consideration. 
+2. Make a list of obstacles that keep you from applying the Win/Win paradigm more frequently. Determine what could be done within your Circle of Influence to eliminate some of those obstacles.
+3.  Select a specific relationship where you would like to develop a Win/Win agreement. Try to put yourself in the other person’s place, and write down explicitly how you think that person sees the solution. Then list, from your own perspective, what results would constitute a Win for you. Approach the other person and ask if he or she would be willing to communicate until you reach a point of agreement and mutually beneficial solution.
+4.  Identify three key relationships in your life. Give some indication of what you feel the balance is in each of the Emotional Bank Accounts. Write down some specific ways you could make deposits in each account. 
+5. Deeply consider your own scripting. Is it Win/Lose? How does that scripting affect your interactions with other people? Can you identify the main source of that script? Determine whether or not those scripts serve well in your current reality. 
+6. Try to identify a model of Win/Win thinking who, even in hard situations, really seeks mutual benefit. Determine now to more closely watch and learn from this person’s example.
+
+## Habit 5: SEEK FIRST TO UNDERSTAND, THEN TO BE UNDERSTOOD
+
+how often do we diagnose before we prescribe in communication?
+
+ If you want to be really effective in the habit of interpersonal communication, you cannot do it with technique alone. You have to build the skills of empathic listening on a base of character that inspires openness and trust.
+“Seek first to understand” involves a very deep shift in paradigm. Most people do not listen with the intent to understand; they listen with the intent to reply. They’re either speaking or preparing to speak. They’re filtering everything through their own paradigms, reading their autobiography into other people’s lives.
+Our conversations become collective monologues, and we never really understand what’s going on inside another human being.
+
+“Regret is the birth place for empathy” Renee Brown http://brenebrown.com/
+
+empathic listening  means listening with intent to understand. seeking first to understand, to really understand. It gets inside another person’s frame of reference. You look out through it, you see the world the way they see the world, you understand their paradigm, you understand how they feel. 
+Empathic listening involves much more than registering, reflecting, or even understanding the words that are said. You listen with your eyes and with your heart. You listen for feeling, for meaning. You listen for behavior.
+Empathic listening is so powerful because it gives you accurate data to work with.
+
+One of the greatest insights in the field of human motivation: Satisfied needs do not motivate. It’s only the unsatisfied need that motivates.
+Next to physical survival, the greatest need of a human being is psychological survival—to be understood, to be affirmed, to be validated, to be appreciated. When you listen with empathy to another person, you give that person psychological air.
+You can’t achieve maximum interdependent production from an inaccurate understanding of where other people are coming from. And you can’t have interpersonal PC—high Emotional Bank Accounts—if the people you relate with don’t really feel understood.
+
+Seek first to understand, or diagnose before you prescribe, is a correct principle manifest in many areas of life. If you don’t have confidence in the diagnosis, you won’t have confidence in the prescription.
+
+FOUR AUTOBIOGRAPHICAL RESPONSES 
+Because we listen autobiographically, we tend to respond in one of four ways. 
+- We evaluate—we either agree or disagree; 
+- we probe—we ask questions from our own frame of reference; 
+- we advise—we give counsel based on our own experience; 
+- we interpret—we try to figure people out, to explain their motives, their behavior, based on our own motives and behavior.
+
+Constant probing is one of the main reasons parents do not get close to their children. Using empathy listening,  now father and son are on the same side of the table looking at the problem, instead of on opposite sides looking across at each other. Children will open up if they feel their parents will love them unconditionally and will be faithful to them afterwards and not judge or ridicule them.
+Empathic listening takes time, but it doesn’t take anywhere near as much time as it takes to back up and correct misunderstandings when you’re already miles down the road, to redo, to live with unexpressed and unsolved problems, to deal with the results of not giving people psychological air.
+
+Perception
+As you learn to listen deeply to other people, you will discover tremendous differences in perception. You will also begin to appreciate the impact that these differences can have as people try to work together in interdependent situations, like working on a problem or on a win/win agreement.
+
+Seek to be understood.
+From the Greek philosophy ethos, pathos, and logos:
+- Ethos is your personal credibility, the faith people have in your integrity and competency. It’s the trust that you inspire, your Emotional Bank Account. 
+- Pathos is the empathic side—it’s the feeling. It means that you are in alignment with the emotional thrust of another person’s communication.
+- Logos is the logic, the reasoning part of the presentation.
+
+When you can present your own ideas clearly, specifically, visually, and most important, contextually—in the context of a deep understanding of other people’s paradigms and concerns—you significantly increase the credibility of your ideas.
+
+One on one.
+You can always seek first to understand, this is in your circle of influence, you have accurate information to work with, you get to the heart of matters quickly, you build Emotional Bank Accounts, and you give people the psychological air they need so you can work together effectively. 
+Because you really listen, you become influenceable. And being influenceable is the key to influencing others. Your circle begins to expand. You increase your ability to influence many of the things in your Circle of Concern.
+Even when people don’t want to open up about their problems, you can be empathic. You can sense their hearts, you can sense the hurt, and you can respond, “You seem down today.” They may say nothing. That’s all right. You’ve shown understanding and respect. 
+Don’t push; be patient; be respectful. People don’t have to open up verbally before you can empathize. You can empathize all the time with their behavior. You can be discerning, sensitive, and aware and you can live outside your autobiography when that is needed. And if you’re highly proactive, you can create opportunities to do preventive work, Spend time with your children now, one on one. Listen to them; understand them. Look at your home, at school life, at the challenges and the problems they’re facing, through their eyes. Build the Emotional Bank Account. Give them air. Go out with your spouse on a regular basis. Have dinner or do something together you both enjoy. Listen to each other; seek to understand. See life through each other’s eyes.
+
+Exercises
+1. Select a relationship in which you sense the Emotional Bank Account is in the red. Try to understand and write down the situation from the other person’s point of view. In your next interaction, listen for understanding, comparing what you are hearing with what you wrote down. How valid were your assumptions? Did you really understand that individual’s perspective?
+
+## Habit 6: Synergize
+What is synergy? Simply defined, it means that the whole is greater than the sum of its parts.
+
+The essence of synergy is to value differences—to respect them, to build on strengths, to compensate for weaknesses.
+In marriage could the physical, social, mental, and emotional differences be sources of creating new, exciting forms of life—creating an environment that is truly fulfilling for each person, that nurtures the self-esteem and self-worth of each, that creates opportunities for each to mature into independence and then gradually into interdependence.
+
+Synergy and communication
+
+Lilienthal took several weeks to create a high Emotional Bank Account. He had these people get to know each other—their interests, their hopes, their goals, their concerns, their backgrounds, their frames of reference, their paradigms. He facilitated the kind of human interaction that creates a great bonding between people
+
+The attitude was “If a person of your intelligence and competence and commitment disagrees with me, then there must be something to your disagreement that I don’t understand, and I need to understand it. You have a perspective, a frame of reference I need to look at.”
+The following diagram illustrates how closely trust is related to different levels of communication.
+
+
+Fishing the third alternative
+Because a couple have a high Emotional Bank Account, they have trust and open communication in their marriage. Because they think Win/Win, they believe in a third alternative, a solution that is mutually beneficial and is better than what either of them originally proposed. Because they listen empathically and seek first to understand, they create within themselves and between them a comprehensive picture of the values and the concerns that need to be taken into account in making a decision. And the combination of those ingredients—the high Emotional Bank Account, thinking Win/Win, and seeking first to understand—creates the ideal environment for synergy.
+
+Valuing the differences
+Valuing the differences is the essence of synergy—the mental, the emotional, the psychological differences between people. And the key to valuing those differences is to realize that all people see the world, not as it is, but as they are. 
+The person who is truly effective has the humility and reverence to recognize his own perceptual limitations and to appreciate the rich resources available through interaction with the hearts and minds of other human beings. That person values the differences because those differences add to his knowledge, to his understanding of reality. When we’re left to our own experiences, we constantly suffer from a shortage of data.
+Is it logical that two people can disagree and that both can be right? It’s not logical: it’s psychological. And it’s very real. You see the young lady; I see the old woman. “Good! You see it differently! Help me see what you see.”
+I take my foot off the brake and release the negative energy you may have invested in defending a particular position. I create an environment for synergy.
+
+Your own internal synergy is completely within your circle of influence. You can respect both sides of your own nature—the analytical side and the creative side.
+You can be synergistic within yourself even in the midst of a very adversarial environment. You don’t have to take insults personally. You can sidestep negative energy; you can look for the good in others and utilize that good, as different as it may be, to improve your point of view and to enlarge your perspective. You can exercise the courage in interdependent situations to be open, to express your ideas, your feelings, and your experiences in a way that will encourage other people to be open also. You can value the difference in other people. When someone disagrees with you, you can say, “Good! You see it differently.” You don’t have to agree with them; you can simply affirm them. And you can seek to understand.
+There’s almost always a third alternative, and if you work with a Win/Win philosophy and really seek to understand, you usually can find a solution that will be better for everyone concerned.
+
+## Habit 7: Sharpen the saw
+
+### FOUR DIMENSIONS OF RENEWAL:
+
+Habit 7 is personal PC. It’s preserving and enhancing the greatest asset you have: you. It’s renewing the four dimensions of your nature—physical, spiritual, mental, and social/emotional.
+
+![](./images/h7_h7_pic1.png)
+
+“Sharpen the saw” basically means expressing all four motivations. It means exercising all four dimensions of our nature, regularly and consistently in wise and balanced ways:
+
+- **Physical:** build your body in three areas:
+
+    - **Endurance**: 30 minutes at least ( 220 - age)*.6 but training is between .72 to .87. 
+    - **Flexibility:** stretching
+    - **Strength:** it comes from muscle resistance exercises—like simple calisthenics, push-ups, pull-ups, and sit-ups, and from working with weights. When there is pain there is gain, but most importantly work from your self awareness, be proactive. Do it anyway. Even if it’s raining on the morning you’ve scheduled to jog, do it anyway. “Oh good! It’s raining! I get to develop my willpower as well as my body!”
+
+- The **spiritual** dimension is your core, your center, your commitment to your value system. It’s a very private area of life and a supremely important one. As I read and meditate, I feel renewed, strengthened, centered and recommitted to serve. The  nature experiences: listen for a long period of time, reach back to your past, happy moments, examine your motives, and finally write your worries. Zen master meditated early in the morning and for the rest of the day, he carried the peace of those moments with him in his mind and heart. 
+- The **mental**: —continuing education, continually honing and expanding the mind—is vital mental renewal. Proactive people can figure out many, many ways to educate themselves: classroom, systematized study programs. Most important is to spend time to understand what the teacher, writer is trying to say.
+- The **social and the emotional** dimensions of our lives are tied together because our emotional life is primarily, but not exclusively, developed out of and manifested in our relationships with others. We can renew our social and emotional in our normal everyday interactions with other people. But it definitely requires exercise.
+
+If our personal security comes from sources within ourselves, then we have the strength to practice the habits of Public Victory. If we are emotionally insecure, even though we may be intellectually very advanced, practicing Habits 4, 5, and 6 with people who think differently on jugular issues of life can be terribly threatening. **our intrinsic security comes from living a life of integrity in which our daily habits reflect our deepest values**.
+
+There is security in knowing that Win/Win solutions do exist, that life is not always “either/or,” that there are almost always mutually beneficial, **Third Alternatives**. There is security in knowing that you can step out of your own frame of reference without giving it up, that you can really, deeply understand another human being. There is security that comes when you authentically, creatively and cooperatively interact with other people and really experience these interdependent habits. There is intrinsic security that comes from service, from helping other people in a meaningful way. One important source is your work, when you see yourself in a contributive and creative mode, really making a difference. 
+
+Renewal in each dimension is important, it only becomes optimally effective as we deal with all four dimensions in a wise and balanced way. To neglect any one area negatively impacts the rest.
+
+Same applies to organizations: the physical dimension is expressed in economic terms. The mental or psychological dimension deals with the recognition, development, and use of talent. The social/emotional dimension has to do with human relations, with how people are treated. And the spiritual dimension deals with finding meaning through purpose or contribution and through organizational integrity.
+
+### Becoming a transition person
+
+Giving “wings” to our children and to others means empowering them with the freedom to rise above negative scripting that had been passed down to us, and better to change them. We are transition.
+
+### To do
+
+Make a list of activities that would help you keep in good physical shape, that would fit your life-style and that you could enjoy over time
+
+- Running 2 to 3 Times a week. Walk 8k steps every days
+- Yoga 3 times 1h a week, 20 MN morning otherwise.
+- Take care of eating vegetables and fruits
+- Drink 2.5 liter a day
+- Meditation 20 MN morning and evening
