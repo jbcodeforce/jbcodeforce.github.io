@@ -63,7 +63,7 @@ CMD ["httpd", "-D", "FOREGROUND"]
 * Get docker env of the minikube: `minikube docker-env` or better `eval $(minikube docker-env)` so env variables are set to be used by
 the docker CLI. Evaluating the docker-env is only valid for the current terminal. 
 * Use docker CLI, it should contact the docker daemon running inside minikube.
-* If the minikube pods are not able to contact internet add a names
+* If the minikube pods are not able to connect to internet, add names
 
   ```
   "https://registry-1.docker.io/v2/": dial tcp: lookup registry-1.docker.io

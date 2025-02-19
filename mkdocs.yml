@@ -172,7 +172,7 @@ nav:
     - Apicurio: techno/apicurio.md
     - Atlas: techno/atlas.md
     - AWS body of knowledge: https://jbcodeforce.github.io/yarfba
-    - Code Engine: techno/code-engine.md 
+    - Colima: techno/colima.md
     - Databricks: techno/databricks/index.md
     - Docker: techno/docker.md
     - Drools: techno/decisions/drools.md
