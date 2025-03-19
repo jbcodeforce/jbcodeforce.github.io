@@ -2,7 +2,7 @@
 
 ## [Apache Iceberg](https://iceberg.apache.org/docs/latest/)
 
-Apache Iceberg is an open table format for huge analytic datasets. 
+Apache Iceberg is an open table format for huge analytic datasets. It becomes a specifications and a set of libraries to standardize how to represent a table as a set of metadata and data files. The libraries support a protocol to manipulate theses file safely.
 
 * It adds tables to compute engines such as Spark, Trino, PrestoDB, Flink, Hive and Impala.
 * It works just like a SQL table on cloud object storage.
@@ -19,11 +19,12 @@ Iceberg has several catalog back-ends that can be used to track tables, like JDB
 
 There’re 3 layers for Iceberg:
 
-1. **Catalog** layer: Hive or Path based catalogs. 
+1. **Catalog** layer: Hive or Path based catalogs. Catalog runs as a service, handles CRUD operations, feeds metadata to the compute engines. It also manages transaction. 
 1. **Metadata** layer: Each CRUD operation will generate a new metadata file which contains all the metadata info of table, including the schema of table, all the historical snapshots until now. Each version of snapshot has one manifest list file. Manifest file can be shared cross snapshot files and contains a collection of data files which store the table data.
 1. **Data** Layer: parquet files which contain all the historical data, including newly added records, updated record and deleted records.
 
-   
+Catalog becomes the source of truth of th data.
+
 When a table is created, Iceberg creates a directory with the name of the table, and then it creates a metadata folder which contains all the metadata info. 
 
 When records are added to the table, Iceberg creates one parquet file for each record. A new version of metadata file is created with information about a manifest list file (in avro format), which itself points to one manifest file which points to the parquet files

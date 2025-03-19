@@ -11,7 +11,7 @@ From an infrastructure perspective, we aim to govern the infrastructure effectiv
 
 Developer and operation teams want to:
 
-* Audit all changes made to pipelines, infrastructure, and application configuration.
+* Audit all changes made to pipelines, infrastructure, and application configurations.
 * Roll forward/backward to desired state in case of issues.
 * Consistently configure all deployment environments.
 * Reduce manual effort by automating application and environment setup and remediation.
@@ -28,18 +28,14 @@ GitOps is a natural evolution of DevOps and Infrastructure-as-Code.
 * [Kustomize.io](https://kustomize.io/) is used as template engine for defining the differences between environments i.e reusable parameters with extra resources described using `kustomization.yaml`.
 * Minimize yaml duplication - no copy/paste
 * Support two axis of configuration: clusters and environments: prod, test, dev. (Accept separating production repo if organization is willing to do so).
-* Prefer a multi-folder and/or multi-repo structure over multi-branch. Avoid dev or test configuration in different branches. 
-In a microservices world, a one branch per environment will quickly lead to an explosion of branches 
-which again becomes difficult and cumbersome to maintain.
+* Prefer a multi-folder and/or multi-repo structure over multi-branch. Avoid dev or test configuration in different branches. In a microservices world, a one branch per environment will quickly lead to an explosion of branches which again becomes difficult and cumbersome to maintain.
 * Minimize specific gitops tool dependencies: (Try to converge to Tekton and ArgoCD)
 * Do not put independent applications or applications managed by different teams in the same repo. 
 
-* [Day 1 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) are actions that users take to bootstrap a GitOps 
-configuration and on how to set up GitOps and Sealed Secrets.
+* [Day 1 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day1) are actions that users take to bootstrap a GitOps configuration and on how to set up GitOps and Sealed Secrets.
 * [Day 2 Operations](https://github.com/redhat-developer/kam/tree/master/docs/journey/day2) are actions that users take to change a GitOps system.
 
-Using continuous delivery approach and tool like ArgoCD, the deployment of all the components is controlled 
-by the tool from the Gitops repositories.
+Using continuous delivery approach and tool like ArgoCD, the deployment of all the components is controlled by the tool from the Gitops repositories.
 
 ## Supporting tools
 
