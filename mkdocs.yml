@@ -86,9 +86,6 @@ nav:
     - About: about.md
     - Skills: skills.md
     - Blogs: blogs/index.md
-    - Leisure: 
-      - Astronomy: astronomy/index.md
-      - Physic - Newton: astronomy/physic.md
   - Coding:
       - Playground: coding/playground.md
       - Dev & Ops:
@@ -101,6 +98,8 @@ nav:
         - Finch: coding/finch.md
       - Fun problems:
         - puzzles: fun/puzzles.md
+        - Astronomy: fun/ astronomy/index.md
+        - Physic - Newton: fun/astronomy/physic.md
       - Java: 
         - Introduction: java/index.md
         - Java FAQ: java/FAQ.md
@@ -116,7 +115,6 @@ nav:
         - VScode: java/java-vscode.md
       - Podman: techno/podman.md
       - React.js & next.js: coding/reactjs/index.md
-      - istio: coding/istio/index.md
       - Python: https://jbcodeforce.github.io/python-code
       - Knative: coding/knative.md
       - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
