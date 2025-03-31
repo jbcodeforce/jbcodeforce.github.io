@@ -98,7 +98,7 @@ nav:
         - Finch: coding/finch.md
       - Fun problems:
         - puzzles: fun/puzzles.md
-        - Astronomy: fun/ astronomy/index.md
+        - Astronomy: fun/astronomy/index.md
         - Physic - Newton: fun/astronomy/physic.md
       - Java: 
         - Introduction: java/index.md
