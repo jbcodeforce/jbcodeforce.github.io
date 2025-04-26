@@ -1,4 +1,4 @@
 # Boardgames consolidate notes
 
 * [Summoner Wars](./summonerwars.md)
-* [Arkham Horror](./arkhamhorror.md)
+* [Arkham Horror](./ah/arkhamhorror.md)

@@ -1,6 +1,6 @@
 # Arkham Horror LCG
 
-## [Rules](https://arkhamdb.com/rules) we may forget
+## [Rules](https://arkhamdb.com/rules) to do not forget
 
 * Skill test modified is always >=0. Token + base + skill icon + modifier on assets >=0.  Then compare to the skill level to test.
 * After an enemy attacks, it is exhausted, so not ready, so we may be able to do action without attack of opportunity. Attention an enemy does not exhaust while making an [attack of opportunity](https://arkhamdb.com/rules#Attack_of_Opportunity). We can still make damage to it with a reaction card (Like [Delilah O'Rourke](https://arkhamdb.com/card/06281)).
@@ -63,7 +63,7 @@ When we can complete 2 or more tasks using 1 action or less actions than it woul
 Cards:
 
 * emergency cache to get resources
-* + 1 damage weapon
+* +1 damage weapon
 * deduction: 1 more clue in case of success
 * short cut: move without action
 * astral travel 
@@ -100,96 +100,13 @@ Cards
 
 - Aquinnah: level 1 is very expensive for survivors. So could be used by other classes with access to resources. While level 3 is only accessible to survivors, with a cost 4 and better skill: it avoids one physical damage per round, specially good on aoo.  It can damage aloof, and enemy engaged with another investigator. Try to combo with cards that make her ability trigger multiple times per round. It Should be useful to peter, william yorik to bring her back when her sanity reached 4. Use charisma and peter silvestre.  Inspiring presence helps to reuse her and remove horror from her.
 
-### Dunwich campaign 
-    
-* Necromencian book is used in miskatonic museum scenario even if available as base card in dunwich box
-* Modify the content of the bag if the scenario tells us to do it.
 
-### The circle undone campaign
-
-Diane needs to get cancelled cards asap to increase her mental. Need spell attack, evade and investigate.
-
-
-## INVESTIGATORs
-
-### Diane Stanley - Pairing with Preston in Circle Undone
-
-[Her deck on ArkhamDB](https://arkhamdb.com/deck/view/512879)
-
-Goal: lean more on mystic side than guardian to avoid too much cards consumption to bump her 3 attack base. Very [interesting study](https://arkhamdb.com/decklist/view/14103/diana-stanley-practicing-safe-hex-hard-mode-1.0) of diane stanley
-
-### Preston Fairmont
-
-[Deck for TCU 2nd campaign with Nathaniel Cho](https://arkhamdb.com/deck/view/2849589)
-
-### Jim Culver
-
-[Recommended deck for Jim Culver](https://arkhamdb.com/decklist/view/1948/invincible-jim-recycling-grotesque-statue-deck-1.0), with the goal to recycle grotesque statue
-
-| Category | Roland Bank - Guardian | Daisy Walker - Seeker | Skids o toole - Rogue | Agnes Baker - Mystic | Wendy Adams Survivor | Zoey | Rex the reporter | Jenny | Jim Culver - Mystic | Ashcan Peter- Survivor |
-| --- | --- | --- | ---| --- | --- | --- | --- | --- | --- | --- |
-| **Assets** | Roland’s .38 Special, .45 Automatic, Physical Training, Beat Cop, First Aid, Machete,Guard Dog, Magnifying Glass, Old Book of Lore, Research Librarian, Dr. Milan Christopher, Hyperawareness, Medical Texts, 2 copies of Knife, 2 copies of Flashlight | Daisy’s Tote Bag, Magnifying Glass, Old Book of Lore, Research Librarian, Dr. Milan Christopher, Hyperawareness, Medical Texts, Forbidden Knowledge, Holy Rosary, Shrivelling, Scrying, Arcane Studies, Arcane Initiate, 2 copies of Knife, 2 copies of Flashlight | .45 Automatic, Physical Training, Beat Cop,First Aid, Machete, Guard Dog, Switchblade, Burglary, Pickpocketing, .41 Derringer, Leo De Luca, Hard Knocks, 2 copies of Knife, 2 copies of Flashlight | Heirloom of Hyperborea, Forbidden Knowledge, Holy Rosary, Shrivelling, Scrying, Arcane Studies, Arcane Initiate, Leather Coat, Scavenging, Baseball Bat, Rabbit’s Foot, Stray Cat, Dig Deep, 2 copies of Knife, 2 copies of Flashlight | Wendy’s Amulet, Switchblade, Burglary, Pickpocketing, .41 Derringer, Leo De Luca, Hard Knocks, Leather Coat, Scavenging, Baseball Bat, Rabbit’s Foot, Stray Cat, Dig Deep, 2 Knifes, 2  Flashlight | Zoey’s Cross, .45 Automatic, Physical Training, Beat Cop, First Aid, Machete, Guard Dog, Holy Rosary, Rite of Seeking, Clarity of Mind, Blackjack, 2 copies of Knife, 2 copies of Flashlight, Kukri | Magnifying Glass, Old Book of Lore, Research Librarian, Dr. Milan Christopher, Hyperawareness, Medical Texts, Burglary, Laboratory Assistant, Pickpocketing, 2 copies of Knife, 2 copies of Flashlight | Jenny’s Twin .45s, Switchblade, Burglary, Pickpocketing, 41 Derringer, Leo De Luca, Hard Knocks, Guard Dog, 2 copies of Liquid Courage, Blackjack, 2 copies of Knife, 2 copies of Flashlight | Jim’s Trumpet, Forbidden Knowledge, Holy Rosary, Shrivelling, Scrying, Arcane Studies, Arcane Initiate, Rabbit’s Foot, Rite of Seeking,2 copies of Ritual Candles, Clarity of Mind, Peter Sylvestre, 2 copies of Knife, 2 Flashlight, Kukri | Duke, Leather Coat, Scavenging, Baseball Bat, Rabbit’s Foot, Stray Cat, Dig Deep, Magnifying Glass, Laboratory Assistant, Old Book of Lore, 2 copies of Fire Axe, Peter Sylvestre, 2 copies of Knife, 2 Flashlight |
-**Events** | Evidence!, Dodge, Dynamite Blast, Mind over Matter, Working a Hunch, Barricade, 2 Emergency Cache | Mind over Matter, Working a Hunch, Barricade, Drawn to the Flame, Ward of Protection,Blinding Light, 2 Emergency Cache | On the Lam, Evidence!, Dodge, Dynamite Blast, Elusive, Backstab, Sneak Attack, 2 Emergency Cache  | Drawn to the Flame, Ward of Protection, Blinding Light, Cunning Distraction, “Look what I found!”, Lucky!, 2 Emergency Cache | Elusive, Backstab, Sneak Attack, Cunning Distraction, “Look what I found!”, Lucky!, 2 Emergency Cache | Evidence!, Dodge, Dynamite Blast, Blinding Light, 2 copies of Taunt, Teamwork, 2 Emergency Cache | Search for the Truth, Mind over Matter, Working a Hunch, Barricade, Elusive, 2 Shortcut, 2 Seeking Answers, Think on Your Feet,2 Emergency Cache | Elusive, Backstab, Sneak Attack, Dynamite Blast, Think on Your Feet, Teamwork, 2 Emergency Cache | Drawn to the Flame, Ward of Protection, Blinding Light, Cunning Distraction, “Look what I found!”, Lucky!, 2 Emergency Cache| Cunning Distraction, “Look what I found!”, Lucky!, Working a Hunch, 2 Bait and Switch, 2 Emergency Cache | 
-| **Skills** | Vicious Blow, Deduction, 2x Guts, 2x Manual Dexterity | Deduction, Fearless, 2x Perception, 2x Manual Dexterity | Vicious Blow, Opportunist, 2x Guts, 2x Overpower | Fearless, Survival Instinct, 2x Perception, 2x Unexpected Courage  | Opportunist, Survival Instinct, 2x Overpower, 2x Unexpected Courage | Vicious Blow, Fearless, 2x Overpower, 2x Guts | Deduction, Opportunist, 2x Perception, 2x Manual Dexterity | Opportunist, 2x Double or Nothing, Vicious Blow, 2x Manual Dexterity, 2 copies of Overpower | Fearless, 2 Guts, 2x of Unexpected Courage | Survival Instinct, Deduction, 2x Unexpected Courage, 2x Perception |
-
-
-### Akashy Onyele
-
-Deck [in arkhamdb level 0](https://arkhamdb.com/deck/view/752314) from [travis explanations](https://youtu.be/EDllmGqLTbE). Rite of seeking to help on clue. Upgrades: grotesque statue, arcane initiate, ward of protection 2, book of shadow, the lvl 4, arcane insight, suggestion, seal of the elder sign.
-
-### Sefina Rousseau
-
-- Her special ability can transform any event into a 5 instance card.
-- Consider keeping events within the same goal: clue, combat, resources... And complement the others with assets. It improve consistency.
-- Select agility or will power but not both. She is the only rogue with agility and will at 4. Very good for her.
-- Protect her 5 lifes with dmg soak cards or healings.
-- [video on her.](https://youtu.be/s1iwSS-kViA) 
-
-### Harrigan
-
-An [interesting deck.](https://arkhamdb.com/decklist/view/2932/sophie-harrigan-s-guide-to-playing-the-soldier-1.0).
-
-
-### [Ursula Downs](https://arkhamdb.com/card/04002)
-
-Played her in FA. A [YouTube presentation.](https://youtu.be/__QgRbymv1k)
-
-She is very single-minded stat set, GET ALL THE CLUES, EVADE ALL THE ENEMIES
-
-- Focus on clues and move around. Use intellect to combat and evade most of the time.
-- Add shrewd analysis to upgrade two copies of archaic glyth
-- interesting relics: chthonian stone, tooth of eztli,  ornate bow, elder sign, key of ys, gold pocket watch. Now if playing with relic I need to have Eli Horowitz. 
-- Boost her willpower for treasury : tooth of etzil, elder sign, logical reasoning
-- Think to play the archaic glyth, so resolve it on first scenario of a campaign.
-- 2 of each: unexpected courage, flashlight, emergency cash, trench coat
-- Hyper awareness
-- Add 2x doctor christopher, anatomical diagram, I have a plan, mind over matter to help on combat and evasion.
-- Fieldwork is mostly mandatory to improve speed
-- 2x shortcut, deduction, fieldworks, pathfinder,  no stone unturned.
-- Muligan to get milan christopher out asap, and fieldwork
-- Think to add charisma to have both christopher and jake out at the same time.
-- Deduction can be upgraded
-- +7 on investigation with fieldworks and Dt Christopher
-
-
-### [LEO ANDERSON](https://arkhamdb.com/card/04001)
-
--  Leo is going to want a lot of allies, and Beat Cop and Venturer are standout level 0 ally cards for him
-- Use Rogue cards to boost his resources gathering: Lone Wolf, Sleight of hand
-- Not sure about leo de lucas… consider all allies in neutral, guardian and rogues
-- charisma is mandatory to get more allies
-- Mitch Brown helps to combo Beat Cop and Venturer. Venturer means .45 automatic to reload it
-- Think about calling in favors
-- interesting to consider: daring maneuver, decorated skull, eavesdrop, liquid courage, lone wolf [Solo], lucky dice [a must], narrow escape, quick thinking
-- give more intellect power with treasure hunter, keen eye, and flash light. 
-
-
-## Scenario commments
+## Scenario comments
 
 ???- info "Return of the night of the zealot: 2/29/2020"
     with [Daisy Walker](https://arkhamdb.com/deck/view/627017) and [Skid O’Toole](https://arkhamdb.com/deck/view/611917).
 
-    - Daisy and Skid get rid of the goulhs priest at the last turn.
+    - Daisy and Skid get rid of the ghouls priest at the last turn.
     - Lita Chantler burns the house to the ground. and joins Daisy to work on enemies
     - Daisy has 2 traumas after the gathering
     - The team gets insight into the hidden world of the Mythos: total victory: 6 VP for gouls 2 VP location + 2 = 10 VPs
@@ -202,8 +119,7 @@ She is very single-minded stat set, GET ALL THE CLUES, EVADE ALL THE ENEMIES
     - Ghoul priest is still alive.
     - The cult worships Umordhoth a monstrous entity from another realm. But we discovered that lita sets  this event in motion. From a journal possessed by the cultist, there is a dark ritual to be performed in the wood of south Arkham to bring umordhoth back.
 
-???- "The Circle Undone"
-    2023 with Nathaniel Cho and Preston Frairmont. Select the choice to be against the Twillight Circle. Not easy campaign. Evade can be a good strategy, at least for the Watcher. 
+
 
     
 ### Best 5 scenarios

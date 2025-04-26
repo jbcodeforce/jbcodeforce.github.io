@@ -100,6 +100,7 @@ nav:
         - puzzles: fun/puzzles.md
         - Astronomy: fun/astronomy/index.md
         - Physic - Newton: fun/astronomy/physic.md
+        - bg: fun/bg/index.md
       - Java: 
         - Introduction: java/index.md
         - Java FAQ: java/FAQ.md
