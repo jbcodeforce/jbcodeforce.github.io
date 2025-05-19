@@ -78,6 +78,7 @@ She is very single-minded stat set, GET ALL THE CLUES, EVADE ALL THE ENEMIES
 
 ## The Feast of Hemlock Vale
 
+Curse and Bless tokens are back. So combine cards from Innsmouth
 ## Rules to take care of
 
 * Elusive
@@ -99,14 +100,17 @@ He can tank damage/horror for other investigators and effectively has 10 health 
 
 **Deck recommendations:** 
 
-* Design for the resolute side too
+* Assess if you want to play with the bag, if so select Accursed from mystic.
+* Design for the resolute side too, and for action compression
 * Can be oriented with Dark Horse, Lablanche
 * Can be effective with allies like Jessica Hyde and Peter Sylvestre
-* Using FOVH cards: **2x Sparrow mask, 2x Pitchwork, 2x Bide your time,**  or 2x baseball bat or. Bide your time (next turn at 5 actions to plan for the worse turn - or when the agenda will change to be ready). 2x Elaborate distraction, 2x pushed the limit, 2x wrong place, right time. 2x [long shot](https://arkhamdb.com/card/10116) (can be used for skill at connecting location, and not just attack. Good synergy with Hatchet).
-* Pelt shipment for the end of a scenario. 
+* Using FOVH cards: **2x Sparrow mask, 2x Pitchwork, 2x Bide your time,**  or 2x `baseball bat` or `Fire Axe` `Bide your time` (next turn at 5 actions to plan for the worse turn - or when the agenda will change to be ready). 2x Elaborate distraction, 2x pushed the limit, 2x wrong place, right time. 2x [long shot](https://arkhamdb.com/card/10116) (can be used for skill at connecting location, and not just attack. Good synergy with Hatchet).
+* Leverage look what I found to get clues and its upgrade version (Stella Clark), may be 'Belly of the beast' 
+* Pelt shipment to play close to the end of a scenario, get a free xp.
 * From core potentially: rabbit foot, leather goat, `lost what I found` for 2 shroud locations. Cache, Guts, Lucky, Cunning distraction 
-* Cards for higher experience ones:  2x fire axe, 2x Hatchet, Strong armed second wind, persistence. Devil, Hunting Jacket, Mariner Compass. Dark Horse L5. From core: Bullet proof and elder sign amulet, Eucastastrophe, emergency cache L2, Aquinnah to soak horrors.
+* Other weapons to consider: chainsaw, hatchet
+* Cards for higher experience ones:  2x fire axe, 2x Hatchet, Strong armed second wind, persistence. Devil, Hunting Jacket, Mariner Compass. Dark Horse L5. From core: Bullet proof and elder sign amulet, Eucastastrophe, emergency cache L2, Aquinnah to soak horrors. Token of Faith, Providential. Strong Armed
+* [A FOHV runs when he finished killed- My arkhamdb deck](https://arkhamdb.com/deck/view/4254493)
 
 * [Justin's video](https://www.youtube.com/watch?v=ik9K0qyc1ts&t=1143s)
-
-* [A FOHV runs when he finished killed- My arkhamdb deck](https://arkhamdb.com/deck/view/4254493)
+* [Rather incoherent video](https://www.youtube.com/watch?v=2fTrWChtFHA)

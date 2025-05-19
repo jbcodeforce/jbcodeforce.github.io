@@ -128,6 +128,7 @@ nav:
       - 90 Days: leadership/first-90-days.md
       - 7 Habits: leadership/7_habits.md
       - Mindfulness: leadership/mindfulness.md
+      - Memory: leadership/memory.md
     - Architecture:
       - Conduct System Design: architecture/system-design.md
       - Event Driven Architecture: https://jbcodeforce.github.io/eda-studies
