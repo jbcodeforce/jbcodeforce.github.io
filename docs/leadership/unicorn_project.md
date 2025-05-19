@@ -1,6 +1,7 @@
-# The unicorn project
+# The unicorn project summary
 
-Some interesting notes to keep in mind when engaging on projects :
+Some interesting notes to keep in mind when engaging on projects:
+
 - Punishing failure and “shooting the messenger” only cause people to hide their mistakes, and eventually, all desire to innovate is completely extinguished.
 - Creating software should be a collaborative and conversational endeavor—individuals need to interact with each other to create new knowledge and value for the customer.
 - what is happening: Too many promises to the market? Bad engineering leadership? Bad product leadership? Too much technical debt? Not enough focus on architectures and platforms that enable developers to be productive?
@@ -9,10 +10,12 @@ Some interesting notes to keep in mind when engaging on projects :
 - Without constant feedback from a centralized build, integration, and test system, developers really have no idea what will happen when all their work is merged with everyone else’s.
 - developers need a system where they can get fast and continual feedback on the quality of their work. If you don’t find problems quickly, you end up finding them months later. By then, the problem is lost in all the other changes that every other developer made, so the link between cause and effect disappears without a trace.
 - Most people are trying to follow a process, like ticketing process, as defined by others, and to do the best, the rules are wrong not the people response. This is important to remember before judging a person's response.
-- Examples of questions: 
+- Examples of questions:
+
 	- How many transactions per second are we expecting for product displays and orders? 
 	- howmany transactions per second are the current builds capable of handling right now? 
 	- That will tell us how many servers we need for the horizontally scalable portions, as well as how far we’re off for the vertically scaled components, like the database.
+
 - As a developer always ask yourself, How can you create anything of value if you don’t have feedback on how it’s used?
 - The risk of polyglot solution, how any one person could possibly understand the system as a whole, especially when it’s built from so many different technology stacks.
 - Technology decisions are commitments to support them  for years or even decades—these are decisions that go far beyond just one team.
@@ -23,11 +26,13 @@ Some interesting notes to keep in mind when engaging on projects :
 - Simplicity is important because it enables locality. Locality in our code is what keeps systems loosely coupled, enabling us to deliver features faster. Teams can quickly and independently develop, test, and deploy value to customers. Locality in our organizations allows teams to make decisions without having to communicate and coordinate with people outside the team, potentially having to get approvals from distant authorities or committees so far removed from the work that they have no relevant basis to make good decisions
 - pay down technical debt as a part of daily work. Not just features delivery. Technical debt is inherently neither good nor bad—it happens because in our daily work, we are always making trade-off decisions. We make a grave mistake when we don’t realize how much this impacts our future productivity.
 - There are five ideals on what we do:
+
 	- First Ideal of Locality and Simplicity. We need to design things so that we have locality in our systems and the organizations that build them. And we need simplicity in everything we do.
 	- The Second Ideal is Focus, Flow, and Joy. It’s all about how our daily work feels. do we work in small batches, ideally single-piece flow, getting fast and continual feedback on our work? Being able to test and push code to production is more productive, makes for happier customers, creates accountability of code quality to the people who write it, and also makes the work more joyful and rewarding.
 	- The third ideal is Improvement of Daily Work. Reflect upon what the Toyota Andon cord teaches us about how we must elevate improvement of daily work over daily work itself. 
 	- The Fourth Ideal is Psychological Safety, where we make it safe to talk about problems, because solving problems requires prevention, which requires honesty, and honesty requires the absence of fear. In manufacturing, psychological safety is just as important as physical safety.
 	- the Fifth Ideal is Customer Focus, where we ruthlessly question whether something actually matters to our customers, as in, are they willing to pay us for it or is it only of value to our functional silo?
+
 - When everyone knows what the goals are, teams will self-organize to best achieve those goals. They realize that they are on a journey of learning and exploration, and that making mistakes is inevitable. Creating ever-safer systems and continual improvement is now viewed as part of daily work.
 - To address concurrency and race condition functional programming principles with immutable function, where output is derived from input, are better tools to think with.
 - Developers need to access production logs without asking ops.
@@ -44,12 +49,14 @@ Some interesting notes to keep in mind when engaging on projects :
 - Demonstrate how the future requires creating a dynamic, learning organization where experimentation and learning are a part of everyone’s daily work.
 - the Hoare principle: “There are two ways to write code: write code so simple there are obviously no bugs in it, or write code so complex that there are no obvious bugs in it.
 
-Company strategy based on geofrey Moore's book:
+## Company strategy based on geofrey Moore's book:
+
 - Horizon 1 is your successful, cash-cow businesses, where the customer, business, and operational models are well-known and predictable.
 - Almost all businesses fade over time, because any profitable operation will attract competitors. The economic logic of selling reductions in transactional cost is irresistible and inevitable
 - Horizon 2 lines of business  represent the future of the company. They may introduce the company’s capabilities to new customers, adjacent markets, or with different business models. These endeavors may not be profitable, but this is where we find higher-growth areas. It is from here that enterprising leaders create the next generation of Horizon 1 businesses.
 - Horizon 3, where the focus is on velocity of learning and having a broad pool of ideas to explore. The name of the game is to prototype ideas and to answer as quickly as possible the three questions of market risk, technical risk, and business model risk: Does the idea solve a real customer need? Is it technically feasible? And is there a financially feasible engine of growth? If the answer is no to any of them, it’s time to pivot or kill the idea. “If the answer is yes, then the idea is continually developed until it earns the right to graduate to Horizon 2, where the business builders take over.
 - Horizon 1 thrives on process and consistency, on rules and compliance, and on bureaucracies, which create extraordinary resilience. These are the mechanisms that allow greatness to be consistently delivered over decades. In contrast, in Horizon 3, you must go fast, you must be constantly experimenting, and you must be allowed to break all the rules and processes governing Horizon 1.
+
 - Regardless of what horizon you’re in, this is the Age of Software. Almost all business investment now involves software. And that means we must elevate developer productivity.
 - Companies are unable to properly invest in the next generation of innovation. they underinvest in Core, because they are being controlled by Context. Cores are the central competencies of the organization. These are things that customers are willing to pay for and what investors reward. Context is everything else. how much of the $80 million of your technology spending is Core, actively building competitive advantage, and how much of it is Context, which is important and maybe even mission-critical, but still needs to be standardized, managed down, and maybe even outsourced entirely?
 - Example of value for event sourcing: in current app there are twenty-three deeply nested API calls made whenever someone checked for product availability. With microservuce dedicated to serve one complex query api, represented as values that were re-computed every time one of their inputs changed, which comes from event sourcing. Now it is one api call. It will decouple all of these services from each other, allowing teams to make changes independently, no longer reliant upon the single integration team to implement their business rule changes. It will make the tracking of data and state across the enterprise simpler, safer, more resilient, easier to understand, cheaper to run, faster to deliver. It applies functional programming ar scale as an architecture principles.

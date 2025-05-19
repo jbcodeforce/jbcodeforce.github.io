@@ -96,6 +96,7 @@ nav:
         - Tekton: coding/tekton.md
         - ArgoCD: coding/argocd.md
         - Finch: coding/finch.md
+        - Release IT: coding/release_it.md
       - Fun problems:
         - puzzles: fun/puzzles.md
         - Astronomy: fun/astronomy/index.md
@@ -125,10 +126,12 @@ nav:
   - Knowledge base: 
     - The SA job: blogs/consultant-job.md
     - Leadership:
+      - General notes: leadership/index.md
       - 90 Days: leadership/first-90-days.md
       - 7 Habits: leadership/7_habits.md
       - Mindfulness: leadership/mindfulness.md
       - Memory: leadership/memory.md
+      - Unicorn project: leadership/unicorn_project.md
     - Architecture:
       - Conduct System Design: architecture/system-design.md
       - Event Driven Architecture: https://jbcodeforce.github.io/eda-studies
