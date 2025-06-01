@@ -96,7 +96,11 @@ nav:
         - Tekton: coding/tekton.md
         - ArgoCD: coding/argocd.md
         - Finch: coding/finch.md
-      - puzzles: fun/puzzles.md
+      - Fun problems:
+        - puzzles: fun/puzzles.md
+        - Astronomy: fun/astronomy/index.md
+        - Physic - Newton: fun/astronomy/physic.md
+        - bg: fun/bg/index.md
       - Java: 
         - Introduction: java/index.md
         - Java FAQ: java/FAQ.md
@@ -121,6 +125,7 @@ nav:
   - Knowledge base: 
     - The SA job: blogs/consultant-job.md
     - Leadership:
+      - General notes: leadership/index.md
       - 90 Days: leadership/first-90-days.md
       - 7 Habits: leadership/7_habits.md
       - Mindfulness: leadership/mindfulness.md

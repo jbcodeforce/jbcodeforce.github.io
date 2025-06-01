@@ -1,5 +1,8 @@
 # Leadership notes
 
+???+ warning "To work on"
+	05/25 Far to be done
+
 ## The Secret of Teams by Mark Miller
 
 - Superior teams have three core elements in common: talented individuals with proven skills who share a strong sense of community
