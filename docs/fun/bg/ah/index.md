@@ -1,5 +1,14 @@
 # Arkham Horror LCG
 
+Interesting links:
+
+* [Official site](https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/)
+* [Arkhamdb](https://arkhamdb.com)
+* [Play board game you tube channel (Justin, Travis...)](https://www.youtube.com/@PlayingBoardGames)
+* [Ancient Evils blog](https://derbk.com/ancientevils/)
+* [Covenant videos](https://www.youtube.com/playlist?list=PLmHifZPFC_JsRF8Zrav13ESRNaEJ6i967)
+* [The whisperer darkness](https://www.youtube.com/@TheWhispererinDarkness)
+
 ## [Rules](https://arkhamdb.com/rules) to do not forget
 
 * Skill test modified is always >=0. Token + base + skill icon + modifier on assets >=0.  Then compare to the skill level to test.
@@ -14,10 +23,13 @@
 * Heal is only on personal investigator, except when explicitly saying at the location, or something else.
 * [Trauma](https://arkhamdb.com/rules#Trauma) can be healed, when game starts.
 * [Revelation](https://arkhamdb.com/rules#Revelation) is only triggered on cards when we draw them, not when we look at or discard them.
-* While seaching, search for any card that meets the criteria, not just the first one.
-* The per invvestigator symbol is when the game starts, so if one is eliminated, the quota is still as at the beginning.
+* While searching, search for any card that meets the criteria, not just the first one.
+* The per investigator symbol is when the game starts, so if one is eliminated, the quota is still as at the beginning.
 * Automatically evade (like in [cunning distraction](https://arkhamdb.com/card/01078)) is a not an evade action, so could not be a successful action. 
 
+## Investigators
+
+[chapter](investigators.md)
 ---
 
 ## Strategies
@@ -60,9 +72,7 @@
 
 When we can complete 2 or more tasks using 1 action or less actions than it would normally take.
 
-Cards:
-
-* emergency cache to get resources
+Card help with action compression, drawing one card from upkeep is not enough. Search card that help drawing cards, search for cards,  and better from discard pile.
 * +1 damage weapon
 * deduction: 1 more clue in case of success
 * short cut: move without action
@@ -70,8 +80,18 @@ Cards:
 
 ### Resource economy
 
- 
-### Deck building
+* Resources include resource tokens, Cards, health, sanity, secrets, ammunition 
+* At major concepts: Guardians typically need resources for weapons and ammunition, so cards like Beat Cop or Prepared for the Worst help. Seekers want to fuel their research tools and card draw engines. Rogues excel at resource generation through cards like Burglary, Hot Streak, or Lone Wolf. Survivors often operate on tight budgets but have efficient low-cost cards. Mystics need resources for spell components and powerful assets
+* Every deck has different needs: assess what need to perform the role, between weapons, events, ally. 
+* While deck building estimate assets and events needs then derive resources needs. Recalls the 5 + 1 per turns for 10 to 14 turns give you a max buying power, if you need mor, then add card resource generation.
+* Add Emergency cache, lvl 0 and 2. Milan Christopher, Hot Streak, Stand Together, Lone Wolf,  Burning the night oil, Act of desperation. I ve had worse; soothing melody. Be sure to get resource generation card quickly. Consider card that reduce cost of other cards. Look at Crafty and Prophety (Neutral EoE)
+* Try to keep 3 resources and cards to be more agile during game play. Take a resource action is not ideal.  Sometimes it's worth taking an action to gain resources rather than making a risky test that could waste cards or create bigger problem.
+* Think to use higher level card as they cost less.
+* Healing is slow: So think about allies for soak. 
+
+Sources of information: [Quick learner: resource economy](https://www.youtube.com/watch?v=AVLicWnVVxM)
+
+## Deck building
 
 For standalone mode, we can build our deck with starting exp, which allows us to include pipped cards within the deckbuilding instructions. Add one weakness per 10 XP used. For campaign starts with 0 XP cards.
 
@@ -79,7 +99,7 @@ Always try to get answers to the following questions:
 
 * How do we plan to deal with 4 shroud locations and 4 combat enemies?
 * What goes in the Hands/Ally/Arcane/Accessory slots?
-* How will I pay for those expensives cards?
+* How will I pay for those expensive cards?
 * What is my upgrade strategy?
 
 Decide on our play style for that deck. If playing solo or with one other investigator, we'll probably want to build more conservatively, adding more cards to the deck that help to boost the lower skill scores. At 3 or 4 players boost on the character's strengths.
@@ -100,7 +120,10 @@ Cards
 
 - Aquinnah: level 1 is very expensive for survivors. So could be used by other classes with access to resources. While level 3 is only accessible to survivors, with a cost 4 and better skill: it avoids one physical damage per round, specially good on aoo.  It can damage aloof, and enemy engaged with another investigator. Try to combo with cards that make her ability trigger multiple times per round. It Should be useful to peter, william yorik to bring her back when her sanity reached 4. Use charisma and peter silvestre.  Inspiring presence helps to reuse her and remove horror from her.
 
+## Campaigns
 
+[chapter](campaign.md)
+ s
 ## Scenario comments
 
 ???- info "Return of the night of the zealot: 2/29/2020"
@@ -121,7 +144,6 @@ Cards
 
 
 
-    
 ### Best 5 scenarios
 
 | Rank | Bryn | Justin | Travis |

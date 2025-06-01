@@ -116,13 +116,14 @@ Normal force is perpendicular to the surface of the contact and is supporting th
 - Write Newton’s second law in the horizontal and vertical directions and add the forces acting on the object. If the object does not accelerate in a particular direction (for example, the x -direction) then Fnet x = 0 . If the object does accelerate in that direction, Fnet x = ma
 - Verify result is reasonable.
 
-- Only four distinct forces account for all known phenomena: the gravitational force, the electromagnetic force, the weak nuclear force, and the strong nuclear force.
+## Four forces
 
-* What is it that carries forces between objects? 
+There are only four distinct forces account for all known phenomena: 1/ gravitational force, 2/ the electromagnetic force, 3/ the weak nuclear force, and 4/ the strong nuclear force 
 
-	- Imagine that a force field surrounds whatever object creates the force.
-	- The field itself is the “thing” that carries the force from one object to another.
-	- These fields may be either scalar or vector fields. Gravity and electromagnetism are examples of vector fields.
+???+ question "What is it that carries forces between objects?" 
+	- Imagine that a force field surrounds whatever object creates the force. 
+	- The field itself is the “thing” that carries the force from one object to another. 
+	- These fields may be either scalar or vector fields. Gravity and electromagnetism are examples of vector fields 
 
 - Gravitational waves are created during the collision of massive stars, in black holes, or in supernova explosions, like shock wave. Waves move at the speed of light.
 
@@ -199,21 +200,19 @@ The net work on a system equals the change in the kinetic energy for transaction
 
 ![](https://latex.codecogs.com/svg.image?Ke=1/2.m.v^2)
 
-- What is the Work to accelerate a 30 kg package by pushing at constant force = 120 N through a distance of 0.8 m (friction force is 5 N):
-
-	-  The force of gravity and the normal force acting on the package are perpendicular to the displacement and do no work.
-	- The net force arises solely from the horizontal applied force Fapp and the horizontal friction force Fc 
-	- Net force is // to the displacement so θ = 0o and cos(θ) = 1 
+???+ question "What is the Work to accelerate a 30 kg package by pushing at constant force = 120 N through a distance of 0.8 m (friction force is 5 N)"
+	- The force of gravity and the normal force acting on the package are perpendicular to the displacement and do no work. 
+	- The net force arises solely from the horizontal applied force **Fapp** and the horizontal friction force f 
+	- Net force is // to the displacement so θ = 0o and cos θ = 1 
 	- Fnet = 120 - 5 = 115 N
 	- The effect of Fnet is to accelerate the package from V0 to V.
 	- The kinetic energy increases, the net work done on the system is positive
-	- Wnet = Fnet .d = m.a.d   (from newton 2nd law Fnet = m.a)  Wnet = 115 * 0.8 = 92
-	- V^2 = Vo^2 + 2.a.d  => a = (V^2  - Vo^2) / 2d
-	- Wnet = m/2 . (V^2  - Vo^2)
-	- By looking at the work only: W total = Wapp + Wgr + Wn + Wfr   => W total = 115 . cos(0) . 0.8 + 0 + 0 + 5 . cos(180) . 0.8 = 96 - 4 = 92
-	
+	- `Wnet = Fnet .d = m.a.d`   (from newton 2nd law `Fnet = m.a`)  => `Wnet = 115 * 0.8 = 92`
+	- `V^2 = Vo^2 + 2.a.d`  => `a = (V^2  - Vo^2) / 2d`
+	- `Wnet = m/2 . (V^2  - Vo^2)`
+	- By looking at the work only: `W total = Wapp + Wgr + Wn + Wfr`   => W total = 115 . cos 0 . 0.8 + 0 + 0 + 5 . cos 180 . 0.8 = 96 - 4 = 92	
 
-## gravitational potential energy
+## Gravitational potential energy
 
 The gravitational potential energy:
 
