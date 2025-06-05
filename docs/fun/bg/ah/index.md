@@ -6,8 +6,10 @@ Interesting links:
 * [Arkhamdb](https://arkhamdb.com)
 * [Play board game you tube channel (Justin, Travis...)](https://www.youtube.com/@PlayingBoardGames)
 * [Ancient Evils blog](https://derbk.com/ancientevils/)
+* [Quick Learner videos](https://www.youtube.com/@Quick_Learner/videos)
 * [Covenant videos](https://www.youtube.com/playlist?list=PLmHifZPFC_JsRF8Zrav13ESRNaEJ6i967)
 * [The whisperer darkness](https://www.youtube.com/@TheWhispererinDarkness)
+* [Superfeng99](https://www.youtube.com/@superfeng99/videos)
 
 ## [Rules](https://arkhamdb.com/rules) to do not forget
 
@@ -29,13 +31,15 @@ Interesting links:
 
 ## Investigators
 
-[chapter](investigators.md)
+[See dedicated chapter](investigators.md)
 ---
 
 ## Strategies
 
+* Remember the obvious: a scenario is won if investigators are able to beat te doom clock, passed skill tests, manage resource efficiently.
+* Think about synergies between investigators to better handle specific challenges of a scenario.
+* Assess the key cards for each investigators and get them as early as possible. Use mulligan to get more useful cards like damage soak cards, character's specific cards and card dealing with enemies as soon as possible. 
 * Apply the 2 point rules: to succeed a test in standard mode at least be sure to be two level higher than the test. +3 when bag becomes nasty (will give an odd around 85% in most test): which also means when the campaign progresses we need to be able to be at 9, 10 skill value.
-* Use mulligan to get more useful cards like damage soak cards, character' specific card and card dealing with enemies as soon as possible
 * Advance the act at the beginning of the turn or when having actions left, as enemy can spawn at the investigator's location
 * Cards that help draw from encounter deck should be played at the beginning of the turn
 * When taking a draw action, do it as first action, to deal with potential weakness or other bad things we could draw
@@ -49,14 +53,20 @@ Interesting links:
      * track our actions and the phase we are in.
 
 * We should not rely on expected cards; use what you have at the time. We do not need to play all our assets.
-
 * Do not think we need to be ready before moving in the scenario act.
 * Assess if we need to go to a location or wait later when more ready.
 * Card drawing and resource gathering actions should be less a priority when there is so much better things to do.
 * Playing the campaign multiple times to adapt the deck with better cards and prepare the play. What enemy to fight...
 * Assess before moving as a last action: may be better to stay with others; or better set in current location to fight an encounter.
 * Know when to evade. Remember monster without hunter does not move. 
-* Try to get a 2 damages at least per attack
+* Try to get a 2 damages at least per attack.
+* In a campaign, investigators may not do well in a given scenario, this is expected. So replay campaign to learn more about how to improve deck building to be better adapted.
+* To avoid bad luck on critical bag draw, think about trick like to transfer a skill test to another investigator, cancel token, cancel card effect...
+* Apply some strategies from MTG, like: 
+
+    * was this the right play?
+    * what are the other options?
+    * 
 
 ### For solo play
 
@@ -93,9 +103,9 @@ Sources of information: [Quick learner: resource economy](https://www.youtube.co
 
 ## Deck building
 
-For standalone mode, we can build our deck with starting exp, which allows us to include pipped cards within the deckbuilding instructions. Add one weakness per 10 XP used. For campaign starts with 0 XP cards.
+For standalone mode, we can build our deck with starting exp, which allows us to include pipped cards within the [deck building instructions](). Add one weakness per 10 XP used. For campaign starts with 0 XP cards.
 
-Always try to get answers to the following questions:
+While designing a deck, always try to get answers to the following questions:
 
 * How do we plan to deal with 4 shroud locations and 4 combat enemies?
 * What goes in the Hands/Ally/Arcane/Accessory slots?
@@ -116,14 +126,18 @@ Any player cards that have an **encounter set logo** in the upper right should *
 
 When playing 2 handed investigators: Combination: guardian - mystic  or guardian - survivor or seeker - rogue or seeker - survivor or mystic - rogue.
 
-Cards
+In campaign, between scenario, revisit if you need to stay on course of what the deck was suppose to do, or work on weakness or punch up strengths. 
 
-- Aquinnah: level 1 is very expensive for survivors. So could be used by other classes with access to resources. While level 3 is only accessible to survivors, with a cost 4 and better skill: it avoids one physical damage per round, specially good on aoo.  It can damage aloof, and enemy engaged with another investigator. Try to combo with cards that make her ability trigger multiple times per round. It Should be useful to peter, william yorik to bring her back when her sanity reached 4. Use charisma and peter silvestre.  Inspiring presence helps to reuse her and remove horror from her.
+## Cards
+
+The core set has important common cards that should be assessed of why NOT using them.
+
+- Aquinnah: level 1 is very expensive for survivors. So could be used by other classes with access to resources. While level 3 is only accessible to survivors, with a cost 4 and better skill: it avoids one physical damage per round, specially good on aoo.  It can damage aloof, and enemy engaged with another investigator. Try to combo with cards that make her ability trigger multiple times per round. It Should be useful to peter, william yorik to bring her back when her sanity reached 4. Use Charisma and Peter Silvestre.  Inspiring presence helps to reuse her and remove horror from her.
 
 ## Campaigns
 
 [chapter](campaign.md)
- s
+ 
 ## Scenario comments
 
 ???- info "Return of the night of the zealot: 2/29/2020"
