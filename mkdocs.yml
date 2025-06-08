@@ -18,15 +18,16 @@ theme:
       - content.code.annotate
       - content.code.copy
       - content.tooltips
+      - content.tabs.link
       - search.highlight
+      - search.suggest
       - navigation.instant
       - navigation.instant.progress
       - navigation.tabs
-      - navigation.instant
       - navigation.tabs.sticky
       - navigation.tracking
-      # - navigation.sections
-      # - navigation.expand
+      - navigation.sections
+      - navigation.expand
       - navigation.footer
       - navigation.tabs.sticky
       - navigation.top
@@ -44,6 +45,7 @@ plugins:
       lang: en
   - minify:
       minify_html: true
+  - mkdocstrings
   #- mermaid2
 markdown_extensions:
   - abbr
@@ -183,6 +185,7 @@ nav:
     - Egeria: techno/egeria.md
     - Elastic Search: techno/elasticsrch.md
     - Flink Studies: https://jbcodeforce.github.io/flink-studies/
+    - Grafana: techno/grafana/index.md 
     - IBM:
       - IBM Cloud: architecture/ibmcloud.md
       - IBM Cloud Satellite: architecture/satellite.md
