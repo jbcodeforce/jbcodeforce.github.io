@@ -87,15 +87,16 @@ She is very single-minded stat set, GET ALL THE CLUES, EVADE ALL THE ENEMIES
 
 Curse and Bless tokens are back. So combine cards from Innsmouth Corruption
 
-### Rules to take care of
-
-* Elusive
-* Alert is for Evade failure
-* Track the resident interactions
-
 ### [Hank Samson](https://arkhamdb.com/card/10015)
 
-[First deck was not strong enough]((https://arkhamdb.com/deck/view/4254493). [Second run Hank deck](https://arkhamdb.com/deck/view/4910692) after upgrade of keep faith, fire axe (2), token of faith, survival technique and marine compass. Then ancient covenant.
+[First deck was not strong enough](https://arkhamdb.com/deck/view/4254493). [Second run Hank deck](https://arkhamdb.com/deck/view/4910692) after upgrade of keep faith, fire axe (2), token of faith, survival technique and marine compass. Then ancient covenant.
+
+Cards from TFOHV to consider:
+Pelt shipment, sparrow mask, matchbox, long shot, elaborate distraction, leather coat, pushed to the limit, wrong place right time, look at I found, 
+
+Upgrade to consider: 
+strong armed, hatched, second wind, hunting jacket, fire axe, devil,persitence, mariner’s compass, dark horse
+Eucatastrophe, elder sign amulet, bullet vest.
 
 He can tank damage/horror for other investigators and effectively has 10 health and sanity combined. He can take damage/horror for other investigators during the assign step (not his allies). Works well with cards that let him profit from, transfer, or heal damage.
 
