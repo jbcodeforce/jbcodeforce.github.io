@@ -98,11 +98,11 @@ nav:
         - Tekton: coding/tekton.md
         - ArgoCD: coding/argocd.md
         - Finch: coding/finch.md
-      - Fun problems:
+      - Fun stuffs:
         - puzzles: fun/puzzles.md
         - Astronomy: fun/astronomy/index.md
         - Physic - Newton: fun/astronomy/physic.md
-        - bg: fun/bg/index.md
+        - others: fun/index.md
       - Java: 
         - Introduction: java/index.md
         - Java FAQ: java/FAQ.md
@@ -173,7 +173,6 @@ nav:
     - AI:
       - Machine learning: https://jbcodeforce.github.io/ML-studies/#machine-learning
       - Deep learning: https://jbcodeforce.github.io/ML-studies/ml/deep-learning/
-  - fun: fun/index.md 
   - Techno:
     - Apicurio: techno/apicurio.md
     - Atlas: techno/atlas.md

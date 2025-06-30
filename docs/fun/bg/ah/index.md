@@ -13,14 +13,14 @@ Interesting links:
 
 ## [Rules](https://arkhamdb.com/rules) to do not forget
 
-* Skill test modified is always >=0. Token + base + skill icon + modifier on assets >=0.  Then compare to the skill level to test.
+* Skill test modified is always >=0: Token + base + skill icon + modifier on assets >=0.  Then compare to the skill level to test.
 * After an enemy attacks, it is exhausted, so not ready, so we may be able to do action without attack of opportunity. Attention an enemy does not exhaust while making an [attack of opportunity](https://arkhamdb.com/rules#Attack_of_Opportunity). We can still make damage to it with a reaction card (Like [Delilah O'Rourke](https://arkhamdb.com/card/06281)).
 * We can not discover more clues than were already available to be discovered from a location, regardless of the number of successes or card effects.
 * All dooms in play are removed when agenda progresses, even the ones on player or enemy cards
 * Prey only cares when an enemy needs a tiebreaker for who it moves to or engages to.  Apply when moving but also when ready.
-* As long as an investigator isn't resolving a treachery with the "peril" keyword, each other investigator on the same location can commit one (only one per skill test) of their cards to that investigator's skill tests.
+* As long as an investigator isn't resolving a treachery with the "peril" keyword, each other investigator on the same location may commit one (only one per skill test) of their cards to that investigator's skill tests.
 * **Revealed tokens** when we cancel or ignore a token, it doesn't count as being revealed. But partially ignored token still count as being revealed. A "skull" during a fight using Baseball bat, breaks the bat, even if we added "Defiance" to the skill test.
-* "Limit 1 per investigator means, "in play". Different than 1 limit per deck.
+* "Limit 1 per investigator" means, "in play". Different than 1 limit per deck.
 * Arrow action on card cannot be combined with other action on card (investigate + a flash light).
 * Heal is only on personal investigator, except when explicitly saying at the location, or something else.
 * [Trauma](https://arkhamdb.com/rules#Trauma) can be healed, when game starts.
@@ -32,21 +32,22 @@ Interesting links:
 ## Investigators
 
 [See dedicated chapter](investigators.md)
+
 ---
 
 ## Strategies
 
-* Remember the obvious: a scenario is won if investigators are able to beat te doom clock, passed skill tests, manage resource efficiently.
+* Remember the obvious: a scenario is won if investigators are able to beat the doom clock, to pass skill tests, and to manage resource efficiently.
 * Think about synergies between investigators to better handle specific challenges of a scenario.
-* Assess the key cards for each investigators and get them as early as possible. Use mulligan to get more useful cards like damage soak cards, character's specific cards and card dealing with enemies as soon as possible. 
-* Apply the 2 point rules: to succeed a test in standard mode at least be sure to be two level higher than the test. +3 when bag becomes nasty (will give an odd around 85% in most test): which also means when the campaign progresses we need to be able to be at 9, 10 skill value.
+* Assess the key cards for each investigator deck and get those cards as early as possible. Use mulligan to get more useful cards like damage soak cards, character's specific cards and card dealing with enemies as soon as possible. 
+* Apply the 2 point rules: to succeed a test in Standard mode be sure to be two level higher than the test. +3 when bag becomes nasty (will give an odd around 85% in most test): which also means when the campaign progresses, we need to be able to be at 9, 10 skill value.
 * Advance the act at the beginning of the turn or when having actions left, as enemy can spawn at the investigator's location
 * Cards that help draw from encounter deck should be played at the beginning of the turn
-* When taking a draw action, do it as first action, to deal with potential weakness or other bad things we could draw
+* When taking a draw action, do it as a first action, to deal with potential weakness or other bad things we could draw
 * We do not have to pass every treachery. Better to keep good cards for next turns and loose health or horror at the beginning of the game.
-* We do not have to kill all enemies. Evade no hunter enemy. Evade, investigate then move to other location is a good turn. Perfectly valid in solo play.
-* Keep munition for 3 damages attack for big guy. Do not waste on 1 life enemies.
-* We do not have to get every experience points of the scenario. Consider how many actions to go to the location and resolve the solution versus the scenario time line.
+* We do not have to kill all enemies. Evade no hunter enemy locks the enemie to the location. Evade, investigate then move to other location is a good turn. Perfectly valid in solo play.
+* Keep munition for 3 damages attack for big enemies. Do not waste on 1 life enemies.
+* We do not have to get every experience points of the scenario. Consider how many actions to go to the location and resolve the solution versus the scenario timeline.
 
      * actions are our most important resources
      * take advantage of action economy: free move, picking clue without using action, free damage…
@@ -57,16 +58,15 @@ Interesting links:
 * Assess if we need to go to a location or wait later when more ready.
 * Card drawing and resource gathering actions should be less a priority when there is so much better things to do.
 * Playing the campaign multiple times to adapt the deck with better cards and prepare the play. What enemy to fight...
-* Assess before moving as a last action: may be better to stay with others; or better set in current location to fight an encounter.
+* Assess before moving as a last action: may be better to stay with others; or better stay in current location to fight an encounter.
 * Know when to evade. Remember monster without hunter does not move. 
-* Try to get a 2 damages at least per attack.
+* Try to get  at least 2 damages per attack.
 * In a campaign, investigators may not do well in a given scenario, this is expected. So replay campaign to learn more about how to improve deck building to be better adapted.
 * To avoid bad luck on critical bag draw, think about trick like to transfer a skill test to another investigator, cancel token, cancel card effect...
 * Apply some strategies from MTG, like: 
 
     * was this the right play?
     * what are the other options?
-    * 
 
 ### For solo play
 
@@ -82,19 +82,18 @@ Interesting links:
 
 When we can complete 2 or more tasks using 1 action or less actions than it would normally take.
 
-Card help with action compression, drawing one card from upkeep is not enough. Search card that help drawing cards, search for cards,  and better from discard pile.
+Card help with action compression, **drawing one card from upkeep is not enough**. Search card that helps drawing cards, searches for cards in the deck, and even better from the discard pile.
 * +1 damage weapon
-* deduction: 1 more clue in case of success
-* short cut: move without action
-* astral travel 
+* [deduction](https://arkhamdb.com/card/02150): 1 more clue in case of success
+* [short cut](https://arkhamdb.com/find?q=short+cut&sort=set&view=card&decks=all&spoilers=hide): move without action
+* [astral travel](https://arkhamdb.com/card/03034) 
 
 ### Resource economy
 
 * Resources include resource tokens, Cards, health, sanity, secrets, ammunition 
 * At major concepts: Guardians typically need resources for weapons and ammunition, so cards like Beat Cop or Prepared for the Worst help. Seekers want to fuel their research tools and card draw engines. Rogues excel at resource generation through cards like Burglary, Hot Streak, or Lone Wolf. Survivors often operate on tight budgets but have efficient low-cost cards. Mystics need resources for spell components and powerful assets
 * Every deck has different needs: assess what need to perform the role, between weapons, events, ally. 
-* While deck building estimate assets and events needs then derive resources needs. Recalls the 5 + 1 per turns for 10 to 14 turns give you a max buying power, if you need mor, then add card resource generation.
-* Add Emergency cache, lvl 0 and 2. Milan Christopher, Hot Streak, Stand Together, Lone Wolf,  Burning the night oil, Act of desperation. I ve had worse; soothing melody. Be sure to get resource generation card quickly. Consider card that reduce cost of other cards. Look at Crafty and Prophety (Neutral EoE)
+* Assets and events needs derives resources needs. Recalls the 5 + 1 per turns for 10 to 14 turns give you a max buying power, if you need more, then add card resource generation, like [Emergency cache](), lvl 0 and 2. Milan Christopher, Hot Streak, Stand Together, Lone Wolf,  Burning the night oil, Act of desperation. I ve had worse; soothing melody. Be sure to get resource generation card quickly. Consider card that reduce cost of other cards. Look at Crafty and Prophety (Neutral EoE)
 * Try to keep 3 resources and cards to be more agile during game play. Take a resource action is not ideal.  Sometimes it's worth taking an action to gain resources rather than making a risky test that could waste cards or create bigger problem.
 * Think to use higher level card as they cost less.
 * Healing is slow: So think about allies for soak. 
@@ -103,7 +102,7 @@ Sources of information: [Quick learner: resource economy](https://www.youtube.co
 
 ## Deck building
 
-For standalone mode, we can build our deck with starting exp, which allows us to include pipped cards within the [deck building instructions](). Add one weakness per 10 XP used. For campaign starts with 0 XP cards.
+For standalone mode, we can build our deck with starting exp, which allows us to include pipped cards within the [deck building instructions](https://arkhamdb.com/rules#Experience). Add one weakness per 10 XP used. For campaign starts with 0 XP cards.
 
 While designing a deck, always try to get answers to the following questions:
 
@@ -112,7 +111,7 @@ While designing a deck, always try to get answers to the following questions:
 * How will I pay for those expensive cards?
 * What is my upgrade strategy?
 
-Decide on our play style for that deck. If playing solo or with one other investigator, we'll probably want to build more conservatively, adding more cards to the deck that help to boost the lower skill scores. At 3 or 4 players boost on the character's strengths.
+Decide on the play style for that deck. If playing solo or with one other investigator, build more conservatively, adding more cards to the deck that help to boost the lower skill scores. At 3 or 4 players boost on the character's strengths.
 
 Some investigators have similar scores in fight and evade. Pick one as the primary. Focusing on both equally will lead to an unfocused deck and inconsistent games.
 
@@ -130,13 +129,15 @@ In campaign, between scenario, revisit if you need to stay on course of what the
 
 ## Cards
 
+[Revisit the permanent cards](https://arkhamdb.com/find?q=x%3Apermanent&decks=player) as most of them are powerful and do not count to deck size.
+
 The core set has important common cards that should be assessed of why NOT using them.
 
 - Aquinnah: level 1 is very expensive for survivors. So could be used by other classes with access to resources. While level 3 is only accessible to survivors, with a cost 4 and better skill: it avoids one physical damage per round, specially good on aoo.  It can damage aloof, and enemy engaged with another investigator. Try to combo with cards that make her ability trigger multiple times per round. It Should be useful to peter, william yorik to bring her back when her sanity reached 4. Use Charisma and Peter Silvestre.  Inspiring presence helps to reuse her and remove horror from her.
 
 ## Campaigns
 
-[chapter](campaign.md)
+[See dedicated chapter](campaign.md)
  
 ## Scenario comments
 
