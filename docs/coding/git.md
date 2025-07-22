@@ -330,6 +330,31 @@ git push origin —tags
 git push origin <tagname>
 ```
 
+## Release management
+
+[Git release management](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) helps to bundle release notes, binary files and code. For better release management the simplest workflow includes:
+
+* Adopt Semantic Versioning: Major.Minor.Patch
+* When doing oython project use the pyproject.toml to configure the project and maintenance. [See the Python Semantic Release project and module](https://python-semantic-release.readthedocs.io/en/latest/).
+* Adopt features or bug fixes on separate branches. Merge within `main` using Pull Requests.
+* Use `main` branch for stable release: it includes latest released or release-ready code.
+* Update any version variable in the code, and create a git `tag vx.x.x` (with a message to describe the tag)
+  ```sh
+  git commit -m "Bump version to 0.2.0 for release"
+  git tag -a v0.2.0 -m "Release version 0.2.0 - Added new feature X"
+  git push origin main
+  git push origin v0.2.0
+  ```
+* Create a Release on GitHub using the tag, and add change description from the changelog.
+
+???- info "The Python Semantic Release cli quick summary"
+      ```sh
+      # Update the pyproject.toml with PSR configuration:
+      semantic-release generate-config --pyproject >> pyproject.toml
+      # Run the command in no-operation mode to see what would happen
+      semantic-release -v --noop version
+      ```
+
 ## Removing sensitive data
 
 Removing sensitive data from repo by using PGP and the filter approach from here [removing-sensitive-data-from-a-repository](https://docs.github.com/en/github/authenticating-to-github/removing-sensitive-data-from-a-repository)

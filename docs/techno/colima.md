@@ -4,19 +4,24 @@
 
 ## Usage
 
-```
-colima start --kubernetes --cpu 4 --memory 16
-```
+* Start the VM
+    ```
+    colima start --kubernetes --cpu 4 --memory 16
+    ```
 
 See [flink studies](https://github.com/jbcodeforce/flink-studies/tree/master/e2e-demos/flink-to-sink-postgresql) for e2e demo which uses colima with flinl, kafka and postgresql operators.
 
-The docker engine is exposed as docker context named colima.
-
-```sh
-docker context use colima
-```
+* The docker engine is exposed as docker context named colima.
+    ```sh
+    docker context use colima
+    ```
 
 It is then possible to use docker compose and docker cli.
+
+* Delete the VM
+    ```sh
+    colima delete
+    ```
 
 ## Postgresql Operator
 
