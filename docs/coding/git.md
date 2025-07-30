@@ -2,11 +2,16 @@
 
 Git can convert any local system folder into a Git repository. Each machine or location is called a remote, in Git's terminology, each remote may have one or more branches.
 
-```sh
-# git authentication specify user and email: jbcodeforce or I22Scode
+## Core Concepts 
+
+### Repository Setup
+```bash
+# Authentication (one-time setup)
 git config --global user.name "Your Name Here"
-# change email address
 git config --global user.email "MY_NAME@example.com"
+
+# Clone repository
+git clone <repository-url>
 ```
 
 This information is persisted in $HOME/.gitconfig. It is possible to use different .gitconfig and reference it with the environment variable:
@@ -23,11 +28,37 @@ In order to begin tracking a new file, you use the command `git add <filename>`.
 
 To track file changes in Git, you create a series of project snapshots or **commits**.
 
-Git version control features a branching model to track code changes. A branch is a named reference to a particular sequence of commits.
+### Daily Operations
 
-When doing a `git status`, git compares with the stage: files staged are under the “Changes to be committed” heading. File not staged are under Changes not stated for commit. Any changes done on a file after it was added to the stage, enforce doing a second add operation. 
+```bash
+# Stage and commit changes
+git add <filename>          # Stage specific file
+git add .                   # Stage all changes
+git commit -m "message"     # Commit staged changes
+git commit -am "message"    # Stage and commit in one step
 
-All Git repositories have a base branch named **main**.
+# Sync with remote
+git fetch origin           # Download updates without merging
+git pull                   # Fetch and merge
+git push origin main       # Push to remote branch
+```
+
+### Branching
+
+Git version control features a branching model to track code changes. A branch is a named reference to a particular sequence of commits. All Git repositories have a base branch named **main**.
+
+```bash
+# Create and switch to branch
+git checkout -b feature-branch
+
+# Switch branches
+git checkout main
+git checkout feature-branch
+
+# Merge and cleanup
+git merge feature-branch
+git branch -d feature-branch  # Delete merged branch
+```
 
 By convention, the main branch in a Git repository contains the latest, stable version of the application source code. To implement a new feature or functionality, create a new branch from the main branch. This new branch, called a feature branch, contains commits corresponding to code changes for the new feature. 
 
@@ -52,107 +83,18 @@ git merge upstream/main
 In case the upstream get other Pull Requests, you can rebase to the latest upstream changes, resolving any conflicts. Commits to `main` will be stored in a local branch, `upstream/main`.
 Merge the changes from `upstream/main` into your local main branch. This brings your fork's main branch into sync with the upstream repository, without losing your local changes.
 
-```shell
-# Be sure to be on your own main branch
-git branch
-git branch --all
-# if needed checkout your main 
-git checkout main
-# merge the changes
-git merge upstream/main
-# 
-```
-
-Create pull request against the integration branch of the upstream repository.
-
 ### Gitflow workflow
 
 Some major concepts of gitflow:
 
-* uses of feature branches and multiple primary branches. It uses two branches to record the history of the project: main and develop for example.
+* Use of feature branches and multiple primary branches. It uses two branches to record the history of the project: main and develop for example.
 * The **main** branch stores the official release history, and the **develop** branch serves as an integration branch for features
-* has numerous, longer-lived branches and larger commits
-* Create a feature branch from the develop branch
-
-  ```sh
-  git checkout develop
-  git checkout -b feature_branch
-  ```
-
+* Has numerous, longer-lived branches and larger commits
 * merge happens when feature is complete to the develop branch.
-
-  ```sh
-  git checkout develop
-  git merge feature_branch
-  ```
-
 * can introduce  conflicting updates.
 * tag all commits in the main branch with a version number.
 * Once develop has acquired enough features for a release, fork a **release** branch off of `develop`. Once Release is ready to ship, the `release` branch gets merged into `main` and tagged with a version number. It has to be merged back into develop, which may have progressed since the release was initiated. 
 
-  ```sh
-  git checkout main
-  git merge release/0.1.0
-  ```
-
-* Release branch is deleted once merged in `main`.
-* Maintenance or “hotfix” branches are used to quickly patch production releases. Hotfix branches are a lot like release branches and feature branches except they're based on main instead of develop.
-
-  ```sh
-  git checkout main
-  git checkout -b hotfix_branch
-  ```
-
- * Once finished, a hotfix branch gets merged into both main and develop
-
-  ```sh
-  git checkout main
-  git merge hotfix_branch
-  git checkout develop
-  git merge hotfix_branch
-  git branch -D hotfix_branch
-  ``` 
-
-## Commands summary
-
-* **git config**: Short for “configure,” this is most useful when you’re setting up Git for the first time
-
-```sh
-git config --global user.name "Your Name Here"
-# change email address
-git config --global user.email "MY_NAME@example.com"
-```
-
-* **git init**: Initializes a new Git repository. Until you run this command inside a repository or directory, it’s just a regular folder. Only after you input this does it accept further Git commands.
-
-* **git add**: This does not add new files to your repository. Instead, it brings new files to Git’s attention. After you add files, they’re included in Git’s “snapshots” of the repository
-* **git rm**: remove from local working directory. If you want to keep the local file use the `git rm --cached` command
-* **git status**: Check the status of your repository. See which files are inside it, which changes still need to be committed, and which branch of the repository you’re currently working on
-
-* **git commit**: After you make any sort of change, you input this in order to take a “snapshot” of the repository. Usually it goes git commit -m “Message here.” The -m indicates that the following section of the command should be read as a message. changing the last commit: If you want to try that commit again, you can run commit with the --amend option
-
-```shell
-git commit -m 'initial commit'
-git add forgotten_file
-git commit --amend
-```
-
-This command takes your staging area and uses it for the commit. If you’ve made no changes since your last commit (for instance, you run this command immediately after your previous commit), then your snapshot will look exactly the same, and all you’ll change is your commit message. 
-
-* **git branch**: Working with multiple collaborators and want to make changes on your own? This command will let you build a new branch, or timeline of commits, of changes and file additions that are completely your own.
-
-```shell
-# create a local branch from remote branch. So this one will be local branch with tracking
-git checkout -b <my-feature-dev> integration
-# list the local branch
-git branch   
-# Remote tracking branches can be viewed with 
-git branch -r
-# create a local tracking branch
-git branch --track hello-kitty origin/hello-kitty
-# delete a branch on a remote machine:
-git branch -rd origin/registration
-```
 
 Commits are done on the current checked out branch. If by any bad chance you have committed changes to the wrong branch, create the new branch, reset the master branch back to before these commits, then switch to the new branch and then commit:
 
@@ -223,49 +165,7 @@ resolves #xxx
 resolved #xxx
 ```
 
-## Branching
 
-Branching means you diverge from the main line of development and continue to do work without messing with that main line. Git encourages a workflow that branches and merges often, even multiple times in a day.
-
-To create a branch and switch to it at the same time, you can run the git checkout command with the -b switch:
-
-```shell
-# git branch creates a pointer to the last commit
-git branch issue2
-# checkout move the HEAD to the branch
-git checkout issue2
-#can be done with one command:
-git checkout -b issue2
-```
-
-Any new commit will move the branch forward, because you have it checked out (that is, your HEAD is pointing to it).
-It’s important to note that when you switch branches in Git, files in your working directory will change. If you switch to an older branch, your working directory will be reverted to look like it did the last time you committed on that branch. If Git cannot do it cleanly, it will not let you switch at all.
-
-Because a branch in Git is in actualy a simple file that contains the 40 character SHA-1 checksum of the commit it points to, branches are cheap to create and destroy.
-
-If you need to apply fix to existing main branch, do a `git checkout main` and the local working directory is exactly the way it was before you started working on the branch. Then add a new branch as hotfix, work on the code, commit changes, and proceed to merge it back to the main branch using git merge.
-
-```shell
-git checkout -b issue2
-git commit -am "fix issue ..."
-git checkout main
-git merge issue2
-git push
-```
-
-When you try to merge one commit with a commit that can be reached by following the first commit’s history, Git simplifies things by moving the pointer forward because there is no divergent work to merge together — this is called a "fast forward".
-
-When the main branch and the fix branch are at the same level, you should delete the fix branch: `git branch -d hotfix`
-
-When development history has diverged from some older point. Because the commit on the branch you’re on isn’t a direct ancestor of the branch you’re merging in, Git has to do some work. In this case, Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two.
-
-Git creates a new snapshot that results from this three-way merge and automatically creates a new commit that points to it: this is a merge-commit and it has two parents. Git determines the best common ancestor to use for its merge base.
-
-When code change applies to the same source code, conflict may happen and the merge will not be automatic. `git status` helps to assess where the merge-commit stopped. Anything that has merge conflicts and hasn’t been resolved is listed as `unmerged`.
-
-After you’ve resolved each of these sections in each conflicted file, run `git add` on each file to mark it as resolved.
-
-Stashing takes the dirty state of your working directory — that is, your modified tracked files and staged changes — and saves it on a stack of unfinished changes that you may reapply at any time.
 
 ## Get SSH key for github account
 
@@ -305,16 +205,6 @@ Webhooks can be installed on an organization, a specific repository. To set up a
  of your repository or organization. From there, click Webhooks, then Add webhook.
 
 
-## VS Code git plugin
-
-Palette includes: git: clone, git... 
-
-VS Code can initialize a folder as local git repository.
-
-VS Code handles the pull and push Git operations when you synchronize your local repository to the remote repository.
-
-The Source Control view compares your local repository with the corresponding remote repository. If there are commits to download from the remote repository, then the number of commits displays with a download arrow icon
-
 ## Tags
 
 If we want to mark a specific point in our history as a particular version, that’s what tags are for.
@@ -335,17 +225,8 @@ git push origin <tagname>
 [Git release management](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) helps to bundle release notes, binary files and code. For better release management the simplest workflow includes:
 
 * Adopt Semantic Versioning: Major.Minor.Patch
-* When doing oython project use the pyproject.toml to configure the project and maintenance. [See the Python Semantic Release project and module](https://python-semantic-release.readthedocs.io/en/latest/).
+* When doing python project use the pyproject.toml to configure the project and maintenance. [See the Python Semantic Release project and module](https://python-semantic-release.readthedocs.io/en/latest/).
 * Adopt features or bug fixes on separate branches. Merge within `main` using Pull Requests.
-* Use `main` branch for stable release: it includes latest released or release-ready code.
-* Update any version variable in the code, and create a git `tag vx.x.x` (with a message to describe the tag)
-  ```sh
-  git commit -m "Bump version to 0.2.0 for release"
-  git tag -a v0.2.0 -m "Release version 0.2.0 - Added new feature X"
-  git push origin main
-  git push origin v0.2.0
-  ```
-* Create a Release on GitHub using the tag, and add change description from the changelog.
 
 ???- info "The Python Semantic Release cli quick summary"
       ```sh
