@@ -145,8 +145,21 @@ git remote set-url origin <url>
 ```sh
 git config commit.gpgsign true
 # define a key with gpg
+# Get the list of secret
+gpg --list-secret-keys --keyid-format=long 
+/Users/jerome/.gnupg/pubring.kbx
+--------------------------------
+sec   rsa4096/E698B.... 2025-05-28 [SC]
+      09B1.....F8583
+uid                 [ultimate] <jboyer@.....com>
+
+# define user signing key
+git config --global user.signingkey E698B...
+# or git config user.signingkey. for local to the repo.
 # sign a commit with -S
 git commit -S -am "a message"
+# Be sure that the gpg key is defined in git server. Extract the public key using
+gpg --armor --export E698B..
 ```
 
 ## Practices
@@ -165,7 +178,14 @@ resolves #xxx
 resolved #xxx
 ```
 
+* Verify the config:  `git config list`
+* Get the list of commits
+      ```sh
+      git log
 
+      # look at lost commits
+      git fsck --lost-found
+      ```
 
 ## Get SSH key for github account
 
