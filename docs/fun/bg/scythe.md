@@ -32,9 +32,38 @@ Two possible strategies:
 
 ![](./images/albion-full.webp)
 
-### Crimean 
+### Crimea 
+
+The Crimea faction has a flexible and aggressive playstyle that revolves around two key faction abilities:
 
 ![](./images/crimean-full.webp)
+
+1.  **Coercion**: Once per turn, you can spend a combat card as if it were any single resource. This provides incredible flexibility, allowing you to make up for missing resources and accelerate your actions.
+2.  **Wayfare** (Mech Ability): Your character and mechs can move from a territory you control to any inactive faction's home base. This grants exceptional mobility for late-game territory grabs.
+
+**Early Game: Build Your Engine**
+
+Your main goal is to get your combat card engine running.
+
+* **First Enlist:** Your first enlist action should be for the combat card bonus. This gives you an immediate two cards and a steady income of them as opponents take Enlist actions.
+* **Workers:** Produce workers early to gather resources for enlists and mechs.
+* **First Mech:** Prioritize deploying your first mech, usually with the **Scout** ability (steal a combat card before combat), to establish a strong defense.
+
+**Mid Game: Aggressive Expansion**
+
+With a steady flow of combat cards (which double as resources for you), try to expand.
+* **Control Territory:** Use your mechs, enhanced by **Riverwalk** and **Speed** abilities, to claim territory and resources. Don't be afraid to be aggressive.
+* **Bottom-Row Actions:** Leverage **Coercion** to afford and complete bottom-row actions like deploying mechs and building structures to earn stars.
+* **Combat Readiness:** Maintain a large hand of combat cards. This makes you a fearsome opponent and fuels your economy.
+
+**Late Game: Secure Victory**
+
+Focus on maximizing your score and ending the game on your terms.
+* **Stars:** Secure your final stars from objectives, combat, or maxing out power/popularity.
+* **Territory Grab:** Use the **Wayfare** mech ability for surprise, last-minute moves to grab valuable territories, including an opponent's empty home base.
+* **Popularity:** In the final turns, be mindful of your popularity tier, as it significantly multiplies your score from territories and resources.
+
+
 
 ### Fenris
 
