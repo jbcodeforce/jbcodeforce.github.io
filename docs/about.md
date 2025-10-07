@@ -80,13 +80,20 @@ Co Author: **[Agile Business Rule Development](http://www.springer.com/business+
 </div>
 <div class="book-container" markdown="1">
 <div class="book-image" markdown="1">
-![](https://jbcodeforce.github.io/flink-studies/images/flink-book-cover.png)
+![5](https://jbcodeforce.github.io/flink-studies/images/flink-book-cover.png)
 </div>
 <div class="book-details" markdown="1">
 [Flink best practices](https://jbcodeforce.github.io/flink-studies): A Guide to Apache Flink and Confluent Flink, code, best practices, data mesh methodology...
 </div>
 </div>
-* [AWS Studies for Solution Architect Professional Certification](https://jbcodeforce.github.io/yarfba/)
+<div class="book-container" markdown="1">
+<div class="book-image" markdown="1">
+![6](./images/aws-studies.png)
+</div>
+<div class="book-details" markdown="1">
+* [AWS Studies for Solution Architect Professional Certification](https://jbcodeforce.github.io/yarfba/), code samples, IaC with AWS CDK, Serverless, Active MQ... a lot of things...
+</div>
+</div>
 
 ### Assets
 
