@@ -2,13 +2,15 @@
 
 ## About me
 
-![pers](./images/jb.jpeg){ align=left width=200 } I am an accomplished technology professional with a diverse background in event-driven architecture (EDA), hybrid cloud solutions (kubernetes and AWS services), business process and business rule implementation. With a strong track record as a former IBM Distinguished Engineer and my current role as a Principal Solution Architect at AWS, my expertise lies in guiding customers through their hybrid cloud journey, including messaging, data pipeline, decision systems and AI model development and integration.
+![pers](./images/jb.jpeg){ align=left width=200 } I am an accomplished technology professional with a diverse background in event-driven architecture (EDA), hybrid cloud solutions (kubernetes and AWS services), real-time processing, business process and business rule implementation. With a strong track record as a former IBM Distinguished Engineer, Principal Solution Architect at AWS, or Flink Ninja at Confluent Inc, my expertise lies in guiding customers through their hybrid cloud journey, real-time processing with Kafka, data as a product pipeline implementation, or in the past decision systems and AI model development and integration.
 
-In my career, I have had the pleasure of assisting customers in a consultative manner, helping them adopt decision management, business process automation, data streaming, and complex event processing. I have a deep understanding of lean and agile methodologies, having authored books and blogs on agile business rule solution development, and being part of IBM Garage from the creation. Additionally, I have engaged with customers to facilitate the adoption of asynchronous and reactive systems based on IBM middleware, AWS serverless services, containers, and Kubernetes deployments.
+In my career, I have had the pleasure of assisting customers in a consultative manner, helping them adopt decision management, business process automation, data streaming, complex event processing then event-driven architecture adoption. I have a deep understanding of lean and agile methodologies, having authored books and blogs on agile business rule solution development, and being part of IBM Garage from the creation. Additionally, I have engaged with customers to facilitate the adoption of asynchronous and reactive systems based on Confluent Kafka and Flink, IBM middleware, AWS serverless services, containers, and Kubernetes deployments.
 
 I led a lot of event-storming, and domain-driven design workshops with customers willing to innovate and break their monolithic applications. I also created an agile methodology for developing intelligent automation solutions, and used by IBM automation product consultants for years.
 
-Furthermore, I have contributed to the definition of the next generation of several middleware products, showcasing my ability to drive innovation. I have led the development of IBM reference architectures for event-driven solution, Cognitive, and Data and AI. 
+Furthermore, I have contributed to the definition of the next generation of several middleware products, showcasing my ability to drive innovation. I have led the development of IBM reference architectures for event-driven solution, Cognitive, and Data and AI. I am advisor for an AI startup, aroung agentic solution for Hybrid AI, combining rule based system with LLM. 
+
+As part of Confluent Flink Ninja team, I help customers moving from batch processing to real-time processing while adopting data as a product / data mesh methodology.
 
 
 ### How I can help
@@ -41,22 +43,57 @@ Thank you for taking the time to read my bio. I look forward to the opportunity 
 
 ### Books
 
-* Co Author: **Sustainable IT Architecture** Wisley
-* Co Author: **[Agile Business Rule Development](http://www.springer.com/business+%26+management/business+information+systems/book/978-3-642-19040-7)** Springer.
-    
-    ![](./images/abrd_book.jpg)
+<div class="book-container" markdown="1">
+<div class="book-image" markdown="1">
+![1](./images/book-sustainable-it.webp)
+</div>
+<div class="book-details" markdown="1">
+2013 - Co Author: **[Sustainable IT Architecture - Wisley](https://www.wiley.com/en-us/Sustainable+IT+Architecture%3A+The+Progressive+Way+of+Overhauling+Information+Systems+with+SOA-p-9781118622742)**: A book on Service Oriented Architecture (SOA), the basis of sustainable and more agile IT systems that are able to adapt themselves to new trends and manage processes involving a third party.
+</div>
+</div>
 
-* [Event-driven solutions virtual book](https://jbcodeforce.github.io/eda-studies/), I think a more flexible way to develop a book, and more agile to change content.
+<div class="book-container" markdown="1">
+<div class="book-image" markdown="1">
+![2](./images/abrd_book.jpg)
+</div>
+<div class="book-details" markdown="1">
+Co Author: **[Agile Business Rule Development](http://www.springer.com/business+%26+management/business+information+systems/book/978-3-642-19040-7)** Springer.
+</div>
+</div>
 
-    ![](./diagrams/eda_book_cover.drawio.png)
-    
+<div class="book-container" markdown="1">
+<div class="book-image" markdown="1">
+![3](./diagrams/eda_book_cover.drawio.png)
+</div>
+<div class="book-details" markdown="1">
+[Event-driven solutions virtual book](https://jbcodeforce.github.io/eda-studies/), I think a more flexible way to develop a book, and more agile to change content.
+</div>
+</div>
+
+<div class="book-container" markdown="1">
+<div class="book-image" markdown="1">
+![4](https://jbcodeforce.github.io/ML-studies/diagrams/ai_book_cover.drawio.png)
+</div>
+<div class="book-details" markdown="1">
+[Machine Learning studies](https://jbcodeforce.github.io/ML-studies/), same approach, it may become a book.
+</div>
+</div>
+<div class="book-container" markdown="1">
+<div class="book-image" markdown="1">
+![](https://jbcodeforce.github.io/flink-studies/images/flink-book-cover.png)
+</div>
+<div class="book-details" markdown="1">
+[Flink best practices](https://jbcodeforce.github.io/flink-studies): A Guide to Apache Flink and Confluent Flink, code, best practices, data mesh methodology...
+</div>
+</div>
 * [AWS Studies for Solution Architect Professional Certification](https://jbcodeforce.github.io/yarfba/)
-* [Machine Learning studies](https://jbcodeforce.github.io/ML-studies/), same approach, it may become a book.
 
 ### Assets
 
 * [Messaging in AWS, Active MQ](https://jbcodeforce.github.io/aws-messaging-study)
 * [AWS Serverless - Lambda studies ](https://jbcodeforce.github.io/autonomous-car-mgr/)
+* [Shift left CLI - hoe to manage a Flink project at scale](https://jbcodeforce.github.io/shift_left_utils)
+* [Flink cluster estimator](https://github.com/jbcodeforce/flink-estimator)
 
 ### Blogs
 

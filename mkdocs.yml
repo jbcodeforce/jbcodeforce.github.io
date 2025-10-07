@@ -5,7 +5,7 @@ site_url: https://jeromeboyer.net
 docs_dir: docs
 site_dir: public
 edit_uri: edit/master/docs
-copyright: Copyright &copy; 2018 - 2024 Jerome Boyer
+copyright: Copyright &copy; 2018 - 2025 Jerome Boyer
 theme: 
   name: material
   logo: images/logo.drawio.png
@@ -16,6 +16,7 @@ theme:
   language: en
   features:
       - content.code.annotate
+      - content.code.annotations
       - content.code.copy
       - content.tooltips
       - content.tabs.link
@@ -55,6 +56,7 @@ markdown_extensions:
   - codehilite
   - footnotes
   - tables
+  - md_in_html
   - pymdownx.smartsymbols
  # - pymdownx.superfences:
  #     custom_fences:

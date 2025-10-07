@@ -185,3 +185,33 @@ width: 8rem;
 .md-typeset .admonition {
     font-size: .75rem;
 }
+
+.book-container {
+    display: flex; /* Use flexbox for a modern, responsive layout */
+    align-items: flex-start;
+    gap: 2rem; /* Add some space between the image and text */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.book-image {
+    flex: 0 0 250px; /* Fixed width for the image column */
+    max-width: 100%; /* Ensure it's responsive */
+}
+
+.book-image img {
+    display: block;
+    width: 100%; /* Make the image fill its container */
+    height: auto;
+}
+
+.book-details {
+    flex: 1; /* Allow the text column to grow */
+    min-width: 300px; /* Ensure a minimum width for the text on large screens */
+}
+
+/* For mobile, stack the columns */
+@media (max-width: 768px) {
+    .book-container {
+        flex-direction: column;
+    }
+}
