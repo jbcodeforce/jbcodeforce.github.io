@@ -189,32 +189,46 @@ resolved #xxx
 
 ## Get SSH key for github account
 
-Use OpenSSH client, which comes pre-installed on GNU/Linux, MacOS, and Windows 10 to define public key. Existing ssh keys are under `.ssh/` folder. The file `id_rsa.pub` is the public key for RSA encrypted key.
+* Use OpenSSH client, which comes pre-installed on GNU/Linux, MacOS, and Windows 10 to define public key. Existing ssh keys are under `.ssh/` folder. The file `id_rsa.pub` is the public key for RSA encrypted key.
+      ```sh
+      # verify keys
+      gh ssh-key list
+      ```
 
-If needed, generate key with:
+* If needed, generate key with:
+      ```sh
+      ssh-keygen -t rsa -b 2048 -C "email@address.here" -f ~/.ssh/id_ed25519_...e -N ""
+      # add the key
+      ssh-add ~/.ssh/id_ed25519_jbcodeforce
+      # Verify
+      ssh-add -l
+      ```
 
-```sh
-ssh-keygen -t rsa -b 2048 -C "email@address.here"
-```
+* add this new key to your jbcodeforce GitHub account  
+      ```sh
+      gh ssh-key add ~/.ssh/id_ed25519_jbcodeforce.pub --title "MacBook SSH Key - jbcodeforce"
+      ```
 
-To debug the ssh authentication
+* Add a configuration in .ssh/config
+      ```
+      Host github.com-jbcode
+            HostName github.com
+            AddKeysToAgent yes
+            UseKeychain yes
+            IdentityFile ~/.ssh/id_ed25519_jbcodeforce
+            IdentitiesOnly yes
+      ```
 
-```sh
-ssh -vvvv git@ssh.gitlab.aws.dev
-```
+* It may be necessary to update the ssh agent with:
+      ```sh
+      eval "$(ssh-agent -s)"
+      ```
 
-It may be necessary to update the ssh agent with:
-
-```sh
-eval "$(ssh-agent -s)"
-```
-
-Also to use the private key to any git command do something like:
-
-```sh
-GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes' git clone git@github.com:...
-GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes' git push git@github.com
-```
+* Also to use the private key to any git command do something like:
+      ```sh
+      GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes' git clone git@github.com:...
+      GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes' git push git@github.com
+      ```
 
 ## Webhook
 
