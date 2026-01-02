@@ -17,13 +17,13 @@ Diane needs to get cancelled cards asap to increase her mental. Need spell attac
 ???- "The Circle Undone"
     2023 with Nathaniel Cho and Preston Frairmont. Select the choice to be against the Twillight Circle. Not easy campaign. Evade can be a good strategy, at least for the Watcher. 
 
-## The insmouth 
+## The Insmouth Conspiracy
 
 Introduce curses tokens.
 
 ## [The Feast of Hemlock Vale](https://arkhamdb.com/set/fhvc)
 
-[Investigators and cards,](https://arkhamdb.com/set/fhvp)
+[Investigators and cards](https://arkhamdb.com/set/fhvp).
 
 [Interesting analysis](https://derbk.com/ancientevils/best-laid-plans-the-feast-of-hemlock-vale/).
 
@@ -44,7 +44,7 @@ Fire in a room causes damages only on its enemies side!.
 
 The shapeless cellar may be killed or all the clues removed.
 
-This campaign uses tokens as in Innsmouth  conspiracy so combine cards from those two campaigns to impact bag.
+This campaign uses tokens as in Innsmouth Conspiracy so combine cards from those two campaigns to impact bag.
 
 As enemies are resilient with high life, elusive or aloof, try to add cards that can hit multiple targets, like [Dynamite blast](https://arkhamdb.com/card/01024) or [Storm of Spirits](https://arkhamdb.com/card/03153).
 

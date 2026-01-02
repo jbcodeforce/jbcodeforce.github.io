@@ -88,8 +88,10 @@ markdown_extensions:
 nav:
   - Home: 
     - About: about.md
+    - Major contributions: contrib.md
     - Skills: skills.md
     - Blogs: blogs/index.md
+    - Repository list: https://github.com/jbcodeforce?tab=repositories
   - Coding:
       - Playground: coding/playground.md
       - Dev & Ops:
