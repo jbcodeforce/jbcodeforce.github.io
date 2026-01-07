@@ -1,6 +1,6 @@
 # Renaud Poupard - coursdegolf.net
 
-## "Inertia club" training
+## Club Inertia training
 
 The swing mechanics includes 5 dimensions:
 
@@ -115,9 +115,41 @@ To avoid top or thin ball, use the under swing image, by dropping the club with 
 
 ## Course management
 
-Do not think the next shot will be your best, so add one or more club as most likley you will be shorter.
-Smooth take away is the most important (Leadbetter, Laura Davies,..) thing in the golf swing. Smooth means we start by moving the body, quick it means we move the hands and arms before. Routine to work on the trajectory with 8 iron and higher: one straight, one fade, one draw, one high (move ball forward in stance), one low (ball at the beginning of the stance, keep hands low after impact).
+Do not think the next shot will be your best, so add one or more club as most likely you will be shorter.
+
+Smooth take away is the most important (Leadbetter, Laura Davies,..) thing in the golf swing. Smooth means we start by moving the body, quick it means we move the hands and arms before. 
+
+Routine to work on the trajectory with 8 iron and higher: one straight, one fade, one draw, one high (move ball forward in stance), one low (ball at the beginning of the stance, keep hands low after impact).
+
 Follow the feet direction for the take away.
+
+### [Michael Breed](https://www.titleist.com/teamtitleist/team-titleist/f/golf-tips/67840/watch-course-management-and-golf-strategy-with-michael-breed)
+
+* **Green Backwards:** Plan your shots by analyzing the hole from the green back to the tee. This approach helps identify the best landing areas to avoid trouble and make greens more accessible.
+    * Can you get in the **scoring zone, within 100 yards of the hole** in 1,2,3 shots (according to the par)? 
+    * Once in the scoring zone: Can you go down in three? => This will ensure bogey at worse. This is now as we are playing a 18 par 3 course. Prioritize conservative shots to avoid trouble. Think to conservative shipping and putting.
+
+* **Green Quadrants:** Divide the green into four quadrants to improve approach shot decisions. This strategy helps you leave yourself easier putts and better birdie chances. 
+
+Try hard to get in the game: fairway, out of obstacles... **advance as far down as you can while being in play** sacrificing distance for accuracy.. Recall that even tour players struggle to get out-of-bound balls.
+
+* Apply the **rule of score** practice with 10 keys consideration to assess at each hole:
+    1. not having penalty shot
+    1. get out of trouble
+    1. 3 putts
+    1. underclubing 
+    1. playing risky shots
+    1. shortsiding
+    1. putting too aggressive not enough break
+     
+
+* On the score cart keep tracking , per hole, to be in the scoring zone. water, 2 topped balls... is a X on that hole.
+* Think about different gears: gear 1/ get inside 100, gear 2/ inside 50, 3/ inside 25, 4/ on the green. Those gears are also related to handicap. Before changing course management and go higher gear, be sure to have completed 18 holes with 18 scoring zones.
+* The level of the score card define the purpose of practices, the gears define what kind of shot to do.
+* **Scoring will be taking the right shot at the right time.**
+* Important stats: for a 8 feet putt, on excellent green, pro make the putt at 50%, at 12 feet 25%: First put is to get a good length on it. 
+
+Understand statistics to help with your strategy, but don't always play by them. Always consider the situation, including your own performance and the specific demands of the shot. 
 
 ## Structural training
 
