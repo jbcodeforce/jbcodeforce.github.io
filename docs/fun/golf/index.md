@@ -234,6 +234,19 @@ shoulders tilted on average at 49d. Use the image of water dripping from right e
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Gl-CwCUwJus" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+## Driver
+
+### Ajay 04/29/2026
+
+* right should lower: when looking from behind, we need to see the left arm and sholder
+* hip parallel to sholder, so get the left hip higher.
+* when coming back from back swing, drop the hands. right shoulder, then extend the finish so the club go upper source at impact
+* the lower point is one club face behind the ball, Put the plevix in front of this point. So the ball does not need to be aligned on the left heel, but one club face in front of.
+* extends after impact and rotate hands
+* the ball should be at at least 70-80 yards at apic
+* do not put the arrow to the ball at preparation but between the arrow and the end of the club face, to get the ball in the middle of the club face at impact.
+* be a little be farther from the ball at stance. 
+
 ## Pitching
 
 From [Pete Cowen's article](https://golftoday.co.uk/proshop-features-2014-pitching-lesson-html/) core principles and [his video](https://youtu.be/Rl0HxN5YBwE):
