@@ -8,6 +8,7 @@ studies/redpanda/pinot-ex/flights-data.json
 site/
 /tmp
 public/
+**/.env
 
 # IDEs and editors
 /.idea
