@@ -319,6 +319,18 @@ To control distance in the pitching arena; a ‘clockface’ principle that invo
 * Pass the gate with straight line
 * Pass the gate with curve.
 
+## Bunker
+
+* Take the club with the highest loft: 60 instead of 54. The goal is not to get under the sand. 
+* Open the loft so the club bounce in the sand, so it using the club bounce under, hitting under the ball.
+* Put the ball on the left of the stance.
+* Feet open to the left of the target
+* Hand neutral (not on the left). legs bent, weight on the left. 
+* Explosion - "get sand out"
+* Club path is direct, slightly exterior to interior. Keep the club face open to take the minimum of sand.
+* On hard sand, humide, compact -> less loft on the club face.  So ball less on the left of the stance, feet less open.
+* If the ball is plugged, then attack more steep do not pass under the ball. Get the sand out.
+
 ## Mental Game
 
 ### Difficult shots
