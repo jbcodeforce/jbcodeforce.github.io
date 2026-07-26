@@ -126,7 +126,6 @@ nav:
       - Knative: coding/knative.md
       - Vue.js Studies:  https://jbcodeforce.github.io/vuejs-studies/
       - Cloud native content IBM: https://cloudnative101.dev/ 
-      - Angular: https://jbcodeforce.github.io/angular-sandbox/
       - My code templates: code-template.md
   - Knowledge base: 
     - The SA job: blogs/consultant-job.md
@@ -137,7 +136,6 @@ nav:
       - Mindfulness: leadership/mindfulness.md
       - Memory: leadership/memory.md
       - Unicorn project: leadership/unicorn_project.md
-      - Release It: leadership/release_it.md
     - Architecture:
       - Conduct System Design: architecture/system-design.md
       - Event Driven Architecture: https://jbcodeforce.github.io/eda-studies
