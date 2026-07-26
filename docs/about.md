@@ -10,7 +10,7 @@ I led a lot of event-storming, and domain-driven design workshops with customers
 
 Furthermore, I have contributed to the definition of the next generation of several middleware products, showcasing my ability to drive innovation. I have led the development of IBM reference architectures for event-driven solution, Cognitive, and Data and AI. I am advisor for an AI startup, aroung agentic solution for Hybrid AI, combining rule based system with LLM. 
 
-As part of Confluent Flink Ninja team, I help customers moving from batch processing to real-time processing while adopting data as a product / data mesh methodology.
+Since 2024, part of Confluent Flink Ninja team, I help customers moving from batch processing to real-time processing while adopting data as a product / data mesh methodology, and Apache Flink as a service or kubernetes deployment. I also do a lot of agentic implementations for improving our solution engineering group and my day to day work.
 
 
 ### How I can help
@@ -97,6 +97,10 @@ Co Author: **[Agile Business Rule Development](http://www.springer.com/business+
 
 ### Assets
 
+* [Flink body of knowledge with best practices and code](tps://jbcodeforce.github.io/flink-studies)
+* [Knowledge mnanagement using agents - local oMLX](https://github.com/jbcodeforce/km-agent)
+* [My AI Assistant](https://github.com/jbcodeforce/MyAIAssistant): a day to day tool to support customer engagements as solution engineer or architect role.
+* [Migration to Apache Flink with an agentic approach](https://github.com/jbcodeforce/migration-to-flink-skills)
 * [Messaging in AWS, Active MQ](https://jbcodeforce.github.io/aws-messaging-study)
 * [AWS Serverless - Lambda studies ](https://jbcodeforce.github.io/autonomous-car-mgr/)
 * [Shift left CLI - hoe to manage a Flink project at scale](https://jbcodeforce.github.io/shift_left_utils)
